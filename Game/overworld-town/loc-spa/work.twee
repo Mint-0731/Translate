@@ -1,22 +1,22 @@
 :: Spa Work Start
-<<effects>><<timeTrackingStart "spa">>
+<<effects>>
 
-You walk down a corridor behind reception, past thin windows opening onto the spa proper.
+당신은 접수대 뒤의 복도로 걸어가, 적절하게 온천으로 향해 있는 얇은 창문을 지나간다.
 <<if $daily.spaEvent is "party">>
-	Swimwear-clad clientele play games in and around the steaming pools.
+	수영복을 입은 고객들은 김이 나는 욕탕 안팎에서 게임을 하고 있다.
 <<else>>
-	Towel-clad clientele relax in or near the steaming pools.
+	수건을 두른 고객들은 김이 나는 욕탕이나 근처에서 휴식을 취하고 있다.
 <</if>>
 <br><br>
 
-<<if pcAreArmsBound("any")>>
-	<<generate1>><<person1>>"You can't work like that," a passing member of staff laughs when <<he>> seems your arm bindings. "Here." <<He>> frees you.
+<<if $leftarm is "bound" or $rightarm is "bound">>
+	<<generate1>><<person1>>"그런 상태로는 일 할 수가 없잖아," 지나가던 직원 중 한 명인 <<he_ ga>> 당신의 팔이 묶인 것을 보더니 웃으며 말한다. "자." <<He_ ga>> 당신을 풀어준다.
 	<br><br>
 	<<unbind>>
 	<<endevent>>
 <</if>>
 
-You enter the massage parlour, and await your client.
+당신은 안마실에 들어가서, 고객을 기다린다.
 <br><br>
 
 <<spa_work>>
@@ -25,7 +25,7 @@ You enter the massage parlour, and await your client.
 :: Spa Work
 <<effects>>
 
-You push a button under the table, informing reception that you're ready for the next client.
+당신이 테이블 아래 버튼을 누르면, 접수대에 당신이 다음 손님을 받을 준비가 되었다는 알림이 가게된다.
 <br><br>
 
 <<spa_work>>
@@ -36,125 +36,125 @@ You push a button under the table, informing reception that you're ready for the
 
 <<switch $spa.personality>>
 <<case hesitant>>
-	"That's right!" you say. "Just lie down, and I'll take care of the rest."
-	<<body_tip hand 0.3>>
+	"맞아요!" 당신이 말한다. "그냥 누워 있어요, 나머지는 제가 알아서 할게요."
 	<br><br>
 
-	The <<person>> lies down as instructed, while you rub oil on your hands. You get to work, <<handtext>> kneading <<his>> back.<<ghandskill>><<handskill 5>>
+	당신이 손에 오일을 바르는 동안, <<person_ un>> 당신이 말한 대로 누워 있다. 당신은 일을 시작하며, <<handtext>> <<his_ yi>> 등을 주무른다.<<ghandskill>><<handskill 5>>
 	<br><br>
 
-	<<Hes>> tense, but that soon changes. <<Hes>> thankful at the end of the session. <<tipreceive>><<pass 50>>
+	<<He_ nun>> 긴장하지만, 곧 긴장을 푼다. <<He_ nun>> 마사지가 끝나자 감사인사를 한다. <<body_tip hand 0.3>><<tipreceive>><<pass 50>>
 	<br><br>
 
 	<<spa_end>>
 <<case tired>>
-	"You just relax," you say, rubbing oil between your hands. "I'll have—"
+	"그냥 긴장 풀어요," 당신은 당신의 손에 오일을 바르며 말한다. "제가-"
+	<br><br>
+	"조용히," <<person_ i>> 말한다. "너랑 얘기하러 돈 낸 게 아냐."<<gstress>><<stress 6>>
+	<br><br>
 	<<body_tip hand 0.1>>
-	<br><br>
-	"Quiet," the <<person>> says. "I'm not paying you to talk."<<gstress>><<stress 6>>
-	<br><br>
 	<<spa_rob_options>>
 <<case rude>>
 	<<if $beauty gte 8000>>
-		"It's kind of you to say so," you say. "I hope you like what my hands can do too." <<body_tip hand 0.5>>
+		"그렇게 말해줘서 고마워요," 당신이 말한다. "제 손이 무엇을 하는지도 마음에 들었으면 좋겠네요." <<body_tip hand 0.5>>
 	<<else>>
-		"Hey!" you say. "Mind my feelings." <<body_tip hand 0.3>>
+		"이 것 봐요!" 당신이 말한다. "듣는 사람 입장도 생각해요."<<body_tip hand 0.3>>
 	<</if>>
-	You get to work, your hands <<handtext>> rubbing oil onto <<his>> body.<<ghandskill>><<handskill 5>>
+	당신은 일을 시작하며, 손으로 <<handtext>> <<his_ yi>> 몸에 오일을 문지른다.
 	<br><br>
 
-	<<He>> grumbles and complains about <<his>> job, <<his>> home life, and just about everything. <<He>> seems calmer by the time you're done.
+	<<He_ nun>> <<his_ yi>> 직업, <<his_ yi>> 집안사정, 그리고 모든 것에 대해 투덜거린다. 당신이 일을 마칠 때 쯤, <<He_ nun>> 더 침착해진 것 처럼 보인다.<<ghandskill>><<handskill 5>>
 	<br><br>
 
 	<<if $beauty gte 8000>>
 		<<if $rng gte 71>>
 			<<if $player.gender_appearance is "f" and random(1, 2) is 2>>
 				<<set $phase2 to 0>>
-				<<He>> grins and leers at your <<breasts>> as <<he>> gives you a tip. <<tipreceive>><<pass 50>>
+				<<He_ nun>> 당신의 <<breasts_ rul>> 음흉한 눈으로 쳐다보고 웃으며 당신에게 팁을 준다. <<tipreceive>><<pass 50>>
 				<br><br>
-				"How about you give me a peek?" <<he>> asks.
+				"살짝 보여주는 것은 어때?" <<he_ ga>> 묻는다.
 				<br><br>
 
-				<<link [[Refuse|Spa Rude Refuse]]>><</link>>
+				<<link [[거절한다|Spa Rude Refuse]]>><</link>>
 				<br>
 				<<if hasSexStat("exhibitionism", 4)>>
-					<<link [[Show|Spa Rude Show]]>><</link>><<exhibitionist4>>
+					<<link [[보여준다|Spa Rude Show]]>><</link>><<exhibitionist4>>
 					<br>
-					<<link [[Ask for money|Spa Rude Money]]>><</link>><<exhibitionist4>>
+					<<link [[돈을 달라고 한다|Spa Rude Money]]>><</link>><<exhibitionist4>>
 					<br>
 				<</if>>
 			<<else>>
 				<<set $phase2 to 1>>
-				<<He>> grins and leers at your crotch as <<he>> gives you a tip. <<tipreceive>><<pass 50>>
+				<<He_ nun>> 당신의 사타구니를 음흉한 눈으로 쳐다보고 웃으며 당신에게 팁을 준다. <<tipreceive>><<pass 50>>
 				<br><br>
-				"How about you give me a peek?" <<he>> asks.
+				"살짝 보여주는 것은 어때?" <<he_ ga>> 묻는다.
 				<br><br>
-				<<link [[Refuse|Spa Rude Refuse]]>><</link>>
+				<<link [[거절한다|Spa Rude Refuse]]>><</link>>
 				<br>
 				<<if hasSexStat("exhibitionism", 5)>>
-					<<link [[Show|Spa Rude Show]]>><</link>><<exhibitionist5>>
+					<<link [[보여준다|Spa Rude Show]]>><</link>><<exhibitionist5>>
 					<br>
-					<<link [[Ask for money|Spa Rude Money]]>><</link>><<exhibitionist5>>
+					<<link [[돈을 달라고 한다|Spa Rude Money]]>><</link>><<exhibitionist5>>
 					<br>
 				<</if>>
 			<</if>>
 		<<else>>
-			<<He>> leaves you a tip. <<tipreceive>><<pass 50>>
+			<<He_ nun>> 당신에게 팁을 남긴다. <<tipreceive>><<pass 50>>
 			<br><br>
 			<<spa_end>>
 		<</if>>
 	<<else>>
-		<<He>> leaves without a word.<<tipreceive>><<pass 50>>
+		<<He_ nun>> 아무 말 없이 떠난다.<<tipreceive>><<pass 50>>
 		<br><br>
 
 		<<spa_end>>
 	<</if>>
 <<case lewd>>
-	"You're eager!" you say. "Just relax. I'll take care of everything."
+	"흥분하셨군요!" 당신이 말한다. "긴장 푸세요. 제가 전부 돌봐드릴게요."
 	<br><br>
 
-	"Everything?" the <<person>> says.
+	"전부?" <<person_ i>> 말한다.
 	<<if $NPCList[0].penis isnot "none">>
-		"Even my erect cock?" <<He>> laughs. "I'm only kidding."
+		"내 발기한 자지도?" <<He_ ga>> 웃는다. "농담이야."
 	<<else>>
-		"Even my pussy?" <<He>> laughs. "I'm only kidding."
+		"내 보지도?" <<He_ ga>> 웃는다. "농담이야."
 	<</if>>
 	<<if $awareness lt 100>>
 		<<gawareness>><<awareness 1>>
 	<</if>>
 	<br><br>
 	<<if random(1, 2) is 2>>
-		<<He>> moans while you work, your hands <<handtext>> rubbing oil onto <<his>> back.<<ghandskill>><<handskill 5>>
+		<<He_ nun>> 당신이 일을 시작하며, 손으로 <<handtext>> <<his_ yi>> 등에 오일을 문지르자 신음한다.<<ghandskill>><<handskill 5>>
 		<br><br>
-		<<He>> rolls to face the ceiling toward the end of the session, resting <<his>> head in <<his>> hands. You avert your eyes.
+		마사지가 끝나자 <<He_ nun>> <<his_ yi>> 머리에 손을 얹고, 얼굴이 천장을 바라보도록 몸을 뒤집는다. 당신은 눈을 피한다.
 		<br><br>
-		"Maybe I wasn't kidding," <<he>> says. "How much for a happy ending?"
+		"아까 그거 농담 아니야." <<he_ ga>> 말한다. "더 좋은 건 얼마야?"
 		<br><br>
 
-		<<link [[Refuse|Spa Lewd Hand Refuse]]>><</link>>
+		<<link [[거절한다|Spa Lewd Hand Refuse]]>><</link>>
 		<br>
 		<<if hasSexStat("promiscuity", 3)>>
-			<<link [[Negotiate|Spa Lewd Hand Negotiate]]>><</link>><<promiscuous3>>
+			<<link [[협상한다|Spa Lewd Hand Negotiate]]>><</link>><<promiscuous3>>
 			<br>
 		<<elseif $uncomfortable.prostituting is false>>
-			<<link [[Negotiate|Spa Lewd Hand Negotiate]]>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+			<<link [[협상한다|Spa Lewd Hand Negotiate]]>><<set $desperateaction to 1>><</link>><<promiscuous3>>
 			<br>
 		<</if>>
 	<<else>>
-		<<body_tip hand 0.3>>
-		<<He>> moans while you work, but doesn't try anything, and seems satisfied at the end of the session.<<tipreceive>><<pass 50>><<ghandskill>><<handskill 5>>
+		<<He_ nun>> 당신이 마사지 하는동안 신음소리를 내지만, 아무 것도 하지 않고, 마사지에 만족한 것 같다.<<handskill 5>><<ghandskill>>
+		<<body_tip hand 0.3>><br>
+		<<tipreceive>><<pass 50>>
 		<br><br>
 		<<spa_end>>
 	<</if>>
 <<case polite>>
-	"I'm your masseur today," you say. "I hope I can make you comfy."
+	"제가 오늘의 마사지사입니다," 당신이 말한다. "편안한 시간 되셨으면 좋겠어요."
+	<br><br>
 	<<body_tip hand 0.5>>
+
+	당신은 오일을 바르고, <<handtext>> <<persons_ yi>> 등을 주무른다. <<He_ nun>> 당신이 마사지하는 동안 행복한 듯 이야기한다.<<lstress>><<stress -6>>
 	<br><br>
 
-	You get the oil ready, and <<handtext>> knead the <<persons>> back. <<He>> seems happy to chat while you work.<<lstress>><<stress -6>><<ghandskill>><<handskill 5>>
-	<br><br>
-
-	<<He>> thanks you at the end of the session, and leaves a tip. <<tipreceive>><<pass 50>>
+	<<He_ nun>> 마사지가 끝나자 감사인사를 하며, 팁을 남긴다. <<tipreceive>><<pass 50>>
 	<br><br>
 
 	<<spa_end>>
@@ -168,33 +168,34 @@ You push a button under the table, informing reception that you're ready for the
 
 <<switch $spa.personality>>
 <<case hesitant>>
-	"That's right <<sir>>," you say. "When you're ready."
+	"맞아요 <<sirPost>>," 당신이 말한다. "준비되면 누우세요."
+	<br><br>
+
+	The <<person>> lies on <<his>> front, and you get to work, your hands <<handtext>> rubbing oil onto <<his>> back.
+
 	<<body_tip hand 0.1>>
 	<br><br>
 
-	The <<person>> lies on <<his>> front, and you get to work, your hands <<handtext>> rubbing oil onto <<his>> back.<<ghandskill>><<handskill 5>>
-	<br><br>
-
-	<<He>> remains silent throughout the session, making it difficult to gauge how you're doing, but <<he>> does leave a tip. <<tipreceive>><<pass 50>>
+	<<He>> remains silent throughout the session, making it difficult to gauge how you're doing, but <<he>> does leave a tip. <<tipreceive>><<pass 50>><<ghandskill>><<handskill 5>>
 	<br><br>
 
 	<<spa_end>>
 
 <<case tired>>
 	<<Hes>> in no mood to talk, so you just get to work, <<handtext>> rubbing oil onto <<his>> body.
-	<<body_tip hand 0.3>>
 	<br><br>
+	<<body_tip hand 0.3>>
 	<<spa_rob_options>>
 <<case rude>>
 	<<if $beauty gte 8000>>
 		"I'm glad you approve," you say. "Please relax." <<body_tip hand 0.5>>
 	<<else>>
-		"I'm sorry to disappoint," you say. "Please relax." <<body_tip hand 0.1>>
+		"I'm sorry to disappoint," you say. "Please relax."<<body_tip hand 0.1>>
 	<</if>>
-	You get to work, your hands <<handtext>> rubbing oil onto <<his>> body.<<ghandskill>><<handskill 5>>
+	You get to work, your hands <<handtext>> rubbing oil onto <<his>> body.
 	<br><br>
 
-	<<He>> grumbles and complains about <<his>> job, <<his>> home life, and just about everything. <<He>> seems calmer by the time you're done.
+	<<He>> grumbles and complains about <<his>> job, <<his>> home life, and just about everything. <<He>> seems calmer by the time you're done.<<ghandskill>><<handskill 5>>
 	<br><br>
 
 	<<if $beauty gte 8000>>
@@ -206,7 +207,7 @@ You push a button under the table, informing reception that you're ready for the
 				"How about you give me a peek?" <<he>> asks.
 				<br><br>
 
-				<<link [[Refuse|Spa Rude Refuse]]>><</link>>
+				<<link [[거절한다|Spa Rude Refuse]]>><</link>>
 				<br>
 				<<if hasSexStat("exhibitionism", 4)>>
 					<<link [[Show|Spa Rude Show]]>><</link>><<exhibitionist4>>
@@ -220,7 +221,7 @@ You push a button under the table, informing reception that you're ready for the
 				<br><br>
 				"How about you give me a peek?" <<he>> asks.
 				<br><br>
-				<<link [[Refuse|Spa Rude Refuse]]>><</link>>
+				<<link [[거절한다|Spa Rude Refuse]]>><</link>>
 				<br>
 				<<if hasSexStat("exhibitionism", 5)>>
 					<<link [[Show|Spa Rude Show]]>><</link>><<exhibitionist5>>
@@ -235,14 +236,14 @@ You push a button under the table, informing reception that you're ready for the
 			<<spa_end>>
 		<</if>>
 	<<else>>
-		<<He>> leaves without a word.<<tipreceive>><<pass 50>>
+		<<He_ nun>> 아무 말 없이 떠난다.<<tipreceive>><<pass 50>>
 		<br><br>
 
 		<<spa_end>>
 	<</if>>
 <<case lewd>>
 	"Please relax," you say, doing your best to remain professional.
-	<br><br>
+	<br>
 	"I'll try," the <<person>> responds.
 	<<if $NPCList[0].penis isnot "none">>
 		"My erect cock's gonna make that difficult though."
@@ -261,22 +262,22 @@ You push a button under the table, informing reception that you're ready for the
 		"You seem stiff," <<he>> says. "How about I give you a massage? Don't worry. I won't charge."
 		<br><br>
 
-		<<link [[Accept|Spa Lewd Accept]]>><<stress -6>><</link>><<lstress>>
+		<<link [[받아들인다|Spa Lewd Accept]]>><<stress -6>><</link>><<lstress>>
 		<br>
-		<<link [[Refuse|Spa Lewd Refuse]]>><<handskill 5>><</link>><<ghandskill>>
+		<<link [[거절한다|Spa Lewd Refuse]]>><<handskill 5>><</link>><<ghandskill>>
 		<br>
 	<<else>>
-		<<body_tip hand 0.3>>
-		<<He>> moans while you work, but doesn't try anything, and seems satisfied at the end of the session.<<tipreceive>><<pass 50>><<ghandskill>><<handskill 5>>
+		<<He>> moans while you work, but doesn't try anything, and seems satisfied at the end of the session.<<handskill 5>><<ghandskill>>
+		<<body_tip hand 0.3>><br>
+		<<tipreceive>><<pass 50>>
 		<br><br>
 		<<spa_end>>
 	<</if>>
 <<case polite>>
-	<<body_tip hand 0.5>>
-	"Please relax," you say as you rub oil over your hands. <<He>> seems happy to oblige as you get to work, your hands <<handtext>> kneading <<his>> back.<<ghandskill>><<handskill 5>>
+	"Please relax," you say as you rub oil over your hands. <<He>> seems happy to oblige as you get to work, your hands <<handtext>> kneading <<his>> back.<<handskill 5>><<ghandskill>>
 	<br><br>
 
-	<<He>> thanks you at the end of the session.<<tipreceive>><<pass 50>>
+	<<He>> thanks you at the end of the session.<<body_tip hand 0.5>><<tipreceive>><<pass 50>>
 	<br><br>
 
 	<<spa_end>>
@@ -293,7 +294,7 @@ You push a button under the table, informing reception that you're ready for the
 
 	The <<person>> blushes. "M-my towel?" <<he>> stutters. "I-I didn't realise." <<He>> grasps the hem, but hesitates.
 	<br><br>
-	<<link [[Wait|Spa Hesitant Wait]]>><</link>>
+	<<link [[기다린다|Spa Hesitant Wait]]>><</link>>
 	<br>
 	<<if hasSexStat("promiscuity", 2)>>
 		<<link [[Strip your client|Spa Hesitant Strip]]>><</link>><<promiscuous2>>
@@ -321,8 +322,8 @@ You push a button under the table, informing reception that you're ready for the
 	The <<person>> chuckles, and closes <<his>> eyes. You oil up your hands, and <<handtext>> knead the <<persons>> back.<<ghandskill>><<handskill 5>>
 	<br><br>
 
-	
-	<<if dangerEvent() and $eventskip is 0>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
 		<<rng>>
 		<<if $rng gte 81 and $analingusdisablegiving is "f">>
 			<<He>> sits up before the session is over, and pulls off <<his>> towel. <<He>> turns around and spreads <<his>> cheeks, drawing attention to <<his>> asshole.
@@ -341,13 +342,13 @@ You push a button under the table, informing reception that you're ready for the
 		<br><br>
 		<<pass 50>>
 		<<if hasSexStat("promiscuity", 4)>>
-			<<link [[Accept|Spa Oral Start]]>><</link>><<promiscuous4>>
+			<<link [[받아들인다|Spa Oral Start]]>><</link>><<promiscuous4>>
 			<br>
 		<<elseif $uncomfortable.prostituting is false>>
-			<<link [[Accept|Spa Oral Start]]>><<set $desperateaction to 1>><</link>><<promiscuous4>>
+			<<link [[받아들인다|Spa Oral Start]]>><<set $desperateaction to 1>><</link>><<promiscuous4>>
 			<br>
 		<</if>>
-		<<link [[Refuse|Spa Oral Refuse]]>><</link>>
+		<<link [[거절한다|Spa Oral Refuse]]>><</link>>
 		<br>
 	<<else>>
 		<<He>> sits up at the end of the session.
@@ -365,7 +366,9 @@ You push a button under the table, informing reception that you're ready for the
 	"You'll be a real treat to work with," you say.
 	<<promiscuity1>>
 
-	"I bet," the <<person>> says. "Be rough with me." You oil up your hands, and <<handtext>> knead the <<persons>> back.<<ghandskill>><<handskill 5>>
+	"I bet," the <<person>> says. "Be rough with me."
+
+	You oil up your hands, and <<handtext>> knead the <<persons>> back.<<ghandskill>><<handskill 5>>
 	<br><br>
 
 	<<if random(1, 2) is 2>>
@@ -376,24 +379,25 @@ You push a button under the table, informing reception that you're ready for the
 		<br><br>
 
 		<<if hasSexStat("exhibitionism", 5)>>
-			<<link [[Accept|Spa Lewd Naked]]>><</link>><<exhibitionist5>>
+			<<link [[받아들인다|Spa Lewd Naked]]>><</link>><<exhibitionist5>>
 		<<else>>
-			<<insufficientStat "exhibitionism" "to take up such an offer">>
+			<span class="blue">You are not exhibitionist enough to take up such an offer.</span>
 		<</if>>
 		<br>
-		<<link [[Refuse|Spa Lewd Naked Refuse]]>><</link>>
+		<<link [[거절한다|Spa Lewd Naked Refuse]]>><</link>>
 	<<else>>
-		<<body_tip hand 0.3>>
-		<<He>> moans while you work, but doesn't try anything, and seems satisfied at the end of the session.<<tipreceive>><<pass 50>>
+		<<He>> moans while you work, but doesn't try anything, and seems satisfied at the end of the session.<<handskill 5>><<ghandskill>>
+		<<body_tip hand 0.3>><br>
+		<<tipreceive>><<pass 50>>
 		<br><br>
 		<<spa_end>>
 	<</if>>
 
 
 <<case polite>>
+
+	"I'm going to enjoy working on you," you say as you oil up your hands. "Just relax." You <<handtext>> knead <<his>> back.<<handskill 5>><<ghandskill>>
 	<<body_tip hand 0.1>>
-	"I'm going to enjoy working on you," you say as you oil up your hands. "Just relax." You <<handtext>> knead <<his>> back.<<ghandskill>><<handskill 5>>
-	<br><br>
 	<<promiscuity1>>
 
 	<<He>> seems satisfied at the end of the session. "Thank you," <<he>> says. "Here."<<tipreceive>><<pass 50>>
@@ -504,17 +508,12 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 
 	You continue working until the end of the session.
 
-	/* TODO: Write new text, can't wake someone that isn't dozing. */
 	<<if $spa.behaviour is "sophisticated">>
 		You nudge the <<person>> awake. "Thank you for your patronage," you say. <<He>> looks around, groggy. "We hope you enjoyed our service."
-	<<elseif $spa.behaviour is "cute">>
-		You nudge the <<person>> awake. "Wake up lazy," you say. <<He>> looks around, groggy. "I hope you liked my service."
 	<<else>>
-		You stroke the <<person>> until <<he>> wakes. "Session's over," you whisper. "I hope I satisfied."
+		You nudge the <<person>> awake. "Wake up lazy," you say. <<He>> looks around, groggy. "I hope you liked my service."
 	<</if>>
-	<br><br>
-
-	<<He>> nods, half awake, and climbs to <<his>> feet. You look away, and pass <<his>> towel. <<tipreceive>><<pass 50>>
+	<<tipreceive>><<pass 50>>
 	<br><br>
 
 	<<spa_end>>
@@ -526,9 +525,9 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 <<effects>>
 
 <<if $spa.behaviour is "sophisticated">>
-	"That's not why I'm here <<sir>>," you say. "Thank you for your patronage."
+	"그 건 제가 하는 일이 아니에요 <<sirPost>>," 당신이 말한다. "이용해주셔서 감사합니다."
 <<else>>
-	"I'm far too shy for such a thing," you say. "Sorry. I hope you enjoyed my service anyway."
+	"그런 일을 하기에는 너무 수줍음을 타서요," 당신이 말한다. "미안해요. 그래도 제 서비스가 마음에 들었으면 좋겠어요."
 <</if>>
 <br><br>
 
@@ -539,20 +538,20 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 		<<spa_breasts_strip>>
 	<</if>>
 <<elseif $rng gte 41>>
-	The <<person>> rubs <<his>> chin a moment, then thumbs through <<his>> cash. "I can tip more generously," <<he>> says.
+	<<person_ nun>> <<his_ yi>> 뺨을 잠시 문지르다, 엄지로 <<his_ yi>> 돈을 센다. "팁을 더 많이 줄 수도 있는데," <<he_ ga>> 말한다.
 	<br><br>
 
 	<<if hasSexStat("exhibitionism", 5) and $phase2 is 1>>
-		<<link [[Negotiate|Spa Rude Negotiate]]>><</link>><<exhibitionist5>>
+		<<link [[협상한다|Spa Rude Negotiate]]>><</link>><<exhibitionist5>>
 		<br>
 	<<elseif hasSexStat("exhibitionism", 4) and $phase2 is 0>>
-		<<link [[Negotiate|Spa Rude Negotiate]]>><</link>><<exhibitionist4>>
+		<<link [[협상한다|Spa Rude Negotiate]]>><</link>><<exhibitionist4>>
 		<br>
 	<</if>>
-	<<link [[Refuse|Spa Rude Refuse 2]]>><</link>>
+	<<link [[거절한다|Spa Rude Refuse 2]]>><</link>>
 	<br>
 <<else>>
-	The <<person>> rubs <<his>> chin a moment. "Not worth it," <<he>> mutters, before leaving the room.
+	<<person_ nun>> <<his_ yi>> 뺨을 잠시 문지른다. "그럴 가치가 없어," <<he_ nun>> 중얼거리며 방을 나간다.
 	<br><br>
 
 	<<spa_end>>
@@ -570,7 +569,7 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 		<<spa_breasts_strip>>
 	<</if>>
 <<else>>
-	The <<person>> rubs <<his>> chin a moment. "Not worth it," <<he>> mutters, before leaving the room.
+	<<person_ nun>> <<his_ yi>> 뺨을 잠시 문지른다. "그럴 가치가 없어," <<he_ nun>> 중얼거리며 방을 나간다.
 	<br><br>
 
 	<<spa_end>>
@@ -584,11 +583,11 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 <<if $worn.under_upper.open is 1 or $worn.under_upper.set isnot $worn.under_lower.set or $worn.under_upper.integrity lte 20>>
 	<<fameexhibitionism 1>>
 	<<if $worn.under_upper.open is 1>>
-		and tugs <<underupperit>> down your chest,
+		and tugs it down your chest,
 	<<elseif $worn.under_upper.integrity gt 20>>
-		and pulls <<underupperit>> up,
+		and pulls it up,
 	<<else>>
-		and tears <<underupperit>> off your body,
+		and tears it off your body,
 		<<set $worn.under_upper.integrity -= 20>>
 		<<integritycheck>><<exposure>>
 	<</if>>
@@ -599,7 +598,7 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 	<br><br>
 	<<spa_end>>
 <<else>>
-	<<He>> tries to tear <<underupperit>> from your body, but only damages the fabric before you manage to twist away.<<set $worn.under_upper.integrity -= 20>>
+	<<He>> tries to tear it from your body, but only damages the fabric before you manage to twist away.<<set $worn.under_upper.integrity -= 20>>
 	<br><br>
 
 	<<He>> looks set to try again, but another member of staff bangs on the door. "Everything okay in there?"
@@ -692,9 +691,9 @@ The <<person>> leers all the while. "Nice," <<he>> says, satisfied. <<He>> gives
 	<</if>>
 	<br><br>
 
-	<<link [[Accept|Spa Rude Show]]>><<set $phase to 1>><</link>>
+	<<link [[받아들인다|Spa Rude Show]]>><<set $phase to 1>><</link>>
 	<br>
-	<<link [[Refuse|Spa Rude Refuse 2]]>><</link>>
+	<<link [[거절한다|Spa Rude Refuse 2]]>><</link>>
 	<br>
 <<else>>
 	<<if $phase2 is 1>>
@@ -721,9 +720,9 @@ You negotiate a fee of <<printmoney $tip>>,
 <</if>>
 <br><br>
 
-<<link [[Accept|Spa Rude Show]]>><<set $phase to 1>><</link>>
+<<link [[받아들인다|Spa Rude Show]]>><<set $phase to 1>><</link>>
 <br>
-<<link [[Refuse|Spa Rude Refuse 2]]>><</link>>
+<<link [[거절한다|Spa Rude Refuse 2]]>><</link>>
 <br>
 
 
@@ -740,11 +739,11 @@ You negotiate a fee of <<printmoney $tip>>,
 <<if $worn.under_lower.open is 1 or _broken or $worn.under_lower.integrity lte 20>>
 	<<fameexhibitionism 1>>
 	<<if setup.clothes.under_lower[clothesIndex('under_lower', $worn.under_lower)].skirt is 1>>
-		and flips <<underlowerit>> up,
+		and flips it up,
 	<<elseif $worn.under_lower.integrity gt 20>>
-		and tugs <<underlowerit>> down,
+		and tugs it down,
 	<<else>>
-		and tears <<underlowerit>> off your body,
+		and tears it off your body,
 		<<set $worn.under_lower.integrity -= 20>>
 		<<integritycheck>><<exposure>>
 	<</if>>
@@ -756,7 +755,7 @@ You negotiate a fee of <<printmoney $tip>>,
 	<br><br>
 	<<spa_end>>
 <<else>>
-	<<He>> tries to tear <<underlowerit>> from your body, but only damages the fabric before you manage to twist away.
+	<<He>> tries to tear it from your body, but only damages the fabric before you manage to twist away.
 	<<set $worn.under_lower.integrity -= 20>>
 	<br><br>
 
@@ -789,9 +788,9 @@ You nod. The <<person>> smiles and stands.
 <<effects>>
 
 <<if $spa.behaviour is "sophisticated">>
-	You shake your head. "I'm sorry <<sir>>," you say. "But that would be unprofessional of me."
+	당신은 고개를 가로젓는다. "I'm sorry <<sir>>," you say. "But that would be unprofessional of me."
 <<else>>
-	You shake your head. "Sorry," you say. "It might make my boss upset."
+	당신은 고개를 가로젓는다. "Sorry," you say. "It might make my boss upset."
 <</if>>
 <br><br>
 
@@ -882,13 +881,13 @@ The <<person>> watches all the while. You lie down on the table.
 The <<person>> rubs oil over your chest, then continues rubbing <<his>> body against yours.
 
 <<if $player.penisExist and $NPCList[0].penis is "none" and !playerChastity()>>
-	<<He>> needs to only back up a little, and your <<penis>> would enter <<him>>, but <<he>> doesn't take advantage.
+	<<He>> need only back up a little, and your <<penis>> would enter <<him>>, but <<he>> doesn't take advantage.
 <</if>>
 <br><br>
 
 <<if $arousal gte $arousalmax>>
 	<<orgasm>>
-
+	<br>
 	<<He>> laughs as your spasms subside. "I'd better not overdo it," <<he>> says <<he>> climbs off you. "Any longer and I might lose control. Thanks for humouring me."<<set $tipmod to 1.5>><<tipset>><<tipreceive>><<pass 50>>
 <<else>>
 	<<He>> continues until the end of the session. "Any longer and I might lose control," <<he>> laughs as <<he>> climbs off you. "Thanks for humouring me."<<set $tipmod to 1.2>><<tipset>><<tipreceive>><<pass 50>>
@@ -905,8 +904,8 @@ The <<person>> rubs oil over your chest, then continues rubbing <<his>> body aga
 
 <<if $arousal gte $arousalmax>>
 	You open your mouth to speak, just as your body betrays you.<<orgasm>>
-
-	The <<person>> laughs, rubbing oil over your chest. "Were you trying to say something?" <<he>> says as you twitch beneath <<him>>. <<if $player.penisExist and !$femaleclimax and !_deniedOrgasm>>"You're getting my ass all slimy."<</if>>
+	<br>
+	The <<person>> laughs, rubbing oil over your chest. "Were you trying to say something?" <<he>> says as you twitch beneath <<him>>. <<if $player.penisExist>>"You're getting my ass all slimy.<</if>>
 	<br><br>
 
 	<<He>> climbs off. "Thanks for humouring me. Commendable service, all round." <<He>> picks up <<his>> towel and leaves the room.
@@ -942,13 +941,13 @@ The <<person>> rubs oil over your chest, then continues rubbing <<his>> body aga
 The <<person>> rubs oil over your back, and continues to hump you.
 
 <<if ($vagina is 1 or $analdisable is "f") and $NPCList[0].penis isnot "none" and !playerChastity()>>
-	<<He>> needs only to realign a little, and <<his>> <<print $NPCList[0].penisdesc>> would enter you, but <<he>> doesn't take advantage.
+	<<He>> need only realign a little, and <<his>> <<print $NPCList[0].penisdesc>> would enter you, but <<he>> doesn't take advantage.
 <</if>>
 <br><br>
 
 <<if $arousal gte $arousalmax>>
 	<<orgasm>>
-
+	<br>
 	<<He>> laughs as your spasms subside. "I'd better not overdo it," <<he>> says as <<he>> climbs off the table. "Any longer and I might lose control. Thanks for humouring me."<<set $tipmod to 1.5>><<tipset>><<tipreceive>><<pass 50>>
 <<else>>
 	<<He>> continues massaging your back in this manner until the end of the session. "Any longer and I might lose control," <<he>> laughs as <<he>> climbs off the table. "Thanks for humouring me."<<set $tipmod to 1.2>><<tipset>><<tipreceive>><<pass 50>>
@@ -966,11 +965,11 @@ The <<person>> rubs oil over your back, and continues to hump you.
 
 <<if $arousal gte $arousalmax>>
 	You open your mouth to speak, just as your body betrays you.<<orgasm>>
-
+	<br>
 	The <<person>> laughs, rubbing oil over your back. "Were you trying to say something?" <<he>> says as you twitch against <<him>>. <<if ($vagina is 1 or $analdisable is "f") and $NPCList[0].penis isnot "none" and !playerChastity()>>"I'm sorely tempted to go all in."<</if>>
 	<br><br>
 
-	<<He>> climbs off the table as your spasms subside. "Thanks for humouring me. Commendable service, all round." <<He>> picks up <<his>> towel and leaves the room.
+	<<He>> climbs off the table as your spams subside. "Thanks for humouring me. Commendable service, all round." <<He>> picks up <<his>> towel and leaves the room.
 	<<set $tipmod to 1.5>><<tipset>><<tipreceive>><<pass 50>>
 	<br><br>
 
@@ -999,7 +998,7 @@ The <<person>> rubs oil over your back, and continues to hump you.
 :: Spa Lewd Hand Refuse
 <<effects>>
 
-You shake your head. "That's too lewd for me," you say. "Sorry."
+당신은 고개를 가로젓는다. "That's too lewd for me," you say. "Sorry."
 <br><br>
 
 "That's a shame," the <<person>> says as <<he>> rises to <<his>> feet. <<He>> throws <<his>> towel over <<his>> shoulder, and strides outside.<<body_tip hand 0.3>><<tipreceive>><<pass 50>>
@@ -1018,14 +1017,14 @@ The <<person>> rests on <<his>> elbow, watching you.
 
 <<link [[Get to work|Spa Lewd Hand]]>><<handskill 5>><</link>><<ghandskill>>
 <br>
-<<link [[Refuse|Spa Lewd Hand Refuse 2]]>><<unset $desperateaction>><</link>>
+<<link [[거절한다|Spa Lewd Hand Refuse 2]]>><<unset $desperateaction>><</link>>
 <br>
 
 
 :: Spa Lewd Hand Refuse 2
 <<effects>>
 
-You shake your head. "Sorry," you say. "I need to get ready for the next customer."
+당신은 고개를 가로젓는다. "Sorry," you say. "I need to get ready for the next customer."
 <br><br>
 
 The <<person>> sighs. "Alright. Thanks for the massage." <<He>> rises to <<his>> feet, throws <<his>> towel over <<his>> shoulder, and strides from the room.<<pass 50>>
@@ -1069,7 +1068,6 @@ The <<person>> lies back and shuts <<his>> eyes.
 	<<handejacstat>><<ejacstat>><<bodyliquid "leftarm" "semen">><<bodyliquid "rightarm" "semen">>
 	You accelerate the pace, until <<his>> <<print $NPCList[0].penisdesc>> erupts over your hands while <<his>> body spasms and jerks.
 <<else>>
-	<<if random(0,1) is 1>><<bodyliquid "rightarm" "goo">><<else>><<bodyliquid "leftarm" "goo">><</if>>
 	You accelerate the pace, until <<his>> body spasms and jerks. You feel <<his>> juices on your fingers.
 <</if>>
 <br><br>
@@ -1112,7 +1110,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 		You slow the pace, <span class="red">and the <<person>> loses control.</span> <<He>> grasps your arms, and pulls you onto the table.
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -1152,7 +1150,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 		You slow the pace, <span class="red">and the <<person>> loses control.</span> <<He>> grasps your arms, and pulls you onto the table.
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -1194,7 +1192,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 		You slow the pace, <span class="red">and the <<person>> loses control.</span> <<He>> grasps your arms, and pulls you onto the table.
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -1325,7 +1323,7 @@ Your hands are occupied. You need to use something else.
 		<<spa_rape_failed>>
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <</if>>
 
@@ -1338,7 +1336,7 @@ Your hands are occupied. You need to use something else.
 	<<if $spa.behaviour is "cute">>
 		"Just a little more money," you say. "I promise."
 	<<else>>
-		"Just a little more money," you purr, "and I'll release you."
+		"Just a little more money," you purr. "And I'll release you."
 	<</if>>
 	<br><br>
 
@@ -1363,7 +1361,7 @@ Your hands are occupied. You need to use something else.
 	<</if>>
 	<<He>> moans loud enough that you worry someone will investigate. It takes half a minute for <<him>> to come down to just the occasional twitch. <<Hes>> still out of breath.
 	<br><br>
-	<<link [[Next|Spa Lewd Torment End]]>><</link>>
+	<<link [[다음|Spa Lewd Torment End]]>><</link>>
 	<br>
 
 <<else>>
@@ -1388,7 +1386,7 @@ Your hands are occupied. You need to use something else.
 		<<spa_rape_failed>>
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <</if>>
 
@@ -1449,7 +1447,7 @@ Your hands are occupied. You need to use something else.
 			<<bodyliquid "bottom" "semen">><<bottomejacstat>><<ejacstat>>
 			until you feel <<his>> <<print $NPCList[0].penisdesc>> against your <<bottom>>. You begin <<bottomtext>> bobbing up and down against <<his>> length. <span class="red">It sends <<him>> over the edge.</span> <<He>> spasms, and <<his>> semen erupts onto you.
 		<<else>>
-			and <<bottomtext>> grind your <<bottom>> against <<his>> pussy. <span class="red">It sends <<him>> over the edge.</span> <<He>> spasms and moans as the orgasm runs through <<his>> body.
+			and <<bottomtext>> grind your <<bottom>> against <<his>> pussy. <span class="green">It sends <<him>> over the edge.</span> <<He>> spasms and moans as the orgasm runs through <<his>> body.
 		<</if>>
 		<br><br>
 
@@ -1474,7 +1472,7 @@ Your hands are occupied. You need to use something else.
 		<<spa_rape_failed>>
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <</if>>
 
@@ -1488,7 +1486,7 @@ Your hands are occupied. You need to use something else.
 	<<if $spa.behaviour is "cute">>
 		"Just a little more money," you say. "I promise."
 	<<else>>
-		"Just a little more money," you purr, "and I'll release you."
+		"Just a little more money," you purr. "And I'll release you."
 	<</if>>
 	<br><br>
 
@@ -1506,7 +1504,7 @@ Your hands are occupied. You need to use something else.
 	<br><br>
 
 	The effect is immediate.
-	<<if $NPCList[0].penis isnot "none" and !npcHasStrapon(0)>>
+	<<if $NPCList[0].penis isnot "none">>
 		<<His>> back arcs as <<his>> whole body convulses, covering your ass in a deluge of cum.
 	<<else>>
 		<<His>> back arcs as <<his>> whole body convulses.
@@ -1514,7 +1512,7 @@ Your hands are occupied. You need to use something else.
 
 	<<He>> moans loud enough that you worry someone will investigate. It takes half a minute for <<him>> to come down to just the occasional twitch. <<Hes>> still out of breath.
 	<br><br>
-	<<link [[Next|Spa Lewd Torment End]]>><</link>>
+	<<link [[다음|Spa Lewd Torment End]]>><</link>>
 	<br>
 <<else>>
 	<<if random(1, 10) gte 4>>
@@ -1538,7 +1536,7 @@ Your hands are occupied. You need to use something else.
 		<<spa_rape_failed>>
 		<br><br>
 
-		<<link [[Next|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Spa Lewd Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <</if>>
 
@@ -1556,8 +1554,12 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 
 <<He>> looks up at you, then down again, shaking <<his>> head.
 <br><br>
-
-"Bloody <<if $player.gender_appearance is "m">>incubus<<else>>succubus<</if>>," <<he>> mutters. "Fine. Here's your money." <<tipreceive>><<pass 50>>
+<<if $player.gender_appearance is "m">>
+	"Bloody incubus," <<he>> mutters. "Fine. Here's your money."
+<<else>>
+	"Bloody succubus," <<he>> mutters. "Fine. Here's your money."
+<</if>>
+<<tipreceive>><<pass 50>>
 <br><br>
 
 <<He>> wraps <<his>> towel around <<his>> waist, and staggers from the room.
@@ -1600,16 +1602,16 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Spa Lewd Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Lewd Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Spa Lewd Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Lewd Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Spa Lewd Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
-	<<He>> lies back on the table, one hand over <<his>> eyes. <<tearful>> you drop to the ground. "Here," <<he>> says. <<tipreceive "prostitution">><<pass 50>>
+	<<He>> lies back on the table, one hand over <<his>> eyes. <<tearful>> you drop to the ground. "Here," <<he>> says. <<tipreceive>><<pass 50>>
 	<br><br>
 	<<He>> ties the towel around <<his>> waist, and exits the room.
 
@@ -1622,7 +1624,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 		Instead, <<he>> pushes a finger into <<his>> pussy, and pumps hard, until <<his>> body shudders into orgasm.
 	<</if>>
 	<br><br>
-	<<tearful>> you step away from the table. "Sorry," the <<person>> manages. "Here." <<tipreceive "prostitution">><<pass 50>>
+	<<tearful>> you step away from the table. "Sorry," the <<person>> manages. "Here." <<tipreceive>><<pass 50>>
 	<br><br>
 
 	<<He>> ties the towel around <<his>> waist, and exits the room.
@@ -1638,7 +1640,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 		<<He>> pushes a finger into <<his>> pussy, and pumps hard, until <<his>> body shudders into orgasm.
 	<</if>>
 	<br><br>
-	<<tearful>> you step away from the table. "Sorry," the <<person>> manages. "Here." <<tipreceive "prostitution">><<pass 50>>
+	<<tearful>> you step away from the table. "Sorry," the <<person>> manages. "Here." <<tipreceive>><<pass 50>>
 	<br><br>
 
 	<<He>> ties the towel around <<his>> waist, and exits the room.
@@ -1663,7 +1665,6 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 
 <<effects>>
 
-<<body_tip hand 1>>
 "Let me help," you say, reaching for <<his>> towel. <<He>> tries to step away from you, but you manage to grasp the fabric. The towel comes free as <<he>> moves,
 <<if $pronoun is "f">>
 	<<if $NPCList[0].penis isnot "none">>
@@ -1686,6 +1687,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 <<He>> hesitates again, then does so. You oil up your hands, and <<handtext>> get to work.<<ghandskill>><<handskill 5>>
 <br><br>
 
+<<body_tip hand 1>>
 <<Hes>> much more comfortable by the end of the session, and leaves a tip. <<tipreceive>><<pass 50>>
 <br><br>
 
@@ -1697,7 +1699,6 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 
 
 <<if $rng gte 51>>
-	<<body_tip hand 1>>
 	The <<person>> blushes harder as <<he>> lets the towel drop to the floor,
 	<<if $pronoun is "f">>
 		<<if $NPCList[0].penis isnot "none">>
@@ -1717,6 +1718,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 	<<He>> covers <<himself>> with <<his>> hands, and lies face down on the table. You oil up your hands, and <<handtext>> get to work.<<ghandskill>><<handskill 5>>
 	<br><br>
 
+	<<body_tip hand 1>>
 	<<Hes>> much more comfortable by the end of the session, and leaves a tip. <<tipreceive>><<pass 50>>
 	<br><br>
 
@@ -1726,7 +1728,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 	The <<person>> blushes harder, and can't work up the courage. <<He>> turns and leaves the room.
 	<br><br>
 	<<set $masseur_stat -= 1>>
-	<<money -1000 "spa">>
+	<<set $money -= 1000>>
 	<<spa_end>>
 <</if>>
 
@@ -1745,7 +1747,11 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 
 <<set $seductiondifficulty to 8000>>
 <<seductioncheck>>
-<<seductionskilluptext>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
+	<br><br>
+<</if>>
 <<seductionskilluse>>
 
 You grasp the <<persons>> cheeks in both hands, and squeeze.
@@ -1764,7 +1770,7 @@ You grasp the <<persons>> cheeks in both hands, and squeeze.
 	"How about a happy ending?"
 	<br><br>
 
-	<<link [[Refuse|Spa Lewd Hand Refuse]]>><</link>>
+	<<link [[거절한다|Spa Lewd Hand Refuse]]>><</link>>
 	<br>
 	<<if hasSexStat("promiscuity", 3)>>
 		<<link [[Negotiate|Spa Lewd Hand Negotiate]]>><</link>><<promiscuous3>>
@@ -1791,12 +1797,13 @@ You grasp the <<persons>> cheeks in both hands, and squeeze.
 	<<He>> grunts and runs <<his>> fingers through your hair as you service <<him>>.
 	<br><br>
 
-	<<link [[Next|Spa Oral Anus]]>><</link>>
+	<<link [[다음|Spa Oral Anus]]>><</link>>
 <<else>>
 	You kneel in front of the <<person>>. <<He>> grasps the back of your head.
 	<<promiscuity4>>
 
-	<<link [[Next|Spa Oral]]>><<set $sexstart to 1>><</link>>
+	<br><br>
+	<<link [[다음|Spa Oral]]>><<set $sexstart to 1>><</link>>
 <</if>>
 <br>
 
@@ -1811,7 +1818,7 @@ You grasp the <<persons>> cheeks in both hands, and squeeze.
 	"That wasn't a request," the <<person>> says. <span class="red"><<He>> grasps your arm,</span> and pulls you onto the table.
 	<br><br>
 
-	<<link [[Next|Spa Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Spa Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	The <<person>> shrugs. "Suit yourself." <<He>> fixes <<his>> towel, and exits the room.
@@ -1850,9 +1857,9 @@ You grasp the <<persons>> cheeks in both hands, and squeeze.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Spa Oral Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Oral Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Spa Oral]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Oral]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Spa Oral Finish
@@ -1860,7 +1867,7 @@ You grasp the <<persons>> cheeks in both hands, and squeeze.
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
-	<<He>> ties <<his>> towel around <<his>> body. "Thanks love," <<he>> says. "Here." <<He>> exits the room. <<tipreceive "prostitution">>
+	<<He>> ties <<his>> towel around <<his>> body. "Thanks love," <<he>> says. "Here." <<He>> exits the room. <<tipreceive>>
 	<br><br>
 	<<tearful>> you wipe down the table.
 
@@ -1938,16 +1945,16 @@ onto your face.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Spa Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Spa Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Spa Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
-	<<He>> lies back on the table, one hand over <<his>> eyes. "Here," <<he>> says. <<tipreceive "prostitution">>
+	<<He>> lies back on the table, one hand over <<his>> eyes. "Here," <<he>> says. <<tipreceive>>
 	<br><br>
 	<<He>> ties the towel around <<his>> waist, and exits the room.
 	<br><br>
@@ -2005,13 +2012,13 @@ The <<person>> watches all the while. "Nice," <<he>> says. "There are other form
 <br><br>
 
 <<if hasSexStat("promiscuity", 3)>>
-	<<link [[Next|Spa Lewd Breasts]]>><<chestskill 5>><</link>><<promiscuous3>><<gchestskill>>
+	<<link [[다음|Spa Lewd Breasts]]>><<chestskill 5>><</link>><<promiscuous3>><<gchestskill>>
 	<br>
 <<elseif $uncomfortable.prostituting is false>>
-	<<link [[Next|Spa Lewd Breasts]]>><<chestskill 5>><<set $desperateaction to 1>><</link>><<promiscuous3>><<gchestskill>>
+	<<link [[다음|Spa Lewd Breasts]]>><<chestskill 5>><<set $desperateaction to 1>><</link>><<promiscuous3>><<gchestskill>>
 	<br>
 <</if>>
-<<link [[Refuse|Spa Lewd Breasts Refuse]]>><</link>>
+<<link [[거절한다|Spa Lewd Breasts Refuse]]>><</link>>
 <br>
 
 :: Spa Lewd Breasts Refuse
@@ -2037,9 +2044,9 @@ You pour oil over your <<if $player.breastsize gte 1>><<breasts>><<else>>chest<<
 "Like this?" you ask, pressing your bodies together. <<He>> nods, so you rub <<him>> up and down<<if $player.breastsize gte 1>>, pressing your <<breasts>> against <<his>> body<</if>>.
 
 <<if $NPCList[0].penis isnot "none">>
-	You sometimes slide too far back, and your <<bottom>> presses against <<his>> <<npcPenis>>.
+	You sometimes slide too far back, and your <<bottom>> presses against <<his>> <<npcPenis>>
 <</if>>
-<<promiscuity3>>
+<br><br>
 
 
 <<if random(1, 2) is 2>>
@@ -2101,7 +2108,7 @@ You grasp the <<persons>> arms, and push them away. "Look," you say. "Don't touc
 	"Fuck that," the <<person>> says, reaching for your <<breasts>> again. "I can't hold back."
 	<br><br>
 
-	<<link [[Next|Spa Lewd Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Spa Lewd Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	The <<person>> doesn't argue. <<He>> lies back, and closes <<his>> eyes as you continue working.
@@ -2152,9 +2159,9 @@ You grasp the <<persons>> arms, and push them away. "Look," you say. "Don't touc
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Spa Lewd Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Lewd Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Spa Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Spa Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 
@@ -2172,6 +2179,7 @@ The <<person>> closes the door behind <<him>>.
 
 <<set $seductiondifficulty to 10000>>
 <<seductioncheck>>
+<br><br>
 <<seductionskilluptext>>
 <<seductionskilluse>>
 

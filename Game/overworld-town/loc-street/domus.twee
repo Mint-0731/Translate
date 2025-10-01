@@ -1,45 +1,45 @@
 :: Domus Street
 
 <<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">><<getTarget true>>
-You are on Domus Street. The orphanage is here. The street is dominated by small homes similar in appearance.
+당신은 도무스 가에 있다. 고아원이 여기 있다. 거리는 다들 비슷비슷하게 생긴 작은 집들로 가득하다.
 <<if Time.dayState is "day">>
 	<<if Weather.precipitation is "rain">>
-		People walk quickly, driven by the rain.
+		사람들이 빗속에서 걸음을 재촉하고 있다.
 	<<elseif Weather.isFreezing>>
-		People walk brisk against the cold.
+		사람들이 추위에 반해 활기차게 걷는다.
 	<<else>>
-		People tend to their gardens and go about their business all along the street.
+		이 거리의 사람들은 정원을 가꾸거나 일을 하러 가고 있다.
 	<</if>>
 <<elseif Time.dayState is "dawn">>
 	<<if Weather.precipitation is "rain">>
-		It's busy. People are on their way to work, wearing raincoats or carrying umbrellas.
+		거리는 꽤나 바쁘다. 사람들은 레인코트를 입거나 우산을 쓰고, 직장으로 가고 있다.
 	<<elseif Weather.isFreezing>>
-		It's busy. People are on their way to work, bundled against the cold.
+		거리는 꽤나 바쁘다. 사람들은 추위 때문에 옷을 껴입고, 직장으로 가고 있다.
 	<<else>>
-		It's busy. People are on their way to work.
+		거리는 꽤나 바쁘다. 사람들은 직장으로 가고 있다.
 	<</if>>
 <<elseif Time.dayState is "dusk">>
 	<<if Weather.precipitation is "rain">>
-		People return to their homes, eager to be out of the rain.
+		비를 피하려는 열망에 차서, 사람들이 집으로 돌아가고 있다.
 	<<elseif Weather.isFreezing>>
-		People return to their homes, eager to be out of the cold.
+		추위를 피하려는 열망에 차서, 사람들이 집으로 돌아가고 있다.
 	<<else>>
-		People return to their homes, tired after a long day.
+		긴 하루의 끝에, 지친 사람들이 집으로 돌아가고 있다.
 	<</if>>
 <<else>>
 	<<if Weather.precipitation is "rain">>
-		The street is dark, and drenched with the patter of rain.
+		거리는 어둡고, 비가 후두둑 떨어지는 소리에 흠뻑 젖어 있다.
 	<<elseif Weather.isFreezing>>
-		The street is dark and silent in the snow.
+		거리는 눈 속에서 어둡고 조용하다.
 	<<else>>
-		The street is dark and silent, save the occasional engine.
+		거리는 가끔 들려오는 엔진 소리를 제외하면, 어둡고 조용하다.
 	<</if>>
 <</if>>
 <<if $halloween is 1>>
-	Jack-o'-lanterns, skeletons, and spiders decorate the houses.
+	잭 오 랜턴, 해골과 거미가 집집마다 장식되어 있다.
 <</if>>
 <<if Weather.isSnow>>
-	Snowmen stand in gardens.
+	눈사람이 정원들에 서 있다.
 <</if>>
 <<streeteffects>>
 <br><br>
@@ -50,39 +50,39 @@ You are on Domus Street. The orphanage is here. The street is dominated by small
 	<<orgasmstreet>>
 <</if>>
 <<if $tutorial is 0 and $debug is 0>><<set $tutorial to 1>>
-	<<generate1>><<person1>>As you leave the orphanage you bump into a <<person>> passing by. <<He>> staggers back and looks at you with anger, but <<his>> rage turns to lechery as <<he>> beholds you. "You're the cutest thing I've seen all week! Come 'ere."
+	<<generate1>><<person1>>고아원에서 나올 때 당신은 지나가던 <<person_ gwa>> 부딪힌다. <<HePost "은">> 비틀거리며 화난 눈길을 보내오지만, 당신을 보자 <<his_ yi>> 분노는 색욕으로 바뀐다. "너처럼 귀여운 아이는 본 적이 없어! 이리 와."
 	<br><br>
-	<<link [[Next|Tutorial]]>><<set $molestationstart to 1>><<set $tutorialExit to "Domus Street">><</link>>
+	<<link [[다음|Tutorial]]>><<set $molestationstart to 1>><<set $tutorialExit to "Domus Street">><</link>>
 <<else>>
 	<<if $stress gte $stressmax and !$possessed>>
 		<<passoutstreet>>
 	<<else>>
-
-		<<if $halloween is 1 and Time.monthDay is 31 and Time.hour gte 19 and C.npc.Whitney.state isnot "dungeon" and C.npc.Whitney.init is 1 and $halloween_whitney_proposed isnot 1 and $halloween_kylar_whitney isnot 1 and !$possessed>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $halloween is 1 and Time.monthDay is 31 and Time.hour gte 19 and C.npc.Whitney.state isnot "dungeon" and C.npc.Whitney.init is 1 and $halloween_whitney_proposed isnot 1 and !$possessed>>
 			<<set $halloween_whitney_proposed to 1>>
 			<<halloweenwhitney>>
 		<<elseif $averyDismissalScene and $averyDismissalSceneWait isnot 1 and Time.weekDay is 7 and Time.hour is 20>>
 			<<loadNPC 0 avery_sidepiece>><<person1>>
 			<<if $averyDismissalScene is 1>>
-				You see a <<person>> standing outside the orphanage wearing a
+				당신은 <<person_ i>> 
 				<<if $pronoun is "f">>
-					fancy gown. <<He>> paces around, trying to get used to being in heels.
+					멋진 가운을 입고 고아원 바깥에 서 있는 걸 발견한다. <<He_ nun>> 하이힐에 익숙해지기 위해, 주변을 왔다갔다하고 있다.
 				<<else>>
-					sharp suit. <<He>> paces around, and it looks like <<hes>> trying to work off <<his>> nerves.
+					맵시있는 정장을 입고 고아원 바깥에 서 있는 걸 발견한다. <<He_ nun>> 주변을 왔다갔다하고 있으며, <<his_ yi>> 긴장된 마음을 진정시키려 하는 것으로 보인다.
 				<</if>>
-				<span class = "blue">You recognise <<him>> now. <<Hes>> Avery's new date.</span>
+				<span class = "blue">당신은 이제 <<him_ ul>> 알아본다. <<He_ nun>> 에이버리의 새 데이트 상대다.</span>
 				<br><br>
-				As if on cue, you see a familiar car stopping nearby.
-				The <<personsimple>> excitedly walks over to it<<if $pronoun is "f">>, almost tripping in the process<</if>>.
-				You see <<him>> give Avery a peck on the lips as <<he>> climbs onboard. The door shuts, and the new couple drives away.
+				마치 정해진 순서마냥, 당신은 익숙한 차가 근처에 멈춰서는 걸 본다.
+				<<personsimple_ i>> 들뜬 모습으로 차를 향해<<if $pronoun is "f">> 걸어가다가, 거의 발이 걸려 넘어질 뻔한다<<else>> 걸어간다<</if>>.
+				당신은 <<him_ i>> 자동차에 올라타며, 에이버리에게 가볍게 입맞춤을 하는 것을 본다. 문이 닫히고, 새로운 커플이 차를 타고 떠나간다.
 			<<else>>
-				You bump into a <<person>>. "Oh! Sorry!" <<He>> frantically apologises, looking you over. <<He>> seems to recognise you, and smiles.
-				"Ah! I'm glad I ran into you. I never got to thank you for warning me about Avery." <span class = "blue">You recognise <<him>> now. <<Hes>> the <<personsimple>> Avery tried to replace you with.</span>
+				당신은 <<person_ gwa>> 부딪힌다. "아! 미안해!" <<He_ ga>> 당신을 살펴보면서 정신없이 사과한다. <<He_ nun>> 당신을 알아본 듯하고, 미소를 짓는다.
+				"아! 우연히 만나서 기뻐. 내게 에이버리에 대해 경고해준 것에 대해 아직 고맙다고 못 했잖아." <span class = "blue">당신은 이제 <<him_ ul>> 알아본다. <<He_ nun>> 에이버리가 당신 대용으로 두려고 시도했던 <<personsimplePost "이다">>.</span>
 				<br><br>
-				"It's funny, had you not warned me that day, I'd actually be out on a date with <<nnpc_him "Avery">> right now. You really helped me dodge a bullet."
-				<<He>> suddenly hugs you.
+				"재미있지, 네가 그날 내게 경고해주지 않았다면, 지금쯤 <<nnpc_him_ gwa "Avery">> 데이트하러 나갔을 거야. 내가 최악의 상황을 면하도록 네가 큰 도움을 줬어."
+				<<He_ ga>> 갑자기 당신을 포옹한다.
 				<br><br>
-				"I can't thank you enough. I'll see you around the orphanage!" <<stress -6>><<lstress>>
+				"아무리 고마워해도 부족한 걸. 나중에 고아원에서 다시 보자!" <<stress -6>><<lstress>>
 			<</if>>
 			<<unset $averyDismissalScene>>
 			<<clearNPC avery_sidepiece>>
@@ -93,148 +93,57 @@ You are on Domus Street. The orphanage is here. The street is dominated by small
 		<<elseif $adultshopgrandopening is true and $adultshopopeningevent is undefined and Time.hour gte 6 and Time.hour lte 20>>
 			<<set $adultshopopeningevent to true>>
 			<<generate1>><<person1>>
-			"Excuse me," says a voice to your right. It's a <<person>>. <<He>> holds out a flyer. 'Sirris' adult shop' is written across the top, above a collection of sex toys.
+			"실례합니다," 당신의 오른편에서 목소리가 들려온다. <<personPost "이다">>. <<He_ nun>> 전단지를 꺼낸다. 전단지 맨 위에는 '시리스의 성인용품점'이라는 문구가 적혀 있고, 그 아래로는 여러 성인용품들이 있다.
 			<br><br>
-			"<span class="gold">We're hosting a grand opening event, today only.</span> We're open until <<ampm 21 00>>. Hope you can make it."
+			<span class="gold">"우리 가게에서 개업 기념 행사를 여는 중입니다, 오늘뿐이예요.</span> 우리 가게는 <<ampm 21 00>> 까지 열려 있습니다. 꼭 들러주세요!"
 			<br><br>
 
-			<<He>> crosses the street to hand out a flyer to another pedestrian.
+			<<He_ nun>> 다른 보행자에게 전단지를 건네주기 위해 길을 건너간다.
 			<br><br>
 			<<endevent>>
 			<<destinationeventend>>
-		<<elseif C.npc.Avery.state is "active" and !$avery_injury and !$daily.averySchoolDropOff and Time.schoolDay and Time.hour is 7 and $exposed lte 0 and ["upper", "lower", "handheld"].some(part => $worn[part].type.includes("school")) and !$avery_mansion and (!$robinaverybeat or C.npc.Avery.rage lte 40) and ((C.npc.Avery.love gte random(20, 100) and ($rng gte 51 or Weather.precipitation isnot "none")) or (C.npc.Avery.love gte 20 and Time.weekDay is 2) or (C.npc.Avery.rage is 0 and $dateCount.Avery is 0 and !$averyRejected.dropOff))>>
-			<<npc "Avery">><<person1>>
-			<<set $daily.averySchoolDropOff to true>>
-			<<if !$weekly.averyRejected.dropOff>>
-				<<set $weekly.averyRejected.dropOff to 0>>
-			<</if>>
-			<<if !$averyRejected.dropOff>>
-				<<set $averyRejected.dropOff to 0>>
-			<</if>>
-			<<set $phase2 to 0>>
-
-			<<if $averySeen.includes("schoolDropOff")>>
-				Avery's car pulls up beside you. The windows wind down to reveal Avery dressed and ready for work. "Good morning, <<pcpetname "Avery">>," <<he>> says and unlocks the doors. "Get in.
-				<<if $averyRejected.dropOff gt 1 and random(1,2) is 2>>
-					It'll be better than walking
-					<<if Weather.precipitation isnot "none">>
-						in the <<= Weather.precipitation is "rain" ? "rain" : "snow">>."
-					<<elseif Weather.isFreezing>>
-						in the cold."
-					<<else>>
-						by yourself."
-					<</if>>
-				<<else>>
-					<<if Weather.precipitation isnot "none">>
-						<<if Weather.precipitation is "rain">>
-							Before you get <<= either("soaked","drenched")>>.<<if $averyragerevealed is 1>> I don't want you getting water on my seats.<</if>>"
-						<<else>>
-							And kick the snow off your shoes before you do.<<if $averyragerevealed is 1>> I do not want snow in my car.<</if>>"
-						<</if>>
-					<<else>>
-						Hopefully <<= either(`we can beat traffic this time`, `traffic isn't too bad today`)>>."
-					<</if>>
-				<</if>>
-			<<else>>
-				<<if $dateCount.Avery is 0 and C.npc.Avery.rage is 0 and !$averyRejected.dropOff>>
-					<<set $phase2 to 1>>
-					An expensive car pulls up beside you. The window winds down to reveal a <<personsimple>> in a <<= $pronoun is "m" ? "suit" : "smart dress">>. It's Avery, the <<personsimple>>
-					<<if $averySeen.some(event => ["meetPark", "meetStreet"].includes(event))>>
-						<<if $averySeen.includes("meetPark")>>
-							you met in the park who
-						<<else>>
-							who helped you in the streets and
-						<</if>>
-						<<if $averySeen.includes("meetCafe")>>
-							took you to the cafe.
-						<<else>>
-							offered to take you to the cafe.
-						<</if>>
-					<<else>>
-						you met the other day.
-					<</if>>
-					"Good morning, <<pcpetname "Avery">>," <<he>> says, looking you up and down. "It's nice to see you again."
-					<br><br>
-					"Are you off to school?" <<he>> asks. But before you can even answer, you hear the doors unlock. "I'll give you a lift there. You can sit in the front."
-				<<else>>
-					<<set $averySeen.pushUnique("schoolDropOff")>>
-					A familiar car pulls up beside you. The window winds down to reveal
-					<<if $averywalkintro is 1>>
-						Avery, dressed and ready for work.
-						<<if $robinaverybeat is 1>>
-							"Good morning," <<he>> greets with
-							<<if C.npc.Avery.rage gte 30>>
-								poorly repressed spite in <<his>> tone. "Decided to leave your little guard dog behind today, I see. Did it bite the hand that feeds it, perhaps?" <<he>> snipes with a derisive snort. "You know, I would take a good, long look at the kind of company you decide to keep, <<pcpetname "Avery">>. It would be a shame if you made enemies of those you shouldn't because of ill-bred brats like <<nnpc_him "Robin">>."
-							<<elseif C.npc.Avery.rage gte 20>>
-								an impatient clip to <<his>> tone. "Left that brat to find <<nnpc_his "Robin">> own way to school today?" <<He>> scoffs. "Good. I expect you to keep better company than that, <<pcpetname "Avery">>."
-							<<else>>
-								a carefully neutral expression on <<his>> face. "I see your... friend isn't with you today." There's a noticeable twitch of <<his>> brows at the mention of Robin, but <<he>> manages to keep <<his>> composure. Barely. "I hope you informed <<nnpc_him "Robin">> that <<nnpc_he "Robin">> ought to watch <<nnpc_his "Robin">> step going forward—for <<nnpc_his "Robin">> own good."
-							<</if>>
-							<br><br>
-							<<He>> glances around briefly, as if expecting another sudden intercession, then continues, "Anyway, walking alone in a town like this isn't safe<<if $allure gte (6000 * $alluremod)>>, as I'm sure you know<</if>>."
-							<br><br>
-							You hear the car doors unlock, and <<his>> eyes narrow. "Get in. It's <<= C.npc.Avery.rage gte 20 ? "for your own good" : "in your best interest">>." <<He>> flashes you a <<= either(`mirthless`,`contemptuous`,`unpleasant`,`imperious`)>> smile and adds, "I'll even let you sit in the front with me this time."
-						<<else>>
-							"Good morning, <<pcpetname "Avery">>," <<he>> says as <<he>> glances around for a few moments before looking at you. "I see your friend isn't with you today. Walking alone isn't safe, you know."
-							<br><br>
-							You hear the car doors unlock. "Get in, I'll give you a lift. You can even sit in the front this time."
-						<</if>>
-					<<else>>
-						<<set $phase2 to ($averyschoolpickupintro is 1 ? 2 : 3)>>
-						a <<personsimple>> in a <<= $pronoun is "m" ? "suit" : "smart dress">>. It's Avery. "Good morning, <<pcpetname "Avery">>," <<he>> says, looking you up and down. "I was just on my way to work when I spotted you. Walking alone isn't safe, you know."
-						<br><br>
-						You hear the car doors unlock. "Get in. I'll give you a lift."
-					<</if>>
-				<</if>>
-			<</if>>
-			<br><br>
-
-			<<getinicon>><<link [[Get in (0:10)|Avery School Drop Off Accept]]>><<pass 10>><</link>>
-			<br>
-			<<refuseicon>><<link [[Refuse|Avery School Drop Off Decline]]>><</link>>
-			<br>
-		<<elseif (dangerEvent() or $eventforced) and $eventskip is 0>>
+		<<elseif ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 			<<eventsstreet>>
 		<<else>>
 			<<if $options.mapTop is true>>
 				<<map "domus">>
 				<br>
 			<</if>>
-			<<if $averydate is 1 and Time.hour is 20 and $averydatedone isnot 1 and !$avery_mansion>>
-				Avery waits for you by <<nnpc_his "Avery">> car.
+			<<if $averydate is 1 and Time.hour is 20 and $averydatedone isnot 1>>
+				에이버리가 <<nnpc_his_ yi "Avery">> 차에서 당신을 기다리고 있다.
 				<br>
-				<<icon "averys_car.png">><<link [[Date (1:20)|Avery Date]]>><</link>>
-				<br><br>
-			<</if>>
-			<<if Time.hour is 20 and $avery_card_gift and C.npc.Avery.state is "dismissed" and !$avery_fate>>
-				Avery leans on <<nnpc_his "Avery">> car, waiting for someone.
-				<br>
-				<<icon "averys_car.png">><<link [[Offer the card|Avery Card]]>><</link>>
+				<<ind>><<link [[데이트 (1:20)|Avery Date]]>><</link>>
 				<br><br>
 			<</if>>
 
-			Places of interest
+			주요 장소
 			<br>
-			<<homeicon>><<link [[Go home (0:01)|Orphanage]]>><<pass 1>><</link>>
+			<<homeicon>><<link [[집에 간다 (0:01)->Orphanage]]>><<pass 1>><</link>>
 			<br>
 			<<if Time.dayState is "night">>
-				<<dooricon "domus">><<link [[Approach one of the houses (0:02)|Domus House Lock]]>><<pass 2>><</link>>
+				<<dooricon "domus">><<link [[한 집에 다가간다 (0:02)|Domus House Lock]]>><<pass 2>><</link>>
 				<br>
 			<<elseif $exposed lte 0>>
-				<<dooricon "domus">><<link [[Knock on one of the houses (0:02)|Domus House Knock]]>><<pass 2>><</link>>
+				<<dooricon "domus">><<link [[한 집의 문을 두드린다 (0:02)|Domus House Knock]]>><<pass 2>><</link>>
 				<br>
 			<</if>>
 			<<if $demon gte 6 and Time.dayState is "night" and hasSexStat("promiscuity", 2)>>
-				<<tficon "demon">><<link [[Climb through a window (0:30)|Domus Window]]>><<pass 30>><</link>><<demon>>
+				<<tficon "demon">><<link [[창문을 통해 올라간다 (0:30)|Domus Window]]>><<pass 30>><</link>><<demon>>
 				<br>
 			<</if>>
 			<<if $exposed gte 2 and Time.dayState isnot "night" and hasSexStat("exhibitionism", 5)>>
-				<<dooricon "domus">><<link [[Beg for clothing (0:02)|Domus House Nude]]>><<pass 2>><</link>><<exhibitionist5>>
+				<<dooricon "domus">><<link [[옷을 구걸한다 (0:02)|Domus House Nude]]>><<pass 2>><</link>><<exhibitionist5>>
 				<br>
 			<</if>>
+			/*
+			<<if StartConfig.sneaky is true>>
+				<<ind>><<link [[Vrelnir의 길 옆 피크닉|Sneaky Picnic]]>><</link>> (Sneaky update)
+				<br>
+			<</if>>
+			*/
 			<<if $exposed gte 1 and Time.dayState isnot "night">>
 			<<else>>
-				<<add_link "Travel<br>">><<hideDisplay>>
+				<<add_link "이동<br>">><<hideDisplay>>
 				<<barb>>
 				<<danube>>
 				<<if $exposed lte 0>>
@@ -243,7 +152,7 @@ You are on Domus Street. The orphanage is here. The street is dominated by small
 				<<loiter>>
 				<br>
 			<</if>>
-			<<add_link "<br>Alternate Routes<br>">><<hideDisplay>>
+			<<add_link "<br>다른 경로<br>">><<hideDisplay>>
 			<<residential>>
 			<<stormdrain>>
 
@@ -265,22 +174,22 @@ You are on Domus Street. The orphanage is here. The street is dominated by small
 :: Sneaky Picnic
 <<effects>>
 
-A girl with long brown hair sits on a bench at the side of the road, a basket on her lap, and a cup of tea in one hand. She smiles as you approach.
+긴 갈색 머리의 소녀 하나가 길 옆의 벤치에 앉아, 무릎에는 바구니를 하나 올려놓고, 한 손에는 홍차 컵을 들고 있다. 그녀는 당신이 다가가자 미소짓는다.
 <br><br>
 
-"Hello," she says. "Don't mind me. I'm just waiting for someone. Someone about to get in a lot of trouble." She pauses. "I think you will meet them in time, but I can introduce you early if you like. If you're feeling adventurous."
+"안녕," 그녀가 말한다. "나는 신경쓰지 마. 나는 그냥 누군가를 기다리고 있어. 엄청난 문제들을 이제 직면할 누군가를 말야." 그녀는 잠시 말을 멈춘다. "네가 그 사람을 곧 만날 거라고 생각하지만, 원하면 미리 소개해 줄 수도 있어. 네가 흥미진진하다면 말야."
 <br><br>
 
-<<link [[Test new Avery scene|Sneaky Picnic Test]]>><</link>> (Will permanently progress Avery's arc if not already at this point.)
+<<link [[에이버리의 새 장면을 테스트한다|Sneaky Picnic Test]]>><</link>> (이 시점에서 에이버리의 스토리를 아직 진행하지 않았으면 강제적으로 진행시킬 것입니다.)
 <br>
-<<link [[Decline|Sneaky Picnic Decline]]>><</link>>
+<<link [[거절한다|Sneaky Picnic Decline]]>><</link>>
 <br>
 
 :: Sneaky Picnic Test
 <<effects>>
 
 <<if !$worn.upper.type.includes("formal") or !$worn.lower.type.includes("formal")>>
-	"You'll need to dress the part," the girl says. "Here." She takes a bundle of clothing from a tentacle within her basket, and throws it on you. "There we go!"
+	"그 파트를 진행하려면 옷을 차려입어야 할 거야," 소녀가 말한다. "여기." 그녀가 바구니 안의 촉수에게서 옷 한 뭉치를 꺼내, 당신에게 던진다. "그렇지!"
 	<<if $player.gender_appearance is "f">>
 		<<upperwear 7>>
 	<<else>>
@@ -290,17 +199,17 @@ A girl with long brown hair sits on a bench at the side of the road, a basket on
 <</if>>
 <<set $avery_location to 3>>
 
-<<npc Avery>><<person1>>"Here <<he>> comes!" the girl says, pulling a newspaper from the basket and hiding behind it. "Break a leg!"
+<<npc Avery>><<person1>>"여기 <<he_ ga>> 왔네!" 소녀가 말하며, 바구니에서 신문을 꺼내 그 뒤에 숨는다. "행운을 빌어!"
 <br><br>
 
-<<link [[Next|Avery Date]]>><<endevent>><</link>>
+<<link [[다음|Avery Date]]>><<endevent>><</link>>
 <br>
 
 :: Sneaky Picnic Decline
 <<effects>>
 
-The girl smiles again. "Understood. I hope you have a pleasant day." She takes a bite from a cheese sandwich.
+소녀가 다시 미소짓는다. "알겠어. 그럼 좋은 하루가 되기를 바라." 그녀는 치즈 샌드위치를 한 입 입에 문다.
 <br><br>
 
-<<link [[Next|Domus Street]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Domus Street]]>><<set $eventskip to 1>><</link>>
 <br>

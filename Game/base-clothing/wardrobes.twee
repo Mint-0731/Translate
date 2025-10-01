@@ -13,19 +13,22 @@
 		<<wardrobeSelection true>>
 	<</if>>
 	<<set _selectedWardrobe to selectWardrobe()>>
-	<<wardrobeSanityCheck>>
+	<<if $runWardrobeSanityChecker is true>>
+		<<wardrobeSanityCheck>>
+		<<set $runWardrobeSanityChecker to false>>
+	<</if>>
 	<<if $clothingShop.stolenClothes gt 0>>
 		<<set $clothingShop.stolenClothes to 0>>
-		<span class="gold">You place the clothes you recently stole from the shop in your wardrobe.</span>
+		<span class="gold">최근에 상점에서 훔친 옷을 옷장에 넣었다.</span>
 		<br>
 	<</if>>
 	<<if $adultShop isnot undefined and $adultShop.stolenClothes gt 0>>
 		<<set $adultShop.stolenClothes to 0>>
-		<span class="gold">You place the clothes you recently stole from the adult shop in your wardrobe.</span>
+		<span class="gold">최근에 성인용품점에서 훔친 옷을 옷장에 넣었다.</span>
 		<br>
 	<</if>>
 	<<if _wearAction is "strip">>
-		You remove your clothing.
+		입고 있던 옷을 벗는다.
 		<br><br>
 		<<undress $wardrobe_location>>
 	<</if>>
@@ -37,7 +40,7 @@
 	<<set _slimePrevent to ["upper", "lower", "under_upper", "under_lower"]>>
 	<<set _towelCheck to ["upper", "lower"]>>
 	<<set _equipSkip to {"over_upper":false, "over_lower":false, "upper":false, "lower":false, "under_upper":false, "under_lower":false, "over_head":false, "head":false, "face":false, "neck":false, "hands":false, "handheld":false, "legs":false, "feet":false, "genitals":false}>>
-	<<set _eIndextemNames to []>>
+	<<set $_itemNames to []>>
 	<<for _slot range _equip>>
 		<<unset _outfitPieceIds>>
 		<<unset _item>>
@@ -57,7 +60,7 @@
 			<<unset _cursedPrevent>>
 			<<set _wornOutfitPrimary to $worn[_slot].outfitPrimary>>
 			<<if $worn[_slot].cursed is 1>>
-				You try to remove the <<print $worn[_slot].name>>, but fail. <<cursedtext $worn[_slot].name>>
+				당신은 <<trClothes _slot $worn[_slot].name "name" "을">>_trResult 벗으려 하나, 실패한다. <<cursedtext $worn[_slot].name>>
 				<br>
 				<<set _cursedPrevent to true>>
 			<</if>>
@@ -76,13 +79,13 @@
 			<</if>>
 			/*Strips equip and puts it in the wardrobe*/
 			<<if _wearId is "strip" and $worn[_slot].name isnot "naked">>
-				You remove the <<print $worn[_slot].name>>.
+				당신은 <<trClothes _slot $worn[_slot].name "name" "을">>_trResult 벗었다.
 				<<generalUndress $wardrobe_location _slot>>
 				<br>
 				<<if _wornOutfitPrimary isnot undefined>>
 					<<for $_outfitPieceSlot, $_outfitPieceName range _wornOutfitPrimary>>
 						<<if $_outfitPieceName isnot "broken" and $_outfitPieceName isnot "split" and $worn[$_outfitPieceSlot].name isnot "naked">>
-							You remove the <<print $worn[$_outfitPieceSlot].name>>.
+							당신은 <<trClothes $_outfitPieceSlot $worn[$_outfitPieceSlot].name "name" "을">>_trResult 벗었다.
 							<<generalUndress $wardrobe_location $_outfitPieceSlot>>
 						<</if>>
 					<</for>>
@@ -95,9 +98,9 @@
 				<<generalUndress $wardrobe_location _slot>>
 				<<set $worn[_slot] to clone(setup.clothes[_slot][3])>><<set $worn[_slot].colour to clone($worn[_slot].colour_options.random())>>
 				<<if _slot is "upper">>
-					You tie a towel around your chest.
+					당신은 가슴팍에 수건을 두른다.
 				<<else>>
-					You tie a towel around your waist.
+					당신은 허리춤에 수건을 두른다.
 				<</if>>
 				<br><br>
 				<<continue>>
@@ -106,7 +109,7 @@
 				<<generalUndress $wardrobe_location "upper">><<generalUndress $wardrobe_location "lower">>
 				<<set $worn.upper to clone(setup.clothes.upper[14])>><<set $worn.upper.colour to clone($worn.upper.colour_options.random())>>
 				<<set $worn.lower to clone(setup.clothes.lower[15])>><<set $worn.lower.colour to clone($worn.upper.colour)>>
-				You tie a large towel around your chest.
+				당신은 가슴팍에 큰 수건을 두른다.
 				<br><br>
 				<<continue>>
 			<</if>>
@@ -120,31 +123,35 @@
 		/*Prevent equip when preggy*/
 		<<if playerBellySize() gte 12 and _item.type.includes("constricting") and $wardrobeOption is "wear">>
 			<<if _item.type.includes("chest_bind")>>
-				<span class="red">Your pregnant body is too sensitive to wear your _item.name.</span>
+				<span class="red">당신의 임신한 몸은 <<trClothes _slot _item.name "name" "을">>_trResult 입기에는 너무 민감하다.</span>
 			<<else>>
-				<span class="red">Your <<bellyDescription "pc">> is too large to wear your _item.name.</span>
+				<span class="red">당신의 <<bellyDescription_ un "pc">> <<trClothes _slot _item.name "name" "을">>_trResult 입기에는 너무 크다.</span>
 			<</if>>
 			<br>
 			<<continue>>
 		<</if>>
 		/*Prevent equip when the ear slime doesn't allow it*/
 		<<if _slimePrevent.includes(_slot) and $wardrobeOption is "wear" and $earSlime.corruption gte 10>>
+			<<if $daily.corruptionSlimeClothes is undefined>>
+				<<set _baseCorruption to (($earSlime.corruption / 2) + ($earSlime.growth / 2))>>
+				<<set $daily.corruptionSlimeClothes to random(_baseCorruption * 5, _baseCorruption * 25) - currentSkillValue('willpower')>>
+			<</if>>
 			<<if $earSlime.forcedCommando isnot undefined and (_slot is "under_lower" or (_item.outfitPrimary and _item.outfitPrimary.under_lower and !["broken","split"].includes(_item.outfitPrimary.under_lower)))>>
 				<<if _item.type.includes("naked") or (_earSlimeEnableSwimwear and _item.type.includes("swim")) or (_earSlimeEnableDancewear and _item.type.includes("dance"))>>
 				<<elseif $earSlime.forcedCommando gt 0>>
-					<span class="red">You are unable to equip your _item.name, as the slime in your ear is forcing you to go commando.</span>
+					<span class="red">당신은 귓속의 슬라임이 속옷을 입지 말라고 명령해서, <<trClothes _slot _item.name "name" "을">>_trResult 입을 수가 없다.</span>
 					<br>
 					<<continue>>
 				<<else>>
 					<<run delete $earSlime.forcedCommando>>
 				<</if>>
-			<<elseif _item.reveal lt earSlimeCorruptionClothes() and (["prison", "asylum"].includes($location) or !_allowSchoolClothes) and !_item.type.includesAny("event")>>
-				<span class="red">You were unable to equip your _item.name as the slime in your ear did not permit it.</span>
+			<<elseif ((["prison", "asylum"].includes($location) and _item.reveal lt Math.clamp($daily.corruptionSlimeClothes, 0, 1000)) or (_item.reveal lt Math.clamp($daily.corruptionSlimeClothes, 0, 500)) and !(_item.type.includesAny("school") and Time.schoolDay)) and !_item.type.includesAny("event")>>
+				<span class="red">귓속의 슬라임이 허가하지 않아 <<trClothes _slot _item.name "name" "을">>_trResult 입을 수가 없다.</span>
 				<br>
 				<<continue>>
 			<<elseif $earSlime.forcedDressing and _item.gender isnot $earSlime.forcedDressing.type and _item.gender isnot "n" and !_item.type.includesAny("event")>>
 				<<if $earSlime.forcedDressing.days gt 0>>
-					<span class="red">You are unable to equip your _item.name, as the slime in your ear is only permitting more <<print $earSlime.forcedDressing.type is "f" ? "feminine" : "masculine">> clothing.</span>
+					<span class="red">당신은 귓속의 슬라임이 더 <<print $earSlime.forcedDressing.type is "f" ? "여성스러운" : "남성스러운">> 복장만을 입도록 해서, <<trClothes _slot _item.name "name" "을">>_trResult 입을 수가 없다.</span>
 					<br>
 					<<continue>>
 				<<else>>
@@ -163,7 +170,7 @@
 					<<if $_wardrobeItem.name isnot $_outfitPieceName>>
 						<<continue>>
 					<</if>>
-					<<if _item.colour isnot $_wardrobeItem.colour or ($_wardrobeItem.accessory isnot 0 and _item.accessory_colour isnot $_wardrobeItem.accessory_colour) or ($_wardrobeItem.pattern and _item.pattern and $_wardrobeItem.pattern isnot 0 and _item.pattern isnot $_wardrobeItem.pattern)>>
+					<<if _item.colour isnot $_wardrobeItem.colour or ($_wardrobeItem.accessory isnot 0 and _item.accessory_colour isnot $_wardrobeItem.accessory_colour)>>
 						<<continue>>
 					<</if>>
 					<<if $_wardrobeItem.outfitSecondary[1] isnot _item.name>>
@@ -189,7 +196,7 @@
 			<<for $_outfitSlot, $_outfitId range _outfitPieceIds>>
 				<<set _selectedWardrobe[$_outfitSlot].deleteAt($_outfitId)>>
 			<</for>>
-			You discard the <<print _item.name>>.
+			당신은 <<trClothes _slot _item.name "name" "을">>_trResult 버린다.
 			<<set _selectedWardrobe[_slot].deleteAt(_wearId)>>
 			<br>
 		<<elseif $wardrobeOption is "repair">>
@@ -201,7 +208,7 @@
 				<<set $_timeSpent += 5>>
 			<</for>>
 			<<pass $_timeSpent>>
-			You repair the <<print _item.name>>.
+			당신은 <<trClothes _slot _item.name "name" "을">>_trResult 수선했다.
 			<br>
 		<<elseif $wardrobeOption is "separateOutfits" and Object.values(_outfitPieceIds).length gt 0>>
 			<<for $_outfitSlot, $_outfitId range _outfitPieceIds>>
@@ -210,7 +217,7 @@
 				<<set _item.outfitPrimary[$_outfitSlot] to "split">>
 			<</for>>
 			<<set _item.one_piece to "split">>
-			You cut up the <<print _item.name>>.
+			당신은 <<trClothes _slot _item.name "name" "을">>_trResult 자른다.
 			<<pass 10>>
 			<br>
 		<<elseif $wardrobeOption is "transfer" and _wardrobeTransfer isnot $wardrobe_location and _wardrobeTransfer isnot undefined>>
@@ -228,14 +235,14 @@
 			<</for>>
 
 			<<if !_slotsFull>>
-				You transferred the <<print _item.name>> to the <<print $wardrobes[_wardrobeTransfer].name>> storage.
+				당신은 <<trClothes _slot _item.name "을">>_trResult <<trWardrobeName $wardrobes[_wardrobeTransfer].name "으로">>_trResult 보낸다.
 				/*Transfer everything*/
 				<<run transferClothing(_slot,_wearId,_wardrobeTransfer)>>
 				<<for $_outfitSlot, $_outfitId range _outfitPieceIds>>
 					<<run transferClothing($_outfitSlot,$_outfitId,_wardrobeTransfer)>>
 				<</for>>
 			<<else>>
-				You were unable to transfer the <<print _item.name>> to the <<print $wardrobes[_wardrobeTransfer].name>> wardrobe due to lack of space there.
+				당신은 공간이 부족해서 <<trClothes _slot _item.name "을">>_trResult <<trWardrobeName $wardrobes[_wardrobeTransfer].name "으로">>_trResult 보낼 수가 없다.
 			<</if>>
 		<<elseif $wardrobeOption is "wear">>
 			/*Equip the relating items*/
@@ -250,20 +257,20 @@
 			<<set $worn[_slot] to clone(_item)>>
 			<<set $worn[_slot].lastTaken to clone($wardrobe_location)>>
 			<<run resetClothingState(_slot)>>
-			<<set _eIndextemNames.push(_item.name)>>
+			<<trClothes _slot _item.name "name">><<set $_itemNames.push(_trResult)>>
 			<<set _selectedWardrobe[_slot].deleteAt(_wearId)>>
 		<</if>>
 	<</for>>
 	<<if $worn.under_lower.type.includes("naked")>>
 		<<set $worn.under_lower.exposedType to "notWorn">>
 	<</if>>
-	<<if $wardrobeOption is "wear" and _eIndextemNames.length gte 1>>
-		You put on the <<print formatList(_eIndextemNames)>>.
+	<<if $wardrobeOption is "wear" and $_itemNames.length gte 1>>
+		당신은 <<set _trResult to formatList($_itemNames)>><<trPost _postNum "을">>_trResult 착용한다.
 	<</if>>
 	<<if _wearAction is "dry">>
 		<<dry>>
-		You wring out your clothes.
-		<<effectswater "liquid">>
+		당신은 옷에서 물기를 짜낸다.
+		<<effectswater>>
 		<br><br>
 	<</if>>
 	<<unset _wearAction>>
@@ -286,52 +293,13 @@
 	<<exposure>>
 <</widget>>
 
-<<widget "loadWardrobeOptions">>
-	<div onclick="event.stopPropagation()">
-		<div class="legend-caption bold gold">Settings</div>
-		<div>
-			<label>
-				<<checkbox "$wardrobeDefaults.showTraits" false true autocheck>>
-				Show clothing trait icons.
-			</label>
-		</div>
-		<div>
-			<label>
-				<<checkbox "$wardrobeDefaults.extraInfo" false true autocheck>>
-				Show 'Extra Info' by default.
-			</label>
-		</div>
-		<<link [[Update wardrobe|$passage]]>><</link>>
-	</div>
-<</widget>>
-
-
 <<widget "wardrobe">>
 	<<set _inWardrobe to true>>
-	<div id="action-popup">Don't look here.</div>
+	<div id="action-popup">여기를 보지 마세요.</div>
 	<<unset $tempDisable>>
 
-	<!-- Options -->
-	<div id="wardrobe-options-div" class="main-shop-div">
-		<div class="wardrobe-options-button no-numberify div-link">
-			<<if $options.images is 1>>
-				<span class="button-icon"><img src="img/ui/options.png"></span>
-			<<else>>
-				Opt.
-			<</if>>
-			<<link "">>
-				<<replace '#shop-options'>><<loadWardrobeOptions>><</replace>>
-				<<run linkifyDivs('#shop-options')>>
-				<<toggleclass '#shop-options' 'hidden'>>
-			<</link>>
-		</div>
-		<div id="shop-options" class="wardrobe-options no-numberify hidden" onclick="$(this).addClass('hidden')">
-		</div>
-	</div>
-	<<run linkifyDivs('#wardrobe-options-div')>>
-
 	<hr>
-	<span>Warmth:</span>
+	<span>따뜻함:</span>
 	<<warmthscale>>
 	<div id="warmth-description">
 		<<warmth_description>>
@@ -340,7 +308,7 @@
 	<div id="clotheson"><<clotheson>></div> /*Fixes perma pulled aside clothes introduced by 0.2.3.0 bug.*/
 	<<if $upperwet gte 1 or $lowerwet gte 1 or $underlowerwet gte 1 or $underupperwet gte 1>>
 		<div class="wardrobe-dry">
-		<<link "Dry your clothes">>
+		<<link "옷을 말린다">>
 			<<set _wearAction to "dry">>
 			<<updatewardrobe>>
 			<<if $upperwet lt 1 and $lowerwet lt 1 and $underlowerwet lt 1 and $underupperwet lt 1>>
@@ -351,24 +319,24 @@
 		</div>
 	<</if>>
 	<div class="wardrobe-action">
-		<<link "Strip all">>
+		<<link "전부 벗는다">>
 			<<set _wearAction to "strip">>
 			<<updatewardrobe>>
 		<</link>>
 	</div> |
 	<div class="wardrobe-action">
-		<<link "Wear random clothes">>
+		<<link "아무 옷이나 입는다">>
 			<<set $randomWear to true>>
 			<<updatewardrobe>>
 		<</link>>
 	</div> |
 	<div class="wardrobe-action">
-		<<link "Configure random">><<toggleclass "#randomClothingConfigure" "hidden">><</link>>
+		<<link "무작위로 설정">><<toggleclass "#randomClothingConfigure" "hidden">><</link>>
 	</div> |
 	<<if $options.images and ($uncomfortable.underwear or $uncomfortable.nude)>>
 		<div class="wardrobe-action">
 			<span id="wardrobe-cover" @class="$dontHide ? '' : 'hidden'">
-				<<link "Cover yourself">>
+				<<link "몸을 가린다">>
 					<<dontHideRevert>>
 					<<toggleclass "#wardrobe-cover" "hidden">>
 					<<toggleclass "#wardrobe-dontCover" "hidden">>
@@ -376,7 +344,7 @@
 				<</link>>
 				</span>
 			<span id="wardrobe-dontCover" @class="$dontHide ? 'hidden' : ''">
-				<<link "Don't cover yourself">>
+				<<link "몸을 가리지 않는다">>
 					<<dontHideForNow>>
 					<<toggleclass "#wardrobe-cover" "hidden">>
 					<<toggleclass "#wardrobe-dontCover" "hidden">>
@@ -391,7 +359,7 @@
 		<</if>>
 		<<for _slot range Object.keys($randomEquipConfigure)>>
 			<<capture _slot>>
-				<label><<checkbox "$randomEquipConfigure[_slot]" false true autocheck>> <<print _slot.replace("_"," ")>></label><br>
+				<label><<checkbox "$randomEquipConfigure[_slot]" false true autocheck>> <<trClothesType _slot>>_trResult</label><br>
 			<</capture>>
 		<</for>>
 	</div>
@@ -399,58 +367,58 @@
 
 	<<if $location is "home" or $location is "town">>
 		<<if $tailorMonthlyService is "repair">>
-			__Wardrobe Repair Crate__
+			__옷장 수리 상자__
 			<br>
-			There is a small crate ready for sending clothes to be repaired.
+			수리할 옷을 보내기 위한 작은 상자가 있다.
 			<br>
-			<<link [[Add damaged items and send|Wardrobe Repair Crate]]>>
+			<<link [[손상된 옷들을 담아 보낸다|Wardrobe Repair Crate]]>>
 				<<set $wardrobeReturnLink to $passage>>
 				<<set $crateContents to "damaged">>
 			<</link>>
 			<br>
-			<<link [[Add outfits and send|Wardrobe Repair Crate]]>>
+			<<link [[입고 있는 옷을 담아 보낸다|Wardrobe Repair Crate]]>>
 				<<set $wardrobeReturnLink to $passage>>
 				<<set $crateContents to "outfits">>
 			<</link>>
 			<br>
-			<<link [[Add all items and send|Wardrobe Repair Crate]]>>
+			<<link [[모두 담아 보낸다|Wardrobe Repair Crate]]>>
 				<<set $wardrobeReturnLink to $passage>>
 				<<set $crateContents to "all">>
 			<</link>>
 			<br><br>
-			<<link [[Cancel the request|$passage]]>><<set $tailorMonthlyService to 1>><</link>>
+			<<link [[요청을 취소한다|$passage]]>><<set $tailorMonthlyService to 1>><</link>>
 			<br><br>
 		<<elseif $tailorMonthlyService is "discard">>
-			__Wardrobe Sale Crate__
-			There is a small crate ready for sending clothes to be sold.
+			__옷장 판매 상자__
+			판매할 옷을 보내기 위한 작은 상자가 있다.
 			<br>
-			<<link [[Add outfits and send|Wardrobe Sale Crate]]>>
+			<<link [[입고있는 옷을 담아 보낸다|Wardrobe Sale Crate]]>>
 				<<set $wardrobeReturnLink to $passage>>
 				<<set $crateContents to "outfits">>
 			<</link>>
 			<br>
-			<<link [[Add all items and send|Wardrobe Sale Crate]]>>
+			<<link [[모두 담아 보낸다|Wardrobe Sale Crate]]>>
 				<<set $wardrobeReturnLink to $passage>>
 				<<set $crateContents to "all">>
 			<</link>>
 			<br><br>
-			<<link [[Cancel the request|$passage]]>><<set $tailorMonthlyService to 1>><</link>>
+			<<link [[요청을 취소한다|$passage]]>><<set $tailorMonthlyService to 1>><</link>>
 			<br><br>
 		<</if>>
 		<<if $wardrobeRepair is undefined>>
 		<<elseif $wardrobeRepair.timeLeft is 0>>
-			The clothes sent to the tailor have been repaired and added back into your wardrobe.
+			재단사에게 보낸 옷이 수선되어 옷장에 다시 추가되었다.
 			<<wardrobeGetRepairedClothes>>
 			<br><br>
 		<</if>>
 	<</if>>
 
-	__Clothing sets__
+	__복장 세트__
 	<br>
 	<div id="listoutfits"><<listoutfits>></div>
 
 	<hr>
-	__Clothing__
+	__옷__
 	<br>
 
 	<<dynamic "wardrobeLinks" "wardrobeLinks">>
@@ -483,20 +451,20 @@
 
 <<widget "wardrobeLinks">>
 	<<set _wardrobeLinks=[
-		{ id: 'over_head', label: 'Over Head', disabled: !$debug },
-		{ id: 'over_upper', label: 'Over Upper', disabled: !$debug },
-		{ id: 'over_lower', label: 'Over Lower', disabled: !$debug },
-		{ id: 'head', label: 'Head' },
-		{ id: 'face', label: 'Face' },
-		{ id: 'neck', label: 'Neck' },
-		{ id: 'upper', label: 'Upper' },
-		{ id: 'lower', label: 'Lower' },
-		{ id: 'under_upper', label: 'Under Upper' },
-		{ id: 'under_lower', label: 'Under Lower' },
-		{ id: 'hands', label: 'Hands' },
-		{ id: 'handheld', label: 'Handheld' },
-		{ id: 'legs', label: 'Legs' },
-		{ id: 'feet', label: 'Feet' },
+		{ id: 'over_head', label: '외투 머리', disabled: !$debug },
+		{ id: 'over_upper', label: '외투 상의', disabled: !$debug },
+		{ id: 'over_lower', label: '외투 하의', disabled: !$debug },
+		{ id: 'head', label: '머리' },
+		{ id: 'face', label: '얼굴' },
+		{ id: 'neck', label: '목' },
+		{ id: 'upper', label: '상의' },
+		{ id: 'lower', label: '하의' },
+		{ id: 'under_upper', label: '속옷 상의' },
+		{ id: 'under_lower', label: '속옷 하의' },
+		{ id: 'hands', label: '손' },
+		{ id: 'handheld', label: '들고다니는 물건' },
+		{ id: 'legs', label: '다리' },
+		{ id: 'feet', label: '발' },
 	]>>
 	<<for _i = 0; _i < _wardrobeLinks.length; _i++>>
 		<<set _wardrobeLink=_wardrobeLinks[_i]>>
@@ -515,18 +483,18 @@
 	<<if $wardrobeOption is undefined or $wardrobeOption is 0>><<set $wardrobeOption to "wear">><</if>>
 	<<if $wardrobeRepeat isnot true or ($wardrobeOption is "repair" and $location isnot "home")>><<set $wardrobeOption to "wear">><</if>>
 
-	<label><<radiobutton "$wardrobeOption" "wear" autocheck>> Wear</label> |
-	<label><<radiobutton "$wardrobeOption" "delete" autocheck>> Discard</label> |
+	<label><<radiobutton "$wardrobeOption" "wear" autocheck>> 입기</label> |
+	<label><<radiobutton "$wardrobeOption" "delete" autocheck>> 버리기</label> |
 	<<if $sewingKit is 1 and $location is "home">>
-		<label><<radiobutton "$wardrobeOption" "repair" autocheck>> Repair (0:05 per piece)</label> |
+		<label><<radiobutton "$wardrobeOption" "repair" autocheck>> 수선한다 (하나 당 0:05)</label> |
 	<</if>>
-	<label><<radiobutton "$wardrobeOption" "separateOutfits" autocheck>> Separate Outfits (0:10)</label> |
+	<label><<radiobutton "$wardrobeOption" "separateOutfits" autocheck>> 의상 분리 (0:10)</label> |
 	<<if $multipleWardrobes is "all" and !$wardrobes[$wardrobe_location].isolated>>
-		<label><<radiobutton "$wardrobeOption" "transfer" autocheck>> Transfer:</label>
+		<label><<radiobutton "$wardrobeOption" "transfer" autocheck>> 이동:</label>
 		<<set _options to {}>>
 		<<for _label, _value range $wardrobes>>
 			<<if _value.unlocked and _label isnot $wardrobe_location and !$wardrobes[_label].isolated>>
-				<<set _options[_value.name] to _label>>
+				<<trWardrobeName _value.name>><<set _options[_trResult] to _label>>
 			<</if>>
 		<</for>>
 		<<listbox "_wardrobeTransfer" autoselect>>
@@ -535,10 +503,10 @@
 		|
 	<</if>>
 
-	<label><<checkbox "$wardrobeRepeat" false true autocheck>> Repeat Actions</label>
+	<label><<checkbox "$wardrobeRepeat" false true autocheck>> 행동 반복</label>
 
 	<<if $wardrobeOption is "delete" and $wardrobeRepeat is true>>
-		<h2 class="red">Discard On Repeat</h2>
+		<h2 class="red">버리기 반복</h2>
 	<<else>>
 		<br><br>
 	<</if>>
@@ -546,20 +514,20 @@
 
 <<widget "wardrobeNewOutfit">>
 	<br>
-	Add new set:
+	새 세트 추가:
 	<br>
-	Name: <input id="outfitName" type="text" value="Custom" maxlength="30" onfocus="V.tempDisable = true;">
+	이름: <input id="outfitName" type="text" value="커스텀" maxlength="30" onfocus="V.tempDisable = true;">
 	<br>
-	Type: <label>Everyday <<radiobutton "$outfit_type" 0 checked>></label> | <label>Sleep<<radiobutton "$outfit_type" "sleep">></label> | <label>Swimming<<radiobutton "$outfit_type" "swim">></label>
+	종류: <label>평상복 <<radiobutton "$outfit_type" 0 checked>></label> | <label>잠옷<<radiobutton "$outfit_type" "sleep">></label> | <label>수영복<<radiobutton "$outfit_type" "swim">></label>
 	<br>
 	<label>
-		Save Clothes Colours in Set
+		세트에서 옷 색상 저장
 		<<checkbox "_saveColor" false true autocheck>>
 	</label>
 	<br>
 	<<if $multipleWardrobes>>
 		<label>
-			Make clothes set unique to this wardrobe
+			복장 세트를 이 옷장의 고유 세트로 만든다
 			<<checkbox "_saveLocation" false true autocheck>>
 		</label>
 		<br>
@@ -567,22 +535,22 @@
 	<<if $savedHairStyles>>
 		<div>
 			<<set _savedHairStylesKeys to Object.keys($savedHairStyles)>>
-			Hair Style:
+			머리모양:
 			<<listbox "_hairStyle" autoselect>>
-				<<option "Not set" undefined>>
+				<<option "설정 않음" undefined>>
 				<<optionsfrom _savedHairStylesKeys>>
 			<</listbox>>
-			<mouse class="tooltip linkBlue">(?)<span>'Not set' will not change the current hairstyle.</span></mouse>
+			<mouse class="tooltip linkBlue">(?)<span>'설정 않음'으로 하면 현재 머리모양을 바꾸지 않습니다.</span></mouse>
 		</div>
 	<<else>>
 		<div>
-			Hair Style: No sets saved (Check mirror)
+			머리모양: 저장된 설정이 없습니다 (거울을 확인하세요)
 		</div>
 	<</if>>
 	<br>
 	<div class="wardrobe-action">
-		<<link "Add current clothes as new set">>
-			<<set $outfit_name to document.getElementById("outfitName").value.replace(/[^a-zA-Z\u4e00-\u9fa5 0-9.!()]+/g,"")>>
+		<<link "새로운 세트에 현재 입은 옷 추가">>
+			<<set $outfit_name to document.getElementById("outfitName").value.replace(/[^a-zA-Z가-힣\u4e00-\u9fa5 0-9.!()]+/g,"")>>
 			<<set _newOutfit to {
 				index: $outfit.length,
 				name: $outfit_name,
@@ -602,9 +570,10 @@
 				feet: clone($worn.feet.name),
 				genitals: clone($worn.genitals.name),
 				type: ["normal"],
-				colors: false,
+				colors: false
 			}>>
-			<<if $outfit_name is "" or $outfit_name is "Custom">><<set $outfit_name to "Custom " + $outfit.length>><</if>>
+
+			<<if $outfit_name is "" or $outfit_name is "Custom" or $outfit_name is "커스텀">><<set $outfit_name to "커스텀 " + $outfit.length>><</if>>
 			<<set _newOutfit.name to $outfit_name>>
 			<<if $outfit_type>>
 				<<set _newOutfit.type[0] to $outfit_type>>
@@ -623,18 +592,6 @@
 			<<else>>
 				<<set _newOutfit.colors to false>>
 			<</if>>
-			<<set _positions to {}>>
-			<<for _slot range _equip>>
-				<<if $worn[_slot].altposition>>
-					<<set _positions[_slot] to $worn[_slot].altposition>>
-				<</if>>
-				<<if $worn[_slot].altsleeve>>
-					<<set _positions.sleeves to $worn[_slot].altsleeve>>
-				<</if>>
-			<</for>>
-			<<if Object.keys(_positions).length > 0>>
-				<<set _newOutfit.positions to _positions>>
-			<</if>>
 			<<if _saveLocation>>
 				<<set _newOutfit.location to $wardrobe_location>>
 			<</if>>
@@ -648,28 +605,28 @@
 <</widget>>
 
 <<widget "wardrobeintegrity">><<silently>>
-	<<set _eIndextem to _args[0]>>
-	<<set _eIndexntegrityMax to clothingData(_args[1],_eIndextem,'integrity_max')>>
-	<<if _eIndextem.integrity gt (_eIndexntegrityMax * 9 / 10)>>
+	<<set $_item to _args[0]>>
+	<<set $_integrityMax to clothingData(_args[1],$_item,'integrity_max')>>
+	<<if $_item.integrity gt ($_integrityMax * 9 / 10)>>
 		<<set $_output to "">>
-	<<elseif _eIndextem.integrity gt (_eIndexntegrityMax * 5 / 10)>>
-		<<set $_output to "<span>(frayed)</span>">>
-	<<elseif _eIndextem.integrity gt (_eIndexntegrityMax * 2 / 10)>>
-		<<set $_output to "<span>(torn)</span>">>
+	<<elseif $_item.integrity gt ($_integrityMax * 5 / 10)>>
+		<<set $_output to "<span>(해어짐)</span>">>
+	<<elseif $_item.integrity gt ($_integrityMax * 2 / 10)>>
+		<<set $_output to "<span>(찢김)</span>">>
 	<<else>>
-		<<set $_output to "<span>(tattered)</span>">>
+		<<set $_output to "<span>(너덜너덜함)</span>">>
 	<</if>>
 <</silently>><<print $_output>><</widget>>
 
 <<widget "toggleHoodLink">>
 	<div class="toggleHoodLink">
-		<<link `($worn.upper.hoodposition is "down" ? "Pull hood up" : "Pull hood down")`>>
+		<<link `($worn.upper.hoodposition is "down" ? "후드를 올린다" : "후드를 내린다")`>>
 			<<toggleHood _args[0]>>
 			<<updatesidebarimg>>
 			<<if _args[0] isnot "shop">>
 				<<updatewardrobe>>
 			<</if>>
-			<<run $(".toggleHoodLink .link-internal").html($worn.upper.hoodposition is "down" ? "Pull hood up" : "Pull hood down")>>
+			<<run $(".toggleHoodLink .link-internal").html($worn.upper.hoodposition is "down" ? "후드를 올린다" : "후드를 내린다")>>
 			<<run Links.generateLinkNumbers($(".passage"))>>
 		<</link>>
 	</div>
@@ -737,8 +694,8 @@
 <</widget>>
 
 <<widget "toggleUpperTuck">>
-	<<set _linkOption1 to _args[0] || `Untuck from ${$worn.lower.name}`>>
-	<<set _linkOption2 to _args[1] || `Tuck into ${$worn.lower.name}`>>
+	<<set _linkOption1 to _args[0] || `${trClothes("lower", $worn.lower.name, "name")} 밖으로 뺀다`>>
+	<<set _linkOption2 to _args[1] || `${trClothes("lower", $worn.lower.name, "name")} 안으로 집어넣는다`>>
 	<div class="toggleUpperTuck">
 		<<link `($upperTucked ? _linkOption1 : _linkOption2)`>>
 			<<set $upperTucked to +!$upperTucked>>
@@ -750,8 +707,8 @@
 <</widget>>
 
 <<widget "toggleLowerTuck">>
-	<<set _linkOption1 to _args[0] || `Untuck from ${$worn.feet.name}`>>
-	<<set _linkOption2 to _args[1] || `Tuck into ${$worn.feet.name}`>>
+	<<set _linkOption1 to _args[0] || `${trClothes("feet", $worn.feet.name, "name")} 밖으로 뺀다`>>
+	<<set _linkOption2 to _args[1] || `${trClothes("feet", $worn.feet.name, "name")} 안으로 집어넣는다`>>
 	<div class="toggleLowerTuck">
 		<<link `($lowerTucked ? _linkOption1 : _linkOption2)`>>
 			<<set $lowerTucked to +!$lowerTucked>>
@@ -762,29 +719,15 @@
 	</div>
 <</widget>>
 
-
-<<widget "toggleBellyTuck">>
-	<<set _softOption1 to _args[0] || `Tug down your ${$worn.lower.name}`>>
-	<<set _softOption2 to _args[1] || `Pull up your ${$worn.lower.name}`>>
-	<div class="toggleBellyTuck">
-		<<link `($bellyTucked ? _softOption1 : _softOption2)`>>
-			<<set $bellyTucked to +!$bellyTucked>>
-			<<updatesidebarimg>>
-			<<run $(".toggleBellyTuck .link-internal").html($bellyTucked ? _softOption1 : _softOption2)>>
-			<<run Links.generateLinkNumbers($(".passage"))>>
-		<</link>>
-	</div>
-<</widget>>
-
 <<widget "toggleLeash">>
 	<<if ["collar", "free use collar", "leather collar", "spiked collar"].includes($worn.neck.name)>>
-		<<link "Attach Leash">>
+		<<link "목줄을 연결한다">>
 			<<attach_leash true true>>
 			<<updatesidebarimg>>
 			<<replace "#wardrobeLeash">><<toggleLeash>><</replace>>
 		<</link>>
 	<<elseif ["collar with leash", "free use collar with leash", "leather collar with leash", "spiked collar with leash"].includes($worn.neck.name)>>
-		<<link "Detach Leash">>
+		<<link "목줄을 떼어낸다">>
 			<<detach_leash true true>>
 			<<updatesidebarimg>>
 			<<replace "#wardrobeLeash">><<toggleLeash>><</replace>>
@@ -796,30 +739,29 @@
 	<<switch _args[0]>>
 		<<case "upper">>
 			<<switch $worn.upper.variable>>
-				<<case "schoolcardigan">><<set _altLink to ["Tie cardigan around waist", "Wear cardigan normally"]>>
-				<<case "brownleather" "blackleather" "leathercropjacket" "winterjacket">><<set _altLink to ["Zip jacket", "Unzip jacket"]>>
-				<<case "waistcoat" "waistcoatlapel" "blazershirt">><<set _altLink to ["Tuck in", "Untuck"]>>
-				<<case "dress" "buttondown" "oversizedbuttondown">><<set _altLink to ["Unbutton shirt", "Button up shirt"]>>
-				<<case "catsuit">><<set _altLink to ["Unzip", "Zip"]>>
-				<<case "kimono" "kimonomini">><<set _altLink to ["Loosen", "Tighten"]>>
+				<<case "schoolcardigan">><<set _altLink to ["카디건을 허리 둘레에 묶는다", "카디건을 평소대로 입는다"]>>
+				<<case "brownleather" "blackleather" "leathercropjacket" "winterjacket">><<set _altLink to ["자켓의 지퍼를 닫는다", "자켓의 지퍼를 연다"]>>
+				<<case "waistcoat" "waistcoatlapel" "blazershirt">><<set _altLink to ["안으로 집어넣는다", "밖으로 뺀다"]>>
+				<<case "dress" "buttondown" "oversizedbuttondown">><<set _altLink to ["셔츠의 버튼을 푼다", "셔츠의 버튼을 잠근다"]>>
+				<<case "catsuit">><<set _altLink to ["지퍼를 내린다", "지퍼를 올린다"]>>
+				<<case "kimono" "kimonomini">><<set _altLink to ["느슨하게 한다", "꽉 조인다"]>>
 				<<default>><<exit>>
 			<</switch>>
 		<<case "neck">>
 			<<switch $worn.neck.variable>>
-				<<case "suspenders">><<set _altLink to ["Lower suspenders", "Wear suspenders normally"]>>
-				<<case "tie">><<set _altLink to ["Loosen", "Tighten"]>>
+				<<case "suspenders">><<set _altLink to ["가터를 내린다", "가터를 평소대로 착용한다"]>>
 				<<default>><<exit>>
 			<</switch>>
 		<<case "face">>
 			<<if $worn.face.type.includes("cool") or $worn.face.type.includes("glasses")>>
 				<<switch $worn.face.variable>>
-					<<case "monocle">><<set _altLink to ["Cover left eye", "Cover right eye"]>>
-					<<default>><<set _altLink to ["Push on head", "Wear normally"]>>
+					<<case "monocle">><<set _altLink to ["왼쪽 눈에 착용한다", "오른쪽 눈에 착용한다"]>>
+					<<default>><<set _altLink to ["머리 위로 올린다", "평소처럼 착용한다"]>>
 				<</switch>>
 			<<else>>
 				<<switch $worn.face.variable>>
-					<<case "medical eyepatch" "eyepatch">><<set _altLink to ["Cover left eye", "Cover right eye"]>>
-					<<case "swimgoggles">><<set _altLink to ["Push on head", "Wear normally"]>>
+					<<case "medical eyepatch" "eyepatch">><<set _altLink to ["왼쪽 눈을 가린다", "오른쪽 눈을 가린다"]>>
+					<<case "swimgoggles">><<set _altLink to ["머리 위로 올린다", "평소처럼 착용한다"]>>
 					<<default>><<exit>>
 				<</switch>>
 			<</if>>
@@ -843,16 +785,43 @@
 
 <<widget "toggleAltPosition">>
 	/*Changes sprite to an alternate image*/
-	<<if $worn[_args[0]].altposition is undefined and setup.clothes[_args[0]][$worn[_args[0]].index].altposition isnot undefined>>
-		<<set $worn[_args[0]].altposition to "none">>
-	<<else>>
-		<<set $worn[_args[0]].altposition to ($worn[_args[0]].altposition is "none" ? "alt" : "none")>>
-	<</if>>
+	<<switch _args[0]>>
+		<<case "upper">>
+			<<if $worn.upper.variable is "schoolcardigan">>
+				<<run [$worn.upper.colour, $worn.upper.accessory_colour] to [$worn.upper.accessory_colour, $worn.upper.colour]>>
+				<<if $worn.upper.colour is "custom" or $worn.upper.accessory_colour is "custom">>
+					<<run [$worn.upper.colourCustom, $worn.upper.accessory_colourCustom] to [$worn.upper.accessory_colourCustom, $worn.upper.colourCustom]>>
+				<</if>>
+				<<if $worn.upper.altposition is "none">>
+					<<set $worn.upper.name to "school blouse">><<set $worn.upper.name_cap to "School blouse">>
+					<<set $worn.upper.altposition to "alt">>
+				<<elseif $worn.upper.altposition is "alt">>
+					<<set $worn.upper.name to "school cardigan">><<set $worn.upper.name_cap to "School cardigan">>
+					<<set $worn.upper.altposition to "none">>
+				<<elseif $worn.upper.altposition is undefined and setup.clothes.upper[$worn.upper.index].altposition isnot undefined>>
+					<<set $worn.upper.name to "school cardigan">><<set $worn.upper.name_cap to "School cardigan">>
+					<<set $worn.upper.altposition to "none">>
+				<</if>>
+			<<else>>
+				<<if $worn.upper.altposition is undefined and setup.clothes.upper[$worn.upper.index].altposition isnot undefined>>
+					<<set $worn.upper.altposition to "none">>
+				<<else>>
+					<<set $worn.upper.altposition to ($worn.upper.altposition is "none" ? "alt" : "none")>>
+				<</if>>
+			<</if>>
+		<<case "neck" "face">>
+			<<if $worn[_args[0]].altposition is undefined and setup.clothes[_args[0]][$worn[_args[0]].index].altposition isnot undefined>>
+				<<set $worn[_args[0]].altposition to "none">>
+			<<else>>
+				<<set $worn[_args[0]].altposition to ($worn[_args[0]].altposition is "none" ? "alt" : "none")>>
+			<</if>>
+		<<default>>
+	<</switch>>
 <</widget>>
 
 <<widget "toggleAltSleeve">>
-	<<set _inDefaultState to _args[0] || "Roll up sleeves">>
-	<<set _inAltState to _args[1] || "Unroll sleeves">>
+	<<set _inDefaultState to _args[0] || "소매를 걷어올린다">>
+	<<set _inAltState to _args[1] || "소매를 내린다">>
 	<div class="toggleAltSleeve">
 		<<link `($worn.upper.altsleeve is "none" ? _inDefaultState : _inAltState)`>>
 			<<set $worn.upper.altsleeve to ($worn.upper.altsleeve is "none" ? "alt" : "none")>>
@@ -865,8 +834,8 @@
 
 <<widget "toggleFaceLayer">>
 	/*changes z-index */
-	<<set _linkOption1 to "Move hair in front">>
-	<<set _linkOption2 to "Tuck hair behind">>
+	<<set _linkOption1 to "머리카락을 앞으로 뺀다">>
+	<<set _linkOption2 to "머리카락을 뒤로 집어넣는다">>
 	<div class="toggleFaceLayer">
 		<<link `($facelayer is "front" ? _linkOption2 : _linkOption1)`>>
 			<<set $facelayer to ($facelayer is "front" ? "back" : "front")>>
@@ -892,51 +861,43 @@
 		<<set _outfitTypes to setup.clothingLayer.torso_inner>>
 		<<set _loweroutfitCheck to setup.clothingLayer.lower>>
 
-		__<<print _wardrobe_list[0].toUpperCase() + _wardrobe_list.substring(1)>>__ <i>_selectedWardrobe[_wardrobe_list].length / _selectedWardrobe.space</i>
-		<<if _wardrobe_list is "upper">>(Outfits will also take a lower slot)<</if>>
-		<<if _wardrobe_list is "under_upper">>(Outfits will also take an under lower slot)<</if>>
+		__<<print "<<trClothesType _wardrobe_list>>_trResult">>__ <i>_selectedWardrobe[_wardrobe_list].length / _selectedWardrobe.space</i>
+		<<if _wardrobe_list is "upper">>(원피스는 하의 슬롯의 공간까지 차지합니다)<</if>>
+		<<if _wardrobe_list is "under_upper">>(원피스는 속옷 하의 슬롯의 공간까지 차지합니다)<</if>>
 		<br>
-		Order by:
+		정렬:
 		/*Undefined error for unknown reason*/
-		/*<a @onclick="`wikifier('wardrobeListReorder', '`+ $lastWardrobeSlot + `', 'name');`">Name</a> |*/
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'name');">Name</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'color');">Colour</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'lewd');">Lewd</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'integrity');">Integrity</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'warmth');">Warmth</a></div> |
+		/*<a @onclick="`wikifier('wardrobeListReorder', '`+ $lastWardrobeSlot + `', 'name');`">이름</a> |*/
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'name');">이름</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'color');">색상</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'lewd');">음란도</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'integrity');">내구도</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'warmth');">따뜻함</a></div> |
 		<<if _outfitTypes.includes(_wardrobe_list)>>
-			<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'outfit');">Outfit Status</a></div> |
+			<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'outfit');">옷 상태</a></div> |
 		<</if>>
 		<br>
-		Inverse Order by:
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'name', true);">Name</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'color', true);">Colour</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'lewd', true);">Lewd</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'integrity', true);">Integrity</a></div> |
-		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'warmth', true);">Warmth</a></div> |
+		역순 정렬:
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'name', true);">이름</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'color', true);">색상</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'lewd', true);">음란도</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'integrity', true);">내구도</a></div> |
+		<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'warmth', true);">따뜻함</a></div> |
 		<<if _outfitTypes.includes(_wardrobe_list)>>
-			<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'outfit', true);">Outfit Status</a></div> |
+			<div class="wardrobe-action"><a onclick="wikifier('wardrobeListReorder', V.lastWardrobeSlot, 'outfit', true);">옷 상태</a></div> |
 		<</if>>
 		<br><br>
-		Currently equipped:
+		현재 입은 옷:
 		<<if $worn[_wardrobe_list].name is "naked">>
-			nothing
+			없음
 			<br>
 		<<else>>
 			<<set _wornItem to $worn[_wardrobe_list]>>
 			<<set _wornItemData to setup.clothes[_wardrobe_list][clothesIndex(_wardrobe_list,_wornItem)]>>
 			<<clothingicon _wornItem _wardrobe_list>>
-			<<print _wornItemData.name_cap>>
-			<<if _wornItem.colour and _wornItem.colour isnot 0>>
-				<span @class="_wornItem.colour?.replace(' ','-')">
-					<<if _wornItem.pattern and ![0, "plain"].includes(_wornItem.pattern) and _wornItemData.pattern_options?.length gt 1>>
-						(_wornItem.colour _wornItem.pattern)
-					<<else>>
-						(_wornItem.colour)
-					<</if>>
-				</span>
-			<<elseif _wornItem.pattern and _wornItem.pattern isnot 0 and _wornItemData.pattern_options?.length gt 1>>
-				<span @class="_wornItem.pattern?.replace(' ','-')">(_wornItem.pattern)</span>
+			<<print "<<trClothes _wardrobe_list _wornItemData.name>>_trResult">>
+			<<if _wornItem.colour isnot 0>>
+				<span @class="_wornItem.colour"><<trColour _wornItem.colour>>(_trResult)</span>
 			<</if>>
 			<<if _wornItem.outfitPrimary isnot undefined>>
 				<<set _keys to Object.keys(_wornItem.outfitPrimary)>>
@@ -947,43 +908,43 @@
 					<</if>>
 				<</for>>
 				<<if _broken is 0>>
-						<span class="gold">(Outfit)</span>
+						<span class="gold">(원피스)</span>
 				<<elseif _broken lt _keys.length>>
-						<span class="red">(Partly Broken)</span>
+						<span class="red">(일부 파손)</span>
 				<<else>>
-						<span class="red">(Broken)</span>
+						<span class="red">(망가짐)</span>
 				<</if>>
 				<<if _wornItem.one_piece is "split">>
-						<span class="separated-indicator">(Separated)</span>
+						<span class="separated-indicator">(분리됨)</span>
 				<</if>>
 			<</if>>
 			<<if _wornItem.outfitSecondary isnot undefined>>
 				<<if _wornItem.outfitSecondary[1] is "broken">>
-					<span class="red">(Broken)</span>
+					<span class="red">(망가짐)</span>
 				<<else>>
-					<span class="gold">(Outfit)</span>
+					<span class="gold">(원피스)</span>
 					<<if _wornItem.one_piece is "split">>
-						<span class="separated-indicator">(Separated)</span>
+						<span class="separated-indicator">(분리됨)</span>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<wardrobeintegrity _wornItem _wardrobe_list>>
-			<a onclick="document.getElementById('wardrobeItemDetails').classList.toggle('hidden')">Extra Info</a>
+			<a onclick="document.getElementById('wardrobeItemDetails').classList.toggle('hidden')">추가 정보</a>
 			<br>
-			<div id="wardrobeItemDetails" @class="$wardrobeDefaults.extraInfo?'':'hidden'">
+			<div id="wardrobeItemDetails" class="hidden">
 				<<if _wornItem.plural is 1>>
 					<<integrity `clothingData(_wardrobe_list,_wornItem,'integrity_max')` "cap">>
 				<<else>>
-					A <<integrity `clothingData(_wardrobe_list,_wornItem,'integrity_max')`>>
+					<<integrity `clothingData(_wardrobe_list,_wornItem,'integrity_max')`>>
 				<</if>>
-				and <<reveal _wornItem.reveal>> <<print _wornItem.name>>.
+				<<reveal _wornItem.reveal>> <<trClothes _wardrobe_list _wornItem.name>>_trResult.
 
 				<<if _wornItem.gender is "m">>
-					<span class="lblue">For boys ♂.</span>
+					<span class="lblue">남성용 ♂.</span>
 				<<elseif _wornItem.gender is "f">>
-					<span class="pink">For girls ♀.</span>
+					<span class="pink">여성용 ♀.</span>
 				<</if>>
-				<<print _wornItemData.description>>
+				<<trClothes _wardrobe_list _wornItemData.name "desc">>_trResult
 				<br>
 				<<print setup.WeatherDescriptions.clothingWarmth(getTrueWarmth(_wornItem))>>
 				<br><br>
@@ -1000,9 +961,6 @@
 			<<elseif _wardrobe_list is "lower" and $worn.feet.name isnot "naked" and !_wornItemData.notuck and !setup.clothes.feet[clothesIndex("feet",$worn.feet)].notuck>>
 				<div class="no-numberify"><<toggleLowerTuck>></div>
 			<</if>>
-			<<if _wardrobe_list is "lower" and $player.bodyshape is "soft" and $worn.lower.name isnot "naked" and (!setup.clothes.lower[clothesIndex("lower",$worn.lower)].outfitSecondary or setup.clothes.lower[clothesIndex("lower",$worn.lower)]?.outfitSecondary[1] isnot $worn.upper.name)>>
-				<div class="no-numberify"><<toggleBellyTuck>></div>
-			<</if>>
 			<<if _wardrobe_list is "upper" and $worn.upper.name isnot "naked" and _wornItemData.altsleeve>>
 				<div class="no-numberify toggleAltSleeve"><<toggleAltSleeve>></div>
 			<</if>>
@@ -1016,13 +974,13 @@
 		<</if>>
 		<br>
 		<<if $worn[_wardrobe_list].name isnot "naked">>
-			<div class="wardrobeItem wardrobe-action no-numberify"><<wearlink_norefresh "Strip" 'strip'>></div>
+			<div class="wardrobeItem wardrobe-action no-numberify"><<wearlink_norefresh "벗기" 'strip'>></div>
 		<</if>>
 		<<if _wardrobe_list is "upper">>
-			<div class="wardrobeItem wardrobe-action no-numberify"><<wearlink_norefresh "Large towel" 'large_towel'>></div>
+			<div class="wardrobeItem wardrobe-action no-numberify"><<wearlink_norefresh "큰 수건" 'large_towel'>></div>
 		<</if>>
 		<<if _wardrobe_list is "upper" or _wardrobe_list is "lower">>
-			<div class="wardrobeItem wardrobe-action no-numberify"><<wearlink_norefresh "Towel" 'towel'>></div>
+			<div class="wardrobeItem wardrobe-action no-numberify"><<wearlink_norefresh "수건" 'towel'>></div>
 		<</if>>
 
 		<<for _i to 0; _i lt _selectedWardrobe[_wardrobe_list].length; _i++>>
@@ -1035,7 +993,7 @@
 			<</if>>
 			<div class="wardrobeItem wardrobe-action no-numberify">
 				<<clothingicon _item _wardrobe_list>>
-				<<wearlink_norefresh _itemData.name_cap _i>>
+				<<trClothes _wardrobe_list _itemData.name>><<wearlink_norefresh _trResult _i>>
 				<<if _item.gender is "m">>
 					<span class="blue">♂</span>
 				<<elseif _item.gender is "f">>
@@ -1043,16 +1001,8 @@
 				<<else>>
 
 				<</if>>
-				<<if _item.colour and _item.colour isnot 0>>
-					<span @class="_item.colour?.replace(' ','-')">
-						<<if _item.pattern and ![0, "plain"].includes(_item.pattern) and _itemData.pattern_options?.length gt 1>>
-							(_item.colour _item.pattern)
-						<<else>>
-							(_item.colour)
-						<</if>>
-					</span>
-				<<elseif _item.pattern and _item.pattern isnot 0 and _itemData.pattern_options?.length gt 1>>
-					<span @class="_item.pattern?.replace(' ','-')">(_item.pattern)</span>
+				<<if _item.colour isnot 0>>
+					<span @class="_selectedWardrobe[_wardrobe_list][_i].colour"><<trColour _item.colour>>(_trResult)</span>
 				<</if>>
 				<<if _item.outfitPrimary isnot undefined>>
 					<<set _keys to Object.keys(_item.outfitPrimary)>>
@@ -1063,31 +1013,26 @@
 						<</if>>
 					<</for>>
 					<<if _broken is 0>>
-						<span class="gold">(Outfit)</span>
+						<span class="gold">(원피스)</span>
 					<<elseif _broken lt _keys.length>>
-						<span class="red">(Partly Broken)</span>
+						<span class="red">(일부 파손)</span>
 					<<else>>
-						<span class="red">(Broken)</span>
+						<span class="red">(망가짐)</span>
 					<</if>>
 					<<if _item.one_piece is "split">>
-						<span class="separated-indicator">(Separated)</span>
+						<span class="separated-indicator">(분리됨)</span>
 					<</if>>
 				<</if>>
 				<<if _item.outfitSecondary isnot undefined>>
 					<<if _item.one_piece is "split">>
-						<span class="separated-indicator">(Separated)</span>
+						<span class="separated-indicator">(분리됨)</span>
 					<<else>>
-						<span class="red">(Broken)</span>
+						<span class="red">(망가짐)</span>
 					<</if>>
 				<</if>>
 				<<wardrobeintegrity _item _wardrobe_list>>
 				<<reveal _item.reveal>>
 				| <span class="cold-resist-icon noDivider"><<print getTrueWarmth(_item)>></span>
-				<<if $wardrobeDefaults.showTraits>>
-					| <span class="wardrobe-traits noDivider"><<for _n, _trait range _item.type>>
-						<<clothingtrait _trait>>
-					<</for>></span>
-				<</if>>
 			</div>
 		<</for>>
 		<div style="clear:both;"></div>
@@ -1162,8 +1107,8 @@
 <<widget "oldWardrobeMinorOptions">>
 	<div id="wardrobeMinorOptions">
 		<<if $worn.lower.name isnot "naked" and $worn.upper.outfitPrimary is undefined and !setup.clothes.upper[clothesIndex('upper', $worn.upper)].notuck>>
-			<<set $_linkOption1 to `Untuck your ${$worn.upper.name}`>>
-			<<set $_linkOption2 to `Tuck your ${$worn.upper.name} into your ${$worn.lower.name}`>>
+			<<trClothes "upper" $worn.upper.name "name" "을">><<set $_upper_name to _trResult>><<set $_linkOption1 to `${$_upper_name} 밖으로 뺀다`>>
+			<<trClothes "lower" $worn.lower.name "name">><<set $_lower_name to _trResult>><<set $_linkOption2 to `${$worn.upper.name} 당신의 ${$_lower_name} 안으로 집어넣는다`>>
 			<<toggleUpperTuck $_linkOption1 $_linkOption2>>
 		<</if>>
 		<<if $worn.head.hood>>
@@ -1222,18 +1167,18 @@
 		<<set _wear to "wear_"+_wardrobe_list>>
 
 		<div class="clothingBox">
-		__<<print _wardrobe_list[0].toUpperCase() + _wardrobe_list.substring(1) + (_showType is "outfits" ? " Outfits" : "")>>__ <i>_selectedWardrobe[_wardrobe_list].length / _selectedWardrobe.space</i>
+		__<<trClothesType _wardrobe_list>><<print _trResult + (_showType is "outfits" ? " 원피스" : "")>>__ <i>_selectedWardrobe[_wardrobe_list].length / _selectedWardrobe.space</i>
 		<br><br>
 		<div>
 		<ul>
 		<<if $worn[_wardrobe_list].name isnot "naked">>
-			<li class="no-numberify"><<wearlink_norefresh "Strip" 'strip' _wear>></li>
+			<li class="no-numberify"><<wearlink_norefresh "벗기" 'strip' _wear>></li>
 		<</if>>
 		<<if _wardrobe_list is "upper" and _showType is "outfits">>
-			<li class="no-numberify"><<wearlink_norefresh "Large towel" 'large_towel' _wear>></li>
+			<li class="no-numberify"><<wearlink_norefresh "큰 수건" 'large_towel' _wear>></li>
 		<</if>>
 		<<if (_wardrobe_list is "upper" or _wardrobe_list is "lower") and _showType isnot "outfits">>
-			<li class="no-numberify"><<wearlink_norefresh "Towel" 'towel' _wear>></li>
+			<li class="no-numberify"><<wearlink_norefresh "수건" 'towel' _wear>></li>
 		<</if>>
 		<<for _i to 0; _i lt _selectedWardrobe[_wardrobe_list].length; _i++>>
 			<<set _item to _selectedWardrobe[_wardrobe_list][_i]>>
@@ -1246,8 +1191,8 @@
 				<<continue>>
 			<</if>>
 			<li class="no-numberify">/*<<clothingicon _item>>*/<<wearlink_norefresh setup.clothes[_wardrobe_list][clothesIndex(_wardrobe_list,_item)].name_cap _i _wear>>
-			<<if _item.colour isnot 0>>
-				<span @class="_item.colour?.replace(' ','-')">(_item.colour)</span>
+			<<if _selectedWardrobe[_wardrobe_list][_i].colour isnot 0>>
+				<span @class="_selectedWardrobe[_wardrobe_list][_i].colour"><<trColour _item.colour>>(_trResult)</span>
 			<</if>>
 			<<wardrobeintegrity _item _wardrobe_list>>
 			</li>
@@ -1269,17 +1214,17 @@
 		<<case "name">>
 			<<set _itemNames to []>>
 			<<for _i to 0; _i lt _wardrobeItems.length; _i++>>
-				<<run _itemNames.pushUnique(_wardrobeItems[_i].name)>>
+				<<trClothes _slot _wardrobeItems[_i].name "name">><<run _itemNames.pushUnique(JSON.stringify({"name":_wardrobeItems[_i].name, "koname":_trResult}))>>
 			<</for>>
 			<<if _descending>>
-				<<set _sortedItemNames to _itemNames.sort(function(a, b){return b.localeCompare(a)})>>
+				<<set _sortedItemNames to _itemNames.sort(function(a, b){return JSON.parse(b).koname.localeCompare(JSON.parse(a).koname)})>>
 			<<else>>
-				<<set _sortedItemNames to _itemNames.sort()>>
+				<<set _sortedItemNames to _itemNames.sort(function(a, b){return JSON.parse(a).koname.localeCompare(JSON.parse(b).koname)})>>
 			<</if>>
 
-			<<for _i to 0; _i lt _sortedItemNames.length; _i++>>
+			<<for _i to 0; _i lt _sortedItemNames.length; _i++>><<set $_name to JSON.parse(_sortedItemNames[_i]).name>>
 				<<for _j to 0; _j lt _wardrobeItems.length; _j++>>
-					<<if _wardrobeItems[_j].name is _sortedItemNames[_i]>>
+					<<if _wardrobeItems[_j].name is $_name>>
 						<<run _newWardrobeItems.push(clone(_wardrobeItems[_j]))>>
 					<</if>>
 				<</for>>
@@ -1387,136 +1332,112 @@
 
 <<widget "wardrobeSanityCheck">>
 	/*Fixes invisible outfit bottoms caused by bugs in previous versions*/
-	<<if $runWardrobeSanityChecker is true>>
-		<<set $lastWardrobeSanityCheck to $saveVersions.last()>>
-		/*Update _equip as required*/
-		<<set _equip to ["lower", "under_lower", "head"]>>
-		<<for _slot range _equip>>
-			<<set _eIndextemIndex to {}>>
-			<<for _eIndex to 0; _eIndex lt _selectedWardrobe[_slot].length; _eIndex++>>
-				<<if _selectedWardrobe[_slot][_eIndex].outfitSecondary is undefined>>
+	<<set $lastWardrobeSanityCheck to $saveVersions.last()>>
+	/*Update _equip as required*/
+	<<set _equip to ["lower", "under_lower", "head"]>>
+	<<for _slot range _equip>>
+		<<set $_itemIndex to {}>>
+		<<for $_i to 0; $_i lt _selectedWardrobe[_slot].length; $_i++>>
+			<<if _selectedWardrobe[_slot][$_i].outfitSecondary is undefined>>
+				<<continue>>
+			<</if>>
+			<<if _selectedWardrobe[_slot][$_i].outfitSecondary[1] is "broken" or _selectedWardrobe[_slot][$_i].outfitSecondary[1] is "split">>
+				<<continue>>
+			<</if>>
+
+			/*Prep*/
+			<<set $_markBroken to true>>
+			<<set $_found to false>>
+			<<set $_item to _selectedWardrobe[_slot][$_i]>>
+			<<set $_outfitSecondary to _selectedWardrobe[_slot][$_i].outfitSecondary>>
+			<<if $_itemIndex[$_outfitSecondary[0]] is undefined>>
+				<<set $_itemIndex[$_outfitSecondary[0]] to []>>
+			<</if>>
+
+			/*Look for a primary piece that matches*/
+			<<for $_j to 0; $_j lt _selectedWardrobe[$_outfitSecondary[0]].length; $_j++>>
+				<<if _selectedWardrobe[$_outfitSecondary[0]][$_j].name isnot $_outfitSecondary[1]>>
 					<<continue>>
 				<</if>>
-				<<if _selectedWardrobe[_slot][_eIndex].outfitSecondary[1] is "broken" or _selectedWardrobe[_slot][_eIndex].outfitSecondary[1] is "split">>
+				<<if $_itemIndex[$_outfitSecondary[0]].includes($_j)>>
 					<<continue>>
 				<</if>>
 
-				/*Prep*/
-				<<set $_markBroken to true>>
-				<<set $_found to false>>
-				<<set _eIndextem to _selectedWardrobe[_slot][_eIndex]>>
-				<<set $_outfitSecondary to _selectedWardrobe[_slot][_eIndex].outfitSecondary>>
-				<<if _eIndextemIndex[$_outfitSecondary[0]] is undefined>>
-					<<set _eIndextemIndex[$_outfitSecondary[0]] to []>>
-				<</if>>
-
-				/*Look for a primary piece that matches*/
-				<<for _iIndex to 0; _iIndex lt _selectedWardrobe[$_outfitSecondary[0]].length; _iIndex++>>
-					<<if _selectedWardrobe[$_outfitSecondary[0]][_iIndex].name isnot $_outfitSecondary[1]>>
-						<<continue>>
+				<<if _selectedWardrobe[$_outfitSecondary[0]][$_j].colour is $_item.colour and ($_item.accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][$_j].accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][$_j].accessory_colour is $_item.accessory_colour)>>
+					<<if $_item.colour isnot "custom" and ($_item.accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][$_j].accessory is 0 or $_item.accessory_colour isnot "custom")>>
+						<<set $_markBroken to false>>
+						<<run $_itemIndex[$_outfitSecondary[0]].push(clone($_j))>>
+						<<break>>
+					<<elseif $_item.colourCustom is _selectedWardrobe[$_outfitSecondary[0]][$_j].colourCustom and ($_item.accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][$_j].accessory is 0 or $_item.accessory_colourCustom is _selectedWardrobe[$_outfitSecondary[0]][$_j].accessory_colourCustom)>>
+						<<set $_markBroken to false>>
+						<<run $_itemIndex[$_outfitSecondary[0]].push(clone($_j))>>
+						<<break>>
 					<</if>>
-					<<if _eIndextemIndex[$_outfitSecondary[0]].includes(_iIndex)>>
-						<<continue>>
-					<</if>>
-
-					<<if _selectedWardrobe[$_outfitSecondary[0]][_iIndex].colour is _eIndextem.colour and (_eIndextem.accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][_iIndex].accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][_iIndex].accessory_colour is _eIndextem.accessory_colour)>>
-						<<if _eIndextem.colour isnot "custom" and (_eIndextem.accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][_iIndex].accessory is 0 or _eIndextem.accessory_colour isnot "custom")>>
-							<<set $_markBroken to false>>
-							<<run _eIndextemIndex[$_outfitSecondary[0]].push(clone(_iIndex))>>
-							<<break>>
-						<<elseif _eIndextem.colourCustom is _selectedWardrobe[$_outfitSecondary[0]][_iIndex].colourCustom and (_eIndextem.accessory is 0 or _selectedWardrobe[$_outfitSecondary[0]][_iIndex].accessory is 0 or _eIndextem.accessory_colourCustom is _selectedWardrobe[$_outfitSecondary[0]][_iIndex].accessory_colourCustom)>>
-							<<set $_markBroken to false>>
-							<<run _eIndextemIndex[$_outfitSecondary[0]].push(clone(_iIndex))>>
-							<<break>>
-						<</if>>
-					<</if>>
-				<</for>>
-				<<if $_markBroken is true>>
-					/*Mark as broken*/
-					<<set _selectedWardrobe[_slot][_eIndex].outfitSecondary[1] to "broken">>
-					<<set _selectedWardrobe[_slot][_eIndex].one_piece to "broken">>
-					<<set _selectedWardrobe[_slot][_eIndex].set to clone(_slot)>>
-					<<set _selectedWardrobe[_slot][_eIndex].sanityCheck to true>>
 				<</if>>
 			<</for>>
+			<<if $_markBroken is true>>
+				/*Mark as broken*/
+				<<set _selectedWardrobe[_slot][$_i].outfitSecondary[1] to "broken">>
+				<<set _selectedWardrobe[_slot][$_i].one_piece to "broken">>
+				<<set _selectedWardrobe[_slot][$_i].set to clone(_slot)>>
+				<<set _selectedWardrobe[_slot][$_i].sanityCheck to true>>
+			<</if>>
 		<</for>>
-		<<set $runWardrobeSanityChecker to false>>
-	<</if>>
-
-	<<if $worn.handheld.type.includes("prop")>>
-		<<error { message: `Removed a prop that should have been destroyed: '${$worn.handheld.name}'. Please report the location where this prop was equipped.` }>>
-		<<handheldruined true>>
-		<<handheldon>>
-	<</if>>
+	<</for>>
 <</widget>>
 
 <<widget "wardrobeGetRepairedClothes">>
 	<<set _equip to setup.clothingLayer.all>>
 	<<set _takenAway to 0>>
-	<<for _eIndex to 0; _eIndex lt _equip.length; _eIndex++>>
-		<<if $wardrobeRepair[_equip[_eIndex]] is undefined>>
+	<<for $_i to 0; $_i lt _equip.length; $_i++>>
+		<<if $wardrobeRepair[_equip[$_i]] is undefined>>
 			<<continue>>
 		<</if>>
-		<<for _iIndex to 0; _iIndex lt $wardrobeRepair[_equip[_eIndex]].length; _iIndex++>>
-			<<set _itemStats to $wardrobeRepair[_equip[_eIndex]][_iIndex]>>
-			<<if typeof _itemStats is "object" and _itemStats?.length >= 5>>
-				/* Players might have old $wardrobeRepair already set before version updated */
-				<<set _itemStats to {
-					index: _itemStats[0],
-					colour: _itemStats[1],
-					colourCustom: _itemStats[2],
-					accessory_colour: _itemStats[3],
-					accessory_colourCustom: _itemStats[4],
-					one_piece: _itemStats[5] === true ? "split" : undefined
-				}>>
+		<<for $_j to 0; $_j lt $wardrobeRepair[_equip[$_i]].length; $_j++>>
+			<<if _selectedWardrobe[_equip[$_i]].length gte _selectedWardrobe.space>>
+				<<set _takenAway++>>
+				<<continue>>
 			<</if>>
-			<<if _selectedWardrobe[_equip[_eIndex]].length gte _selectedWardrobe.space>>
-				<<set _takenAwayCheckitem to setup.clothes[_equip[_eIndex]][_itemStats.index]>>
-				<<if _takenAwayCheckitem.one_piece != 1>>
-					<<set _takenAway++>>
-					<<continue>>
+			<<if $wardrobeRepair[_equip[$_i]][$_j][5]>>
+				<<generalSend "wardrobe" _equip[$_i] `$wardrobeRepair[_equip[$_i]][$_j][0]` `$wardrobeRepair[_equip[$_i]][$_j][1]` `$wardrobeRepair[_equip[$_i]][$_j][3]`>>
+				<<set _selectedWardrobe[_equip[$_i]].last().one_piece to "split">>
+				<<if _selectedWardrobe[_equip[$_i]].last().outfitPrimary>>
+					<<for $_label, $_value range _selectedWardrobe[_equip[$_i]].last().outfitPrimary>>
+						<<set _selectedWardrobe[_equip[$_i]].last().outfitPrimary[$_label] to "split">>
+					<</for>>
+				<<elseif _selectedWardrobe[_equip[$_i]].last().outfitSecondary>>
+					<<set _selectedWardrobe[_equip[$_i]].last().outfitSecondary[1] to "split">>
+				<</if>>
+			<<else>>
+				<<sendToWardrobeFromDefault "wardrobe" _equip[$_i] `$wardrobeRepair[_equip[$_i]][$_j][0]` `$wardrobeRepair[_equip[$_i]][$_j][1]` `$wardrobeRepair[_equip[$_i]][$_j][3]`>>
+			<</if>>
+			<<if $wardrobeRepair[_equip[$_i]][$_j][2] isnot undefined and $wardrobeRepair[_equip[$_i]][$_j][2] isnot null>>
+				/*colourCustom*/
+				<<set _selectedWardrobe[_equip[$_i]].last().colourCustom to $wardrobeRepair[_equip[$_i]][$_j][2]>>
+				<<if _selectedWardrobe[_equip[$_i]].last().outfitPrimary isnot undefined and _selectedWardrobe[_equip[$_i]].last().one_piece isnot "split">>
+					<<for $_label, $_value range _selectedWardrobe[_equip[$_i]].last().outfitPrimary>>
+						<<if _selectedWardrobe[$_label].last().name is $_value>>
+							<<set _selectedWardrobe[$_label].last().colourCustom to $wardrobeRepair[_equip[$_i]][$_j][2]>>
+						<</if>>
+					<</for>>
 				<</if>>
 			<</if>>
-
-			<<sendToWardrobeFromDefault "wardrobe" _equip[_eIndex] `_itemStats.index` `_itemStats.colour` `_itemStats.accessory_colour` `_itemStats.pattern`>>
-			<<set _latestWardrobeAddition to _selectedWardrobe[_equip[_eIndex]].last()>>
-
-			<<run Object.entries(_itemStats).forEach(([key, itemStatValue]) => {
-				if (!itemStatValue) return;
-				switch (key) {
-					case "index": case "colour": case "accessory_colour": case "pattern":
-						return;
-						break;
-					case "altposition": case "altsleeve":
-						if (!T.latestWardrobeAddition[key]) return;
-						break;
-					case "one_piece":
-						if (T.latestWardrobeAddition[key] != 1) return;
-						if (itemStatValue === "split") {
-							if (T.latestWardrobeAddition.outfitPrimary) {
-								Object.keys(T.latestWardrobeAddition.outfitPrimary).forEach((label) => {
-									T.latestWardrobeAddition.outfitPrimary[label] = itemStatValue;
-								})
-							} else if (T.latestWardrobeAddition.outfitSecondary) {
-								T.latestWardrobeAddition.outfitSecondary[1] = itemStatValue;
-							}
-						}
-						break;
-					case "hoodposition":
-						if (!T.latestWardrobeAddition[key]) return;
-						if (itemStatValue === "down") {
-							delete T.latestWardrobeAddition.outfitPrimary.head;
-							/* TODO: when over_head slot is added: delete T.latestWardrobeAddition.outfitPrimary.over_head; */
-						}
-						break;
-				}
-				T.latestWardrobeAddition[key] = itemStatValue;
-			})>>
+			<<if $wardrobeRepair[_equip[$_i]][$_j][4] isnot undefined and $wardrobeRepair[_equip[$_i]][$_j][4] isnot null>>
+				/*accessory_colourCustom*/
+				<<set _selectedWardrobe[_equip[$_i]].last().accessory_colourCustom to $wardrobeRepair[_equip[$_i]][$_j][4]>>
+				<<if _selectedWardrobe[_equip[$_i]].last().outfitPrimary isnot undefined and _selectedWardrobe[_equip[$_i]].last().one_piece isnot "split">>
+					<<for $_label, $_value range _selectedWardrobe[_equip[$_i]].last().outfitPrimary>>
+						<<if _selectedWardrobe[$_label].last().name is $_value>>
+							<<set _selectedWardrobe[$_label].last().colourCustom to $wardrobeRepair[_equip[$_i]][$_j][2]>>
+						<</if>>
+					<</for>>
+				<</if>>
+			<</if>>
 		<</for>>
 	<</for>>
 	<<if _takenAway gt 0>>
 		<br>
-		The driver thanks you for the donation of _takenAway items due to you not having enough space.
+		당신에겐 충분한 공간이 없다. 운전기사가 당신의 _takenAway개의 물건의 기부에 고마워 한다.
 	<</if>>
 	<<unset $wardrobeRepair>>
 <</widget>>
@@ -1533,20 +1454,20 @@
 	<</for>>
 	<<for $_slot range $_equip>>
 		<<if !_equipped.includes($_slot) and $worn[$_slot].name is "naked">>
-			<<set _eIndexds to _selectedWardrobe[$_slot].map((item, index) => {
+			<<set $_ids to _selectedWardrobe[$_slot].map((item, index) => {
 				if (!item.outfitSecondary or item.outfitSecondary[1] is "broken" or item.outfitSecondary[1] is "split") return index;
 			}).filter(Boolean)>>
-			<<if _eIndexds.length gt 0>>
-				<<set _eIndexd to _eIndexds.random()>>
-				<<set $_selectedItem to _selectedWardrobe[$_slot][_eIndexd]>>
+			<<if $_ids.length gt 0>>
+				<<set $_id to $_ids.random()>>
+				<<set $_selectedItem to _selectedWardrobe[$_slot][$_id]>>
 					<<run _equipped.pushUnique($_slot)>>
 					<<if $_selectedItem.outfitPrimary isnot undefined>>
 						<<run Object.entries($_selectedItem.outfitPrimary).forEach((slot,value) => {
 							if (value !== "broken" && value !== "split") _equipped.pushUnique(slot)
 						})>>
 					<</if>>
-					<<set V["wear_" + $_slot] to _eIndexd>>
-				<<unset _eIndexd>>
+					<<set V["wear_" + $_slot] to $_id>>
+				<<unset $_id>>
 			<</if>>
 		<</if>>
 	<</for>>
@@ -1556,20 +1477,20 @@
 <<widget "warmth_description">>
 	<<print setup.WeatherDescriptions.shop()>>
 	<br>
-	Your clothing warmth is currently <span class="orange"><<print Weather.BodyTemperature.getWarmth()>></span>.
+	당신 옷의 따뜻함은 현재 <span class="orange"><<print Weather.BodyTemperature.getWarmth()>></span>이다.
 	<br>
 
 	<<set $_minWarmth to getTargetWarmth(36.4)>>
 	<<set $_maxWarmth to getTargetWarmth(37.6)>>
-	To be comfortable you'll need
+	쾌적해지기 위해 당신은
 	<<if $_minWarmth and $_maxWarmth>>
-		a clothing warmth between <span class="orange"><<print getTargetWarmth(36.5)>></span> and <span class="orange"><<print getTargetWarmth(37.5)>></span>.
+		<span class="orange"><<print getTargetWarmth(36.5)>></span>와 <span class="orange"><<print getTargetWarmth(37.5)>></span> 사이의 따뜻함을 가진 옷이 필요하다.
 	<<elseif $_minWarmth>>
-		at least a clothing warmth of <span class="orange"><<print getTargetWarmth(36.5)>></span>.
+		최소 <span class="orange"><<print getTargetWarmth(36.5)>></span> 이상의 따뜻함을 가진 옷이 필요하다.
 	<<elseif $_maxWarmth>>
-		at most a clothing warmth of <span class="orange"><<print getTargetWarmth(37.5)>></span>.
+		최대 <span class="orange"><<print getTargetWarmth(37.5)>></span> 이하의 따뜻함을 가진 옷이 필요하다.
 	<<else>>
-		to stay indoors.
+		실내에 있을 필요가 있다.
 	<</if>>
 	<hr />
 <</widget>>
@@ -1583,13 +1504,13 @@
 		<<set $wardrobe_location to "wardrobe">>
 	<</if>>
 	<<if $debug and $multipleWardrobes and !_args[0]>>
-		<div class="no-numberify">Debug:
+		<div class="no-numberify">디버그:
 			<<for _label, _value range $wardrobes>>
 				<<if _value.unlocked is undefined>>
 				<<elseif $wardrobe_location is _label>>
-					<span class="gold"><<print _value.name>></span> |
+					<span class="gold"><<trWardrobeName _value.name>><<print _trResult>></span> |
 				<<else>>
-					<<capture _label>><<link [[_value.name|$passage]]>><<set $forceWardrobeLocation to _label>><</link>> |<</capture>>
+					<<capture _label>><<trWardrobeName _value.name>><<link [[_trResult|$passage]]>><<set $forceWardrobeLocation to _label>><</link>> |<</capture>>
 				<</if>>
 			<</for>>
 		</div>
@@ -1598,8 +1519,7 @@
 <</widget>>
 
 <<widget "cleanupOnWardrobeExit">>
-	<<if $bus is "clothingshop">><<tryOnReset>><</if>>
-	<<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><<set $delete_outfit to "none">><<unset $forceWardrobeLocation>><<set $dontHide to false>><<run delete $wardrobeExit>>
+	<<unset $saveColor>><<unset $wardrobeRepeat>><<unset $tempDisable>><<set $delete_outfit to "none">><<unset $forceWardrobeLocation>><<set $dontHide to false>>
 <</widget>>
 
 <<widget "wardrobeExits">>
@@ -1607,121 +1527,95 @@
 	<!-- this widget doesn't make sense because these links ALWAYS depend on the passage this widget is called from, so there's no reason to make it a widget -->
 	<<switch $passage>>
 		<<case "Wardrobe">>
-			<<link [[Close wardrobe|Bedroom]]>><<cleanupOnWardrobeExit>><</link>>
+			<<link [[옷장을 닫는다|Bedroom]]>><<cleanupOnWardrobeExit>><</link>>
 		<<case "Changing Room">>
 			<<if $exposed lte 1>>
-				<<set _exit to $wardrobeExit or "Beach">>
-				<<getouticon>><<link [[Leave|_exit]]>><<cleanupOnWardrobeExit>><</link>>
+				<<getouticon>><<link [[떠난다|Beach]]>><<cleanupOnWardrobeExit>><</link>>
 			<<elseif hasSexStat("exhibitionism", 5)>>
-				<<set _exitSneak to $wardrobeExit or "Beach Changing Room Sneak">>
-				<<sneakicon>><<link [[Sneak outside|_exitSneak]]>><<cleanupOnWardrobeExit>><</link>><<exhibitionist5>>
+				<<sneakicon>><<link [[몰래 나간다|Beach Changing Room Sneak]]>><<cleanupOnWardrobeExit>><</link>><<exhibitionist5>>
 			<<else>>
-				You can't go out like this!
+				이 꼴로는 나갈 수 없다!
 			<</if>>
 		<<case "Sydney Beach Changing Room">>
 			<<set _earSlimeEnableSwimwear to true>>
 			<<if $exposed lte 1>>
-				<<getouticon>><<link [[Leave|Sydney Beach Swimsuit]]>><<cleanupOnWardrobeExit>><</link>>
+				<<getouticon>><<link [[떠난다|Sydney Beach Swimsuit]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't go out like this!
+				이 꼴로는 나갈 수 없다!
 			<</if>>
 		<<case "Sydney Beach Changing Room Leave">>
 			<<set _earSlimeEnableSwimwear to true>>
 			<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked")>>
-				<span class="red">The slime in your ear refuses to allow you to leave with <<underwearTypeText>> on.</span>
+				<span class="red">귓속의 슬라임이 <<underwearTypeText "을">> 입은 채 나가는 것을 허락하지 않는다.</span>
 			<<elseif $exposed lte 1>>
-				<<getouticon>><<link [[Leave|Sydney Beach Leave]]>><<cleanupOnWardrobeExit>><</link>>
+				<<getouticon>><<link [[떠난다|Sydney Beach Leave]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't go out like this!
+				이 꼴로는 나갈 수 없다!
 			<</if>>
 		<<case "Eden Wardrobe">>
 			<<if isLoveInterest("Eden") or hasSexStat("exhibitionism", 5) or $exposed lte 0 or (hasSexStat("exhibitionism", 4) and $exposed lte 1)>>
-				<<link [[Done|Eden Cabin]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[마친다|Eden Cabin]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't remain undressed like this!
+				지금처럼 아무 것도 안 입고 있을 순 없다!
 			<</if>>
 		<<case "Eden Night Wardrobe">>
 			<<if isLoveInterest("Eden") or hasSexStat("exhibitionism", 5) or $exposed lte 0 or (hasSexStat("exhibitionism", 4) and $exposed lte 1)>>
-				<<link [[Done|Eden Cabin Bed]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[마친다|Eden Cabin Bed]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't remain undressed like this!
+				지금처럼 아무 것도 안 입고 있을 순 없다!
 			<</if>>
 		<<case "Asylum Wardrobe">>
 			<<if hasSexStat("exhibitionism", 5) or $exposed lte 0 or (hasSexStat("exhibitionism", 4) and $exposed lte 1)>>
-				<<link [[Done|Asylum Cell]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[마친다|Asylum Cell]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't remain undressed like this!
+				지금처럼 아무 것도 안 입고 있을 순 없다!
 			<</if>>
 		<<case "Farm Wardrobe">>
 			<<if hasSexStat("exhibitionism", 5) or $exposed lte 0 or (hasSexStat("exhibitionism", 4) and $exposed lte 1)>>
-				<<link [[Done|Farm Bedroom]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[마친다|Farm Bedroom]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't remain undressed like this!
+				지금처럼 아무 것도 안 입고 있을 순 없다!
 			<</if>>
 		<<case "Strip Club Wardrobe">>
 			<<if hasSexStat("exhibitionism", 4) or $exposed lte 0 or (hasSexStat("exhibitionism", 2) and $exposed lte 1)>>
-				<<link [[Step away|Strip Club Dressing Room]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[물러난다|Strip Club Dressing Room]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't go out like this!
+				이 꼴로는 나갈 수 없다!
 			<</if>>
 		<<case "Brothel Wardrobe">>
 			<<if hasSexStat("exhibitionism", 4) or $exposed lte 0 or (hasSexStat("exhibitionism", 2) and $exposed lte 1)>>
-				<<link [[Step away|Brothel Dressing Room]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[물러난다|Brothel Dressing Room]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't go out like this!
+				이 꼴로는 나갈 수 없다!
 			<</if>>
 		<<case "School Pool Wardrobe">>
 			<<if $changingRoomGender is "boys">>
-				<<getouticon>><<link [[Leave|School Boy Changing Room]]>><<cleanupOnWardrobeExit>><</link>>
+				<<getouticon>><<link [[떠난다|School Boy Changing Room]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				<<getouticon>><<link [[Leave|School Girl Changing Room]]>><<cleanupOnWardrobeExit>><</link>>
+				<<getouticon>><<link [[떠난다|School Girl Changing Room]]>><<cleanupOnWardrobeExit>><</link>>
 			<</if>>
 		<<case "Farm Assault Wardrobe">>
 			<<if hasSexStat("exhibitionism", 5) or $exposed lte 0 or (hasSexStat("exhibitionism", 4) and $exposed lte 1)>>
-				<<link [[Done|Farm Assault Intro]]>><<cleanupOnWardrobeExit>><</link>>
+				<<link [[마친다|Farm Assault Intro]]>><<cleanupOnWardrobeExit>><</link>>
 			<<else>>
-				You can't remain undressed like this!
+				지금처럼 아무 것도 안 입고 있을 순 없다!
 			<</if>>
 		<<case "Prison Wardrobe">>
-			<<link [[Close|Prison Cell]]>><<cleanupOnWardrobeExit>><</link>>
+			<<link [[닫는다|Prison Cell]]>><<cleanupOnWardrobeExit>><</link>>
 		<<case "Temple Wardrobe">>
-			<<link [[Close|Temple Bunk]]>><<cleanupOnWardrobeExit>><</link>>
+			<<link [[닫는다|Temple Bunk]]>><<cleanupOnWardrobeExit>><</link>>
 		<<case "Pirate Wardrobe">>
-			<<link [[Close|Pirate Bed]]>><<cleanupOnWardrobeExit>><</link>>
+			<<link [[닫는다|Pirate Bed]]>><<cleanupOnWardrobeExit>><</link>>
 		<<case "Office Agency Changing Room">>
 			<<if $exposed lte 1>>
-				<<getouticon>><<link [[Leave|Office Agency]]>><<cleanupOnWardrobeExit>><</link>>
+				<<getouticon>><<link [[떠난다|Office Agency]]>><<cleanupOnWardrobeExit>><</link>>
 			<<elseif hasSexStat("exhibitionism", 4)>>
-				<<sneakicon>><<link [[Sneak outside|Office Agency Streak]]>><<cleanupOnWardrobeExit>><</link>><<exhibitionist4>>
+				<<sneakicon>><<link [[몰래 나간다|Office Agency Streak]]>><<cleanupOnWardrobeExit>><</link>><<exhibitionist4>>
 			<<else>>
-				You can't go out like this!
+				이 꼴로는 나갈 수 없다!
 			<</if>>
 		<<case "Bird Tower Wardrobe">>
-			<<link [[Close|Bird Tower]]>><<cleanupOnWardrobeExit>><</link>>
-		<<case "Mansion Wardrobe">>
-			<<if $avery_party>>
-				<<link [[Exit|Mansion Party Quinn Change 2]]>><<cleanupOnWardrobeExit>><</link>>
-				<br>
-			<<elseif $avery_mansion_skyscraper_wardrobe>>
-				<<link [[Exit|Mansion Skyscraper Wardrobe Exit]]>><<cleanupOnWardrobeExit>><</link>>
-				<br>
-			<<elseif $wardrobe_residential_alleys gte 2>>
-				<<if $exposed lte 0>>
-					<<link [[Exit|Residential alleyways]]>><</link>>
-					<br>
-				<<elseif $exposed is 1 and hasSexStat("exhibitionism", 4)>>
-					<<link [[Exit|Residential Mansion Undies]]>><</link>><<exhibitionist4>>
-					<br>
-				<<elseif $exposed is 2 and hasSexStat("exhibitionism", 5)>>
-					<<link [[Exit|Residential Mansion Naked]]>><</link>><<exhibitionist5>>
-					<br>
-				<<else>>
-					You can't leave dressed like this!
-				<</if>>
-			<<else>>
-				<<link [[Exit|Mansion Bedroom]]>><<cleanupOnWardrobeExit>><</link>>
-				<br>
-			<</if>>
+			<<link [[닫는다|Bird Tower]]>><<cleanupOnWardrobeExit>><</link>>
 	<</switch>>
 	<br><br>
 <</widget>>
@@ -1729,11 +1623,11 @@
 <<widget "underwearTypeText">><<silently>>
 	<<if $worn.under_lower.name is "naked">>
 	<<elseif $worn.under_lower.type.includes("swim")>>
-		<<set $_text_output to "swimwear">>
+		<<set _trResult to "수영복">><<trPost 0 _args[0] _args[1]>><<set $_text_output to _trResult>>
 	<<elseif $worn.under_lower.type.includes("dance")>>
-		<<set $_text_output to "dancewear">>
+		<<set $_text_output to "댄스복">><<trPost 0 _args[0] _args[1]>><<set $_text_output to _trResult>>
 	<<else>>
-		<<set $_text_output to "underwear">>
+		<<set $_text_output to "속옷">><<trPost 0 _args[0] _args[1]>><<set $_text_output to _trResult>>
 	<</if>>
 <</silently>><<if $_text_output>><<print $_text_output>><</if>>
 <</widget>>
@@ -1742,7 +1636,7 @@
 <<effects>>
 <<set $wardrobe_location to "wardrobe">>
 <<wardrobeSelection>>
-You look in your wardrobe.
+당신은 옷장을 들여다본다.
 <br><br>
 <div id="wardrobewear"><<wardrobewear>></div>
 <div id="wardrobeExits"><<wardrobeExits>></div>
@@ -1754,7 +1648,7 @@ You look in your wardrobe.
 <<set $wardrobe_location to "changingRoom">>
 <<set _earSlimeEnableSwimwear to true>>
 <<wardrobeSelection>>
-You are in a small<<if $bus isnot "clothingshop">> wooden<</if>> changing room.
+당신은 작은 나무 탈의실에 있다.
 <br><br>
 <div id="wardrobewear"><<wardrobewear>></div>
 <div id="wardrobeExits"><<wardrobeExits>></div>
@@ -1762,7 +1656,7 @@ You are in a small<<if $bus isnot "clothingshop">> wooden<</if>> changing room.
 
 :: Eden Wardrobe [exitCheckBypass]
 <<effects>>
-You look through the cupboard containing your clothes. There's an old dressing screen for privacy.
+당신은 입던 옷이 들어있는 찬장을 들여다본다. 사생활을 위한 낡은 탈의용 가림막이 있다.
 <br><br>
 <<set $wardrobe_location to "edensCabin">>
 <<wardrobeSelection>>
@@ -1773,7 +1667,7 @@ You look through the cupboard containing your clothes. There's an old dressing s
 :: Asylum Wardrobe [exitCheckBypass]
 
 <<effects>>
-You look through the cupboard containing your clothes.
+당신은 입던 옷이 들어있는 찬장을 들여다본다.
 <br><br>
 <<set $wardrobe_location to "asylum">>
 <<wardrobeSelection>>
@@ -1784,7 +1678,7 @@ You look through the cupboard containing your clothes.
 
 :: Farm Wardrobe [exitCheckBypass]
 <<effects>>
-You look through the rustic wardrobe.
+당신은 소박한 옷장을 들여다본다.
 <br><br>
 <<set $wardrobe_location to "alexFarm">>
 <<wardrobeSelection>>
@@ -1816,7 +1710,7 @@ You look through the rustic wardrobe.
 <<effects>>
 <<wardrobeSelection>>
 <<set _earSlimeEnableSwimwear to true>>
-You stand in front of your open locker.
+당신은 자신의 열려있는 사물함 앞에 서있다.
 <br><br>
 <div id="wardrobewear"><<wardrobewear>></div>
 <div id="wardrobeExits"><<wardrobeExits>></div>
@@ -1826,7 +1720,7 @@ You stand in front of your open locker.
 :: Temple Wardrobe [exitCheckBypass]
 
 <<effects>>
-You look through the cupboard containing your clothes.
+당신은 입던 옷이 들어있는 찬장을 들여다본다.
 <br><br>
 <<set $wardrobe_location to "temple">>
 <<wardrobeSelection>>
@@ -1838,7 +1732,7 @@ You look through the cupboard containing your clothes.
 :: Pirate Wardrobe [exitCheckBypass]
 
 <<effects>>
-You look through the cupboard containing your clothes.
+당신은 입던 옷이 들어있는 찬장을 들여다본다.
 <br><br>
 <<set $wardrobe_location to "pirate">>
 <<wardrobeSelection>>
@@ -1851,7 +1745,7 @@ You look through the cupboard containing your clothes.
 <<effects>><<location "officeBuilding">>
 <<set $wardrobe_location to "officeBuilding">>
 <<wardrobeSelection>>
-You are in the small storage room sanctioned for temps to use for changing.
+당신은 임시 고용직들이 옷을 갈아입도록 허락된 작은 창고 안에 있다.
 <br><br>
 <div id="wardrobewear"><<wardrobewear>></div>
 <div id="wardrobeExits"><<wardrobeExits>></div>
@@ -1861,7 +1755,7 @@ You are in the small storage room sanctioned for temps to use for changing.
 :: Bird Tower Wardrobe [exitCheckBypass]
 
 <<effects>>
-You look through the wardrobe you built.
+당신은 당신이 만든 옷장 안을 들여다본다.
 <br><br>
 <<set $wardrobe_location to "birdTower">>
 <<wardrobeSelection>>
@@ -1870,30 +1764,15 @@ You look through the wardrobe you built.
 
 <<wardrobe>>
 
-:: Mansion Wardrobe [exitCheckBypass]
-<<effects>>
-<<set $wardrobe_location to "avery_mansion">>
-<<wardrobeSelection>>
-<<if $wardrobe_residential_alleys gte 2>>
-	You enter the storage unit.
-<<else>>
-	You enter the large wardrobe.
-<</if>>
-<br><br>
-<div id="wardrobewear"><<wardrobewear>></div>
-<div id="wardrobeExits"><<wardrobeExits>></div>
-
-<<wardrobe>>
-
 :: Wardrobe Sale Crate
 
-Are you prepared to add all your
+정말 당신의 모든 
 <<if $crateContents is "all">>
-	clothes
+	옷들을 
 <<else>>
-	outfits
+	입고 있는 옷들을 
 <</if>>
-to the crate and send them to be sold? Might be best to go shopping shortly after.
+상자에 넣어 판매를 맡길까? 조만간 쇼핑하러 가야할 지도 모르겠다.
 <br><br>
 <<set _value to 0>>
 <<for _label, _items range $wardrobe>>
@@ -1910,11 +1789,11 @@ to the crate and send them to be sold? Might be best to go shopping shortly afte
 		<<set _value += Math.floor(getClothingCost(_items[_i], _label) * (_items[_i].integrity / clothingData(_label,_items[_i],'integrity_max')) / 3)>>
 	<</for>>
 <</for>>
-It will earn you <<printmoney `_value + 5000`>>.
+전부 팔면 <<printmoney `_value + 5000`>>를 받을 수 있다.
 <br><br>
-<<link [[Yes|Wardrobe Sale Crate Result]]>><</link>>
+<<link [[네|Wardrobe Sale Crate Result]]>><</link>>
 <br>
-<<link [[No|$wardrobeReturnLink]]>>
+<<link [[아니오|$wardrobeReturnLink]]>>
 	<<unset $wardrobeReturnLink>>
 	<<unset $crateContents>>
 <</link>>
@@ -1924,68 +1803,67 @@ It will earn you <<printmoney `_value + 5000`>>.
 <<set $tailorMonthlyService to 7>>
 <<set _value to 0>>
 <<set _equip to setup.clothingLayer.all>>
-<<for _eIndex to 0; _eIndex lt _equip.length; _eIndex++>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
 	<<set _toDelete to []>>
-	<<for _iIndex to 0; _iIndex lt $wardrobe[_equip[_eIndex]].length; _iIndex++>>
-		<<if setup.clothes[_equip[_eIndex]][clothesIndex(_equip[_eIndex],$wardrobe[_equip[_eIndex]][_iIndex])].shop.length is 0>>
+	<<for $_j to 0; $_j lt $wardrobe[_equip[$_i]].length; $_j++>>
+		<<if setup.clothes[_equip[$_i]][clothesIndex(_equip[$_i],$wardrobe[_equip[$_i]][$_j])].shop.length is 0>>
 			<<continue>>
 		<</if>>
-		<<if $wardrobe[_equip[_eIndex]][_iIndex].outfitPrimary is undefined and $crateContents is "outfits">>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitPrimary is undefined and $crateContents is "outfits">>
 			<<continue>>
 		<</if>>
-		<<set _value += Math.floor(tailorClothingCost($wardrobe[_equip[_eIndex]][_iIndex],_equip[_eIndex]) * ($wardrobe[_equip[_eIndex]][_iIndex].integrity / clothingData(_equip[_eIndex],$wardrobe[_equip[_eIndex]][_iIndex],'integrity_max')) / 3)>>
-		<<run _toDelete.push(clone(_iIndex))>>
+		<<set _value += Math.floor(tailorClothingCost($wardrobe[_equip[$_i]][$_j],_equip[$_i]) * ($wardrobe[_equip[$_i]][$_j].integrity / clothingData(_equip[$_i],$wardrobe[_equip[$_i]][$_j],'integrity_max')) / 3)>>
+		<<run _toDelete.push(clone($_j))>>
 	<</for>>
-	<<for _iIndex to $wardrobe[_equip[_eIndex]].length; _iIndex gte 0; _iIndex-->>
-		<<if _toDelete.includes(_iIndex)>>
-			<<run $wardrobe[_equip[_eIndex]].deleteAt(_iIndex)>>
+	<<for $_j to $wardrobe[_equip[$_i]].length; $_j gte 0; $_j-->>
+		<<if _toDelete.includes($_j)>>
+			<<run $wardrobe[_equip[$_i]].deleteAt($_j)>>
 		<</if>>
 	<</for>>
 <</for>>
-The driver takes the crate away, leaving <<printmoney `_value + 5000`>> in its place.
-<<money `Math.floor(_value + 5000)` "tailor">>
+운전기사가 <<printmoney `_value + 5000`>>를 두고 상자를 가져간다.
+<<set $money += Math.floor(_value + 5000)>>
 <br><br>
-<<link [[Continue|$wardrobeReturnLink]]>>
+<<link [[계속|$wardrobeReturnLink]]>>
 	<<unset $wardrobeReturnLink>>
 	<<unset $crateContents>>
 <</link>>
 
 :: Wardrobe Repair Crate
 
-Are you prepared to add all your
+정말 당신의 모든 
 <<if $crateContents is "all">>
-	clothes
+	옷들을 
 <<elseif $crateContents is "damaged">>
-	damaged clothes
+	손상된 옷들을
 <<else>>
-	outfits
+	입고 있는 옷들을 
 <</if>>
-to the crate and send them to be repaired? Might be best to go shopping shortly after.
+상자에 넣고 수리를 맡길까요? 조만간 쇼핑하러 가야할 지도 모르겠다.
 <br><br>
 <<set _value to 0>> /* recalculated with adding lower or upper halves when missing */
 <<for _label, _items range $wardrobe>>
 	<<for _i to 0; _i lt _items.length; _i++>>
-		<<if isNaN(clothingData(_label,_items[_i],'integrity_max'))>><<continue>><</if>>
-		<<if (_items[_i].outfitPrimary is undefined and _items[_i].outfitSecondary is undefined and $crateContents is "outfits") or (_items[_i].integrity gt clothingData(_label,_items[_i],'integrity_max'))>>
+		<<if _items[_i].outfitPrimary is undefined and _items[_i].outfitSecondary is undefined and $crateContents is "outfits">>
 			<<continue>>
 		<</if>>
 		<<set _value += Math.floor(tailorClothingCost(_items[_i],_label) * (1 - (_items[_i].integrity / clothingData(_label,_items[_i],'integrity_max'))) * 1.25)>>
 	<</for>>
 <</for>>
-It will cost you
+전부 수리하려면 
 <<if _value gt 5000>>
-	<<printmoney `_value - 5000`>>.
+	<<printmoney `_value - 5000`>>가 필요하다.
 <<else>>
-	nothing.
+	돈은 필요없다.
 <</if>>
 <br><br>
 <<if $money gte _value>>
-	<<link [[Yes|Wardrobe Repair Crate Result]]>><</link>>
+	<<link [[네|Wardrobe Repair Crate Result]]>><</link>>
 <<else>>
-	Not enough money.
+	돈이 부족하다.
 <</if>>
 <br>
-<<link [[No|$wardrobeReturnLink]]>>
+<<link [[아니오|$wardrobeReturnLink]]>>
 	<<unset $wardrobeReturnLink>>
 	<<unset $crateContents>>
 <</link>>
@@ -1996,191 +1874,65 @@ It will cost you
 <<set $wardrobeRepair to {timeLeft: 1}>>
 <<set _equip to setup.clothingLayer.all>>
 <<set _value to 0>>
-
-/* item stat keys to find matching clothing */
-<<set _itemStatsIdentifierKeys to [
-	"colour",
-	"colourCustom",
-	"accessory_colour",
-	"accessory_colourCustom",
-	"one_piece",
-	"pattern"
-]>>
-/* Add a new key whenever the clothing object is updated */
-<<set _itemStatsConditionalKeys to [
-	...T.itemStatsIdentifierKeys,
-	"hoodposition",
-	"altposition",
-	"altsleeve"
-]>>
-<<for _eIndex to 0; _eIndex lt _equip.length; _eIndex++>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
 	<<set _toDelete to []>>
-	<<for _iIndex to 0; _iIndex lt $wardrobe[_equip[_eIndex]].length; _iIndex++>>
-		<<set _currentClothing to $wardrobe[_equip[_eIndex]][_iIndex]>>
-		<<if isNaN(clothingData(_equip[_eIndex],_currentClothing,'integrity_max'))>><<continue>><</if>>
-		<<if _currentClothing.integrity gte clothingData(_equip[_eIndex],_currentClothing,'integrity_max') and _currentClothing.one_piece isnot "broken" and $crateContents is "damaged">>
+	<<for $_j to 0; $_j lt $wardrobe[_equip[$_i]].length; $_j++>>
+		<<if $wardrobe[_equip[$_i]][$_j].integrity is clothingData(_equip[$_i],$wardrobe[_equip[$_i]][$_j],'integrity_max') and $wardrobe[_equip[$_i]][$_j].one_piece isnot "broken" and $crateContents is "damaged">>
 			<<continue>>
 		<</if>>
-		<<if (_currentClothing.outfitPrimary is undefined and _currentClothing.outfitSecondary is undefined and $crateContents is "outfits") or (_currentClothing.integrity gt clothingData(_equip[_eIndex],_currentClothing,'integrity_max'))>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitPrimary is undefined and $wardrobe[_equip[$_i]][$_j].outfitSecondary is undefined and $crateContents is "outfits">>
 			<<continue>>
 		<</if>>
-		<<set _value += Math.floor(tailorClothingCost(_currentClothing,_equip[_eIndex]) * (1 - (_currentClothing.integrity / clothingData(_equip[_eIndex],_currentClothing,'integrity_max'))) * 1.25)>>
+		<<set _value += Math.floor(tailorClothingCost($wardrobe[_equip[$_i]][$_j],_equip[$_i]) * (1 - ($wardrobe[_equip[$_i]][$_j].integrity / clothingData(_equip[$_i],$wardrobe[_equip[$_i]][$_j],'integrity_max'))) * 1.25)>>
 
-		/* Deletes the full outfit set paired with a damaged outfit piece in wardrobe before duplicating */
-		<<if $crateContents is "damaged" and _currentClothing.one_piece is 1 and (_currentClothing.outfitPrimary or _currentClothing.outfitSecondary)>>
-			<<set _ignoreSlot to _equip[_eIndex]>>
-			<<if _currentClothing.outfitSecondary>>
-				<<set _upperSlot to _currentClothing.outfitSecondary[0]>>
-				<<set _upperOutfit to setup.clothes[_upperSlot][clothesIndex(_upperSlot, _currentClothing)]>>
-			<<else>>
-				<<set _upperSlot to _ignoreSlot>>
-				<<set _upperOutfit to _currentClothing>>
-			<</if>>
-
-			<<set _itemDeleteSlots to new Set([_upperOutfit.slot, ...Object.keys(_upperOutfit.outfitPrimary)])>>
-			<<set _itemDeleteSlots.delete(_ignoreSlot)>>
-
-			/* Searches wardrobe to mark one outfit piece each for deletion before duplicating */
-			<<set _itemDeleteCandidates to Object.fromEntries(Object.entries($wardrobe)
-				.filter(([slot, items]) => T.itemDeleteSlots.has(slot))
-				.map(([slot, items]) => {
-					/* Converted to entries in order to preserve index */
-					const itemEntry = Object.entries(items)
-						.filter(([, item]) => T.upperOutfit.variable === item.variable)
-						/* Colours and pattern must match */
-						.filter(([, item]) =>
-							T.itemStatsIdentifierKeys.every((key) => T.currentClothing[key] === item[key])
-						)
-						/* Edge case for damaged hood paired with an upper w/ hoodposition === "down" */
-						.filter(([, item]) => {
-							if (item.outfitPrimary) {
-								return Object.keys(item.outfitPrimary).contains(T.ignoreSlot);
-							}
-							return true;
-						})
-						/* Get most damaged item */
-						.reduce((minimum, [index, item]) => {
-							if (minimum === undefined || item.integrity < minimum.item.integrity) {
-								return {index: Number(index), item: item};
-							}
-							return minimum;
-						}, undefined);
-					return [slot, itemEntry];
-				})
-				.filter(([slot, itemEntry]) => itemEntry))
-			>>
-
-			<<if _ignoreSlot isnot _upperSlot>>
-				<<if _itemDeleteCandidates[_upperSlot]>>
-					/* Edge case for damaged lower paired with an upper w/ hoodposition === "down" */
-					<<set _upperOutfit to _itemDeleteCandidates[_upperSlot].item>>
-					<<set _currentClothing to clone(_upperOutfit)>>
-
-					<<run _itemDeleteSlots.clear()>>
-					<<run [_upperSlot, ...Object.keys(_upperOutfit.outfitPrimary)].forEach((k) => T.itemDeleteSlots.add(k))>>
-					<<set _itemDeleteSlots.delete(_ignoreSlot)>>
-
-					<<run Object.entries(_itemDeleteCandidates).forEach(([slot]) => {
-						if (!T.itemDeleteSlots.has(slot)) {
-							delete T.itemDeleteCandidates[slot];
-						}
-					})>>
-				<<else>>
-					/* Edge case for damaged secondary paired with split/partly broken upper */
-					<<set _outfitRepairSkip to true>>
-				<</if>>
-			<</if>>
-
-			<<if !_outfitRepairSkip>>
-				/* Deletes each outfit component except for current slot and adds repair costs */
-				<<run Object.entries(_itemDeleteCandidates).forEach(([slot, {index, item}]) => {
-					T.value += Math.floor(tailorClothingCost(item,slot) * (1 - (item.integrity / clothingData(slot,item,'integrity_max'))) * 1.25);
-					V.wardrobe[slot].deleteAt(index);
-				})>>
-
-				/* _currentClothing marked "broken" to trigger full repair */
-				<<set _currentClothing.one_piece to "broken">>
-				<<if _currentClothing.outfitSecondary>>
-					<<set _currentClothing.outfitSecondary[1] to "broken">>
-				<</if>>
-				<<if _currentClothing.outfitPrimary>>
-					<<run Object.entries(_currentClothing.outfitPrimary).forEach(([itemSlot, itemName]) => {
-						T.currentClothing.outfitPrimary[itemSlot] = "broken";
-					})>>
-				<</if>>
-			<</if>>
-			<<unset _outfitRepairSkip>>
+		<<if $wardrobeRepair[_equip[$_i]] is undefined>>
+			<<set $wardrobeRepair[_equip[$_i]] to []>>
 		<</if>>
-
-		<<set $wardrobeRepair[_currentClothing.slot] ||= []>>
-		<<set _itemStats to {
-			index: _currentClothing.index
-		}>>
-		/* Conditionally stores values in _itemStats if they are not 0 or undefined */
-		<<run _itemStatsConditionalKeys.forEach((key) => {
-			if (!T.currentClothing[key]) return;
-			switch (key) {
-				case "one_piece":
-					if (T.currentClothing[key] != "split") return;
-					break;
-				case "altposition": case "altsleeve":
-					if (T.currentClothing[key] === "none") return;
-					break;
-				case "hoodposition":
-					if (T.currentClothing[key] === "up") return;
-					break;
-			}
-			T.itemStats[key] = T.currentClothing[key];
-		})>>
-
-		<<set _isBroken to (_currentClothing.one_piece === "broken")>>
-		<<if _currentClothing.outfitSecondary and _isBroken>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitSecondary and $wardrobe[_equip[$_i]][$_j].one_piece is "broken">>
 			/* If a secondary part of an outfit is broken adds the primary part so the complete outfit will be repaired */
-			<<set _upperSlot to _currentClothing.outfitSecondary[0]>>
-			<<set _upperIndex to clothesIndex(_upperSlot, _currentClothing)>>
-			<<set $wardrobeRepair[_upperSlot] ||= []>>
-			/* clothing to send for repair is now _currentClothing's upper part */
-			<<set _itemStats.index to _upperIndex>>
-			<<run $wardrobeRepair[_upperSlot].push(clone(_itemStats))>>
-
-			/* Adds all outfit components from upper primary (i.e. bottom + hood from a cow onesie) */
-			<<set _upperOutfit to setup.clothes[_upperSlot][_upperIndex]>>
-			<<run Object.keys(_upperOutfit.outfitPrimary).forEach((itemSlot) => {
-				T.itemStats.index = clothesIndex(itemSlot, T.upperOutfit);
-				V.wardrobeRepair[itemSlot] ||= []
-				V.wardrobeRepair[itemSlot].push(clone(T.itemStats));
-			})>>
-		<<else>>
-			<<run $wardrobeRepair[_currentClothing.slot].push(clone(_itemStats))>>
-
-			<<if _currentClothing.outfitPrimary and _isBroken>>
-				/* Adds all broken outfit components from upper primary */
-				<<set _upperOutfit to _currentClothing>>
-				<<run Object.entries(_upperOutfit.outfitPrimary).forEach(([itemSlot, itemName]) => {
-					if (itemName === "broken") {
-						T.itemStats.index = clothesIndex(itemSlot, T.upperOutfit);
-						V.wardrobeRepair[itemSlot] ||= []
-						V.wardrobeRepair[itemSlot].push(clone(T.itemStats));
-					}
-				})>>
+			<<set _upperSlot to $wardrobe[_equip[$_i]][$_j].outfitSecondary[0]>>
+			<<set _upperItem to setup.clothes[_upperSlot].findIndex(x => x.name === setup.clothes[_equip[$_i]][clothesIndex(_equip[$_i],$wardrobe[_equip[$_i]][$_j])].outfitSecondary[1])>>
+			<<if $wardrobeRepair[_upperSlot] is undefined>>
+				<<set $wardrobeRepair[_upperSlot] to []>>
 			<</if>>
+			<<set _itemStats to [
+					clone(_upperItem),
+					clone($wardrobe[_equip[$_i]][$_j].colour),
+					clone($wardrobe[_equip[$_i]][$_j].colourCustom),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colour),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colourCustom),
+					false
+				]>>
+			<<run $wardrobeRepair[_upperSlot].push(clone(_itemStats))>>
+			<<run _toDelete.push(clone($_j))>>
+		<<else>>
+			<<set _splitted to ($wardrobe[_equip[$_i]][$_j].one_piece === "split" ? true : false)>>
+			<<set _itemStats to [
+					clone(clothesIndex(_equip[$_i],$wardrobe[_equip[$_i]][$_j])),
+					clone($wardrobe[_equip[$_i]][$_j].colour),
+					clone($wardrobe[_equip[$_i]][$_j].colourCustom),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colour),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colourCustom),
+					clone(_splitted)
+				]>>
+			<<run $wardrobeRepair[_equip[$_i]].push(clone(_itemStats))>>
+			<<run _toDelete.push(clone($_j))>>
 		<</if>>
-		<<run _toDelete.push(clone(_iIndex))>>
 	<</for>>
-	<<for _iIndex to $wardrobe[_equip[_eIndex]].length; _iIndex gte 0; _iIndex-->>
-		<<if _toDelete.includes(_iIndex)>>
-			<<run $wardrobe[_equip[_eIndex]].deleteAt(_iIndex)>>
+	<<for $_j to $wardrobe[_equip[$_i]].length; $_j gte 0; $_j-->>
+		<<if _toDelete.includes($_j)>>
+			<<run $wardrobe[_equip[$_i]].deleteAt($_j)>>
 		<</if>>
 	<</for>>
 <</for>>
 <<if _value gt 5000>>
-	<<money `-(_value - 5000)` "tailor">>
-	The driver takes <<printmoney `_value - 5000`>> and the crate away.
+	<<set $money -= _value - 5000>>
+	운전기사가 상자와 <<printmoney `_value - 5000`>>를 들고간다.
 <<else>>
-	The driver takes the crate away.
+	운전기사가 상자를 들고간다.
 <</if>>
 <br><br>
-<<link [[Continue|$wardrobeReturnLink]]>>
+<<link [[계속|$wardrobeReturnLink]]>>
 	<<unset $wardrobeReturnLink>>
 	<<unset $crateContents>>
 <</link>>

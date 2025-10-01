@@ -1,12 +1,11 @@
 :: Office Meeting Start
-<<if $avery_fate is "ascended">><<location "avery_skyscraper">><<else>><<location "office">><</if>><<effects>>
+<<location "office">><<effects>>
 <<set $meetingPhase to 0>>
 <<set $meetingTip to 5>>
 <<set $meetingOrgasm to 0>>
 <<set $mAttention to 0>>
 <<set $assaultEnergy to random(25,50)>>
 <<beastNEWinit 1 dog>><<generate2>><<generate3>><<generateyv4>>
-<<wearProp "write" 0 "notebook">>
 
 You take the lift to <<checkfloor>> and walk into a small conference room. A <<person2>><<person>> gets up and directs you to your seat.
 <br>
@@ -23,12 +22,12 @@ Now, it's important that you remain still and quiet, as the call is being broadc
 <br><br>
 You take your seat and wait for the meeting to begin.
 <br><br>
-<<link [[Next|Office Meeting Progress]]>><</link>>
+<<link [[다음|Office Meeting Progress]]>><</link>>
 
 :: Office Meeting Progress
 <<effects>>
-
-<<if dangerEvent(1, 8000, 300*$officeFloor)>>
+<<set $danger to random(1,10000)>>
+<<if $danger gte 8000 - (300 * $officeFloor)>>
 	<<if $rng gte 51 or ($bestialitydisable is "t" and $monster isnot 1)>>
 		A <<person3>><<person>> enters the room and sits down next to you.
 		<br><br>
@@ -52,24 +51,24 @@ You take your seat and wait for the meeting to begin.
 		Not long into the meeting, you feel something at your feet. The <<beasttype 0>> has started tugging on your $worn.lower.name!
 		<<meetingpetactions>>
 	<</if>>
-<<elseif $rng gte 86>>
+<<elseif $rng gte 85>>
 	The meeting is uneventful, until the <<person3>><<person>> giving the presentation tries to recall an obscure fact about your town. No one else in the room seems to know what <<he>> is talking about. You think you remember hearing about it in History class, but you were told to remain quiet.
 	<br><br>
 	<<link [[Say something|Office Meeting History Speak]]>><</link>><br>
 	<<link [[Remain silent|Office Meeting History Silence]]>><</link>>
-<<elseif $rng gte 71>>
-	The <<person3>><<person>> speaking gives a painfully boring presentation, but despite <<his>> dry demeanour, you learn a number of interesting facts about the town. <<ghistory>><<historyskill>>
+<<elseif $rng gte 70>>
+	The <<person3>><<person>> speaking gives a painfully boring presentation, but despite <<his>> dry demeanor, you learn a number of interesting facts about the town. <<ghistory>><<historyskill>>
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
-<<elseif $rng gte 56>>
+	<<link [[다음|Office Meeting End]]>><</link>>
+<<elseif $rng gte 55>>
 	You feel like the meeting is passing quickly, until a <<person3>><<person>> starts talking about the orphanage.
 	<br><br>
 	"Yeah, the whole place is full of them. If you're lucky, you get a virgin, and the best part is that no one cares if they go missing," <<he>> says, before glancing over at you.
 	<br><br>
 	<<He>> doesn't address you directly, but you can't help but think they know you live there, and it makes you feel uncomfortable. <<gstress>><<stress 2>>
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
-<<elseif $rng gte 41>>
+	<<link [[다음|Office Meeting End]]>><</link>>
+<<elseif $rng gte 40>>
 	During the meeting, another temp, a <<person4>><<person>>, comes in to set up refreshments in the corner.
 	<br>
 	While <<he>> is working, a <<person3>><<person>> walks up to <<person4>><<him>> and places <<person3>><<his>> hand<<person4>>
@@ -82,19 +81,19 @@ You take your seat and wait for the meeting to begin.
 	<<link [[Keep watching|Office Meeting Temp Watch]]>><</link>> <<promiscuous1>>
 	<br>
 	<<link [[Look away|Office Meeting Temp Look Away]]>><</link>>
-<<elseif $rng gte 26>>
+<<elseif $rng gte 25>>
 	As the meeting progresses, you notice a <<person3>><<person>> shifting back and forth in <<his>> seat with a devious look in <<his>> eyes. Across from <<him>>, a <<person4>><<person>> is gripping the table and looks to be aroused.
 	<br>
 	You can't help but peek under the table, and you see that the <<person3>><<person>> has removed <<his>> shoes and is massaging the <<person4>><<persons>> crotch with <<person3>><<his>> feet.
 	<br><br>
-
+	
 	You sit upright and continue taking your notes. Not long after, the <<person4>><<person>> asks to be excused and runs from the room, covering <<his>> groin with <<his>> hands.
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
+	<<link [[다음|Office Meeting End]]>><</link>>
 <<else>>
 	The speaker in the meeting talks really fast and very quietly, but you are able to follow along and take notes to the best of your ability.
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
+	<<link [[다음|Office Meeting End]]>><</link>>
 <</if>>
 
 :: Office Meeting History Speak
@@ -102,20 +101,20 @@ You take your seat and wait for the meeting to begin.
 You are certain you know what the speaker is referring to. "Excuse me, <<person3>><<sir>>," you say, getting the room's attention. You say what you believe to be the correct fact, and the speaker takes a moment to think about it.
 <br><br>
 <<if currentSkillValue("history") gte random(1,1000)>>
-	<span class="green">"That's exactly right, thanks!"</span> <<he>> says before continuing <<his>> presentation. The <<person2>><<person>> smiles at you and gives you an approving nod. <<set $meetingTip += 5>>
+	"<span class="green">That's exactly right, thanks!</span>" <<he>> says before continuing <<his>> presentation. The <<person2>><<person>> smiles at you and gives you an approving nod. <<set $meetingTip += 5>>
 <<else>>
 	<<He>> looks around at the room at the <<people>> and then looks at you, confused. "Who are you again? No, no, <span class="red">that's not what I was referring to at all</span>," <<he>> says, before continuing.
 	<br>
 	The <<person2>><<person>> glares at you angrily. <<gstress>><<stress 2>><<set $meetingTip -= 5>>
 <</if>>
 <br><br>
-<<link [[Next|Office Meeting End]]>><</link>>
+<<link [[다음|Office Meeting End]]>><</link>>
 
 :: Office Meeting History Silence
 <<effects>>
 You're afraid of embarrassing yourself or disturbing the attendees, so you remain silent. After a few moments, the speaker shrugs and carries on with the meeting.
 <br><br>
-<<link [[Next|Office Meeting End]]>><</link>>
+<<link [[다음|Office Meeting End]]>><</link>>
 
 :: Office Meeting Temp Watch
 <<effects>>
@@ -126,14 +125,14 @@ No one else in the meeting seems to notice as the <<person3>><<person>> slips <<
 The <<person3>><<person>> notices you looking, removes <<his>> hand, and grabs a drink. <<He>> winks at you before returning to <<his>> seat, and the <<person4>><<person>> finishes setting up the refreshments and hurries out of the room, tears streaming down <<his>> face.
 <br><br>
 <<promiscuity1>>
-
-<<link [[Next|Office Meeting End]]>><</link>>
+<br><br>
+<<link [[다음|Office Meeting End]]>><</link>>
 
 :: Office Meeting Temp Look Away
 <<effects>>
 You can't bring yourself to watch the violation, so you turn your attention back to the meeting. You can hear the <<person4>><<person>> moaning softly in the corner.
 <br><br>
-<<link [[Next|Office Meeting End]]>><</link>>
+<<link [[다음|Office Meeting End]]>><</link>>
 
 :: Office Meeting Molest Resist
 <<effects>>
@@ -142,7 +141,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 <<if $mAttention gte 10>>
 	Your attempts to get rid of the <<person>> has disturbed the meeting. The other <<people>> all turn and look at you, angry at all the commotion you are making.
 	<br><br>
-	<<link [[Next|Office Meeting Molest Discovered]]>><</link>>
+	<<link [[다음|Office Meeting Molest Discovered]]>><</link>>
 <<elseif $assaultEnergy gte 1>>
 	<<if $arousal gte $arousalmax>>
 		<<orgasm>>
@@ -152,13 +151,13 @@ You can't bring yourself to watch the violation, so you turn your attention back
 		<br>
 		The whole room immediately goes silent as everyone takes notice of your sudden outburst.
 		<br><br>
-		<<link [[Next|Office Meeting Molest Discovered]]>><</link>>
+		<<link [[다음|Office Meeting Molest Discovered]]>><</link>>
 	<<elseif $meetingPhase lte 2>>
 		You grab the hand on your thigh and try to move it away,
 		<<if $speech_attitude is "bratty">>
 			glaring at the <<person>>. "Get your hands off of me, pervert," you say firmly.
 		<<elseif $speech_attitude is "meek">>
-			<<nervously>> looking down to avoid making eye contact <<person>>. "<<Sir>>, please stop. You're making me uncomfortable," you say meekly.
+			<<nervously>> looking down to avoid making eye contact <<person>>. "<<if $pronoun is "m">>Sir<<else>>Miss<</if>>, please stop. You're making me uncomfortable," you say meekly.
 		<<else>>
 			glancing at the <<person>>. "This is inappropriate, please stop," you say.
 		<</if>>
@@ -237,7 +236,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 	<<elseif $meetingPhase is 7>>
 		Unable to resist <<himself>>,
 		<<if $worn.under_lower.name isnot "naked">>
-			the <<persons>> hand goes under your $worn.under_lower.name and
+			 the <<persons>> hand goes under your $worn.under_lower.name and
 		<<else>>
 			the <<person>>
 		<</if>>
@@ -266,7 +265,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 			"I'm going to make you cum in front of everyone," <<he>> says fiendishly.
 			<<set $assaultEnergy += 3>>
 		<<elseif $NPCList[1].skills.security lte 300>>
-			"B-but we are so close," <<he>> says.
+			"B-but we are so close." <<he>> says.
 			<<set $assaultEnergy -= 5>>
 		<<else>>
 			<<He>> ignores your demands and continues rubbing.
@@ -318,7 +317,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 	<br><br>
 	You fix your clothes before returning your attention to the meeting.
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
+	<<link [[다음|Office Meeting End]]>><</link>>
 <</if>>
 
 :: Office Meeting Molest Ignore
@@ -334,7 +333,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 		<br>
 		The whole room immediately goes silent as everyone takes notice of your sudden outburst.
 		<br><br>
-		<<link [[Next|Office Meeting Molest Discovered]]>><</link>>
+		<<link [[다음|Office Meeting Molest Discovered]]>><</link>>
 	<<elseif $meetingPhase lte 2>>
 		You ignore the <<persons>> hand on your thigh and focus on the meeting.
 		<br><br>
@@ -395,8 +394,9 @@ You can't bring yourself to watch the violation, so you turn your attention back
 	<<elseif $meetingPhase is 7>>
 		Unable to restrain <<himself>>, the <<person>>
 		<<if $worn.under_lower.name isnot "naked">>
-			slips <<his>> hand beneath your $worn.under_lower.name and
+			slips <<his>> hand beneath your $worn.under_lower.name
 		<</if>>
+		and
 		<<if $player.penisExist>>
 			grabs your <<penis>>.
 		<<else>>
@@ -408,7 +408,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 		You grip the edge of the table as you try to remain focused on your task.
 		<br><br>
 		<<if $NPCList[1].skills.security gte 600>>
-			"I'm going to make you cum in front of everyone, and you won't even look me in the eye?" <<he>> says, annoyed.
+			"I'm going to make you cum in front of everyone, and you won't even look me in the eye?" <<He>> says, annoyed.
 			<<set $assaultEnergy -= 5>>
 		<<elseif $NPCList[1].skills.security lte 300>>
 			"I'll be gentle," <<he>> whispers.
@@ -427,7 +427,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 		<<set $agrowth to 100 * $meetingPhase>>
 		The relentless assault is pushing you closer to the edge. <<ggarousal>><<arousal $agrowth>>
 		<br><br>
-		You try to stay focused, but each agonising second makes it harder and harder to concentrate.
+		You try to stay focused, but each agonizing second makes it harder and harder to concentrate.
 		<br><br>
 		<<if $NPCList[1].skills.security gte 600 and !playerChastity()>>
 			"Your <<genitals>> feels like it's ready to burst. Say something!"
@@ -456,7 +456,7 @@ You can't bring yourself to watch the violation, so you turn your attention back
 	<br><br>
 	You fix your clothes before returning your attention to the meeting.
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
+	<<link [[다음|Office Meeting End]]>><</link>>
 <</if>>
 
 :: Office Meeting Molest Help
@@ -467,7 +467,7 @@ The room grows silent as everyone turns and looks at you.
 <br>
 The <<person>> pulls <<his>> hand away.
 <br><br>
-<<link [[Next|Office Meeting Molest Discovered]]>><</link>>
+<<link [[다음|Office Meeting Molest Discovered]]>><</link>>
 
 :: Office Meeting Molest Discovered
 <<effects>><<famesex 5>>
@@ -484,7 +484,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 		Before you can compose yourself, a security guard arrives and drags you out of the meeting room.
 		<br><br>
 		<<endevent>>
-		<<link [[Next|Office Security Escort]]>><</link>>
+		<<link [[다음|Office Security Escort]]>><</link>>
 	<<elseif $NPCList[1].skills.security lte 300>>
 		"This <<girl>> seems to have had some sort of episode," the <<person3>><<person>> says meekly.
 		<br><br>
@@ -507,7 +507,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 		<<loadNPC 0 office_molest>>
 		<<clearNPC office_molest>>
 
-		<<link [[Next|Office Supply Molest]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Office Supply Molest]]>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <<else>>
 	<<tearful>> you point at the <<person3>><<person>>. "It was <<him>>, <<he>> was touching me inappropriately."
@@ -536,7 +536,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 		<br><br>
 		After the tension in the room clears, the meeting continues.
 		<br><br>
-		<<link [[Next|Office Meeting End]]>><</link>>
+		<<link [[다음|Office Meeting End]]>><</link>>
 	<</if>>
 <</if>>
 
@@ -550,7 +550,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 <<if $mAttention gte 10>>
 	Your attempts to get rid of the <<beasttype 0>> has disturbed the meeting. The <<people>> all turn and look at you, angry at all the commotion you are making.
 	<br><br>
-	<<link [[Next|Office Meeting Pet Discovered]]>><</link>>
+	<<link [[다음|Office Meeting Pet Discovered]]>><</link>>
 <<elseif $assaultEnergy gte 1>>
 	<<if $worn.lower.name isnot "naked">>
 		<<if $meetingPhase lte 1>>
@@ -609,7 +609,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 			<br>
 			The whole room immediately goes silent as everyone takes notice of your sudden outburst.
 			<br><br>
-			<<link [[Next|Office Meeting Pet Discovered]]>><</link>>
+			<<link [[다음|Office Meeting Pet Discovered]]>><</link>>
 		<<elseif $arousal gte ($arousalmax / 5) * 4>>
 			You bite down onto one hand, trying to hold back your moans as you use the other to bat at the <<beasttype 0>> still probing your soaking <<genitals>> with <<bhis 0>> tongue.
 			<br>
@@ -631,9 +631,9 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 			"Pl-please st-stop," you moan at the <<beasttype 0>> as <<bhis 0>> long tongue continues to work your bare <<genitals>>.
 			<br>
 			<<if $player.penisExist>>
-				The <<beasttype 0>> ignores your pleas, savouring the precum starting to form on the tip of your <<penis>>.
+				The <<beasttype 0>> ignores your pleas, savouring the precum starting to form on the tip of your <<penis>>
 				<<if $player.vaginaExist>>
-					The fluids from your <<pussy>> begin to pool around your <<bottom>> as <<bhe 0>> continues to assault your <<penis>>.
+					The fluids from your <<pussy>> begin to pool around your <<bottom>> as <<bhe 0>> continues to assault your <<penis>>
 				<</if>>
 			<<else>>
 				The <<beasttype 0>> continues to tongue your <<pussy>>. Your thighs are soaked as your juices mingle with <<bhis 0>> saliva.
@@ -652,7 +652,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 <<else>>
 	The <<beasttype 0>> seems to have gotten bored and walks back over to <<bhis 0>> master, leaving you in peace.
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
+	<<link [[다음|Office Meeting End]]>><</link>>
 <</if>>
 
 :: Office Meeting Pet Ignore
@@ -680,7 +680,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 			<<set $meetingPhase to 0>>
 		<</if>>
 	<<elseif $worn.under_lower.name isnot "naked">>
-		You try to ignore the <<beasttype 0>> and focus on the meeting, but it's more difficult now that <<bhe 0>> is tugging on your $worn.under_lower.name.
+		You try to ignore the <<beasttype 0>> and focus on the meeting, but it's more diffcult now that <<bhe 0>> is tugging on your $worn.under_lower.name.
 		<br>
 		<<if $meetingPhase lte 1>>
 			The <<beasttype 0>> gently pulls your $worn.under_lower.name down to your knees, exposing your <<genitals>>.
@@ -710,7 +710,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 			<br>
 			The whole room immediately goes silent as everyone takes notice of your sudden outburst.
 			<br><br>
-			<<link [[Next|Office Meeting Pet Discovered]]>><</link>>
+			<<link [[다음|Office Meeting Pet Discovered]]>><</link>>
 		<<elseif $arousal gte ($arousalmax / 5) * 4>>
 			You bite down onto one hand, attempting to hold back your moans as you try to continue taking notes with the other.
 			<br>
@@ -732,9 +732,9 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 			Your writing slows as you breathe heavily, trying to ignore the <<beasttype 0>> as <<bhis 0>> long tongue continues to work your bare <<genitals>>.
 			<br>
 			<<if $player.penisExist>>
-				The <<beasttype 0>> savours the precum starting to form on the tip of your <<penis>>.
+				The <<beasttype 0>> savours the precum starting to form on the tip of your <<penis>>
 				<<if $player.vaginaExist>>
-					The fluids from your <<pussy>> begin to pool around your <<bottom>> as <<bhe 0>> continues to assault your <<penis>>.
+					The fluids from your <<pussy>> begin to pool around your <<bottom>> as <<bhe 0>> continues to assault your <<penis>>
 				<</if>>
 			<<else>>
 				The <<beasttype 0>> continues to tongue your <<pussy>>. Your thighs are soaked as your juices mingle with <<bhis 0>> saliva.
@@ -751,7 +751,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 <<else>>
 	The <<beasttype 0>> seems to have gotten bored and walks back over to <<bhis 0>> master, leaving you in peace.
 	<br><br>
-	<<link [[Next|Office Meeting End]]>><</link>>
+	<<link [[다음|Office Meeting End]]>><</link>>
 <</if>>
 
 :: Office Meeting Pet Help
@@ -760,7 +760,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. "What is going on
 <br>
 The room grows silent as everyone turns and looks at you.
 <br><br>
-<<link [[Next|Office Meeting Pet Discovered]]>><</link>>
+<<link [[다음|Office Meeting Pet Discovered]]>><</link>>
 
 :: Office Meeting Pet Discovered
 <<effects>>
@@ -782,7 +782,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. The <<beasttype 0
 	Before you can compose yourself, a security guard arrives and drags you out of the meeting room.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Office Security Escort]]>><</link>>
+	<<link [[다음|Office Security Escort]]>><</link>>
 <<elseif $worn.lower.name is "naked">>
 	You frantically attempt to cover your <<lewdness>>, but everyone gets a good look at you as the <<person>> pulls you to your feet.
 	<br>
@@ -797,7 +797,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. The <<beasttype 0
 	You do your best to cover your <<lewdness>> as <<he>> closes and locks the door behind you.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Office Streak]]>><</link>>
+	<<link [[다음|Office Streak]]>><</link>>
 <<else>>
 	You frantically fix your $worn.lower.name as the <<person>> approaches you.
 	<br>
@@ -855,9 +855,9 @@ The <<person2>><<person>> storms over to you in a fit of rage. The <<beasttype 0
 :: Widgets Office Meeting [widget]
 <<widget "meetingmolestactions">>
 	<br><br>
-	<<link [[Resist|Office Meeting Molest Resist]]>><<def 1>><</link>><<defianttext>><<gsuspicion>>
+	<<link [[반항한다|Office Meeting Molest Resist]]>><<def 1>><</link>><<defianttext>><<gsuspicion>>
 	<br>
-	<<link [[Ignore|Office Meeting Molest Ignore]]>><<stress 1>><<sub 1>><</link>><<submissivetext>><<gstress>><<lsuspicion>>
+	<<link [[무시한다|Office Meeting Molest Ignore]]>><<stress 1>><<sub 1>><</link>><<submissivetext>><<gstress>><<lsuspicion>>
 	<br>
 	<<link [[Yell for help |Office Meeting Molest Help]]>><</link>><<gggsuspicion>>
 <</widget>>
@@ -866,7 +866,7 @@ The <<person2>><<person>> storms over to you in a fit of rage. The <<beasttype 0
 	<br><br>
 	<<link [[Shoo|Office Meeting Pet Shoo]]>><<def 1>><</link>><<defianttext>><<gsuspicion>>
 	<br>
-	<<link [[Ignore|Office Meeting Pet Ignore]]>><<stress 1>><<sub 1>><</link>><<submissivetext>><<gstress>><<lsuspicion>>
+	<<link [[무시한다|Office Meeting Pet Ignore]]>><<stress 1>><<sub 1>><</link>><<submissivetext>><<gstress>><<lsuspicion>>
 	<br>
 	<<link [[Yell for help|Office Meeting Pet Help]]>><</link>><<gggsuspicion>>
 <</widget>>

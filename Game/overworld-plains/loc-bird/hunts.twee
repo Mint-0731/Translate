@@ -6,9 +6,9 @@
 <<set $bird.timer to random(30, 60)>>
 <<set $bird.state to "hunting">>
 <<if $birdPerch>>
-	<<link [[Next|Bird Tower Perch]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower Perch]]>><<endevent>><</link>>
 <<else>>
-	<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <</if>>
 <<unset $birdPerch>>
 <br>
@@ -44,7 +44,7 @@
 	<<if !$daily.birdHuntAsked>>
 		<<set $daily.birdHuntAsked to 1>>
 		<<if $monster is 1>>
-			<<bHe>> looks at you for a moment. "No. <<Wife>> is not ready yet." Before you can ask why, <<bhe>> flaps <<bhis>> wings for emphasis. "Cannot carry you for the hunt. When <<wife>> is ready, we can go together."
+			<<bHe>> looks at you for a moment. "No. <<Wife>> is not ready yet." Before you can ask why, <<bhe>> flaps <<bhis>> wings for emphasis. "Can not carry you for the hunt. When <<wife>> is ready, we can go together."
 		<<else>>
 			<<bHe>> looks at you for a moment. <<bHe>> flaps <<bhis>> wings at you and shakes <<bhis>> head. <<bHe>> seems to think you're not ready. <span class="blue">You'll need to learn to fly first.</span>
 		<</if>>
@@ -62,7 +62,7 @@
 	<</if>>
 	<br><br>
 
-	<<link [[Next|Bird Tower No Hunt]]>><</link>>
+	<<link [[다음|Bird Tower No Hunt]]>><</link>>
 	<br>
 <<elseif C.npc["Great Hawk"].love lte 25>>
 	<!-- Love too low -->
@@ -74,7 +74,7 @@
 	<span class="blue"><<bHe>> might let you join when <<bhe>> trusts you more.</span>
 	<br><br>
 
-	<<link [[Next|Bird Tower No Hunt]]>><</link>>
+	<<link [[다음|Bird Tower No Hunt]]>><</link>>
 	<br>
 <<elseif playerIsPregnant() and getPregnancyObject().fetus[0].type is "hawk" and playerBellyVisible() and talkedAboutPregnancy("pc","Great Hawk") and playerBellySize() gte 15>>
 	<!-- TOO PREGGY -->
@@ -86,7 +86,7 @@
 	<span class="blue"><<bHe>> might let you join after you've laid your eggs.</span>
 	<br><br>
 
-	<<link [[Next|Bird Tower No Hunt]]>><</link>>
+	<<link [[다음|Bird Tower No Hunt]]>><</link>>
 	<br>
 <<elseif $bird.hunts.unlocked is false>>
 	<!-- First hunt, can't happen during poor flying weather -->
@@ -98,7 +98,7 @@
 		<</if>>
 		<br><br>
 
-		<<link [[Next|Bird Tower No Hunt]]>><</link>>
+		<<link [[다음|Bird Tower No Hunt]]>><</link>>
 		<br>
 	<<else>>
 		<<if $monster is 1>>
@@ -119,7 +119,7 @@
 		<</if>>
 		<br><br>
 
-		<<link [[Next (0:30)|Bird Hunt Intro]]>><<pass 30>><<unset $birdPerch>><</link>>
+		<<link [[다음 (0:30)|Bird Hunt Intro]]>><<pass 30>><<unset $birdPerch>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -182,7 +182,7 @@ It struggles in your hands. You manage to pick up wind and soar to the sky. As s
 <</if>>
 <br><br>
 
-<<link [[Next (0:30)|Bird Hunt Intro 3]]>><<pass 30>><</link>>
+<<link [[다음 (0:30)|Bird Hunt Intro 3]]>><<pass 30>><</link>>
 <br>
 
 :: Bird Hunt Intro 3
@@ -250,7 +250,7 @@ You return your attention to your catch.
 <<set $bird.timer to 90>>
 <<set $dateCount.Total++>><<set $dateCount.GreatHawkHunts++>>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Intro No Eat
@@ -269,7 +269,7 @@ You place your lurker in front of the <<beasttype>>.
 <<set $bird.timer to 90>>
 <<set $dateCount.Total++>><<set $dateCount.GreatHawkHunts++>>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 
@@ -289,21 +289,15 @@ You stand on the edge of the perch, spreading your wings. You feel for the wind 
 	<</if>>
 	<br><br>
 
-	<<link [[Step away|Bird Tower Perch]]>><<endevent>><</link>>
+	<<link [[물러난다|Bird Tower Perch]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<flight_time_check 30 "silent">>
-	<<if pcAreArmsBound("both")>>
-		<span class="red">Both of your arms are bound</span>, so you are unable to hunt alone.
-	<<else>>
-		<<link [[Hunt alone (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Start Alone]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<unset $birdPerch>><<bird_pass _flightTime>><</link>><<print _fatigueText>>
-	<</if>>
+	<<link [[Hunt alone (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Start Alone]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<unset $birdPerch>><<bird_pass _flightTime>><</link>><<print _fatigueText>>
 	<br>
 	<<if ($bird.activity is "sing" or $bird.activity is "groom") and $bird.state is "home">>
 		<<if $bird.injured gt 1>>
 			<span class="red">Your spouse won't be able to hunt with you until <<bhis>> wing heals.</span>
-		<<elseif pcAreArmsBound("both")>>
-			<span class="red">Both of your arms are bound</span>, so you are unable to hunt together.
 		<<else>>
 			<<link [[Hunt together|Bird Hunt Start Ask]]>><<npcincr "Great Hawk" dom 1>><</link>><<gdom>>
 		<</if>>
@@ -315,9 +309,9 @@ You stand on the edge of the perch, spreading your wings. You feel for the wind 
 			<br>
 		<<elseif $bird.hunts.estate is "scouting">>
 			<<if Time.dayState is "night">>
-				<span class="red">It's too dark to scout the estate. You'll have to wait until the sun comes up.</span>
+				<span class="red">It's too dark to scout the estate, you'll have to wait until the sun comes up.</span>
 			<<elseif Time.hour gte 18>>
-				<span class="red">It'll be too dark to scout the estate soon. You'll have to wait until the sun comes up again.</span>
+				<span class="red">It'll be too dark to scout the estate soon, you'll have to wait until the sun comes up again.</span>
 			<<elseif Weather.precipitation isnot "none" or Weather.isOvercast>>
 				<span class="red">The weather isn't clear enough to scout the estate.</span>
 			<<else>>
@@ -335,7 +329,7 @@ You stand on the edge of the perch, spreading your wings. You feel for the wind 
 			<br>
 		<</if>>
 	<</if>>
-	<<link [[Step away|Bird Tower Perch]]>><<endevent>><</link>>
+	<<link [[물러난다|Bird Tower Perch]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
@@ -362,7 +356,7 @@ You stand on the edge of the perch, spreading your wings. You feel for the wind 
 You stand on the edge of the perch, spreading your wings. You feel for the wind while looking out to the moor. Your focus sharpens. You spread your wings and leap from the tower.
 <br><br>
 
-<<link [[Next|Bird Hunt Goal]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Goal]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Start Ask
@@ -425,7 +419,7 @@ You turn to the <<beasttype>>.
 <<else>>
 	<<link [[Hunt alone (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Start Alone]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<unset $birdPerch>><<bird_pass _flightTime>><</link>><<print _fatigueText>>
 	<br>
-	<<link [[Step away|Bird Tower Perch]]>><<endevent>><</link>>
+	<<link [[물러난다|Bird Tower Perch]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
@@ -460,7 +454,7 @@ You turn to the <<beasttype>>.
 You spread your wings and leap from the tower.
 <br><br>
 
-<<link [[Next|Bird Hunt Goal]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Goal]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Goal
@@ -554,7 +548,7 @@ What will you hunt for?
 	<<bird_loot_select>>
 	<br><br>
 
-	<<link [[Next (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Event]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<bird_pass _flightTime>><<endevent>><</link>><<print _fatigueText>>
+	<<link [[다음 (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Event]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<bird_pass _flightTime>><<endevent>><</link>><<print _fatigueText>>
 	<br>
 <<else>>
 	<<if $bird.hunts.duo is true>>
@@ -623,7 +617,7 @@ What will you hunt for?
 		You feel something grab you mid-air, and your ears pop as you begin to ascend again.
 		<br><br>
 
-		<<link [[Next (?:??)|Bird Hunt Passout]]>><<bird_pass _returnTime>><</link>>
+		<<link [[다음 (?:??)|Bird Hunt Passout]]>><<bird_pass _returnTime>><</link>>
 		<br>
 	<</if>>
 <<elseif _distanceTotal is 0>>
@@ -641,7 +635,7 @@ What will you hunt for?
 		<<set $phase to 2>>
 		<<flight_hunt_options>>
 	<<elseif $daily.huntRemyBurnt>>
-		The smouldering remains of an encampment sit below you. As cathartic as the sight is, you won't find anything more here today.
+		The smoldering remains of an encampent sit below you. As cathartic as the sight is, you won't find anything more here today.
 		<br><br>
 
 		<<endevent>>
@@ -713,7 +707,7 @@ What will you hunt for?
 		<<if $daily.emptyCamp>>
 			You're above the trashed campsite.
 		<<else>>
-			You see a big open clearing with a smouldering firepit in the middle. Litter and other items lie scattered around everywhere. Looks like some people were hanging out here. It's possible they left behind something useful to you.
+			You see a big open clearing with a smoldering firepit in the middle. Litter and other items lie scattered around everywhere. Looks like some people were hanging out here. It's possible they left behind something useful to you.
 		<</if>>
 		<br><br>
 
@@ -758,7 +752,7 @@ What will you hunt for?
 								<<case "dawn">>The morning sun kisses the horizon, making you feel more alert. <<stress -6>><<lstress>>
 								<<case "day">>You take a moment to relish in the sun's warmth as you glide. <<stress -6>><<lstress>>
 								<<case "dusk">>The setting sun casts striking shadows across the moor. <<stress -6>><<lstress>>
-								<<case "night">>The moor is dark, and seems strangely peaceful from up here. <<stress -6>><<lstress>>
+								<<case "night">>The moor is dark, and seems strangely peaceful from up here.  <<stress -6>><<lstress>>
 							<</switch>>
 						<<else>>
 							A strong gust of wind washes over you, allowing you to glide in place for a few minutes. <<stress -6>><<lstress>>
@@ -782,7 +776,7 @@ What will you hunt for?
 
 		<<link [[Search the area (0:05)|Bird Hunt Camp]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -792,7 +786,7 @@ What will you hunt for?
 
 		<<link [[Land (0:05)|Bird Hunt Dead Tree]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -805,7 +799,7 @@ What will you hunt for?
 
 		<<link [[Land (0:05)|Bird Hunt Sticks]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -819,7 +813,7 @@ What will you hunt for?
 
 		<<link [[Land (0:05)|Bird Hunt Leaves]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -829,7 +823,7 @@ What will you hunt for?
 
 		<<link [[Land (0:05)|Bird Hunt Underbrush]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -839,7 +833,7 @@ What will you hunt for?
 
 		<<link [[Land (0:05)|Bird Hunt Flowers]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -850,7 +844,7 @@ What will you hunt for?
 
 			<<link [[Take the tarp (0:05)|Bird Hunt Tarp]]>><<bird_pass 5>><</link>>
 			<br>
-			<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+			<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 			<br>
 		<</addinlineevent>>
 	<</if>>
@@ -875,7 +869,7 @@ What will you hunt for?
 			<<link [[Hunt them (0:05)|Bird Hunt Lurkers Alone]]>><<bird_pass 5>><</link>>
 			<br>
 		<</if>>
-		<<link [[Ignore them|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -885,7 +879,7 @@ What will you hunt for?
 
 		<<link [[Hunt it (0:05)|Bird Hunt Lurkers Few]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore it|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -893,9 +887,9 @@ What will you hunt for?
 		A shiny glint catches your eye amidst the mire.
 		<br><br>
 
-		<<link [[Investigate (0:05)|Bird Hunt Shiny]]>><<bird_pass 5>><</link>>
+		<<link [[조사한다 (0:05)|Bird Hunt Shiny]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore it|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -903,9 +897,9 @@ What will you hunt for?
 		You notice a glimmer in the depths of a pond. There could be something of interest beneath the water's surface.
 		<br><br>
 
-		<<link [[Investigate (0:05)|Bird Hunt Pond Dive]]>><<bird_pass 5>><</link>>
+		<<link [[조사한다 (0:05)|Bird Hunt Pond Dive]]>><<bird_pass 5>><</link>>
 		<br>
-		<<link [[Ignore it|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -913,7 +907,7 @@ What will you hunt for?
 		<<rng 2>><<set _beastGen to ($rng is 1 ? "cat" : "fox")>><<if _beastGen is "cat">><<beastNEWinit 1 cat>><<else>><<beastNEWinit 1 fox>><</if>>
 		You spot a lone <<beasttype>> below.
 		<<rng 100>>
-		<<if $rng gte 61>>
+		<<if $rng gte 60>>
 			<<set $phase to 1>>
 			<<bHes>> holding something<<if $monster isnot 1>> in <<bhis>> mouth<</if>>.
 		<</if>>
@@ -925,7 +919,7 @@ What will you hunt for?
 		<br>
 		<<link [[Screech|Bird Hunt Animal Screech]]>><<stress -3>><</link>><<lstress>>
 		<br>
-		<<link [[Ignore it|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -944,7 +938,7 @@ What will you hunt for?
 		<br>
 		<<link [[Screech|Bird Hunt Animal Screech]]>><<stress -3>><<set $phase to 4>><</link>><<lstress>>
 		<br>
-		<<link [[Ignore it|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -954,7 +948,7 @@ What will you hunt for?
 
 		<<link [[Follow (0:10)|Bird Hunt People Watching]]>><<bird_pass 10>><</link>>
 		<br>
-		<<link [[Ignore|Bird Hunt Ignore]]>><<endevent>><</link>>
+		<<link [[무시한다|Bird Hunt Ignore]]>><<endevent>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -974,7 +968,7 @@ What will you hunt for?
 				Before you can say anything, <<bhe>> starts chasing after it. Not wanting to be left behind, you fly after <<bhim>>.
 				<br><br>
 
-				<<link [[Next|Bird Hunt Plane Chase]]>><</link>>
+				<<link [[다음|Bird Hunt Plane Chase]]>><</link>>
 				<br>
 			<<else>>
 				<<if $monster is 1>>
@@ -989,7 +983,7 @@ What will you hunt for?
 
 				<<link [[Chase the plane (0:20)|Bird Hunt Plane Chase]]>><<bird_pass 20>><<set $phase to 0>><<npcincr "Great Hawk" love 1>><</link>><<glove>>
 				<br>
-				<<link [[Ignore it|Bird Hunt Plane Chase]]>><<set $phase to 1>><<npcincr "Great Hawk" love -1>><</link>><<llove>>
+				<<link [[무시한다|Bird Hunt Plane Chase]]>><<set $phase to 1>><<npcincr "Great Hawk" love -1>><</link>><<llove>>
 				<br>
 			<</if>>
 		<</addinlineevent>>
@@ -1051,7 +1045,7 @@ What will you hunt for?
 			<<your_bird_text "cap">> suddenly looks agitated. Some of <<bhis 1>> plumage stands on end.
 			<br><br>
 			<<if $monster is 1>>
-				"Outsider. Can smell—" A horrible screech cuts <<bhim 1>> off. Something's hurtling towards the two of you. It's in the sky, with you!
+				"Outsider. Can smell-" a horrible screech cuts <<bhim 1>> off. Something's hurtling towards the two of you. It's in the sky, with you!
 			<<else>>
 				<<bHe 1>> lets out a shriek, but not like the ones you've heard before. This one sounds like a warning, or perhaps a challenge. <<bHe>> gets an answer immediately, as you hear another screech nearby. It rapidly gets closer, and you spot something hurtling through the air towards you!
 			<</if>>
@@ -1060,7 +1054,7 @@ What will you hunt for?
 			It's big, and you feel its whole weight crash right into you. Your ears ring as it drags you out of the sky. <<ggpain>><<pain 8>>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Trespasser]]>><</link>>
+			<<link [[다음|Bird Hunt Trespasser]]>><</link>>
 			<br>
 		<</addinlineevent>>
 	<</if>>
@@ -1082,7 +1076,7 @@ What will you hunt for?
 			You're swallowed by the sky. Everything fades to red.
 			<br><br>
 
-			<<link [[Next|Bird Hunt Blood]]>><<bird_pass 60>><</link>>
+			<<link [[다음|Bird Hunt Blood]]>><<bird_pass 60>><</link>>
 			<br>
 		<</addinlineevent>>
 	<</if>>
@@ -1102,13 +1096,13 @@ What will you hunt for?
 <</if>>
 <br><br>
 
-<<if $bird.upgrades.tools is 0 and !$bird.hunts.loot.tools and ($rng gte 91 or $dateCount.GreatHawkHunts gte 5)>>
+<<if $bird.upgrades.tools is 0 and !$bird.hunts.loot.tools and ($rng gte 90 or $dateCount.GreatHawkHunts gte 5)>>
 	You notice a toolbox on the ground. You look inside it and find a handsaw, hammer and a chisel. These would be useful for improving the tower.
 	<br><br>
 
 	<<link [[Take the toolbox|Bird Hunt Camp 2]]>><<set $phase to 1>><</link>>
 	<br>
-<<elseif $rng gte 21>>
+<<elseif $rng gte 20>>
 	You notice some firewood was left behind. Most of it has been ruined by the damp atmosphere, but you notice two of the small logs are in good condition.
 	<br><br>
 
@@ -1132,7 +1126,7 @@ What will you hunt for?
 	<<link [[Look for higher quality pieces|Bird Hunt Camp 2]]>><<set $phase to 5>><</link>><<housekeepingdifficulty 1 300>><<ghousekeeping 300>>
 	<br>
 <</if>>
-<<link [[Leave|Bird Hunt Exit]]>><<endevent>><</link>>
+<<link [[떠난다|Bird Hunt Exit]]>><<endevent>><</link>>
 <br>
 
 
@@ -1149,7 +1143,6 @@ What will you hunt for?
 			<</if>>
 		<</if>>
 		<br><br>
-		<<set _prop to "toolbox">>
 
 		<<flight_hunt_get "tools" 1>>
 		<<flight_hunt_return>>
@@ -1162,14 +1155,12 @@ What will you hunt for?
 				<<bHe>> grabs the other log in <<bhis>> talons.
 			<</if>>
 			<br><br>
-			<<set _prop to "wood">>
 
 			<<flight_hunt_get "wood" 2>>
 			<<flight_hunt_return>>
 		<<else>>
 			You take a log. It's heavy, but you should still be able to fly.
 			<br><br>
-			<<set _prop to "wood">>
 
 			<<flight_hunt_get "wood" 1>>
 			<<flight_hunt_return>>
@@ -1178,7 +1169,6 @@ What will you hunt for?
 		<<if $athleticsSuccess>>
 			You grab a log in each hand. It's hard to fly with this much extra weight, <span class="green">but you manage it</span>.
 			<br><br>
-			<<set _prop to "wood">>
 
 			<<flight_hunt_get "wood" 2>>
 			<<flight_hunt_return>>
@@ -1219,7 +1209,7 @@ What will you hunt for?
 	<<if $monster is 1>>
 		"I can help," <<bhe>> says.
 	<<else>>
-		<<your_bird_text "cap">> sees you eyeing the branch and caws.
+		<<your_bird_text "cap">> sees you eying the branch and caws.
 	<</if>>
 	<br><br>
 
@@ -1262,13 +1252,11 @@ What will you hunt for?
 			<</if>>
 			<<flight_hunt_get "wood" 1>> <<flight_hunt_get "sticks" 2>>
 			<br><br>
-			<<set _prop to "wood">>
 
 			<<endevent>>
 			<<flight_hunt_return>>
 		<<else>>
-			<<set _prop to "stick">>
-			You try to climb carefully, but still manage to <span class="red">accidentally put too much weight on a small branch</span>. It cracks beneath your foot, sending you off balance, and you fall. You try to grab onto anything you can to slow the fall, breaking other branches as you go. <<pain 10>><<ggpain>>
+			You try to climb carefully, but still manage to <span class="red">accidentally put too much weight on a small branch</span>. It cracks beneath your foot, sending you off balance , and you fall. You try to grab onto anything you can to slow the fall, breaking other branches as you go. <<pain 10>><<ggpain>>
 			<br><br>
 
 			You brace for impact with the ground, but it's much softer than you expect. You look down, and see that <<your_bird_text>> has caught you.
@@ -1295,12 +1283,10 @@ What will you hunt for?
 			<br><br>
 
 			You carefully climb back down and look it over. The branch itself will be useful, as well as some of the smaller branches on it. <<flight_hunt_get "wood" 1>> <<flight_hunt_get "sticks" 2>>
-			<<set _prop to "wood">>
-
 			<<endevent>>
 			<<flight_hunt_return>>
 		<<else>>
-			You try to climb carefully, but still manage to <span class="red">accidentally put too much weight on a small branch</span>. It cracks beneath your foot, sending you off balance, and you fall. You try to grab onto anything you can to slow the fall, breaking other branches as you go. <<pain 10>><<ggpain>>
+			You try to climb carefully, but still manage to <span class="red">accidentally put too much weight on a small branch</span>. It cracks beneath your foot, sending you off balance , and you fall. You try to grab onto anything you can to slow the fall, breaking other branches as you go. <<pain 10>><<ggpain>>
 			<br><br>
 
 			You crash into the ground, and the wind is knocked out of you. You spend a few moments retching for air. <<pain 5>><<gpain>>
@@ -1308,7 +1294,6 @@ What will you hunt for?
 
 			The tree you were climbing is now bare of anything you could use to climb up again, not that you have the strength to do so anyway. At least one of the branches you broke off could be of use to you. <<flight_hunt_get "sticks" 1>>
 			<br><br>
-			<<set _prop to "stick">>
 
 			<<endevent>>
 			<<flight_hunt_return>>
@@ -1323,8 +1308,7 @@ What will you hunt for?
 				<<bHe>> looks puzzled at your request, but is willing to oblige.
 			<</if>>
 			<<bHe>> flies up and grips the trunk with <<bhis>> talons. You then begin to shake the bottom while <<bhe>> shakes further up.
-		<<if $rng gte 31>>
-			<<set _prop to "wood">>
+		<<if $rng gte 30>>
 			It takes you many minutes, but eventually the branch snaps off loudly. The <<beasttype>> lets it fall down for you to inspect. The branch itself will be useful, as well as some of the smaller branches on it. <<flight_hunt_get "wood" 1>> <<flight_hunt_get "sticks" 2>>
 			<br><br>
 
@@ -1348,8 +1332,7 @@ What will you hunt for?
 	<<else>>
 		You get a firm grip on the tree and start shaking. It's quite tiring.
 		<br><br>
-		<<if $rng gte 71>>
-			<<set _prop to "wood">>
+		<<if $rng gte 70>>
 			After a few minutes, your dedication pays off. You hear a small snap from the branch, then creaking as it starts to detach from the tree. You dodge the falling debris, then go over to inspect it. The branch itself will be useful, as well as some of the smaller branches on it. <<flight_hunt_get "wood" 1>> <<flight_hunt_get "sticks" 2>>
 			<br><br>
 			<<endevent>>
@@ -1371,7 +1354,7 @@ What will you hunt for?
 	You and your <<beasttype>> land near the branches. Only two of them look suitable for use. The two of you should be able to carry them without any trouble.
 	<br><br>
 
-	<<link [[Take them|Bird Hunt Sticks 2]]>><<set $phase to 1>><</link>>
+	<<link [[가져간다|Bird Hunt Sticks 2]]>><<set $phase to 1>><</link>>
 	<br>
 <<else>>
 	You land near the branches and walk over to them.
@@ -1408,7 +1391,6 @@ What will you hunt for?
 <<effects>>
 <<switch $phase>>
 	<<case 1>>
-		<<set _prop to "stick">>
 		You take a branch and instruct the <<beasttype>> to take the other one.
 		<<if $monster is 1>>
 			<<bHe>> looks it over. "<<Wife>> found good sticks for nest," <<bhe>> states, grabbing the other one.
@@ -1420,14 +1402,12 @@ What will you hunt for?
 		<<flight_hunt_get "sticks" 2>>
 		<<flight_hunt_return>>
 	<<case 2>>
-		<<set _prop to "stick">>
 		You grab a branch. Its uneven shape makes it more difficult to carry, but you manage without issue.
 		<br><br>
 
 		<<flight_hunt_get "sticks" 1>>
 		<<flight_hunt_return>>
 	<<case 3>>
-		<<set _prop to "stick">>
 		You take both branches. Their uneven shape makes them hard to carry.
 
 		<<if $athleticsSuccess>>
@@ -1469,7 +1449,7 @@ What will you hunt for?
 		You try to jump aside, <span class="red">but you fail to move in time, and the lurker lands on your face.</span>
 		<br><br>
 
-		<<link [[Next|Bird Hunt Struggle]]>><<set $struggle_start to 1>><</link>>
+		<<link [[다음|Bird Hunt Struggle]]>><<set $struggle_start to 1>><</link>>
 		<br>
 	<<else>>
 		You jump to the side, just barely tumbling out of the way. You flee from the lurker, but don't escape unscathed. <<beastescape>>
@@ -1504,7 +1484,7 @@ What will you hunt for?
 	<<prof net 1>>
 	<br><br>
 
-	<<link [[Next|Bird Hunt Struggle]]>><<handheldon>><<set $struggle_start to 1>><</link>>
+	<<link [[다음|Bird Hunt Struggle]]>><<handheldon>><<set $struggle_start to 1>><</link>>
 	<br>
 <</if>>
 
@@ -1512,7 +1492,7 @@ What will you hunt for?
 <<effects>>
 You stand still, and allow the lurker to latch onto your face. <<deviancy4>>
 
-<<link [[Next|Bird Hunt Struggle]]>><<set $struggle_start to 2>><</link>>
+<<link [[다음|Bird Hunt Struggle]]>><<set $struggle_start to 2>><</link>>
 <br>
 
 :: Bird Hunt Struggle
@@ -1545,10 +1525,10 @@ You stand still, and allow the lurker to latch onto your face. <<deviancy4>>
 <<struggle>>
 
 <<if $struggle.done gte $struggle.number>>
-	<span id="next"><<link [[Next|Bird Hunt Struggle Finish]]>><</link>></span>
+	<span id="next"><<link [[다음|Bird Hunt Struggle Finish]]>><</link>></span>
 	<br>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Struggle]]>><</link>></span>
+	<span id="next"><<link [[다음|Bird Hunt Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -1574,7 +1554,7 @@ You return your attention to the branches. Only two of them look suitable for us
 :: Bird Hunt Leaves
 <<effects>>
 You land near the leaves.
-<<if $rng gte 91>>
+<<if $rng gte 90>>
 	<<if $quicksand gte 5>>
 		You notice a pattern. They didn't just fall here. They were placed by someone. Looking closer, you notice that the ground looks unstable. Quicksand.
 		<br><br>
@@ -1590,7 +1570,7 @@ You land near the leaves.
 
 		You carefully walk around the pit, picking some of the nicer leaves from the surface. Most of them are in good condition.
 		<br><br>
-		<<set _prop to "leaf">>
+
 		<<flight_hunt_get "leaves" 2>>
 		<<flight_hunt_return>>
 	<<else>>
@@ -1606,7 +1586,7 @@ You land near the leaves.
 
 			You carefully cross the pit, picking some of the nicer leaves from the surface. Most of them are in good condition.
 			<br><br>
-			<<set _prop to "leaf">>
+
 			<<flight_hunt_get "leaves" 2>>
 			<<flight_hunt_return>>
 		<<else>>
@@ -1618,20 +1598,19 @@ You land near the leaves.
 			<<quicksand_actions>>
 		<</if>>
 	<</if>>
-<<elseif $rng gte 21>>
+<<elseif $rng gte 20>>
 	Now that you're closer, you see that many of them are torn or eaten through. There's still some good ones left.
 	<br><br>
 
 	You take what you can and leave.
 	<br><br>
-	<<set _prop to "leaf">>
+
 	<<flight_hunt_get "leaves" 1>>
 	<<flight_hunt_return>>
 <<else>>
-
 	Now that you're closer, you see that most of the leaves are in good condition. You take them.
 	<br><br>
-	<<set _prop to "leaf">>
+
 	<<flight_hunt_get "leaves" 2>>
 	<<flight_hunt_return>>
 <</if>>
@@ -1640,24 +1619,29 @@ You land near the leaves.
 <<effects>>
 Having escaped the sand, you carefully pick leaves from the surface. Most of them are in good condition. You should be able to get a lot of usable ones.
 <br><br>
-<<set _prop to "leaf">>
+
 <<flight_hunt_get "leaves" 3>>
 <<flight_hunt_return>>
 
 :: Bird Hunt Quicksand Rescue
 <<set $outside to 1>><<effects>>
 
-The <<person2>><<person>> helps you to your feet, and
+The <<person2>><<person>> helps you to your feet,
 
 <<if $exposed gte 1>>
-	blushes when <<he>> sees your state of dress. <<covered>> <<He>> offers you some towels.
+	and blushes when <<he>> sees your state of dress. <<covered>> <<He>> offers you some towels.
 	<<towelup>>
 <<else>>
-	offers you a towel to wipe off the sand.
+	and offers a towel to wipe off the sand.
 <</if>>
 <br><br>
 
-"You shouldn't wander the moor alone," <<he>> says. "Not this deep<<if Time.dayState is "night">>, and especially not at night<</if>>."
+"You shouldn't wander the moor alone," <<he>> says.
+<<if Time.dayState is "night">>
+	"Not this deep, and especially not at night."
+<<else>>
+	"Not this deep."
+<</if>>
 <br><br>
 
 <<person1>>"We can help you back to civilisation," the <<person>> adds. "If you like."
@@ -1687,16 +1671,16 @@ You land near the dying plants. They look fragile. You'll have to choose which p
 :: Bird Hunt Underbrush 2
 <<effects>>
 <<switch $phase>>
-	<<case 0>>You focus on larger pieces of wood on small dead trees. <<set _prop to "wood">><<flight_hunt_get "wood" 1>>
-	<<case 1>>You snap off branches from the dead bushes and small trees. <<set _prop to "stick">><<flight_hunt_get "sticks" 2>>
-	<<case 2>>You pluck away the few living leaves.<<set _prop to "leaf">><<flight_hunt_get "leaves" 2>>
+	<<case 0>>You focus on larger pieces of wood on small dead trees. <<flight_hunt_get "wood" 1>>
+	<<case 1>>You snap off branches from the dead bushes and small trees. <<flight_hunt_get "sticks" 2>>
+	<<case 2>>You pluck away the few living leaves. <<flight_hunt_get "leaves" 2>>
 <</switch>>
 <br><br>
 
-<<if dangerEvent(1, 9000)>>
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9000 - $allure)>>
 	<<endevent>>
-	<<wearProp _prop>>
-	<<if $rng gte 51>><<beastNEWinit 1 fox>><<else>><<beastNEWinit 1 cat>><</if>>
+	<<if $rng gte 50>><<beastNEWinit 1 fox>><<else>><<beastNEWinit 1 cat>><</if>>
 	You hear a low growl from inside the tangle. Two glowing eyes stare at you.
 	<<if $bird.hunts.duo is true>>
 		They flick between you and your spouse, before slowly backing away. <<stress 12>><<ggstress>>
@@ -1708,7 +1692,7 @@ You land near the dying plants. They look fragile. You'll have to choose which p
 		<<if $bestialitydisable is "f">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Underbrush Rape]]>><<handheldon>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Bird Hunt Underbrush Rape]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<<else>>
 			You take flight to escape. <<beastescape>>
@@ -1755,9 +1739,9 @@ You land near the dying plants. They look fragile. You'll have to choose which p
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Underbrush Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Underbrush Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Underbrush Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Underbrush Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Underbrush Rape Finish
@@ -1769,18 +1753,26 @@ You land near the dying plants. They look fragile. You'll have to choose which p
 	<br><br>
 
 	<<tearful>> you rise to your feet.
+	<<clotheson>>
+	<<endcombat>>
+
+	<<flight_hunt_return>>
 <<elseif $enemyhealth lte 0>>
 	<<bHe>> rolls away from you, and flees into the underbrush.
 	<br><br>
 
 	<<tearful>> you gather yourself.
+	<<clotheson>>
+	<<endcombat>>
+
+	<<flight_hunt_return>>
 <<else>>
 	The <<beasttype>> turns away from you and slinks into the moor.
-<</if>>
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<flight_hunt_return>>
+	<<flight_hunt_return>>
+<</if>>
 
 :: Bird Hunt Flowers
 <<effects>>
@@ -1791,7 +1783,7 @@ You land amidst the flowers.
 <</if>>
 <br><br>
 
-<<if $rng gte 81>>
+<<if $rng gte 80>>
 	<<if $plants_known.includes("strange_flower")>>
 		<span class="purple">You recognise them.</span> Strange flowers.
 	<<else>>
@@ -1815,7 +1807,7 @@ You land amidst the flowers.
 		<<link [[Take some (0:05)|Bird Hunt Flowers Take]]>><<bird_pass 5>><<drugs 50>><</link>><<gdrugged>><<tendingdifficulty 600 900>>
 		<br>
 	<</if>>
-	<<link [[Leave|Bird Hunt Flowers Leave]]>><<set $phase to 2>><</link>>
+	<<link [[떠난다|Bird Hunt Flowers Leave]]>><<set $phase to 2>><</link>>
 	<br>
 <<else>>
 	There's nothing particularly useful here, but it's certainly pretty.
@@ -1831,7 +1823,7 @@ You land amidst the flowers.
 		<<link [[Make yourself a crown of flowers (0:25)|Bird Hunt Flowers Relax]]>><<set $phase to 3>><<bird_pass 25>><</link>><<tendingdifficulty 1 200>>
 		<br>
 	<</if>>
-	<<link [[Leave|Bird Hunt Flowers Leave]]>><</link>>
+	<<link [[떠난다|Bird Hunt Flowers Leave]]>><</link>>
 	<br>
 <</if>>
 
@@ -1839,11 +1831,11 @@ You land amidst the flowers.
 <<effects>>
 <<switch $phase>>
 	<<case 1>>
-		You lie back in the flowers.
+		You lay back in the flowers.
 		<<if $bird.hunts.duo>>
 			<<your_bird_text "cap">> looks down at you curiously, before
 			<<if $monster is 1>>
-				lying on <<bhis>> back next to you.
+				laying on <<bhis>> back next to you.
 			<<else>>
 				sitting down next to you.
 			<</if>>
@@ -1929,7 +1921,7 @@ You land amidst the flowers.
 
 		<<flight_hunt_return>>
 	<<case 4>>
-		You lie back in the strange flowers. Your head spins.
+		You lay back in the strange flowers. Your head spins.
 		<<if $bird.hunts.duo is true>>
 			<<your_bird_text "cap">> snuggles up next to you, gripping onto you tightly.
 			<br><br>
@@ -1945,7 +1937,7 @@ You land amidst the flowers.
 			<span class="red"><<bHe>> pushes you to the ground.</span>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Flowers Sex]]>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Bird Hunt Flowers Sex]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<<else>>
 			Eventually, you start to feel nauseous. You pull yourself from the flower patch and take some time to recover before leaving.
@@ -1959,11 +1951,10 @@ You land amidst the flowers.
 :: Bird Hunt Flowers Take
 <<effects>>
 <<if $tendingSuccess>>
-	<<wearProp "strange flower">>
 	You're careful not to disturb the flowers too much, and cover your nose and mouth to minimise your exposure. <<tending_pick strange_flower 5 15>>
 	<br><br>
 
-	<<link [[Leave|Bird Hunt Flowers Leave]]>><<handheldon>><<set $phase to 2>><</link>>
+	<<link [[떠난다|Bird Hunt Flowers Leave]]>><<set $phase to 2>><</link>>
 	<br>
 <<else>>
 	You attempt to pick some of the flowers, but your head is spinning too much. Each flower you disturb makes the overpowering sweet smell stronger, which makes you more and more clumsy.<<drugs 50>><<gdrugged>>
@@ -1981,7 +1972,7 @@ You land amidst the flowers.
 		In an instant, <<bhe>> beats <<bhis>> wings, and comes hurtling towards you. <<bHe>> collides with you, pushing you both to the ground.
 		<br><br>
 
-		<<link [[Next|Bird Hunt Flowers Sex]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bird Hunt Flowers Sex]]>><<set $molestationstart to 1>><</link>>
 		<br>
 	<<else>>
 		You pull yourself away from the flower patch before it's too late, and take some time to recover. It would be too dangerous to fly without getting your bearings first.
@@ -2019,9 +2010,9 @@ You land amidst the flowers.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Flowers Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Flowers Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Flowers Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Flowers Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Flowers Sex Finish
@@ -2104,7 +2095,6 @@ It's large and unwieldy.
 	<</if>>
 <</if>>
 <br><br>
-<<set _prop to "tarp">>
 <<flight_hunt_get "tarp" 1>>
 <<flight_hunt_return>>
 
@@ -2123,7 +2113,6 @@ You start to dive. There's one isolated from the others, and two more that are c
 You prepare to grab the isolated lurker. You wait for the right moment before quickening your dive.
 <br><br>
 
-<<dancedifficulty 1 600 true>>
 <<if $danceSuccess>>
 	With grace, <span class="green">you smoothly grab it</span> and ascend back to the skies. The lurker is too stunned to even struggle.
 	<<flight_hunt_get "lurkers" 1>>
@@ -2140,7 +2129,6 @@ You prepare to grab the isolated lurker. You wait for the right moment before qu
 You arrest your dive and use the momentum to circle the group, looking for the perfect angle to grab two at once. You see an opening, and dive again.
 <br><br>
 
-<<dancedifficulty 300 1200 true>>
 <<if $danceSuccess>>
 	With impressive dexterity, <span class="green">you manage to snatch both of them</span>. They wriggle around in your arms, but soon fall limp.
 	<br><br>
@@ -2155,7 +2143,7 @@ You arrest your dive and use the momentum to circle the group, looking for the p
 		The first lurker squirms in your grasp as the second pounces at you!
 		<br><br>
 
-		<<link [[Next|Bird Hunt Lurkers Alone Struggle]]>><<set $struggle_start to 1>><</link>>
+		<<link [[다음|Bird Hunt Lurkers Alone Struggle]]>><<set $struggle_start to 1>><</link>>
 		<br>
 	<<else>>
 		You drop your catch and flee from the lurkers, but don't escape unscathed. <<beastescape>>
@@ -2182,7 +2170,7 @@ You arrest your dive and use the momentum to circle the group, looking for the p
 	<<molested>>
 	<<set $struggle.mouth.creature to "lurker">>
 	<<set $mouthuse to "struggle">><<set $mouthstate to "struggle">>
-	<<set $rightarm to "struggle">><<set $rightarmstate to "mouthstruggle">>
+	<<set $rightuse to "struggle">><<set $rightstate to "struggle">>
 	<<set $struggle.enemy[0].location to "mouth">><<set $struggle.mouth.grip to 4>>
 	<<unset $struggle_start>>
 <</if>>
@@ -2190,10 +2178,10 @@ You arrest your dive and use the momentum to circle the group, looking for the p
 <<struggle>>
 
 <<if $struggle.done gte $struggle.number>>
-	<span id="next"><<link [[Next|Bird Hunt Lurkers Alone Struggle Finish]]>><</link>></span>
+	<span id="next"><<link [[다음|Bird Hunt Lurkers Alone Struggle Finish]]>><</link>></span>
 	<br>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Lurkers Alone Struggle]]>><</link>></span>
+	<span id="next"><<link [[다음|Bird Hunt Lurkers Alone Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -2459,7 +2447,7 @@ You wait for the lurker to start resting, then land. Keeping in mind its locatio
 <<effects>>
 You land near it and begin running. The lurker sees you immediately and starts to flee.
 <<if $athleticsSuccess>>
-	<span class="green">You manage to keep up with it.</span> Soon, the creature is within arm's reach. You leap on it, catching it in a tight grip. It struggles for a moment, but soon gives up.
+	<span class="green">You manage to keep up with it.</span> Soon, the creature is within arms reach. You leap on it, catching it in a tight grip. It struggles for a moment, but soon gives up.
 
 	<<if $bird.hunts.duo is true>>
 		<br><br>
@@ -2483,7 +2471,7 @@ You land near it and begin running. The lurker sees you immediately and starts t
 		<span class="red">A gigantic lurker bursts from the darkness, catching you in its mouth.</span>
 		<br><br>
 
-		<<link [[Next|Bird Hunt Giant Lurker Vore]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bird Hunt Giant Lurker Vore]]>><<set $molestationstart to 1>><</link>>
 		<br>
 	<<else>>
 		<span class="red">The lurker is simply too fast.</span> It begins skittering away even faster, and soon you're left behind feeling disappointed.
@@ -2533,13 +2521,13 @@ You land near it and begin running. The lurker sees you immediately and starts t
 <</if>>
 
 <<if $stress gte $stressmax>>
-	<span id="next"><<link [[Next|Bird Hunt Giant Lurker Vore Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Giant Lurker Vore Finish]]>><</link>></span><<nexttext>>
 <<elseif $vorestage lte 0>>
-	<span id="next"><<link [[Next|Bird Hunt Giant Lurker Vore Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Giant Lurker Vore Finish]]>><</link>></span><<nexttext>>
 <<elseif $vorestomach gte 5>>
-	<span id="next"><<link [[Next|Bird Hunt Giant Lurker Vore Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Giant Lurker Vore Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Giant Lurker Vore]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Giant Lurker Vore]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Giant Lurker Vore Finish
@@ -2579,24 +2567,19 @@ You land nearby and begin searching.
 <<rng 7>>
 <<switch $rng>>
 	<<case 1>>
-		<<set _prop to "bullet">>
 		You sift through some tall grass until you find it; a bullet. It looks old. A collector might pay for it.
 		<<flight_hunt_get "valuables" 1 "antique bullet">>
 	<<case 2>>
 		<<set _looted to either("watch", "ring", "necklace", "bracelet")>>
-		<<set _prop to _looted>>
 		You find it in a small puddle. It's a _looted. Someone must have lost it while travelling.
 		<<flight_hunt_get "valuables" 1 _looted>>
 	<<case 3>>
-		<<set _prop to "junk">>
 		You spot it sticking out of a small patch of sand. You dig it up, revealing a piece of a drink can. Worthless, but pleasingly shiny.
 		<<flight_hunt_get "junk" 1>>
 	<<case 4>>
-		<<set _prop to "junk">>
 		You spot it easily in a sunken patch of grass. It's a tin can. Worthless, but pleasingly shiny.
 		<<flight_hunt_get "junk" 1>>
 	<<case 5>>
-		<<set _prop to "junk">>
 		You see it again after a few seconds of searching. It's a tiny pile of metal scrap, worn down by the elements. Worthless, but pleasingly shiny.
 		<<flight_hunt_get "junk" 3>>
 	<<case 6>>
@@ -2710,9 +2693,8 @@ Getting everything would be quite a challenge, though not impossible.
 	You slip into the pond and swim right above where the glimmer is. <<water>> You take a deep breath and dive. The murky water makes it hard to see where you're going.
 	<<if $swimmingSuccess>>
 		<span class="green">You maintain your composure and methodically swim deeper.</span> You reach the source of the shine. You see
-		<<if $rng gte 31>>
+		<<if $rng gte 30>>
 			a bunch of metallic trash, likely the results of littering. You quickly snatch up your prize and swim back up to the surface. <<flight_hunt_get "junk" 2>>
-			<<set _prop to "junk">>
 		<<else>>
 			<<set _looted1 to either("ring", "necklace", "bracelet")>><<set _looted2 to either("ring", "necklace", "bracelet")>>
 			<<if _looted1 is _looted2>>
@@ -2720,7 +2702,6 @@ Getting everything would be quite a challenge, though not impossible.
 			<<else>>
 				a _looted1 and a _looted2, possibly lost by someone. You quickly snatch up your prize and swim back up to the surface. <<flight_hunt_get "valuables" 1 _looted1>><<flight_hunt_get "valuables" 1 _looted2>>
 			<</if>>
-			<<set _prop to either(_looted1, _looted2)>>
 		<</if>>
 		<br><br>
 
@@ -2765,7 +2746,7 @@ Getting everything would be quite a challenge, though not impossible.
 	<<if $swimmingSuccess>>
 		<span class="green">You maintain your composure and methodically swim deeper.</span> You reach the source of the shine.
 		You see
-		<<if $rng gte 31>>
+		<<if $rng gte 30>>
 			a bunch of metallic trash, likely the results of littering. You quickly snatch up your prize and swim back up to the surface. <<flight_hunt_get "junk" 2>>
 		<<else>>
 			<<set _looted1 to either("ring", "necklace", "bracelet")>><<set _looted2 to either("ring", "necklace", "bracelet")>>
@@ -2780,7 +2761,6 @@ Getting everything would be quite a challenge, though not impossible.
 		<<set _looted3 to either("ring", "necklace", "bracelet")>>
 		After grabbing them, you start digging up the buried object. You pull away the sand, revealing <<if _looted3 is _looted1>>another _looted1<<else>>a _looted3<</if>>. <<flight_hunt_get "valuables" 1 _looted3>>
 		<br><br>
-		<<set _prop to _looted3>>
 
 		Swimming with your hands full isn't easy, but anyone watching wouldn't be able to tell. You reach the surface of the water, then swim back to land, satisfied with your finds. <<clotheson>>
 		<<if $bird.hunts.duo is true>>
@@ -2889,7 +2869,7 @@ You fly lower to the ground and spend some time watching the <<beasttype>> from 
 				<<link [[Take the object|Bird Hunt Fox Take]]>><</link>>
 				<br>
 			<</if>>
-			<<if ($bestialitydisable is "f" or $monster is 1) and hasSexStat("deviancy", 3)>>
+			<<if $bestialitydisable is "f" and hasSexStat("deviancy", 3)>>
 				<<link [[Push over|Bird Hunt Fox Sex]]>><<set $sexstart to 1>><</link>><<deviant3>>
 				<br>
 			<</if>>
@@ -2909,7 +2889,7 @@ You fly lower to the ground and spend some time watching the <<beasttype>> from 
 			Immediately, <<bhes 0>> pressed to the ground from above.
 			<<person2>>
 			<<if $monster is 1>>
-				"Poor manners. No way to greet a neighbour." Your <<beasttype 1>> smiles from atop the <<person1>><<beasttypes>> back.
+				"Poor manners. No way to greet a neighbor." Your <<beasttype 1>> smiles from atop the <<person1>><<beasttypes>> back.
 			<<else>>
 				Your <<beasttype 1>> shrieks triumphantly from the <<person1>><<beasttypes>> back.
 			<</if>>
@@ -2946,7 +2926,7 @@ You fly lower to the ground and spend some time watching the <<beasttype>> from 
 				You don't have time to flee before <<bhe>> springs forward.
 				<br><br>
 
-				<<link [[Next|Bird Hunt Fox Sex]]>><<set $molestationstart to 1>><</link>>
+				<<link [[다음|Bird Hunt Fox Sex]]>><<set $molestationstart to 1>><</link>>
 				<br>
 			<<else>>
 				You take to the skies to avoid it, but <<bhe>> gets a few hits on you first. <<beastescape>>
@@ -3011,16 +2991,15 @@ You hold out your hand, motioning for <<bhim>> to give you whatever <<bhes>> hid
 <</if>>
 <<flight_hunt_get_random>>
 <<set $phase to 3>>
-<<wearProp _prop>>
 <br><br>
 
-<<if ($bestialitydisable is "f" or $monster is 1) and hasSexStat("deviancy", 3)>>
+<<if $bestialitydisable is "f" and hasSexStat("deviancy", 3)>>
 	<<link [[Reward|Bird Hunt Fox Sex]]>><<set $sexstart to 1>><</link>><<deviant3>>
 	<br>
 <</if>>
-<<link [[Pet|Bird Hunt Fox Pet]]>><<handheldon>><<stress -3>><</link>><<lstress>>
+<<link [[Pet|Bird Hunt Fox Pet]]>><<stress -3>><</link>><<lstress>>
 <br>
-<<link [[Leave|Bird Hunt Fox Leave]]>><<handheldon>><</link>>
+<<link [[떠난다|Bird Hunt Fox Leave]]>><</link>>
 <br>
 
 :: Bird Hunt Fox Sex
@@ -3052,9 +3031,9 @@ You hold out your hand, motioning for <<bhim>> to give you whatever <<bhes>> hid
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Fox Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Fox Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Fox Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Fox Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Fox Sex Finish
@@ -3175,7 +3154,7 @@ You land a short distance away from the pair.
 You approach them low to the ground, unseen, for a closer look.
 <br><br>
 
-<<if $rng gte 61>>
+<<if $rng gte 60>>
 	<<if $NPCList[0].traits.includes("territorial")>>
 		The larger of the two pounces on the other.
 		<<if $monster is 1>>
@@ -3191,9 +3170,9 @@ You approach them low to the ground, unseen, for a closer look.
 				The larger one huffs, dismounting and freeing the smaller one, who darts away. The winner saunters off, seemingly resuming <<bhis 0>> own interrupted hunt.
 			<</if>>
 		<<else>>
-			<<bHe>> barks and yips at the smaller one,
+			<<bHe>> barks and yipps at the smaller one,
 			<<if $NPCList[1].traits.includes("territorial")>>
-				who rolls out and makes a pounce of their own. They tumble off into the underbrush.
+				who rolls out and makes a punce of their own. They tumble off into the underbrush.
 			<<else>>
 				before releasing <<bhim 1>>. <<bHe 1>> darts off, and the victorious fox saunters away.
 			<</if>>
@@ -3205,14 +3184,14 @@ You approach them low to the ground, unseen, for a closer look.
 			<br>
 			"I saw it first!" the <<beasttype 1>> under <<bhim 0>> barks back. <<bHe 1>> rolls out from under <<bhim 0>> and makes a pounce of <<bhis 1>> own. They chase each other deeper into the moor.
 		<<else>>
-			The two then bark and yip at each other for a moment, before the fight continues. They chase each other deeper into the moor.
+			The two then bark and yipp at each other for a moment, before the fight continues. They chase each other deeper into the moor.
 		<</if>>
 	<</if>>
 	<br><br>
 
-	<<link [[Leave|Bird Hunt Fox Leave]]>><</link>>
+	<<link [[떠난다|Bird Hunt Fox Leave]]>><</link>>
 	<br>
-<<elseif $rng gte 31>>
+<<elseif $rng gte 30>>
 	<<if $NPCList[0].traits.includes("territorial") or $NPCList[1].traits.includes("territorial")>>
 		The larger of the two pounces on the other.
 		<<if $monster is 1>>
@@ -3228,7 +3207,7 @@ You approach them low to the ground, unseen, for a closer look.
 
 	<<link [[Keep watching (0:10)|Bird Hunt Foxes Watch Mate]]>><<bird_pass 10>><</link>><<deviant1>>
 	<br>
-	<<link [[Leave|Bird Hunt Fox Leave]]>><</link>>
+	<<link [[떠난다|Bird Hunt Fox Leave]]>><</link>>
 	<br>
 <<else>>
 	They each get low to the ground, before righting themselves and yelling at each other. One jumps forward, tackling the other and nuzzling <<bhim>>. They're just playing.
@@ -3236,7 +3215,7 @@ You approach them low to the ground, unseen, for a closer look.
 
 	<<link [[Screech|Bird Hunt Animal Screech]]>><<set $phase to 5>><<stress -3>><</link>><<lstress>>
 	<br>
-	<<link [[Leave|Bird Hunt Fox Leave]]>><</link>>
+	<<link [[떠난다|Bird Hunt Fox Leave]]>><</link>>
 	<br>
 <</if>>
 
@@ -3282,29 +3261,29 @@ You watch the couple with interest.
 	<<else>>
 		<<bhis _subF>> pussy.
 	<</if>>
-	<<bHe _subF>> covers <<bhis _subF>> face in embarrassment as <<bhe _subF>> softly moans.
+	<<bHe _subF>> covers <<bhis _subF>> face in embarassment as <<bhe _subF>> softly moans.
 	<br><br>
 
 	<<switch $phase>>
 		<<case 1 2>>
 			<<if $NPCList[_domF].penis isnot "none">>
 				The large <<beasttype _domF>> crawls back up, and gently guides <<bhis _domF>> knotted penis into the smaller <<beasttype _subF>>'s <<if $phase is 1>>pussy<<else>>ass<</if>>.
-				It starts off slow, but before long, the large <<beasttype _domF>> is thrusting into <<bhis _domF>> lover with fervour. It's hard to not get a little exasperated yourself.
+				It starts off slow, but before long, the large <<beasttype _domF>> is thrusting into <<bhis _domF>> lover with fervor. It's hard to not get a little exasperated yourself.
 				<br><br>
 
 				You continue to watch for a long time, their pace still increasing. With a final thrust, you <<if $bird.hunts.duo is true>>and your spouse <</if>>watch the <<beasttype _domF>>'s knot slide in. The <<beasttype _subF>> moans as <<bhes _subF>> filled with warm semen. <<arousal 2000>><<ggarousal>>
 			<<else>>
 				The large <<beasttype _domF>> crawls back up, and gently guides the smaller <<beasttype _subF>>'s knotted penis into <<bhim _domF>>.
-				It starts off slow, but before long, the large <<beasttype _domF>> is riding <<bhis _domF>> lover with fervour. It's hard to not get a little exasperated yourself.
+				It starts off slow, but before long, the large <<beasttype _domF>> is riding <<bhis _domF>> lover with fervor. It's hard to not get a little exasperated yourself.
 				<br><br>
 
-				You continue to watch for a long time, their pace still increasing. With a final thrust, you <<if $bird.hunts.duo is true>>and your spouse <</if>>watch the <<beasttype _subF>>'s knot slide in. They both moan as the <<beasttype _domF>> is filled with warm semen. <<arousal 2000>><<ggarousal>>
+				You continue to watch for a long time, their pace still increasing. With a final thrust, you <<if $bird.hunts.duo is true>>and your spouse <</if>>watch the <<beasttype _subF>>'s knot slide in. They both moan as the <<beasttype _domF>> is filled wih warm semen. <<arousal 2000>><<ggarousal>>
 			<</if>>
 		<<case 3>>
 			The large <<beasttype _domF>> slowly takes the smaller <<beasttype _subF>>'s penis into <<bhis _domF>> mouth, and bobs <<bhis _domF>> head up and down.
 			You <<if $bird.hunts.duo is true>>and your spouse <</if>>watch until the <<beasttype _subF>> moans, and fresh semen escapes the large <<beasttype _domF>>'s mouth.
 		<<case 4>>
-			The large <<beasttype _domF>> slowly inserts <<bhis _domF>> tongue into the smaller <<beasttype _subF>>'s pussy. <<bHe _domF>> intensifies <<bhis _domF>> assault.
+			The large <<beasttype _domF>> slowly inserts <<bhis _domF>> tounge into the smaller <<beasttype _subF>>'s pussy. <<bHe _domF>> intensifies <<bhis _domF>> assault.
 			You <<if $bird.hunts.duo is true>>and your spouse <</if>>watch until the <<beasttype _subF>> moans and bucks <<bhis _subF>> hips.
 	<</switch>>
 <<else>>
@@ -3339,7 +3318,7 @@ They disengage from each other.
 	<br><br>
 <</if>>
 
-<<link [[Leave|Bird Hunt Fox Leave]]>><</link>>
+<<link [[떠난다|Bird Hunt Fox Leave]]>><</link>>
 <br>
 
 :: Bird Hunt People Watching
@@ -3417,7 +3396,7 @@ You <<if $bird.hunts.duo is true>>and your <<beasttype>> <</if>>tail the pair fo
 	It's a shame to see people littering, but at least you can make sure the cans aren't just left out here. After they leave, you land and take the now empty cans. <<flight_hunt_get "junk" 2>>
 	<br><br>
 
-	<<endevent>><<wearProp "junk">>
+	<<endevent>>
 	<<flight_hunt_options>>
 <</addinlineevent>>
 
@@ -3443,7 +3422,7 @@ You <<if $bird.hunts.duo is true>>and your <<beasttype>> <</if>>tail the pair fo
 		<br><br>
 	<</if>>
 
-	<<endevent>><<wearProp "wallet" 0 "empty">>
+	<<endevent>>
 	<<flight_hunt_options>>
 <</addinlineevent>>
 
@@ -3451,7 +3430,7 @@ You <<if $bird.hunts.duo is true>>and your <<beasttype>> <</if>>tail the pair fo
 	You note that they are walking in the rougher parts of the moor, not something most would do willingly. After a few minutes, you notice they're nearing a resting lurker. They both crouch and quietly approach it. The <<person2>><<person>> takes out a net from <<his>> backpack, and closes the distance.
 	<br><br>
 
-	<<if $rng gte 51>>
+	<<if $rng gte 50>>
 		<<He>> hurls the net. The lurker is too fast, barely dodging out of the way. The <<person3>><<person>> tries to cut it off, but the lurker manages to slip away between <<his>> legs.
 		<<if $bird.hunts.duo is true>>
 			<<your_bird_text "cap">>
@@ -3489,11 +3468,9 @@ You <<if $bird.hunts.duo is true>>and your <<beasttype>> <</if>>tail the pair fo
 	<br><br>
 
 	After gathering as much wood as they can, they leave. You land to inspect what's left over.
-	<<if $rng gte 31>>
-		<<set _prop to "stick">>
+	<<if $rng gte 30>>
 		They took almost everything, leaving behind just the undesirable parts. There's still something you can use, but not much. <<flight_hunt_get "sticks" 1>>
 	<<else>>
-		<<set _prop to "stick">>
 		They left behind a lot of the smaller branches. <<flight_hunt_get "sticks" 2>>
 	<</if>>
 	<br><br>
@@ -3529,21 +3506,23 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
-	<<wearProp "rock">>
 	<span class="green">Thinking quickly, you pick up a rock and throw it behind them.</span> The sound is enough to pull their attention. With the <<person>> distracted, you sneak into the tent they came out of.
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+	<</if>>
 	<br><br>
-
-	<<skulduggeryuse>>
 
 	It's mercifully empty of other occupants. There's a lot of ground to cover, but you don't know how much time you have.
 	<br><br>
 
-	<<link [[Steal clothes|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 1>><<crimeUp 10 "thievery">><</link>>
+	<<link [[Steal clothes|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 1>><<crimeUp 10 "thievery">><</link>>
 	<br>
-	<<link [[Steal valuables|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 2>><<crimeUp 10 "thievery">><</link>>
+	<<link [[Steal valuables|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 2>><<crimeUp 10 "thievery">><</link>>
 	<br>
 	<<if $bird.upgrades.tools is 0 and !$bird.hunts.loot.tools>>
-		<<link [[Steal tools|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 3>><<crimeUp 10 "thievery">><</link>>
+		<<link [[Steal tools|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 3>><<crimeUp 10 "thievery">><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -3555,11 +3534,9 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 	Something about <<him>> makes you uneasy.
 	<br><br>
 
-	<<skulduggeryuse>>
-
 	<<link [[Run|Bird Hunt Tent Steal Alone Caught]]>><<set $phase to 1>><<set $phase2 to 1>><</link>><<athleticsdifficulty 100 700>>
 	<br>
-	<<link [[Comply|Bird Hunt Tent Steal Alone Caught]]>><<set $phase to 2>><<set $phase2 to 1>><</link>>
+	<<link [[응한다|Bird Hunt Tent Steal Alone Caught]]>><<set $phase to 2>><<set $phase2 to 1>><</link>>
 	<br>
 <</if>>
 
@@ -3588,14 +3565,14 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 		The <<person>> towers over you. "Since you didn't want to make things easy, we'll do this the hard way."
 		<br><br>
 
-		<<link [[Next|Bird Hunt Tent Steal Alone Rape]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bird Hunt Tent Steal Alone Rape]]>><<set $molestationstart to 1>><</link>>
 		<br>
 	<</if>>
 <<else>>
 	You let the <<person>> approach you. <<He>> quickly drops <<his>> act. "Be good for me now, I'd rather not share you with the others."
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Steal Alone Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Tent Steal Alone Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <</if>>
 
@@ -3619,9 +3596,9 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 <<actionsman>>
 
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Alone Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Alone Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Alone Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Alone Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Tent Steal Alone Rape Finish
@@ -3637,7 +3614,7 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 	<<unset $tentLootAmount>>
 	<<endcombat>>
 
-	<<link [[Next|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
+	<<link [[다음|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	You take the opportunity to flee. Luckily, <<he>> makes no attempt to pursue you.
@@ -3669,8 +3646,8 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 	You continue searching.
 	<br><br>
 <</if>>
+<<set $danger to (random(1, 10000) + ($tentLootAmount * 2000))>>
 <<if $phase is 1>>
-	<<wearProp "rag">>
 	You look around for any spare clothing. You find
 	<<select_random_clothes_limited "upper" "lower" "under_upper" "under_lower" "legs" "hands">>
 	<<if _random_clothes isnot "piece of fabric">>
@@ -3708,27 +3685,27 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 		<<if !_cursedPrevent>>
 			<<if $worn[_random_slot].name isnot "naked">>
 				<<if $bird.upgrades.wardrobe is 1>>
-					<<link [[Wear|Bird Hunt Tent Steal Clothes]]>><<handheldon>><<set $phase to 1>><<flight_hunt_get "clothing" 1 _random_slot _random_index "wear">><</link>>
+					<<link [[Wear|Bird Hunt Tent Steal Clothes]]>><<set $phase to 1>><<flight_hunt_get "clothing" 1 _random_slot _random_index "wear">><</link>>
 					<span class="blue">Your $worn[_random_slot].name will be replaced.</span>
 				<<else>>
-					<<link [[Wear|Bird Hunt Tent Steal Clothes]]>><<handheldon>><<set $phase to 1>><<generalRuined _random_slot>><<flight_hunt_get "clothing" 1 _random_slot _random_index "wear">><<flight_hunt_get "fabric" 1>><</link>>
+					<<link [[Wear|Bird Hunt Tent Steal Clothes]]>><<set $phase to 1>><<generalRuined _random_slot>><<flight_hunt_get "clothing" 1 _random_slot _random_index "wear">><<flight_hunt_get "fabric" 1>><</link>>
 					<span class="blue">Your $worn[_random_slot].name will be scrapped.</span>
 				<</if>>
 			<<else>>
-				<<link [[Wear|Bird Hunt Tent Steal Clothes]]>><<handheldon>><<set $phase to 1>><<flight_hunt_get "clothing" 1 _random_slot _random_index "wear">><</link>>
+				<<link [[Wear|Bird Hunt Tent Steal Clothes]]>><<set $phase to 1>><<flight_hunt_get "clothing" 1 _random_slot _random_index "wear">><</link>>
 			<</if>>
 		<</if>>
 		<br>
-		<<link [[Scrap for cloth|Bird Hunt Tent Steal Clothes]]>><<handheldon>><<set $phase to 2>><<flight_hunt_get "fabric" 1>><</link>>
+		<<link [[Scrap for cloth|Bird Hunt Tent Steal Clothes]]>><<set $phase to 2>><<flight_hunt_get "fabric" 1>><</link>>
 		<br>
 		<<if $bird.upgrades.wardrobe is 1>>
-			<<link [[Steal it|Bird Hunt Tent Steal Clothes]]>><<handheldon>><<set $phase to 3>><<flight_hunt_get "clothing" 1 _random_slot _random_index>><</link>>
+			<<link [[Steal it|Bird Hunt Tent Steal Clothes]]>><<set $phase to 3>><<flight_hunt_get "clothing" 1 _random_slot _random_index>><</link>>
 			<br>
 		<</if>>
 	<<else>>
 		<br><br>
 
-		<<link [[Steal|Bird Hunt Tent Steal Clothes]]>><<handheldon>><<set $phase to 4>><<flight_hunt_get "fabric" 3>><</link>>
+		<<link [[훔친다|Bird Hunt Tent Steal Clothes]]>><<set $phase to 4>><<flight_hunt_get "fabric" 3>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 2>>
@@ -3738,27 +3715,25 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 		<<gspraymax>><<set $spraymax += 1>><<spray 5>>
 		<br><br>
 		<span class="gold">You've gained an additional pepper spray charge.</span>
-		<<wearProp "pepperspray">>
 	<<else>>
 		<<set _looted to either("watch", "ring", "necklace", "bracelet")>>
 		You search the tent for any valuables. You turn over a sleeping bag and find a nice-looking _looted. You take it with you. <<flight_hunt_get "valuables" 1 _looted>>
-		<<wearProp _looted>>
 	<</if>>
 	<br><br>
 
-	<<if dangerEvent(1, 9900 + $tentLootAmount * 2000) and $tentLootAmount gte 2>>
+	<<if $danger gte (9900 - $allure) and $tentLootAmount gte 2>>
 		<<set $daily.huntRemyAlerted to true>><<unset $tentLootAmount>>
 		<span class="red">You hear footsteps.</span> The <<person>> enters the tent and locks eyes with you.
 		<br><br>
 
-		<<link [[Run|Bird Hunt Tent Steal Run]]>><<handheldon>><</link>><<athleticsdifficulty 300 800>>
+		<<link [[Run|Bird Hunt Tent Steal Run]]>><</link>><<athleticsdifficulty 300 800>>
 		<br>
 		<<if $submissive lte 500>>
-			<<link [[Hit|Bird Hunt Tent Steal Hit]]>><<handheldon>><<def 1>><</link>><<physiquedifficulty 8000 16000>><<defianttext>>
+			<<link [[Hit|Bird Hunt Tent Steal Hit]]>><<def 1>><</link>><<physiquedifficulty 8000 16000>><<defianttext>>
 			<br>
 		<</if>>
 		<<if hasSexStat("promiscuity", 2)>>
-			<<link [[Seduce|Bird Hunt Tent Steal Seduce]]>><<handheldon>><</link>><<promiscuous2>>
+			<<link [[유혹한다|Bird Hunt Tent Steal Seduce]]>><</link>><<promiscuous2>>
 			<br>
 		<</if>>
 	<<elseif $bird.hunts.weight gte 3>>
@@ -3766,43 +3741,42 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 		<br><br>
 
 		<<set $skulduggerydifficulty to ($tentLootAmount * 100)>>
-		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><<handheldon>><</link>>
+		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><</link>>
 		<br>
 	<<else>>
 		You could look for more, though you don't know when the <<person>> will return.
 		<br><br>
 
-		<<link [[Steal clothes|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 1>><</link>><<dangerousText>>
+		<<link [[Steal clothes|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 1>><</link>><<dangerousText>>
 		<br>
-		<<link [[Steal valuables|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 2>><</link>><<dangerousText>>
+		<<link [[Steal valuables|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 2>><</link>><<dangerousText>>
 		<br>
 		<<if $bird.upgrades.tools is 0 and !$bird.hunts.loot.tools>>
-			<<link [[Steal tools|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 3>><</link>><<dangerousText>>
+			<<link [[Steal tools|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 3>><</link>><<dangerousText>>
 			<br>
 		<</if>>
 		<<set $skulduggerydifficulty to ($tentLootAmount * 100)>>
-		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><<handheldon>><</link>>
+		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
 	You spot a toolbox amidst their belongings. It's easy to carry, and light enough for you to fly with it.
-	<<wearProp "toolbox">>
 	<br><br>
 
 	<<flight_hunt_get "tools" 1>>
-	<<if dangerEvent(1, 9900 + $tentLootAmount * 2000) and $tentLootAmount gte 2>>
+	<<if $danger gte (9900 - $allure) and $tentLootAmount gte 2>>
 		<<set $daily.huntRemyAlerted to true>><<unset $tentLootAmount>>
 		<span class="red">You hear footsteps.</span> The <<person>> enters the tent and locks eyes with you.
 		<br><br>
 
-		<<link [[Run|Bird Hunt Tent Steal Run]]>><<handheldon>><</link>><<athleticsdifficulty 300 800>>
+		<<link [[Run|Bird Hunt Tent Steal Run]]>><</link>><<athleticsdifficulty 300 800>>
 		<br>
 		<<if $submissive lte 500>>
-			<<link [[Hit|Bird Hunt Tent Steal Hit]]>><<handheldon>><<def 1>><</link>><<physiquedifficulty 8000 16000>><<defianttext>>
+			<<link [[Hit|Bird Hunt Tent Steal Hit]]>><<def 1>><</link>><<physiquedifficulty 8000 16000>><<defianttext>>
 			<br>
 		<</if>>
 		<<if hasSexStat("promiscuity", 2)>>
-			<<link [[Seduce|Bird Hunt Tent Steal Seduce]]>><<handheldon>><</link>><<promiscuous2>>
+			<<link [[유혹한다|Bird Hunt Tent Steal Seduce]]>><</link>><<promiscuous2>>
 			<br>
 		<</if>>
 	<<elseif $bird.hunts.weight gte 3>>
@@ -3810,18 +3784,18 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 		<br><br>
 
 		<<set $skulduggerydifficulty to ($tentLootAmount * 100)>>
-		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><<handheldon>><</link>>
+		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><</link>>
 		<br>
 	<<else>>
 		You could look for more, though you don't know when the <<person>> will return.
 		<br><br>
 
-		<<link [[Steal clothes|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 1>><</link>><<dangerousText>>
+		<<link [[Steal clothes|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 1>><</link>><<dangerousText>>
 		<br>
-		<<link [[Steal valuables|Bird Hunt Tent Steal Alone 2]]>><<handheldon>><<set $phase to 2>><</link>><<dangerousText>>
+		<<link [[Steal valuables|Bird Hunt Tent Steal Alone 2]]>><<set $phase to 2>><</link>><<dangerousText>>
 		<br>
 		<<set $skulduggerydifficulty to ($tentLootAmount * 100)>>
-		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><<handheldon>><</link>>
+		<<link [[Leave with your loot|Bird Hunt Tent Steal Alone Leave]]>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -3836,7 +3810,7 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 <</switch>>
 <br><br>
 
-<<if dangerEvent(1, 9900 + $tentLootAmount * 2000) and $tentLootAmount gte 2>>
+<<if $danger gte (9900 - $allure) and $tentLootAmount gte 2>>
 	<<set $daily.huntRemyAlerted to true>><<unset $tentLootAmount>>
 	<span class="red">You hear footsteps.</span> The <<person>> enters the tent and locks eyes with you.
 	<br><br>
@@ -3848,7 +3822,7 @@ You land away from their tents and stay low. <<if $exposed gte 2>>Your heart pou
 		<br>
 	<</if>>
 	<<if hasSexStat("promiscuity", 2)>>
-		<<link [[Seduce|Bird Hunt Tent Steal Seduce]]>><</link>><<promiscuous2>>
+		<<link [[유혹한다|Bird Hunt Tent Steal Seduce]]>><</link>><<promiscuous2>>
 		<br>
 	<</if>>
 <<elseif $bird.hunts.weight gte 3>>
@@ -3892,7 +3866,7 @@ You run past <<him>>. "Hey! We've got a thief!" You hear stirring and yelling fr
 	The group towers over you.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Steal Group Fight]]>><<set $molestationstart to 2>><</link>>
+	<<link [[다음|Bird Hunt Tent Steal Group Fight]]>><<set $molestationstart to 2>><</link>>
 	<br>
 <</if>>
 
@@ -3914,17 +3888,17 @@ Without thinking, you grab one of the snare rods from the wall and swing it at <
 	<<He>> holds you down, and a group enters the tent. They bear down on you. "Let's teach <<phim>> a lesson."
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Steal Group Fight]]>><<set $fightstart to 2>><</link>>
+	<<link [[다음|Bird Hunt Tent Steal Group Fight]]>><<set $fightstart to 2>><</link>>
 	<br>
 <</if>>
 
 :: Bird Hunt Tent Steal Seduce
 <<effects>>
-<<set _seductionMod to $tentLootAmount or 0>>
-<<set $seductiondifficulty to (5000 + (_seductionMod * 1000))>>
+<<set $seductiondifficulty to (5000 + ($tentLootAmount * 1000))>>
 <<seductioncheck>>
-<<seductionskilluptext>>
-<<seductionskilluse>>
+<br><br>
+
+<<if $seductionskill lt 1000>><span class="gold">You feel more confident in your powers of seduction.</span><br><br><</if>><<seductionskilluse>>
 
 <<if $speech_attitude is "meek">>
 	"I-I'm sorry! I got lost and I saw this camp and I was looking for... I'm sorry! Let... let me make it up to you," you say.
@@ -3939,7 +3913,7 @@ Without thinking, you grab one of the snare rods from the wall and swing it at <
 	<<He>> raises an eyebrow, but eyes you hungrily. "Well, how can I say no to that? With the way ya snuck in, I won't even have to share ya!"
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Steal Seduce Sex]]>><<set $sexstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Tent Steal Seduce Sex]]>><<set $sexstart to 1>><</link>>
 	<br>
 <<else>>
 	<<He>> looks at you with confusion. "What the fuck? Hey, guys! We've got a thief in here!" You hear stirring from the other tents.
@@ -3973,9 +3947,9 @@ Without thinking, you grab one of the snare rods from the wall and swing it at <
 <<actionsman>>
 
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Seduce Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Seduce Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Seduce Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Seduce Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Tent Steal Seduce Sex Finish
@@ -3991,7 +3965,7 @@ Without thinking, you grab one of the snare rods from the wall and swing it at <
 	<<unset $tentLootAmount>>
 	<<endcombat>>
 
-	<<link [[Next|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
+	<<link [[다음|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	"Alright, get the fuck outta here before I come to my senses," <<he>> says. You do so.
@@ -4033,12 +4007,12 @@ You quietly exit the tent. You're almost in the clear.
 		"Oh? What's a <<girl>> like you doing out here?" <<he>> asks.
 	<</if>>
 	<<if $tentLootAmount is 1>>
-		<<He>> slowly looks down at what you're holding. "H-hey, how did you get that?" <<He>> pauses, seemingly recognising what you've stolen. "Why don't... Why don't you just come here for a moment? We can talk this through."
+		<<He>> slowly looks down at what you're holding. "H-hey, how did you get that?" <<he>> pauses, seemingly recognising what you've stolen. "Why don't... Why don't you just come here for a moment? We can talk this through."
 		<br><br>
 
 		<<link [[Run|Bird Hunt Tent Steal Alone Caught]]>><<set $phase to 1>><<set $phase2 to 2>><</link>><<athleticsdifficulty 200 700>>
 		<br>
-		<<link [[Comply|Bird Hunt Tent Steal Alone Caught]]>><<set $phase to 2>><<set $phase2 to 2>><</link>>
+		<<link [[응한다|Bird Hunt Tent Steal Alone Caught]]>><<set $phase to 2>><<set $phase2 to 2>><</link>>
 		<br>
 	<<else>>
 		<<He>> slowly looks down at what you're holding. "Hey! We've got a thief!" <<he>> yells. You hear stirring from the other tents.
@@ -4076,7 +4050,7 @@ You run as fast as you can. Adrenaline kicks in. You don't want to think about w
 	The group towers over you.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Steal Group Fight]]>><<set $fightstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Tent Steal Group Fight]]>><<set $fightstart to 1>><</link>>
 	<br>
 <</if>>
 
@@ -4130,9 +4104,9 @@ You run as fast as you can. Adrenaline kicks in. You don't want to think about w
 <<actionsman>>
 
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Group Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Group Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Group Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Group Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Tent Steal Group Fight Finish
@@ -4144,7 +4118,7 @@ You run as fast as you can. Adrenaline kicks in. You don't want to think about w
 	The <<person4>><<person>> gloats. "Had enough? Too bad, we're only just getting started."
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Defeated]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Tent Defeated]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -4156,7 +4130,7 @@ You run as fast as you can. Adrenaline kicks in. You don't want to think about w
 	<<unset $tentLootAmount>>
 	<<endcombat>>
 
-	<<link [[Next|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
+	<<link [[다음|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
 	<br>
 <<else>>
 	The <<group>> lies defeated before you, but the ones who didn't participate still block the way. You take a step forward and let out a hawk-like screech. They flee in panic. <<gggcontrol>><<control 50>>
@@ -4189,9 +4163,9 @@ You run as fast as you can. Adrenaline kicks in. You don't want to think about w
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Steal Group Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Steal Group Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Tent Defeated]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Tent Defeated]]>><</link>></span><<nexttext>>
 <</if>>
 
 
@@ -4219,7 +4193,6 @@ You land away from the campsite, and give <<bhim>> the signal. <<bHe>> lets out 
 	<br>
 <<else>>
 	<<set _looted to either("watch", "ring", "necklace", "bracelet")>>
-	<<set _prop to _looted>>
 	<<if currentSkillValue("skulduggery") gte random(200,1000)>>
 		You manage to find two _looted<<if _looted is "watch">>es<<else>>s<</if>>. You grab them. <<flight_hunt_get "valuables" 2 _looted>>
 	<<else>>
@@ -4261,7 +4234,6 @@ Regrouping with the Great Hawk in the sky, you show <<bhim>> what you found.
 :: Bird Hunt Tent Steal Other
 <<effects>>
 <<set _looted to either("watch", "ring", "necklace", "bracelet")>>
-<<set _prop to _looted>>
 <<if currentSkillValue("skulduggery") gte random(200,1000)>>
 	You manage to find two _looted<<if _looted is "watch">>es<<else>>s<</if>>. You grab them and begin to leave. <<flight_hunt_get "valuables" 2 _looted>>
 <<else>>
@@ -4327,7 +4299,7 @@ You land away from the campsite, and give <<bhim>> the signal. <<bHe>> lets out 
 <br><br>
 
 <<if $athleticsSuccess>>
-	You rush in to the centre of the camp, grabbing food and other supplies. <span class="green">You quickly throw one after another into the fire.</span> You manage to get a sizeable chunk of the things nearby. <<if $farm?.aggro>><<farm_aggro -5>><<laggro>><</if>><<crimeUp 25 "destruction">>
+	You rush in to the center of the camp, grabbing food and other supplies. <span class="green">You quickly throw one after another into the fire.</span> You manage to get a sizeable chunk of the things nearby. <<if $farm?.aggro>><<farm_aggro -5>><<laggro>><</if>><<crimeUp 25 "destruction">>
 	<br><br>
 
 	You see a <<generate2>><<person2>><<person>> peek <<his>> head out of a tent. <<He>> must have heard you running around. <<His>> eyes widen in horror as <<he>> sees the bonfire.
@@ -4342,7 +4314,7 @@ You land away from the campsite, and give <<bhim>> the signal. <<bHe>> lets out 
 	<br>
 <<else>>
 	<<set _huntFail to 1>>
-	You run into the centre of the camp, grabbing food and other supplies. You do your best to get as much into the fire as you can, but it takes you longer than you thought, <span class="red">and many supplies remain</span>. <<tiredness 5>><<gtiredness>><<crimeUp 10 "destruction">>
+	You run into the center of the camp, grabbing food and other supplies. You do your best to get as much into the fire as you can, but it takes you longer than you thought, <span class="red">and many supplies remain</span>. <<tiredness 5>><<gtiredness>><<crimeUp 10 "destruction">>
 	<br><br>
 
 	You see a <<generate2>><<person2>><<person>> peek <<his>> head out of a tent. <<He>> must have heard you running around. "Hey! Some brat's burning our shit!"
@@ -4351,7 +4323,7 @@ You land away from the campsite, and give <<bhim>> the signal. <<bHe>> lets out 
 	You're already winded. You need to escape.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Flee]]>><</link>>
+	<<link [[다음|Bird Hunt Tent Flee]]>><</link>>
 	<br>
 <</if>>
 
@@ -4379,7 +4351,7 @@ With the group alerted, you won't be able to sabotage them again today.
 
 :: Bird Hunt Tent Burn
 <<effects>>
-<<wearProp "torch">>
+
 Ignoring the <<person>>, you grab a long piece of wood and wrap some cloth around it. You dip it into the fire until it begins burning. Your heart starts to beat faster as you realise what you're about to go through with. <<stress 6>><<gstress>>
 <br><br>
 
@@ -4394,14 +4366,13 @@ You take a step forward. Then another. You begin to run, torch to the side. You 
 	<br><br>
 
 	<<if $danceSuccess>>
-		<<canvas-model-temporary-effect "fire" 2>>
 		Some of them try to throw water at you, <span class="green">but you dodge every attempt to quench the flame</span>. You duck clear under a bucketful of water hurled at you, only to spin and light another tent. You deftly avoid someone trying to tackle you, and pass another tent as it goes up in smoke. They try to surround you, so you keep your torch between you and them, making them think twice. Arriving near their last tent, you hurl your torch. It finds its mark. <<if $farm?.aggro>><<farm_aggro -5>><<laggro>><</if>><<ggcrime "destruction">><<crimeUp 35 "destruction">>
 		<br><br>
 
 		There's no one left chasing you. They're all trying to stop the fire. Smoke begins to fill your lungs. You run out of sight and spread your wings. The rising hot air makes it easy.
 		<br><br>
 
-		<<link [[Next|Bird Hunt Tent Burnt]]>><<handheldon>><</link>>
+		<<link [[다음|Bird Hunt Tent Burnt]]>><</link>>
 		<br>
 	<<else>>
 		You've torched nearly half the tents when <span class="red">the <<person>> manages to dump a bucket of water over you,</span> extinguishing your torch.
@@ -4417,7 +4388,7 @@ You take a step forward. Then another. You begin to run, torch to the side. You 
 		Salvation dives from above with a screech.
 		<br><br>
 
-		<<link [[Next|Bird Hunt Tent Burnt Fail]]>><<handheldon>><</link>>
+		<<link [[다음|Bird Hunt Tent Burnt Fail]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -4434,7 +4405,7 @@ You take a step forward. Then another. You begin to run, torch to the side. You 
 	Salvation dives from above with a screech.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Tent Burnt Fail]]>><<handheldon>><</link>>
+	<<link [[다음|Bird Hunt Tent Burnt Fail]]>><</link>>
 	<br>
 <</if>>
 
@@ -4533,7 +4504,7 @@ You decide that you can spare one of your caught lurkers.
 
 	It lands right on the head of a <<person1>><<person>> below.
 <</if>>
-The impact knocks <<him>> to the ground, and <<he>> begins screaming as the lurker stirs, now returned to a liveable altitude.
+The impact knocks <<him>> to the ground, and <<he>> begins screaming as the lurker stirs, now returned to a livable altitude.
 More people rush out from the tents to assist their comrade. You can't help but laugh at the mayhem. <<stress -6>><<trauma -3>><<lstress>><<ltrauma>>
 <br><br>
 
@@ -4587,7 +4558,7 @@ You won't be able to do anything else to them today, now that they're alerted.
 :: Bird Hunt Scavenge
 <<effects>>
 <<endevent>>
-<<if !$daily.emptyCampFox and $rng gte 81>>
+<<if !$daily.emptyCampFox and $rng gte 80>>
 	<<beastNEWinit 1 fox>>
 	<<set $daily.emptyCampFox to true>>
 	<<if $bird.hunts.duo is true>>
@@ -4597,7 +4568,7 @@ You won't be able to do anything else to them today, now that they're alerted.
 
 		As you rummage through the trash, you hear a noise behind you. You turn and see a <<beasttype 0>>. <<bHe 0>> looks at you and your <<beasttype 1>>, then turns and runs.
 		Your <<beasttype 1>> turns to look at <<bhim 0>>.
-		<<if $NPCList[1].monster is "monster">>
+		<<if $monster is 1>>
 			"Smart not to interrupt us," <<bhe 1>> says.
 		<<else>>
 			<<bHe 1>> screeches, but does not give chase.
@@ -4605,7 +4576,7 @@ You won't be able to do anything else to them today, now that they're alerted.
 		You continue your search.
 		<br><br>
 
-		<<link [[Next|Bird Hunt Scavenge]]>><<endevent>><</link>>
+		<<link [[다음|Bird Hunt Scavenge]]>><<endevent>><</link>>
 		<br>
 	<<else>>
 		You look around for anything that could be useful to you.
@@ -4619,7 +4590,7 @@ You won't be able to do anything else to them today, now that they're alerted.
 		<</if>>
 		<br><br>
 
-		<<link [[Next|Bird Hunt Scavenge Fox]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bird Hunt Scavenge Fox]]>><<set $molestationstart to 1>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -4632,7 +4603,7 @@ You won't be able to do anything else to them today, now that they're alerted.
 	<</if>>
 	<br><br>
 
-	<<if $rng gte 71>>
+	<<if $rng gte 70>>
 		<<select_random_clothes_limited "upper" "lower" "under_upper" "under_lower" "legs" "hands">>
 		None of the trash you find is of any interest to you, but you do find
 		<<if _random_clothes isnot "piece of fabric">>
@@ -4686,11 +4657,11 @@ You won't be able to do anything else to them today, now that they're alerted.
 				<br>
 			<</if>>
 		<<else>>
-			<<link [[Steal|Bird Hunt Scavenge Clothes]]>><<set $phase to 4>><<flight_hunt_get "fabric" 3>><</link>>
+			<<link [[훔친다|Bird Hunt Scavenge Clothes]]>><<set $phase to 4>><<flight_hunt_get "fabric" 3>><</link>>
 			<br>
 		<</if>>
 	<<else>>
-		<<if $rng gte 31>>
+		<<if $rng gte 30>>
 			<<if $rng gte 66>>
 				Amidst the useless trash, you manage to find the torn remains of some clothes. <<flight_hunt_get "fabric" 1>>
 			<<else>>
@@ -4707,7 +4678,6 @@ You won't be able to do anything else to them today, now that they're alerted.
 				<</if>>
 				<br><br>
 			<</if>>
-			<<set _prop to "rag">>
 		<<else>>
 			<<if $rng gte 18>>
 				Most of the trash is boring and unappealing, but you do manage to find some that shines nicely. <<flight_hunt_get "junk" 1>>
@@ -4726,23 +4696,20 @@ You won't be able to do anything else to them today, now that they're alerted.
 				<</if>>
 				<br><br>
 			<</if>>
-			<<set _prop to "junk">>
 		<</if>>
 		<<if ($bird.hunts.weight gte 3 and $bird.hunts.duo is false) or $bird.hunts.weight gte 5>>
-			<<wearProp _prop>>
-			You won't be able to carry any more. You take off and begin to fly back to the tower.
+			You won't be able to carry anymore. You take off and begin to fly back to the tower.
 			<br><br>
 
 			<<flight_distance_check>>
 			<<flight_time_check _returnTime "silent">>
-			<<link [[Return to the castle (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Return]]>><<handheldon>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<bird_pass _flightTime>><<endevent>><</link>><<print _fatigueText>>
+			<<link [[Return to the castle (<<print getTimeString(_hoursPassed, _minutesPassed)>>)|Bird Hunt Return]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<bird_pass _flightTime>><<endevent>><</link>><<print _fatigueText>>
 		<<elseif $daily.emptyCampLoot lte 0>>
 			You take another look around. You've gotten everything of value. All you can do now is leave.
 
 			<<endevent>>
 			<<flight_hunt_return>>
 		<<else>>
-			<<wearProp _prop>>
 			<<switch $daily.emptyCampLoot>>
 				<<case 3>>You've gone through some of the trash, but there's still much to find.
 				<<case 2>>You've found many things, but there should still be more.
@@ -4751,13 +4718,13 @@ You won't be able to do anything else to them today, now that they're alerted.
 			<br><br>
 
 			<<if $bird.hunts.duo is true>>
-				<<link [[Keep searching (0:05)|Bird Hunt Scavenge]]>><<handheldon>><<bird_pass 5>><</link>>
+				<<link [[Keep searching (0:05)|Bird Hunt Scavenge]]>><<bird_pass 5>><</link>>
 				<br>
 			<<else>>
-				<<link [[Keep searching (0:10)|Bird Hunt Scavenge]]>><<handheldon>><<bird_pass 10>><</link>>
+				<<link [[Keep searching (0:10)|Bird Hunt Scavenge]]>><<bird_pass 10>><</link>>
 				<br>
 			<</if>>
-			<<link [[Leave|Bird Hunt Scavenge Leave]]>><<handheldon>><</link>>
+			<<link [[떠난다|Bird Hunt Scavenge Leave]]>><</link>>
 			<br>
 		<</if>>
 	<</if>>
@@ -4792,7 +4759,7 @@ Deciding you've found enough, you get ready to leave.
 <</if>>
 
 <<if ($bird.hunts.weight gte 3 and $bird.hunts.duo is false) or $bird.hunts.weight gte 5>>
-	You won't be able to carry any more. You take off and begin to fly back to the tower.
+	You won't be able to carry anymore. You take off and begin to fly back to the tower.
 	<br><br>
 
 	<<flight_distance_check>>
@@ -4818,7 +4785,7 @@ Deciding you've found enough, you get ready to leave.
 		<<link [[Keep searching (0:10)|Bird Hunt Scavenge]]>><<bird_pass 10>><</link>>
 		<br>
 	<</if>>
-	<<link [[Leave|Bird Hunt Scavenge Leave]]>><</link>>
+	<<link [[떠난다|Bird Hunt Scavenge Leave]]>><</link>>
 	<br>
 <</if>>
 
@@ -4889,9 +4856,9 @@ Deciding you've found enough, you get ready to leave.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Scavenge Fox Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Scavenge Fox Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Scavenge Fox]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Scavenge Fox]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Scavenge Fox Finish
@@ -4911,7 +4878,7 @@ Deciding you've found enough, you get ready to leave.
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Scavenge]]>><</link>>
+	<<link [[다음|Bird Hunt Scavenge]]>><</link>>
 	<br>
 <<else>>
 	The <<beasttype>> recoils away from you.
@@ -4926,7 +4893,7 @@ Deciding you've found enough, you get ready to leave.
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Scavenge]]>><</link>>
+	<<link [[다음|Bird Hunt Scavenge]]>><</link>>
 	<br>
 <</if>>
 
@@ -4970,8 +4937,7 @@ You're able to see quite far around you.
 	<<endevent>>
 	<br><br>
 <</if>>
-<<set $ambushThreat to ($rng gte 51 ? "human" : "lurker")>>
-<<wearProp "leaf">>
+<<set $ambushThreat to ($rng gte 50 ? "human" : "lurker")>>
 You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 
 <<if ($rng + $hkTime) gte 80>>
@@ -5007,7 +4973,7 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 		You stand up and admire your handiwork. Now it's time to put it to the test. You fly back up onto the pillar. All you can do now is wait.
 		<br><br>
 
-		<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<handheldon>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
+		<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
 		<br>
 	<<else>>
 		<<if $hkTime lte 10>>
@@ -5026,7 +4992,7 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 
 		<<if $ambushThreat is "human">>
 			<<generate1>><<generate2>>
-			<<if $rng gte 86>>
+			<<if $rng gte 85>>
 				With the trap prepared, you stand up again. You hear something behind you. You turn around and see a <<person1>><<person>> and a <<person2>><<person>> grinning at you.
 				<<if $exposed gte 2>>
 					"Now what're you doing out here? Going for a nude stroll?" the <<person1>><<person>> asks sarcastically. "Wandering out here looking like that is just asking to get raped," the <<person2>><<person>> chimes in, eyes full of lust. <<He>> begins to approach you.
@@ -5038,9 +5004,9 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 				You only have a moment to react. The hole is right behind you.
 				<br><br>
 
-				<<link [[Pull <<him>> into the trap|Bird Hunt Ambush Caught Pull]]>><<handheldon>><</link>><<physiquedifficulty 2000 18000>>
+				<<link [["Pull " + $NPCList[1].pronouns.him + " into the trap"|Bird Hunt Ambush Caught Pull]]>><</link>><<physiquedifficulty 2000 18000>>
 				<br>
-				<<link [[Stand still|Bird Hunt Ambush Caught Rape]]>><<handheldon>><<set $phase to 2>><<set $molestationstart to 1>><</link>>
+				<<link [[Stand still|Bird Hunt Ambush Caught Rape]]>><<set $phase to 2>><<set $molestationstart to 1>><</link>>
 				<br>
 			<<else>>
 				<<if $exposed gte 2>>
@@ -5048,16 +5014,16 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 					<br><br>
 
 					<<if hasSexStat("exhibitionism", 4)>>
-						<<link [[Flaunt|Bird Hunt Ambush Caught Flaunt]]>><<handheldon>><</link>><<exhibitionist4>>
+						<<link [[과시한다|Bird Hunt Ambush Caught Flaunt]]>><</link>><<exhibitionist4>>
 					<<else>>
-						<<insufficientStat "exhibitionism" "to flaunt your nudity at them">>
+						<span class="blue">You aren't exhibitionist enough to flaunt your nudity at them.</span>
 					<</if>>
 					<br>
 				<<else>>
 					You turn around and notice two people staring at you a way's down the path. "What are you doing over there?" a <<person1>><<person>> calls out.
 					<br><br>
 				<</if>>
-				<<link [[Hide|Bird Hunt Ambush Caught Hide]]>><<handheldon>><</link>>
+				<<link [[Hide|Bird Hunt Ambush Caught Hide]]>><</link>>
 				<br>
 			<</if>>
 		<<else>>
@@ -5065,11 +5031,10 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 				As you stand up, you notice movement in the grass near you. You turn to face it, but something leaps on your back and lands on your <<bottom>>.
 				<br><br>
 
-				<<link [[Next|Bird Hunt Ambush Struggle]]>><<handheldon>><<set $struggle_start to 1>><</link>>
+				<<link [[다음|Bird Hunt Ambush Struggle]]>><<set $struggle_start to 1>><</link>>
 				<br>
 			<<else>>
 				As you stand up, you notice movement in the grass near you. A small, leathery creature leaps at you! You manage to take flight, but not unscathed. You abandon the pillar and your trap in fear.
-				<<handheldon>>
 				<<beastescape>>
 				<br><br>
 
@@ -5098,7 +5063,7 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 	You stand up and admire your handiwork. Now it's time to put it to the test. You fly back up onto the pillar. All you can do now is wait.
 	<br><br>
 
-	<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<handheldon>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
+	<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
 	<br>
 <</if>>
 
@@ -5107,13 +5072,13 @@ You start to make the trap. You scrounge up leaves and sticks to cover the hole.
 
 As the <<person2>><<person>> draws close, you suddenly grab <<his>> hand and pull.
 <<if $physiqueSuccess>>
-	<span class="green"><<Hes>> unable to pull away.</span> You sidestep the hole, and bring <<him>> right to it. "Don't make this hard for—" <<His>> words are interrupted as <<he>> steps on the trap, causing <<him>> to stumble and fall. You take the opportunity to quickly run away. The <<person1>> doesn't chase you, instead opting to laugh at <<his>> misfortunate friend.
+	<span class="green"><<He>>'s unable to pull away.</span> You sidestep the hole, and bring <<him>> right to it. "Don't make this hard for-" <<His>> words are interrupted as <<he>> steps on the trap, causing <<him>> to stumble and fall. You take the opportunity to quickly run away. The <<person1>> doesn't chase you, instead opting to laugh at <<his>> misfortunate friend.
 	<br><br>
 
 	You make sure you're out of sight, then take flight. You fly above them and wait until the two leave, then land up on the pillar again. With your trap ruined, you can either leave or try to make an ambush without it.
-	<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
+	<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
 	<br>
-	<<link [[Leave|Bird Hunt Ambush Leave]]>><<endevent>><<set $phase to 2>><</link>>
+	<<link [[떠난다|Bird Hunt Ambush Leave]]>><<endevent>><<set $phase to 2>><</link>>
 	<br>
 <<else>>
 	<span class="red"><<He>> simply grabs you tighter.</span> "Resisting will only make me harder for ya, <<girl>>!" <<He>> grabs your hands and pushes you backwards, making you fall into your own trap. <<pain 10>><<ggpain>>
@@ -5122,7 +5087,7 @@ As the <<person2>><<person>> draws close, you suddenly grab <<his>> hand and pul
 	"That's what happens when ya resist!" <<he>> says. The pair pull you out of the hole, if only so that they can molest you properly. The <<person1>><<person>> holds your arms. "Now be still, don't make this worse for yourself," <<he>> says coldly.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Ambush Caught Rape]]>><<set $phase to 3>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Ambush Caught Rape]]>><<set $phase to 3>><<set $molestationstart to 1>><</link>>
 	<br>
 <</if>>
 
@@ -5155,9 +5120,9 @@ As the <<person2>><<person>> draws close, you suddenly grab <<his>> hand and pul
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Caught Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Caught Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Caught Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Caught Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Ambush Caught Rape Finish
@@ -5184,7 +5149,7 @@ As the <<person2>><<person>> draws close, you suddenly grab <<his>> hand and pul
 	<<endcombat>>
 	<<set $phase to _phaseSaved>>
 
-	You make sure you're out of sight, then take flight. You fly above them and wait until they leave, then land up on the pillar again.
+	You make sure you're out of sight, then take flight. You fly above them and wait until the they leave, then land up on the pillar again.
 	<<if $phase is 3>>
 		Your trap is ruined, but maybe you won't need it.
 	<<else>>
@@ -5192,10 +5157,10 @@ As the <<person2>><<person>> draws close, you suddenly grab <<his>> hand and pul
 	<</if>>
 	<br><br>
 
-	<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<if $phase isnot 3>><<set $birdAmbushTrap to true>><</if>><<endevent>><</link>>
+	<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<if $phase isnot 3>><<set $birdAmbushTrap to true>><</if>><<endevent>><</link>>
 	<br>
 	<<if $phase is 3>>
-		<<link [[Leave|Bird Hunt Ambush Leave]]>><<endevent>><<set $phase to 2>><</link>>
+		<<link [[떠난다|Bird Hunt Ambush Leave]]>><<endevent>><<set $phase to 2>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -5217,7 +5182,7 @@ You use your hands to pronounce your exposure and bend half way over. "Just gett
 The two continue down the path, eyes fixed on your body the whole time. You point out your trap when one of them nearly steps on it. Once they're gone, you fly back to the top of the pillar. All you can do now is wait.
 <br><br>
 
-<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
+<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
 <br>
 
 :: Bird Hunt Ambush Caught Hide
@@ -5236,7 +5201,7 @@ The two approach casually. "Where'd <<pshe>> run off to?" the <<person1>><<perso
 You fly back to the top of the pillar once you're sure they're gone. Your trap is ready, now you just have to wait for someone to come.
 <br><br>
 
-<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
+<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<endevent>><<set $birdAmbushTrap to true>><</link>>
 <br>
 
 :: Bird Hunt Ambush Struggle
@@ -5259,10 +5224,10 @@ You fly back to the top of the pillar once you're sure they're gone. Your trap i
 <<struggle>>
 
 <<if $struggle.done gte $struggle.number>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Struggle End]]>><</link>></span>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Struggle End]]>><</link>></span>
 	<br>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Struggle]]>><</link>></span>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -5276,7 +5241,7 @@ The creatures disappear into the heather.
 <<clotheson>>
 <<endcombat>>
 
-<<link [[Wait (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<set $birdAmbushTrap to true>><</link>>
+<<link [[기다린다 (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><<set $birdAmbushTrap to true>><</link>>
 <br>
 
 :: Bird Hunt Ambush Wait
@@ -5308,7 +5273,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 		<<case 3>><<if $englishtrait gte 2>>You pass time by rehearsing what you will say when ambushing someone. <<if $monster is 1>><<bHe>> helps you practise.<<else>><<bHe>> caws at you in response.<</if>><<else>>You briefly look up at the clouds, taking a moment to admire them.<</if>>
 		<<case 4>><<if $trauma gte 50>>Waiting around makes you nervous. You start having doubts about your plan. <<bHe>> seems to notice this, and gently caresses you with <<bhis>> wing.<<else>>You take a moment to enjoy the feeling of the wind on your skin. <<stress -2>><<lstress>><</if>>
 		<<case 5>>You cuddle up to <<bhim>> and hold each other for a moment. <<stress -3>><<lstress>>
-		<<case 6>>You take some time to comb through <<bhis>> feathers with your hands, cleaning <<bhim>> up a bit. One of <<bhis>> feathers comes loose. You keep it. <<flight_hunt_get "feathers" 1>><<set _prop to "feather">>
+		<<case 6>>You take some time to comb through <<bhis>> feathers with your hands, cleaning <<bhim>> up a bit. One of <<bhis>> feathers comes loose. You keep it. <<flight_hunt_get "feathers" 1>>
 		<<case 7>>You take a moment to just admire the Great Hawk for a moment. <<bHe>> looks at you curiously, but <<bhe>> seems happy. <<npcincr "Great Hawk" love 1>><<glove>>
 		<<case 8>>You hum a small tune. <<bHe>> does <<bhis>> best to imitate you. <<trauma -2>><<ltrauma>>
 	<</switch>>
@@ -5346,7 +5311,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 
 		<<link [[Keep waiting (0:15)|Bird Hunt Ambush Wait]]>><<bird_pass 15>><</link>>
 		<br>
-		<<link [[Leave|Bird Hunt Ambush Leave]]>><<endevent>><<set $phase to 2>><</link>>
+		<<link [[떠난다|Bird Hunt Ambush Leave]]>><<endevent>><<set $phase to 2>><</link>>
 		<br>
 	<</addinlineevent>>
 	<<addinlineevent "bird_ambush_humans" (_flight_hunt_chance.materials + _flight_hunt_chance.valuables)>>
@@ -5389,8 +5354,6 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 		<br>
 	<</addinlineevent>>
 	<<runeventpool>>
-	/* at end due to inline endevent */
-	<<if _prop>><<wearProp _prop "original">><</if>>
 <</if>>
 
 :: Bird Hunt Ambush Humans Pass
@@ -5400,7 +5363,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 	<<unset $birdAmbushTrap>>
 	<br><br>
 
-	As you continue to wait, you notice that something got left behind in the hole. It must have fallen out of <<his>> backpack.
+	As you continue to wait, you notice that something got left behind in the hole. It must have fallen out of <<his>> pack.
 	<br>
 	<<flight_hunt_get_ambush 2>>
 <<else>>
@@ -5408,7 +5371,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Hunt Ambush Wait]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Ambush Wait]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Ambush Humans
@@ -5431,7 +5394,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 		You spread your wings, attempting to intimidate <<him>>.
 		<<if $exposed gte 2>>
 			<span class="lewd">You realise far too late that you're also flashing <<him>>.</span>
-			<<if !hasSexStat("exhibitionism", 3)>>
+			<<if $exhibitionism lte 34>>
 				<<set $rng -= 10>>
 				The sudden realisation makes you close your wings again. <<stress 6>><<ggstress>>
 				<br>
@@ -5448,7 +5411,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 	<</switch>>
 	<br><br>
 
-	<<if $rng gte 71>>
+	<<if $rng gte 70>>
 		<<if $bird.hunts.duo is true>>
 			"Okay! Please don't hurt us, we'll give you what you want!" <<he>> says frantically, unable to hide <<his>> fear. The <<person1>><<person>> in the hole peeks up. With shaky hands, the <<person2>><<person>> throws <<his>> backpack to you.
 			<br><br>
@@ -5476,9 +5439,9 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 		<<crimeUp 40 "thievery">><<crime "thievery">>
 		<br><br>
 
-		<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+		<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 		<br>
-	<<elseif $rng gte 41>>
+	<<elseif $rng gte 40>>
 		<<if $bird.hunts.duo is true>>
 			The <<person2>><<person>> looks at the <<beasttype 2>> circling <<him>>. "How the hell did <<pshe>> tame a hawk?!" <<he>> exclaims. You repeat your demands.
 			"Alright! C-Calm down, you lunatic!" <<he>> says. "Just take what you want from my backpack and leave us alone." <<He>> throws <<his>> backpack towards you.
@@ -5511,7 +5474,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 		<<crimeUp 40 "thievery">><<crime "thievery">>
 		<br><br>
 
-		<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+		<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 		<br>
 	<<else>>
 		<<if $bird.hunts.duo is true>>
@@ -5535,7 +5498,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 			<<crimeUp 40 "thievery">><<crime "thievery">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+			<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 			<br>
 		<<elseif $fame.scrap gte random(400, 800)>>
 			<<He>> considers your words for a moment, then relents. "Alright, <span class="green">you're not worth the trouble anyway</span>."<br>
@@ -5551,24 +5514,24 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 			Wordlessly, you toss the now empty backpack at <<him>>. You stare <<him>> down as <<he>> pulls <<his>> companion from the hole, and the two run off. <<crimeUp 40 "thievery">><<crime "thievery">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+			<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 			<br>
 		<<else>>
-			<<He>> looks you over. "You've got some nerve, little birdie," <<he>> says, <span class="red">approaching you angrily</span>.
+			He looks you over. "You've got some nerve, little birdie," <<he>> says, <span class="red">approaching you angrily</span>.
 			<<saveNPC 0 "bird_ambush_trapped">>
 			<<saveNPC 1 "bird_ambush_fight">>
 			<<endevent>>
 			<<loadNPC 0 "bird_ambush_fight">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush Fight]]>><<set $fightstart to 1>><</link>>
+			<<link [[다음|Bird Hunt Ambush Fight]]>><<set $fightstart to 1>><</link>>
 			<br>
 		<</if>>
 	<</if>>
 <<else>>
 	<!-- Trapn't -->
 	<<if $bird.hunts.duo is true>>
-		As they walk beneath the pillar, you and your <<beasttype 2>> screech loudly and leap down in front of them. You both land and spread your wings wide in an attempt to intimidate them.
+		As they walk beneath the pillar, you and <<your_bird_text>> screech loudly and leap down in front of them. You both land and spread your wings wide in an attempt to intimidate them.
 	<<else>>
 		You let out a loud screech and drop in front of them. You spread your wings wide, trying to intimidate them.
 	<</if>>
@@ -5576,7 +5539,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 
 	<<if $exposed gte 2>>
 		<span class="lewd">You realise far too late that you're also flashing them.</span>
-		<<if !hasSexStat("exhibitionism", 3)>>
+		<<if $exhibitionism lte 34>>
 			<<set $rng -= 10>>
 			The sudden realisation makes you close your wings again. <<stress 6>><<ggstress>>
 			<br>
@@ -5593,7 +5556,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 	<br><br>
 
 	For a moment, the pair are too stunned to speak.
-	<<if $rng gte 71>>
+	<<if $rng gte 70>>
 		<<if $bird.hunts.duo is true>>
 			"Okay! Please don't hurt us, I'll give you what you want!" <<he>> says frantically, unable to hide <<his>> fear. With shaky hands, the <<person2>><<person>> throws <<his>> backpack to you. You start searching it.
 			<br><br>
@@ -5620,9 +5583,9 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 		<<crimeUp 40 "thievery">><<crime "thievery">>
 		<br><br>
 
-		<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+		<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 		<br>
-	<<elseif $rng gte 41>>
+	<<elseif $rng gte 40>>
 		They look you over, thinking up a response.
 		<<if $bird.hunts.duo is true>>
 			"How the hell did <<pshe>> tame a hawk?" <<he>> asks the other. <<person1>><<He>> simply shrugs. You repeat your demands.
@@ -5634,7 +5597,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 
 			<<flight_hunt_get_ambush>>
 			<br>
-			You toss back <<his>> now empty backpack. You squawk at your spouse, indicating you're finished. The <<beasttype 2>> lands next to you, and the pair runs off.
+			You toss back <<his>> now empty backpack. You squawk at your spouse, indicating you're finished.  The <<beasttype 2>> lands next to you, and the pair runs off.
 			<<if $monster is 1>>
 				<<bHe 2>> looks over your new items. "<<Wife>> is efficient," <<bhe 2>> says.
 			<<else>>
@@ -5642,7 +5605,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 			<</if>>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+			<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 			<br>
 		<<elseif $physique gte random (4000, 16000)>>
 			After a long silence, the <<person1>><<person>> speaks. "Alright, <span class="teal">we're willing to give you something small</span>. But that's all you'll get." The <<person2>><<person>> looks displeased, but <<he>> doesn't object. You order them to throw you one of their backpacks, with the promise you won't take much. The <<person1>><<person>> throws you <<his>> bag. You begin rummaging through it.
@@ -5653,7 +5616,7 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 			Wordlessly, you toss the now empty backpack at them. You stare them down as they run off. <<crimeUp 40 "thievery">><<crime "thievery">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+			<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 			<br>
 		<<else>>
 			Once <<person1>><<he>> snaps out of it, the <<person>> steps forward and yells. "There's no way we're giving anything to you!"<br>
@@ -5679,10 +5642,10 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 			After getting what you want, you toss the backpack. You give them a slight nod, and watch them leave. <<crimeUp 40 "thievery">><<crime "thievery">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+			<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 			<br>
 		<<elseif $fame.scrap gte random(400, 800)>>
-			The <<person1>><<person>> chuckles and starts to approach you. "You picked the wrong people to mess with, <<girl>>. We were just looking for—"<br>
+			The <<person1>><<person>> chuckles and starts to approach you. "You picked the wrong people to mess with, <<girl>>. We were just looking for-"<br>
 			Before <<he>> can take another step, the <<person2>><<person>> stops <<him>>. "Hold on, isn't that <span class="pink"><<underworld_nickname>></span>?"<br>
 			"Huh? <<pHim>>? Are you sure?" The two whisper something to each other.<br>
 			"Alright, you can have something of mine if you leave us alone," the <<person1>><<person>> says, throwing you <<his>> backpack. You maintain an aura of control, and begin rummaging through it.
@@ -5693,13 +5656,13 @@ You sit atop the pillar, waiting for a potential victim<<if $bird.hunts.duo is t
 			After getting what you want, you toss the backpack. You give them a slight nod, and watch them leave. <<crimeUp 40 "thievery">><<crime "thievery">>
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+			<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 			<br>
 		<<else>>
 			The <<person1>><<person>> chuckles and starts to approach you. "You picked the wrong people to mess with, <<girl>>." <<He>> cracks <<his>> knuckles and approaches you. "Hold still."
 			<br><br>
 
-			<<link [[Next|Bird Hunt Ambush Rape]]>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Bird Hunt Ambush Rape]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<</if>>
 	<</if>>
@@ -5720,7 +5683,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	You run off and hide in the underbrush, waiting for them to recover and leave. You hear their curses slowly fade in the distance.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+	<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<span class="red">You're just barely too slow.</span> <<He>> grabs your arms, stopping you. The <<person2>><<person>> punches your side, making you gasp. <<pain 6>><<ggpain>>
@@ -5729,7 +5692,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	"Stupid little shit. Time to have some fun."
 	<br><br>
 
-	<<link [[Next|Bird Hunt Ambush Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Ambush Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <</if>>
 
@@ -5752,9 +5715,9 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 <<actionsman>>
 
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Ambush Fight Finish
@@ -5767,7 +5730,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Ambush Leave]]>><<set $phase to 2>><</link>>
+	<<link [[다음|Bird Hunt Ambush Leave]]>><<set $phase to 2>><</link>>
 	<br>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -5784,7 +5747,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	You toss the now empty backpack down the hole. You hide in the underbrush as they slowly pull themselves up, and wait until they're gone. <<crimeUp 40 "thievery">><<crime "thievery">>
 	<br><br>
 
-	<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+	<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<loadNPC 1 "bird_ambush_trapped">>
@@ -5799,7 +5762,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	You toss the now empty backpack down the hole. You watch as they slowly pull themselves up, and screech at them again to speed up their retreat. <<crimeUp 40 "thievery">><<crime "thievery">>
 	<br><br>
 
-	<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+	<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
@@ -5824,9 +5787,9 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Ambush Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Ambush Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Ambush Rape Finish
@@ -5841,7 +5804,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+	<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<if $timer gt 0>>
@@ -5855,7 +5818,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 		<<clotheson>>
 		<<endcombat>>
 
-		<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+		<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 		<br>
 	<<else>>
 		You push away the <<person1>><<person>>, who stumbles. The <<person2>><<person>> helps <<person1>><<him>> back up. You're all panting, staring each other down, waiting for someone to make the next move.
@@ -5865,7 +5828,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 		<<clotheson>>
 		<<endcombat>>
 
-		<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+		<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -5910,7 +5873,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Hunt Ambush End]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Ambush End]]>><<endevent>><</link>>
 <br>
 
 
@@ -5938,7 +5901,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 		<br><br>
 		<<flight_distance_check>>
 		<<flight_time_check _returnTime "silent">>
-		<<link [[Next (?:??)|Bird Hunt Passout]]>><<bird_pass _returnTime>><</link>>
+		<<link [[다음 (?:??)|Bird Hunt Passout]]>><<bird_pass _returnTime>><</link>>
 		<br>
 	<</if>>
 <<elseif $pain gte 90>>
@@ -6004,7 +5967,7 @@ Like a predator, you begin slowly circling them. When you notice a good opportun
 	<br>
 	<<link [[Return to the top of the pillar and wait (0:15)|Bird Hunt Ambush Wait]]>><<endevent>><<set $phase to 2>><<bird_pass 15>><<tiredness 5>><</link>><<gtiredness>>
 	<br>
-	<<link [[Leave|Bird Hunt Ambush Leave]]>><</link>>
+	<<link [[떠난다|Bird Hunt Ambush Leave]]>><</link>>
 	<br>
 <</if>>
 <<unset $birdAmbushTrap>>
@@ -6040,7 +6003,7 @@ Your stomach rises as you plummet. You try to get your bearings, and your attack
 <<if $phase is 0>>
 	<<if $physiqueSuccess>>
 		<<if $bodysize lte 1>>
-			You tuck your wings in as tightly as you can, disrupting <<bhis 0>> grip. <span class="green"><<bHe 0>> fumbles you thanks to your small size, and you escape <<bhis 0>> grasp.</span> Your manoeuvre throws <<bhim 0>> off balance.
+			You tuck your wings in as tightly as you can, disrupting <<bhis 0>> grip. <span class="green"><<bHe 0>> fumbles you thanks to your small size, and you escape <<bhis 0>> grasp.</span> Your maneuver throws <<bhim 0>> off balance.
 			<br><br>
 
 			You take the chance to turn the grab around, preventing <<bhim 0>> from using <<bhis 0>> wings entirely. Once you're confident you can escape, you release <<bhim 0>>, letting the air resistance keep you far above <<bhim 0>>.
@@ -6080,14 +6043,14 @@ Your stomach rises as you plummet. You try to get your bearings, and your attack
 
 	The Great Hawk adjusts <<bhis 1>> grip on the outsider painfully. "Great Hawk is not alone anymore. Great Hawk finally has family." <<bHe 1>> looks to you with a smile, and the outsider's gaze follows <<bhis 1>>.
 	<br>
-	"<<if $pregnancyspeechdisable is "f">>Breeding<<else>>Mating<</if>> with a landbound? You've sunken low—" <<bhes 0>> interrupted as the Great Hawk's talon pushes <<bhis 0>> head into the dirt.
+	"<<if $pregnancyspeechdisable is "f">>Breeding<<else>>Mating<</if>> with a landbound? You've sunken low-" <<bhe 0>>'s interrupted as the Great Hawk's talon pushes <<bhis 0>> head into the dirt.
 	<br>
 	"Begone. You have your own home," <<bhe 1>> says with the slightest hint of sadness. <<bHe>> releases the other <<beasttype>>, who flies off quickly without another word.
 <<else>>
 	The two screech at each other, until the trespasser fully submits. The Great Hawk lets out a cry of victory, before pushing the outsider away, who flies off quickly.
 <</if>>
 <<if !_birdInjury>>
-	<<bHis 0>> flight is shaky and uneven thanks to the beating <<bhe 0>> received.
+	<<bHis 0>> flight is shaky and uneven thanks to the beating <<bhe 0>> recieved.
 <<else>>
 	<<set $bird.injured to 30>>
 <</if>>
@@ -6115,10 +6078,8 @@ Your stomach rises as you plummet. You try to get your bearings, and your attack
 			<<wearProp "rag">>
 			You waste no time, using some of the fabric you have on-hand to patch up the worst of <<bhis 1>> wounds. <<bHe 1>> winces in pain, but nuzzles you affectionately when you're done. <<if $monster is 1>>"Thank you, <<wife>>. Will be fine, just need rest."<</if>> <span class="green"><<bHe 1>>'ll recover faster thanks to your swift care.</span> <<npcincr "Great Hawk" love 3>><<npcincr "Great Hawk" dom -3>><<gglove>><<lldom>><<set $bird.injured -= 5>><<flight_hunt_remove "fabric" 1>>
 		<<elseif $bird.hunts.loot.leaves gte 2>>
-			<<wearProp "leaf">>
 			You waste no time, using some of the leaves you have on-hand to patch up the worst of <<bhis 1>> wounds. <<bHe 1>> winces in pain, but nuzzles you affectionately when you're done. <<if $monster is 1>>"Thank you, <<wife>>. Will be fine, just need rest."<</if>> <span class="green"><<bHe 1>>'ll recover faster thanks to your swift care.</span> <<npcincr "Great Hawk" love 3>><<npcincr "Great Hawk" dom -3>><<gglove>><<lldom>><<set $bird.injured -= 5>><<flight_hunt_remove "leaves" 2>>
 		<<elseif $bird.hunts.loot.sticks gte 2>>
-			<<wearProp "stick">>
 			You waste no time, using some of the sticks you have on-hand to make a makeshift splint, binding it together with grass. <<bHe 1>> winces in pain, but nuzzles you affectionately when you're done. <<if $monster is 1>>"Thank you, <<wife>>. Will be fine, just need rest."<</if>> <span class="green"><<bHe 1>>'ll recover faster thanks to your swift care.</span> <<npcincr "Great Hawk" love 3>><<npcincr "Great Hawk" dom -3>><<gglove>><<lldom>><<set $bird.injured -= 5>><<flight_hunt_remove "sticks" 2>>
 		<<else>>
 			Without any materials on hand, there isn't much you can do for <<bhim 1>>, but you do your best to keep the affected areas clean. <<npcincr "Great Hawk" love 1>><<glove>><<set $bird.injured -= 1>>
@@ -6163,7 +6124,7 @@ Your stomach rises as you plummet. You try to get your bearings, and your attack
 	<</if>>
 	<br><br>
 
-	<<link [[Next|Bird Hunt Exit]]>><<endevent>><</link>>
+	<<link [[다음|Bird Hunt Exit]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
@@ -6184,7 +6145,7 @@ The <<childtype>> shuffles away from you, looking <<if $cmonster is 1>>guarded<<
 <</if>>
 <<link "Try to calm <<childhim>> down" "Bird Hunt Chick Calm">><</link>><<tendingdifficulty `600 - 4*$birdbuild` `1200 - 1.5*$birdbuild`>>
 <br>
-<<link [[Leave|Bird Hunt Chick Abandon]]>><<npcincr "Great Hawk" love -20>><<npcincr "Great Hawk" dom -10>><<set $phase to 1>><</link>><<llllove>><<lldom>>
+<<link [[떠난다|Bird Hunt Chick Abandon]]>><<npcincr "Great Hawk" love -20>><<npcincr "Great Hawk" dom -10>><<set $phase to 1>><</link>><<llllove>><<lldom>>
 <br>
 
 :: Bird Hunt Chick Feed
@@ -6326,7 +6287,7 @@ You gently place the <<if $cmonster is 1>>baby harpy<<else>>hawk chick<</if>> in
 </div>
 <br>
 
-<<link [[Next|Bird Hunt Chick Adopt End]]>>
+<<link [[다음|Bird Hunt Chick Adopt End]]>>
 	<<if !$children["orphanHawk1"].name>><<set $children["orphanHawk1"].name = generateBabyName(undefined, $children["orphanHawk1"].gender)>><</if>>
 <</link>>
 <br>
@@ -6350,7 +6311,7 @@ It makes you feel warm inside. You've changed a life today. <<stress -36>><<trau
 	<br><br>
 
 	<<flight_hunt_end>>
-	<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<flight_hunt_loot>>
@@ -6390,7 +6351,7 @@ It makes you feel warm inside. You've changed a life today. <<stress -36>><<trau
 <<set $bird.overrideTimer to 300>>
 <<set $bird.timer to 300>>
 <<set $moor to 100>>
-You see the castle, it's not far anymore. Meanwhile, your <<beasttype>> has started to show a slight limp in <<bhis>> wing. You land on the perch. <<bHe>> slowly walks into the nest and lies down.
+You see the castle, it's not far anymore. Meanwhile, your <<beasttype>> has started to show a slight limp in <<bhis>> wing. You land on the perch. <<bHe>> slowly walks into the nest and lays down.
 <br><br>
 
 <<bHe>> closes <<bhis>> wings and tries to find a comfortable position.
@@ -6409,7 +6370,7 @@ You see the castle, it's not far anymore. Meanwhile, your <<beasttype>> has star
 	<br><br>
 
 	<<flight_hunt_end>>
-	<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<flight_hunt_loot>>
@@ -6448,11 +6409,11 @@ You tell your <<beasttype>> that you want to return to the castle.
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Hunt Return]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Return]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Return
-<<effects>><<set $location to "tower">>
+<<effects>>
 <<npc "Great Hawk">><<person1>>
 <<set $moor to 100>>
 <<set $bird.timer to 120>>
@@ -6476,7 +6437,7 @@ land back on the perch<<if $bird.upgrades.decor gte 3>> and push the curtain asi
 	just in time for your spouse to drag you into the nest.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Return Sex]]>><<set $sexstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Return Sex]]>><<set $sexstart to 1>><</link>>
 	<br>
 <<elseif $bird.hunts.duo is false and $bird.state is "home" and birdEggsReady("Great Hawk")>>
 	only to immediately notice that something's wrong.
@@ -6504,7 +6465,7 @@ land back on the perch<<if $bird.upgrades.decor gte 3>> and push the curtain asi
 	<</if>>
 
 	<<flight_hunt_end>>
-	<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	satisfied with a successful hunt.
@@ -6547,9 +6508,9 @@ land back on the perch<<if $bird.upgrades.decor gte 3>> and push the curtain asi
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bird Hunt Return Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Return Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Return Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Return Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Return Sex Finish
@@ -6571,7 +6532,7 @@ land back on the perch<<if $bird.upgrades.decor gte 3>> and push the curtain asi
 	<br><br>
 
 	<<flight_hunt_end>>
-	<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	You rise from the nest and take stock of your finds.
@@ -6590,7 +6551,7 @@ land back on the perch<<if $bird.upgrades.decor gte 3>> and push the curtain asi
 <</if>>
 
 :: Bird Hunt Blood
-<<effects>><<silently>><<water>><</silently>>
+<<effects>><<water>>
 You hear a splash, and your whole body feels wet. The sky ripples above you.
 <br><br>
 
@@ -6606,7 +6567,7 @@ You sit and take a moment to re-orient yourself. You still feel dizzy. You seem 
 <</if>>
 
 <<flight_hunt_end>>
-<<link [[Next|Moor]]>><<endevent>><<set $moor to 50>><<set $eventskip to 1>><</link>>
+<<link [[다음|Moor]]>><<endevent>><<set $moor to 50>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Bird Hunt Passout
@@ -6626,7 +6587,7 @@ You sit and take a moment to re-orient yourself. You still feel dizzy. You seem 
 	<br><br>
 	<<flight_hunt_end>>
 
-	<<link [[Next|Pregnancy Birth Hospital Passout]]>><<set $stress -= 5000>><<endevent>><</link>>
+	<<link [[다음|Pregnancy Birth Hospital Passout]]>><<set $stress -= 5000>><<endevent>><</link>>
 	<br>
 <<else>>
 	The next time you open your eyes, you're back in your tower. The <<beasttype>>'s face comes into view.
@@ -6679,7 +6640,7 @@ You sit and take a moment to re-orient yourself. You still feel dizzy. You seem 
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Tower]]>><<bird_pass 5>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<bird_pass 5>><<endevent>><</link>>
 <br>
 
 
@@ -6694,7 +6655,7 @@ You devour the lurker, and are filled with warmth. <<eatLurker>><<trauma -6>><<d
 	<br><br>
 <</if>>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 :: Bird Tower Hunt End Eat Cook
@@ -6711,14 +6672,14 @@ You stoke the fire, and keep a close eye on it. When you think it's done, you ta
 	<br><br>
 <</if>>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 :: Bird Tower Hunt End Injured Eat
 <<effects>>
 <<npc "Great Hawk">>
 <<feedLurker>>
-You bring the lurker to your injured spouse. <<bHe>> quickly devours it.
+You bring the lurker to your injured spouse. <<He>> quickly devours it.
 <<if $monster is 1>>
 	"Thank you for hunting for me, <<wife>>. I feel... better."
 <<else>>
@@ -6726,14 +6687,14 @@ You bring the lurker to your injured spouse. <<bHe>> quickly devours it.
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 :: Bird Tower Hunt End Preggy Eat
 <<effects>>
 <<npc "Great Hawk">>
 <<feedLurker>>
-You bring the lurker to your spouse. <<bHe>> quickly devours it.
+You bring the lurker to your spouse. <<He>> quickly devours it.
 <<if $monster is 1>>
 	"Thank you for hunting for me, <<wife>>. I hope I can join you in hunting again soon."
 <<else>>
@@ -6745,10 +6706,10 @@ You bring the lurker to your spouse. <<bHe>> quickly devours it.
 	You turn away, but your spouse grabs your arm. "I need to properly thank <<wife>>." With a strength that defies <<bhis>> pregnant condition, <<bhe>> pulls you into the nest!
 	<br><br>
 
-	<<link [[Next|Bird Tower Sleep Sex]]>><<set $sexstart to 1>><</link>>
+	<<link [[다음|Bird Tower Sleep Sex]]>><<set $sexstart to 1>><</link>>
 	<br>
 <<else>>
-	<<link [[Next|Bird Tower]]>><</link>>
+	<<link [[다음|Bird Tower]]>><</link>>
 	<br>
 <</if>>
 
@@ -6775,7 +6736,7 @@ chirps and cries go quiet as
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 
@@ -6824,19 +6785,19 @@ You tell your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if
 		You look outside. It's too dark to go scouting right now, you'll have to wait until the sun comes up.
 		<br><br>
 
-		<<link [[Next|Bird Tower Perch]]>><<endevent>><</link>>
+		<<link [[다음|Bird Tower Perch]]>><<endevent>><</link>>
 		<br>
 	<<elseif Time.hour gte 18>>
 		You look outside. It'll be too dark by the time you get there. You'll have to wait.
 		<br><br>
 
-		<<link [[Next|Bird Tower Perch]]>><<endevent>><</link>>
+		<<link [[다음|Bird Tower Perch]]>><<endevent>><</link>>
 		<br>
 	<<elseif Weather.precipitation isnot "none" or Weather.isOvercast>>
 		You look outside. You should wait until the weather clears up.
 		<br><br>
 
-		<<link [[Next|Bird Tower Perch]]>><<endevent>><</link>>
+		<<link [[다음|Bird Tower Perch]]>><<endevent>><</link>>
 		<br>
 	<<else>>
 		You look outside. Now would be the perfect time to go scout out the estate.
@@ -6860,7 +6821,7 @@ You tell your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if
 	<span class="blue"><i><<bHe>> may be willing to help you if <<bhe>> trusted you more.</i></span>
 	<br><br>
 
-	<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+	<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
@@ -6868,7 +6829,7 @@ You tell your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if
 <<effects>><<set $outside to 1>><<set $location to "moor">>
 <<npc "Great Hawk">>
 <<if $phase is 1>>
-	You tell <<your_bird_text>> that you want to go scout out the estate right now. <<bHe>> cocks <<bhis>> head.
+	You tell your <<your_bird_text>> that you want to go scout out the estate right now. <<bHe>> cocks <<bhis>> head.
 	<<if $monster is 1>>
 		"Right now? Well, if <<wife>> thinks that is best, then we go now," <<bhe>> says.
 	<<else>>
@@ -6896,7 +6857,7 @@ You can tell <<bhes>> still somewhat nervous to go near the estate. You assure <
 You leap from the tower and begin flying towards the Remy estate.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Scout 2]]>><<bird_pass 45>><</link>>
+<<link [[다음|Bird Hunt Estate Scout 2]]>><<bird_pass 45>><</link>>
 <br>
 
 :: Bird Hunt Estate Scout 2
@@ -6912,7 +6873,7 @@ You do many laps around the perimeter. Your <<beasttype>> follows you, unsure wh
 <<if $estate>>
 	You know how well defended the stone building is, not to mention those in the cottage ready to rush over to help defend it.
 <<else>>
-	You saw many guards around the stone building. It most likely has something worth taking, but it's clear that even with the help of your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if>>, you couldn't get in there. The cottage nearby would be more accessible, but it's unlikely to have anything you'd want.
+	You saw many guards around the stone building. It most likely has something worth taking, but it's clear that even with the help of your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if>> you couldn't get in there. The cottage nearby would be more accessible, but it's unlikely to have anything you'd want.
 <</if>>
 <<if $livestock_intro isnot undefined>>
 	You know what the barn holds, and know there's no point in trying to get in there.
@@ -6927,7 +6888,7 @@ The manor itself would likely have what you want, but trying to get in there wou
 As you're about to give up hope, you spot a group of four people carrying a secure-looking box out of the manor. They load it up into one of the vans, and get in. The van then drives out of the estate and turns towards the moor. This could be your only chance to find that special something! You follow after it.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Scout 3]]>><<bird_pass 15>><</link>>
+<<link [[다음|Bird Hunt Estate Scout 3]]>><<bird_pass 15>><</link>>
 <br>
 
 :: Bird Hunt Estate Scout 3
@@ -6942,7 +6903,7 @@ The people get out and start unloading supplies. Three of them take out a bunch 
 You consider landing, but a look from your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if>> reminds you what you promised to <<bhim>>. You observe the surrounding area. It looks unremarkable from the rest of the moor. Most importantly, there's nothing that would help you ambush the goons when they come back. A sheer drop from above would leave you open to the armed guard.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Scout 4]]>><<bird_pass 15>><</link>>
+<<link [[다음|Bird Hunt Estate Scout 4]]>><<bird_pass 15>><</link>>
 <br>
 
 :: Bird Hunt Estate Scout 4
@@ -6962,7 +6923,7 @@ You land once they're far away, immediately relishing in the chance to rest your
 You walk past the shrubbery, into the hole. It's more like a small cave entrance, with the ground gently sloping downwards. Wooden supports keep the mouth stable.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Scout 5]]>><</link>>
+<<link [[다음|Bird Hunt Estate Scout 5]]>><</link>>
 <br>
 
 :: Bird Hunt Estate Scout 5
@@ -6985,7 +6946,7 @@ One thing is clear. Whatever's in that box is used to help capture lurkers. Nets
 The chittering begins to grow louder, and you hear movement. You exit swiftly, not wanting to push your luck. With your scouting mission a success and a plan in mind, you exit the cave satisfied.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Scout 6]]>><<bird_pass 45>><</link>>
+<<link [[다음|Bird Hunt Estate Scout 6]]>><<bird_pass 45>><</link>>
 <br>
 
 :: Bird Hunt Estate Scout 6
@@ -7022,7 +6983,7 @@ The rest of the flight goes by in silence. Eventually you land, pushing the curt
 <br><br>
 
 <<set $bird.hunts.estate to "ready">>
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Estate Steal Intro
@@ -7043,7 +7004,7 @@ You tell your <<beasttype>> you want to put your plan in motion. <<bHe>> stands 
 	<<bHe>> leaps off the perch. You follow after <<bhim>> and begin flying to the estate.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Estate Steal 1]]>><<bird_pass 60>><</link>>
+	<<link [[다음|Bird Hunt Estate Steal 1]]>><<bird_pass 60>><</link>>
 	<br>
 <<elseif $birdSilverHunt.failed is 1>>
 	<<bHe>> looks hesitant.
@@ -7058,7 +7019,7 @@ You tell your <<beasttype>> you want to put your plan in motion. <<bHe>> stands 
 	<<bHe>> does not say anything. <<bHe>> leaps off the perch. You follow after <<bhim>> and begin flying to the estate.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Estate Steal 1]]>><<bird_pass 60>><</link>>
+	<<link [[다음|Bird Hunt Estate Steal 1]]>><<bird_pass 60>><</link>>
 	<br>
 <<else>>
 	<<bHe>> looks determined.
@@ -7073,7 +7034,7 @@ You tell your <<beasttype>> you want to put your plan in motion. <<bHe>> stands 
 	You assure <<bhim>> everything will be fine. <<bHe>> nods and leaps off the perch. You follow after <<bhim>> and begin flying to the estate.
 	<br><br>
 
-	<<link [[Next|Bird Hunt Estate Steal 1]]>><<bird_pass 60>><</link>>
+	<<link [[다음|Bird Hunt Estate Steal 1]]>><<bird_pass 60>><</link>>
 	<br>
 <</if>>
 
@@ -7089,7 +7050,7 @@ There's a lot being moved in and out. It's hard to keep track of everything. <<y
 You pat <<your_bird_text>> on the head, and the two of you move to follow the van.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Steal 2]]>><<bird_pass 10>><</link>>
+<<link [[다음|Bird Hunt Estate Steal 2]]>><<bird_pass 10>><</link>>
 <br>
 
 :: Bird Hunt Estate Steal 2
@@ -7127,7 +7088,7 @@ Finally, a <<person5>><<person>> exits. Everyone except <<him>> walks into the s
 
 You wait until you're sure everyone else is inside, then tell your <<beasttype 5>> to lead the guard away.
 <<bHe 5>> nods<<if $monster is 1>>. "Good luck, <<wife>>," <<bhe 5>> says.<<else>> and squawks, wishing you good luck.<</if>>
-<<bHe 5>> flies a good distance away from you and lets out a loud screech. The <<person5>><<person>> jumps and drops something, before reaching for a device on <<his>> vest. <<He>> yells into it, then follows the Great Hawk.
+<<bHe 5>> flies a good distance away from you and lets out a loud screech. The <<person5>><<person>> jumps and drops something, before reaching for something else on <<his>> vest. <<He>> yells something into it, and starts to follow the Great Hawk.
 <br><br>
 
 <<saveNPC 0 "estateHuntGuard0">>
@@ -7139,7 +7100,7 @@ You wait until you're sure everyone else is inside, then tell your <<beasttype 5
 You land and enter the cave.
 <br><br>
 
-<<link [[Next|Bird Hunt Estate Steal 3]]>><</link>>
+<<link [[다음|Bird Hunt Estate Steal 3]]>><</link>>
 <br>
 
 :: Bird Hunt Estate Steal 3
@@ -7174,7 +7135,7 @@ You carefully enter the clearing and take cover behind some rocks, away from the
 <<else>>
 	<span class="red">You let out a short yelp involuntarily.</span> Luckily for you, the lurker ignores you, opting to skitter onwards towards the light. Unluckily, the <<person>> starts walking towards your hiding spot, but is stopped by another shout. "Your blinders come loose, jackass? What're you trudging around for? Get over here!"
 	<br>
-	"Okay okay, just a moment," <<he>> responds, annoyed. <<He>> turns back around and walks towards the centre. <<gsuspicion>><<set $birdSilverHunt.suspicion++>>
+	"Okay okay, just a moment," <<he>> responds, annoyed. <<He>> turns back around and walks towards the center. <<gsuspicion>><<set $birdSilverHunt.suspicion++>>
 	<br><br>
 <</if>>
 
@@ -7185,7 +7146,7 @@ You carefully enter the clearing and take cover behind some rocks, away from the
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Steal 2]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Silver Steal 2]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Silver Steal Sneak
@@ -7216,7 +7177,7 @@ You see another lurker run past you, towards the light.
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Steal 2]]>><<endevent>><</link>>
+<<link [[다음|Bird Hunt Silver Steal 2]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Silver Steal 2
@@ -7225,7 +7186,7 @@ You see another lurker run past you, towards the light.
 <<loadNPC 1 "estateHuntGuard1">>
 <<loadNPC 2 "estateHuntGuard2">>
 <<loadNPC 3 "estateHuntGuardCaptain">>
-With the bright light ahead, you have an entirely different perspective of the cave. You can see everything. The light itself is shining so brightly that everywhere it touches almost looks reflective. You can see lurkers coming and going from various small holes, heading towards the middle of the clearing. The <<person3>><<person>> is furthest away from the middle. <<He>> seems to be catching lurkers with nets as they exit the holes. You get a better look at <<his>> face. <<Hes>> wearing some kind of visor with heavily tinted glass.
+With the bright light ahead, you have an entirely different perspective of the cave. You can see everything. The light itself is shining so brightly that everywhere it touches almost looks reflective. You can see lurkers coming and going from various small holes, most of which walk towards the middle of the clearing. The <<person3>><<person>> is furthest away from the middle. <<He>> seems to be catching lurkers with nets as they exit the holes. You get a better look at <<his>> face. <<Hes>> wearing some kind of visor with heavily tinted glass.
 <br><br>
 
 A bit further ahead, you see the <<person1>><<person>> and <<person2>><<person>>. They too are wearing the same kind of visor, and have more cages and nets around them. They've caught a lot of lurkers already, though they still have room for more. They don't look too focused, so getting past them shouldn't be too hard.
@@ -7280,13 +7241,13 @@ As your eyes get used to the light, you realise it's coming from the now-open bo
 <<else>>
 	You're having a hard time getting a proper look at what it is. No matter how much you try to focus your vision on it, all you can see is blurry light.
 <</if>>
-Whatever it is, you know you want it. But first, you have to get close enough to grab it. Looking around, you notice that the cave has a lot of rocks and natural cover to hide behind. You spot the same big hole again. Despite all the light, it still looks pitch black.
+Whatever it is, you know you want it. But first, you have to get close enough to grab it. Looking around, the cave has a lot of rocks and other natural cover you could hide between. You spot the same big hole again. Despite all the light, it still looks pitch black.
 <br><br>
 
 You consider what to do next. You should be able to sneak up to the middle if you go carefully between the rocks. You should avoid any lurkers, and more importantly, being seen by the guards. With the visors hampering their vision, you should be able to hide if they get too close. Hiding won't help you against the lurkers, though. You steel your nerves and prepare to sneak forward.
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Sneak]]>><</link>>
+<<link [[다음|Bird Hunt Silver Sneak]]>><</link>>
 <br>
 
 :: Bird Hunt Silver Sneak
@@ -7445,7 +7406,7 @@ You consider what to do next. You should be able to sneak up to the middle if yo
 <br><br>
 
 <<if _caught>>
-	<<link [[Next|Bird Hunt Silver Fail]]>><<endevent>><</link>>
+	<<link [[다음|Bird Hunt Silver Fail]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<if $birdSilverHuntGuards[2].position is "none" and $birdSilverHunt.distance gte 2>>
@@ -7576,7 +7537,7 @@ You consider what to do next. You should be able to sneak up to the middle if yo
 		<<caveicon "right">><<link[[Crawl right|Bird Hunt Silver Sneak]]>><<set $birdSilverHunt.player.action to "crawlRight">><</link>><<note "Sneaky, but slow" "teal">>
 		<br><br>
 
-		<<crimeicon>><<link[[Hide|Bird Hunt Silver Sneak]]>><<set $birdSilverHunt.player.action to "hide">><</link>>
+		<<icon "crime.png">><<link[[Hide|Bird Hunt Silver Sneak]]>><<set $birdSilverHunt.player.action to "hide">><</link>>
 		<br>
 		<<if !_onGuard>>
 			<<crimeicon "mark">><<link[[Peek|Bird Hunt Silver Sneak]]>><<set $birdSilverHunt.player.action to "peek">><</link>>
@@ -7617,7 +7578,6 @@ Only one person remains to protect it, the <<person4>><<person>>. You look aroun
 You wait for an opportune moment and slip out of your hiding place.
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
-	<<wearProp "silver bar">>
 	You wait for another lurker to walk close to the silver bar. While the <<person>> has <<his>> back turned, you swiftly approach the cages. They're only locked by a simple latch, making it very easy to open them.
 	<br><br>
 
@@ -7634,19 +7594,19 @@ You wait for an opportune moment and slip out of your hiding place.
 	You take it from the central pedestal, where light shines down. The cave immediately becomes much darker. "Goddamn it, what now?!" you hear the <<person>> scream. "Someone's here! And they've got the Lure!"
 	<br><br>
 
-	<<link [[Next|Bird Hunt Silver Escape]]>><</link>>
+	<<link [[다음|Bird Hunt Silver Escape]]>><</link>>
 	<br>
 <<else>>
 	You sneak over to the cages while the <<person4>><<person>> isn't looking. They're only locked by a simple latch, making it very easy to open them.
 	<br><br>
 
-	You open up as many cages as you can. Some of the lurkers don't move at all, simply laying there limply. The ones that do leave make enough noise for the <<person>> to turn around. "What the hell is—" <<he>> begins to speak, <span class="red">then stops as <<he>> notices you</span>. It's still possible for you to steal the silver bar if you act fast. With no time to spare, you rush the <<person>> before <<he>> can yell for help.
+	You open up as many cages as you can. Some of the lurkers don't move at all, simply laying there limply. The ones that do leave make enough noise for the <<person>> to turn around. "What the hell is-" <<he>> begins to speak, <span class="red">then stops as <<he>> notices you</span>. It's still possible for you to steal the silver bar if you act fast. With no time to spare, you rush the <<person>> before <<he>> can yell for help.
 	<br><br>
 
 	<<endevent>>
 	<<loadNPC 0 "estateHuntGuardCaptain">>
 
-	<<link [[Next|Bird Hunt Silver Fight]]>><<set $fightstart to 1>><</link>>
+	<<link [[다음|Bird Hunt Silver Fight]]>><<set $fightstart to 1>><</link>>
 	<br>
 <</if>>
 
@@ -7671,9 +7631,9 @@ You wait for an opportune moment and slip out of your hiding place.
 <<actionsman>>
 
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Bird Hunt Silver Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Silver Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bird Hunt Silver Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bird Hunt Silver Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bird Hunt Silver Fight Finish
@@ -7685,7 +7645,7 @@ You wait for an opportune moment and slip out of your hiding place.
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Silver Fail]]>><</link>>
+	<<link [[다음|Bird Hunt Silver Fail]]>><</link>>
 	<br>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
@@ -7694,14 +7654,14 @@ You wait for an opportune moment and slip out of your hiding place.
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Silver Theft]]>><</link>>
+	<<link [[다음|Bird Hunt Silver Theft]]>><</link>>
 	<br>
 <<else>>
 	You bring <<him>> low with a kick, before knocking <<him>> to the cave floor. You manage to rip <<his>> holster away and toss it across the room to give yourself more time. You're able to run over to the silver bar before <<he>> can even get up.
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Bird Hunt Silver Theft]]>><</link>>
+	<<link [[다음|Bird Hunt Silver Theft]]>><</link>>
 	<br>
 <</if>>
 
@@ -7711,7 +7671,6 @@ You wait for an opportune moment and slip out of your hiding place.
 <<loadNPC 1 "estateHuntGuard1">>
 <<loadNPC 2 "estateHuntGuard2">>
 <<loadNPC 3 "estateHuntGuardCaptain">>
-<<wearProp "silver bar">>
 
 You grab the silver bar from the open box.
 <<if $awarelevel gte 2>>
@@ -7727,21 +7686,21 @@ You take it from the central pedestal, where light shines down. The cave immedia
 The <<person4>><<person>> stands up. "There's an intruder! And <<pshe>> has the Lure!"
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Escape]]>><</link>>
+<<link [[다음|Bird Hunt Silver Escape]]>><</link>>
 <br>
 
 :: Bird Hunt Silver Escape
 <<effects>>
-The silver bar is extremely heavy. You try to run for the exit, but get cut off by the <<person3>><<person>>. "Give that back now, and we won't have to hurt ya," <<he>> says. You double back and run the other way, but are intercepted by the <<person1>><<person>> and <<person2>><<person>>. "There's nowhere for you to run. Just drop the Lure, and I promise we'll go easy on you," <<he>> says.
+The silver bar is extremely heavy. You try to run for the exit, but get cut off by the <<person3>><<person>>. "Give that back now and we won't have to hurt ya," <<he>> says. You double back and run the other way, but are intercepted by the <<person1>><<person>> and <<person2>><<person>>. "There's nowhere for you to run, just drop the Lure and I promise we'll go easy on you," <<he>> says.
 <br><br>
 
 You dodge their grabs and try to maintain distance, but they eventually corner you to the other side of the cave. The <<person4>><<person>> cracks <<his>> neck and marches towards you.
 <br><br>
 
-"I can't deny your skill, <<girl>>. No one's gotten past me before." <<His>> voice reverberates through the now darkened cave, <<his>> visor giving it an eerie undertone. <<He>> brings <<his>> face close to yours, letting you see your own reflection. You see the etchings on the visor clearly: a pair of antlers, each one over where <<his>> eyes would be, over where your reflection's eyes are. <<stress 12>><<ggstress>>
+"I can't deny your skill, <<girl>>. No one's gotten past me before." <<His>> voice reverberates through the now darkened cave, <<his>> visor giving it an eerie undertone. <<He>> brings <<his>> face close to yours, letting you see your own reflection. You see the etchings on the visor clearly; A pair of antlers, each one over where <<his>> eyes would be. Over where your reflection's eyes are. <<stress 12>><<ggstress>>
 <br><br>
 
-You back away, holding the silver bar behind you. <<He>> chuckles. "The Lure called to you too, didn't it? It calls to all of the Elk's children. How's about we talk awhile? We could use someone like—"
+You back away, holding the silver bar behind you. <<He>> chuckles. "The Lure called to you too, didn't it? It calls to all of the Elk's children. How's about we talk a while? We could use someone like-"
 <br><br>
 
 Suddenly, you hear a heavy thumping coming from behind you. It starts slow, but speeds up rapidly. You didn't realise it until now, but you've ended up right in front of the largest hole in the wall. The sound grows louder and louder, and the chittering in the cave becomes overwhelming. The <<person4>><<person>> takes a few steps back. You turn around, and a wiry pink shape in the darkness starts to grow larger. As it approaches, you see the shiny black detailing around it. It's a massive lurker. It lunges out of the hole!
@@ -7753,7 +7712,7 @@ Suddenly, you hear a heavy thumping coming from behind you. It starts slow, but 
 :: Bird Hunt Silver Escape 2
 <<effects>>
 
-You deftly step aside, leaving the <<person4>><<person>> in its trajectory. It grabs onto <<him>>. "The giant! It's angry that the Lure is—" <<he>> yells as it tries to pull <<him>> into the hole. <<He>> reaches for <<his>> gun, but a pink tendril snaps out from the creature's mouth and immobilises <<his>> arm. You take advantage of <<his>> situation and rush past <<him>>. The others move to give chase, but stop when their captain yells again. "H-hey! Get it off of me! I don't want to become this thing's next meal!"
+You deftly step aside, leaving the <<person4>><<person>> in its trajectory. It grabs onto <<him>>. "The giant! It's angry that the Lure is-" <<he>> yells as it tries to pull <<him>> into the hole. <<He>> reaches for <<his>> gun, but a pink tendril snaps out from the creature's mouth and immobilises <<his>> arm. You take advantage of <<his>> situation and rush past <<him>>. The others move to give chase, but stop when their captain yells again. "H-hey! Get it off of me! I don't want to become this thing's next meal!"
 <br><br>
 
 They hesitate just long enough for you to run by them. The <<person2>><<person>> yells. "Fuck! If <<pshe>> gets away with the Lure, Remy's going to kill us! You help the captain, I'm going after <<phim>>!"
@@ -7762,7 +7721,7 @@ They hesitate just long enough for you to run by them. The <<person2>><<person>>
 You keep running, not daring to look back. The jagged ground does little to help your escape, but you manage to get out of the main chamber. <<ggtiredness>><<tiredness 12>>
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Escape 3]]>><<bird_pass 5>><</link>>
+<<link [[다음|Bird Hunt Silver Escape 3]]>><<bird_pass 5>><</link>>
 <br>
 
 :: Bird Hunt Silver Escape 3
@@ -7771,7 +7730,7 @@ You keep running, not daring to look back. The jagged ground does little to help
 You run as fast as your legs will carry you. You can hear the <<person2>><<person>> running after you now, hot on your trail. Your lungs burn, and it feels like an eternity passes before you finally reach the crack leading out. You rush outside and screech, trying to get the attention of your <<beasttype 4>> as fast as possible. The <<person>> emerges from the hole after you. "Get back here you fucking <<bitch>>!" <<he>> screams through <<his>> panting.
 <br><br>
 
-As you feel like you're about to collapse, your screech is returned. Your <<beasttype 4>> swoops down. You're suddenly grabbed by the shoulders and lifted off of the ground. You recognise the feeling: the firm grip of your <<beasttype 4>>'s talons.
+As you feel like you're about to collapse, your screech is returned. Your <<beasttype 4>> swoops down. You're suddenly grabbed by the shoulders and lifted off of the ground. You recognise the feeling: The firm grip of your <<beasttype 4>>'s talons.
 <<if $monster is 1>>
 	"Don't worry, I would never drop <<wife>>," <<bhe>> says in <<bhis>> usual gentle tone.
 <<else>>
@@ -7790,7 +7749,7 @@ Once you finally catch your breath, you tell your <<beasttype 4>> that you want 
 <<clearNPC "estateHuntGuard2">>
 <<clearNPC "estateHuntGuard4">>
 
-<<link [[Next|Bird Hunt Silver Escape Tower]]>><<endevent>><<bird_pass 60>><</link>>
+<<link [[다음|Bird Hunt Silver Escape Tower]]>><<endevent>><<bird_pass 60>><</link>>
 <br>
 
 :: Bird Hunt Silver Escape Tower
@@ -7824,7 +7783,7 @@ It's some kind of symbol. A seal, or maybe a manufacturer's mark. A large circle
 The light catches the symbol as you look, creating a brilliant pattern that seems to persist when you close your eyes. For a moment, it looks just like it did back in the cave.
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Escape Tower 2]]>><</link>>
+<<link [[다음|Bird Hunt Silver Escape Tower 2]]>><</link>>
 <br>
 
 :: Bird Hunt Silver Escape Tower 2
@@ -7865,7 +7824,7 @@ You tell <<bhim>> you're alright now that you've caught your breath. <<bHe>> nod
 <<unset $birdSilverHuntGuards>>
 <<set $bird.timer to 120>>
 
-<<link[[Next|Bird Tower]]>><<endevent>><</link>>
+<<link[[다음|Bird Tower]]>><<endevent>><</link>>
 <br>
 
 :: Bird Hunt Silver Fail
@@ -7877,7 +7836,7 @@ You tell <<bhim>> you're alright now that you've caught your breath. <<bHe>> nod
 <<clearNPC "estateHuntGuard4">>
 Before you know it, all the guards have rushed over to you. They have you surrounded, blocking any possible way of escaping.
 <<if $birdSilverHunt.failed is 0>>
-	"What's a little birdie like you doing in a place like this?" the <<person4>><<person>> asks sternly. <<His>> voice reverberates throughout the chamber, the visor giving it an intimidating tone. <<He>> brings <<his>> face close to yours, letting you see your own reflection. You see the etchings on the visor more clearly: a pair of antlers, each one over where <<his>> eyes would be, over where your reflection's eyes are. <<stress 12>><<ggstress>>
+	"What's a little birdie like you doing in a place like this?" the <<person4>><<person>> asks sternly. <<His>> voice reverberates throughout the chamber, the visor giving it an intimidating tone. <<He>> brings <<his>> face close to yours, letting you clearly see your own reflection. You see the etchings on the visor more clearly. A pair of antlers, each one over where <<his>> eyes would be. Over where your reflection's eyes are. <<stress 12>><<ggstress>>
 	<br><br>
 
 	<<switch $speech_attitude>>
@@ -7912,7 +7871,7 @@ Before you know it, all the guards have rushed over to you. They have you surrou
 On <<person4>><<his>> command, they begin leading you out.
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Fail Return]]>><</link>>
+<<link [[다음|Bird Hunt Silver Fail Return]]>><</link>>
 <br>
 
 :: Bird Hunt Silver Fail Return
@@ -7925,10 +7884,10 @@ On <<person4>><<his>> command, they begin leading you out.
 	The <<person1>><<person>> roughly shoves you out, causing you to stumble. "Don't even think about running off. Even if you get away, you can't outrun our van," <<he>> says.
 	<br><br>
 
-	You look to the skies and see the Great Hawk. And <<bhe 4>> sees you. You scream and start thrashing around. The <<person1>><<person>> tries to restrain you. "Hey, quit squirming you little—"
+	You look to the skies and see the Great Hawk. And <<bhe 4>> sees you. You scream and start thrashing around. The <<person1>><<person>> tries to restrain you. "Hey, quit squirming you little-"
 	<br><br>
 
-	<<Hes>> knocked down as a blur of brown feathers streaks by in an instant. "Why is that stupid fucking bird still here?!" the <<person2>><<person>> yells into the radio on <<his>> vest. <<He>> doesn't receive an answer. You break free from <<his>> grasp and start running. The captain tries to chase after you, and is knocked down by another swoop. From the ground, <<person4>><<he>> reaches for <<his>> gun, but suddenly freezes in place. You see your <<beasttype 4>>'s petrifying gaze reflected in <<his>> visor, and watch yourself get grabbed by the shoulders and lifted away.
+	<<Hes>> knocked down as a blur of brown feathers streaks by in an instant. "Why is that stupid fucking bird still here?!" the <<person2>><<person>> yells into the radio on <<his>> vest. <<He>> doesn't recieve an answer. You break free from <<his>> grasp and start running. The captain tries to chase after you, and is knocked down by another swoop. From the ground, <<person4>><<he>> reaches for <<his>> gun, but suddenly freezes in place. You see your <<beasttype 4>>'s petrifying gaze reflected in <<his>> visor, and watch yourself get grabbed by the shoulders and lifted away.
 	<br><br>
 
 	<<if $monster is 1>>
@@ -7939,7 +7898,7 @@ On <<person4>><<his>> command, they begin leading you out.
 	You can still hear the guards yelling out curses as you fly away.
 <<else>>
 	They lead you outside. "Alright, can anyone see where that damn bird is?" the <<person2>><<person>> asks.<br>
-	"No, I don't see it anywhe—" the <<person3>><<person>> is about to respond before being cut off by a divebomb.<br>
+	"No, I don't see it anywhe-" the <<person3>><<person>> is about to respond before being cut off by a divebomb.<br>
 	"Fuck, it's already here!" You try to get free, but with two people holding you, it's just not possible. You keep struggling as the <<beasttype 4>> prepares for another dive.<br><br>
 
 	<<bHe 4>> begins diving down towards the <<person2>><<person>>. "Not so fast!" the <<person4>><<person>> yells, preparing to strike <<bhim 4>> down. Before <<he>> swings, you manage to kick <<him>> just hard enough to cause <<him>> to lose <<his>> stance. However, <<his>> swing still lands, hurting your <<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>partner<</if>>. At least <<bhes 4>> still airborne, and <<bhe 4>> even managed to push the <<person2>><<person>> away from you. With one hand free, you're able to punch the <<person1>><<person>> in the face to free yourself.
@@ -7957,7 +7916,7 @@ On <<person4>><<his>> command, they begin leading you out.
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Hunt Silver Fail Tower]]>><<endevent>><<bird_pass 30>><</link>>
+<<link [[다음|Bird Hunt Silver Fail Tower]]>><<endevent>><<bird_pass 30>><</link>>
 <br>
 
 :: Bird Hunt Silver Fail Tower
@@ -8000,5 +7959,5 @@ On <<person4>><<his>> command, they begin leading you out.
 <</if>>
 <br><br>
 
-<<link [[Next|Bird Tower]]>><<endevent>><</link>>
+<<link [[다음|Bird Tower]]>><<endevent>><</link>>
 <br>

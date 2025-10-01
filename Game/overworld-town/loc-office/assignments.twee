@@ -5,44 +5,44 @@
 	<<set $officeFloor to random(4,15)>>
 	<<rng>>
 
-	<<if $rng gte 86>>
-		You pick up an assignment to deliver coffee to workers on <<checkfloor>>.
+	<<if $rng gte 85>>
+		당신은 <<checkfloor>>의 직원들에게 커피를 배달하는 업무를 받았다.
 		<<acceptassignment "Office Coffee Start">>
-	<<elseif $rng gte 71>>
-		You pick up an assignment to take notes for a meeting on <<checkfloor>>.
+	<<elseif $rng gte 70>>
+		당신은 <<checkfloor>>에서 열리는 회의의 회의록을 작성하라는 업무를 받았다.
 		<<acceptassignment "Office Meeting Start">>
-	<<elseif $rng gte 56>>
-		You pick up an assignment to destroy some documents on <<checkfloor>>.
+	<<elseif $rng gte 55>>
+		당신은 <<checkfloor>>의 일부 문서를 파기해 달라는 업무를 받았다.
 		<<acceptassignment "Office Shredder Start">>
-	<<elseif $rng gte 41>>
-		You pick up an assignment to assist an executive on <<checkfloor>>.
+	<<elseif $rng gte 40>>
+		당신은 <<checkfloor>>에 있는 임원을 보조하는 업무를 받았다.
 		<<acceptassignment "Office Executive Start">>
-	<<elseif $rng gte 26>>
-		You pick up an assignment to file documents on <<checkfloor>>.
+	<<elseif $rng gte 25>>
+		당신은 <<checkfloor>>에서 서류들을 보관해 놓으라는 업무를 받았다.
 		<<acceptassignment "Office Filing Start">>
 	<<else>>
-		You pick up an assignment to relieve a secretary on <<checkfloor>>.
+		당신은 <<checkfloor>>에 있는 비서를 돕는 업무를 받았다.
 		<<acceptassignment "Office Secretary Start">>
 	<</if>>
 <<else>>
-	A security guard enters the breakroom and directs everyone to the lobby. The building is closing to the general public.
+	경비원이 휴게실에 들어와 모두에게 로비로 가라고 지시한다. 이제 이 빌딩의 문을 닫는 모양이다.
 	<br><br>
-	<<getouticon>><<link [[Return to lobby (0:01)|Office Lobby]]>><<pass 1>><</link>>
+	<<getouticon>><<link [[로비로 돌아간다 (0:01)|Office Lobby]]>><<pass 1>><</link>>
 <</if>>
-
+	
 
 
 :: Widgets Office Assignment [widget]
 <<widget "acceptassignment">>
 	<<set _assignment to _args[0]>>
 	<br><br>
-	Do you want to accept this assignment?
+	업무를 받아들이시겠습니까?
 	<br><br>
-	<<link [[Yes|_assignment]]>><</link>>
+	<<link [[그렇다|_assignment]]>><</link>>
 	<br>
-	<<link [[Wait for next assignment (0:10)|Office Assignment Start]]>><<pass 10>><</link>>
+	<<link [[다음 업무를 기다린다 (0:10)|Office Assignment Start]]>><<pass 10>><</link>>
 	<br>
-	<<link [[Return to lobby (0:01)|Office Lobby]]>><<pass 1>><</link>>
+	<<link [[로비로 돌아간다 (0:01)|Office Lobby]]>><<pass 1>><</link>>
 <</widget>>
 
 <<widget "completeassignment">>
@@ -55,16 +55,16 @@
 	<<set _assignmentPay to (625 * ($assignmentTime / 60))>>
 	<<if _assignmentPay gt 0>>
 		<<managerLove 1>>
-		You return to the temp's lounge and receive your pay of <span class="gold"><<printmoney _assignmentPay>></span>. <<money _assignmentPay>>
+		당신은 임시직 휴게실로 돌아와 급여로 <span class="gold"><<printmoney _assignmentPay>></span>를 받는다. <<set $money += _assignmentPay>>
 		<<if $managerLove gte random(50,100)>>
 			<<set _managerTip to $managerLove * 20>><!-- £20 at 100 love-->
-			<span class="green"><<office_manager>> gives you a <<printmoney _managerTip>> bonus.</span> <<money _managerTip>>
+			<span class="green"><<office_manager_ ga>> 당신에게 보너스로 <<printmoney _managerTip>>의 팁을 준다.</span> <<set $money += _managerTip>>
 		<</if>>
 		<br><br>
 	<</if>>
+	<<endevent>>
 	<<set $officeFloor to 0>>
-	<<timeTrackingManual "office" $assignmentTime "minute">>
-	<<link [[Agency office|Office Agency]]>><<endevent>><<pass $assignmentTime>><</link>>
+	<<link [[인력 센터 사무실|Office Agency]]>><<pass $assignmentTime>><</link>>
 <</widget>>
 
 

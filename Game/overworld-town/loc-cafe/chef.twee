@@ -1,60 +1,60 @@
 :: Chef Help
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You enter the kitchens and put on an apron. Sam gives you a very brief rundown.
-"Our cream buns are our big seller," <<he>> says. "The secret's in the ingredients, so don't feel too pressured."
-<<He>> dashes away at sound of something shattering in the cafe proper, leaving you to it.
+당신은 주방으로 들어가 앞치마를 두른다. 샘이 간단하게 설명을 해준다.
+"여기서는 크림 빵이 제일 잘 나가." <<hePost "이">> 말한다. "비밀은 재료에 들어있으니까, 너무 부담 느끼진 말고." 
+<<HePost "은">> 홀 쪽에서 뭔가 부서지는 소리가 들려오자, 당신을 내버려두고 밖으로 달려나간다.
 <br><br>
 
-You get to work replenishing the stock of buns. You finish a batch just in time.
+당신은 빵 재고를 채워넣는 일을 한다. 시간에 맞춰서 끝낼 수 있었다.
 <br><br>
 <<endevent>>
 <<pass 60>>
 
-<<link [[Next|Chef Help 2]]>><</link>>
+<<link [[다음|Chef Help 2]]>><</link>>
 <br>
 
 :: Chef Help 2
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
 <<generate1>><<person1>>
-"Absolutely unacceptable," shouts a voice from the main room. "I demand to see the chef." A <<person>> barges in and fixes you with a glare.
+"이런 건 용납할 수 없어." 홀에서 누군가 소리친다. "셰프를 봐야겠어." <<personPost "이">> 불쑥 주방에 들어오더니 당신을 노려본다.
 <br><br>
-"You call this stale turd a cream bun?" <<he>> says, throwing it at you.
-"I waited long enough. You're gonna make me a fresh one. You better put some actual work into it this time."
-<br><br>
-
-<<He>> storms the way <<he>> came.
+"이딴 똥찌그레기를 크림 빵이라고 한단 말이야?" <<hePost "이">> 빵을 당신에게 내던지며 말한다. 
+"이미 충분히 기다렸어. 당장 새로 하나를 만들어줘. 이번에는 제대로 만들어줘야 할 거야."
 <br><br>
 
-"Sorry," Sam says, entering a moment later. "<<Hes>> always like that. Just make <<him>> a fresh bun with extra cream. That usually does the trick."
+<<HePost "은">> 왔던 길로 다시 뛰쳐나간다.
 <br><br>
 
-Sam leaves you to get to work.
+"미안." 샘이 잠시 뒤 들어오며 말한다. "항상 저러거든. 그냥 크림 좀 많이 넣어서 새로 하나 만들어줘. 보통 그러면 넘어가주니까 말이야."
 <br><br>
 
-<<link [[Add your bodily fluids to the cream|Chef Help Masturbation]]>><<set $masturbationstart to 1>><</link>>
+샘은 당신이 일을 할 수 있게 나가준다.
+<br><br>
+
+<<link [[크림에 체액을 추가한다|Chef Help Masturbation]]>><<set $masturbationstart to 1>><</link>>
 <br>
 
-<<link [[Make a bun with regular cream|Chef Regular Bun]]>><</link>>
+<<link [[평범한 크림으로 빵을 만든다|Chef Regular Bun]]>><</link>>
 <br>
 
 :: Chef Regular Bun
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You whip up another bun, stuffed with extra cream. Sam arrives to collect and deliver it, before arriving back a minute later.
-"<<Hes>> about as satisfied as I've seen <<him>>. Sorry about that."
+당신은 빠르게 새 빵을 하나 준비한 뒤, 크림을 추가로 안에 집어넣는다. 샘이 곧 다가와 빵을 가져가고, 몇 분 뒤에 돌아온다. 
+"내가 <<him_ ul>> 봐왔던 그대로 <<He_ ga>> 만족하더라. 미안해."
 <br><br>
 <<endevent>>
 <<npc Sam>>
 
-<<He>> glances at the clock on the wall. "Chef should be back in a moment. Thank you for the help, you saved my life. Here's your pay."
-<<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+<<HePost "은">> 벽에 걸린 시계를 쳐다본다. "곧 셰프가 돌아올 거야. 도와줘서 고마워. 덕분에 살았어. 네 몫은 여깄어." 
+<<HePost "은">> <<moneyGain 10>>를 건네준다.
 <br><br>
 
 <<endevent>>
 
-<<link [[Next|Ocean Breeze]]>><</link>>
+<<link [[다음|Ocean Breeze]]>><</link>>
 <br>
 
 :: Chef Help Masturbation
@@ -76,14 +76,14 @@ You whip up another bun, stuffed with extra cream. Sam arrives to collect and de
 
 <div id="masturbationButtons">
 	<<if $timer lte 1>>
-		<div id="next"><<link [[Continue|Chef Help Masturbation Finish]]>><</link>><<nexttext>></div>
-		<div id="stop"><<link [[Stop|Chef Help Masturbation Finish]]>><<set $finish to 1>><</link>></div>
+		<div id="next"><<link [[계속한다|Chef Help Masturbation Finish]]>><</link>><<nexttext>></div>
+		<div id="stop"><<link [[그만둔다|Chef Help Masturbation Finish]]>><<set $finish to 1>><</link>></div>
 	<<elseif $masturbation_fluid gte 30>>
-		<div id="next"><<link [[Continue|Chef Help Masturbation Finish]]>><</link>><<nexttext>></div>
-		<div id="stop"><<link [[Stop|Chef Help Masturbation Finish]]>><<set $finish to 1>><</link>></div>
+		<div id="next"><<link [[계속한다|Chef Help Masturbation Finish]]>><</link>><<nexttext>></div>
+		<div id="stop"><<link [[그만둔다|Chef Help Masturbation Finish]]>><<set $finish to 1>><</link>></div>
 	<<else>>
-		<div id="next"><<link [[Continue|Chef Help Masturbation]]>><</link>><<nexttext>></div>
-		<div id="stop"><<link [[Stop|Chef Help Masturbation Finish]]>><<set $finish to 1>><</link>></div>
+		<div id="next"><<link [[계속한다|Chef Help Masturbation]]>><</link>><<nexttext>></div>
+		<div id="stop"><<link [[그만둔다|Chef Help Masturbation Finish]]>><<set $finish to 1>><</link>></div>
 	<</if>>
 </div>
 <br><br><br><br><br>
@@ -96,44 +96,44 @@ You whip up another bun, stuffed with extra cream. Sam arrives to collect and de
 <<npc Sam>><<person1>>
 
 <<if $masturbation_fluid gte 30>>
-	You add your fluid to the mixture, and whip up a new batch of cream.
+	당신은 재료를 섞은 것에 체액을 추가한 뒤, 새롭게 크림을 만들어낸다.
 	<br><br>
-	Sam arrives soon after. You do your best to keep a straight face as <<he>> takes the bun to the rude customer.
+	곧 샘이 나타난다. 당신은 <<hePost "이">> 무례한 손님에게 빵을 가져가는 동안 최대한 무표정한 얼굴을 유지하고자 한다.
 	<br><br>
-	You hear shouting from the cafe proper. It sounds more excited than angry. You peek through the door, and see a crowd stood around a table.
+	카페 홀에서 누군가의 외침이 들려온다. 화가 난 고함소리보다는 흥분한 소리에 더 가깝다. 문을 통해 바깥을 내다보자, 테이블 주변에 사람들이 몰려든 것이 보인다.
 	<br><br>
 
-	<<link [[Next|Chef Help 3]]>><</link>>
+	<<link [[다음|Chef Help 3]]>><</link>>
 	<br>
 
 <<elseif $finish is 1>>
-	You stop masturbating. You whip up a bun without special ingredients.
+	당신은 자위를 멈춘다. 그러고는 특별한 재료 없이 빵을 만든다.
 	<br><br>
-	Sam arrives to collect and deliver it, before arriving back a minute later. "The customer is satisfied," <<he>> says. "Sorry about that."
+	샘이 다가와 빵을 가져가고, 몇 분 뒤에 돌아온다. "고객도 만족했어." <<hePost "이">> 말한다. "미안해."
 	<br><br>
 
-	<<He>> glances at the clock on the wall.
-	"Chef should be back in a moment. Thank you for the help, you saved my life. Here's your pay." <<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+	<<HePost "은">> 벽에 걸린 시계를 쳐다본다. 
+	"곧 셰프가 돌아올 거야. 도와줘서 고마워. 덕분에 살았어. 네 몫은 여깄어." <<HePost "은">> <<moneyGain 10>>를 건네준다.
 	<br><br>
 
 	<<endevent>>
 
-	<<link [[Next|Ocean Breeze]]>><</link>>
+	<<link [[다음|Ocean Breeze]]>><</link>>
 	<br>
 
 <<else>>
-	You hear someone coming. You quickly cover yourself and prepare a bun without special ingredients.
+	누군가 다가오는 소리가 들린다. 당신은 재빠르게 옷을 입은 뒤 특별한 재료 없이 빵을 만든다.
 	<br><br>
-	Sam arrives to collect and deliver it, before arriving back a minute later. "The customer is satisfied," <<he>> says. "Sorry about that."
+	샘이 다가와 빵을 가져가고, 몇 분 뒤에 돌아온다. "고객도 만족했어." <<hePost "이">> 말한다. "미안해."
 	<br><br>
 
-	<<He>> glances at the clock on the wall.
-	"Chef should be back in a moment. Thank you for the help, you saved my life. Here's your pay." <<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+	<<HePost "은">> 벽에 걸린 시계를 쳐다본다. 
+	"곧 셰프가 돌아올 거야. 도와줘서 고마워. 덕분에 살았어. 네 몫은 여깄어." <<HePost "은">> <<moneyGain 10>>를 건네준다.
 	<br><br>
 
 	<<endevent>>
 
-	<<link [[Next|Ocean Breeze]]>><</link>>
+	<<link [[다음|Ocean Breeze]]>><</link>>
 	<br>
 
 <</if>>
@@ -143,22 +143,22 @@ You whip up another bun, stuffed with extra cream. Sam arrives to collect and de
 
 <<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
 
-<<person2>>"You have to try some," a <<person>> exclaims, handing a spoonful of cream to a <<person3>><<person>>.
-<span class="lewd">It's your cream.</span> The <<person>> raises the spoon to <<his>> nose, sniffs, then licks a little off the end.
+<<person2>>"이거 한 번 먹어봐야 해." <<personPost "이">> 소리치며, <<person3>><<personPost>>에게 크림을 한 숟가락 떠서 건네준다. 
+<span class="lewd">당신이 만든 크림이다.</span> <<personPost "은">> 숟가락을 코 앞으로 가져가, 냄새를 맡더니, 끝부분을 살짝 핥는다.
 <br><br>
-<<His>> expression changes at once, from suspicion to awe. <<He>> buries the rest of the cream in <<his>> mouth. "That's so good!" <<he>> says. "I need more,"
+곧바로 의심스러워 하던 표정이 경악으로 바뀐다. <<HePost "은">> 남은 크림을 전부 입 안에 쑤셔넣는다. "엄청 맛있는데!" <<hePost "이">> 말한다. "더 먹고 싶은걸."
 <br><br>
-"Oi," a <<person4>><<person>> interjects, "I've not had any yet."
+"잠깐." <<person4>><<personPost "이">> 끼어든다. "난 아직 맛도 못 봤어."
 <br><br>
 
 <<person1>>
-Sam notices you, and walks over. <<Hes>> beaming. "I've never seen that customer so satisfied," <<he>> says.
-"I don't know how you did it. How would you like to put your cooking talents to work more regularly? I'll pay you £10 per hour, plus a cut of each bun we sell."
+샘이 당신을 보고는 활짝 웃으며 다가온다. "손님이 저 정도로 만족스러워 하는 건 처음 봐." <<hePost "이">> 말한다. 
+"네가 어떻게 한 건지 모르겠네. 요리 재능을 살려서 더 정규적으로 일해보는 건 어때? 시간당 £10에, 빵이 팔릴 때마다 약간 더 떼서 줄게.".
 <br><br>
 
-<<link [[Accept|Chef Help Accept]]>><</link>>
+<<link [[받아들인다|Chef Help Accept]]>><</link>>
 <br>
-<<link [[Refuse|Chef Help Refuse]]>><</link>>
+<<link [[거절한다|Chef Help Refuse]]>><</link>>
 <br>
 
 :: Chef Help Accept
@@ -166,15 +166,15 @@ Sam notices you, and walks over. <<Hes>> beaming. "I've never seen that customer
 
 <<set $chef_state to 1>><<set $chef_sus to 0>><<set $bun_value to 5000>><<set $bun_cut to 0.2>>
 
-You nod. Sam claps in excitement.
-"Fantastic! You can work whenever we're open. I know you'll need to fit it around other commitments.
-I'll get whatever ingredients you need. This could be the start of something big."
+당신은 고개를 끄덕인다. 샘은 신이 나서 손바닥을 마주친다. 
+"환상적이야! 가게가 열려있는 동안은 원할 때마다 와서 일하면 돼. 다른 일들이랑 조정해서 시간을 맞춰야 할 테니까 말이야. 
+필요한 재료는 뭐든지 제공할게. 어쩌면 이게 더 큰 일의 시작일지도 몰라."
 <br><br>
-<<He>> turns to walk away, then remembers <<himself>>. "Almost forgot. It's the end of your shift. Here's your pay." <<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+<<HePost "은">> 자리를 뜨려고 몸을 돌렸다가, 뭔가를 떠올리고는 발걸음을 멈춘다. "까먹을 뻔했네. 오늘 네 일은 이걸로 끝이야. 네 수당은 여깄어." <<HePost "은">> <<moneyGain 10>>를 건넨다.
 <br><br>
 
 <<endevent>>
-<<link [[Next|Ocean Breeze]]>><</link>>
+<<link [[다음|Ocean Breeze]]>><</link>>
 <br>
 
 :: Chef Help Refuse
@@ -182,14 +182,14 @@ I'll get whatever ingredients you need. This could be the start of something big
 
 <<set $chef_state to 0>>
 
-You shake your head. <<His>> energy deflates. "My offer's open. I hope you change your mind. Everyone should have a chance to taste something so superb."
+당신은 고개를 내젓는다. <<HePost "은">> 금새 풀이 죽는다. "제안은 여전히 유효해. 생각이 바뀌면 좋겠네. 다들 저렇게 맛있는 건 한 번쯤 먹어볼 수 있어야 하니까 말이야."
 <br><br>
-<<He>> turns to walk away, then remembers <<himself>>. "Almost forgot. It's the end of your shift. Here's your pay." <<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+<<HePost "은">> 자리를 뜨려고 몸을 돌렸다가, 뭔가를 떠올리고는 발걸음을 멈춘다. "까먹을 뻔했네. 오늘 네 일은 이걸로 끝이야. 네 수당은 여깄어." <<HePost "은">> <<moneyGain 10>>를 건넨다.
 <br><br>
 
 <<endevent>>
 
-<<link [[Next|Ocean Breeze]]>><</link>>
+<<link [[다음|Ocean Breeze]]>><</link>>
 <br>
 
 :: Chef Work Accept
@@ -197,42 +197,42 @@ You shake your head. <<His>> energy deflates. "My offer's open. I hope you chang
 
 <<set $chef_state to 1>><<set $chef_sus to 0>><<set $bun_value to 5000>><<set $bun_cut to 0.2>>
 
-<<npc Sam>><<person1>>You approach Sam. "Have you reconsidered?" <<he>> asks, hopeful. You nod.
-<<He>> claps in excitement.
-"Fantastic! You can work whenever we're open. I know you'll need to fit it around other commitments.
-I'll get whatever ingredients you need. This could be the start of something big."
+<<npc Sam>><<person1>>당신은 샘에게 다가간다. "다시 생각을 좀 해봤어?" <<hePost "은">> 약간 기대감에 찬 상태로 묻는다. 당신은 고개를 끄덕인다. 
+<<He_ nun>> 신이 나서 손바닥을 마주친다. 
+"환상적이야! 가게가 열려있는 동안은 원할 때마다 와서 일하면 돼. 다른 일들이랑 조정해서 시간을 맞춰야 할 테니까 말이야. 필요한 재료는 뭐든지 제공할게. 
+어쩌면 이게 더 큰 일의 시작일지도 몰라."
 <br><br>
 
 <<endevent>>
-<<link [[Next|Ocean Breeze]]>><</link>>
+<<link [[다음|Ocean Breeze]]>><</link>>
 <br>
 
 :: Chef Work
-<<set $outside to 0>><<set $location to "cafe">><<effects>><<timeTrackingStart "cafe">><<timeTrackingStart "cafeChef">>
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You enter the kitchen, ready to make the Ocean Breeze's famous cream buns.
+당신은 주방에 들어간다. 오션 브리즈의 명물인 크림 빵을 만들 준비가 되었다.
 <br><br>
 
 <<if $rng gte 91>>
-	"Let me know if you need anything," calls Sam from the cafe proper.
+	"뭐든 필요하면 내게 알려줘" 카페 쪽에서 샘의 목소리가 들려온다.
 	<br><br>
 <<elseif $rng gte 81>>
-	"I can taste that cream already," calls Sam from the cafe proper.
+	"벌써 그 크림을 맛 볼 수 있을 것 같아" 카페 쪽에서 샘의 목소리가 들려온다.
 	<br><br>
 <<elseif $rng gte 71>>
-	"Our top chef is getting to work," you hear Sam say in the cafe proper. An agreeable murmur follows.
+	"우리 최고 주방장이 일을 시작했어" 당신은 카페 쪽에서 샘이 말하는 것을 듣는다. 동의하는 중얼거림이 따라 들려온다.
 	<br><br>
 <</if>>
 
-<<link [[Make cream with lewd fluid|Chef Work 2]]>><<timeTrackingStart "cafeBuns">><<set $chef_job to "special">><</link>>
+<<link [[체액으로 크림을 만든다|Chef Work 2]]>><<set $chef_job to "special">><</link>>
 <br>
-<<link [[Make regular cream|Chef Work 2]]>><<set $chef_job to "regular">><</link>>
+<<link [[평범한 크림을 만든다|Chef Work 2]]>><<set $chef_job to "regular">><</link>>
 <br>
 
 :: Chef Work 2
-<<set $outside to 0>><<set $location to "cafe">><<effects>><<wearProp "wooden spoon">>
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You begin by mixing the ingredients in a bowl, before kneading the resulting dough.
+당신은 그릇에다가 재료들을 섞은 뒤, 만들어진 도우를 치댄다.
 <br><br>
 
 <<eventschef>>
@@ -240,31 +240,31 @@ You begin by mixing the ingredients in a bowl, before kneading the resulting dou
 :: Chef Thief Intervene
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You reach beneath the table, and haul out a <<person>>.
+당신은 탁자 아래로 손을 뻗어, <<personPost "을">> 끌어낸다.
 
 <<if $rng gte 51>>
-	You don't recognise <<him>>. <<He>> regards you with fear.
+	처음 보는 사람이다. <<HePost "은">> 두려움에 찬 시선을 보내온다.
 	<br><br>
 
-	<<link [[Let <<him>> go|Chef Thief Let]]>><<famegood 1>><</link>>
+	<<link [[그냥 보내준다|Chef Thief Let]]>><<famegood 1>><</link>>
 	<br>
-	<<link [[Take back the bun|Chef Thief Take]]>><</link>>
+	<<link [[빵을 돌려받는다|Chef Thief Take]]>><</link>>
 	<br>
 	<<if $money gte 5000>>
-		<<link [[Buy <<him>> the bun (£50)|Chef Thief Buy]]>><<famegood 4>><<money -5000 "cafeChef">><<trauma -6>><</link>><<ltrauma>>
+		<<link [[빵을 사준다 (£50)|Chef Thief Buy]]>><<famegood 4>><<set $money -= 5000>><<trauma -6>><</link>><<ltrauma>>
 		<br>
 	<</if>>
 
 <<else>>
-	You recognise <<him>> from the orphanage. <<He>> looks frightened at first, but <<his>> expression eases when <<he>> looks at you.
+	고아원에서 본 녀석이다. <<HePost "은">> 처음에는 두려움에 떠나, 당신을 알아보자 표정이 풀어진다.
 	<br><br>
 
-	<<link [[Let <<him>> go|Chef Thief Let]]>><<hope 1>><<famegood 1>><</link>><<ghope>>
+	<<link [[그냥 보내준다|Chef Thief Let]]>><<hope 1>><<famegood 1>><</link>><<ghope>>
 	<br>
-	<<link [[Take back the bun|Chef Thief Take]]>><<hope -1>><</link>><<lhope>>
+	<<link [[빵을 돌려받는다|Chef Thief Take]]>><<hope -1>><</link>><<lhope>>
 	<br>
 	<<if $money gte 5000>>
-		<<link [[Buy <<him>> the bun (£50)|Chef Thief Buy]]>><<famegood 4>><<hope 1>><<money -5000 "cafeChef">><<trauma -6>><</link>><<ghope>><<ltrauma>>
+		<<link [[빵을 사준다 (£50)|Chef Thief Buy]]>><<famegood 4>><<hope 1>><<set $money -= 5000>><<trauma -6>><</link>><<ghope>><<ltrauma>>
 		<br>
 	<</if>>
 
@@ -273,7 +273,7 @@ You reach beneath the table, and haul out a <<person>>.
 :: Chef Thief Let
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You release <<his>> arm. <<He>> gives you a grateful look before disappearing out the back door.
+당신은 <<hisPost "의">> 팔을 놔준다. <<HePost "은">> 고마움에 찬 시선을 보내고는 뒷문으로 사라진다.
 <br><br>
 
 <<endevent>>
@@ -283,9 +283,9 @@ You release <<his>> arm. <<He>> gives you a grateful look before disappearing ou
 :: Chef Thief Take
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You snatch the bun from <<his>> hands and place it back on the table.
+당신은 <<hisPost "의">> 손에서 빵을 낚아채서 탁자 위에 돌려놓는다.
 <br><br>
-The <<person>> scurries out the back door.
+<<personPost "은">> 허둥지둥 뒷문으로 나간다.
 <br><br>
 
 <<endevent>>
@@ -295,10 +295,10 @@ The <<person>> scurries out the back door.
 :: Chef Thief Buy
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You release <<his>> arm. <<He>> gives you a grateful look before disappearing out the back door.
+당신은 <<hisPost "의">> 팔을 놔준다. <<HePost "은">> 고마움에 찬 시선을 보내고는 뒷문으로 사라진다.
 <br><br>
 
-You pay at the cash register on <<his>> behalf before returning to work.
+당신은 <<hePost>> 대신에 빵 값을 금전 등록기에 넣고는 다시 일을 시작한다.
 <br><br>
 
 <<endevent>>
@@ -308,7 +308,7 @@ You pay at the cash register on <<his>> behalf before returning to work.
 :: Chef Thief Ignore
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You hear them escape the way they came.
+곧 들어왔던 길로 다시 도망치는 소리가 들려온다.
 <br><br>
 
 <<endevent>>
@@ -329,16 +329,16 @@ You hear them escape the way they came.
 
 <<effects>>
 <<effectsman>>
-<<alarmstate '"Stop causing a fuss in there," you hear Sam say through the door.'>>
+<<alarmstate '"그 안에서 소란 좀 떨지마," 당신은 샘이 문 밖에서 말하는 것을 듣는다.'>>
 <<man>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Chef Work Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Chef Work Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Chef Work Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Chef Work Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Chef Work Rape Finish
@@ -346,20 +346,20 @@ You hear them escape the way they came.
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 
-	"Break's over," <<he>> says. <<He>> leaves the way <<he>> came.
+	"쉬는 시간은 끝났어." <<hePost "이">> 말한다. <<HePost "은">> 왔던 길로 다시 나간다.
 	<br><br>
 
-	<<tearful>> you prepare to continue cooking.
+	<<tearful>> 당신은 요리를 계속한다.
 	<br><br>
 
 	<<clothesontowel>>
 	<<endcombat>>
 
 <<elseif $enemyhealth lte 0>>
-	"Fuck," the <<person>> manages, clutching <<his>> side and stumbling the way <<he>> came.
+	"씨발." <<personPost "은">> 간신히 욕지기를 내뱉고는, 옆의 벽을 붙잡아 서서는 들어왔던 길로 비틀거리며 나간다.
 	<br><br>
 
-	<<tearful>> you prepare to continue cooking.
+	<<tearful>> 당신은 요리를 계속한다.
 	<br><br>
 
 	<<clothesontowel>>
@@ -368,13 +368,13 @@ You hear them escape the way they came.
 <<else>>
 	<<set $rescued += 1>>
 
-	Sam enters the room. The <<person>> backs away from you. "It was <<pher>> idea," <<he>> lies. "I'm going." <<He>> leaves the way <<he>> came.
+	샘이 들어온다. <<personPost "은">> 당신에게서 떨어진다. "저 녀석이 하자고 한 거야." <<hePost "이">> 거짓말을 한다. "이제 가야겠어." <<HePost "은">> 들어왔던 길로 나간다.
 	<br><br>
-	Sam gives you a suspicious glance before heading back to the main room.
+	샘은 당신에게 의혹이 담긴 시선을 보내고는 다시 홀로 나간다.
 	<<npcincr Sam love -1>><<llove>>
 	<br><br>
 
-	<<tearful>> you prepare to continue cooking.
+	<<tearful>> 당신은 요리를 계속한다.
 	<br><br>
 
 	<<clothesontowel>>
@@ -394,7 +394,7 @@ You hear them escape the way they came.
 	<<set $timer to 60>>
 	<<set $masturbation_bowl to 1>>
 	<<set $mouth to "disabled">>
-You make sure you're alone in the kitchen, and place a bowl in front of you.
+주방에 홀로 있는 것이 확실해지자, 당신은 앞에다가 그릇을 하나 놓는다.
 <br><br>
 
 <</if>>
@@ -402,15 +402,15 @@ You make sure you're alone in the kitchen, and place a bowl in front of you.
 <<masturbationactions>>
 
 <<if $timer gte 50>>
-	<span class="teal">Sam is occupied.</span>
+	<span class="teal">샘은 바쁘다.</span>
 <<elseif $timer gte 40>>
-	<span class="lblue">Sam is occupied.</span>
+	<span class="lblue">샘은 바쁘다.</span>
 <<elseif $timer gte 30>>
-	<span class="blue">Sam will want to check on you soon.</span>
+	<span class="blue">샘은 조만간 당신을 확인하러 올 것이다.</span>
 <<elseif $timer gte 20>>
-	<span class="purple">You hear Sam chatting near the door.</span>
+	<span class="purple">문 근처에서 샘이 대화를 나누는 소리가 들려온다.</span>
 <<else>>
-	<span class="pink">You hear Sam right outside the door!</span>
+	<span class="pink">샘은 문 바로 앞에 있다!</span>
 <</if>>
 <br>
 <<masturbationbowl>>
@@ -433,64 +433,63 @@ You make sure you're alone in the kitchen, and place a bowl in front of you.
 
 <<if $masturbation_fluid gte 30>>
 	<<if _temp_timer lte 10>>
-		Sam barges through the door. You barely cover yourself in time. <<He>> frowns. "Just checking up on you," <<he>> says.
+		샘이 불쑥 문을 열고 들어온다. 당신은 가까스로 제 시간에 옷을 입은 상태다. <<HePost "이">> 얼굴을 찌푸린다. "그냥 확인차 들렀어." <<hePost "이">> 말한다.
 		<br><br>
-		You assure <<him>> everything is under control, and <<he>> nods. <<He>> returns to the main room, but wedges the kitchen door open.
+		당신은 모든 것이 통제 하에 있다고 장담하고, <<hePost "은">> 고개를 끄덕인다. <<HePost "은">> 다시 홀로 돌아가나, 이번에는 주방 문을 연 채로 고정시켜 놓는다.
 		<<gsuspicion>><<set $chef_sus += 5>>
 		<br><br>
 	<</if>>
 
 	<<set _buns_sold to Math.floor(($masturbation_fluid / 30))>>
-	You add your fluid to the mixture, and whip up a new batch of cream. You have enough to make <<number _buns_sold>> buns.
+	당신은 재료를 섞은 것에 체액을 첨가한 뒤, 새로 크림을 만들어낸다. <<trNumber _buns_sold>> 개의 빵을 만들 수 있을 것이다.
 	<br><br>
-	Sam arrives as you finish adding the cream, drawn by the smell. <<He>> leans over them, closes <<his>> eyes, and sniffs.
+	크림을 막 넣은 뒤에, 샘이 그 냄새에 이끌려 다가온다. <<HePost "은">> 빵 위로 몸을 숙이고는, 눈을 감고 냄새를 맡는다.
 
 	<<if _buns_sold gte 30>>
-		"Marvellous," <<he>> says, staring in awe at the mountain in front of <<him>>. "This might be enough to satisfy demand. Good job!"
+		"훌륭해," <<hePost "이">> 눈 앞에 놓인 빵의 산을 경외심이 담긴 눈길로 바라보며 말한다. "이 정도면 사람들의 요구를 충족시킬 수 있겠어. 잘 했어!"
 	<<elseif _buns_sold gte 20>>
-		"Marvellous," <<he>> says, licking <<his>> lips. "You've been very busy. Our customers will be happy."
+		"훌륭해," <<hePost "이">> 입술을 핥으며 말한다. "정말 열심히 일해줬구나. 손님들이 기뻐할 거야."
 	<<elseif _buns_sold gte 10>>
-		"Marvellous," <<he>> says, licking <<his>> lips. "Good job. Our customers will be happy."
+		"훌륭해," <<hePost "이">> 입술을 핥으며 말한다. "잘 했어. 손님들이 기뻐할 거야."
 	<<elseif _buns_sold gte 4>>
-		"Marvellous," <<he>> says, licking <<his>> lips. "A nice batch. Our customers will be happy."
+		"훌륭해," <<hePost "이">> 입술을 핥으며 말한다. "꽤 만들었구나. 손님들이 기뻐할 거야."
 	<<elseif _buns_sold gte 3>>
-		"Marvellous," <<he>> says, licking <<his>> lips. "Three customers are going to be happy."
+		"훌륭해," <<hePost "이">> 입술을 핥으며 말한다. "세 명의 손님이 기뻐할 수 있겠구나."
 	<<elseif _buns_sold gte 2>>
-		"Marvellous," <<he>> says, licking <<his>> lips. "Shame there's only a couple. Our customers might need to draw lots."
+		"훌륭해," <<hePost "이">> 입술을 핥으며 말한다. "두 개밖에 없어서 안타깝구나. 손님들은 더 많이 먹고 싶어할 거야."
 	<<else>>
-		"Marvellous," <<he>> says. "Shame there's only one. I hope a fight doesn't break out!"
+		"훌륭해," <<hePost "이">> 말한다. "하나밖에 없어서 아쉽네. 싸움이라도 일어나지 않으면 좋으련만!"
 	<</if>>
 	<br><br>
 
-	<<He>> carries the buns into the cafe proper. You hear someone cheer as <<he>> enters.
+	<<HePost "은">> 홀 쪽으로 빵을 갖고 간다. <<HePost "이">> 나타나자 누군가 환호성을 내지르는 소리가 들려온다.
 	<br><br>
 
 	<<sellbuns>>
 
 <<else>>
 	<<if _temp_timer lte 10>>
-		Sam barges through the door. You barely cover yourself in time. <<He>> frowns. "Just checking up on you," <<he>> says.
+		샘이 불쑥 문을 열고 들어온다. 당신은 가까스로 제 시간에 옷을 입은 상태다. <<HePost "이">> 얼굴을 찌푸린다. "그냥 확인차 들렀어." <<hePost "이">> 말한다.
 		<br><br>
-		You assure <<him>> everything is under control, and <<he>> nods. <<He>> returns to the main room, but wedges the kitchen door open.
+		당신은 모든 것이 통제 하에 있다고 장담하고, <<hePost "은">> 고개를 끄덕인다. <<HePost "은">> 다시 홀로 돌아가나, 이번에는 주방 문을 연 채로 고정시켜 놓는다.
 		<<gsuspicion>><<set $chef_sus += 5>>
 		<br><br>
 	<</if>>
 
-	You make the buns without special ingredients, using Sam's recipe. A <<print either("waiter", "waitress")>> arrives to collect the fresh batch.
+	당신은 샘의 레시피를 이용하여, 특별한 재료 없이 빵을 만든다. <<print either("웨이터", "웨이트리스")>>가 들어와 갓 구운 빵들을 들고 나간다.
 	<br><br>
-	You're cleaning up when Sam enters the kitchen.
-	"Buns aren't selling today," <<he>> says, deflated. "They didn't have the smell of your good ones. I don't want to be pushy, but I know you can do better."
+	청소를 하고 있자니 샘이 주방에 들어온다. 
+	"오늘은 빵이 그닥 잘 팔리지 않았어." <<hePost "이">> 기죽은 모습으로 말한다. "네가 잘 만들었을 때의 그 냄새가 안 나더라고. 재촉하고 싶은 건 아니지만, 이것보다 더 잘 할 수 있다는 건 너도 알잖아."
 	<br><br>
 
-	"Still," <<he>> continues. "You've earned this." <<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+	"그래도." <<hePost "이">> 말을 이어나간다. "일은 열심히 했으니까." <<HePost "은">> <<moneyGain 10>>를 건네준다.
 	<br><br>
 
 <</if>>
 
 <<pass 50>>
-<<timeTrackingEndCafe>>
 
-<<link [[Next|Ocean Breeze]]>><<endevent>><</link>>
+<<link [[다음|Ocean Breeze]]>><<endevent>><</link>>
 <br>
 
 :: Chef Work Regular
@@ -498,119 +497,118 @@ You make sure you're alone in the kitchen, and place a bowl in front of you.
 
 <<npc Sam>><<person1>>
 <<pass 60>>
-<<timeTrackingEndCafe>>
-You prepare the cream following Sam's recipe. A <<print either("waiter","waitress")>> arrives to collect the fresh batch.
+당신은 샘의 레시피를 이용하여 크림을 만든다. <<print either("웨이터", "웨이트리스")>>가 들어와 갓 구운 빵들을 들고 나간다.
 <br><br>
-You're cleaning up when Sam enters the kitchen.
-"Buns aren't selling today," <<he>> says, deflated. "They didn't have the smell of your good ones. I don't want to be pushy, but I know you can do better."
-<br><br>
-
-"Still," <<he>> continues. "You've earned this." <<He>> hands you <<money 1000 "cafeChef">><<printmoney 1000>>.
+청소를 하고 있자니 샘이 주방에 들어온다. 
+"오늘은 빵이 그닥 잘 팔리지 않았어." <<hePost "이">> 기죽은 모습으로 말한다. "네가 잘 만들었을 때의 그 냄새가 안 나더라고. 재촉하고 싶은 건 아니지만, 이것보다 더 잘 할 수 있다는 건 너도 알잖아."
 <br><br>
 
-<<link [[Next|Ocean Breeze]]>><<endevent>><</link>>
+"그래도." <<hePost "이">> 말을 이어나간다. "일은 열심히 했으니까." <<HePost "은">> <<moneyGain 10>>를 건네준다.
+<br><br>
+
+<<link [[다음|Ocean Breeze]]>><<endevent>><</link>>
 <br>
 
 :: Chef Photographer
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
 <<npc Sam>><<person1>>
-You approach Sam. <<He>> hunches over a table, wiping it. <<He>> smiles when <<he>> sees you. "Have you thought about my suggestion?" <<he>> asks.
+당신은 샘에게 다가간다. <<HePost "은">> 테이블을 닦고 있다. 당신을 보자 <<hePost "이">> 미소 짓는다. "내 제안에 대해서는 생각 해봤어?" <<hePost "이">> 묻는다.
 <br><br>
 <<set $chef_state to 4>>
 <<if $speech_attitude is "meek">>
-	You nod. "It's very kind of you to offer," you say. "I'd be happy to help."
+	당신은 고개를 끄덕인다. "그런 제안을 해주셔서 정말 감사드려요." 당신이 말한다. "기꺼이 도와드릴게요."
 <<elseif $speech_attitude is "bratty">>
-	You nod. "As long as you're sure the photographer isn't some pervert," you say. "I'm in."
+	당신은 고개를 끄덕인다. "그 사진사가 변태가 아니라면야." 당신이 말한다. "할게요."
 <<else>>
-	You nod. "I'm in," you say.
+	당신은 고개를 끄덕인다. "할게요." 당신이 말한다.
 <</if>>
 <br><br>
 
-Sam claps <<his>> hands together. "I'm so happy to hear it," <<he>> says. "Good timing too. The photographer just called with an address."
-<<He>> hands you a slip of paper.
-"<<nnpc_He "Niki">> has a studio on <span class="gold">Nightingale Street.</span> Head on over when you're ready, and just let <<nnpc_him "Niki">> know who you are."
+샘은 <<his_ yi>> 손뼉을 친다. "정말 고마워." <<hePost "이">> 말한다. "시기적절하게 와주기도 했고. 방금 그 사진사가 주소를 전해줬거든." 
+<<HePost "은">> 당신에게 종이 한 장을 건네준다. 
+"<span class="gold">나이팅게일 가</span>에 스튜디오가 있다더라. 준비가 된다면 그쪽으로 가서, 카페에서 왔다고 말하면 될 거야."
 <br><br>
-Sam returns to work, whistling all the while.
+샘은 콧노래를 부르며 다시 일을 계속한다.
 <br><br>
 <<endevent>>
-<<link [[Next|Ocean Breeze]]>><</link>>
+<<link [[다음|Ocean Breeze]]>><</link>>
 <br>
 
 :: Chef Opening
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<set $chef_state to 9>>
 <<npc Sam>><<person1>>
-You enter the Ocean Breeze. Sam approaches you and clasps your hands in <<his>> own. "Are you ready?" <<he>> asks. You nod.
+당신은 오션 브리즈에 들어간다. 샘이 다가와서는 당신의 손을 붙잡는다. "준비 됐니?" <<hePost "이">> 묻는다. 당신은 고개를 끄덕인다.
 <br><br>
-"I'll prepare things here," <<he>> says. "You only need to worry about yourself. You need to make a proper entrance." <<He>> waves a
+"준비는 내가 여기서 할게." <<hePost "이">> 말한다. "다른 곳에는 신경쓰지 말고. 입장할 때 제대로 하고 말이야." <<HePost "은">> 손짓으로
 <<endevent>><<generatey1>><<generate2>><<person1>>
-<<person>> over. You recognise <<him>> from the orphanage. "We've set up somewhere for you to get ready nearby. My new employee here will show you."
+<<person_ ul>> 부른다. 고아원에서 본 아이다. "근처에서 네가 기다릴 수 있을만한 장소를 준비해뒀어. 여기 내 새 직원이 안내해줄 거야."
 <br><br>
 
-You follow the <<person>> out the back, and cross the street. <<He>> takes you to an old house at the edge of the residential district.
+당신은 <<person_ ul>> 따라 뒤쪽으로 나가, 길을 건넌다. <<HePost "은">> 거주구 외곽의 낡은 집으로 데려다준다.
 <br><br>
 
-<<link [[Next|Chef Opening 2]]>><</link>>
+<<link [[다음|Chef Opening 2]]>><</link>>
 <br>
 
 :: Chef Opening 2
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
-<<He>> turns to you once inside. "Lots of important people will be coming tonight," <<he>> says. "People from outside town."
-<<He>> looks around, as if afraid <<hes>> being watched. "You need to tell them about Bailey. And the orphanage. I don't think we'll get another chance like this."
+안에 들어가자 <<hePost "이">> 당신을 쳐다본다. "오늘 밤에는 중요한 사람들이 굉장히 많이 올 거야." <<hePost "이">> 말한다. "도시 밖에서 온 사람들 말이야." 
+<<HePost "은">> 마치 누군가 보는 걸 두려워하듯 주변을 둘러본다. "그 사람들한테 베일리에 대해 알려야 해. 고아원에 대해서도 말이야. 이런 기회가 또 올 것 같지는 않아."
 <br><br>
 
-<<He>> looks at <<his>> feet. "I'm sorry," <<he>> says. "I shouldn't have said anything. It's not fair for you to take such a risk."
+<<HePost "은">> 제 발을 내려다본다. "미안." <<hePost "이">> 말한다. "그런 말은 하지 않았어야 했던 것 같아. 너한테 그런 위험 부담을 전부 지라고 하는 건 부당하니까 말이야."
 <br><br>
 
-<<Hes>> interrupted by another door opening. A <<person2>><<person>> sticks <<his>> head out. "What you two yapping about? Get in here. The party starts soon."
+누군가 문을 여는 바람에 <<hePost "은">> 말을 멈춘다. <<person2>><<personPost "이">> 머리를 들이민다. "너네 둘은 뭘 떠들고 있어? 빨리 와. 곧 파티가 시작될 거야."
 <br><br>
 
-<<link [[Next|Chef Opening 3]]>><</link>>
+<<link [[다음|Chef Opening 3]]>><</link>>
 <br>
 
 :: Chef Opening 3
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
-You enter the next room. The <<person1>><<person>> shuffles in behind you.
+당신은 옆방에 들어간다. <<person1>><<personPost "은">> 당신의 뒤에서 느릿느릿 따라오고 있다.
 <br><br>
 
-"You'll need to dress nicely," the <<person2>><<person>> says.
+"이런 자리에선 잘 차려입어야 해." <<person2>><<personPost "이">> 말한다.
 
 <<if $worn.upper.type.includes("formal") and $worn.lower.type.includes("formal")>>
-	"It looks like you've got that covered though. We went ahead and got an outfit for you, should you prefer it."
-	<<He>> gestures at a rack near the window, where a red ball gown hangs beside a tuxedo shirt, jacket and trousers.
+	"그 부분에 대해서는 이미 생각해뒀던 것 같네. 사실 널 위한 옷도 준비를 해두긴 했는데 말이야, 그냥 맘에 드는 쪽을 골라." 
+	<<HePost "은">> 창가에 있는 받침대를 가리킨다. 거기에는 빨간 무도회복과 턱시도 자켓, 턱시도 바지가 걸려있다.
 	<br><br>
 
-	<<link [[Wear current clothes|Chef Opening Current]]>><</link>>
+	<<link [[지금 옷을 그대로 입고 간다|Chef Opening Current]]>><</link>>
 	<br>
 	<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "m">>
 		<span class="red">The ear slime refuses to allow you to wear the gown.</span>
 	<<else>>
-		<<link [[Wear gown|Chef Opening Gown]]>><</link>>
+		<<link [[무도회복을 입는다|Chef Opening Gown]]>><</link>>
 	<</if>>
 	<br>
 	<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "f">>
 		<span class="red">The ear slime refuses to allow you to wear the tux.</span>
 	<<else>>
-		<<link [[Wear tux|Chef Opening Tuxedo]]>><</link>>
+		<<link [[턱시도를 입는다|Chef Opening Tuxedo]]>><</link>>
 	<</if>>
 	<br>
 
 <<else>>
-	"We went and got an outfit for you." <<He>> gestures at a rack near the window, where a red ball gown hangs beside a tuxedo shirt, jacket and trousers.
+	"널 위한 옷을 미리 준비해뒀어." <<HePost "은">> 창가에 있는 받침대를 가리킨다. 거기에는 빨간 무도회복과 턱시도 자켓, 턱시도 바지가 걸려있다.
 	<br><br>
 	<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "m">>
 		<span class="red">The ear slime refuses to allow you to wear the gown.</span>
 	<<else>>
-		<<link [[Wear gown|Chef Opening Gown]]>><</link>>
+		<<link [[무도회복을 입는다|Chef Opening Gown]]>><</link>>
 	<</if>>
 	<br>
 	<<if $earSlime.forcedDressing and $earSlime.forcedDressing.type is "f">>
 		<span class="red">The ear slime refuses to allow you to wear the tux.</span>
 	<<else>>
-		<<link [[Wear tux|Chef Opening Tuxedo]]>><</link>>
+		<<link [[턱시도를 입는다|Chef Opening Tuxedo]]>><</link>>
 	<</if>>
 	<br>
 
@@ -619,118 +617,118 @@ You enter the next room. The <<person1>><<person>> shuffles in behind you.
 :: Chef Opening Current
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
-The <<person2>><<person>> nods. "One moment," <<he>> says, leaving the room.
-<<He>> returns soon after, carrying a large mirror.
-The <<person1>><<person>> pushes a chair in front of it, and the <<person2>><<person>> gestures for you to take a seat.
+<<person2>><<personPost "은">> 고개를 끄덕인다. "잠시만." <<hePost "은">> 그렇게 말하고는 방을 나선다. 
+<<HePost "은">> 곧 커다란 거울을 하나 들고 돌아온다. 
+<<person1>><<personPost "이">> 그 앞에 의자를 가져다 놓고, <<person2>><<personPost "이">> 당신에게 거기에 앉으라며 손짓한다.
 <br><br>
 
-You sit still as the <<fullGroup>> carefully apply makeup and trim your hair.
-It takes a while. "Sam wants you looking your best," the <<person2>><<person>> says. "A lot of people will be there."
+당신이 가만히 앉아있는 동안 <<fullGroupPost "이">> 조심스럽게 당신에게 화장을 해주고 머리카락을 다듬어준다.
+거기에 시간이 약간 걸린다. "샘은 네가 최대한 빛나보이길 원하거든." <<person2>><<personPost "이">> 말한다. "정말 많은 사람들이 참석할 거야."
 <br><br>
 
 <<pass 60>>
 
-<<link [[Next|Chef Opening 4]]>><</link>>
+<<link [[다음|Chef Opening 4]]>><</link>>
 <br>
 
 :: Chef Opening Gown
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $player.gender_appearance is "m">>
-	The <<person>> laughs. "I meant the other one," <<he>> says. "But as you like. You're the star."
+	<<personPost "이">> 웃음을 터트린다. "다른 쪽을 말했던 거긴 한데." <<hePost "이">> 말한다. "그치만 좋을대로 해. 주역은 너니까 말이야."
 <<else>>
-	"I bet it'll look cute on you," the <<person>> says.
+	"굉장히 귀여워 보일 거야." <<personPost "이">> 말한다.
 <</if>>
 <br><br>
 
 <<upperwear 9 red>>
 
-You get dressed in a large cupboard. The <<person1>><<person>> claps when <<he>> sees you. They've set up a tall mirror, and pushed a chair in front of it.
+당신은 커다란 찬장 안에서 옷을 갈아입는다. 옷을 입고 나온 당신을 보자 <<person1>><<personPost "이">> 박수를 친다. 둘은 커다란 거울을 세워놓고는, 그 앞에 의자를 가져다 놓았다.
 <br><br>
 
-You sit still as the <<fullGroup>> carefully apply makeup and trim your hair. It takes a while.
-"Sam wants you looking your best," the <<person2>><<person>> says. "A lot of people will be there."
+당신이 가만히 앉아있는 동안 <<fullGroupPost "이">> 조심스럽게 당신에게 화장을 해주고 머리카락을 다듬어준다. 거기에 시간이 약간 걸린다.
+"샘은 네가 최대한 빛나보이길 원하거든." <<person2>><<personPost "이">> 말한다. "정말 많은 사람들이 참석할 거야."
 <br><br>
 
 <<pass 60>>
 
-<<link [[Next|Chef Opening 4]]>><</link>>
+<<link [[다음|Chef Opening 4]]>><</link>>
 <br>
 
 :: Chef Opening Tuxedo
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
 <<if $player.gender_appearance is "f">>
-	The <<person>> laughs. "I meant the other one," <<he>> says. "But as you like. You're the star."
+	<<personPost "이">> 웃음을 터트린다. "다른 쪽을 말했던 거긴 한데." <<hePost "이">> 말한다. "그치만 좋을대로 해. 주역은 너니까 말이야."
 <<else>>
-	"I bet it'll look cute on you," the <<person>> says.
+	"굉장히 귀여워 보일 거야." <<personPost "이">> 말한다.
 <</if>>
 <br><br>
 
 <<upperwear 15>>
 <<lowerwear 16>>
 
-You get dressed in a large cupboard. The <<person1>><<person>> claps when <<he>> sees you. They've set up a tall mirror, and pushed a chair in front of it.
+당신은 커다란 찬장 안에서 옷을 갈아입는다. 옷을 입고 나온 당신을 보자 <<person1>><<personPost "이">> 박수를 친다. 둘은 커다란 거울을 세워놓고는, 그 앞에 의자를 가져다 놓았다.
 <br><br>
 
-You sit still as the <<fullGroup>> carefully apply makeup and trim your hair.
-It takes a while. "Sam wants you looking your best," the <<person2>><<person>> says. "A lot of people will be there."
+당신이 가만히 앉아있는 동안 <<fullGroupPost "이">> 조심스럽게 당신에게 화장을 해주고 머리카락을 다듬어준다.
+거기에 시간이 약간 걸린다. "샘은 네가 최대한 빛나보이길 원하거든." <<person2>><<personPost "이">> 말한다. "정말 많은 사람들이 참석할 거야."
 <br><br>
 
 <<pass 60>>
 
-<<link [[Next|Chef Opening 4]]>><</link>>
+<<link [[다음|Chef Opening 4]]>><</link>>
 <br>
 
 :: Chef Opening 4
 <<set $outside to 0>><<set $location to "town">><<effects>>
 
-"You look amazing," the <<person1>><<person>> says once they're finished.
+"환상적인데." 다 끝나자 <<person1>><<personPost "이">> 말한다.
 <br><br>
 
-A limo waits for you outside. A <<generate3>><<person3>><<person>> opens the door when <<he>> sees you. "People are arriving," <<he>> says. "Sam's waiting."
+밖에서 리무진 한 대가 당신을 기다리고 있다. 당신이 나오자 <<generate3>><<person3>><<personPost "이">> 차문을 연다. "사람들이 도착하고 있어." <<hePost "이">> 말한다. "샘도 기다리고 있고."
 <br><br>
 <<endevent>>
 
-<<link [[Next|Chef Opening 5]]>><</link>>
+<<link [[다음|Chef Opening 5]]>><</link>>
 <br>
 
 :: Chef Opening 5
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-The limo approaches the cafe. You look out the window, and see a large crowd gathered beneath a giant picture, mounted above the cafe entrance.
-It's a picture of you, smiling beneath a chef's hat and pouring <<if $chef_picture is "lewd">>"cream"<<else>>cream<</if>> down your chest from a ladle.
+리무진은 카페에 도착한다. 창문 밖을 내다보자, 카페 입구에 세워진 커다란 사진 밑에 사람들이 잔뜩 몰려있는 것이 보인다. 
+셰프 모자를 쓰고 미소를 지으며 국자를 가슴팍으로 들어올려 <<if $chef_picture is "lewd">>"크림"<<else>>크림<</if>>을 붓고 있는 당신의 사진이다.
 <br><br>
 
 <<if $chef_picture is "lewd">>
-	<span class="lewd">You remember exactly what the cream is made of, and blush.</span>
+	<span class="lewd">당신은 저 크림에 무엇이 들어갔는지를 떠올리고는 얼굴을 붉힌다.</span>
 	<<garousal>><<arousal 600>>
 	<br><br>
 <</if>>
-<<if C.npc.Avery.state is "active" and !$avery_injury>>
-	The limo halts, and a <<print either("waiter", "waitress")>> opens the door. You're met by applause.
+<<if C.npc.Avery.state is "active">>
+	리무진이 멈추고, <<print either("웨이터", "웨이트리스")>> 한 명이 문을 열어준다. 사람들이 일제히 박수를 친다.
 	<<llltrauma>><<trauma -24>>
 	<br><br>
-	You're walking down the red carpet when a figure appears at your side.
-	<<npc Avery>><<person1>> It's Avery. "I had no idea you were a culinary prodigy," <<he>> says. "I was surprised to see your face up in lights."
-	<<He>> holds out <<his>> hand. "Let me walk you in."
+	레드 카펫 위를 걸어가고 있자니 옆에서 누군가 나타난다. 
+	<<npc Avery>><<person1>>에이버리다. "네가 요리에 재능이 있는 줄은 몰랐는데." <<hePost "이">> 말한다. "조명이 네 얼굴을 비추는 걸 보고 깜짝 놀랐어." 
+	<<HePost "은">> <<his_ yi>> 손을 내민다. "안쪽까지 에스코트 해줄게."
 	<br><br>
-	<<link [[Take Avery's hand|Chef Opening Avery Accept]]>><<set $chef_avery to true>><<npcincr Avery love 1>><</link>><<glove>>
+	<<link [[에이버리의 손을 잡는다|Chef Opening Avery Accept]]>><<set $chef_avery to true>><<npcincr Avery love 1>><</link>><<glove>>
 	<br>
-	<<link [[Refuse Avery's hand|Chef Opening Avery Refuse]]>><<set $chef_avery to false>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<garage>><<llove>>
+	<<link [[에이버리의 손을 거절한다|Chef Opening Avery Refuse]]>><<set $chef_avery to false>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<garage>><<llove>>
 	<br>
 <<else>>
-	The limo halts, and a <<print either("waiter", "waitress")>> opens the door. You're met by applause.
+	리무진이 멈추고, <<print either("웨이터", "웨이트리스")>> 한 명이 문을 열어준다. 사람들이 일제히 박수를 친다.
 	<<llltrauma>><<trauma -24>>
 	<br><br>
-	You walk down the red carpet. You recognise Niki among them.
-	<<npc Sam>><<person1>> Sam meets you at the entrance, wearing <<his>> <<if $pronoun is "m">>suit and tie<<else>>red dress<</if>>.
+	당신은 레드 카펫 위를 걸어간다. 군중 속에서 니키가 보인다. 
+	<<npc Sam>><<person1>>카페 입구에는 샘이 <<if $pronoun is "m">>정장에 넥타이를 맨 채로<<else>>빨간 드레스를 입은 채로<</if>> 서있다.
 	<br><br>
-	"This is everything I've wished for," <<he>> says. "Thank you for making it come true." <<He>> hugs you, eliciting a greater cheer from the audience.
-	<<ggglove>><<npcincr Sam love 10>>
+	"전부 다 내가 꿈꾸던 대로야." <<hePost "이">> 말한다. "내 꿈을 실현시켜줘서 고마워." <<HePost "은">> 당신을 껴안고, 그 광경에 사람들은 더더욱 크게 환호성을 내지른다.
+	<<gglove>><<npcincr Sam love 3>>
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Chef Opening 6]]>><</link>>
+	<<link [[다음|Chef Opening 6]]>><</link>>
 	<br>
 <</if>>
 
@@ -738,158 +736,154 @@ It's a picture of you, smiling beneath a chef's hat and pouring <<if $chef_pictu
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You take Avery's hand, and together you walk down the red carpet. <<takeHandholdingVirginity "Avery" "consensual">>
+당신은 에이버리의 손을 붙잡고는 함께 레드 카펫 위를 걸어간다. 사진사 몇 명이 그 광경을 찍는다. 그 중에는 니키도 있다.
 <br><br>
 
-Several photographers snap pictures. You recognise Niki among them.
+<<endevent>><<npc Sam>><<person1>>카페 입구에는 샘이 <<if $pronoun is "m">>정장에 넥타이를 맨 채로<<else>>빨간 드레스를 입은 채로<</if>> 서있다.
 <br><br>
 
-<<endevent>><<npc Sam>><<person1>> Sam meets you at the entrance, wearing <<his>> <<if $pronoun is "m">>suit and tie<<else>>red dress<</if>>.
-<br><br>
-
-"This is everything I've wished for," <<he>> says. "Thank you for making it come true." <<He>> hugs you, eliciting a greater cheer from the audience.
-<<ggglove>><<npcincr Sam love 10>>
+"전부 다 내가 꿈꾸던 대로야." <<hePost "이">> 말한다. "내 꿈을 실현시켜줘서 고마워." <<HePost "은">> 당신을 껴안고, 그 광경에 사람들은 더더욱 크게 환호성을 내지른다.
+<<gglove>><<npcincr Sam love 3>>
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening 6]]>><</link>>
+<<link [[다음|Chef Opening 6]]>><</link>>
 <br>
 
 :: Chef Opening Avery Refuse
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You turn your back on Avery. You hear <<him>> take a step after you, but doesn't follow further.
-You walk down the red carpet. Several photographers snap pictures. You recognise Niki among them.
+당신은 에이버리에게서 등을 돌린다. <<HePost "이">> 당신을 따라 발걸음을 옮기는 소리가 들려오긴 하나, 더 이어지진 않는다. 
+당신은 레드 카펫 위를 걸어내려간다. 사진사 몇 명이 그 광경을 찍는다. 그 중에는 니키도 있다.
 <br><br>
 
-<<endevent>><<npc Sam>><<person1>> Sam meets you at the entrance, wearing <<his>> <<if $pronoun is "m">>suit and tie<<else>>red dress<</if>>.
+<<endevent>><<npc Sam>><<person1>>카페 입구에는 샘이 <<if $pronoun is "m">>정장에 넥타이를 맨 채로<<else>>빨간 드레스를 입은 채로<</if>> 서있다.
 <br><br>
 
-"This is everything I've wished for," <<he>> says. "Thank you for making it come true." <<He>> hugs you, eliciting a greater cheer from the audience.
-<<ggglove>><<npcincr Sam love 10>>
+"전부 다 내가 꿈꾸던 대로야." <<hePost "이">> 말한다. "내 꿈을 실현시켜줘서 고마워." <<HePost "은">> 당신을 껴안고, 그 광경에 사람들은 더더욱 크게 환호성을 내지른다.
+<<gglove>><<npcincr Sam love 3>>
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening 6]]>><</link>>
+<<link [[다음|Chef Opening 6]]>><</link>>
 <br>
 
 :: Chef Opening 6
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<earnFeat "Head Chief">>
-You walk through the fancy doors, entering the cafe proper. More people await you. Another cheer erupts.
-A podium has been set up near the entrance, viewable from nearly everywhere in the building.
+화려한 문을 열고, 당신은 카페 안으로 들어가자. 그 안에는 더 많은 사람들이 당신을 기다리고 있다. 다시 한 번 환호성이 터져나온다. 
+입구 근처에는 연단이 설치된 상태이고, 건물 안이라면 어디서든 볼 수 있게 되어있다.
 <br><br>
-<<npc Bailey>>
+<<npc Bailey>><<npc Avery 2>>
 <<person1>>
-Someone grasps your arm. <span class="purple">It's Bailey.</span>
-<<He>> gives you <<his>> best smile. It doesn't look sincere. "You've done well," <<he>> says through <<his>> teeth. "Now don't fuck it up."
+누군가 당신의 팔을 붙잡는다. <span class="purple">베일리다.</span> 
+<<HePost "은">> 이전까지 본 적 없는 최고의 미소를 지어보인다. 진심이 담긴 것 같지는 않다. "잘 해줬구나." <<HePost "은">> 이를 악문 채로 말한다. "그러니까 망칠 생각따윈 말고."
 <br><br>
 
 <<if $chef_avery>>
-	<<npc Avery 2>>
 	<<if $bailey_avery_met isnot 1>>
 		<<set $bailey_avery_met to 1>>
-		Avery grasps Bailey's hand, and forcefully shakes it.
-		"I'm Avery," <<person2>><<he>> says, a hint of anger in <<his>> voice. "I don't believe we've met."
+		에이버리가 베일리의 손을 붙잡고는, 강제로 악수를 한다. 
+		"전 에이버리입니다." <<person2>><<HePost "이">> 목소리에 약간의 분노를 담은 채로 말한다. "만나뵌 적이 없는 것 같은데요."
 		<br><br>
-		Your heart skips a beat as Bailey reaches into <<person1>><<his>> jacket, but <<his>> arm changes course.
-		<<He>> pulls a handkerchief from <<his>> pocket. "A pleasure," <<he>> says. "I was talking to my ward. Please, a moment's privacy."
+		베일리가 <<person1>><<his_ yi>> 자켓 안쪽으로 손을 뻗는 걸 보자 심장이 멎을 것 같으나, 곧 <<hePost "이">> 손의 진로를 바꾼다.
+		<<HePost "은">> 주머니에서 손수건을 꺼내든다. "만나서 반갑습니다." <<hePost "이">> 말한다. "제 피후견인과 이야기를 나누던 중이었습니다. 잠시 자리를 좀 비켜주시죠."
 		<br><br>
-		They stare at each other, until Avery turns to you. "I've some old friends I need to catch up with," <<person2>><<he>> says.
-		"And I'm sure many others want some time with you."
+		둘은 한동안 서로 쳐다보다가, 곧 에이버리가 당신을 바라본다. "간만에 옛 친구들도 봐야 해서 말이야." <<person2>><<hePost "이">> 말한다.
+		"게다가 다들 너하고 시간을 보내고 싶을테지."
 		<br><br>
-		Bailey watches <<him>> leave, wiping <<person1>><<his>> hand with the handkerchief.
+		베일리는 <<hePost "이">> 떠나가는 걸 지켜보다가, <<person1>>손수건으로 <<his_ yi>> 손을 닦는다.
 		<br><br>
 
-		<<link [[Slap Bailey|Chef Opening Bailey Slap]]>><<trauma -6>><</link>><<ltrauma>>
+		<<link [[베일리의 뺨을 때린다|Chef Opening Bailey Slap]]>><<trauma -6>><</link>><<ltrauma>>
 		<br>
-		<<link [[Thank Bailey|Chef Opening Bailey Thank]]>><</link>>
+		<<link [[베일리에게 감사를 표한다|Chef Opening Bailey Thank]]>><</link>>
 		<br>
-		<<link [[Remain silent|Chef Opening Bailey Silent]]>><</link>>
+		<<link [[조용히 있는다|Chef Opening Bailey Silent]]>><</link>>
 		<br>
 	<<else>>
-		Avery grasps Bailey's hand, and forcefully shakes it.
-		"It's good to see you again," <<person2>><<he>> says, a hint of anger in <<his>> voice.
+		에이버리가 베일리의 손을 붙잡고는, 강제로 악수를 한다. 
+		"또 뵙네요." <<person2>><<HePost "이">> 목소리에 약간의 분노를 담은 채로 말한다.
 		<br><br>
-		Your heart skips a beat as Bailey reaches into <<person1>><<his>> jacket, but <<his>> arm changes course.
-		<<He>> pulls a handkerchief from <<his>> pocket. "A pleasure," <<he>> says. "I was talking to my ward. Please, a moment's privacy."
+		베일리가 <<person1>><<his_ yi>> 자켓 안쪽으로 손을 뻗는 걸 보자 심장이 멎을 것 같으나, 곧 <<hePost "이">> 손의 진로를 바꾼다.
+		<<HePost "은">> 주머니에서 손수건을 꺼내든다. "만나서 반갑습니다." <<hePost "이">> 말한다. "제 피후견인과 이야기를 나누던 중이었습니다. 잠시 자리를 좀 비켜주시죠."
 		<br><br>
-		They stare at each other, until Avery turns to you. "I've some old friends I need to catch up with," <<person2>><<he>> says.
-		"And I'm sure many others want some time with you."
+		둘은 한동안 서로 쳐다보다가, 곧 에이버리가 당신을 바라본다. "간만에 옛 친구들도 봐야 해서 말이야." <<person2>><<hePost "이">> 말한다.
+		"게다가 다들 너하고 시간을 보내고 싶을테지."
 		<br><br>
-		Bailey watches <<him>> leave, wiping <<person1>><<his>> hand with the handkerchief.
+		베일리는 <<hePost "이">> 떠나가는 걸 지켜보다가, <<person1>>손수건으로 <<his_ yi>> 손을 닦는다.
 		<br><br>
 
-		<<link [[Slap Bailey|Chef Opening Bailey Slap]]>><<trauma -6>><<control 10>><</link>><<gcontrol>><<ltrauma>>
+		<<link [[베일리의 뺨을 때린다|Chef Opening Bailey Slap]]>><<trauma -6>><<control 10>><</link>><<gcontrol>><<ltrauma>>
 		<br>
-		<<link [[Thank Bailey|Chef Opening Bailey Thank]]>><</link>>
+		<<link [[베일리에게 감사를 표한다|Chef Opening Bailey Thank]]>><</link>>
 		<br>
-		<<link [[Remain silent|Chef Opening Bailey Silent]]>><</link>>
+		<<link [[조용히 있는다|Chef Opening Bailey Silent]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
-	Bailey looks away from you. You realise that, for the first time since your arrival, you're no longer the centre of attention.
+	베일리는 당신에게서 시선을 돌린다. 곧 당신은 카페에 도착하고 나서 처음으로 사람들의 이목이 자신에게로 집중되지 않았다는 걸 깨닫는다.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Chef Opening 7]]>><</link>>
+	<<link [[다음|Chef Opening 7]]>><</link>>
 	<br>
 <</if>>
 
 :: Chef Opening Bailey Slap
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You slap Bailey across the cheek. <<He>> barely flinches.
-The room quiets for a moment, before breaking into laughter and excitement. Bailey leans closer, <<his>> face contorted by that fake smile.
+당신은 베일리의 뺨을 후려갈긴다. <<HePost "은">> 움찔거리지도 않는다. 
+카페 안이 잠시 조용해졌다가, 곧 사람들은 흥분에 차서 웃음을 터트린다. 베일리가 가까이 몸을 기울인다. <<his_ yi>> 얼굴이 가짜 미소로 일그러져 있다.
 <br><br>
 
-"Best not try that when we're alone," <<he>> whispers. "You're worth more with both hands attached."
+"우리 둘만 있을 때에는 그러지 않는게 좋을 거다." <<hePost "이">> 속삭인다. "넌 양손이 다 멀쩡히 붙어있을 때 더 쓸모가 있으니 말이야."
 <br><br>
 
-<<He>> pulls away as, for the first time since you arrived, attention is diverted elsewhere.
+<<HePost "은">> 당신을 밀어낸다. 곧 카페에 도착하고 나서 처음으로 사람들의 이목이 다른 곳으로 돌려진다.
 <br><br>
 
 <<endevent>>
-<<link [[Look|Chef Opening 7]]>><</link>>
+<<link [[그쪽을 본다|Chef Opening 7]]>><</link>>
 <br>
 
 :: Chef Opening Bailey Thank
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
 <<if $speech_attitude is "meek">>
-	"Thank you," you say. "Avery can be scary."
+	"고마워요." 당신이 말한다. "가끔 에이버리는 무섭게 굴 때가 있어요."
 <<elseif $speech_attitude is "bratty">>
-	"Thanks," you say. "You've made my evening slightly less unpleasant."
+	"고마워요." 당신이 말한다. "덕분에 이 저녁이 조금 덜 기분 나빠졌네요."
 <<else>>
-	"Thank you," you say. "I needed some space."
+	"고마워요." 당신이 말한다. "마침 공간이 좀 필요했는데 말이에요."
 <</if>>
 <br><br>
 
-Bailey leans in. "When you deliver your speech," <<he>> whispers. "Don't say anything you'll regret."
+베일리가 몸을 가까이 기울인다. "연설을 할 때 말이다." <<hePost "이">> 속삭인다. "후회할만한 말은 하지 마."
 <br><br>
 
-<<He>> pulls away as, for the first time since you arrived, attention is diverted elsewhere.
+<<HePost "은">> 당신을 밀어낸다. 곧 카페에 도착하고 나서 처음으로 사람들의 이목이 다른 곳으로 돌려진다.
 <br><br>
 
 <<endevent>>
-<<link [[Look|Chef Opening 7]]>><</link>>
+<<link [[그쪽을 본다|Chef Opening 7]]>><</link>>
 <br>
 
 :: Chef Opening Bailey Silent
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
 <<if $speech_attitude is "meek">>
-	You don't say anything. You just stare at your feet. Bailey looks away from you.
-	You realise that, for the first time since your arrival, you're no longer the centre of attention.
+	당신은 아무 말도 없이 발만 내려다본다. 베일리가 당신에게서 시선을 돌린다. 
+	곧 당신은 카페에 도착하고 나서 처음으로 사람들의 이목이 자신에게로 집중되지 않았다는 걸 깨닫는다.
 <<elseif $speech_attitude is "bratty">>
-	You glare at Bailey, but don't say anything. <<He>> looks away from you.
-	You realise that, for the first time since your arrival, you're no longer the centre of attention.
+	당신은 베일리를 노려보나, 별다른 말은 하지 않는다. <<HePost "은">> 당신에게서 시선을 돌린다.
+	곧 당신은 카페에 도착하고 나서 처음으로 사람들의 이목이 자신에게로 집중되지 않았다는 걸 깨닫는다.
 <<else>>
-	You remain silent. Bailey seems satisfied. <<He>> looks away from you.
-	You realise that, for the first time since your arrival, you're no longer the centre of attention.
+	당신은 가만히 있는다. 베일리는 만족한 눈치다. <<HePost "은">> 당신에게서 시선을 돌린다.
+	곧 당신은 카페에 도착하고 나서 처음으로 사람들의 이목이 자신에게로 집중되지 않았다는 걸 깨닫는다.
 <</if>>
 <br><br>
 <<endevent>>
-<<link [[Look|Chef Opening 7]]>><</link>>
+<<link [[그쪽을 본다|Chef Opening 7]]>><</link>>
 
 :: Chef Opening 7
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
@@ -898,195 +892,197 @@ Bailey leans in. "When you deliver your speech," <<he>> whispers. "Don't say any
 
 <<if C.npc.Quinn.init is 1>>
 	<<npc Quinn>><<person1>>
-	Mayor Quinn enters the cafe.
-	<<He>> passes <<his>> <<if $pronoun is "f">>fur <</if>> coat to a <<print either("waiter", "waitress")>>, and poses for a photographer.
+	퀸 시장이 카페에 들어온다. 
+	<<HePost "은">> 입고 있던<<if $pronoun is "f">> 모피<</if>> 코트를 <<print either("웨이터", "웨이트리스")>>에게 건네고는 사진사를 위한 포즈를 취한다.
 	<br><br>
 
-	<<He>> looks around the room, <<his>> gaze settling on you.
-	Pushing through the gathered crowd, <<he>> makes <<his>> way over.
-	"It's good to see you again," <<he>> says, grasping your hand and shaking it. <<takeHandholdingVirginity "Quinn">>
+	<<HePost "은">> 카페 내부를 둘러보더니, 곧 시선을 당신에게서 멈춘다. 
+	그러고는 몰려든 사람들 사이를 뚫고 당신에게 다가온다. 
+	"다시 보게 되니 좋구나." <<hePost "은">> 당신의 손을 붙잡고는 흔들며 말한다.
+	<br><br>
+
 <<else>>
 	<<npc Quinn>><<person1>>
-	A middle-aged <<personsimple>> enters the cafe.
-	<<He>> passes <<his>> <<if $pronoun is "f">>fur <</if>> coat to a <<print either("waiter", "waitress")>>, and poses for a photographer.
+	중년 <<personsimplePost>> 한 명이 카페에 들어온다. 
+	<<HePost "은">> 입고 있던<<if $pronoun is "f">> 모피<</if>> 코트를 <<print either("웨이터", "웨이트리스")>>에게 건네고는 사진사를 위한 포즈를 취한다.
 	<br><br>
 
-	<<He>> looks around the room. <<His>> gaze settles on you.
-	Pushing through the gathered crowd, <<he>> makes <<his>> way over.
-	"You must be the star of the show," <<he>> says, grasping your hand and shaking it. <<takeHandholdingVirginity "Quinn" null null true>>
-	"I'm Quinn." You recognise the name. <span class="red"><<Hes>> the mayor.</span>
+	<<HePost "은">> 카페 내부를 둘러보더니, 곧 시선을 당신에게서 멈춘다. 
+	그러고는 몰려든 사람들 사이를 뚫고 당신에게 다가온다. 
+	"네가 이번 쇼의 주역이로구나." <<hePost "은">> 당신의 손을 붙잡고는 흔들며 말한다. 
+	"난 퀸이야." 익숙한 이름이다. <span class="red"><<He_ ga>> 이 도시의 시장이다.</span>
+	<br><br>
 <</if>>
+
+베일리가 몸을 기울이더니 퀸에게 뭔가를 속삭인다. 
+시장은 웃음을 터트린다. "말도 안되는 소리." <<hePost "이">> 말한다. "연설은 계획대로 진행할 걸세." 
+퀸은 다시 당신의 팔을 붙잡고는 자신의 옆으로 데려온다. 니키가 카메라를 손에 든 채로 군중 속에서 나온다.
 <br><br>
 
-Bailey leans in and whispers something to Quinn.
-The mayor laughs. "Nonsense," <<he>> says. "The speech will go ahead."
-Quinn grasps your arm again, and pulls you beside <<him>>. Niki appears from the crowd, camera in hand.
-<br><br>
-
-<<link [[Smile for the camera|Chef Opening Smile]]>><<npcincr Quinn love 1>><<famebusiness 50 "pic">><</link>>
+<<link [[카메라를 보고 웃는다|Chef Opening Smile]]>><<npcincr Quinn love 1>><<famebusiness 50 "pic">><</link>>
 <br>
-<<link [[Pull a funny face|Chef Opening Funny]]>><<npcincr Quinn love 1>><</link>>
+<<link [[웃긴 표정을 짓는다|Chef Opening Funny]]>><<npcincr Quinn love 1>><</link>>
 <br>
-<<link [[Refuse to be photographed|Chef Opening Refuse Photograph]]>><<npcincr Quinn love -1>><</link>>
+<<link [[사진 찍는 걸 거부한다|Chef Opening Refuse Photograph]]>><<npcincr Quinn love -1>><</link>>
 <br>
 
 :: Chef Opening Smile
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You smile with Quinn as Niki takes your picture. Quinn holds up your hand, eliciting a cheer from the gathering audience.
+니키가 사진을 찍는 동안 당신은 퀸과 함게 미소 짓는다. 퀸이 당신의 손을 들어올리자 모여든 군중들이 환호성을 내지른다.
 <br><br>
-"Good luck up there," Quinn says, turning back to you. Someone passes <<him>> a glass of champagne. "Though I'm sure you don't need it."
+"연설 잘 하렴." 퀸이 당신에게서 돌아서며 말한다. 누군가 <<hePost "에게">> 샴페인 한 잔을 건네준다. "알아서도 잘 할 것 같지만 말이야."
 <br><br>
-Bailey whispers something else, and Quinn frowns. "Excuse me," <<he>> says, as much to the crowd as to you.
-Bailey and Quinn walk away from the crowd, talking. You can't make out what they're saying.
+베일리가 뭔가를 다시 속삭이자, 퀸이 얼굴을 굳힌다. "실례하지." <<hePost "은">> 당신과 군중에게 그렇게 말한다. 
+베일리와 퀸은 뭔가를 말하며 군중에게서 멀어져간다. 뭐라 하는지는 들리지 않는다.
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening 8]]>><</link>>
+<<link [[다음|Chef Opening 8]]>><</link>>
 <br>
 
 :: Chef Opening Funny
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You pull a funny face as Niki takes your picture. Someone in the audience laughs.
-Quinn glances at you, and laughs <<himself>>. <<He>> holds up your hand, eliciting a cheer for the gathering crowd.
+니키가 사진을 찍는 동안 당신은 웃긴 표정을 지어보인다. 군중 속의 누군가 웃음을 터트린다. 
+퀸도 당신을 보고는, 곧 웃음을 터트린다. 퀸이 당신의 손을 들어올리자 모여든 군중들이 환호성을 내지른다.
 <br><br>
-"Good luck up there," Quinn says, turning back to you. Someone passes <<him>> a glass of champagne. "Though I'm sure you don't need it."
+"연설 잘 하렴." 퀸이 당신에게서 돌아서며 말한다. 누군가 <<hePost "에게">> 샴페인 한 잔을 건네준다. "알아서도 잘 할 것 같지만 말이야."
 <br><br>
-Bailey whispers something else, and Quinn frowns. "Excuse me," <<he>> says, as much to the crowd as to you.
-Bailey and Quinn walk away from the crowd, talking. You can't make out what they're saying.
+베일리가 뭔가를 다시 속삭이자, 퀸이 얼굴을 굳힌다. "실례하지." <<hePost "은">> 당신과 군중에게 그렇게 말한다. 
+베일리와 퀸은 뭔가를 말하며 군중에게서 멀어져간다. 뭐라 하는지는 들리지 않는다.
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening 8]]>><</link>>
+<<link [[다음|Chef Opening 8]]>><</link>>
 <br>
 
 :: Chef Opening Refuse Photograph
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You wrest yourself free from Quinn's grip. Niki looks at the mayor, unsure what to do. Quinn waves the photographer away.
+당신은 퀸의 손아귀에서 손을 빼낸다. 니키는 어쩔 줄을 몰라하며 시장을 쳐다본다. 퀸은 저리 가라는 듯 손짓을 한다.
 <br><br>
-"Good luck up there," Quinn says, turning back to you. Someone passes <<him>> a glass of champagne. "Though I'm sure you don't need it."
+"연설 잘 하렴." 퀸이 당신에게서 돌아서며 말한다. 누군가 <<hePost "에게">> 샴페인 한 잔을 건네준다. "알아서도 잘 할 것 같지만 말이야."
 <br><br>
-Bailey whispers something else, and Quinn frowns. "Excuse me," <<he>> says, as much to the crowd as to you.
-Bailey and Quinn walk away from the crowd, talking. You can't make out what they're saying.
+베일리가 뭔가를 다시 속삭이자, 퀸이 얼굴을 굳힌다. "실례하지." <<hePost "은">> 당신과 군중에게 그렇게 말한다. 
+베일리와 퀸은 뭔가를 말하며 군중에게서 멀어져간다. 뭐라 하는지는 들리지 않는다.
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening 8]]>><</link>>
+<<link [[다음|Chef Opening 8]]>><</link>>
 <br>
 
 :: Chef Opening 8
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
 <<npc Sam>><<person1>>
-"That was the mayor!" Sam says, rushing to your side. <<He>> pulls a mirror from <<his>> pocket and checks <<his>> hair.
-"<<nnpc_He "Quinn">>'ll introduce you when we're ready for your speech. That shouldn't be long now."
-<<He>> looks around the room. People are finding their seats, and the last of the guests shuffle through the doors.
+"저분이 시장님이셔!" 샘이 당신의 옆으로 달려오며 말한다. <<HePost "은">> 주머니에서 거울을 꺼내고는 머리카락을 점검한다. 
+"네가 연설할 준비를 마치면 <<nnpc_He_ ga "Quinn">> 널 소개하실 거야. 곧 할 거니까 준비해." 
+<<HePost "은">> 카페 내부를 둘러본다. 사람들은 이미 자리를 찾아 앉고 있고, 마지막 남은 손님들이 서둘러 문으로 들어오고 있다.
 <br><br>
 <<endevent>><<npc Quinn>><<person1>>
-You look over at Bailey and Quinn. Bailey seems agitated, but Quinn is more jovial.
-The mayor chuckles, and pulls <<himself>> away from the conversation.
+당신은 베일리와 퀸이 있는 쪽을 바라본다. 베일리는 뭔가 불안한 눈치이나, 퀸은 쾌활한 상태다. 
+시장은 키득거리며 대화를 마친다.
 <br><br>
 <<endevent>><<npc Sam>><<person1>>
-"It's happening," Sam says. "Go sit over there. By the podium." <<He>> looks around the room again.
-"The cream treats should be here by now..." <<He>> rushes into the kitchen, while you take your seat beside the podium.
+"시작한다." 샘이 말한다. "저쪽에 가서 앉아있어. 연단 쪽에 말이야." <<HePost "은">> 다시 한 번 카페 내부를 둘러본다. 
+"크림 빵들이 지금쯤 완성되었어야 하는데..." <<HePost "은">> 주방 쪽으로 달려가고, 당신은 연단 옆 자리에 앉는다.
 <br><br>
 <<endevent>>
-<<link [[Next|Chef Opening 9]]>><</link>>
+<<link [[다음|Chef Opening 9]]>><</link>>
 <br>
 
 :: Chef Opening 9
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You wait as the remaining guests take their seats. It's a large room, and the tables have been packed together quite tightly.
-Others watch from the second floor, glasses in hand. There are a lot of people here, all dressed for the fanciest of occasions.
+당신은 아직 서있는 사람들이 마저 앉을 때까지 기다린다. 카페 내부는 상당히 넓은데도 테이블들이 꽤나 다닥다닥 붙어있다. 
+다른 사람들은 2층에서 손에는 잔을 하나씩 든 채로 보고 있다. 상당히 많은 사람들이 모여들었다. 다들 최대한 차려입고 온 것 같다.
 <br><br>
 
-<<npc Quinn>><<person1>>Quinn steps up to the podium, and the room falls silent.
+<<npc Quinn>><<person1>>퀸이 연단에 올라오자, 카페 내부가 조용해진다.
 <br><br>
 
-"Good evening, <<if maleChance() is 100>>gentlemen<<elseif maleChance() is 0>>ladies<<else>>ladies and gentlemen<</if>>," <<he>> says. "It's my privilege as mayor..."
-<<He>> talks for a while, about investment opportunities in the town, and <<his>> successes in office.
-Your mind wanders, but snaps back to attention when <<he>> gestures at you.
+"좋은 저녁입니다, 신사 숙녀 여러분." <<hePost "이">> 말한다. "시장으로서 여러분과 이렇게 함께하게 되어서..." 
+<<HePost "은">> 잠시동안 도시의 투자 기회나 재직 중의 <<his_ yi>> 성공에 대해서 말을 한다. 
+당신은 잠시 동안 딴생각을 하다가, <<hePost "이">> 당신에게 손짓을 하자 정신을 차린다.
 <br><br>
 
-<<link [[Next|Chef Opening 10]]>><</link>>
+<<link [[다음|Chef Opening 10]]>><</link>>
 
 :: Chef Opening 10
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-"Mere months ago this <<girl>> was a normal student, until <<pshe>> discovered a talent for baking. Now," Quinn says. "<<pShes>> the reason we're all here."
+"몇 달 전만 해도 이 <<girlPost "은">> 평범한 학생에 불과했습니다만, 곧 <<pshe_ nun>> 이렇게 제빵에 대한 재능을 발견하게 되었죠. 자." 퀸이 말한다 "<<pshes_ ga>> 바로 여러분이 다 여기 모인 이유입니다."
 <br><br>
 
-"I'd also like to thank <<pher>> guardian," Quinn continues, gesturing at Bailey, who perches at the edge of the room.
-"<<nnpc_His "Bailey">> hard work protecting and caring for the town's most vulnerable has allowed our young prodigy to flourish." Applause fills the room.
+"또한 <<pher_ yi>> 보호자에게도 감사 인사를 하고 싶군요." 퀸은 말을 계속하며, 가장자리에 앉아있던 베일리를 향해 손짓을 한다. 
+"도시의 가장 중요한 자산을 보호하고 보살핀 <<nnpc_His_ yi "Bailey">> 노력 덕분에 이 영재가 꽃을 피울 수 있었습니다." 카페 안이 박수 소리로 가득 찬다.
 <<gtrauma>><<trauma 6>>
 <br><br>
-Quinn quiets the audience with a wave.
-"But you've heard enough from me," <<he>> continues. "Our world-class chef has a few words too. It's my absolute pleasure to introduce <<phim>>."
-<<He>> steps away from the podium, and waves you up.
+퀸이 손을 내젓자 관중들이 조용해진다. 
+"하지만 여러분들은 이제 제 말 따윈 그만 듣고 싶으시겠죠," <<hePost "이">> 말을 계속한다. "우리의 세계구급 셰프도 할 말이 있다고 합니다. 제가 <<phim_ ul>> 소개할 수 있어서 엄청난 영광입니다."
+<<HePost "은">> 연단에서 내려와, 당신에게 올라가라고 손짓을 한다.
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening 11]]>><</link>>
+<<link [[다음|Chef Opening 11]]>><</link>>
 
 :: Chef Opening 11
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You walk up to the podium. A murmuring fills the room as you do. People hold up their phones, taking pictures.
-Staff move between tables, offering guests cream treats from platters. They're eager to taste them. You doubt they're anything as tasty as yours.
+당신은 연단 위로 걸어 올라간다. 그 광경에 카페 내부가 웅성거림으로 가득 찬다. 사람들은 휴대전화를 꺼내들고는 사진을 찍는다. 
+ 직원들이 테이블 사이를 돌아다니며, 쟁반에서 크림 빵을 사람들 앞에 내려놓는다. 다들 맛을 보지 못해 안달을 낸다. 그치만 당신이 직접 만든 것만큼 맛있을지에 대해서 당신은 회의적이다.
 <br><br>
 
-Everyone watches you, waiting.
+다들 당신을 보며 기다린다.
 <br><br>
 
-<<link [[Tell them the truth about your cream|Chef Opening Truth]]>><<set $chef_speech to "truth">><<stress 12>><<trauma -6>><<famesex 100 "pic">><<set $chef_sus += 30>><</link>><<gggsuspicion>><<ggstress>><<ltrauma>>
+<<link [[크림의 진실에 대해 밝힌다|Chef Opening Truth]]>><<set $chef_speech to "truth">><<stress 12>><<trauma -6>><<famesex 100 "pic">><<set $chef_sus += 30>><</link>><<gggsuspicion>><<ggstress>><<ltrauma>>
 <br>
-<<link [[Tell them of Bailey's tyranny|Chef Opening Bailey]]>><<set $chef_speech to "bailey">><<hope 10>><</link>><<ggghope>>
+<<link [[베일리의 압제에 대해 말한다|Chef Opening Bailey]]>><<set $chef_speech to "bailey">><<hope 10>><</link>><<ggghope>>
 <br>
-<<link [[Praise Sam|Chef Opening Sam]]>><<set $chef_speech to "sam">><<npcincr Sam love 10>><</link>><<ggglove>>
+<<link [[샘을 칭찬한다|Chef Opening Sam]]>><<set $chef_speech to "sam">><<npcincr Sam love 6>><</link>><<ggglove>>
 <br>
-<<link [[Praise yourself|Chef Opening Self]]>><<set $chef_speech to "yourself">><<famebusiness 100 "pic">><<trauma -24>><</link>><<llltrauma>>
+<<link [[스스로를 칭찬한다|Chef Opening Self]]>><<set $chef_speech to "yourself">><<famebusiness 100 "pic">><<trauma -24>><</link>><<llltrauma>>
 <br>
-<<link [[Don't say anything|Chef Opening Refuse]]>><<set $chef_speech to "refuse">><<stress -6>><</link>><<lstress>>
+<<link [[아무 말도 하지 않는다|Chef Opening Refuse]]>><<set $chef_speech to "refuse">><<stress -6>><</link>><<lstress>>
 <br>
 
 :: Chef Opening Truth
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You look around the room. Each face looks back. You take a deep breath, and share how the cream is made.
+당신은 카페 내부를 둘러본다. 다들 당신을 쳐다보고 있다. 당신은 심호흡을 한 뒤, 어떻게 크림을 만들었는지에 대해 밝힌다.
 <br><br>
 <<npc Sam>><<person1>>
-The room was already quiet. Rendered so by anticipation. Now the silence is deafening. All blood drains from Sam's face. You're surprised <<he>> doesn't faint.
+카페 내부는 이미 완전한 침묵에 휩싸여 있었다. 다만 그건 기대에 찬 상태로 그런 것이었다. 이번에는 숨이 막힐 듯한 정적이다. 샘의 얼굴에서 피가 빠져나가는 것이 보인다. 쓰러지지 않는 것이 용하다는 생각이 문뜩 든다.
 <br><br>
 
 <<endevent>>
 
-<<generate1>><<person1>>A <<person>> at the back laughs. "We know," <<he>> says. "And it's fucking delicious. Why do you think we came all this way?"
+<<generate1>><<person1>>뒤쪽의 <<personPost "이">> 웃음을 터트린다. "다들 알아." <<hePost "이">> 말한다. "게다가 존나 맛있지. 우리가 뭣 때문에 여기까지 왔다고 생각하는 거야?"
 <br><br>
-<<generate2>><<person2>>A <<person>> turns to the <<person1>><<person>>. "Don't encourage the <<girl>>," <<person2>><<he>> says. "That's not an okay joke to make,"
+<<generate2>><<person2>><<personPost "이">> <<personPost "을">> 돌아본다. "부추기지 마세요." <<person2>><<hePost "이">> 말한다. "이런 자리에서는 부적절한 농담이었으니까요."
 <br><br>
-"It's not a joke," the <<person1>><<person>> replies. The <<person2>><<person>> rolls <<his>> eyes.
+"농담이 아니라니까." <<person1>><<personPost "이">> 대답한다. <<person2>><<personPost "은">> 눈을 굴린다.
 <br><br>
 
 <<endevent>>
-<<link [[Next|Chef Opening Truth 2]]>><</link>>
+<<link [[다음|Chef Opening Truth 2]]>><</link>>
 <br>
 
 :: Chef Opening Truth 2
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-Laughter fills the cafe. You're not sure how many knew all along, and how many think you're joking.
+카페 내부가 웃음 소리로 가득 찬다. 얼마나 많은 사람이 이미 사실을 알고 있었는지, 그리고 얼마나 많은 사람이 당신의 말을 농담으로 받아들이고 있는지는 알 수 없다.
 <br><br>
-<<npc Quinn>><<person1>>The mayor pushes you aside and assumes control of the podium.
-"Our chef here enjoys a joke," <<he>> says. "How <<pshe>> prepares the cream is <<pher>> secret, but I assure you it's made from the finest local produce."
-<br><br>
-
-The mayor turns to you, away from the microphone. "Good thinking," <<he>> says as <<he>> passes. "You know how to build a legend."
+<<npc Quinn>><<person1>>시장은 당신을 옆으로 밀어내고는 연단에 서서 상황을 통제하려고 한다. 
+"우리 이 셰프가 농담 할 줄 아는 친구로군요." <<hePost "이">> 말한다. "크림을 어떻게 만드는지는 이곳만의 비밀이지만, 분명 이 지역에서 생산하는 최고의 재료로 만들고 있을 겁니다.."
 <br><br>
 
-You imagine they'll be talking about this for a while. You join the party. What do you want to do?
+시장이 마이크에서 몸을 돌리더니, 당신을 돌아본다. "훌륭한 생각이었구나." <<hePost "이">> 지나가며 말한다. "전설을 만들 줄 알아."
+<br><br>
+
+한동안 사람들이 이 일에 대해 떠들어 댈 것이다. 당신은 곧 파티에 참여한다. 무엇을 할까?
 <br><br>
 
 <<chefspeechoptions>>
@@ -1094,31 +1090,31 @@ You imagine they'll be talking about this for a while. You join the party. What 
 :: Chef Opening Bailey
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You look around the room. Bailey stares back. You take a deep breath, and begin.
-You talk about life at the orphanage. About the lack of food. About what Bailey makes you do, and about the punishment for failure.
+당신은 카페 내부를 둘러본다. 베일리도 당신을 쳐다본다. 당신은 심호흡을 한 뒤, 말을 시작한다. 
+당신은 고아원에서의 삶에 대해 이야기를 한다. 늘 음식이 부족하다는 것에 대해서도 말한다. 거기에 베일리가 시키는 일이나, 실패할 때 받는 처벌에 대한 것도 덧붙인다.
 
 <<if $speech_attitude is "meek">>
-	You're not sure when you started crying.
+	언제부터 울기 시작했는지는 모르겠다.
 <<elseif $speech_attitude is "bratty">>
-	Your fingers hurt. At some point you started gripping the sides of the podium.
+	손가락이 아프다. 언제부턴가 연단 가장자리를 꽉 붙잡고 있었다.
 <<else>>
 
 <</if>>
 <br><br>
-The audience listen in rapt silence. Some wear strange smiles, others look on aghast.
-The employee you recognise from the orphanage is in tears.
-<<npc Bailey>><<person1>>You dare a glance at Bailey, but <<hes>> not even looking at you. <<He>> glares at the mayor instead.
+관중들은 완전히 몰입하여 조용히 듣고만 있는다. 어떤 이들은 이상한 미소를 짓고 있고, 다른 이들은 경악하여 바라보고 있다. 
+고아원에서 본 적이 있는 직원들은 눈물을 흘리고 있다. 
+<<npc Bailey>><<person1>>당신은 베일리를 바라보나, <<hePost "은">> 이쪽을 보고 있지도 않다. 대신 <<hePost "은">> 시장을 노려보고 있다.
 <br><br>
 <<endevent>><<npc Quinn>><<person1>>
-Quinn darts forward and interrupts your speech, pushing you off the podium.
-"Our young chef," <<he>> says, "is such a joker. <<pHer>> friends put <<phim>> up to it.
-Bailey's orphanage is one of the town's oldest, and most esteemed, institutions. Any abuses of power are taken seriously."
+퀸이 앞으로 튀어나오더니 당신의 말을 막으며, 연단에서 밀어낸다. 
+"우리의 어린 셰프는." <<hePost "이">> 말한다. "참 농담도 잘 하지요. <<pHer_ yi>> 친구들이 이러라고 <<phim_ ul>> 부추겼나 봅니다. 
+베일리의 고아원은 이 도시에서 가장 유서 깊고, 가장 존경 받는 기관 중 하나입니다. 어떠한 직권 남용이라도 있었다면 심각하게 받아들여질 것입니다."
 <br><br>
 
-You're not sure if your words got through. Many of the locals nod along with the mayor's words. Some don't look so convinced.
+하고자 했던 말이 제대로 전달되었는지 모르겠다. 이 도시의 사는 사람들의 대다수가 시장의 말에 고개를 끄덕인다. 어떤 이들은 그닥 믿지 못하겠다는 표정이다.
 <br><br>
 
-The mayor steps away from the podium, and the party begins in earnest. It seems subdued. What do you want to do?
+시장이 연단에서 내려오고, 파티가 본격적으로 시작된다. 분위기가 약간 가라앉은 것 같다. 무엇을 할까?
 <br><br>
 <<endevent>>
 <<chefspeechoptions>>
@@ -1126,14 +1122,14 @@ The mayor steps away from the podium, and the party begins in earnest. It seems 
 :: Chef Opening Sam
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<npc Sam>><<person1>>
-You look around the room. Sam stares back, looking more excited than you've ever seen <<him>>.
+당신은 카페 내부를 둘러본다. 샘도 이쪽을 쳐다본다. 여태껏 본 것 중에 가장 신난 모습이다.
 <br><br>
-You talk about Sam, and all the work <<he>> put in to make the cafe what it is.
-You thank <<him>> for giving the opportunity to develop your talents, and thank the audience for making <<his>> dreams come true.
+당신은 샘에 대해 말한다. <<HePost "이">> 카페를 지금의 모습으로 만들어 놓기 위해 한 모든 일들에 대해서도. 
+당신은 재능을 살릴 기회를 주었다며 <<hePost "에게">> 감사를 표하고, <<hisPost "의">> 꿈을 현실로 만들어준 것에 대해 관중들에게도 감사 인사를 전한다.
 <br><br>
-The audience applaud. Sam starts crying.
+관중들이 박수를 친다. 샘은 눈물을 흘리기 시작한다.
 <br><br>
-You step away from the podium, and the party begins in earnest. What do you want to do?
+당신이 연단에서 내려오자 파티가 본격적으로 시작된다. 무엇을 할까?
 <br><br>
 <<endevent>>
 <<chefspeechoptions>>
@@ -1142,19 +1138,22 @@ You step away from the podium, and the party begins in earnest. What do you want
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
 <<if $speech_attitude is "meek">>
-	"I made my buns," you begin, "because I wanted to make people happy..."
+	"제가 빵을 만든 건." 당신은 말을 시작한다. "사람들을 기쁘게 만들고 싶어서였어요..."
 	<br><br>
+
 <<elseif $speech_attitude is "bratty">>
-	"From the first time I saw the result of my cooking on another's face," you begin, "I knew I was destined for greatness..."
+	"제가 구운 빵을 먹은 사람의 표정을 처음으로 보았을 때." 당신은 말을 시작한다. "전 제가 더 나은 일을 할 운명이란 걸 알았죠..."
 	<br><br>
+
 <<else>>
-	"The secret to my buns," you begin, "is hard work, determination..."
+	"제 빵의 비밀은." 당신은 말을 시작한다. "근면함과 의지입니다..."
 	<br><br>
+
 <</if>>
 
-It's shameless self-aggrandisement, but it goes down well. They must agree you earned it.
+파렴치하게도 자신을 띄우는 말에 불과하지만, 사람들은 별 일 없이 받아들인다. 아마도 당신의 노력을 감안하는 모양이다.
 <br><br>
-You step away from the podium, and the party begins in earnest. How do you want to conduct yourself?
+당신이 연단에서 내려오자 파티가 본격적으로 시작된다. 무엇을 할까?
 <br><br>
 
 <<endevent>>
@@ -1163,12 +1162,12 @@ You step away from the podium, and the party begins in earnest. How do you want 
 :: Chef Opening Refuse
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You step away from the podium. The crowd sounds disappointed, though not upset. You hear someone call you cute.
-The mayor rushes to take over the microphone.
-<<npc Quinn>><<person1>>"Our chef isn't used to public speaking," <<he>> says. "Please, a round of applause regardless." The audience applauds you as prompted.
+당신은 연단에서 내려온다. 관중들은 실망스럽다는 듯한 말들을 내뱉으나, 화가 나진 않은 것 같다. 누군가 당신을 귀엽다고 말하는 말이 들려온다. 
+시장이 앞으로 달려나와 마이크를 잡는다. 
+<<npc Quinn>><<person1>>"우리 셰프는 사람들 앞에서 연설을 하는게 익숙치 않아서 말입니다." <<hePost "이">> 말한다. "그래도 부디 큰 박수로 격려해주세요." 그 말을 따라 사람들은 당신을 향해 박수를 쳐준다.
 <br><br>
 
-The mayor steps away from the podium, and the party begins in earnest. How do you want to conduct yourself?
+시장이 연단에서 내려오자 파티가 본격적으로 시작된다. 무엇을 할까?
 <br><br>
 
 <<endevent>>
@@ -1178,59 +1177,62 @@ The mayor steps away from the podium, and the party begins in earnest. How do yo
 :: Chef Opening Local
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You talk to the local elites, ingratiating yourself with them. They're eager for your company.
+당신은 지역 엘리트들과 대화를 하며, 어떻게든 환심을 사보려 한다. 당신과 함께 하게 되어서 기쁜 모양이다. 
 <<if $chef_speech is "truth">>
-	They ask for more details about how the cream is prepared, which you gladly give. They laugh each time.
+	그들은 크림을 어떻게 만드는지에 대해 더 자세하게 말해달라고 하고, 당신은 기쁜 마음으로 말해준다. 다들 웃음을 터트린다.
 <<elseif $chef_speech is "bailey">>
-	<<generate1>><<person1>>A concerned-looking <<person>> asks for more details regarding the orphanage, but <<his>> friend shushes <<him>>.
+	<<generate1>><<person1>>걱정스러운 표정의 <<personPost "이">> 고아원에 대해 더 이야기 해달라고 하나, <<his_ yi>> 친구들이 조용히 하라며 <<him_ ul>> 말린다.
 <<else>>
-	They try to tease out your secret cream recipe, but you're not telling.
+	그들은 비밀 크림 제조법을 알아내려 하나, 당신은 말하지 않는다.
 <</if>>
 <<endevent>>
 <br><br>
 
-<<link [[Next|Chef Opening End]]>><</link>>
+<<link [[다음|Chef Opening End]]>><</link>>
 <br>
 
 :: Chef Opening Foreign
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You talk to the foreign visitors, ingratiating yourself with them. They're eager for your company.
+당신은 해외 방문객들과 대화를 하며, 어떻게든 환심을 사보려 한다. 당신과 함께 하게 되어서 기쁜 모양이다. 
 <<if $chef_speech is "bailey">>
-	<<generate1>><<person1>>A concerned-looking <<person>> asks for more details regarding the orphanage, but <<his>> friend shushes <<him>>.
+	<<generate1>><<person1>>걱정스러운 표정의 <<personPost "이">> 고아원에 대해 더 이야기 해달라고 하나, <<his_ yi>> 친구들이 조용히 하라며 <<him_ ul>> 말린다.
 <<else>>
-	They're intrigued by some of the local customs, which are apparently strange to them.
+	그들은 이 지역의 관습을 흥미로워 한다. 그들에게 있어서는 신기한 모양이다.
 <</if>>
 <br><br>
 <<endevent>>
-<<link [[Next|Chef Opening End]]>><</link>>
+<<link [[다음|Chef Opening End]]>><</link>>
 <br>
 
 :: Chef Opening Staff
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You chat with other members of the cafe's staff. You recognise many, but there are a lot of new faces.
-Even with Sam mobilising the entire staff for this event, they're kept busy and rarely have time to talk.
-They don't seem to mind. Sam's joy is infectious.
+당신은 카페의 다른 직원들과 잡담을 나눈다. 익숙한 얼굴이 많으나, 새로 들어온 직원들도 많다. 
+샘이 전 직원을 이 이벤트에 동원했는데도 다들 일하느라 바빠 이야기할 시간이 거의 없다. 
+그렇지만 다들 딱히 신경쓰진 않는 것 같다. 샘의 기쁨이 전염되기라도 한 듯 하다.
 <br><br>
 
-<<link [[Next|Chef Opening End]]>><</link>>
+<<link [[다음|Chef Opening End]]>><</link>>
 <br>
 
 :: Chef Opening Enjoy
-<<set $outside to 0>><<set $location to "cafe">><<effects>><<wearProp "alcohol" 0 "champagne">>
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
 
-You grab a glass of <<= playerIsPregnant() and playerAwareTheyArePregnant() ? "sparkling water" : "champagne">> from a passing <<print either("waiter", "waitress")>>, and explore the new cafe. You find a quiet spot on a second floor balcony, overlooking the sea. You sit down and relax.
-
-<<if !(playerIsPregnant() and playerAwareTheyArePregnant())>>
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	당신은 지나가는 <<print either("웨이터", "웨이트리스")>>가 나르던 쟁반에서 탄산수 한 잔을 집어들고, 새 카페의 내부를 돌아본다.
+	당신은 2층 발코니 쪽에서 바다를 내려다보는 조용한 장소를 찾아낸다. 그러고는 거기에 앉아서 쉰다.
+<<else>>
+	당신은 지나가는 <<print either("웨이터", "웨이트리스")>>가 나르던 쟁반에서 샴페인 한 잔을 집어들고, 새 카페의 내부를 돌아본다. 
+	당신은 2층 발코니 쪽에서 바다를 내려다보는 조용한 장소를 찾아낸다. 그러고는 거기에 앉아서 쉰다.
 	<<alcohol 60>>
 <</if>>
 <br><br>
 
-Despite being secluded, several people stop by to chat.
+사람들과 동떨어진 장소임에도 불구하고, 몇 명의 사람들이 다가와 이야기를 나누고자 한다.
 <br><br>
 
-<<link [[Next|Chef Opening End]]>><<handheldon>><</link>>
+<<link [[다음|Chef Opening End]]>><</link>>
 <br>
 
 :: Chef Opening End
@@ -1238,60 +1240,60 @@ Despite being secluded, several people stop by to chat.
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<if $chef_speech is "bailey">>
 	<<npc Bailey>><<person1>>
-	The party winds down after a few hours. You head to the exit, but Bailey intercepts you.
+	몇 시간이 지나자 파티도 슬슬 끝나는 분위기가 된다. 출입구 쪽으로 가려 하자, 베일리가 앞길을 막아선다.
 	<br><br>
-	"You're a brave little shit," <<he>> says. <<He>> grasps your shoulders and turns you to face the guests, now drunkenly shuffling out the cafe.
-	"They all want a piece of orphan ass now that you've screamed about it. You've made things difficult."
+	"너도 참 당돌한 꼬맹이야." <<hePost "이">> 말한다. <<HePost "은">> 당신의 어깨를 붙잡아, 취한 채로 카페 밖으로 나가려는 손님들을 향하게 만든다. 
+	"이제 다들 네가 그렇게 호소한 고아 녀석들을 어떻게든 손에 넣고 싶어하게 되었어. 네가 일을 어렵게 만들었다 이거야."
 	<<gstress>><<stress 6>>
 	<br><br>
-	<<He>> releases you, and walks away.
+	<<HePost "은">> 당신을 놔준 뒤 떠나간다.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Chef Opening End 2]]>><</link>>
+	<<link [[다음|Chef Opening End 2]]>><</link>>
 	<br>
 <<elseif $chef_speech is "sam">>
 	<<npc Sam>><<person1>>
-	The party winds down after a few hours. You head to the exit, where Sam is seeing off guests. <<He>> beams at you.
+	몇 시간이 지나자 파티도 슬슬 끝나는 분위기가 된다. 출입구 쪽으로 가자, 샘이 고객들을 배웅하고 있다. <<HePost "은">> 당신을 보고 활짝 웃는다.
 	<br><br>
-	"No one's ever said such nice things about me," <<he>> confides. "Thank you so much." <<He>> wipes away a tear with the back of <<his>> hand.
+	"나에 대해 그렇게 좋은 말을 해준 건 네가 처음이야." <<hePost "이">> 털어놓는다. "정말로 고마워." <<HePost "은">> 손등으로 눈물을 닦아낸다.
 	<br><br>
-	"I forgot to mention," <<he>> adds. "We're bumping up the price of buns to <<printmoney 15000>>.
+	"깜빡 잊고 말을 안 했는데." <<hePost "이">> 덧붙인다. "빵 가격을 <span class="gold">£150</span>로 올리기로 했어.
 	<<set $bun_value to 15000>>
-	It's expensive, but they're worth it. And we have extra staff to pay."
+	비싸긴 하지만, 그 값은 충분히 하니까 말이야. 게다가 이제부터는 돈을 줘야 할 직원들도 늘었고."
 	<br><br>
-	<<He>> waves you goodbye, and you exit onto Cliff Street.
+	<<HePost "은">> 손을 흔들며 작별 인사를 하고, 당신은 클리프 가로 나간다.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<elseif $chef_speech is "truth">>
 	<<npc Sam>><<person1>>
-	The party winds down after a few hours. You head to the exit. Sam intercepts you.
+	몇 시간이 지나자 파티도 슬슬 끝나는 분위기가 된다. 출입구 쪽으로 가려 하자, 샘이 앞길을 막아선다.
 	<br><br>
-	"I wasn't expecting... that," <<he>> says. "In your speech. I know I said you could say anything, but that didn't cross my mind."
-	<<He>> shakes <<his>> head. "Still, people took the joke well. No damage done. Thank you for everything."
+	"전혀...예상하지 못했어." <<hePost "이">> 말한다. "네가 연단 위에서 말한 것 말이야. 아무 거나 말해도 된다고 말하긴 했지만, 그런 내용일 거라고는 생각조차 못했단 말이야." 
+	<<HePost "은">> 머리를 흔든다. "그래도, 사람들이 그 농담을 잘 받아들여줘서 다행이야. 피해 본 건 없어. 어쨌거나 고마워."
 	<br><br>
-	"I forgot to mention," <<he>> adds. "We're bumping up the price of buns to <<printmoney 15000>>.
+	"깜빡 잊고 말을 안 했는데." <<hePost "이">> 덧붙인다. "빵 가격을 <span class="gold">£150</span>로 올리기로 했어.
 	<<set $bun_value to 15000>>
-	It's expensive, but they're worth it. And we have extra staff to pay."
+	비싸긴 하지만, 그 값은 충분히 하니까 말이야. 게다가 이제부터는 돈을 줘야 할 직원들도 늘었고."
 	<br><br>
-	<<He>> waves you goodbye, and you exit onto Cliff Street.
+	<<HePost "은">> 손을 흔들며 작별 인사를 하고, 당신은 클리프 가로 나간다.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
 	<<npc Sam>><<person1>>
-	The party winds down after a few hours. You head to the exit, where Sam is seeing off guests.
+	몇 시간이 지나자 파티도 슬슬 끝나는 분위기가 된다. 출입구 쪽으로 가자, 샘이 고객들을 배웅하고 있다.
 	<br><br>
-	"I forgot to mention," <<he>> says. "We're bumping up the price of buns to <<printmoney 15000>>.
+	"깜빡 잊고 말을 안 했는데." <<hePost "이">> 덧붙인다. "빵 가격을 <span class="gold">£150</span>로 올리기로 했어.
 	<<set $bun_value to 15000>>
-	It's expensive, but they're worth it. And we have extra staff to pay."
+	비싸긴 하지만, 그 값은 충분히 하니까 말이야. 게다가 이제부터는 돈을 줘야 할 직원들도 늘었고."
 	<br><br>
-	<<He>> waves you goodbye, and you exit onto Cliff Street.
+	<<HePost "은">> 손을 흔들며 작별 인사를 하고, 당신은 클리프 가로 나간다.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
@@ -1299,107 +1301,107 @@ Despite being secluded, several people stop by to chat.
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<npc Sam>><<person1>>
-You continue to the exit, where Sam is seeing off guests.
+출입구 쪽으로 가자, 샘이 고객들을 배웅하고 있다.
 <br><br>
-"I forgot to mention," <<he>> says. "We're bumping up the price of buns to <<printmoney 15000>>.
+"깜빡 잊고 말을 안 했는데." <<hePost "이">> 덧붙인다. "빵 가격을 <span class="gold">£150</span>로 올리기로 했어.
 <<set $bun_value to 15000>>
-It's expensive, but they're worth it. And we have extra staff to pay."
+비싸긴 하지만, 그 값은 충분히 하니까 말이야. 게다가 이제부터는 돈을 줘야 할 직원들도 늘었고."
 <br><br>
-<<He>> waves you goodbye, and you exit onto Cliff Street.
+<<HePost "은">> 손을 흔들며 작별 인사를 하고, 당신은 클리프 가로 나간다.
 <br><br>
 <<endevent>>
-<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Chef Blackmail Ask
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<if $speech_attitude is "meek">>
-	"Please don't tell anyone," you say. "What do I do to keep you quiet?"
+	"제발 아무한테도 말하지 말아주세요." 당신이 말한다. "뭘 해주면 말하지 않을 건가요?"
 <<elseif $speech_attitude is "bratty">>
-	"I get it," you say. "What do you want?"
+	"알겠어요." 당신이 말한다. "뭘 원하죠?"
 <<else>>
-	"What do you want?" you ask.
+	"원하는게 뭐예요?" 당신이 묻는다.
 <</if>>
 <br><br>
 <<if $rng gte 91>>
-	"<<printmoney 200000>> should do," <<he>> says.
+	"<span class="gold">£2000</span> 정도면 되겠군." <<hePost "이">> 말한다.
 	<br><br>
 	<<if $money gte 200000>>
-		<<link [[Pay (£2000)|Chef Blackmail Pay]]>><<sub 1>><<money -200000>><</link>>
+		<<link [[돈을 준다 (£2000)|Chef Blackmail Pay]]>><<sub 1>><<set $money -= 200000>><</link>>
 		<br>
-		<<link [[Say you can't afford it|Chef Blackmail Lie]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[돈이 충분치 않다고 말한다|Chef Blackmail Lie]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
-		<<link [[Refuse|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[거절한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
 	<<else>>
-		<<link [[Say you can't afford it|Chef Blackmail Truth]]>><</link>>
+		<<link [[돈이 충분치 않다고 말한다|Chef Blackmail Truth]]>><</link>>
 		<br>
-		<<link [[Refuse|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[거절한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
 	<</if>>
 <<elseif $rng gte 51>>
-	"<<printmoney 50000>> should do," <<he>> says.
+	"<span class="gold">£500</span> 정도면 되겠군." <<hePost "이">> 말한다.
 	<br><br>
 	<<if $money gte 50000>>
-		<<link [[Pay (£500)|Chef Blackmail Pay]]>><<sub 1>><<money -50000>><</link>>
+		<<link [[돈을 준다 (£500)|Chef Blackmail Pay]]>><<sub 1>><<set $money -= 50000>><</link>>
 		<br>
-		<<link [[Say you can't afford it|Chef Blackmail Lie]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[돈이 충분치 않다고 말한다|Chef Blackmail Lie]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
-		<<link [[Refuse|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[거절한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
 	<<else>>
-		<<link [[Say you can't afford it|Chef Blackmail Truth]]>><</link>>
+		<<link [[돈이 충분치 않다고 말한다|Chef Blackmail Truth]]>><</link>>
 		<br>
-		<<link [[Refuse|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<<link [[거절한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 		<br>
 	<</if>>
 <<else>>
-	<<He>> points down the alley. "How about I taste some of your cream," <<he>> says. "Straight from the source."
+	<<HePost "은">> 골목길 쪽을 가리킨다. "네 크림 맛 좀 보여주는게 어때." <<hePost "이">> 말한다. "갓 짜낸 신선한 크림을 말이야."
 	<br><br>
-	<<link [[Accept|Chef Blackmail Rape]]>><<set $molestationstart to 1>><<sub 1>><</link>>
+	<<link [[받아들인다|Chef Blackmail Rape]]>><<set $molestationstart to 1>><<sub 1>><</link>>
 	<br>
-	<<link [[Refuse|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+	<<link [[거절한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 	<br>
 <</if>>
 
 :: Chef Blackmail Refuse
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-Deciding to damn the consequences, you turn your back to the <<person>> and march away.
+이로 인해 곤란해질 상황은 전혀 신경쓰지 않기로 하고, 당신은 <<personPost>>에게서 등을 돌려 떠나간다.
 <br><br>
 <<endevent>>
-<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 
 :: Chef Blackmail Pay
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-You hand over the money. The <<person>> pulls an expression of mock confusion.
-"What were we talking about?" <<he>> says. "I've forgotten. How strange." <<He>> laughs and saunters down the alley.
+당신은 돈을 건넨다. <<personPost "은">> 조롱하듯 혼란스러워 하는 연기를 한다. 
+"우리가 무슨 얘기를 하고 있었지?" <<hePost "이">> 말한다. "잊어먹었네. 이상하기도 하지." <<HePost "은">> 웃음을 터트리고는 어슬렁어슬렁 골목길을 걸어내려간다.
 <br><br>
 <<endevent>>
-<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Chef Blackmail Lie
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-"Liar," the <<person>> says. "But if you want to play it that way, fine. I have friends on the force." <<He>> walks away.
+"거짓말쟁이." <<personPost "이">> 말한다. "그런 식으로 나온다면야, 좋아. 나도 힘 좀 쓰는 친구들이 있거든." <<HePost "은">> 떠나간다.
 <br><br>
 <<endevent>>
-<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Chef Blackmail Truth
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-"Well," the <<person>> says. "There's something else you have."
-<<He>> leers at your <<if $player.gender_appearance is "f">><<breasts>><<else>><<penis>><</if>>.
-"How about you give me a taste of your cream," <<he>> continues. "Straight from the source."
+"어쩔 수 없지." <<personPost "이">> 말한다. "돈 말고도 가진게 있잖아." 
+<<HePost "은">> 당신의 <<if $player.gender_appearance is "f">><<breastsPost "을">><<else>><<penisPost "을">><</if>> 음흉한 눈으로 힐끔거린다. 
+"네 크림 맛 좀 보여주는게 어때." <<hePost "이">> 말을 이어나간다. "갓 짜낸 신선한 크림을 말이야."
 <br><br>
-<<link [[Accept|Chef Blackmail Rape]]>><<set $molestationstart to 1>><<sub 1>><</link>>
+<<link [[받아들인다|Chef Blackmail Rape]]>><<set $molestationstart to 1>><<sub 1>><</link>>
 <br>
-<<link [[Refuse|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+<<link [[거절한다|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
 <br>
 
 :: Chef Blackmail Rape
@@ -1411,7 +1413,7 @@ You hand over the money. The <<person>> pulls an expression of mock confusion.
 	<<neutral 1>>
 	<<molested>>
 	<<maninit>>
-	You follow the <<person>> down the alley. <<He>> shoves you against a wall as soon as you round the corner.
+	당신은 <<personPost "을">> 따라 골목길로 들어간다. 모퉁이를 돌자 <<hePost "은">> 당신을 벽쪽으로 밀친다.
 	<br><br>
 	<<if Time.dayState isnot "night">><<enable_rescue>><</if>>
 <</if>>
@@ -1425,9 +1427,9 @@ You hand over the money. The <<person>> pulls an expression of mock confusion.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Chef Blackmail Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Chef Blackmail Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Chef Blackmail Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Chef Blackmail Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Chef Blackmail Rape Finish
@@ -1435,71 +1437,71 @@ You hand over the money. The <<person>> pulls an expression of mock confusion.
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
-	The <<person>> walks away, leaving you to slump to the ground.
+	<<personPost "은">> 바닥에 쓰러진 당신을 두고 떠나간다.
 	<br><br>
-	<<tearful>> you struggle to your feet.
+	<<tearful>> 당신은 어떻게든 자리에서 일어난다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 <<elseif $enemyhealth lte 0>>
-	You shove <<him>> against the wall and run out into the street.
+	당신은 <<hePost "을">> 벽쪽으로 밀치고는 거리로 달려나간다.
 	<<set $chef_sus += 10>><<ggsuspicion>>
 	<br><br>
-	<<tearful>> you look behind you. <<He>> doesn't follow.
+	<<tearful>> 당신은 뒤를 돌아본다. <<HePost "은">> 쫓아오지 않는다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 <<else>>
 	<<set $rescued += 1>>/*Unnecessary if rescue is impossible*/
-	"Everything okay down there?" a voice shouts from the end of the alley.
+	"거기 무슨 일 있어요?" 누군가 골목길 끝자락에서 외친다.
 	<br><br>
-	"F-It's fine," the <<person>> shouts back, adjusting <<his>> clothes. <<He>> gives you an evil look as <<he>> leaves.
+	"아-아무 일도 아녜요." <<personPost "은">> 옷을 정돈하며 외친다. <<HePost "은">> 사악한 표정을 지어보이고는 떠난다.
 	<<set $chef_sus += 10>><<ggsuspicion>>
 	<br><br>
-	<<tearful>> you return to the street.
+	<<tearful>> 당신은 거리로 나온다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Cliff Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Cliff Street]]>><<set $eventskip to 1>><</link>>
 <</if>>
 
 :: Chef Blackmail Car
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-You climb in. <<generate2>><<person2>>A <<person>> sits in the driver's seat. The <<person1>><<person>> sits beside <<person2>><<him>>, and you drive away.
+당신은 차에 올라탄다. <<generate2>><<person2>><<personPost "이">> 운전석에 앉아있다. <<person1>><<personPost "이">> <<person2>><<him_ yi>> 옆에 앉자, 차가 출발한다.
 <br><br>
-<<link [[Next|Chef Blackmail Livestock]]>><</link>>
+<<link [[다음|Chef Blackmail Livestock]]>><</link>>
 <br>
 
 :: Chef Blackmail Livestock
 
 <<set $outside to 0>><<set $location to "farm">><<effects>>
-Instead of driving you to the station, they take you through Harvest Street, and onto the road leading out of town.
-Buildings give way to green and yellow fields, as they take you deeper into the countryside.
+경찰서로 가는 대신, 자동차는 하베스트 가 쪽으로 가더니, 도시 밖으로 나가는 도로로 빠진다. 
+곧 건물들이 사라지고 초록색과 노란색이 가득한 밭들이 보이고, 자동차는 더더욱 시골 지역 깊숙이 들어간다.
 <br><br>
-The police chat and gossip. Little of it is interesting, until the <<person2>><<person>> turns to face you.
+두 경찰관은 잡담을 나누며 수다를 떤다. 흥미가 가는 내용은 없다. 곧 <<person2>><<personPost "이">> 당신을 돌아본다.
 <br><br>
-"You've been a bad <<girl>>," <<he>> says. "But don't worry. We've a proper punishment in mind."
+"너도 참 못된 꼬맹이구나." <<hePost "이">> 말한다. "그렇지만 걱정하진 마. 적절한 처벌을 생각해뒀으니까."
 <br><br>
-<<link [[Ignore|Chef Blackmail Livestock Ignore]]>><</link>>
+<<link [[무시한다|Chef Blackmail Livestock Ignore]]>><</link>>
 <br>
-<<link [[Plead|Chef Blackmail Livestock Plead]]>><</link>>
+<<link [[애원한다|Chef Blackmail Livestock Plead]]>><</link>>
 <br>
-<<link [[Insult|Chef Blackmail Livestock Insult]]>><</link>>
+<<link [[모욕한다|Chef Blackmail Livestock Insult]]>><</link>>
 <br>
 
 :: Chef Blackmail Livestock Ignore
 
 <<effects>>
 <<pass 60>>
-You ignore the <<person>>, instead staring out the window. You catch a glimpse of the forest as the car crests a hill.
-"A <<girl>> of few words," <<he>> says. "That'll suit just fine where you're going."
+당신은 <<personPost>>의 말을 무시하고는 창 밖을 내다본다. 자동차가 언덕 위로 올라가자 언뜻 숲이 보인다. 
+"말수가 적은 <<girl_ iguna>>." <<hePost "이">> 말한다. "우리가 가는 곳에서는 그 편이 낫지."
 <br><br>
-After what feels like an hour, you turn down a thin lane and pull to a stop outside a barn.
+몇 시간쯤 지났다고 생각하자, 자동차는 좁은 길로 접어들더니 외양간 앞에서 멈춘다.
 <br><br>
-<<link [[Next|Chef Blackmail Livestock 2]]>><</link>>
+<<link [[다음|Chef Blackmail Livestock 2]]>><</link>>
 <br>
 
 :: Chef Blackmail Livestock Plead
@@ -1507,18 +1509,18 @@ After what feels like an hour, you turn down a thin lane and pull to a stop outs
 <<effects>>
 <<pass 60>>
 <<if $speech_attitude is "meek">>
-	"P-please let me go," you say. "I want to go home."
+	"제-제발 보내주세요." 당신이 말한다. "집에 가고 싶어요."
 <<elseif $speech_attitude is "bratty">>
-	"I can't be worth this much trouble," you say. "How about a slap on the wrist?"
+	"저한테 이런 수고를 들일 필요는 없잖아요." 당신이 말한다. "그냥 손목을 좀 맞는 걸로 끝내는 건 어떤가요?"
 <<else>>
-	"You don't have to do this," you say. "Let me go."
+	"이렇게까지 할 필욘 없잖아요." 당신이 말한다. "보내주세요."
 <</if>>
 <br><br>
-"Sorry <<girl>>," the <<person>> says. "The money's too good. I mean, the justice. We have to uphold justice."
+"미안하구나 꼬맹아." <<personPost "이">> 말한다. "그렇지만 돈을 거절할 순 없어서. 아니, 정의구현 말이야. 우린 정의를 실현하는 입장이라서 말이지."
 <br><br>
-After what feels like an hour, you turn down a thin lane and pull to a stop outside a barn.
+몇 시간쯤 지났다고 생각하자, 자동차는 좁은 길로 접어들더니 외양간 앞에서 멈춘다.
 <br><br>
-<<link [[Next|Chef Blackmail Livestock 2]]>><</link>>
+<<link [[다음|Chef Blackmail Livestock 2]]>><</link>>
 <br>
 
 :: Chef Blackmail Livestock Insult
@@ -1526,51 +1528,50 @@ After what feels like an hour, you turn down a thin lane and pull to a stop outs
 <<effects>>
 <<pass 60>>
 <<if $speech_attitude is "meek">>
-	"You big meanies," you say. "Is money more important than protecting people?"
+	"이런 나쁜 사람들." 당신이 말한다. "사람들을 보호하는 것보다 돈이 더 중요한가요?"
 <<elseif $speech_attitude is "bratty">>
-	"Corrupt shits like you will face a reckoning," you say. "Whatever you're being paid isn't worth it."
+	"당신들 같은 부패 경찰들은 곧 심판 받을 거예요." 당신이 말한다. "돈을 얼마나 받았든 그만한 가치는 없을 걸요."
 <<else>>
-	"How much are you being paid?" you ask. "I bet they got you cheap."
+	"도대체 얼마를 받은 건가요?" 당신이 말한다. "그래봤자 얼마 못 받았겠죠."
 <</if>>
-They both laugh. "You're a smart <<girl>>," the <<person>> says. "Almost a waste."
+둘 다 웃음을 터트린다. "너도 참 똑똑한 꼬맹이구나." <<personPost "이">> 말한다. "참 아까울 정도야."
 <br><br>
-After what feels like an hour, you turn down a thin lane and pull to a stop outside a barn.
+몇 시간쯤 지났다고 생각하자, 자동차는 좁은 길로 접어들더니 외양간 앞에서 멈춘다.
 <br><br>
-<<link [[Next|Chef Blackmail Livestock 2]]>><</link>>
+<<link [[다음|Chef Blackmail Livestock 2]]>><</link>>
 <br>
 
 :: Chef Blackmail Livestock 2
 
 <<effects>>
 <<generate3>><<generate4>>
-They lead you inside, where a <<person3>><<person>> and <<person4>><<person>> wait.
-The <<person3>><<person>> shakes hand with the police officers, while the <<person4>><<person>> prowls around you.
+두 경찰관은 당신을 그 안으로 데려가고, 안에서는 <<person3>><<personPost "이">> <<person4>><<personPost "이">> 기다리고 있다. 
+<<person3>><<personPost "은">> 경찰관들과 악수를 나누고, <<person4>><<personPost "은">> 당신의 주변을 배회한다.
 <br><br>
-"This the chef, then?" the <<person3>><<person>> asks.
+"그럼 이게 그 셰프인거야?" <<person3>><<personPost "이">> 묻는다.
 <br>
-"This the one," the <<person1>><<person>> responds.
+"이녀석이죠." <<person1>><<personPost "이">> 대답한다.
 <br>
-"Dunno what I was expecting. Here's the money."
-<<He>> nods at the <<person4>><<person>>, now stood behind you, and you lurch back as <<he>> ties a collar around your neck.
+"기대하던 건 아니었는데 말이야. 돈은 여깄어." 
+<<HePost "은">> 당신의 뒤에 서있는 <<person4>><<personPost>>에게 턱짓을 한다. 그러자 당신의 몸이 뒤쪽으로 휘청이더니 <<hePost "이">> 목에 개목걸이를 걸어버린다.
 <<leash 21>>
 <br><br>
-The police leave as the <<person3>><<person>> takes your leash. "Gonna make a killing from this one," <<he>> whispers as <<he>> tugs. You're pulled forward.
+경찰관들이 떠나자 <<person3>><<personPost "이">> 개목걸이에 달린 목줄을 잡는다. "이녀석으로 한탕 벌어야지." <<hePost "은">> 그렇게 속삭이며 목줄을 잡아당긴다. 당신은 앞으로 끌려나온다.
 <br><br>
-<<badEndTracking "Underground Farm" { reason: "arrested" }>>
-<<link [[Next|Livestock Intro]]>><<endevent>><</link>>
+<<link [[다음|Livestock Intro]]>><<endevent>><</link>>
 <br>
 
 :: Chef Blackmail Car 2
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-They drive you to Harvest Street, and stop outside an old warehouse.
+둘을 하베스트 가로 가더니, 낡은 창고 앞에서 차를 멈춘다.
 <br><br>
-They open your door, pull you out, and shove you towards the building.
+경찰관들은 차문을 열고, 당신을 끌어내, 창고 쪽으로 밀친다.
 <br><br>
 <<generate3>><<generate4>><<generate5>><<generate6>>
-The interior is pitch black. Four others step out of the dark, each wearing a police uniform.
+창고 내부는 어두컴컴하다. 경찰 제복을 입고 있는 네 명이 어둠 속에서 걸어나온다.
 <br><br>
-<<link [[Next|Chef Blackmail Car Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Chef Blackmail Car Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 :: Chef Blackmail Car Rape
@@ -1592,9 +1593,9 @@ The interior is pitch black. Four others step out of the dark, each wearing a po
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Chef Blackmail Car Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Chef Blackmail Car Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Chef Blackmail Car Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Chef Blackmail Car Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Chef Blackmail Car Rape Finish
@@ -1602,47 +1603,47 @@ The interior is pitch black. Four others step out of the dark, each wearing a po
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
-	"<<pShe>> was good," the <<person3>><<person>> says. "You always find the cute ones."
+	"훌륭한걸." <<person3>><<personPost "이">> 말한다. "이런 귀여운 애들을 매번 어디서 찾아내는거야?"
 	<br><br>
-	"Thanks," the <<person1>><<person>> responds. "Always ready to do my duty." They laugh their way out the building.
+	"고마워." <<person1>><<personPost "이">> 대답한다. "의무를 다할 준비는 언제나 되어있다고." 그들은 웃으면서 창고를 나간다.
 	<br><br>
-	<<tearful>> you stumble to the exit, and emerge near Harvest Street
+	<<tearful>> 당신은 비틀거리며 출구로 나가, 하베스트 가 근처로 나온다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Harvest Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Harvest Street]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
-	You shove the <<person1>><<person>> to the ground, trip up the <<person2>><<person>>,
-	headbutt the <<person3>><<person>>, punch the <<person4>><<person>>, and tackle the <<person5>><<person>> to the floor.
+	당신은 <<person1>><<personPost "을">> 땅바닥에 눕히고, <<person2>><<personPost "을">> 넘어뜨린 뒤, 
+	<<person3>><<personPost "을">> 들이받고 <<person4>><<personPost "을">> 때려눕힌 뒤 <<person5>><<personPost>>의 발을 건다.
 	<br><br>
-	The <<person6>><<person>> backs off for a moment, shocked by your aggression and anticipating an attack.
-	<<tearful>> you seize the opportunity. You flee the building, and escape onto Harvest Street.
+	<<person6>><<personPost "은">> 당신의 공격성에 놀라, 자신도 공격해올 거라고 생각하여 잠시 뒤로 물러난다. 
+	<<tearful>> 당신은 그 기회를 놓치지 않고 창고 밖으로 도망나가, 하베스트 가로 탈출한다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Harvest Street]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Harvest Street]]>><<set $eventskip to 1>><</link>>
 <</if>>
 
 :: Chef Blackmail Car Refuse
 
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
-You turn your back on the <<person>>, and walk away. <<He>> doesn't stop you.
+당신은 <<personPost>>에게서 등을 돌려 떠나간다. <<HePost "은">> 당신을 잡지 않는다.
 <br><br>
-<<link [[Next|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<link [[다음|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Cafe Coffee Lewd
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<if $milk_amount gte 40>>
-	With your lewd intentions confirmed, you start preparing to make some lattes. You start making the coffee normally, until it comes time to add the milk.
-	<br><br>
+With your lewd intentions confirmed, you start preparing to make some lattes. You start making the coffee normally, until it comes time to add the milk.
+<br><br>
 
-	The only question is, how much milk should you use?
-	<br><br>
+The only question is, how much milk should you use?
+<br><br>
 
-	<<link [[Use a normal amount|Cafe Coffee Creation]]>><<set $phase to 1>><</link>>
-	<br>
+<<link [[Use a normal amount|Cafe Coffee Creation]]>><<set $phase to 1>><</link>>
+<br>
 	<<if $milk_amount gte 70>>
 		<<link [[Use a moderate amount|Cafe Coffee Creation]]>><<set $phase to 2>><</link>><<note "+ Suspicion?" "red">>
 		<br>
@@ -1656,7 +1657,7 @@ You turn your back on the <<person>>, and walk away. <<He>> doesn't stop you.
 		<</if>>
 	<</if>>
 <<else>>
-	You grab a small bowl and start milking yourself. You try to squeeze milk out of your breasts, but <<if $milk_amount lte 1>>nothing<<else>>not much<</if>> is coming out. It seems you've exhausted your supply. You'll have to make the drinks normally.
+	You grab a small bowl and start milking yourself. You try to squeeze milk out of your breasts, but <<if $milk_amount lte 1>> nothing <<else>> not much <</if>> is coming out. It seems you've exhausted your supply. You'll have to make the drinks normally.
 	<br><br>
 	<<link [[Make the drinks normally|Cafe Coffee Creation]]>><</link>>
 	<br>
@@ -1665,22 +1666,22 @@ You turn your back on the <<person>>, and walk away. <<He>> doesn't stop you.
 :: Cafe Coffee Creation
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<if $phase is 1>>
-	/*Small*/
+/*Small*/
 	You grab a small bowl and start milking yourself. Soon you have a decent amount of milk in the bowl. You mix it into their coffees. After a couple of minutes, Sam comes to collect them.<<breastfeed 4>>
 	<br><br>
 
 <<elseif $phase is 2>>
-	/*Medium*/
+/*Medium*/
 	You grab a small bowl and start milking yourself. Soon you have a large amount of milk in the bowl. Hopefully the amount of milk won't seem unusual. You mix it into their coffees. After a couple of minutes, Sam comes to collect them.<<breastfeed 7>>
 	<br><br>
 
 <<elseif $phase is 3>>
-	/*Large*/
+/*Large*/
 	You grab a small bowl and start milking yourself. Soon you have nearly filled the bowl. They're sure to notice how much milk there is. You mix it into their coffees. After a couple of minutes, Sam comes to collect them.<<breastfeed 10>>
 	<br><br>
 
 <<elseif $phase is 4>>
-	/*Huge*/
+/*Huge*/
 	You decide to give them drinks they're sure to love. You decide to add the milk straight in. You make sure to squeeze out a lot of milk. Some of it misses the coffee, making a mess in the kitchen. <<breastfeed 15>>
 	<br><br>
 
@@ -1688,29 +1689,29 @@ You turn your back on the <<person>>, and walk away. <<He>> doesn't stop you.
 	<br><br>
 
 <<else>>
-	/*Normal, no milk*/
+/*Normal, no milk*/
 	<<set _coffee to ["mocha", "latte", "caramel latte", "white chocolate mocha", "flat white", "caramel iced latte"].pluck()>>
 	You decide to make some normal <<print _coffee>>s for them. After a couple of minutes, the drinks are ready. Sam soon comes to collect them.
 	<br><br>
 
 <</if>>
 
-<<link [[Next|Cafe Coffee Creation Results]]>><</link>>
+<<link [[다음|Cafe Coffee Creation Results]]>><</link>>
 <br>
 
 :: Cafe Coffee Creation Results
 <<set $outside to 0>><<set $location to "cafe">><<effects>>
 <<npc Sam>><<person1>>
 <<if $phase is 1>>
-	/*Small*/
-	You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem satisfied with your coffee. You go back into the kitchen.
-	<br><br>
+/*Small*/
+You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem satisfied with your coffee. You go back into the kitchen.
+<br><br>
 
-	You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. They seemed happy with it. Here, think of this as a little 'thank you' for helping me out." <<He>> hands you <<money 10000 "cafeChef">><<printmoney 10000>>. "I won't keep you any longer," <<he>> says as <<he>> leaves.
-	<br><br>
+You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. They seemed happy with it. Here, think of this as a little 'thank you' for helping me out." <<He>> hands you <<moneyGain 100>>. "I won't keep you any longer." <<he>> says as <<he>> leaves.
+<br><br>
 
 <<elseif $phase is 2>>
-	/*Medium*/
+/*Medium*/
 	<<if $rng % 2 == 0>>
 		You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem delighted with your coffee. You go back into the kitchen.
 		<br><br>
@@ -1718,7 +1719,7 @@ You turn your back on the <<person>>, and walk away. <<He>> doesn't stop you.
 		You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. They seemed to really like it. Some of them said that the milk was even better than normal. How were you able to do that?" <<gsuspicion>><<set $chef_sus += 15>>
 		<br><br>
 
-		"Ah, sorry for asking into your secrets. Here, this is for your great work." <<He>> hands you <<money 12500 "cafeChef">><<printmoney 12500>>. "I won't keep you any longer," <<he>> says as <<he>> leaves.
+		"Ah, sorry for asking into your secrets. Here, this is for your great work." <<He>> hands you <<moneyGain 125>>. "I won't keep you any longer." <<he>> says as <<he>> leaves.
 		<br><br>
 	<<else>>
 		You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem delighted with your coffee. You go back into the kitchen.
@@ -1727,41 +1728,41 @@ You turn your back on the <<person>>, and walk away. <<He>> doesn't stop you.
 		You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. They seemed to really like it."
 		<br><br>
 
-		"Here, this is for your great work." <<He>> hands you <<money 12500 "cafeChef">><<printmoney 12500>>. "I won't keep you any longer," <<he>> says as <<he>> leaves.
+		"Here, this is for your great work." <<He>> hands you <<moneyGain 125>>. "I won't keep you any longer." <<he>> says as <<he>> leaves.
 		<br><br>
 	<</if>>
 <<elseif $phase is 3>>
-	/*Large*/
-	You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem thrilled with your coffee. You go back into the kitchen.
-	<br><br>
+/*Large*/
+You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem thrilled with your coffee. You go back into the kitchen.
+<br><br>
 
-	You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. They seemed to love your recipe. Were you able to make the milk even better somehow?" <<gsuspicion>>
-	<br><br>
+You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. They seemed to love your recipe. Were you able to make the milk even better somehow?" <<gsuspicion>>
+<br><br>
 
-	"Ah, sorry for asking into your secrets. Here, this is for your great work." <<He>> hands you <<money 15000 "cafeChef">><<printmoney 15000>>. "I won't keep you any longer," <<he>> says as <<he>> leaves.
-	<br><br>
+"Ah, sorry for asking into your secrets. Here, this is for your great work." <<He>> hands you <<moneyGain 150>>. "I won't keep you any longer." <<he>> says as <<he>> leaves.
+<br><br>
 
 <<elseif $phase is 4>>
-	/*Huge*/
-	You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. At first they seem irritated to have been brought what appears to be milk. But as soon as one of them takes a sip, their mood changes entirely. All of them begin to enthusiastically drink their 'coffees'. You return to the kitchen, satisfied with the effect your drinks had.
-	<br><br>
+/*Huge*/
+You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. At first they seem irritated to have been brought what appears to be milk. But as soon as one of them takes a sip, their mood changes entirely. All of them begin to enthusiastically drink their 'coffees'. You return to the kitchen, satisfied with the effect your drinks had.
+<br><br>
 
-	You put the dough in the oven. Sam comes in again. "I wasn't sure about your drinks when I saw them, but it seems they were a great success. They were so great that even the other guests wanted to get a taste." <<ggsuspicion>>
-	<br><br>
+You put the dough in the oven. Sam comes in again. "I wasn't sure about your drinks when I saw them, but it seems they were a great success. They were so great that even the other guests wanted to get a taste." <<ggsuspicion>>
+<br><br>
 
-	"Too bad you're usually busy making buns, else I'd ask you to make more of those drinks." <<He>> hands you <<money 20000 "cafeChef">><<printmoney 20000>>. "You really outdid yourself, thank you." <<npcincr Sam love 2>> <<glove>>
-	<br><br>
+"Too bad you're usually busy making buns, else I'd ask you to make more of those drinks." <<He>> hands you <<moneyGain 200>>. "You really outdid yourself, thank you." <<npcincr Sam love 2>> <<glove>>
+<br><br>
 
-	"I won't keep you any longer," <<he>> says as <<he>> leaves.
-	<br><br>
+"I won't keep you any longer." <<he>> says as <<he>> leaves.
+<br><br>
 
 <<else>>
-	/*Normal, no milk*/
-	You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem pleased with the coffee. You go back into the kitchen.
-	<br><br>
+/*Normal, no milk*/
+You watch from the kitchen door as Sam brings the coffees to the aristocrats' table. They seem pleased with the coffee. You go back into the kitchen.
+<br><br>
 
-	You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. Here, think of this as a little 'thank you' for helping me out." <<He>> hands you <<money 5000 "cafeChef">><<printmoney 5000>>. "I won't keep you any longer," <<he>> says as <<he>> leaves.
-	<br><br>
+You put the dough in the oven. Sam comes in again. "Thank you for making the coffee on such short notice. Here, think of this as a little 'thank you' for helping me out." <<He>> hands you <<moneyGain 50>>. "I won't keep you any longer." <<he>> says as <<he>> leaves.
+<br><br>
 
 <</if>>
 <<endevent>>

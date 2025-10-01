@@ -2,19 +2,15 @@
 <<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
 <<switch Time.dayState>>
 	<<case "day">>
-		You are on the top level of the shopping centre. It's not so busy up here, but you can hear a throng on the level below.
+		당신은 쇼핑센터의 최상층에 있다. 이곳은 그렇게 바쁘지 않지만, 아래층은 꽤나 붐비는 것 같다.
 	<<case "dusk">>
-		You are on the top level of the shopping centre. The shops are still open, but there are fewer people around as it nears closing time.
+		당신은 쇼핑센터의 최상층에 있다. 가게들은 아직 영업 중이지만, 문 닫는 시간이 가까워 머무르는 사람은 많지 않다.
 	<<case "dawn">>
-		You are on the top level of the shopping centre. The shops are opening but it's not yet busy.
+		당신은 쇼핑센터의 최상층에 있다. 상점들이 문을 열기 시작했기에 아직 붐비지는 않는다.
 	<<case "night">>
-		<<if Time.hour is $closinghour>>
-			You are on the top level of the shopping centre.
-		<<else>>
-			The building is closed for the night and seemingly deserted. It's probably illegal to be here right now.
-		<</if>>
+		문을 닫는 시간이기에 지금은 아무도 없다. 지금 이시간 이곳에 있는 것은 불법이다.
 	<<default>>
-		You are on the top level of the shopping centre. Something seems wrong, as if the day state was incorrect.
+		당신은 쇼핑센터의 최상층에 있다. 무언가 잘못되어, day state 가 정확하지 않은 것 같다.
 <</switch>>
 <br><br>
 
@@ -23,9 +19,9 @@
 	You search through the cart. The only thing that might help is a small waist apron.
 	<br><br>
 
-	<<link [[Take it|Shopping Centre Top]]>><<lowerwear 4>><</link>>
+	<<link [[가져간다|Shopping Centre Top]]>><<lowerwear 4>><</link>>
 	<br>
-	<<link [[Leave it|Shopping Centre Top]]>><</link>>
+	<<link [[놔둔다|Shopping Centre Top]]>><</link>>
 	<br><br>
 <<else>>
 	<<if $stress gte $stressmax>>
@@ -35,53 +31,51 @@
 			<<orgasmLocation "shoppingCentre">>
 		<</if>>
 		<<if Time.hour is 21>>
-			It's closing time. Security is herding everyone outside. <<if $exposed gte 1>>Panic swells within you as you realise how exposed you'll be should security find you in this state of dress.<</if>>
+			폐점 시간이다. 보안요원이 모두를 밖으로 이동시킨다. <<if $exposed gte 1>>당신은 이렇게 노출된 차림으로 보안요원에게 발각된다면 당신이 얼마나 부끄러울지를 깨닫자 공포가 일어난다..<</if>>
 			<br><br>
 			<<if $exposed lte 0>>
-				<<highicon>><<link [[Go outside|High Street]]>><</link>>
+				<<highicon>><<link [[밖으로 나간다|High Street]]>><</link>>
 				<br>
 			<<else>>
-				<<ind>><<link [[Hide until it's over (1:00)|Shopping Centre Top]]>><<pass 1 hour>><</link>>
+				<<ind>><<link [[끝날때까지 숨어 있는다 (1:00)|Shopping Centre Top]]>><<pass 1 hour>><</link>>
 			<</if>>
 		<<else>>
 			<<if $exposed gte 2>>
 				You feel so vulnerable with your privates exposed.
-				<<if pcAreArmsBound("both")>>
+				<<if $leftarm is "bound" and $rightarm is "bound">>
 					With your arms bound you can't even cover yourself.
 				<</if>>
 				<<if Time.dayState is "night">>
 					You must admit though that standing unclad in this often-crowded space is exhilarating. Still, you must find a way to fix your predicament.
 					<br><br>
 					<<if $clothingShop.ban gt 0 and $clothingShop.banExtension is true>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Sneak Guard]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Sneak Guard]]>><<pass 1>><</link>>
 					<<else>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Sneak]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Sneak]]>><<pass 1>><</link>>
 					<</if>>
 					<br>
-					<<shopicon "tailor">><<link [[Tailor shop (0:01)|Tailor Shop Sneak]]>><<pass 1>><</link>>
+					<<shopicon "tailor">><<link [[옷 수선 가게 (0:01)|Tailor Shop Sneak]]>><<pass 1>><</link>>
 					<br>
-					<<cosmeticsicon>><<link [[Cosmetics shop (0:01)|Cosmetics Lock]]>><<pass 1>><</link>>
+					<<cosmeticsicon>><<link [[화장품 가게 (0:01)|Cosmetics Lock]]>><<pass 1>><</link>>
 					<br>
-					<<shopicon "toy">><<link [[Toy shop (0:01)|Toy Shop Lock]]>><<pass 1>><</link>>
-					<br>
-					<<shopicon "closed">><<link [[Empty shop (0:01)|EmptyStore]]>><<pass 1>><</link>>
+					<<shopicon "toy">><<link [[장난감 가게 (0:01)|Toy Shop Lock]]>><<pass 1>><</link>>
 					<br>
 					<br>
-					<<stairsicon "down">><<link [[Main floor (0:02)|Shopping Centre]]>><<pass 2>><</link>>
+					<<stairsicon "down">><<link [[1층으로 (0:02)|Shopping Centre]]>><<pass 2>><</link>>
 					<br>
-					<<stairsicon "up">><<link [[Roof (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
+					<<stairsicon "up">><<link [[지붕으로 (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
 					<br><br>
 				<<else>>
 					You cower behind a maintenance door away from prying eyes. There's a staircase here leading to the roof. There's also a cart full of cleaning tools, perhaps you could find something to cover yourself in there?
 					<br><br>
 
-					<<ind>><<link [[Search cart (0:01)|Shopping Centre Top]]>><<pass 1>><<set $shop_phase to 1>><</link>>
+					<<ind>><<link [[카트를 살펴본다 (0:01)|Shopping Centre Top]]>><<pass 1>><<set $shop_phase to 1>><</link>>
 					<br>
-					<<stairsicon "up">><<link [[Roof (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
+					<<stairsicon "up">><<link [[지붕으로 (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
 				<</if>>
 			<<elseif $exposed gte 1>>
 				You are dressed really inappropriately for public!
-				<<if pcAreArmsBound("both")>>
+				<<if $leftarm is "bound" and $rightarm is "bound">>
 				With your arms bound you can't even cover yourself.
 				<</if>>
 				<<if Time.dayState is "night">>
@@ -89,23 +83,23 @@
 					<br><br>
 
 					<<if $clothingShop.ban gt 0 and $clothingShop.banExtension is true>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Sneak Guard]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Sneak Guard]]>><<pass 1>><</link>>
 					<<else>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Sneak]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Sneak]]>><<pass 1>><</link>>
 					<</if>>
 					<br>
-					<<shopicon "tailor">><<link [[Tailor shop (0:01)|Tailor Shop Sneak]]>><<pass 1>><</link>>
+					<<shopicon "tailor">><<link [[옷 수선 가게 (0:01)|Tailor Shop Sneak]]>><<pass 1>><</link>>
 					<br>
-					<<cosmeticsicon>><<link [[Cosmetics shop (0:01)|Cosmetics Store]]>><<pass 1>><</link>>
+					<<cosmeticsicon>><<link [[화장품 가게 (0:01)|Cosmetics Store]]>><<pass 1>><</link>>
 					<br>
-					<<shopicon "toy">><<link [[Toy shop (0:01)|Toy Shop]]>><<pass 1>><</link>>
+					<<shopicon "toy">><<link [[장난감 가게 (0:01)|Toy Shop]]>><<pass 1>><</link>>
 					<br>
-					<<shopicon "closed">><<link [[Empty shop (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
+					/*<<shopicon "closed">><<link [[비어있는 가게 (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
+					<br>*/
 					<br>
+					<<stairsicon "down">><<link [[1층으로 (0:02)|Shopping Centre]]>><<pass 2>><</link>>
 					<br>
-					<<stairsicon "down">><<link [[Main floor (0:02)|Shopping Centre]]>><<pass 2>><</link>>
-					<br>
-					<<stairsicon "up">><<link [[Roof (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
+					<<stairsicon "up">><<link [[지붕으로 (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
 					<br><br>
 				<<else>>
 					<<if $clothingShop.ban gt 0>>
@@ -116,13 +110,13 @@
 						You are hiding behind an ajar maintenance door. You know there's a clothing shop and a tailor nearby.
 						You could make a run for it, but you're bound to be seen. There's also a staircase to the roof.
 						<br><br>
-						<<shopicon "clothing">><<link [[Dash to the clothing shop (0:01)|Clothing Shop]]>><<pass 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+						<<shopicon "clothing">><<link [[옷 가게 안으로 뛰어들어간다 (0:01)|Clothing Shop]]>><<pass 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 					<</if>>
 					<br>
 
-					<<shopicon "tailor">><<link [[Dash to the tailor shop (0:01)|Tailor Shop]]>><<pass 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+					<<shopicon "tailor">><<link [[옷 수선 가게 안으로 뛰어들어간다 (0:01)|Tailor Shop]]>><<pass 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 					<br>
-					<<stairsicon "up">><<link [[Roof (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
+					<<stairsicon "up">><<link [[지붕으로 (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
 					<br><br>
 				<</if>>
 			<<elseif $earSlime.growth gt 50 and random(0,1000) lt Math.clamp(($exhibitionism / 3) + ($daily.earSlimeShoppingCentre or 0), 0, 10) and !$weekly.earSlimeShoppingCentre>>
@@ -133,41 +127,41 @@
 				<</if>>
 				<<if Time.dayState is "night">>
 					<<if $clothingShop.ban gt 0 and $clothingShop.banExtension is true>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Sneak Guard]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Sneak Guard]]>><<pass 1>><</link>>
 					<<else>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Sneak]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Sneak]]>><<pass 1>><</link>>
 					<</if>>
 					<br>
-					<<shopicon "tailor">><<link [[Tailor shop (0:01)|Tailor Shop Sneak]]>><<pass 1>><</link>>
+					<<shopicon "tailor">><<link [[옷 수선 가게 (0:01)|Tailor Shop Sneak]]>><<pass 1>><</link>>
 					<br>
-					<<cosmeticsicon>><<link [[Cosmetics shop (0:01)|Cosmetics Lock]]>><<pass 1>><</link>>
+					<<cosmeticsicon>><<link [[화장품 가게 (0:01)|Cosmetics Lock]]>><<pass 1>><</link>>
 					<br>
-					<<shopicon "toy">><<link [[Toy shop (0:01)|Toy Shop Lock]]>><<pass 1>><</link>>
+					<<shopicon "toy">><<link [[장난감 가게 (0:01)|Toy Shop Lock]]>><<pass 1>><</link>>
 					<br>
-					<<shopicon "closed">><<link [[Empty shop (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
-					<br>
+					/*<<shopicon "closed">><<link [[비어있는 가게 (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
+					<br>*/
 				<<else>>
 					<<if $clothingShop.ban gt 0>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop Guard]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop Guard]]>><<pass 1>><</link>>
 					<<else>>
-						<<shopicon "clothing">><<link [[Clothing shop (0:01)|Clothing Shop]]>><<pass 1>><</link>>
+						<<shopicon "clothing">><<link [[옷 가게 (0:01)|Clothing Shop]]>><<pass 1>><</link>>
 					<</if>>
 					<br>
-					<<shopicon "tailor">><<link [[Tailor (0:01)|Tailor Shop]]>><<pass 1>><</link>>
+					<<shopicon "tailor">><<link [[옷 수선 가게 (0:01)|Tailor Shop]]>><<pass 1>><</link>>
 					<br>
-					<<cosmeticsicon>><<link [[Cosmetics shop (0:01)|Cosmetics Store]]>><<pass 1>><</link>>
+					<<cosmeticsicon>><<link [[화장품 가게 (0:01)|Cosmetics Store]]>><<pass 1>><</link>>
 					<br>
-					<<shopicon "toy">><<link [[Toy shop (0:01)|Toy Shop]]>><<pass 1>><</link>>
+					<<shopicon "toy">><<link [[장난감 가게 (0:01)|Toy Shop]]>><<pass 1>><</link>>
 					<br>
 					/*Comment out when a new shop is added in its place, uncomment when required*/
 					/*Used to keep the `Go onto the roof` and `Go downstair` in lines with the lower floor*/
-					<<shopicon "closed">><<link [[Empty shop (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
-					<br>
+					/*<<shopicon "closed">><<link [[비어있는 가게 (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
+					<br>*/
 				<</if>>
 				<br>
-				<<stairsicon "up">><<link [[Go onto the roof (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
+				<<stairsicon "up">><<link [[지붕으로 올라간다 (0:02)|Commercial rooftops]]>><<pass 2>><</link>>
 				<br>
-				<<stairsicon "down">><<link [[Go downstairs (0:02)|Shopping Centre]]>><<pass 2>><</link>>
+				<<stairsicon "down">><<link [[아래층으로 내려간다 (0:02)|Shopping Centre]]>><<pass 2>><</link>>
 				<br><br>
 			<</if>>
 		<</if>>
@@ -179,133 +173,139 @@
 	<<if isPregnancyEnding()>>
 		<<pregnancyPassout "shop">>
 	<<else>>
-		<<link [[Everything fades to black...|Passout Shop]]>><</link>>
+		<<link [[모든 게 깜깜해진다...|Passout Shop]]>><</link>>
 	<</if>>
 <</widget>>
 
 :: Passout Shop
-You've pushed yourself too much.
+당신은 스스로를 너무 혹사시켰다.
 <br><br>
 <<passout>>
+<<set $dangershop to 0>>
+<<set $safeshop to 0>>
+<<set $danger to random(1, 10000)>>
 
-<<if dangerEvent()>>
-	<<switch random(1, 2)>>
-		<<case 1>>
-			<<link [[Wake up|Abduction Shop]]>><</link>>
-		<<case 2>>
-			<<link [[Wake up|Molestation Shop]]>><<set $molestationstart to 1>><</link>>
-	<</switch>>
-<<else>>
-	<<ambulance>>
+<<if $danger gte (9900 - $allure)>><<set $dangershop to random(1, 2)>><</if>>
+
+<<if $danger lt (9900 - $allure)>><<set $safeshop to 1>><</if>>
+
+<<if $dangershop is 1>>
+	<<link [[일어난다|Abduction Shop]]>><</link>>
+<<elseif $dangershop is 2>>
+	<<link [[일어난다|Molestation Shop]]>><<set $molestationstart to 1>><</link>>
 <</if>>
 
+<<if $safeshop is 1>><<ambulance>><</if>>
+
 <<pass 1 hour>>
+
 <<trauma 6>><<set $stress -= 2000>>
 
 :: Abduction Shop
 <<set $outside to 0>><<effects>>
 
 <<if $phase is 0>><<set $phase to 1>>
-	<<drugs 180>>
-	<<lowerruined>>
-	<<upperruined>>
-	<<underruined>>
-	<<handheldruined>>
+<<drugs 180>>
+<<lowerruined>>
+<<upperruined>>
+<<underruined>>
+<<handheldruined>>
 
-	<<underupperwear 1>>
-	<<underlowerwear 2>>
+<<underupperwear 1>>
+<<underlowerwear 2>>
 
-	<<generate1>><<generate2>>
-	You feel light-headed as you regain consciousness. Your vision clears, and you find yourself facing out a window onto the High Street. You cannot move an inch, but you're stood upright. You feel straps against your skin, they must be holding you steady. They're also contorting your limbs into a specific pose; your hands are resting on your hips and your head is cocked to one side.
-	<br><br>
+<<generate1>><<generate2>>
+You feel light-headed as you regain consciousness. Your vision clears, and you find yourself facing out a window onto the High Street. You cannot move an inch, but you're stood upright. You feel straps against your skin, they must be holding you steady. They're also contorting your limbs into a specific pose; your hands are resting on your hips and your head is cocked to one side.
+<br><br>
 
-	Once your bewilderment subsides, you notice you are wearing nothing but a string bikini. The implication suddenly dawns on you when a young blond woman stops in front of the window and stares. You feel blood rush to your face at the humiliation, but she moves on without a flicker of realisation on her face.
-	<br><br>
+Once your bewilderment subsides, you notice you are wearing nothing but a string bikini. The implication suddenly dawns on you when a young blond woman stops in front of the window and stares. You feel blood rush to your face at the humiliation, but she moves on without a flicker of realisation on her face.
+<br><br>
 
-<<link [[Next|Abduction Shop]]>><<pass 1 hour>><<trauma 9>><</link>>
+<<link [[다음|Abduction Shop]]>><<pass 1 hour>><<trauma 9>><</link>>
 
 <<elseif $phase is 1>>
 
-	An hour passes without event. More people look at you through the window but none realise you aren't a mannequin. Most people just pass you by without a glance.
-	<br><br>
+An hour passes without event. More people look at you through the window but none realise you aren't a mannequin. Most people just pass you by without a glance.
+<br><br>
 
-	You feel less groggy now, and can even twitch a bit. You'll regain control of your body soon, but that still leaves the straps.
-	<br><br>
+You feel less groggy now, and can even twitch a bit. You'll regain control of your body soon, but that still leaves the straps.
+<br><br>
 
-	Your musing is interrupted by a gentle prod on your backside. A <<person1>><<person>> walks in front of you. <<His>> eyes explore up and down your body, lingering on your bikini bottoms. <<He>> reaches a hand out.
-	<br><br>
+Your musing is interrupted by a gentle prod on your backside. A <<person1>><<person>> walks in front of you. <<His>> eyes explore up and down your body, lingering on your bikini bottoms. <<He>> reaches a hand out.
+<br><br>
 
-	<<link [[Try to say stop|Abduction Shop]]>><<trauma 9>><<set $phase to 2>><</link>>
-	<br>
-	<<link [[Remain silent|Abduction Shop]]>><<trauma 9>><<set $phase to 3>><</link>>
+<<link [[Try to say stop|Abduction Shop]]>><<trauma 9>><<set $phase to 2>><</link>>
+<br>
+<<link [[침묵한다|Abduction Shop]]>><<trauma 9>><<set $phase to 3>><</link>>
 
 <<elseif $phase is 2>>
 
-	You can barely murmur, but it's enough. Startled, the <<person>> cries out and runs away. A moment later you hear another voice<<person2>> laugh. "A mannequin spoke?" <<he>> says. "You have an overactive imagination." A pair of hands clasp round your shoulders and spin you to face the inside of the shop. You see the <<person1>><<person>> along with a <<person2>><<person>> watching you.
-	<br><br>
+You can barely murmur, but it's enough. Startled, the <<person>> cries out and runs away. A moment later you hear another voice<<person2>> laugh. "A mannequin spoke?" <<he>> says. "You have an overactive imagination." A pair of hands clasp round your shoulders and spin you to face the inside of the shop. You see the <<person1>><<person>> along with a <<person2>><<person>> watching you.
+<br><br>
 
-	"Hey sexy doll." The <<person>> prods your waist. Prods a little too hard; the force upsets your balance and you fall to the ground. The <<person1>><<person>> bursts into laughter.
-	<br><br>
+"Hey sexy doll," the <<person>> prods your waist. Prods a little too hard; the force upsets your balance and you fall to the ground. The <<person1>><<person>> bursts into laughter.
+<br><br>
 
-	Looking somewhat sheepish, the <<person2>><<person>> picks you up and tries to put you back into position. It's not an easy job to get you stable. Thinking you an object, <<he>> callously manhandles you, gripping you by whichever part of your body <<he>> thinks will help until <<he>> gets you to stay upright.
-	<br><br>
-	<<arousal 200 "breasts">>
+Looking somewhat sheepish, the <<person2>><<person>> picks you up and tries to put you back into position. It's not an easy job to get you stable. Thinking you an object, <<he>> callously manhandles you, gripping you by whichever part of your body <<he>> thinks will help until <<he>> gets you to stay upright.
+<br><br>
+<<arousal 200 "breasts">>
 
-	Satisfied, <<he>> and the <<person1>><<person>> leave you be.
-	<br><br>
+Satisfied, <<he>> and the <<person1>><<person>> leave you be.
+<br><br>
 
-	<<link [[Next|Abduction Shop]]>><<pass 2 hours>><<trauma 18>><<set $phase to 4>><</link>>
+<<link [[다음|Abduction Shop]]>><<pass 2 hours>><<trauma 18>><<set $phase to 4>><</link>>
 
 <<elseif $phase is 3>>
-	<<lowerstrip>>
+<<lowerstrip>>
 
-	<<He>> prods your <<genitals>> through the thin fabric of the bikini. Curiosity unsated, <<he>> yanks the bikini bottoms, which easily come loose and fall to the ground. With your <<genitals>> exposed for all to see, <<he>> recommences <<his>> investigation into your private area. Before <<he>> becomes too confident a voice calls out. "What are you doing to that mannequin," it says. "You're such a pervert." Startled, the <<person>> ceases <<his>> adventure and moves away from you.
-	<br><br>
-	<<arousal 400 "genitals">>
+<<He>> prods your <<genitals>> through the thin fabric of the bikini. Curiosity unsated, <<he>> yanks the bikini bottoms, which easily come loose and fall to the ground. With your <<genitals>> exposed for all to see, <<he>> recommences <<his>> investigation into your private area. Before <<he>> becomes too confident a voice calls out, "What are you doing to that mannequin," it says. "You're such a pervert." Startled, the <<person>> ceases <<his>> adventure and moves away from you.
+<br><br>
+<<arousal 400 "genitals">>
 
-	<<link [[Next|Abduction Shop]]>><<pass 2 hours>><<trauma 18>><<set $phase to 5>><</link>>
+<<link [[다음|Abduction Shop]]>><<pass 2 hours>><<trauma 18>><<set $phase to 5>><</link>>
 
 <<elseif $phase is 5>>
-	<<set $phase to 0>>
+<<set $phase to 0>>
 
-	You continue waiting, only now with your <<genitals>> on display. People react much the same way as before, only eyes now linger on your exposed <<genitals>>. A few people giggle.
-	<br><br>
+You continue waiting, only now with your <<genitals>> on display. People react much the same way as before, only eyes now linger on your exposed <<genitals>>. A few people giggle.
+<br><br>
 
-	After two hours you feel your focus has returned, but the tight straps and forced position have made you physically sore. You are considering trying to loosen your bonds when you are lifted from behind and carried into a back room.
-	<br><br>
+After two hours you feel your focus has returned, but the tight straps and forced position have made you physically sore. You are considering trying to loosen your bonds when you are lifted from behind and carried into a back room.
+<br><br>
 
-	<<endevent>><<generate1>><<person1>>
-	As you are placed on the ground your bearer is revealed to be a <<person>> in <<his>> thirties. <<He>> talks while undoing your bindings. "Sorry for the short notice! The missing mannequin has shown up, so your services are no longer needed. You did a fine job though! Your payment is on the table there. You can keep the bikini too, it looks good on you." After removing your bindings <<he>> leaves the room, shutting the door behind <<him>>.
-	<br><br>
+<<endevent>><<generate1>><<person1>>
+As you are placed on the ground your bearer is revealed to be a <<person>> in <<his>> thirties. <<He>> talks while undoing your bindings. "Sorry for the short notice! The missing mannequin has shown up, so your services are no longer needed. You did a fine job though! Your payment is on the table there. You can keep the bikini too, it looks good on you." After removing your bindings <<he>> leaves the room, shutting the door behind <<him>>.
+<br><br>
 
-	True to <<his>> word, there's £15 on the table, along with a bottle of water, a muffin with some sort of fruit in it, and the bottoms that were stripped from you.
-	<br><br>
-	<<set $hunger -= 500>><<set $thirst -= 500>><<clotheson>><<endevent>>
+True to <<his>> word, there's £15 on the table, along with a bottle of water, a muffin with some sort of fruit in it, and the bottoms that were stripped from you.
+<br><br>
+<<set $hunger -= 500>><<set $thirst -= 500>><<clotheson>><<endevent>>
 
-	<<commercialquick>>
-	<br>
-	<<shopicon>><<link [[Go into the shop|Clothing Shop]]>><</link>>
-	<br>
+<<commercialquick>>
+<br>
+<<shopicon>><<link [[가게 안으로 들어간다|Clothing Shop]]>><</link>>
+<br>
 
 <<elseif $phase is 4>>
-	<<set $phase to 0>>
+<<set $phase to 0>>
 
-	After two hours you feel your focus has returned, but the tight straps and forced position have made you physically sore. You are considering trying to surreptitiously loosen your bonds when you are lifted from behind and carried into a back room.
-	<br><br>
+After two hours you feel your focus has returned, but the tight straps and forced position have made you physically sore. You are considering trying to surreptitiously loosen your bonds when you are lifted from behind and carried into a back room.
+<br><br>
 
-	<<endevent>><<generate1>><<person1>>
-	As you are placed on the ground your bearer is revealed to be a <<person>> in <<his>> thirties. <<He>> talks while undoing your bindings. "Sorry for the short notice! The missing mannequin has shown up, so your services are no longer needed. You did a fine job though! Your payment is on the table there. You can keep the bikini too, it looks good on you." After removing your bindings <<he>> leaves the room, shutting the door behind <<him>>.
-	<br><br>
+<<endevent>><<generate1>><<person1>>
+As you are placed on the ground your bearer is revealed to be a <<person>> in <<his>> thirties. <<He>> talks while undoing your bindings. "Sorry for the short notice! The missing mannequin has shown up, so your services are no longer needed. You did a fine job though! Your payment is on the table there. You can keep the bikini too, it looks good on you." After removing your bindings <<he>> leaves the room, shutting the door behind <<him>>.
+<br><br>
 
-	True to <<his>> word, there's £15 on the table, along with a bottle of water, a muffin with some sort of fruit in it, and the bottoms that were stripped from you.
-	<br><br>
-	<<set $hunger -= 500>><<set $thirst -= 500>><<endevent>>
+True to <<his>> word, there's £15 on the table, along with a bottle of water, a muffin with some sort of fruit in it, and the bottoms that were stripped from you.
+<br><br>
+<<set $hunger -= 500>><<set $thirst -= 500>><<endevent>>
 
-	<<commercialquick>>
-	<br>
-	<<if Time.dayState isnot "night">>
-		<<shopicon>><<link [[Go into the shop|Clothing Shop]]>><</link>>
-	<</if>>
+<<commercialquick>>
+<br>
+<<if Time.dayState isnot "night">>
+<<shopicon>><<link [[가게 안으로 들어간다|Clothing Shop]]>><</link>>
+<br>
+<</if>>
 
 <</if>>
 
@@ -354,24 +354,24 @@ You've pushed yourself too much.
 
 <<if $alarm is 1>>
 	<<if $rescue is 1>>
-		<span id="next"><<link [[Next|Molestation Shop Alarm]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Molestation Shop Alarm]]>><</link>></span><<nexttext>>
 	<<else>>
 		<<set $alarm to 0>>
 		<br><br>
 		<<if $enemyarousal gte $enemyarousalmax>>
-			<span id="next"><<link [[Next|Molestation Shop Ejaculation]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Molestation Shop Ejaculation]]>><</link>></span><<nexttext>>
 		<<elseif $enemyhealth lte 0>>
-			<span id="next"><<link [[Next|Molestation Shop Escape]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Molestation Shop Escape]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|Molestation Shop]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Molestation Shop]]>><</link>></span><<nexttext>>
 		<</if>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Molestation Shop Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Shop Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Molestation Shop Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Shop Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Molestation Shop]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Shop]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Molestation Shop Alarm
@@ -424,28 +424,25 @@ Their bodies shudder in unison as they reach orgasm.
 :: Shopping Centre
 <<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
 <<if Time.dayState is "day">>
-	You are on the main floor of the shopping centre. It's crowded with shoppers.
+	당신은 쇼핑센터의 1층에 있다. 이곳은 쇼핑객들로 인해 붐빈다.
 <<elseif Time.dayState is "dusk">>
-	You are on the main floor of the shopping centre. The shops are still open, but there are fewer people around as it nears closing time.
+	당신은 쇼핑센터의 1층에 있다. 가게들은 아직 영업 중이지만, 문 닫는 시간이 가까워 머무르는 사람은 많지 않다.
 <<elseif Time.dayState is "dawn">>
-	You are on the main floor of the shopping centre. The shops are opening but it's not yet busy.
+	당신은 쇼핑센터의 1층에 있다. 상점들이 문을 열기 시작했기에 아직 붐비지는 않는다.
 <<elseif Time.dayState is "night">>
-	You are on the main floor of the shopping centre.
-	<<if Time.hour isnot $closinghour>>
-		It's probably illegal to be here right now.
-	<</if>>
+	당신은 쇼핑센터의 1층에 있다. 지금 이시간 이곳에 있는 것은 불법이다.
 <</if>>
 <br><br>
 
 <<if Time.days is 0 and C.npc.Robin.init is 0 and $exposed lte 0 and Time.hour gte 17 and Time.hour lte 19>>
 		<<set $robindebt to 0>><<set $robindebtlimit to 5>>
 		<<npc Robin>><<initnpc Robin>><<person1>>
-		You see a familiar figure leaving one of the shops with a large box. <<He>> notices you at the same time. "Hey!" It's Robin. <<Hes>> another resident at the orphanage. <<Hes>> always looked up to you, despite being about the same age. <<He>> quickly fumbles around with the box, stuffing it in an oversized bag before approaching you. "I didn't expect to see you today," <<he>> says, <<his>> eyes shifting between you and the box.
+		You see a familiar figure leaving one of the shops with a large box. <<He>> notices you at the same time. "Hey!" <<He>> shouts. It's Robin. <<Hes>> another resident at the orphanage. <<Hes>> always looked up to you, despite being about the same age. <<He>> quickly fumbles around with the box, stuffing it in an oversized bag before approaching you. "I didn't expect to see you today," <<he>> says, <<his>> eyes shifting between you and the box.
 		<br><br>
 		"Don't peek! I wanted to surprise you with this when I got home. Remember, <span class="gold">you can visit me in my room</span> anytime you want. I can't wait to show you, I'm so excited!" <<He>> puts the box down and hugs you, then runs off with it before you can respond.
 		<br><br>
 		<<endevent>>
-		<<link [[Next|Shopping Centre]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Shopping Centre]]>><<set $eventskip to 1>><</link>>
 		<br>
 <<elseif $stress gte $stressmax>>
 	<<passoutshop>>
@@ -454,19 +451,19 @@ Their bodies shudder in unison as they reach orgasm.
 		<<orgasmLocation "shoppingCentre">>
 	<</if>>
 	<<if Time.hour is 21>>
-		It's closing time. Security is herding everyone outside. <<if $exposed gte 1>>Panic swells within you as you realise how exposed you'll be should security find you in this state of dress.<</if>>
+		폐점 시간이다. 보안요원이 모두를 밖으로 이동시킨다. <<if $exposed gte 1>>당신은 이렇게 노출된 차림으로 보안요원에게 발각된다면 당신이 얼마나 부끄러울지를 깨닫자 공포가 일어난다..<</if>>
 		<br><br>
 
 		<<if $exposed lte 0>>
-			<<highicon>><<link [[Go outside|High Street]]>><</link>>
+			<<highicon>><<link [[밖으로 나간다|High Street]]>><</link>>
 			<br>
 		<<else>>
-			<<ind>><<link [[Hide until it's over (1:00)|Shopping Centre]]>><<pass 1 hour>><</link>>
+			<<ind>><<link [[끝날때까지 숨어 있는다 (1:00)|Shopping Centre]]>><<pass 1 hour>><</link>>
 		<</if>>
 	<<else>>
 		<<if $exposed gte 2>>
 			You feel so vulnerable with your privates exposed.
-			<<if pcAreArmsBound("both")>>
+			<<if $leftarm is "bound" and $rightarm is "bound">>
 				With your arms bound you can't even cover yourself.
 			<</if>>
 			<<if Time.dayState is "night">>
@@ -479,7 +476,7 @@ Their bodies shudder in unison as they reach orgasm.
 			<</if>>
 		<<elseif $exposed gte 1>>
 			You are dressed really inappropriately for public!
-			<<if pcAreArmsBound("both")>>
+			<<if $leftarm is "bound" and $rightarm is "bound">>
 				With your arms bound you can't even cover yourself.
 			<</if>>
 			<<if Time.dayState is "night">>
@@ -494,25 +491,23 @@ Their bodies shudder in unison as they reach orgasm.
 		<</if>>
 
 		<<if Time.dayState is "night">>
-			<<hairdressericon>><<link [[Hairdressers (0:01)|Hairdressers Lock]]>><<pass 1>><</link>>
+			<<hairdressericon>><<link [[미용실 (0:01)|Hairdressers Lock]]>><<pass 1>><</link>>
 			<br>
-			<<petshopicon>><<link [[Pet shop (0:01)|Pet Shop Lock]]>><<pass 1>><</link>>
+			<<petshopicon>><<link [[애완동물 가게 (0:01)|Pet Shop Lock]]>><<pass 1>><</link>>
 			<br>
-			<<shopicon "tattoo">><<link [[Tattoo parlour (0:01)|Tattoo Parlour Lock]]>><<pass 1>><</link>>
+			<<shopicon "tattoo">><<link [[문신 가게 (0:01)|Tattoo Parlour Lock]]>><<pass 1>><</link>>
 			<br>
-			<<wardrobeicon>><<link [[Furniture shop (0:01)|Furniture Shop Lock]]>><<pass 1>><</link>>
+			<<wardrobeicon>><<link [[가구 가게 (0:01)|Furniture Shop Lock]]>><<pass 1>><</link>>
 			<br>
-			<<supermarketicon>><<link [[Supermarket (0:01)|Supermarket Lock]]>><<pass 1>><</link>>
-			<br>
-			/*<<shopicon "closed">><<link [[Empty shop (0:01)|EmptyStore]]>><<pass 1>><</link>>
+			/*<<shopicon "closed">><<link [[비어있는 가게 (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "top">><</link>>
 			<br>*/
 			<br>
-			<<stairsicon "up">><<link [[Go upstairs (0:02)|Shopping Centre Top]]>><<pass 2>><</link>>
+			<<stairsicon "up">><<link [[위층으로 올라간다 (0:02)|Shopping Centre Top]]>><<pass 2>><</link>>
 			<br>
-			<<highicon>><<link [[Go outside (0:02)|Shopping Centre Entrance Sneak]]>><<pass 2>><</link>>
+			<<highicon>><<link [[밖으로 나간다 (0:02)|Shopping Centre Entrance Sneak]]>><<pass 2>><</link>>
 			<br>
 		<<elseif $exposed gte 1>>
-			<<bathroomicon "toilet">><<link [[Restroom|Shopping Centre Restroom]]>><</link>>
+			<<bathroomicon "toilet">><<link [[화장실|Shopping Centre Restroom]]>><</link>>
 			<br>
 		<<elseif $earSlime.growth gt 50 and random(0,1000) lt Math.clamp(($exhibitionism / 3) + ($daily.earSlimeShoppingCentre or 0), 0, 10) and !$weekly.earSlimeShoppingCentre>>
 			<<earSlimeShoppingExhibitionism>>
@@ -521,49 +516,49 @@ Their bodies shudder in unison as they reach orgasm.
 				<<set $daily.earSlimeShoppingCentre to ($daily.earSlimeShoppingCentre or 0) + 1>>
 			<</if>>
 			<<if $edenshopping is 0 and $money gte 5000>>
-				<<edenicon "supplies">><<link [[Buy Eden's supplies (0:30 £50)|Eden Supplies]]>><<pass 30>><<money -5000>><</link>>
+				<<edenicon "supplies">><<link [[에덴의 보급품을 산다 (0:30 £50)|Eden Supplies]]>><<pass 30>><<set $money -= 5000>><</link>>
 				<br>
 			<</if>>
-			<<if $edenfurniture is 1 and !$edenpillow>>
-				<<edenicon "rug">><<link [[Buy a rug and some pillows (0:10)|Shop Eden Pillows]]>><<pass 10>><</link>>
+			<<if $edenfurniture is 1 and $edenpillow isnot 1>>
+				<<edenicon "rug">><<link [[깔개와 베개 몇 개를 산다 (0:10)|Shop Eden Pillows]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if $edenfurniture is 2 and $edencurtains isnot 1>>
-				<<ind>><<link [[Buy some curtains (0:10)|Shop Eden Curtains]]>><<pass 10>><</link>>
+				<<ind>><<link [[커텐을 산다 (0:10)|Shop Eden Curtains]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if $edenfurniture is 3 and $edenloveseat is 7 and !$edencushions>>
-				<<shopicon "tailor">><<link [[Buy some cushion materials (0:10)|Shop Eden Cushions]]>><<pass 10>><</link>>
+				<<shopicon "tailor">><<link [[쿠션을 위한 자재를 산다 (0:10)|Shop Eden Cushions]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if $valentines_eden is 1 and !$valentines_eden_bought>>
-				<<gifticon "valentine">><<link [[Find a Valentine's day gift for Eden (0:10)|Shop Eden Valentines]]>><<pass 10>><</link>>
+				<<gifticon "valentine">><<link [[에덴을 위한 발렌타인 데이 선물을 찾는다 (0:10)|Shop Eden Valentines]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if $halloween_eden is 1 and !$halloween_eden_bought>>
-				<<foodicon "sweets">><<link [[Buy sweets for Eden (0:10)|Shop Eden Sweets]]>><<pass 10>><</link>>
+				<<foodicon "sweets">><<link [[에덴을 위한 사탕을 산다 (0:10)|Shop Eden Sweets]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if $christmas_gift_eden is undefined and $christmas is 1 and $syndromeeden gte 1>>
-				<<checkforloveinterests>><<if isLoveInterest("Eden")>><<gifticon "love">><<else>><<gifticon "christmas">><</if>><<link [[Find a gift for Eden (0:10)|Shop Eden Gift]]>><<pass 10>><</link>>
+				<<checkforloveinterests>><<if isLoveInterest("Eden")>><<gifticon "love">><<else>><<gifticon "christmas">><</if>><<link [[에덴을 위한 선물을 산다 (0:10)|Shop Eden Gift]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if $christmas_gift is undefined and $christmas is 1>>
 				<<if $money gte 10000>>
-					<<gifticon "christmas">><<link [[Buy gifts for the orphans (0:40 £100)|Shop Gifts]]>><<pass 40>><<money -10000>><<set $christmas_gift to "clothes_unwrapped">><</link>>
+					<<gifticon "christmas">><<link [[고아들을 위한 선물을 산다 (0:40 £100)|Shop Gifts]]>><<pass 40>><<set $money -= 10000>><<set $christmas_gift to "clothes_unwrapped">><</link>>
 					<br>
 				<<else>>
-					You could buy gifts for the orphans here, <span class="blue">if you had more money.</span>
+					당신은 고아들을 위한 선물을 여기서 살 수 있다, <span class="blue">돈이 있다면 말이지만.</span>
 					<br><br>
 				<</if>>
 			<</if>>
 			<<if $christmas_gift_robin is undefined and $christmas is 1 and C.npc.Robin.init is 1>>
-				<<checkforloveinterests>><<if isLoveInterest("Robin")>><<gifticon "love">><<else>><<gifticon "christmas">><</if>><<link [[Find a gift for Robin (0:10)|Shop Robin Gift]]>><<pass 10>><</link>>
+				<<checkforloveinterests>><<if isLoveInterest("Robin")>><<gifticon "love">><<else>><<gifticon "christmas">><</if>><<link [[로빈을 위한 선물을 찾는다 (0:10)|Shop Robin Gift]]>><<pass 10>><</link>>
 				<br>
 			<</if>>
 			<<if ($christmas_gift_robin isnot undefined or $christmas_gift isnot undefined) and $christmas_wrap is undefined>>
 				<<if $money gte 1000>>
-				<<gifticon "wrapping">><<link [[Buy wrapping paper (0:10 £10)|Shop Paper]]>><<pass 10>><<money -1000>><<set $christmas_wrap to 1>><</link>>
+				<<gifticon "wrapping">><<link [[포장지를 산다 (0:10 £10)|Shop Paper]]>><<pass 10>><<set $money -= 1000>><<set $christmas_wrap to 1>><</link>>
 				<br>
 				<<else>>
 					<br>
@@ -573,32 +568,31 @@ Their bodies shudder in unison as they reach orgasm.
 			<</if>>
 			<<if ($brothelVending isnot undefined and $brothelVending.status is "asked") or ($brothelVending isnot undefined and $brothelVending.status is "sold")>>
 				<<if $money gte 200000>>
-					<<condomicon "machine">><<link [[Buy a vending machine (0:10 £2,000)|Shop Brothel VM]]>><<pass 10>><<money -200000>><<set $brothelVending.status to "bought">><</link>>
+					<<condomicon "machine">><<link [[자동판매기를 산다 (0:10 £2,000)|Shop Brothel VM]]>><<pass 10>><<set $money -= 200000>><<set $brothelVending.status to "bought">><</link>>
 					<br>
 				<<else>>
 					<br>
-					<span class="blue">You'll need £2,000 to buy a vending machine.</span>
+					<span class="blue">자동판매기를 사려면 £2,000가 필요하다.</span>
 					<br><br>
 				<</if>>
 			<</if>>
-			<<hairdressericon>><<link [[Hairdressers (0:01)|Hairdressers]]>><<pass 1>><</link>>
+			<<hairdressericon>><<link [[미용실 (0:01)|Hairdressers]]>><<pass 1>><</link>>
 			<br>
-			<<petshopicon>><<link [[Pet shop (0:01)|Pet Shop]]>><<pass 1>><</link>>
+			<<petshopicon>><<link [[애완동물 가게 (0:01)|Pet Shop]]>><<pass 1>><</link>>
 			<br>
-			<<shopicon "tattoo">><<link [[Tattoo parlour (0:01)|Tattoo Parlour]]>><<pass 1>><</link>>
+			<<shopicon "tattoo">><<link [[문신 가게 (0:01)|Tattoo Parlour]]>><<pass 1>><</link>>
 			<br>
-			<<wardrobeicon>><<link [[Furniture shop (0:01)|Furniture Shop]]>><<pass 1>><</link>>
-			<br>
-			<<supermarketicon>><<link [[Supermarket (0:01)|Supermarket]]>><<pass 1>><</link>>
+			<<wardrobeicon>><<link [[가구 가게 (0:01)|Furniture Shop]]>><<pass 1>><</link>>
 			<br>
 			/*Comment out when a new shop is added in its place, uncomment when required*/
 			/*Used to keep the `Go Upstairs` and High Street` in lines with the top floor*/
-			/*<<shopicon "closed">><<link [[Empty shop (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "bottom">><</link>>
+			/*<<shopicon "closed">><<link [[비어있는 가게 (0:01)|EmptyStore]]>><<pass 1>><<set $shopFloor to "bottom">><</link>>
 			<br>*/
 			<br>
-			<<stairsicon "up">><<link [[Go upstairs (0:02)|Shopping Centre Top]]>><<pass 2>><</link>>
+			<<stairsicon "up">><<link [[위층으로 올라간다 (0:02)|Shopping Centre Top]]>><<pass 2>><</link>>
 			<br>
-			<<highicon>><<link [[High Street (0:02)|High Street]]>><<pass 2>><</link>>
+			<<highicon>><<link [[하이 가 (0:02)|High Street]]>><<pass 2>><</link>>
+			<br>
 		<</if>>
 	<</if>>
 <</if>>
@@ -610,13 +604,14 @@ You walk around a few DIY shops, finding some foam cushions, cloth and batting f
 <br><br>
 
 <<if $money gte 2000>>
-	<<shopicon "tailor">><<link [[Buy them (£20)|Shop Eden Cushions Buy]]>><<set $edencushions to 1>><<money -2000>><</link>>
+	<<shopicon "tailor">><<link [[산다 (£20)|Shop Eden Cushions Buy]]>><<set $edencushions to 1>><<set $money -= 2000>><</link>>
 	<br>
-	<<refuseicon>><<link [[Don't buy them|Shopping Centre]]>><</link>>
+	<<refuseicon>><<link [[사지 않는다|Shopping Centre]]>><</link>>
 <<else>>
 	Unfortunately, you can't seem to afford them.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
+	<br>
 <</if>>
 
 :: Shop Eden Cushions Buy
@@ -624,7 +619,8 @@ You walk around a few DIY shops, finding some foam cushions, cloth and batting f
 
 You decide to make your purchase.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Eden Curtains
 <<effects>>
@@ -634,13 +630,14 @@ Most are too gaudy and you're sure Eden would use them as fuel for the fireplace
 <br><br>
 
 <<if $money gte 2000>>
-	<<link [[Buy them (£20)|Shop Eden Curtains Buy]]>><<set $edencurtains to 1>><<money -2000>><</link>>
+	<<link [[산다 (£20)|Shop Eden Curtains Buy]]>><<set $edencurtains to 1>><<set $money -= 2000>><</link>>
 	<br>
-	<<link [[Don't buy them|Shopping Centre]]>><</link>>
+	<<link [[사지 않는다|Shopping Centre]]>><</link>>
 <<else>>
 	Unfortunately, you can't seem to afford them.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
+	<br>
 <</if>>
 
 :: Shop Eden Curtains Buy
@@ -648,7 +645,8 @@ Most are too gaudy and you're sure Eden would use them as fuel for the fireplace
 
 You decide to make your purchase.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Eden Pillows
 <<effects>>
@@ -658,13 +656,14 @@ Eventually, you settle on something plain and practical you find in one of the s
 <br><br>
 
 <<if $money gte 4000>>
-	<<edenicon "rug">><<link [[Buy them (£40)|Shop Eden Pillows Buy]]>><<set $edenpillow to 1>><<money -4000>><</link>>
+	<<edenicon "rug">><<link [[산다 (£40)|Shop Eden Pillows Buy]]>><<set $edenpillow to 1>><<set $money -= 4000>><</link>>
 	<br>
-	<<refuseicon>><<link [[Don't buy them|Shopping Centre]]>><</link>>
+	<<refuseicon>><<link [[사지 않는다|Shopping Centre]]>><</link>>
 <<else>>
 	Unfortunately, you can't seem to afford them.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
+	<br>
 <</if>>
 
 :: Shop Eden Pillows Buy
@@ -672,30 +671,33 @@ Eventually, you settle on something plain and practical you find in one of the s
 
 You decide to make your purchase.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Eden Valentines
 <<effects>>
 
-You walk around, trying to find something that Eden might like. Eventually, you narrow down your possibilities to a set of bath oils and a romance book.
+You walk around, trying to find something that Eden might like. Eventually, you narrow down your possibilities to set of bath oils and a romance book.
 <br><br>
 
 <<if $money gte 3500>>
-	<<link [[Buy them (£35)|Shop Eden Valentines Buy]]>><<set $valentines_eden_bought to 1>><<money -3500>><</link>>
+	<<link [[산다 (£35)|Shop Eden Valentines Buy]]>><<set $valentines_eden_bought to 1>><<set $money -= 3500>><</link>>
 	<br>
-	<<link [[Don't buy them|Shopping Centre]]>><</link>>
+	<<link [[사지 않는다|Shopping Centre]]>><</link>>
 <<else>>
 	Unfortunately, you can't seem to afford them.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
+	<br>
 <</if>>
 
 :: Shop Eden Valentines Buy
 <<effects>>
 
-You decide to buy the romance book and the bath oil set. Maybe you could prepare a bath for Eden on Valentine's day.
+You decide to buy romance book and bath oil set. Maybe you could prepare a bath for Eden on Valentine's day.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Eden Sweets
 <<effects>>
@@ -704,13 +706,13 @@ You see a small hamper of sweets sitting on one of the shelves. It looks light e
 <br><br>
 
 <<if $money gte 2000>>
-	<<link [[Buy it (£20)|Shop Eden Halloween]]>><<set $halloween_eden_bought to 1>><<money -2000>><</link>>
+	<<link [[산다 (£20)|Shop Eden Halloween]]>><<set $halloween_eden_bought to 1>><<set $money -= 2000>><</link>>
 	<br>
-	<<link [[Don't buy it|Shopping Centre]]>><</link>>
+	<<link [[사지 않는다|Shopping Centre]]>><</link>>
 <<else>>
-	Unfortunately, you can't seem to afford it.
+	불행하게도, 당신은 그것을 살 여유가 없다.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
 	<br>
 <</if>>
 
@@ -719,7 +721,8 @@ You see a small hamper of sweets sitting on one of the shelves. It looks light e
 
 You decide to buy the hamper.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Eden Gift
 <<effects>>
@@ -727,14 +730,15 @@ You decide to buy the hamper.
 You walk around in the shopping centre, looking for something you think Eden would like. Your eyes are drawn to a cosy hunting jacket.
 <br><br>
 <<if $money gte 3000>>
-	<<link [[Buy it (£30)|Shop Eden Christmas]]>><<set $christmas_gift_eden to 1>><<money -3000>><</link>>
+	<<link [[산다 (£30)|Shop Eden Christmas]]>><<set $christmas_gift_eden to 1>><<set $money -= 3000>><</link>>
 	<br>
-	<<link [[Don't buy it|Shopping Centre]]>><</link>>
+	<<link [[사지 않는다|Shopping Centre]]>><</link>>
 	<br>
 <<else>>
-	Unfortunately, you can't seem to afford it.
+	불행하게도, 당신은 그것을 살 여유가 없다.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
+	<br>
 <</if>>
 
 :: Shop Gifts
@@ -750,13 +754,14 @@ You pass a sweet shop. You know the orphans would love that, but Bailey wouldn't
 <<elseif $speech_attitude is "bratty">>
 	"No," you say. "Well, yeah. Kinda." You pay the required amount.
 <<else>>
-	"Something like that." You smile. You pay the required amount.
+	"Something like that," you smile. You pay the required amount.
 <</if>>
 <br><br>
 The clerk thanks you. You leave the shop with several full bags. <<if $christmas_wrap is undefined>>Now you just need wrapping paper.<<else>>You can wrap it in your room.<</if>>
 <br><br>
 
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Paper
 <<effects>>
@@ -764,7 +769,8 @@ The clerk thanks you. You leave the shop with several full bags. <<if $christmas
 You buy several tubes of wrapping paper. That should cover everything. You can wrap your gifts in your bedroom.
 <br><br>
 
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shop Robin Gift
 <<effects>>
@@ -772,24 +778,24 @@ You buy several tubes of wrapping paper. That should cover everything. You can w
 You walk between shops, looking for something Robin would like. You find a few items you think would work.
 <br><br>
 <<if $money gte 1500>>
-	<<gifticon "shirt">><<link [[Shirt and shorts (Sensible £15)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "shirt_unwrapped">><<money -1500 "robin">><</link>> <<if C.npc.Robin.pronoun is "f">><<note "Robin might need some convincing to wear this." "italic">><</if>>
+	<<gifticon "shirt">><<link [[Shirt and shorts (Sensible £15)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "shirt_unwrapped">><<set $money -= 1500>><</link>> <<if C.npc.Robin.pronoun is "f">><<note "Robin might need some convincing to wear this." "italic">><</if>>
 	<br>
-	<<gifticon "sundress">><<link [[Sundress (Sensible £15)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "sundress_unwrapped">><<money -1500 "robin">><</link>> <<if C.npc.Robin.pronoun is "m">><<note "Robin might need some convincing to wear this." "italic">><</if>>
+	<<gifticon "sundress">><<link [[Sundress (Sensible £15)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "sundress_unwrapped">><<set $money -= 1500>><</link>> <<if C.npc.Robin.pronoun is "m">><<note "Robin might need some convincing to wear this." "italic">><</if>>
 	<br>
 	<<if $money gte 14000>>
-		<<gifticon "kimono">><<link [[Kimono (Exotic £140)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "kimono_unwrapped">><<money -14000 "robin">><</link>>
+		<<gifticon "kimono">><<link [[Kimono (Exotic £140)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "kimono_unwrapped">><<set $money -= 14000>><</link>>
 		<br>
 	<<else>>
 		<<set _moreExotic to true>>
 	<</if>>
 	<<if $money gte 42000>>
-		<<gifticon "tuxedo">><<link [[Tuxedo set (Exotic £420)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "tuxedo_set_unwrapped">><<money -42000 "robin">><</link>> <<if C.npc.Robin.pronoun is "f">><<note "Robin might need some convincing to wear this." "italic">><</if>>
+		<<gifticon "tuxedo">><<link [[Tuxedo set (Exotic £420)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "tuxedo_set_unwrapped">><<set $money -= 42000>><</link>> <<if C.npc.Robin.pronoun is "f">><<note "Robin might need some convincing to wear this." "italic">><</if>>
 		<br>
 	<<else>>
 		<<set _moreExotic to true>>
 	<</if>>
 	<<if $money gte 42000>>
-		<<gifticon "gothic">><<link [[Gothic gown (Exotic £420)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "gothic_gown_unwrapped">><<money -42000 "robin">><</link>> <<if C.npc.Robin.pronoun is "m">><<note "Robin might need some convincing to wear this." "italic">><</if>>
+		<<gifticon "gothic">><<link [[Gothic gown (Exotic £420)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "gothic_gown_unwrapped">><<set $money -= 42000>><</link>> <<if C.npc.Robin.pronoun is "m">><<note "Robin might need some convincing to wear this." "italic">><</if>>
 		<br>
 	<<else>>
 		<<set _moreExotic to true>>
@@ -800,12 +806,13 @@ You walk between shops, looking for something Robin would like. You find a few i
 		<br>
 	<</if>>
 	<br>
-	<<getouticon>><<link [[Leave|Shopping Centre]]>><</link>>
+	<<getouticon>><<link [[떠난다|Shopping Centre]]>><</link>>
 	<br>
 <<else>>
 	Unfortunately, you can't afford anything right now.
 	<br><br>
-	<<link [[Next|Shopping Centre]]>><</link>>
+	<<link [[다음|Shopping Centre]]>><</link>>
+	<br>
 <</if>>
 
 :: Shop Robin Christmas
@@ -820,13 +827,13 @@ You walk between shops, looking for something Robin would like. You find a few i
 <<if $christmas_wrap is undefined>>Now you just need wrapping paper.<<else>>You can wrap it in your room.<</if>>
 <br><br>
 
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
 
 :: Shop Eden Christmas
 <<effects>>
 You decide to buy the hunting jacket. Hopefully it fits.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
 
 <!--Old passage to be removed at a later date-->
 :: Shop Robin Sundress
@@ -835,7 +842,7 @@ You decide to buy the hunting jacket. Hopefully it fits.
 You buy the sundress. You think Robin will like it. <<if $christmas_wrap is undefined>>Now you just need wrapping paper.<<else>>You can wrap it in your room.<</if>>
 <br><br>
 
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
 <br>
 
 <!--Old passage to be removed at a later date-->
@@ -845,29 +852,25 @@ You buy the sundress. You think Robin will like it. <<if $christmas_wrap is unde
 You buy the kimono. You think Robin will like it. <<if $christmas_wrap is undefined>>Now you just need wrapping paper.<<else>>You can wrap it in your room.<</if>>
 <br><br>
 
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shopping Centre Entrance Sneak
 <<set $outside to 0>><<effects>><<set $lock to 100>>
 
-<<if currentSkillValue('skulduggery') gte $lock>>
-	<<if pcAreArmsBound("both")>>
-		You think you'd be able to pick the lock, <span class="blue">if your arms weren't bound.</span>
-		<br><br>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">자물쇠를 따기 쉬워 보인다.</span>
+	<br><br>
+
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|High Street]]>><<pass 10>><<crimeUp 20 "trespassing">><</link>><<crime "trespassing">>
+	<br>
 	<<else>>
-		<<wearProp "lockpick">>
-		<span class="green">The lock looks easy to pick.</span>
-		<br><br>
-		<<lockicon "pick">><<link [[Pick it (0:10)|High Street]]>><<handheldon>><<pass 10>><<crimeUp 20 "trespassing">><</link>><<crime "trespassing">>
-		<br>
-	<</if>>
-<<else>>
-	<span class="red">The lock looks beyond your ability to pick.</span>
+	<span class="red">잠금장치는 당신이 해제할 수 있는 능력 이상인 것 같다.</span>
 	<<skulduggeryrequired>>
 	<br><br>
-<</if>>
+	<</if>>
 
-<<shopicon>><<link [[Leave|Shopping Centre]]>><<handheldon>><</link>>
+<<shopicon>><<link [[떠난다|Shopping Centre]]>><</link>>
 <br>
 
 :: Shopping Centre Restroom
@@ -880,42 +883,36 @@ You find some towels. They make a poor substitute for actual clothing, but they'
 <<link [[Leave through main door|Shopping Centre]]>><</link>>
 <br>
 <<link [[Leave through escape door|Commercial alleyways]]>><<set $eventskip to 1>><</link>>
+<br>
 
 :: Shopping Centre Sneak
 <<set $outside to 1>><<effects>><<set $lock to 100>>
-The shopping centre is closed. <<openinghours 6 21>>
-<br><br>
 
-<<if currentSkillValue('skulduggery') gte $lock>>
-	<<if pcAreArmsBound("both")>>
-		You think you'd be able to pick the lock, <span class="blue">if your arms weren't bound.</span>
-		<br><br>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">자물쇠를 따기 쉬워 보인다.</span>
+	<br><br>
+
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Shopping Centre]]>><<pass 10>><<crimeUp 20 "trespassing">><</link>><<crime "trespassing">>
+	<br>
 	<<else>>
-		<<wearProp "lockpick">>
-		<span class="green">The lock looks easy to pick.</span>
-		<br><br>
-		<<lockicon "pick">><<link [[Pick it (0:10)|Shopping Centre]]>><<handheldon>><<pass 10>><<crimeUp 20 "trespassing">><</link>><<crime "trespassing">>
-		<br>
-	<</if>>
-<<else>>
-	<span class="red">The lock looks beyond your ability to pick.</span>
+	<span class="red">잠금장치는 당신이 해제할 수 있는 능력 이상인 것 같다.</span>
 	<<skulduggeryrequired>>
 	<br><br>
-<</if>>
+	<</if>>
 
-<<getouticon>><<link [[Leave|High Street]]>><<handheldon>><</link>>
+<<getouticon>><<link [[떠난다|High Street]]>><</link>>
 <br>
 
 :: EmptyStore
 <<set $outside to 0>>
 
-You try to peek behind the shutters, but can't make anything out in the dark shop.
+You try to peek behind the shutters but can't make anything out in the dark shop.
 <br><br>
 
 <<if $shopFloor is "bottom">>
-	<<link [[Leave|Shopping Centre]]>><</link>>
-<<else>>
-	<<link [[Leave|Shopping Centre Top]]>><</link>>
+	<<link [[떠난다|Shopping Centre]]>><</link>>
+<<elseif $shopFloor is "top">>
+	<<link [[떠난다|Shopping Centre Top]]>><</link>>
 <</if>>
 <<unset $shopFloor>>
 
@@ -923,7 +920,8 @@ You try to peek behind the shutters, but can't make anything out in the dark sho
 <<effects>>
 You buy a vending machine. According to the instructions, it can dispense several kinds of products and can store up to <span class="blue">200</span> units of each one. It is not very complicated to install and program. You can go to the brothel and set it up in the dressing rooms.
 <br><br>
-<<link [[Next|Shopping Centre]]>><</link>>
+<<link [[다음|Shopping Centre]]>><</link>>
+<br>
 
 :: Shopping Centre Slime Exhibitionism Obey
 <<effects>>
@@ -955,13 +953,13 @@ You buy a vending machine. According to the instructions, it can dispense severa
 <<exposure>>
 <br><br>
 <<if $worn.upper.name isnot "naked" and $worn.upper.outfitPrimary and $worn.upper.outfitPrimary.lower isnot $worn.lower.name>>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Outfit]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Outfit]]>><</link>>
 <<elseif $worn.upper.name isnot "naked">>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Upper]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Upper]]>><</link>>
 <<elseif $worn.lower.name isnot "naked">>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Lower]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Lower]]>><</link>>
 <<else>>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
 <</if>>
 
 :: Shopping Centre Slime Exhibitionism Obey Upper
@@ -985,7 +983,7 @@ You notice a small alley coming up, as you walk down the corridor. Hastily, you 
 <</if>>
 
 <br><br>
-<<link [[Next|Shopping Centre Slime Exhibitionism Obey Lower]]>><</link>>
+<<link [[다음|Shopping Centre Slime Exhibitionism Obey Lower]]>><</link>>
 
 :: Shopping Centre Slime Exhibitionism Obey Lower
 <<effects>>
@@ -1017,9 +1015,9 @@ You turn around a corner, loosening your $worn.lower.name and letting them fall 
 <</if>>
 <br><br>
 <<if $worn.under_upper.name isnot "naked">>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Under Outfit]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Under Outfit]]>><</link>>
 <<else>>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
 <</if>>
 
 :: Shopping Centre Slime Exhibitionism Obey Outfit
@@ -1044,9 +1042,9 @@ You notice a small alley coming up, as you walk down the corridor. With your han
 
 <br><br>
 <<if $worn.under_upper.name isnot "naked" and $worn.under_upper.outfitPrimary and $worn.under_upper.outfitPrimary.under_lower isnot $worn.under_lower.name>>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Under Outfit]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Under Outfit]]>><</link>>
 <<else>>
-	<<link [[Next|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
+	<<link [[다음|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
 <</if>>
 
 :: Shopping Centre Slime Exhibitionism Obey Under Outfit
@@ -1059,7 +1057,7 @@ Continuing your walk, a small crowd following behind you, your <<underoutfit>> i
 Your <<chest>> and genitals now exposed, you begin to draw attention. Most are now openly ogling you, some cheer you, enjoying your display.
 
 <br><br>
-<<link [[Next|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
+<<link [[다음|Shopping Centre Slime Exhibitionism Obey Ending]]>><</link>>
 
 :: Shopping Centre Slime Exhibitionism Obey Ending
 <<effects>>
@@ -1095,7 +1093,7 @@ A small crowd has formed around you, shouting all kinds of obscenities. A ruckus
 Now free from the parasite's <<if $phase is 1>>suggestion<<else>>control<</if>>, you sprint in the opposite direction, turning back, you spot someone picking up your clothes as the guards shout and chase you, but you manage to leave them behind. You find a place to hide, having now lost your clothes.
 <br><br>
 
-<<link [[Next|$shoppingCentreExit]]>><<endevent>><<unset $shoppingCentreExit>><</link>>
+<<link [[다음|$shoppingCentreExit]]>><<endevent>><<unset $shoppingCentreExit>><</link>>
 
 :: Shopping Centre Slime Exhibitionism Defy
 <<effects>>
@@ -1115,4 +1113,5 @@ You ignore the slime's demand. You feel a spike of pain as the slime punishes yo
 <</if>>
 
 <br><br>
-<<link [[Next|$shoppingCentreExit]]>><<unset $shoppingCentreExit>><</link>>
+<<link [[다음|$shoppingCentreExit]]>><<unset $shoppingCentreExit>><</link>>
+<br>

@@ -1,11 +1,8 @@
-// @ts-check
 /* For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites. */
 function initOverLower() {
-	/** @type {ClothesItem[]} */
-	const clothing = [
+	setup.clothes.over_lower = [
 		{
 			index: 0,
-			slot: "over_lower",
 			name: "naked",
 			name_cap: "Naked",
 			variable: "naked",
@@ -48,13 +45,9 @@ function initOverLower() {
 
 		{
 			index: 1,
-			slot: "over_lower",
 			name: "froggy skirt",
 			name_cap: "Froggy skirt",
 			variable: "froggy",
-			combat: {
-				renderType: "skirt",
-			},
 			integrity: 300,
 			integrity_max: 300,
 			fabric_strength: 30,
@@ -99,19 +92,14 @@ function initOverLower() {
 
 		{
 			index: 2,
-			slot: "over_lower",
 			name: "cream",
 			name_cap: "Cream",
 			variable: "cream",
-			combat: {
-				renderType: "skirt",
-			},
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 30,
 			reveal: 1000,
 			rearresize: 0,
-			warmth: 0,
 			word: "n",
 			one_piece: 0,
 			skirt: 0,
@@ -147,7 +135,6 @@ function initOverLower() {
 			accIcon: 0,
 		},
 	];
-	setup.clothes.over_lower = clothing;
 
 	/*
 		Clothes that modders add go into this array, this should be empty in the base game at all times.

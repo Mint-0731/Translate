@@ -1,5 +1,5 @@
 :: Office Lift
-<<if $avery_fate is "ascended">><<location "avery_skyscraper">><<else>><<location "office">><</if>><<effects>>
+<<location "office">><<effects>>
 You dash from your hiding place towards the lift, keeping low and staying out of sight. You press the button to call the lift and duck behind a nearby bench as you wait for it to arrive.
 <br>
 Before long, the lift doors open. Luckily for you, the lift is empty. You press the button for the lobby and shift nervously as the doors close.
@@ -28,7 +28,7 @@ After what feels like an eternity, the doors open and
 	<br><br>
 	As the doors close and the lift begins its descent, the <<person1>><<person>> presses the emergency stop. "Must be our lucky day."
 	<br><br>
-	<<link [[Next|Office Lift Molest]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Office Lift Molest]]>><<set $molestationstart to 1>><</link>>
 <<elseif $rng gte 71>>
 	a <<generate1>><<person1>><<person>> walks into the lift.
 	<br>
@@ -96,14 +96,14 @@ After what feels like an eternity, the doors open and
 <<else>>
 	a <<generate1>><<person1>><<person>> walks up to the doors and stops when <<he>> sees you.
 	<br><br>
-	<<if $rng gte 76>>
+	<<if $rng gte 75>>
 		<<He>> stares at you in surprise for a few moments before stepping away from the lift.
 		<br>
 		"...I'll catch the next one," <<he>> says as the doors close.
 		<br>
 		<<embarrassment>>
 		<<officeliftdescend>>
-	<<elseif $rng gte 51>>
+	<<elseif $rng gte 50>>
 		<<He>> pulls out <<his>> phone and starts snapping pictures.
 		<br>
 		"Thanks for these!" <<he>> says happily as the doors close.
@@ -116,8 +116,7 @@ After what feels like an eternity, the doors open and
 		"I found <<phim>>. Bringing <<phim>> to the security office now," <<he>> says into <<his>> radio as <<he>> joins you in the lift.
 		<<embarrassment>>
 		<br>
-		<<endevent>>
-		<<link [[Next|Office Security Escort]]>><</link>>
+		<<link [[다음|Office Security Escort]]>><</link>>
 	<</if>>
 <</if>>
 
@@ -136,11 +135,11 @@ After what feels like an eternity, the doors open and
 <<actionsman>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Office Lift Molest Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Lift Molest Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Office Lift Molest Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Lift Molest Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Office Lift Molest]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Lift Molest]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Office Lift Molest Ejaculation
@@ -162,7 +161,7 @@ You push your assailants off of you and disengage the emergency stop, waiting in
 <br>
 <<clotheson>>
 <<endcombat>>
-<<link [[Next|Office Streak]]>><</link>>
+<<link [[다음|Office Streak]]>><</link>>
 
 :: Widgets Office Lift[widget]
 <<widget "officeliftdescend">>

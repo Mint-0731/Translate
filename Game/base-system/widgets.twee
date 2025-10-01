@@ -171,17 +171,14 @@
 		<<else>>
 			<<set $nooxygen to 0>>
 		<</if>>
-		<span class="lblue">Air:</span>
+		<span class="lblue">공기:</span>
 		<<if $oxygen lt 0>>
-			<span class="red">You can't breathe! Your stress will increase and you'll soon pass out if you can't find air.</span>
+			<span class="red">숨을 쉴 수 없다! 숨을 쉬지 못하게 된다면 스트레스가 상승하고 곧 정신을 잃게 될 것이다.</span>
 		<</if>>
-		<<dynamicblock id=oxygen-caption>>
-			<<oxygencaption>>
-		<</dynamicblock>>
-
+		<<oxygencaption>>
 		<<if $underwaterintro isnot 1 and $combat isnot 1 and !$possessed>>
 			<<set $underwaterintro to 1>>
-			<i>You can't hold your breath forever. You will pass less time and use less air per action with a higher swimming skill.</i>
+			<i>언제까지고 숨을 참을 수는 없다. 수영 스킬이 높을수록 행동마다 시간과 공기를 더 적게 소비할 것이다.</i>
 			<br><br>
 		<</if>>
 	<</if>>
@@ -203,9 +200,9 @@
 
 <<widget "virginitylosttext">>
 	<<if $templePromised is _args[0]>>
-		<span class="lblue">yet you remain pure.</span>
+		<span class="lblue">그럼에도 불구하고 당신은 순결하게 남아있다.</span>
 	<<else>>
-		<span class="red">forever robbing you of your purity.</span>
+		<span class="red">영원히 당신의 순결을 빼앗겨 버린다.</span>
 	<</if>>
 <</widget>>
 
@@ -538,8 +535,8 @@
 					<<set $_stealthReduce1 to expCurve($_normcrime1, 3.0)>>
 					<!-- First 5k of crime at a curve to 5000 -->
 				*/
-				<<set $_stealthfactor to ( 0.15 * ( 1 - normalise($crime[_crimeType].current, C.crime.max ) ) )>>
-				<!-- Stealth gives 15%, but reduced by existing crime stat down to 0 at C.crime.max -->
+				<<set $_stealthfactor to ( 0.15 * ( 1 - normalise($crime[_crimeType].current, C.crime.max / 5 ) ) )>>
+				<!-- Stealth gives 15%, but reduced by existing crime stat down to 0 at C.crime.max / 5 -->
 				<!-- At 10k crime of the current type, stealthy equipment is effectively useless - too much evidence -->
 
 				<!-- Filter to all items with type "stealthy" and count them -->
@@ -743,45 +740,45 @@
 <<widget "listCrimeCheats">>
 	<<if Object.keys(V.crime.events).length isnot 0>>
 		<<for $_ce range Object.keys(V.crime.events)>>
-			<<print $_ce.toUpperFirst() + ": " + setup.crimeDescs[$_ce].toUpperFirst() + ", " + $crime.events[$_ce].length + " count(s)">>
+			<<print $_ce + ": " + setup.crimeDescs[$_ce].toUpperFirst() + ", " + $crime.events[$_ce].length + " 번">>
+			<br>
 		<</for>>
 	<<else>>
-		<span class="red">No unique crime events</span>
+		<span class="red">특별한 범죄 이벤트가 없음</span>
+		<br>
 	<</if>>
 <</widget>>
 
 <<widget "crimeParade">>
-	<<set _crimes_output to "">>
 	<<for $_crimeType range Object.keys(setup.crimeNames)>>
 		<<if C.crime[$_crimeType + "Count"] gte 1>>
 			<<set $_crimes_output to "">>
-			<<number `C.crime[$_crimeType + "Count"]` "silent">>
-			<<set $_crimes_output += "- " + _text_output.toLocaleUpperFirst() + " count">>
+			<<trNumber `C.crime[$_crimeType + "Count"]` "silent">>
+			<<set $_crimes_output += "- " + _trResult + " 번의">>
 			<<if C.crime[$_crimeType + "Count"] isnot 1>>
-				<<set $_crimes_output += "s">>
+				<<set $_crimes_output += "">>
 			<</if>>
-			<<set $_crimes_output += " of " + toTitleCase(setup.crimeNames[$_crimeType])>>
-			<<unset _text_output>>
+			<<set $_crimes_output += " " + toTitleCase(trCrimeName(setup.crimeNames[$_crimeType]))>>
+			<<unset _trResult>>
 			<<set $_crimes_event_list to []>>
 			<<for $_ce range Object.keys($crime.events)>>
 				<<set $_crDescLen to $crime.events[$_ce].filter(e => e.type is $_crimeType).length>>
 				<<if $_crDescLen gte 1>>
-					<<number $_crDescLen "silent">>
-					<<set $_crDescStr to _text_output + " count">>
+					<<trNumber $_crDescLen "silent">>
+					<<set $_crDescStr to _trResult + " 번의">>
 					<<if $_crDescLen gt 1>>
-						<<set $_crDescStr += "s">>
+						<<set $_crDescStr += "">>
 					<</if>>
-					<<set $_crDescStr += " of " + setup.crimeDescs[$_ce]>>
-					<<unset _text_output>>
+					<<set $_crDescStr += " " + setup.crimeDescs[$_ce]>>
+					<<unset _trResult>>
 					<<set $_crimes_event_list.push($_crDescStr)>>
 				<</if>>
 			<</for>>
 			<<if $_crimes_event_list.length isnot 0>>
-				<<set $_crimes_output += ", including ">>
-				<<set $_crimes_output += formatList($_crimes_event_list, "and", true)>>
+				<<set $_crimes_output += ", ">>
+				<<set $_crimes_output += formatList($_crimes_event_list, "그리고", true)+ " 포함">>
 			<</if>>
 			<<set $_crimes_output += ".">><span class="red"><<print $_crimes_output>></span>
-			<<set _crimes_output += $_crimes_output + "<br>">>
 			<br>
 		<</if>>
 	<</for>>
@@ -793,7 +790,7 @@
 
 <<widget "seductionskilluptext">>
 	<<if $seductionskill lt 1000>>
-		<span class="gold">You feel more confident in your powers of seduction.</span>
+		<span class="gold">유혹 기술에 좀 더 자신감이 생겼다.</span>
 		<br><br>
 	<</if>>
 <</widget>>
@@ -839,32 +836,41 @@
 <</widget>>
 
 <<widget "skulduggeryskilluse">>
-	<<if $statFreeze isnot true and $skulduggery lt 1000>>
-		<<combatskulduggeryskilluse>>
-		<br><br>
+	<<if $statFreeze isnot true>>
+		<<set $skulduggery += 3>>
+		<<if $skulduggery lt 1000>>
+			<span class="gold"> 당신은 도둑질에 대해 조금 깨우쳤다.</span>
+		<</if>>
 	<</if>>
+	<br><br>
 <</widget>>
 
 <<widget "combatskulduggeryskilluse">>
-	<<if $statFreeze isnot true and $skulduggery lt 1000>>
-		<span class="gold"> You learned a thing or two about skulduggery.</span>
+	<<if $statFreeze isnot true>>
 		<<set $skulduggery += 3>>
 		<<set $skulduggery to Math.clamp($skulduggery, 0, 1000)>>
+		<<if $skulduggery lt 1000>>
+			<span class="gold"> 당신은 도둑질에 대해 조금 깨우쳤다.</span>
+		<</if>>
 	<</if>>
 <</widget>>
 
 <<widget "swimmingskilluse">>
-	<<if $statFreeze isnot true and $swimmingskill lt 1000>>
-		<span class="gold"> You've become more confident at swimming.</span>
+	<<if $statFreeze isnot true>>
 		<<set $swimmingskill += 9>>
+		<<if $swimmingskill lt 1000>>
+			<span class="gold"> 수영에 좀 더 자신감이 생겼다.</span>
+		<</if>>
 		<<set $swimmingskill to Math.clamp($swimmingskill, 0, 1000)>>
 	<</if>>
 <</widget>>
 
 <<widget "danceskilluse">>
-	<<if $statFreeze isnot true and $danceskill lt 1000>>
-		<span class="gold"> You feel more confident in your dancing abilities.</span>
+	<<if $statFreeze isnot true>>
 		<<danceskill 1>>
+		<<if $danceskill lt 1000>>
+			<span class="gold"> 춤 실력에 대해 좀 더 자신감이 생겼다.</span>
+		<</if>>
 	<</if>>
 <</widget>>
 
@@ -895,8 +901,8 @@
 	<<schoolskillgeneral "science" _args[0] _args[1]>>
 <</widget>>
 
-<<widget "mathsskill">>/*Faster to account for fewer lessons.*/
-	<<schoolskillgeneral "maths" `_args[0] * 1.2` _args[1]>>
+<<widget "mathsskill">>
+	<<schoolskillgeneral "maths" _args[0] _args[1]>>
 <</widget>>
 
 <<widget "englishskill">>
@@ -981,16 +987,9 @@
 <</widget>>
 
 <<widget "housekeeping">>
-<<if _args[1]>>
-	<<if _args[0] and $statFreeze isnot true and $housekeeping lt _args[1]>>
-		<<set $housekeeping += (_args[0] * 2)>>
-		<<set $housekeeping to Math.clamp($housekeeping, 0, 1000)>>
-	<</if>>
-<<else>>
-	<<if _args[0] and $statFreeze isnot true>>
-		<<set $housekeeping += (_args[0] * 2)>>
-		<<set $housekeeping to Math.clamp($housekeeping, 0, 1000)>>
-	<</if>>
+<<if _args[0] and $statFreeze isnot true and $housekeeping lt _args[1]>>
+	<<set $housekeeping += (_args[0] * 2)>>
+	<<set $housekeeping to Math.clamp($housekeeping, 0, 1000)>>
 <</if>>
 <</widget>>
 
@@ -1016,15 +1015,15 @@
 	<<if _args[1]>>
 		<<if _args[1] isnot "noMessage">>
 			<<if ($combat is 1 and _args[1] isnot "workout") or _args[1] is "invig">>
-				<span class="gold"> It invigorates you.</span>
+				<span class="gold"> 기운이 넘친다.</span>
 			<<else>>
-				<span class="gold"> You get a good workout.</span>
+				<span class="gold"> 좋은 운동이 되었다.</span>
 			<</if>>
 		<</if>>
 	<<elseif $combat is 1>>
-		<span class="gold"> It invigorates you.</span>
+		<span class="gold"> 기운이 넘친다.</span>
 	<<else>>
-		<span class="gold"> You get a good workout.</span>
+		<span class="gold"> 좋은 운동이 되었다.</span>
 	<</if>>
 	<<set $physique = Math.clamp($physique, 0, $physiquesize)>>
 	<<set Weather.BodyTemperature.addActivity("physique")>>
@@ -1103,11 +1102,11 @@
 
 <<widget "vaginalstat">><<if $statFreeze isnot true>><<set $vaginalstat += 1>><<set $vaginalTimeStat to Time.date.timeStamp>><</if>><</widget>>
 
-<<widget "vaginalejacstat">><<if $statFreeze isnot true>><<set $vaginalejacstat += 1>><<purity -2>><<internalejac>><<fertiliseParasites "vagina">><<creampie "self" "vagina">><<set $vaginalEjacTimeStat to Time.date.timeStamp>><</if>><</widget>>
+<<widget "vaginalejacstat">><<if $statFreeze isnot true>><<set $vaginalejacstat += 1>><<purity -1>><<internalejac>><<fertiliseParasites "vagina">><<creampie "self" "vagina">><<set $vaginalEjacTimeStat to Time.date.timeStamp>><</if>><</widget>>
 
 <<widget "analstat">><<if $statFreeze isnot true>><<set $analstat += 1>><<set $analTimeStat to Time.date.timeStamp>><</if>><</widget>>
 
-<<widget "analejacstat">><<if $statFreeze isnot true>><<set $analejacstat += 1>><<purity -2>><<internalejac>><<fertiliseParasites>><<creampie "self" "anus">><<set $analEjacTimeStat to Time.date.timeStamp>><</if>><</widget>>
+<<widget "analejacstat">><<if $statFreeze isnot true>><<set $analejacstat += 1>><<purity -1>><<internalejac>><<fertiliseParasites>><<creampie "self" "anus">><<set $analEjacTimeStat to Time.date.timeStamp>><</if>><</widget>>
 
 <<widget "oralstat">><<if $statFreeze isnot true>><<set $oralstat += 1>><</if>><</widget>>
 
@@ -1147,7 +1146,7 @@
 	<</if>>
 <</if>><</silently>><</widget>>
 
-<<widget "penileejacstat">><<if $statFreeze isnot true>><<set $penileejacstat += 1>><<purity -2>><<set $penileEjacTimeStat to Time.date.timeStamp>><</if>><</widget>>
+<<widget "penileejacstat">><<if $statFreeze isnot true>><<set $penileejacstat += 1>><<set $penileEjacTimeStat to Time.date.timeStamp>><</if>><</widget>>
 
 <<widget "clothesstripstat">><<if $statFreeze isnot true>><<set $clothesstripstat += 1>><</if>><</widget>>
 
@@ -1211,24 +1210,24 @@
 <</widget>>
 
 <<widget "hunger_description">>
-	<<if $hunger gte 2000>><span class="red">You are starving!</span>
-	<<elseif $hunger gte 1600>><span class="pink">You are famished.</span>
-	<<elseif $hunger gte 1200>><span class="purple">You are ravenous.</span>
-	<<elseif $hunger gte 800>><span class="blue">You are hungry.</span>
-	<<elseif $hunger gte 400>><span class="lblue">You are peckish.</span>
-	<<elseif $hunger gte 1>><span class="teal">You are satiated.</span>
-	<<else>><span class="green">You are full.</span>
+	<<if $hunger gte 2000>><span class="red">뱃가죽이 등에 붙을 정도다!</span>
+	<<elseif $hunger gte 1600>><span class="pink">배가 고파 죽을 것만 같다.</span>
+	<<elseif $hunger gte 1200>><span class="purple">굶주렸다.</span>
+	<<elseif $hunger gte 800>><span class="blue">배가 고프다.</span>
+	<<elseif $hunger gte 400>><span class="lblue">약간 허기가 졌다.</span>
+	<<elseif $hunger gte 1>><span class="teal">만족스럽다.</span>
+	<<else>><span class="green">배가 부르다.</span>
 	<</if>>
 <</widget>>
 
 <<widget "thirst">>
-	<<if $thirst gte 2000>><span class="red">You are dehydrated!</span>
-	<<elseif $thirst gte 1600>><span class="pink">You are really thirsty.</span>
-	<<elseif $thirst gte 1200>><span class="purple">You are thirsty.</span>
-	<<elseif $thirst gte 800>><span class="blue">Your throat is dry.</span>
-	<<elseif $thirst gte 400>><span class="lblue">You are satisfied.</span>
-	<<elseif $thirst gte 1>><span class="teal">You are satiated.</span>
-	<<elseif $thirst lte 0>><span class="green">You are full.</span>
+	<<if $thirst gte 2000>><span class="red">탈수 상태다!</span>
+	<<elseif $thirst gte 1600>><span class="pink">정말로 목이 마르다.</span>
+	<<elseif $thirst gte 1200>><span class="purple">목이 마르다.</span>
+	<<elseif $thirst gte 800>><span class="blue">목이 좀 칼칼하다.</span>
+	<<elseif $thirst gte 400>><span class="lblue">만족스럽다.</span>
+	<<elseif $thirst gte 1>><span class="teal">많이 마셨다.</span>
+	<<elseif $thirst lte 0>><span class="green">배가 터지도록 마셨다.</span>
 	<</if>>
 <</widget>>
 
@@ -1236,22 +1235,22 @@
 	<<if Number.isFinite($tiredness)>>
 		<div id="tirednesscaption" @title="'Fatigue: ' + $tiredness.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Fatigue:
+				피로:
 				<<if $options.showCaptionText is true>>
 					<<if $tiredness gte C.tiredness.max>>
-						<span class="red">You are exhausted.</span>
+						<span class="red">기진맥진하다.</span>
 					<<elseif $tiredness gte (C.tiredness.max / 5) * 4>>
-						<span class="pink">You are fatigued.</span>
+						<span class="pink">피로하다.</span>
 					<<elseif $tiredness gte (C.tiredness.max / 5) * 3>>
-						<span class="purple">You are tired.</span>
+						<span class="purple">피곤하다.</span>
 					<<elseif $tiredness gte (C.tiredness.max / 5) * 2>>
-						<span class="blue">You are wearied.</span>
+						<span class="blue">지쳤다.</span>
 					<<elseif $tiredness gte C.tiredness.max / 5>>
-						<span class="lblue">You are alert.</span>
+						<span class="lblue">정신이 말짱하다.</span>
 					<<elseif $tiredness gte 1>>
-						<span class="teal">You are wide awake.</span>
+						<span class="teal">완전히 정신이 또렷하다.</span>
 					<<else>>
-						<span class="green">You are refreshed.</span>
+						<span class="green">상쾌한 기분이다.</span>
 					<</if>>
 				<</if>>
 			</div>
@@ -1263,25 +1262,26 @@
 			<<set $tiredness = Math.clamp($tiredness, 0, C.tiredness.max)>>
 			<<set _showCaptionText to !$options.showCaptionText>>
 			<<statbar 0 $tiredness `C.tiredness.max` _showCaptionText>>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
 
 <<widget "hygiene">>
 	<<if $hygiene gte 2000>>
-		<span class="red">You are filthy.</span>
+		<span class="red">더럽다.</span>
 	<<elseif $hygiene gte 1600>>
-		<span class="pink">You are soiled.</span>
+		<span class="pink">때가 좀 탔다.</span>
 	<<elseif $hygiene gte 1200>>
-		<span class="purple">You are smelly.</span>
+		<span class="purple">악취가 난다.</span>
 	<<elseif $hygiene gte 800>>
-		<span class="blue">You are messy.</span>
+		<span class="blue">지저분하다.</span>
 	<<elseif $hygiene gte 400>>
-		<span class="lblue">You are neat.</span>
+		<span class="lblue">깔끔하다.</span>
 	<<elseif $hygiene gte 1>>
-		<span class="teal">You are clean.</span>
+		<span class="teal">깨끗하다.</span>
 	<<elseif $hygiene lte 0>>
-		<span class="green">You are speckless.</span>
+		<span class="green">먼지 하나 묻지 않았다.</span>
 	<</if>>
 <</widget>>
 
@@ -1289,28 +1289,29 @@
 	<<if Number.isFinite($stress)>>
 		<div id="stresscaption" @title="'Stress: ' + $stress.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Stress:
+				스트레스:
 				<<if $options.showCaptionText is true>>
 					<<if $stress gte $stressmax>>
-						<span class="red">You are overwhelmed!</span>
+						<span class="red">정신을 차릴 수가 없다!</span>
 					<<elseif $stress gte ($stressmax / 5) * 4>>
-						<span class="pink">You are distressed.</span>
+						<span class="pink">정신적으로 괴롭다.</span>
 					<<elseif $stress gte ($stressmax / 5) * 3>>
-						<span class="purple">You are strained.</span>
+						<span class="purple">정신을 혹사하고 있다.</span>
 					<<elseif $stress gte ($stressmax / 5) * 2>>
-						<span class="blue">You are tense.</span>
+						<span class="blue">긴장하고 있다.</span>
 					<<elseif $stress gte $stressmax / 5>>
-						<span class="lblue">You are calm.</span>
+						<span class="lblue">침착하다.</span>
 					<<elseif $stress gte 1>>
-						<span class="teal">You are placid.</span>
+						<span class="teal">차분하다.</span>
 					<<else>>
-						<span class="green">You are serene.</span>
+						<span class="green">마음이 고요하다.</span>
 					<</if>>
 				<</if>>
 			</div>
 			<<set $stress = Math.clamp($stress, 0, $stressmax)>>
 			<<set _showCaptionText to !$options.showCaptionText>>
 			<<statbar 0 $stress $stressmax _showCaptionText>>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1319,50 +1320,51 @@
 	<<if Number.isFinite($trauma)>>
 		<div id="traumacaption" @title="'Trauma: ' + $trauma.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Trauma:
+				트라우마:
 				<<if $options.showCaptionText is true>>
 					<<if $trauma gte $traumamax>>
-						<span class="red">You feel numb.</span>
+						<span class="red">정신이 멍하다.</span>
 					<<elseif $trauma gte ($traumamax / 5) * 4>>
-						<span class="pink">You are tormented.</span>
+						<span class="pink">고통을 받고 있다.</span>
 					<<elseif $trauma gte ($traumamax / 5) * 3>>
-						<span class="purple">You are disturbed.</span>
+						<span class="purple">불편하다.</span>
 					<<elseif $trauma gte ($traumamax / 5) * 2>>
-						<span class="blue">You are troubled.</span>
+						<span class="blue">걱정스럽다.</span>
 					<<elseif $trauma gte ($traumamax / 5) * 1>>
-						<span class="lblue">You are nervous.</span>
+						<span class="lblue">불안하다.</span>
 					<<elseif $trauma gte 1>>
-						<span class="teal">You are uneasy.</span>
+						<span class="teal">마음이 뒤숭숭하다.</span>
 					<<else>>
-						<span class="green">You are healthy.</span>
+						<span class="green">건강하다.</span>
 					<</if>>
 				<</if>>
 			</div>
 			<<set _showCaptionText to !$options.showCaptionText>>
 			<<statbar 0 $trauma $traumamax _showCaptionText>>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
 
 <<widget "innocencecaption">>
-	<div id="innocencecaption" @title="'Innocence: ' + Math.abs($awareness).toFixed(2)">
+	<div id="innocencecaption">
 		<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-			Innocence:
+			순수함:
 			<<if $options.showCaptionText is true>>
 				<<if $awareness gte 0>>
-					<span class="red">You understand.</span>
+					<span class="red">모두 이해하고 있다.</span>
 				<<elseif $awareness gt -40>>
-					<span class="pink">You are uncertain.</span>
+					<span class="pink">확신이 없다.</span>
 				<<elseif $awareness gt -80>>
-					<span class="purple">You are perplexed.</span>
+					<span class="purple">이해하기 힘들어 한다.</span>
 				<<elseif $awareness gt -120>>
-					<span class="blue">You are curious.</span>
+					<span class="blue">호기심을 갖고 있다.</span>
 				<<elseif $awareness gt -160>>
-					<span class="lblue">You are trusting.</span>
+					<span class="lblue">의심할 줄을 모른다.</span>
 				<<elseif $awareness gt -200>>
-					<span class="teal">You are naive.</span>
+					<span class="teal">순진하다.</span>
 				<<else>>
-					<span class="green">You are oblivious.</span>
+					<span class="green">아무 것도 모른다.</span>
 				<</if>>
 			<</if>>
 		</div>
@@ -1376,45 +1378,46 @@
 	<<if Number.isFinite($control)>>
 		<div id="controlcaption" @title="'Control: ' + $control.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Control:
+				통제력:
 				<<if $options.showCaptionText is true>>
 					<<if $possessed>>
 						<<if $control gte $controlmax>>
-							<span class="green">You are in control.</span>
+							<span class="green">통제하고 있다.</span>
 						<<elseif $control gte ($controlmax / 5) * 4>>
-							<span class="teal">You are nearly in control.</span>
+							<span class="teal">거의 통제하고 있다.</span>
 						<<elseif $control gte ($controlmax / 5) * 3>>
-							<span class="lblue">You are struggling.</span>
+							<span class="lblue">분투하고 있다.</span>
 						<<elseif $control gte ($controlmax / 5) * 2>>
-							<span class="blue">Your body feels hollow.</span>
+							<span class="blue">몸이 공허하게 느껴진다.</span>
 						<<elseif $control gte ($controlmax / 5) * 1>>
-							<span class="purple">Your mind is numb.</span>
+							<span class="purple">정신이 멍하다.</span>
 						<<elseif $control gte 1>>
-							<span class="pink">You're being puppeteered.</span>
+							<span class="pink">조종당하고 있다.</span>
 						<<else>>
-							<span class="red">You're helpless.</span>
+							<span class="red">무력하다.</span>
 						<</if>>
 					<<else>>
 						<<if $control gte $controlmax>>
-							<span class="green">You are confident.</span>
+							<span class="green">확신에 차있다.</span>
 						<<elseif $control gte ($controlmax / 5) * 4>>
-							<span class="teal">You are insecure.</span>
+							<span class="teal">자신이 없다.</span>
 						<<elseif $control gte ($controlmax / 5) * 3>>
-							<span class="lblue">You are worried.</span>
+							<span class="lblue">걱정에 차있다.</span>
 						<<elseif $control gte ($controlmax / 5) * 2>>
-							<span class="blue">You are anxious.</span>
+							<span class="blue">불안하다.</span>
 						<<elseif $control gte ($controlmax / 5) * 1>>
-							<span class="purple">You are scared.</span>
+							<span class="purple">무서워 하고 있다.</span>
 						<<elseif $control gte 1>>
-							<span class="pink">You are frightened.</span>
+							<span class="pink">겁에 질렸다.</span>
 						<<else>>
-							<span class="red">You are terrified.</span>
+							<span class="red">공포에 빠져 있다.</span>
 						<</if>>
 					<</if>>
 				<</if>>
 			</div>
 			<<set _showCaptionText to !$options.showCaptionText>>
 			<<statbarinverted $control $controlmax _showCaptionText>>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1423,27 +1426,28 @@
 	<<if Number.isFinite($arousal)>>
 		<div id="arousalcaption" @title="'Arousal: ' + $arousal.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Arousal:
+				흥분:
 				<<if $options.showCaptionText is true>>
 					<<if $arousal gte $arousalmax>>
-						<span class="red">You shake with arousal.</span>
+						<span class="red">흥분에 몸을 떤다.</span>
 					<<elseif $arousal gte ($arousalmax / 5) * 4>>
-						<span class="pink">A heat rises within.</span>
+						<span class="pink">열기가 솟아오른다.</span>
 					<<elseif $arousal gte ($arousalmax / 5) * 3>>
-						<span class="purple">You feel horny.</span>
+						<span class="purple">꼴려있다.</span>
 					<<elseif $arousal gte ($arousalmax / 5) * 2>>
-						<span class="blue">You feel lustful.</span>
+						<span class="blue">욕정으로 가득 찼다.</span>
 					<<elseif $arousal gte $arousalmax / 5>>
-						<span class="lblue">You feel aroused.</span>
+						<span class="lblue">흥분해있다.</span>
 					<<elseif $arousal gte 1>>
-						<span class="teal">You feel stimulated.</span>
+						<span class="teal">성적 욕망이 일어난다.</span>
 					<<else>>
-						<span class="green">You feel cold.</span>
+						<span class="green">마음이 차갑게 가라앉아 있다.</span>
 					<</if>>
 				<</if>>
 			</div>
 			<<set _showCaptionText to !$options.showCaptionText>>
 			<<statbar `statChange.minArousal()` $arousal $arousalmax _showCaptionText>>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1452,27 +1456,28 @@
 	<<if Number.isFinite($lewdity)>>
 		<div id="lewditycaption" @title="'lewdity: ' + $lewdity.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				lewdity:
+				음란도:
 				<<if $options.showCaptionText is true>>
 					<<if $lewdity gte $lewditymax>>
-						<span class="red">You shiver with energy.</span>
+						<span class="red">당신은 정력이 넘쳐 몸이 떨린다.</span>
 					<<elseif $lewdity gte ($lewditymax / 5) * 4>>
-						<span class="pink">You feel a trembling.</span>
+						<span class="pink">당신은 전율을 느낀다.</span>
 					<<elseif $lewdity gte ($lewditymax / 5) * 3>>
-						<span class="purple">You feel exhilarated.</span>
+						<span class="purple">당신은 기분이 들뜬 것을 느낀다.</span>
 					<<elseif $lewdity gte ($lewditymax / 5) * 2>>
-						<span class="blue">You feel sensual.</span>
+						<span class="blue">당신은 육욕을 느낀다.</span>
 					<<elseif $lewdity gte $lewditymax / 5>>
-						<span class="lblue">You feel excited.</span>
+						<span class="lblue">당신은 흥분감을 느낀다.</span>
 					<<elseif $lewdity gte 1>>
-						<span class="teal">You feel tingly.</span>
+						<span class="teal">당신은 설레임을 느낀다.</span>
 					<<else>>
-						<span class="green">You feel steady.</span>
+						<span class="green">당신은 진정되어 있다.</span>
 					<</if>>
 				<</if>>
 			</div>
 			<<set _showCaptionText to !$options.showCaptionText>>
 			<<statbar 0 $lewdity $lewditymax _showCaptionText `restLewdity)`>>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1481,15 +1486,15 @@
 	<<if Number.isFinite($allure)>>
 		<div id="allurecaption" @title="'Allure: ' + $allure.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Allure:
+				색기:
 				<<if $options.showCaptionText is true>>
-					<<if $allure gte (6000 * $alluremod)>><span class="red">You look like you need to be ravaged.</span>
-					<<elseif $allure gte (4000 * $alluremod)>><span class="pink">You look perverted.</span>
-					<<elseif $allure gte (3000 * $alluremod)>><span class="purple">You look lewd.</span>
-					<<elseif $allure gte (2000 * $alluremod)>><span class="blue">You stand out.</span>
-					<<elseif $allure gte (1500 * $alluremod)>><span class="lblue">You attract attention.</span>
-					<<elseif $allure gte (1000 * $alluremod)>><span class="teal">You attract glances.</span>
-					<<else>><span class="green">You look unremarkable.</span>
+					<<if $allure gte (6000 * $alluremod)>><span class="red">금방이라도 유린당할 것처럼 보인다.</span>
+					<<elseif $allure gte (4000 * $alluremod)>><span class="pink">변태같다.</span>
+					<<elseif $allure gte (3000 * $alluremod)>><span class="purple">음란한 모습이다.</span>
+					<<elseif $allure gte (2000 * $alluremod)>><span class="blue">돋보인다.</span>
+					<<elseif $allure gte (1500 * $alluremod)>><span class="lblue">이목을 끈다.</span>
+					<<elseif $allure gte (1000 * $alluremod)>><span class="teal">사람들이 시선을 던지곤 한다.</span>
+					<<else>><span class="green">지극히 평범하다.</span>
 					<</if>>
 				<</if>>
 			</div>
@@ -1519,6 +1524,7 @@
 				<<set $allure -= 100000>>
 			<</if>>
 
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1532,7 +1538,7 @@
 	<div id="oxygencaption">
 		<<if _args[0] is true>>
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Air:
+				공기:
 			</div>
 			<<set _showCaptionText to !$options.showCaptionText>>
 		<<else>>
@@ -1544,31 +1550,31 @@
 <</widget>>
 
 <<widget "flashbacktown">>
-	<span class="red">You hear a car horn blare somewhere in the distance, and you panic. Phantom tendrils probe your body and restrict your limbs as a wordless voice jeers and promises endless debasement. It lasts only a moment, but the impression of violation remains.</span>
+	<span class="red">당신은 저멀리 어디선가 자동차 경적소리가 요란하게 울리는 것을 듣고는 겁에 질려 어쩔 줄을 모른다. 보이지 않는 덩굴 같은 것이 몸을 타고 올라와 팔다리를 구속하고, 소리 없는 목소리가 조소하며 끝없는 타락을 약속한다. 아주 잠깐 동안 일어난 일이었지만, 폭력의 기억은 남아있다.</span>
 	<<garousal>><<gstress>><<gtrauma>><<arousal 600>><<stress 12>><<trauma 6>>
 	<br><br>
 <</widget>>
 
 <<widget "flashbackhome">>
-	<span class="red">You hear a car drive past, and you panic. Phantom tendrils probe your body and restrict your limbs as a wordless voice jeers and promises endless debasement. It lasts only a moment, but the impression of violation remains.</span>
+	<span class="red">당신은 자동차가 지나가는 소리를 듣고는 겁에 질려 어쩔 줄을 모른다. 보이지 않는 덩굴 같은 것이 몸을 타고 올라와 팔다리를 구속하고, 소리 없는 목소리가 조소하며 끝없는 타락을 약속한다. 아주 잠깐 동안 일어난 일이었지만, 폭력의 기억은 남아있다.</span>
 	<<garousal>><<gstress>><<gtrauma>><<arousal 600>><<stress 6>><<trauma 6>>
 	<br><br>
 <</widget>>
 
 <<widget "flashbackbeach">>
-	<span class="red">You hear a gull squawk, and you panic. Phantom tendrils probe your body and restrict your limbs as a wordless voice jeers and promises endless debasement. It lasts only a moment, but the impression of violation remains.</span>
+	<span class="red">당신은 갈매기가 우는 소리를 듣고는 겁에 질려 어쩔 줄을 모른다. 보이지 않는 덩굴 같은 것이 몸을 타고 올라와 팔다리를 구속하고, 소리 없는 목소리가 조소하며 끝없는 타락을 약속한다. 아주 잠깐 동안 일어난 일이었지만, 폭력의 기억은 남아있다.</span>
 	<<garousal>><<gstress>><<gtrauma>><<arousal 600>><<stress 6>><<trauma 6>>
 	<br><br>
 <</widget>>
 
 <<widget "flashbackunderground">>
-	<span class="red">You feel a tremor through the earth, and you panic. Phantom tendrils probe your body and restrict your limbs as a wordless voice jeers and promises endless debasement. It lasts only a moment, but the impression of violation remains.</span>
+	<span class="red">당신은 땅을 타고 울리는 진동을 느끼고는 겁에 질려 어쩔 줄을 모른다. 보이지 않는 덩굴 같은 것이 몸을 타고 올라와 팔다리를 구속하고, 소리 없는 목소리가 조소하며 끝없는 타락을 약속한다. 아주 잠깐 동안 일어난 일이었지만, 폭력의 기억은 남아있다.</span>
 	<<garousal>><<gstress>><<gtrauma>><<arousal 600>><<stress 6>><<trauma 6>>
 	<br><br>
 <</widget>>
 
 <<widget "flashbackschool">>
-	<span class="red">You remember the last time you were molested at school, and you panic. Phantom tendrils probe your body and restrict your limbs as a wordless voice jeers and promises endless debasement. It lasts only a moment, but the impression of violation remains.</span>
+	<span class="red">당신은 마지막으로 학교에서 추행당한 것을 떠올리고는 겁에 질려 어쩔 줄을 모른다. 보이지 않는 덩굴 같은 것이 몸을 타고 올라와 팔다리를 구속하고, 소리 없는 목소리가 조소하며 끝없는 타락을 약속한다. 아주 잠깐 동안 일어난 일이었지만, 폭력의 기억은 남아있다.</span>
 	<<garousal>><<gstress>><<gtrauma>><<arousal 600>><<stress 6>><<trauma 6>>
 	<br><br>
 <</widget>>
@@ -1585,19 +1591,20 @@
 				<<if $options.showCaptionText is true>>
 					<<set $_drunk_level to Math.clamp(Math.floor($drunk / 120), 0, 4) * 120>>
 					<<switch $_drunk_level>>
-						<<case 0>><span @class="$_colour">You are woozy.</span>
-						<<case 120>><span @class="$_colour">You are tipsy.</span>
-						<<case 240>><span @class="$_colour">You are drunk.</span>
-						<<case 360>><span @class="$_colour">You are smashed.</span>
-						<<case 480>><span @class="$_colour">You are wasted.</span>
+						<<case 0>><span @class="$_colour">정신이 멍하다.</span>
+						<<case 120>><span @class="$_colour">약간 취했다.</span>
+						<<case 240>><span @class="$_colour">취했다.</span>
+						<<case 360>><span @class="$_colour">고주망태가 되었다.</span>
+						<<case 480>><span @class="$_colour">완전히 맛이 갔다.</span>
 					<</switch>>
 				<<else>>
-					Drunk:
+					취기:
 				<</if>>
 			</div>
 			<div @class="($options.showCaptionText is true ? 'meter' : 'rightMeter')">
 				<div @class="$_barColour" @style="$_barWidth"></div>
 			</div>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1612,14 +1619,15 @@
 		<div id="druggedcaption" @title="'Drugged: ' + $drugged.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
 				<<if $options.showCaptionText is true>>
-					<span class="pink">A lewd warmth fills you.</span>
+					<span class="pink">음란한 온기가 몸을 가득 채운다.</span>
 				<<else>>
-					Drugged:
+					약물:
 				<</if>>
 			</div>
 			<div @class="($options.showCaptionText is true ? 'meter' : 'rightMeter')">
 				<div @class="$_barColour" @style="$_barWidth"></div>
 			</div>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1634,14 +1642,15 @@
 		<div id="hallucinogencaption" @title="'Hallucinogens: ' + $hallucinogen.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
 				<<if $options.showCaptionText is true>>
-					<span class="purple">Your perception is altered.</span>
+					<span class="purple">당신의 인지 능력이 뒤틀려 있다.</span>
 				<<else>>
-					Hallucinogen:
+					환각:
 				<</if>>
 			</div>
 			<div @class="($options.showCaptionText is true ? 'meter' : 'rightMeter')">
 				<div @class="$_barColour" @style="$_barWidth"></div>
 			</div>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1650,15 +1659,15 @@
 	<<if Number.isFinite($pain)>>
 		<div id="paincaption" @title="'Pain: ' + $pain.toFixed(2)">
 			<div @class="($options.showCaptionText is true ? '' : 'rightMeterText')">
-				Pain:
+				고통:
 				<<if $options.showCaptionText is true>>
-					<<if $pain gte 100 and $willpowerpain is 0>><span class="red">You sob uncontrollably.</span>
-					<<elseif $pain gte 80>><span class="pink">You cry and whimper.</span>
-					<<elseif $pain gte 60>><span class="purple">You are crying.</span>
-					<<elseif $pain gte 40>><span class="blue">Tears run down your face.</span>
-					<<elseif $pain gte 20>><span class="lblue">Tears well in your eyes.</span>
-					<<elseif $pain gte 1>><span class="teal">You are upset.</span>
-					<<else>><span class="green">You feel okay.</span>
+					<<if $pain gte 100 and $willpowerpain is 0>><span class="red">겉잡을 수 없이 흐느끼고 있다.</span>
+					<<elseif $pain gte 80>><span class="pink">울며 훌쩍이고 있다.</span>
+					<<elseif $pain gte 60>><span class="purple">울고 있다.</span>
+					<<elseif $pain gte 40>><span class="blue">눈물이 얼굴을 타고 흐른다.</span>
+					<<elseif $pain gte 20>><span class="lblue">눈에 눈물이 고인다.</span>
+					<<elseif $pain gte 1>><span class="teal">마음이 상했다.</span>
+					<<else>><span class="green">괜찮다.</span>
 					<</if>>
 				<</if>>
 			</div>
@@ -1687,6 +1696,7 @@
 					<</if>>
 				<</if>>
 			</div>
+			<div style="clear:both;"></div>
 		</div>
 	<</if>>
 <</widget>>
@@ -1786,7 +1796,6 @@
 <</widget>>
 
 <<widget "controlloss">>
-	<<set _controlloss to true>> /* indicate that $controlstart was saved for <<combatinit>> */
 	<<if $gamemode is "soft">>
 	<<elseif $consensual is 0>>
 		<<set $pullaway to 0>>
@@ -1798,15 +1807,15 @@
 			<<else>>
 				<<set $controlstart to $control>><<control -25>>
 				<<if $control gte ($controlmax * 0.74)>>
-					<span class="purple">Your sense of control wavers.</span>
+					<span class="purple">통제감이 약해진다.</span>
 				<<elseif $control gte ($controlmax * 0.49)>>
-					<span class="purple">Your sense of control falters.</span>
+					<span class="purple">통제감이 흔들린다.</span>
 				<<elseif $control gte ($controlmax * 0.24)>>
-					<span class="pink">Your sense of control cracks.</span>
+					<span class="pink">통제감에 금이 간다.</span>
 				<<elseif $control gte 1>>
-					<span class="pink">Your sense of control breaks down.</span>
+					<span class="pink">통제감이 부서져내린다.</span>
 				<<else>>
-					<span class="red">Your sense of control shatters.</span>
+					<span class="red">통제감이 산산조각난다.</span>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -1890,47 +1899,47 @@
 		<<switch Time.dayState>>
 			<<case "day">>
 				<<switch Weather.name>>
-					<<case "clear" "lightClouds">>It's a bright and sunny day.
+					<<case "clear" "lightClouds">>밝고 화창한 날이다.
 					<<case "lightPrecipitation" "heavyPrecipitation" "thunderStorm">>
 						<<if Weather.precipitation is "rain">>
-							It's a rainy day.
+							비가 오는 날이다.
 						<<else>>
-							It's a snowy day.
+							눈이 오는 날이다.
 						<</if>>
-					<<case "heavyClouds">>Clouds are hiding the sun.
+					<<case "heavyClouds">>구름이 태양을 가리고 있다.
 				<</switch>>
 			<<case "night">>
 				<<switch Weather.name>>
-					<<case "clear" "lightClouds">>The stars are shining.
+					<<case "clear" "lightClouds">>별들이 반짝이고 있다.
 					<<case "lightPrecipitation" "heavyPrecipitation" "thunderStorm">>
 						<<if Weather.precipitation is "rain">>
-							It's a rainy night.
+							비가 오는 밤이다.
 						<<else>>
-							It's a snowy night.
+							눈이 오는 밤이다.
 						<</if>>
-					<<case "heavyClouds">>All starlight is blocked by the clouds.
+					<<case "heavyClouds">>모든 별빛이 구름에 가려져 있다.
 				<</switch>>
 			<<case "dawn">>
 				<<switch Weather.name>>
-					<<case "clear" "lightClouds">>The sun is rising.
+					<<case "clear" "lightClouds">>태양이 떠오르고 있다.
 					<<case "lightPrecipitation" "heavyPrecipitation" "thunderStorm">>
 					<<if Weather.precipitation is "rain">>
-						It's a rainy morning.
+						비가 오는 아침이다.
 					<<else>>
-						It's a snowy morning.
+						눈이 오는 아침이다.
 					<</if>>
-					<<case "heavyClouds">>It's a cloudy morning.
+					<<case "heavyClouds">>구름 낀 아침이다.
 				<</switch>>
 			<<case "dusk">>
 				<<switch Weather.name>>
-					<<case "clear" "lightClouds">>The sun is setting.
+					<<case "clear" "lightClouds">>태양이 지고 있다.
 					<<case "lightPrecipitation" "heavyPrecipitation" "thunderStorm">>
 					<<if Weather.precipitation is "rain">>
-						It's a rainy evening.
+						비가 오는 저녁이다.
 					<<else>>
-						It's a snowy evening.
+						눈이 오는 저녁이다.
 					<</if>>
-					<<case "heavyClouds">>It's cloudy evening.
+					<<case "heavyClouds">>구름 낀 저녁이다.
 				<</switch>>
 		<</switch>>
 		<br>
@@ -1999,13 +2008,13 @@
 <</widget>>
 
 <<widget "ragup">>
-	<<if $worn.upper.exposed gte 2>>
-		<<upperwear 79>>
-	<</if>>
+<<if $worn.upper.exposed gte 2>>
+	<<upperwear 79>>
+<</if>>
 
-	<<if $worn.lower.exposed gte 2>>
-		<<lowerwear 71>>
-	<</if>>
+<<if $worn.lower.exposed gte 2>>
+	<<lowerwear 71>>
+<</if>>
 <</widget>>
 
 <<widget "plantupper">>
@@ -2014,11 +2023,7 @@
 	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
 	or $upperwetstage gte 3 and $underupperwetstage gte 3
 	or _args[0] is "force">>
-		<<if _args[0] is "seaweed">>
-			<<upperwear 163>>
-		<<else>>
-			<<upperwear 6>>
-		<</if>>
+		<<upperwear 6>>
 	<</if>>
 <</widget>>
 
@@ -2028,28 +2033,16 @@
 	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
 	or $lowerwetstage gte 3 and $underlowerwetstage gte 3
 	or _args[0] is "force">>
-		<<if _args[0] is "seaweed">>
-			<<lowerwear 150>>
-		<<else>>
-			<<lowerwear 8>>
-		<</if>>
+		<<lowerwear 8>>
 	<</if>>
 <</widget>>
 
 <<widget "plantup">>
 	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1 or $upperwetstage gte 3 and $underupperwetstage gte 3>>
-		<<if _args[0] is "seaweed">>
-			<<upperwear 163>>
-		<<else>>
-			<<upperwear 6>>
-		<</if>>
+		<<upperwear 6>>
 	<</if>>
 	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1 or $lowerwetstage gte 3 and $underlowerwetstage gte 3 or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1>>
-		<<if _args[0] is "seaweed">>
-			<<lowerwear 150>>
-		<<else>>
-			<<lowerwear 8>>
-		<</if>>
+		<<lowerwear 8>>
 	<</if>>
 <</widget>>
 
@@ -2075,13 +2068,13 @@
 	<<underlowerwear 7>><<set $worn.under_lower.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>><<set $worn.under_lower.integrity /= 2>>
 <</widget>>
 
-<<widget "exposureold">>
+<<widget "exposure">>
 	<!-- In safe locations, while alone, the player won't cover up. Love interest check is likely not hitting everywhere it should be due to NPCs generating after this check. -->
-	<<if ["Wardrobe", "Bedroom", "Sleep", "Bird Tower", "Bird Hunt", "Spa Tan Underwear", "Spa Tan Curtains", "Spa Tan Naked", "Mirror"].some(keyword => V.passage.includes(keyword)) and !($NPCList.some(obj => Object.hasOwn(obj, "type")) and !$NPCList.find(({fullDescription:fd}) => fd && Object.values($loveInterest).includes(fd)))>>
+	<<if ["Wardrobe", "Bedroom", "Sleep", "Bird Tower", "Bird Hunt", "Spa Tan Underwear", "Spa Tan Curtains", "Spa Tan Naked"].some(keyword => V.passage.includes(keyword)) and !($NPCList.some(obj => Object.hasOwn(obj, "type")) and !$NPCList.find(({fullDescription:fd}) => fd && Object.values($loveInterest).includes(fd)))>>
 		<<set $libertine to 2>>
 	<<else>>
 		<<set $libertine to 0>>
-		<<if !["beach", "pool", "sea", "lake", "lake_ruin"].includes($location)>>
+		<<if !["beach","pool","sea","lake","lake_ruin"].includes($location)>>
 			<<set $libertine to 0>>
 		<<else>>
 			<<set $libertine to 1>>
@@ -2091,52 +2084,71 @@
 		<</if>>
 	<</if>>
 
+
+	<<set $worn.over_upper.exposedcarry to $worn.over_upper.exposed>>
+	<<set $worn.over_lower.exposedcarry to $worn.over_lower.exposed>>
+	<<set $worn.upper.exposedcarry to $worn.upper.exposed>>
+	<<set $worn.lower.exposedcarry to $worn.lower.exposed>>
+	<<set $worn.under_lower.exposedcarry to $worn.under_lower.exposed>>
+	<<set $worn.under_upper.exposedcarry to $worn.under_upper.exposed>>
+
+	<<if $upperwetstage gte 3>>
+		<<set $worn.upper.exposed to 2>>
+	<</if>>
+	<<if $lowerwetstage gte 3>>
+		<<set $worn.lower.exposed to 2>>
+	<</if>>
+	<<if $underlowerwetstage gte 3>>
+		<<set $worn.under_lower.exposed to 1>>
+	<</if>>
+	<<if $underupperwetstage gte 3>>
+		<<set $worn.under_upper.exposed to 1>>
+	<</if>>
+
 	<<exposedcheck>>
 
 	<<set $exposed to 0>>
-
-	<<if !$possessed>>
-		/*
-		To be considered exposing your underwear or breasts ($exposure 1 for both) the following must be true
-			Male appearing breasts do not count as exposed
-			over_upper needs to be exposing/displaced
-			upper needs to be exposing/displaced or wet
-			under_upper needs to not have covered trait or be exposing/displaced or be wet
-			lower needs to not have covered trait or be displaced or be wet
-		 */
-		<<if $player.gender_appearance isnot "m"
-		and $worn.over_upper.exposed gte 1
-		and ($worn.upper.exposed gte 1 or $upperwetstage gte 3)
-		and (!$worn.under_upper.type.includes("covered") or $worn.under_upper.exposure gte 1 or $underupperwetstage gte 3)
-		and (!$worn.lower.type.includes("covered") or $worn.lower.exposed gte 2 or $lowerwetstage gte 3)>>
+	<<if $worn.upper.exposed gte 1 and $worn.over_upper.exposed gte 1>>
+		<<if $player.gender_appearance is "m">>
+		<<elseif $libertine gte 1 or $possessed or $worn.under_upper.type.includes("covered") or $worn.lower.type.includes("covered")>>
+		<<else>>
 			<<set $exposed to 1>>
 		<</if>>
-
-		/*
-		To be considered exposing your underwear or genitals ($exposure 1 and 2 respectively) the following must be true
-			over_lower needs to be exposing/displaced
-			lower needs to be exposing/displaced or wet
-
-		To be considered exposing your underwear the following must be true
-			under_lower needs to not have the covered trait and be not exposing or wet
-		Otherwise to be considered exposing your genitals the following must be true
-			under_lower needs to be exposing or wet
-		 */
-		<<if $worn.over_lower.exposed gte 1
-		and ($worn.lower.exposed gte 1 or $lowerwetstage gte 3)>>
-			<<if $worn.under_lower.exposed is 0 and $underlowerwetstage lt 3 and !$worn.under_lower.type.includes("covered")>>
-				<<set $exposed to 1>>
-			<<elseif $worn.under_lower.exposed gte 1 or $underlowerwetstage gte 3>>
-				<<set $exposed to 2>>
-			<</if>>
+	<</if>>
+	<<if $worn.upper.exposed gte 2 and $worn.over_upper.exposed gte 2 and $player.gender_appearance isnot "m">>
+		<<if $possessed>>
+		<<elseif $worn.under_upper.type.includes("covered") or $worn.lower.type.includes("covered")>>
+		<<elseif $libertine is 1>>
+			<<set $topless to 1>>
+		<<else>>
+			<<set $exposed to 1>>
+		<</if>>
+	<<else>>
+		<<set $topless to 0>>
+	<</if>>
+	<<if $worn.lower.exposed gte 1 and $worn.over_lower.exposed gte 1>>
+		<<if $libertine gte 1 or $possessed or $worn.under_lower.type.includes("covered")>>
+		<<else>>
+			<<set $exposed to 1>>
 		<</if>>
 	<</if>>
 
-	<<set $exposedRaw to $exposed>>
-
-	<<if $libertine gte $exposed>>
-		<<set $exposed to 0>>
+	<<if $worn.lower.exposed gte 2 and $worn.over_lower.exposed gte 2>>
+		<<if $possessed>>
+		<<elseif $worn.under_lower.exposed gte 1>>
+			<<set $exposed to 2>>
+		<<elseif $libertine gte 1 or $worn.under_lower.type.includes("covered")>>
+		<<else>>
+			<<set $exposed to 1>>
+		<</if>>
 	<</if>>
+
+	<<set $worn.over_upper.exposed to $worn.over_upper.exposedcarry>>
+	<<set $worn.over_lower.exposed to $worn.over_lower.exposedcarry>>
+	<<set $worn.upper.exposed to $worn.upper.exposedcarry>>
+	<<set $worn.lower.exposed to $worn.lower.exposedcarry>>
+	<<set $worn.under_lower.exposed to $worn.under_lower.exposedcarry>>
+	<<set $worn.under_upper.exposed to $worn.under_upper.exposedcarry>>
 <</widget>>
 
 <<widget "integritycheck">>
@@ -2145,7 +2157,7 @@
 		<<if $worn.over_upper.integrity lte 0>>
 			<<set $worn.over_upper.type.push("broken")>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.over_upper.name <<overupperplural>> ripped into scraps<<if $worn.upper.exposed gte 2>>, exposing your <<undertop>><</if>>.</span>
+				<span class="lewd">당신의 <<trClothes "over_upper" $worn.over_upper.name "name" "이">>_trResult 조각조각 찢어<<if $worn.upper.exposed gte 2>>지며, <<undertop_ ul>> 노출시킨다<<else>>진다<</if>>.</span>
 				<br>
 			<</if>>
 		<<overupperruined>><<clothesruinstat>><<if $worn.upper.exposed gte 2>><<set $upperoff to 0>><</if>>
@@ -2155,7 +2167,7 @@
 		<<if $worn.over_lower.integrity lte 0>>
 			<<set $worn.over_lower.type.push("broken")>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.over_lower.name <<upperplural>> ripped into scraps<<if $worn.lower.exposed gte 2>>, exposing your <<undies>><</if>>.</span>
+				<span class="lewd">당신의 <<trClothes "over_lower" $worn.over_lower.name "name" "이">>_trResult 조각조각 찢어<<if $worn.lower.exposed gte 2>>지며, <<undiesPost "을">> 노출시킨다<<else>>진다<</if>>.</span>
 				<br>
 			<</if>>
 		<<overlowerruined>><<clothesruinstat>><<if $worn.lower.exposed gte 2>><<set $upperoff to 0>><</if>>
@@ -2165,7 +2177,7 @@
 		<<if $worn.upper.integrity lte 0>>
 			<<set $worn.upper.type.push("broken")>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.upper.name <<upperplural>> ripped into scraps, exposing your <<undertop>>.</span>
+				<span class="lewd">당신의 <<trClothes "upper" $worn.upper.name "name" "이">>_trResult 조각조각 찢어지며, <<undertop_ ul>> 노출시킨다.</span>
 				<br>
 			<</if>>
 		<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
@@ -2175,7 +2187,7 @@
 		<<if $worn.lower.integrity lte 0>>
 			<<set $worn.lower.type.push("broken")>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.lower.name <<lowerplural>> ripped into scraps, exposing your <<undies>>.</span>
+				<span class="lewd">당신의 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 조각조각 찢어지며, <<undiesPost "을">> 노출시킨다.</span>
 				<br>
 			<</if>>
 		<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
@@ -2185,7 +2197,7 @@
 		<<if $worn.under_upper.integrity lte 0>>
 			<<set $worn.under_upper.type.push("broken")>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.under_upper.name <<underupperplural>> ripped into scraps, exposing your <<breasts>>.</span>
+				<span class="lewd"><<trClothes "under_upper" $worn.under_upper.name "name" "이">>_trResult 조각조각 찢어지며, <<breastsPost "을">> 노출시킨다.</span>
 				<br>
 			<</if>>
 		<<underupperruined>><<clothesruinstat>><<set $underupperoff to 0>>
@@ -2195,7 +2207,7 @@
 		<<if $worn.under_lower.integrity lte 0>>
 			<<set $worn.under_lower.type.push("broken")>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.under_lower.name <<underlowerplural>> ripped into scraps, exposing your <<if $worn.genitals.name isnot "naked">>$worn.genitals.name.<<else>><<genitals>>.<</if>></span>
+				<span class="lewd"><<trClothes "under_lower" $worn.under_lower.name "name" "이">>_trResult 조각조각 찢어지며, <<if $worn.genitals.name isnot "naked">><<trClothes "genitals" $worn.genitals.name "name" "을">>_trResult<<else>><<genitalsPost "을">><</if>> 노출시킨다.</span>
 				<br>
 			<</if>>
 		<<underlowerruined>><<clothesruinstat>><<set $underloweroff to 0>>
@@ -2205,23 +2217,23 @@
 		<<if $worn.genitals.integrity lte 0>>
 			<<set _chastityBreak to 1>>
 			<<if _args[0] isnot "no_text">>
-				<span class="lewd">Your $worn.genitals.name breaks, exposing your <<genitals>>.</span>
+				<span class="lewd"><<trClothes "genitals" $worn.genitals.name "name" "이">>_trResult 부서지며, <<if $penisexist is 1>><<penisPost "을">><<else>><<pussyPost "을">><</if>> 노출시킨다.</span>
 				<br>
 			<</if>>
 			<<if playerChastity()>>
 				<<set $worn.genitals.type.push("broken")>>
 				<<if $vaginalchastityparasite isnot 0>>
-					<span class="pink">With the <<print $worn.genitals.name>> gone, the $vaginalchastityparasite fall out of your vagina.</span>
+					<span class="pink"><<worn_genitals_name_ i>> 사라지자, <<trParasite $vaginalchastityparasite "이">>_trResult 당신의 보지에서 떨어진다.</span>
 					<br>
 					<<set $vaginalchastityparasite to 0>>
 				<</if>>
 				<<if $penilechastityparasite isnot 0>>
-					<span class="pink">With the <<print $worn.genitals.name>> gone, the $penilechastityparasite fall off of your penis.</span>
+					<span class="pink"><<worn_genitals_name_ i>> 사라지자, <<trParasite  $penilechastityparasite "이">>_trResult 당신의 자지에서 떨어진다.</span>
 					<br>
 					<<set $penilechastityparasite to 0>>
 				<</if>>
 				<<if $analchastityparasite isnot 0>>
-					<span class="pink">With the <<print $worn.genitals.name>> gone, the $analchastityparasite fall out of your anus.</span>
+					<span class="pink"><<worn_genitals_name_ i>> 사라지자, <<trParasite  $analchastityparasite "이">>_trResult 당신의 항문에서 떨어진다.</span>
 					<br>
 					<<set $analchastityparasite to 0>>
 				<</if>>
@@ -2252,7 +2264,7 @@
 
 <<widget "unbind">>
 	/*<<unbind>> is only used for the player unbinding their arms after they've been tied with rope. it will destroy handheld items. do not use it for unbinding arms after they've been temporarily restrained; use <<unbindtemp>> instead*/
-	<<if pcAreArmsBound("right") and $worn.handheld.name isnot "naked">>
+	<<if $rightarm is "bound" and $worn.handheld.name isnot "naked">>
 		<<handheldruined>>
 	<</if>>
 	<<set $rightboundcarry to 0>>
@@ -2291,7 +2303,7 @@
 	/*<<bind>> and <<unbind>> are only used for binding the player's arms with rope. they are only meant to be used for scenes where the player is left helpless and must undo their bindings elsewhere, forcing them to leave behind their handheld items. Use <<bindtemp>> and <<unbindtemp>> for temporarily binding arms.*/
 	<<if _args[0]>>
 		<<set _args[0] to "bound">>
-		<<if pcAreArmsBound("right") and $worn.handheld.name isnot "naked">>
+		<<if $rightarm is "bound" and $worn.handheld.name isnot "naked">>
 			<<handheldruined>>
 		<</if>>
 	<<else>>
@@ -2338,33 +2350,32 @@
 <</widget>>
 
 <<widget "bindings">>
-	<<if pcAreArmsBound("left") and $position isnot "wall">><<set $leftboundcarry to 1>><</if>>
-	<<if !pcAreArmsBound("left") and $leftboundcarry is 1>>
-		<<set $leftarm to "bound">>
-	<</if>>
-
-	<<if pcAreArmsBound("right") and $position isnot "wall">><<set $rightboundcarry to 1>><</if>>
-	<<if !pcAreArmsBound("right") and $rightboundcarry is 1>>
+	<<if $leftarm is "bound" and $position isnot "wall">><<set $leftboundcarry to 1>><</if>>
+	<<if $rightarm is "bound" and $position isnot "wall">><<set $rightboundcarry to 1>><</if>>
+	<<if $rightboundcarry is 1 and $rightarm isnot "bound">>
 		<<set $rightarm to "bound">>
+	<</if>>
+	<<if $leftboundcarry is 1 and $leftarm isnot "bound">>
+		<<set $leftarm to "bound">>
 	<</if>>
 <</widget>>
 
 <<widget "water">>
 	<<set _inWater to true>>
 	<<if !waterproofCheck($worn.over_upper) and !$worn.over_upper.type.includes("naked") and _args[0] isnot "waist">>
-		<<upperwet 200>>
+		<<set $upperwet to 200>>
 	<</if>>
 	<<if !waterproofCheck($worn.upper) and !$worn.upper.type.includes("naked") and _args[0] isnot "waist">>
-		<<upperwet 200>>
+		<<set $upperwet to 200>>
 	<</if>>
 	<<if !waterproofCheck($worn.lower) and !$worn.lower.type.includes("naked")>>
-		<<lowerwet 200>>
+		<<set $lowerwet to 200>>
 	<</if>>
 	<<if !waterproofCheck($worn.upper) and !waterproofCheck($worn.under_upper) and !$worn.under_upper.type.includes("naked") and _args[0] isnot "waist">>
-		<<underupperwet 200>>
+		<<set $underupperwet to 200>>
 	<</if>>
 	<<if !waterproofCheck($worn.lower) and !waterproofCheck($worn.under_lower) and !$worn.under_lower.type.includes("naked")>>
-		<<underlowerwet 200>>
+		<<set $underlowerwet to 200>>
 	<</if>>
 
 	<<waterwash>>
@@ -2432,28 +2443,28 @@
 		<!-- Variables constructed: $semenoutsidecount, $goooutsidecount, $nectaroutsidecount -->
 		<<set _liquid to formatList(
 			["semen", "goo", "nectar"].filter(stuff => V[stuff + "outsidecount"] gte 1)
-			).replace("goo", "slime")
-		>>
+			.join(',').replace(/([^,]+)(,|$)/g, (match, p1, p2) => {return {"semen": "정액", "goo": "점액", "nectar": "꿀"}[p1] + p2}).split(','))
+		>><<set _trResult to _liquid>><<trPost _postNum "으로">><<set _liquid_ro to _trResult>>
 		<<if $liquidoutsidecount gte 100>>
-			<span class="red">Lewd fluid drenches <<possessedWord 'you' $_textCol>> from head to toe.</span>
+			<span class="red">머리부터 발 끝까지 음란한 액체로 흠뻑 젖었다.</span>
 			<br>
 		<<elseif $liquidoutsidecount gte 25>>
-			<span class="pink"><<possessedWord 'You' $_textCol>> are drenched in _liquid.</span>
+			<span class="pink">몸이 _liquid_ro 흠뻑 젖었다.</span>
 			<br>
 		<<elseif $liquidoutsidecount gte 20>>
-			<span class="purple"><<possessedWord 'You' $_textCol>> are soaked with _liquid.</span>
+			<span class="purple">몸이 _liquid 투성이다.</span>
 			<br>
 		<<elseif $liquidoutsidecount gte 15>>
-			<span class="purple"><<possessedWord 'Your' $_textCol>> skin is slick with _liquid.</span>
+			<span class="purple">피부가 _liquid_ro 미끌미끌하다.</span>
 			<br>
 		<<elseif $liquidoutsidecount gte 10>>
-			<span class="purple"><<possessedWord 'You' $_textCol>> are wet with _liquid.</span>
+			<span class="purple">몸이 _liquid_ro 젖었다.</span>
 			<br>
 		<<elseif $liquidoutsidecount gte 5>>
-			<span class="purple"><<possessedWord 'Your' $_textCol>> skin is moist with _liquid.</span>
+			<span class="purple">피부가 _liquid_ro 축축하다.</span>
 			<br>
 		<<elseif $liquidoutsidecount gte 1>>
-			<span class="blue"><<possessedWord 'You' $_textCol>> feel _liquid on your skin.</span>
+			<span class="blue">피부에 _liquid이 묻은 느낌이 든다.</span>
 			<br>
 		<</if>>
 	<</if>>
@@ -2462,8 +2473,8 @@
 		<!-- Variables constructed: $player.bodyliquid.vagina.semen, $player.bodyliquid.vagina.goo, $player.bodyliquid.vagina.nectar -->
 		<<set _liquid to formatList(
 			["semen", "goo", "nectar"].filter(stuff => V.player.bodyliquid.vagina[stuff] gte 1)
-			).replace("goo", "slime")
-		>>
+			.join(',').replace(/([^,]+)(,|$)/g, (match, p1, p2) => {return {"semen": "정액", "goo": "점액", "nectar": "꿀"}[p1] + p2}).split(','))
+		>><<set _trResult to _liquid>><<trPost _postNum "으로">><<set _liquid_ro to _trResult>>
 		<<set _liquidUpper to _liquid.toUpperFirst()>>
 		<<if _liquid.includes(" ")>>
 			<<set _s to "">>
@@ -2472,19 +2483,19 @@
 		<</if>>
 		<<switch Math.clamp(setup.bodyliquid.combined("vagina"), 1, 5)>>
 			<<case 5>>
-				<span class="red"><<possessedWord 'Your' $_textCol>> womb overflows with _liquid.</span>
+				<span class="red">자궁에서 _liquid이 흘러넘친다.</span>
 				<br>
 			<<case 4>>
-				<span class="pink"><<possessedWord 'Your' $_textCol>> <<pussy>> overflows with _liquid.</span>
+				<span class="pink"><<pussyPost "에서">> _liquid이 흘러넘친다.</span>
 				<br>
 			<<case 3>>
-				<span class="pink">_liquidUpper flow_s from <<possessedWord 'your' $_textCol>> <<pussy>>.</span>
+				<span class="pink"><<pussyPost "에서">> _liquid이 흘러나온다.</span>
 				<br>
 			<<case 2>>
-				<span class="pink">_liquidUpper stream_s from <<possessedWord 'your' $_textCol>> <<pussy>>.</span>
+				<span class="pink"><<pussyPost "에서">> _liquid이 새어나온다.</span>
 				<br>
 			<<case 1>>
-				<span class="pink">_liquidUpper drip_s from <<possessedWord 'your' $_textCol>> <<pussy>>.</span>
+				<span class="pink"><<pussyPost "에서">> _liquid이 방울방울 떨어진다.</span>
 				<br>
 		<</switch>>
 	<</if>>
@@ -2493,8 +2504,8 @@
 		<!-- Variables constructed: $player.bodyliquid.anus.semen, $player.bodyliquid.anus.goo, $player.bodyliquid.anus.nectar -->
 		<<set _liquid to formatList(
 			["semen", "goo", "nectar"].filter(stuff => V.player.bodyliquid.anus[stuff] gte 1)
-			).replace("goo", "slime")
-		>>
+			.join(',').replace(/([^,]+)(,|$)/g, (match, p1, p2) => {return {"semen": "정액", "goo": "점액", "nectar": "꿀"}[p1] + p2}).split(','))
+		>><<set _trResult to _liquid>><<trPost _postNum "으로">><<set _liquid_ro to _trResult>>
 		<<set _liquidUpper to _liquid.toUpperFirst()>>
 		<<if _liquid.includes(" ")>>
 			<<set _s to "">>
@@ -2503,19 +2514,19 @@
 		<</if>>
 		<<switch Math.clamp(setup.bodyliquid.combined("anus"), 1, 5)>>
 			<<case 5>>
-				<span class="red"><<possessedWord 'Your' $_textCol>> bowels overflow with _liquid.</span>
+				<span class="red">장에서 _liquid이 흘러넘친다.</span>
 				<br>
 			<<case 4>>
-				<span class="pink"><<possessedWord 'Your' $_textCol>> <<bottom>> overflows with _liquid.</span>
+				<span class="pink"><<bottomPost "에서">> _liquid이 흘러넘친다.</span>
 				<br>
 			<<case 3>>
-				<span class="pink">_liquidUpper flow_s from <<possessedWord 'your' $_textCol>> <<bottom>>.</span>
+				<span class="pink"><<bottomPost "에서">> _liquid이 흘러나온다.</span>
 				<br>
 			<<case 2>>
-				<span class="pink">_liquidUpper stream_s from <<possessedWord 'your' $_textCol>> <<bottom>>.</span>
+				<span class="pink"><<bottomPost "에서">> _liquid이 새어나온다.</span>
 				<br>
 			<<case 1>>
-				<span class="pink">_liquidUpper drip_s from <<possessedWord 'your' $_textCol>> <<bottom>>.</span>
+				<span class="pink"><<bottomPost "에서">> _liquidUpper이 방울방울 떨어진다.</span>
 				<br>
 		<</switch>>
 	<</if>>
@@ -2524,8 +2535,8 @@
 		<!-- Variables constructed: $player.bodyliquid.mouth.semen, $player.bodyliquid.mouth.goo, $player.bodyliquid.mouth.nectar -->
 		<<set _liquid to formatList(
 			["semen", "goo", "nectar"].filter(stuff => V.player.bodyliquid.mouth[stuff] gte 1)
-			).replace("goo", "slime")
-		>>
+			.join(',').replace(/([^,]+)(,|$)/g, (match, p1, p2) => {return {"semen": "정액", "goo": "점액", "nectar": "꿀"}[p1] + p2}).split(','))
+		>><<set _trResult to _liquid>><<trPost _postNum "으로">><<set _liquid_ro to _trResult>>
 		<<set _liquidUpper to _liquid.toUpperFirst()>>
 		<<if _liquid.includes(" ")>>
 			<<set _s to "">>
@@ -2535,22 +2546,48 @@
 		<<set _liquidUpper to _liquid.toUpperFirst()>>
 		<<switch Math.clamp(setup.bodyliquid.combined("mouth"), 1, 5)>>
 			<<case 5>>
-				<span class="red"><<possessedWord 'You' $_textCol>> keep coughing up _liquid.</span>
+				<span class="red">기침할 때마다 _liquid이 터져 나온다.</span>
 				<br>
 			<<case 4>>
-				<span class="pink">_liquidUpper dribble_s down <<possessedWord 'your' $_textCol>> chin.</span>
+				<span class="pink">_liquid이 턱을 타고 흘러내린다.</span>
 				<br>
 			<<case 3>>
-				<span class="pink">_liquidUpper line_s the sides of <<possessedWord 'your' $_textCol>> throat.</span>
+				<span class="pink">_liquid이 목구멍 벽을 타고 흘러내린다.</span>
 				<br>
 			<<case 2>>
-				<span class="pink">_liquidUpper layer_s the back of <<possessedWord 'your' $_textCol>> throat.</span>
+				<span class="pink">_liquid이 목구멍 뒤쪽에 켜켜히 쌓인다.</span>
 				<br>
 			<<case 1>>
-				<span class="pink">The taste of _liquid permeate_s <<possessedWord 'your' $_textCol>> mouth.</span>
+				<span class="pink">_liquid의 맛이 입 속에 퍼진다.</span>
 				<br>
 		<</switch>>
 	<</if>>
+<</widget>>
+
+<<widget "clampgoo">>
+	<<for _bodypart range setup.bodyliquid.bodyparts>>
+		<<set $player.bodyliquid[_bodypart]["goo"] to Math.clamp($player.bodyliquid[_bodypart]["goo"], 0, 5)>>
+		<<set $player.bodyliquid[_bodypart]["semen"] to Math.clamp($player.bodyliquid[_bodypart]["semen"], 0, 5)>>
+		<<set $player.bodyliquid[_bodypart]["nectar"] to Math.clamp($player.bodyliquid[_bodypart]["nectar"], 0, 5)>>
+	<</for>>
+<</widget>>
+
+<<widget "goocount">>
+	<<clampgoo>>
+	<<set $goocount to $player.bodyliquid.neck.goo + $player.bodyliquid.rightarm.goo + $player.bodyliquid.leftarm.goo + $player.bodyliquid.thigh.goo + $player.bodyliquid.bottom.goo + $player.bodyliquid.tummy.goo + $player.bodyliquid.chest.goo + $player.bodyliquid.face.goo + $player.bodyliquid.hair.goo + $player.bodyliquid.feet.goo + $player.bodyliquid.vaginaoutside.goo + ($player.bodyliquid.vagina.goo * 3) + ($player.bodyliquid.penis.goo * 3) + ($player.bodyliquid.anus.goo * 3) + ($player.bodyliquid.mouth.goo * 3)>>
+	<<set $semencount to $player.bodyliquid.neck.semen + $player.bodyliquid.rightarm.semen + $player.bodyliquid.leftarm.semen + $player.bodyliquid.thigh.semen + $player.bodyliquid.bottom.semen + $player.bodyliquid.tummy.semen + $player.bodyliquid.chest.semen + $player.bodyliquid.face.semen + $player.bodyliquid.hair.semen + $player.bodyliquid.feet.semen + $player.bodyliquid.vaginaoutside.semen + ($player.bodyliquid.vagina.semen * 3) + ($player.bodyliquid.penis.semen * 3) + ($player.bodyliquid.anus.semen * 3) + ($player.bodyliquid.mouth.semen * 3)>>
+	<<set $nectarcount to $player.bodyliquid.neck.nectar + $player.bodyliquid.rightarm.nectar + $player.bodyliquid.leftarm.nectar + $player.bodyliquid.thigh.nectar + $player.bodyliquid.bottom.nectar + $player.bodyliquid.tummy.nectar + $player.bodyliquid.chest.nectar + $player.bodyliquid.face.nectar + $player.bodyliquid.hair.nectar + $player.bodyliquid.feet.nectar + $player.bodyliquid.vaginaoutside.nectar + ($player.bodyliquid.vagina.nectar * 3) + ($player.bodyliquid.penis.nectar * 3) + ($player.bodyliquid.anus.nectar * 3) + ($player.bodyliquid.mouth.nectar * 3)>>
+	<<set $liquidcount to $goocount + $semencount + $nectarcount>>
+
+	<<set $goooutsidecount to $player.bodyliquid.neck.goo + $player.bodyliquid.rightarm.goo + $player.bodyliquid.leftarm.goo + $player.bodyliquid.thigh.goo + $player.bodyliquid.bottom.goo + $player.bodyliquid.tummy.goo + $player.bodyliquid.chest.goo + $player.bodyliquid.face.goo + $player.bodyliquid.hair.goo + $player.bodyliquid.feet.goo + $player.bodyliquid.vaginaoutside.goo + ($player.bodyliquid.penis.goo * 3)>>
+	<<set $semenoutsidecount to $player.bodyliquid.neck.semen + $player.bodyliquid.rightarm.semen + $player.bodyliquid.leftarm.semen + $player.bodyliquid.thigh.semen + $player.bodyliquid.bottom.semen + $player.bodyliquid.tummy.semen + $player.bodyliquid.chest.semen + $player.bodyliquid.face.semen + $player.bodyliquid.hair.semen + $player.bodyliquid.feet.semen + $player.bodyliquid.vaginaoutside.semen + ($player.bodyliquid.penis.semen * 3)>>
+	<<set $nectaroutsidecount to $player.bodyliquid.neck.nectar + $player.bodyliquid.rightarm.nectar + $player.bodyliquid.leftarm.nectar + $player.bodyliquid.thigh.nectar + $player.bodyliquid.bottom.nectar + $player.bodyliquid.tummy.nectar + $player.bodyliquid.chest.nectar + $player.bodyliquid.face.nectar + $player.bodyliquid.hair.nectar + $player.bodyliquid.feet.nectar + $player.bodyliquid.vaginaoutside.nectar + ($player.bodyliquid.penis.nectar * 3)>>
+	<<set $liquidoutsidecount to $goooutsidecount + $semenoutsidecount + $nectaroutsidecount>>
+
+	<<set $goobodycount to $player.bodyliquid.thigh.goo + $player.bodyliquid.bottom.goo + $player.bodyliquid.tummy.goo + $player.bodyliquid.chest.goo + $player.bodyliquid.vaginaoutside.goo + ($player.bodyliquid.vagina.goo * 3) + ($player.bodyliquid.penis.goo * 3) + ($player.bodyliquid.anus.goo * 3)>>
+	<<set $semenbodycount to $player.bodyliquid.thigh.semen + $player.bodyliquid.bottom.semen + $player.bodyliquid.tummy.semen + $player.bodyliquid.chest.semen + $player.bodyliquid.vaginaoutside.semen + ($player.bodyliquid.vagina.semen * 3) + ($player.bodyliquid.penis.semen * 3) + ($player.bodyliquid.anus.semen * 3)>>
+	<<set $nectarbodycount to $player.bodyliquid.thigh.nectar + $player.bodyliquid.bottom.nectar + $player.bodyliquid.tummy.nectar + $player.bodyliquid.chest.nectar + $player.bodyliquid.vaginaoutside.nectar + ($player.bodyliquid.vagina.nectar * 3) + ($player.bodyliquid.penis.nectar * 3) + ($player.bodyliquid.anus.nectar * 3)>>
+	<<set $liquidbodycount to $goobodycount + $semenbodycount + $nectarbodycount>>
 <</widget>>
 
 <<widget "outergoo">>
@@ -2579,99 +2616,60 @@
 <</widget>>
 
 <<widget "random_goo">>
+	<<set $_rng to random (0, 9)>> <!-- 1-10 but 0 indexed -->
 	<<set $_part_text to [
 		"neck", "right arm", "left arm", "thigh", "bottom",
 		"tummy", "chest", "face", "hair", "feet"
-		].random()>>
+		].select($_rng)>>
 	<<set $_part to $_part_text.replace(" ","")>>
 	<<set $player.bodyliquid[$_part].goo += 1>>
-	<<switch $_part_text>>
-		<<case "right arm" "left arm">><<handejacstat>>
-		<<case "neck">><<neckejacstat>>
-		<<case "thigh">><<thighejacstat>>
-		<<case "bottom">><<bottomejacstat>>
-		<<case "tummy">><<tummyejacstat>>
-		<<case "chest">><<chestejacstat>>
-		<<case "face">><<faceejacstat>>
-		<<case "hair">><<hairejacstat>>
-		<<case "feet">><<feetejacstat>>
-	<</switch>>
 
-	It <<print either("splatters onto your", "coats your", "lands on your", "splashes your")>>
-	<span class="purple">$_part_text</span>.
+	그것이 당신의 
+	<span class="purple"><<trBodypart $_part>>_trResult</span> <<print either("위로 후두둑 떨어진다", "위를 뒤덮는다", "위에 떨어진다", "위에 철벅 떨어진다")>>.
 <</widget>>
 
 <<widget "random_semen">>
+	<<set $_rng to random (0, 9)>> <!-- 1-10 but 0 indexed -->
 	<<set $_part_text to [
 		"neck", "right arm", "left arm", "thigh", "bottom",
 		"tummy", "chest", "face", "hair", "feet"
-		].random()>>
+		].select($_rng)>>
 	<<set $_part to $_part_text.replace(" ","")>>
 	<<set $player.bodyliquid[$_part].semen += 1>>
-	<<switch $_part_text>>
-		<<case "right arm" "left arm">><<handejacstat>>
-		<<case "neck">><<neckejacstat>>
-		<<case "thigh">><<thighejacstat>>
-		<<case "bottom">><<bottomejacstat>>
-		<<case "tummy">><<tummyejacstat>>
-		<<case "chest">><<chestejacstat>>
-		<<case "face">><<faceejacstat>>
-		<<case "hair">><<hairejacstat>>
-		<<case "feet">><<feetejacstat>>
-	<</switch>>
 
-	It <<print either("splatters onto your", "coats your", "lands on your", "splashes your","covers your")>>
-	<span class="purple">$_part_text</span>.
+	그것이 당신의
+	<span class="purple"><<trBodypart $_part>>_trResult</span> <<print either("위로 후두둑 떨어진다", "위를 뒤덮는다", "위에 떨어진다", "위에 철벅 떨어진다")>>.
 <</widget>>
 
 <<widget "random_goo_head">>
-	<<switch random(0, 3)>>
-		<<case 0>>
-			<<set $_part_text to "neck">>
-			<<neckejacstat>>
-		<<case 1>>
-			<<set $_part_text to "chest">>
-			<<chestejacstat>>
-		<<case 2>>
-			<<set $_part_text to "face">>
-			<<faceejacstat>>
-		<<case 3>>
-			<<set $_part_text to "hair">>
-			<<hairejacstat>>
-	<</switch>>
-	<<set $player.bodyliquid[$_part_text].goo += 1>>
+	<<set $_rng to random (0, 3)>> <!-- 1-10 but 0 indexed -->
+	<<set $_part_text to [
+		"neck", "chest", "face", "hair"
+		].select($_rng)>>
+	<<set $_part to $_part_text.replace(" ","")>>
+	<<set $player.bodyliquid[$_part].goo += 1>>
 
-	It <<print either("splatters onto your", "coats your", "lands on your", "splashes your")>>
-	<span class="purple">$_part_text</span>.
+	그것이 당신의 
+	<span class="purple"><<trBodypart $_part>>_trResult</span> <<print either("위로 후두둑 떨어진다", "위를 뒤덮는다", "위에 떨어진다", "위에 철벅 떨어진다")>>.
 <</widget>>
 
 <<widget "random_semen_head">>
-	<<switch random(0, 3)>>
-		<<case 0>>
-			<<set $_part_text to "neck">>
-			<<neckejacstat>>
-		<<case 1>>
-			<<set $_part_text to "chest">>
-			<<chestejacstat>>
-		<<case 2>>
-			<<set $_part_text to "face">>
-			<<faceejacstat>>
-		<<case 3>>
-			<<set $_part_text to "hair">>
-			<<hairejacstat>>
-	<</switch>>
-	<<set $player.bodyliquid[$_part_text].semen += 1>>
+	<<set $_rng to random (0, 3)>> <!-- 1-10 but 0 indexed -->
+	<<set $_part_text to [
+		"neck", "chest", "face", "hair"
+		].select($_rng)>>
+	<<set $_part to $_part_text.replace(" ","")>>
+	<<set $player.bodyliquid[$_part].semen += 1>>
 
-	It <<print either("splatters onto your", "coats your", "lands on your", "splashes your")>>
-	<span class="purple">$_part_text</span>.
+	그것이 당신의 
+	<span class="purple"><<trBodypart $_part>>_trResult</span> <<print either("위로 후두둑 떨어진다", "위를 뒤덮는다", "위에 떨어진다", "위에 철벅 떨어진다")>>.
 <</widget>>
 
 <<widget "washmakeup">>
-	<<if $makeup.lipstick != 0 or $makeup.eyeshadow != 0 or $makeup.blusher != 0 or ($makeup.mascara != 0 and !$makeup.mascara.includes('waterproof')) or $makeup.concealer != 0>>
+	<<if $makeup.lipstick != 0 or $makeup.eyeshadow != 0 or ($makeup.mascara != 0 and !$makeup.mascara.includes('waterproof')) or $makeup.concealer != 0>>
 		<<set $makeupWashed = 1>>
 		<<set $makeup.lipstick = 0>>
 		<<set $makeup.eyeshadow = 0>>
-		<<set $makeup.blusher = 0>>
 		<<if $makeup.mascara and !$makeup.mascara.includes('waterproof')>>
 			<<set $makeup.mascara = 0>>
 			<<set $makeup.mascara_running = 0>>
@@ -2692,13 +2690,13 @@
 	<</if>>
 
 	<<if $waterwash gte 10>>
-		<span class="lewd">Copious amounts of lewd fluid washes into the water. You hope it doesn't attract attention.</span><br>
+		<span class="lewd">엄청난 양의 음란한 액체가 물에 씻겨나간다. 이목을 끌지 않길 바랄 뿐이다.</span><br>
 	<<elseif $waterwash gte 5>>
-		<span class="lewd">Lots of lewd fluid washes into the water. You hope it doesn't attract attention.</span><br>
+		<span class="lewd">많은 양의 음란한 액체가 물에 씻겨나간다. 이목을 끌지 않길 바랄 뿐이다.</span><br>
 	<<elseif $waterwash gte 2>>
-		<span class="lewd">Lewd fluid washes into the water. You hope it doesn't attract attention.</span><br>
+		<span class="lewd">음란한 액체가 물에 씻겨나간다. 이목을 끌지 않길 바랄 뿐이다.</span><br>
 	<<elseif $waterwash is 1>>
-		<span class="lewd">Some lewd fluid washes into the water. You hope it doesn't attract attention.</span><br>
+		<span class="lewd">약간의 음란한 액체가 물에 씻겨나간다. 이목을 끌지 않길 바랄 뿐이다.</span><br>
 	<</if>>
 	<<set $waterwash to 0>>
 
@@ -2794,8 +2792,8 @@
 <</widget>>
 
 <<widget "tipreceive">>
-	<span class="gold"><<if random(1, 10000) is 10000>>You gain Brouzouf<<else>>You make<</if>> <<printmoney $tip>>.</span>
-	<<money $tip `_args[0] ? _args[0] : ""`>>
+	<span class="gold"><<if random(1, 10000) is 10000>>당신은 브로조프<<else>>당신은<</if>> <<printmoney $tip>>를 얻었다.</span>
+	<<set $money += $tip>>
 	<<if $tip gte 50000>>
 		<<earnFeat "Negotiator">>
 	<</if>>
@@ -2803,16 +2801,16 @@
 <</widget>>
 
 <<widget "tip_neg">>
-	You negotiate a price of <<printmoney $tip>>,
+	당신은
 	<<if $tipreaction is "low">>
-		less than you hoped for.
+		생각했던 것보다 적은 가격으로,
 	<<else>>
-		which sounds reasonable.
-	<</if>>
+		적절한 가격으로,
+	<</if>><<printmoney $tip>>에 협상을 마친다.
 <</widget>>
 
 <<widget "tip_up">>
-	<<He>> raises <<his>> offer to <<printmoney $tip>>.
+	<<He_ nun>> 팁을 <<printmoney $tip>>로 올려 제안한다.
 <</widget>>
 
 <<widget "passout">>
@@ -2878,18 +2876,20 @@
 <</widget>>
 
 <<widget "textmap">>
-	<<if V.options.mapMovement>>
-		<div id="textmap">
-			╔═<<tml "Barb Street">>═╦═<<tml "Cliff Street">>═╦═<<tml "Starfish Street">>═╦═<<tml "Mer Street">>═╗<br>
-			<<tml "Domus Street">><<tml "Residential alleyways">><<tml "Connudatus Street">><<tml"Commercial alleyways">><<tml "High Street">><<tml "Park">><<tml "Oxford Street">><<tml "Industrial alleyways">><<tml "Harvest Street">><br>
-			╚═<<tml "Danube Street">>═╩═<<tml "Wolf Street">>═╩═<<tml "Nightingale Street">>═╩═<<tml "Elk Street">>═╝<br>
-		</div>
+	<<if $options.mapMovement is true and !$possessed>>
+	__Map__<br>
+		|.....<a class="no-numberify mapmove" onclick="mapMove('Barb Street')" title="Barb Street">Ba</a> &#9866; <a class="no&#9866;numberify mapmove" onclick="mapMove('Cliff Street')" title="Cliff Street">Cl</a> &#9866; <a class="no&#9866;numberify mapmove" onclick="mapMove('Starfish Street')" title="Starfish Street">St</a> &#9866; <a class="no&#9866;numberify mapmove" onclick="mapMove('Mer Street')" title="Mer Street">Me</a><br>
+		|..╱ ╲ ╱ ╲ ╱ ╲ ╱ ╲<br>
+		|<a class="no&#9866;numberify mapmove" onclick="mapMove('Domus Street')" title="Domus Street">Do</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Residential alleyways')" title="ResidentialAlley">&#9866;</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Connudatus Street')" title="Connudatus Street">Co</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Commercial alleyways')" title="CommercialAlley">&#9866; </a><a class="no&#9866;numberify mapmove" onclick="mapMove('High Street')" title="High Street">Hi</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Park')" title="Park">&#9866;</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Oxford Street')" title="Oxford Street">Ox</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Industrial alleyways')" title="IndustrialAlley">&#9866;</a> <a class="no&#9866;numberify mapmove" onclick="mapMove('Harvest Street')" title="Harvest Street">Ha</a><br>
+		|..╲ ╱ ╲ ╱ ╲ ╱ ╲ ╱<br>
+		|.....<a class="no&#9866;numberify mapmove" onclick="mapMove('Danube Street')" title="Danube Street">Da</a> &#9866; <a class="no&#9866;numberify mapmove" onclick="mapMove('Wolf Street')" title="Wolf Street">Wo</a> &#9866; <a class="no&#9866;numberify mapmove" onclick="mapMove('Nightingale Street')" title="Nightingale Street">Ni</a> &#9866; <a class="no&#9866;numberify mapmove" onclick="mapMove('Elk Street')" title="Elk Street">El</a><br>
 	<<else>>
-		<div id="textmap">
-			╔═ Ba ═╦═ Cl ═╦═ St ═╦═ Me ═╗<br>
-			Do ─┼─ Co ─┼─ Hi ─┼─ Ox ─┼─ Ha<br>
-			╚═ Da ═╩═ Wo ═╩═ Ni ═╩═ El ═╝<br>
-		</div>
+		__Map__<br>
+		|.....Ba &#9866; Cl &#9866; St &#9866; Me<br>
+		|..╱ ╲ ╱ ╲ ╱ ╲ ╱ ╲<br>
+		|Do &#9866; Co &#9866; Hi &#9866; Ox &#9866; Ha<br>
+		|..╲ ╱ ╲ ╱ ╲ ╱ ╲ ╱<br>
+		|.....Da &#9866; Wo &#9866; Ni &#9866; El<br>
 	<</if>>
 	<br>
 <</widget>>
@@ -2919,8 +2919,8 @@
 
 		/*This version of sugarcube doesn't perform any processing inside of SVG elements, so we need to perform those actions ourselves inside a custom macro */
 		<<svg 260 130>>
-			<image x="2" class="zoomable" xlink:href="img/misc/map.png" width="256" height="128"> </image>
-			<image x="2" class="zoomable" @xlink:href="'img/misc/maparrow' + $map.location + '.png'" width="256" height="128"> </image>
+			<image x="2" xlink:href="img/misc/map.png"> </image>
+			<image x="2" @xlink:href="'img/misc/maparrow' + $map.location + '.png'"> </image>
 
 			<<for _i to 0; _i lt $map.arrayList.length; _i++>>
 				<<set _canMoveTo = $debug || $map.available[$passage].includes($map.arrayList[_i])>>
@@ -2976,7 +2976,7 @@
 <</widget>>
 
 <<widget "rentday">>
-	<<set $_text_output to ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][$rentday-1]>>
+	<<set $_text_output to ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"][$rentday-1]>>
 	<<print $_text_output>>
 <</widget>>
 
@@ -2988,7 +2988,7 @@
 
 <<widget "roomoptions">>
 	<<if $sexStats.pills.boughtOnce is true or $sexStats.pills["pills"]["Dr Harper\'s prescription"].owned gte 1 or $sexStats.pills["pills"]["asylum\'s prescription"].owned gte 1>>
-		<<pillicon>><<link [[Check your medicine drawer|PillCollection]]>><<set $pillsExitPassage to $passage>><<endevent>><</link>>
+		<<pillicon>><<link [[약 서랍을 확인한다|PillCollection]]>><<set $pillsExitPassage to $passage>><<endevent>><</link>>
 		<br>
 	<</if>>
 <</widget>>
@@ -2997,26 +2997,26 @@
 	<<if $christmas_wrap is 1>>
 		<<switch $christmas_gift_robin>>
 			<<case "shirt_unwrapped">>
-				<<gifticon "shirt">><<link [[Wrap Robin's shirt and shorts (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "shirt">><<set $christmas_gift_robin_wrapped to 1>><</link>>
+				<<gifticon "shirt">><<link [[로빈의 셔츠와 반바지를 포장한다 (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "shirt">><<set $christmas_gift_robin_wrapped to 1>><</link>>
 				<br>
 			<<case "sundress_unwrapped">>
-				<<gifticon "sundress">><<link [[Wrap Robin's sundress (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "sundress">><<set $christmas_gift_robin_wrapped to 1>><</link>>
+				<<gifticon "sundress">><<link [[로빈의 선드레스를 포장한다 (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "sundress">><<set $christmas_gift_robin_wrapped to 1>><</link>>
 				<br>
 			<<case "kimono_unwrapped">>
-				<<gifticon "kimono">><<link [[Wrap Robin's kimono (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "kimono">><<set $christmas_gift_robin_wrapped to 1>><</link>>
+				<<gifticon "kimono">><<link [[로빈의 기모노를 포장한다 (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "kimono">><<set $christmas_gift_robin_wrapped to 1>><</link>>
 				<br>
 			<<case "tuxedo_set_unwrapped">>
-				<<gifticon "tuxedo">><<link [[Wrap Robin's tuxedo (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "tuxedo">><<set $christmas_gift_robin_wrapped to 1>><</link>>
+				<<gifticon "tuxedo">><<link [[로빈의 턱시도를 포장한다 (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "tuxedo">><<set $christmas_gift_robin_wrapped to 1>><</link>>
 				<br>
 			<<case "gothic_gown_unwrapped">>
-				<<gifticon "gothic">><<link [[Wrap Robin's gothic gown (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "gothic gown">><<set $christmas_gift_robin_wrapped to 1>><</link>>
+				<<gifticon "gothic">><<link [[로빈의 고딕 드레스를 포장한다 (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "gothic gown">><<set $christmas_gift_robin_wrapped to 1>><</link>>
 				<br>
 			<<case "christmas_unwrapped">>
-				<<gifticon "christmas hat">><<link [[Wrap Robin's Christmas outfit (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "christmas">><<set $christmas_gift_robin_wrapped to 1>><</link>>
+				<<gifticon "christmas hat">><<link [[로빈의 크리스마스 옷을 포장한다 (0:10)|Bedroom Robin Wrap]]>><<pass 10>><<set $christmas_gift_robin to "christmas">><<set $christmas_gift_robin_wrapped to 1>><</link>>
 				<br>
 		<</switch>>
 		<<if $christmas_gift is "clothes_unwrapped">>
-			<<gifticon "christmas">><<link [[Wrap the orphans' gifts (3:00)|Bedroom Orphans Clothes Wrap]]>><<pass 180>><<set $christmas_gift to "clothes">><</link>>
+			<<gifticon "christmas">><<link [[고아들을 위한 선물을 포장한다 (3:00)|Bedroom Orphans Clothes Wrap]]>><<pass 180>><<set $christmas_gift to "clothes">><</link>>
 			<br>
 		<</if>>
 	<</if>>
@@ -3033,37 +3033,37 @@
 		<<crimeUp 20 "petty">><<combatskulduggeryskilluse>><<combatcontrol 10>><<gcombatcontrol>>
 	<<elseif $location is "prison">>
 		<<set _teeth to random(3,10)>>
-		You steal a handful of white, translucent gems.
+		당신은 하얗고, 반투명한 보석들을 훔친다.
 		<<prison_teeth _teeth>> <<prison_teeth_text _teeth>>
 	<<elseif $location is "island">>
 		/* Steal a specific antique like a wooden carving? */
-		<<if currentSkillValue("skulduggery") gte 800 and $rng gte 96>>
-			<span class="green">You find a stick.</span><<set $island.wood += 1>>
-		<<elseif (currentSkillValue("skulduggery") gte 800 and $rng gte 81) or $rng gte 91>>
-			<span class="green">You find a handful of walnuts.</span><<set $island.walnut += 1>>
+		<<if currentSkillValue("skulduggery") gte 800 and $rng gte 95>>
+			<span class="green">당신은 막대기를 하나 훔친다.</span><<set $island.wood += 1>>
+		<<elseif (currentSkillValue("skulduggery") gte 800 and $rng gte 80) or $rng gte 90>>
+			<span class="green">당신은 호두 한 웅큼을 훔친다.</span><<set $island.walnut += 1>>
 		<<else>>
-			<span class="red">You find nothing to steal.</span>
+			<span class="red">당신은 훔칠 것을 아무것도 찾지 못한다.</span>
 		<</if>>
-	<<elseif $location is "farm" and $livestock_dig isnot undefined>>
-		<<if $rng gte 91 and !$farm_key>>
+	<<elseif $location is "farm">>
+		<<if $rng gte 90 and !$farm_key>>
 			<<set $farm_key to true>>
 			<<set $farmCellUnlk to false>>
-			You pull a <span class="green">ring of keys</span> from the <<persons>> pocket and hide it in the straw.<<combatskulduggeryskilluse>><<combatcontrol 10>><<gcombatcontrol>>
+			당신은 <span class="green">열쇠 꾸러미</span>를 그 <<persons_ yi>> 호주머니에서 꺼내 지푸라기 속에 숨긴다.<<combatskulduggeryskilluse>><<combatcontrol 10>><<gcombatcontrol>>
 		<<else>>
-			<span class="red">You find nothing to steal.</span>
+			<span class="red">당신은 훔칠 것을 아무것도 찾지 못한다.</span>
 		<</if>>
 	<<elseif ["naked", "schoolSwim"].includes(_stealType)>>
-		<span class="red">You find nothing to steal.</span>
+		<span class="red">당신은 훔칠 것을 아무것도 찾지 못한다.</span>
 	<<elseif $rng gte 96 and $spray lt $spraymax>>
 		<<spray 1>>
-		<span class="green">You steal a charge for your pepper spray.</span>
+		<span class="green">당신은 후추 스프레이 충전제를 훔친다.</span>
 		<<crimeUp 50 "petty">><<combatskulduggeryskilluse>><<combatcontrol 10>><<gcombatcontrol>>
-	<<elseif $rng gte 91 and !$compoundcard>>
+	<<elseif $rng gte 90 and !$compoundcard>>
 		<<set $compoundcard to 1>>
-		You steal a strange card. There's an address on it, for a location on <span class="gold">Elk Street</span>.
+		당신은 기이한 카드를 훔친다. 거기엔 주소가 하나 쓰여있다. <span class="gold">엘크 가</span>에 위치한 장소다.
 	<<else>>
 		<<rng 5 100>>
-		You steal <<moneyGain $rng>>.
+		당신은 <<moneyGain $rng>>를 훔친다.
 		<<crimeUp $rng "petty">><<combatskulduggeryskilluse>><<combatcontrol 10>><<gcombatcontrol>>
 	<</if>>
 <</widget>>
@@ -3229,17 +3229,17 @@
 				<<if _config.sensitivity gte 4>>
 					<mouse class = "pink tooltip-small">
 						!!!
-						<span class="pink"><i>Sensitivity: <<print _config.sensitivity>></i></span>
+						<span class="pink"><i>민감도: <<print _config.sensitivity>></i></span>
 					</mouse>
 				<<elseif _config.sensitivity gte 3>>
 					<mouse class = "purple tooltip-small">
 						!!
-						<span class="purple"><i>Sensitivity: <<print _config.sensitivity>></i></span>
+						<span class="purple"><i>민감도: <<print _config.sensitivity>></i></span>
 					</mouse>
 				<<elseif _config.sensitivity gte 2>>
 					<mouse class = "blue tooltip-small">
 						!
-						<span class="blue"><i>Sensitivity: <<print _config.sensitivity>></i></span>
+						<span class="blue"><i>민감도: <<print _config.sensitivity>></i></span>
 					</mouse>
 				<</if>>
 			</span>
@@ -3250,7 +3250,7 @@
 					</span>
 				<<elseif _config.displayType eq "grade">>
 					<span class="characteristic-level">
-						<span @class="_config.color">_config.level</span> <<if _config.level neq 'None'>><small class="grade-percent black">_config.percent%</small><</if>>
+						<span @class="_config.color">_config.level</span> <<if _config.level neq '없음'>><small class="grade-percent black">_config.percent%</small><</if>>
 					</span>
 				<</if>>
 			<</if>>
@@ -3259,7 +3259,7 @@
 			<span @class="'characteristic-description ' + _config.color">_config.description</span>
 		<</if>>
 		<<if _config.showStars>>
-			<span class="characteristic-description grade-progress">Daily Progress</span>
+			<span class="characteristic-description grade-progress">일일 성취도</span>
 			<div class="progress-stars">
 				<img class="icon" @src="'img/ui/' + (_config.starLevel > 0 ? 'bronze_star'	: 'empty_star') + '.png'" />
 				<img class="icon" @src="'img/ui/' + (_config.starLevel > 1 ? 'silver_star'	: 'empty_star') + '.png'" />
@@ -3282,8 +3282,6 @@
 			<<set $_result to " <small class='green characteristic-modifier'>(+"+$_modifier+"%)</small>">>
 		<<elseif $_modifier lt 0>>
 			<<set $_result to " <small class='red characteristic-modifier'>("+$_modifier+"%)</small>">>
-		<<elseif ["Promiscuity", "Exhibitionism", "Deviancy"].includes(_args[2]) and (drunkSexStatModifier(V[_args[2].toLowerCase()]) gte 1 or heatRutSexStatModifier(_args[2].toLowerCase()) gte 1)>>
-			<<set $_result to " <span class='" + getLargestSexStatModifierCssClasses(_args[2].toLowerCase()) + "'><small class='blue characteristic-modifier'>(???%)</small></span>">>
 		<</if>>
 	<</if>>
 	<</silently>>
@@ -3294,11 +3292,11 @@
 		<span @class="$_modifier gt 0 ? 'green' : 'red'"><mouse class = "tooltip-small">
 			$_result
 			<<if $_good.length gt 0 and $_bad.length gt 0>>
-				<span class="green">Increasing your $_stat: <<print $_good>> <span class="red">Decreasing your $_stat: <<print $_bad>></span></span>
+				<span class="green"><<putpost_ rul $_stat>> 높임: <<print $_good>> <span class="red"><<putpost_ rul $_stat>> 낮춤: <<print $_bad>></span></span>
 			<<elseif $_good.length gt 0>>
-				<span class="green">Increasing your $_stat: <<print $_good>></span>
+				<span class="green"><<putpost_ rul $_stat>> 높임: <<print $_good>></span>
 			<<elseif $_bad.length gt 0>>
-				<span class="red">Decreasing your $_stat: <<print $_bad>></span>
+				<span class="red"><<putpost_ rul $_stat>> 낮춤: <<print $_bad>></span>
 			<</if>>
 		</mouse></span>
 	<</if>>
@@ -3377,17 +3375,17 @@
 			<<if $options.images>>
 					<img class="relation-icon" src="img/misc/icon/wolfpup.png" />
 			<</if>>
-			<span class="relation-name">Wolf Pack</span>
+			<span class="relation-name">늑대 무리</span>
 		</div>
 		<div class="relation-description">
-			The <<= $monsterchance is 100 ? "wolfgirls and wolfboys" : "wolves">>
-			<<if $wolfpackleader gte 1>> view you as <span class="green">the leader of the pack.</span>
-				<<elseif $syndromewolves gte 1>> view you as <span class="green">their <<ppackbrother>>.</span>
-				<<elseif $wolfpacktrust gte 12>> <span class="green">trust you.</span>
-				<<elseif $wolfpacktrust gte 6>> are <span class="teal">starting to accept you.</span>
-				<<elseif $wolfpackfear gte 12>> <span class="red">fear you.</span>
-				<<elseif $wolfpackfear gte 6>> are <span class="purple">starting to fear you.</span>
-				<<else>><span class="pink"> view you as prey.</span>
+			늑대들은
+			<<if $wolfpackleader gte 1>> 당신을 <span class="green">무리 우두머리로 본다.</span>
+				<<elseif $syndromewolves gte 1>> 당신을 <span class="green">그들의 <<ppackbrother_ ro>> 본다.</span>
+				<<elseif $wolfpacktrust gte 12>> <span class="green">당신을 믿고 있다.</span>
+				<<elseif $wolfpacktrust gte 6>> <span class="teal">당신을 받아들이기 시작했다.</span>
+				<<elseif $wolfpackfear gte 12>> <span class="red">당신을 무서워하고 있다.</span>
+				<<elseif $wolfpackfear gte 6>> <span class="purple">당신을 무서워하기 시작했다.</span>
+				<<else>><span class="pink"> 당신을 사냥감으로 본다.</span>
 			<</if>>
 		</div>
 	</div>
@@ -3416,14 +3414,14 @@
 
 			let statDefaults = {
 				"love" : {
-					name : setup.loveAlias[T.npcData.nam](),
+					name : "사랑",
 					value : T.npcData.love,
 					activeIcon : 'img/ui/sym_love.png',
 					inactiveIcon: 'img/ui/emptyheart.png',
 					color: 'red'
 				},
 				"lust" : {
-					name : "Lust",
+					name : "욕정",
 					value : T.npcData.lust,
 					iconOrientation : 'vertical',
 					activeIcon : 'img/ui/sym_lust.png',
@@ -3431,45 +3429,45 @@
 					color: 'pink'
 				},
 				"dom" : {
-					name : "Dominance",
+					name : "지배",
 					value : T.npcData.dom,
 					activeIcon : "img/ui/sym_dominance.png",
 					color: 'purple'
 				},
 				"trauma" : {
-					name : "Trauma",
+					name : "트라우마",
 					value : T.npcData.trauma,
 					activeIcon : "img/ui/sym_trauma.png",
 					color: 'teal'
 				},
 				"rage" : {
-					name : "Rage",
+					name : "분노",
 					value : T.npcData.rage,
 					activeIcon : "img/ui/sym_rage.png",
 					color: 'gold'
 				},
 				"purity" : {
-					name: "Purity",
+					name: "순결",
 					value: T.npcData.purity,
-					activeIcon: (T.npcData.virginity.vaginal == false || T.npcData.virginity.penile == false ? "img/ui/tf_fallenangel.png" : "img/ui/tf_angel.png"),
+					activeIcon: (T.npcData.virginity.vaginal == false || T.npcData.virginity.penile == false ? "img/misc/icon/tf_fallen.png" : "img/misc/icon/tf_angel.png"),
 					color: 'white'
 				},
 				"corruption" : {
-					name: "Corruption",
+					name: "타락",
 					value: T.npcData.corruption,
 					iconOrientation : 'horizontal-inverted',
-					activeIcon: "img/ui/tf_demon.png",
+					activeIcon: "img/misc/icon/tf_demon.png",
 					color: 'purple'
 				},
 				"harmony" : {
-					name: "Harmony",
+					name: "화합",
 					value: V.wolfpackharmony,
 					iconOrientation : 'vertical',
 					activeIcon: "img/ui/wolfharmony.png",
 					color: 'purple'
 				},
 				"ferocity" : {
-					name: "ferocity",
+					name: "흉폭성",
 					value: V.wolfpackferocity,
 					iconOrientation : 'vertical',
 					activeIcon: "img/ui/wolfferocity.png",
@@ -3503,34 +3501,34 @@
 				<div class="relation-box">
 					<div class="relation-top-line">
 						<span class="relation-name">
-							_npcData.nam
-							<small class="relation-title black"><i>The _wraithTitle</i></small>
+							<<trNamedNPC _npcData.nam>>_trResult<small> _npcData.nam</small>
+							<small class="relation-title black"><i><<trNamedNPC _wraithTitle>>_trResult</i></small>
 						</span>
+						<div class="quick-stats">
+							<<for _j = 0; _j lt _otherNpcStats.length; _j++>>
+								<<if _npcData[_otherNpcStats[_j]] gt 0 and _checkRequirements(_otherNpcStats[_j])>>
+									<<relation-box-stat _getStatConfig(_otherNpcStats[_j])>>
+								<</if>>
+							<</for>>
+						</div>
 					</div>
 					<div class="relation-description">
 						<<if $options.images is 1 and (_rngWraithFace is 1 or $possessed)>>
-							<img id="wraith" @src="'img/ui/wraith' + V.wraith.state + '.png'">
+							<img id="wraith" @src="'img/misc/icon/wraith' + V.wraith.state + '.png'">
 						<<else>>
 							<<npcrelationship _npcData.nam>>
 						<</if>>
-					</div>
-					<div @class="(_npcData[_otherNpcStats[1]] lte 0 or _npcData[_otherNpcStats[0]] lte 0 ? 'full-width ' : '') + 'quick-stats relation-stat-list'">
-						<<for _j = 0; _j lt _otherNpcStats.length; _j++>>
-							<<if _npcData[_otherNpcStats[_j]] gt 0 and _checkRequirements(_otherNpcStats[_j])>>
-								<<relation-box-stat _getStatConfig(_otherNpcStats[_j])>>
-							<</if>>
-						<</for>>
 					</div>
 				</div>
 			<<elseif $wraithIntro and $wraith.mimic is _npcData.nam and $wraith.revealed and _npcOverrides and _npcOverrides.important>>
 				<div class="relation-box">
 					<div class="relation-top-line">
 						<span class="relation-name">
-							_npcData.nam?
-							<small class="relation-title black"><i>The _wraithTitle</i></small>
+							<<trNamedNPC _npcData.nam>><<print _trResult>>?
+							<small class="relation-title black"><i><<trNamedNPC _wraithTitle>>_trResult</i></small>
 						</span>
 						<<if _loveInterest>>
-							<img class="love-interest-icon" src="img/ui/love_interest.png" alt="Love Interest" title="Love Interest"/>
+							<img class="love-interest-icon" src="img/ui/love_interest.png" alt="연애 상대" title="연애 상대"/>
 						<</if>>
 					</div>
 					<div class="relation-description">
@@ -3557,11 +3555,11 @@
 			<div class="relation-box">
 				<div class="relation-top-line">
 					<span class="relation-name">
-						_npcData.nam
-						<small class="relation-title black"><i>The _npcData.title</i></small>
+						<<trNamedNPC _npcData.nam>>_trResult
+						<small class="relation-title black"><i><<trNamedNPC _npcData.title>>_trResult</i></small>
 					</span>
 					<<if _loveInterest>>
-						<img class="love-interest-icon" src="img/ui/love_interest.png" alt="Love Interest" title="Love Interest"/>
+						<img class="love-interest-icon" src="img/ui/love_interest.png" alt="연애 상대" title="연애 상대"/>
 					<</if>>
 				</div>
 				<div class="relation-description">
@@ -3587,19 +3585,19 @@
 			<div class="relation-box">
 				<div class="relation-top-line">
 					<span class="relation-name">
-						_npcData.nam
-						<small class="relation-title black"><i>The _npcData.title</i></small>
+						<<trNamedNPC _npcData.nam>>_trResult
+						<small class="relation-title black"><i><<trNamedNPC _npcData.title>>_trResult</i></small>
 					</span>
+					<div class="quick-stats">
+						<<for _j = 0; _j lt _otherNpcStats.length; _j++>>
+							<<if _npcData[_otherNpcStats[_j]] gt 0 and _checkRequirements(_otherNpcStats[_j])>>
+								<<relation-box-stat _getStatConfig(_importantNpcStats[_j])>>
+							<</if>>
+						<</for>>
+					</div>
 				</div>
 				<div class="relation-description">
 					<<npcrelationship _npcData.nam>>
-				</div>
-				<div @class="(!_importantNPCs.includes(_npcData.description) and (_npcData[_otherNpcStats[1]] lte 0 or _npcData[_otherNpcStats[0]] lte 0) ? 'full-width ' : '') + 'quick-stats relation-stat-list'">
-					<<for _j = 0; _j lt _otherNpcStats.length; _j++>>
-						<<if _npcData[_otherNpcStats[_j]] gt 0 and _checkRequirements(_otherNpcStats[_j])>>
-							<<relation-box-stat _getStatConfig(_otherNpcStats[_j])>>
-						<</if>>
-					<</for>>
 				</div>
 			</div>
 		<</if>>
@@ -3611,7 +3609,7 @@
 		<<set _config = _args[0]>>
 		<<set _important = _args[1]>>
 
-		<<set _config.progress = Math.ceil(Math.clamp(100*((_config.value - (_config.minValue || 0)) / (_config.maxValue || 100)), 0, 100))>>
+		<<set _config.progress = Math.floor(Math.clamp(100*((_config.value - (_config.minValue || 0)) / (_config.maxValue || 100)), 0, 100))>>
 	<</silently>>
 	<div class="relation-stat-block" @style="'--progress: ' + _config.progress + '%;'">
 		<<if _important>>
@@ -3619,11 +3617,6 @@
 		<</if>>
 		<<if $options.images>>
 			<div class="relation-stat">
-				<<if !_important>>
-					<span class="relation-stat-name">
-						<small>_config.name</small>
-					</span>
-				<</if>>
 				<span @class="'relation-stat-icon ' + (_config.iconOrientation || 'horizontal')">
 					<img class="active-icon-img" @src="_config.activeIcon">
 					<<if _config.inactiveIcon>>
@@ -3672,7 +3665,6 @@
 	<<set $NPCName[_i].love = Math.clamp($NPCName[_i].love, 0, 100)>>
 	<<set $NPCName[_i].lust = Math.clamp($NPCName[_i].lust, 0, 100)>>
 	<<set $NPCName[_i].rage = Math.clamp($NPCName[_i].rage, 0, 100)>>
-	<<set $NPCName[_i].dom = Math.clamp($NPCName[_i].dom, 0, 100)>>
 	<<set _i to $NPCNameList.indexOf("Avery")>>
 	<<set $NPCName[_i].love = Math.clamp($NPCName[_i].love, 0, 100)>>
 	<<set $NPCName[_i].rage = Math.clamp($NPCName[_i].rage, 0, 100)>>
@@ -3778,36 +3770,36 @@
 		<<else>>
 			<<set _colour to $hairfringecolour>>
 		<</if>>
-		<<set $_fringe to _colour + " fringe">>
+		<<trColour _colour>><<set $_fringe to _trResult + " 앞머리">>
 	<<else>>
-		<<set $_fringe to "fringe">>
+		<<set $_fringe to "앞머리">>
 	<</if>>
 
 	<<if $fringelength gte 980>>
-		and your <<print $_fringe>> is very long.
+		당신의 <<print $_fringe>>는 매우 길다.
 	<<elseif $fringelength gte 800>>
-		and your <<print $_fringe>> is long.
+		당신의 <<print $_fringe>>는 길다.
 	<<elseif $fringelength gte 600>>
-		and your <<print $_fringe>> is somewhat long.
+		당신의 <<print $_fringe>>는 조금 길다.
 	<<elseif $fringelength gte 400>>
-		and your <<print $_fringe>> is quite normal.
+		당신의 <<print $_fringe>>는 보통의 길이다.
 	<<elseif $fringelength gte 200>>
-		and your <<print $_fringe>> is short.
+		당신의 <<print $_fringe>>는 짧다.
 	<<else>>
-		and your <<print $_fringe>> is very short.
+		당신의 <<print $_fringe>>는 매우 짧다.
 	<</if>>
 <</widget>>
 
 <<widget "willpowerpain">>
 	<<if $pain gte 100 and $willpowerpain is undefined and _willpowerpainchecked isnot true>>
 		<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
-			<span class="green">The pain threatens to overwhelm, but you endure it.</span>
+			<span class="green">고통에 정신이 압도당할 뻔하나, 당신은 견뎌낸다.</span>
 			<<gwillpower>><<willpower 1>>
 			<br>
 		<<else>>
-			<span class="red">The pain overwhelms you.</span>
+			<span class="red">고통에 정신이 압도당한다.</span>
 			<<if $position is "stalk">>
-				You fall to your knees.
+				당신은 무릎을 꿇으며 쓰러진다.
 			<</if>>
 			<<ggwillpower>><<willpower 5>><<set $willpowerpain to 0>>
 			<br>
@@ -3819,13 +3811,13 @@
 <<widget "willpowerorgasm">>
 	<<if $orgasmdown gte 1 and _willpowerorgasmchecked isnot true>>
 		<<if (currentSkillValue('willpower') / 10) gte (($orgasmdown * 30) + random(1, 80))>>
-			<span class="green">You endure the orgasmic shivers running through you.</span>
+			<span class="green">당신은 오르가즘에 몸을 타고 퍼지는 전율을 견뎌낸다.</span>
 			<<gwillpower>><<willpower 1>><<set $orgasmdown to 0>>
 			<br>
 		<<else>>
-			<span class="red">You struggle against the orgasmic spasms overwhelming you.</span>
+			<span class="red">당신은 오르가즘으로 인한 경련에 저항한다.</span>
 			<<if $position is "stalk">>
-				You fall to your knees.
+				당신은 무릎을 꿇으며 쓰러진다.
 			<</if>>
 			<<gwillpower>><<willpower 1>>
 			<br>
@@ -3838,12 +3830,12 @@
 	<<set _slot to _args[0]>>
 	<<if $worn[_slot].colour isnot 0 and $worn[_slot].colour isnot undefined>>
 		<<if $worn[_slot].colour.substring(0, 3) is "wet">>
-			<<set _text_output to $worn[_slot].colour.substring(3)>>
+			<<trColour $worn[_slot].colour.substring(3)>><<set _text_output to _trResult>>
 		<<elseif $worn[_slot].colour_sidebar is 1>>
 			<<if $worn[_slot].colour == "custom">>
-				<<set _text_output to getCustomColourName($worn[_slot].colourCustom)>>
+				<<set _col to getCustomColourName($worn[_slot].colourCustom)>><<trColour _col>><<set _text_output to _trResult>>
 			<<else>>
-				<<set _text_output to $worn[_slot].colour>>
+				<<trColour $worn[_slot].colour>><<set _text_output to _trResult>>
 			<</if>>
 		<</if>>
 	<</if>>
@@ -3867,24 +3859,19 @@
 <</widget>>
 
 <<widget "breastfed">>
-	<<if _args[0]>>
-		<<set $milk_drank_stat += _args[0]>>
-		<<set $hunger -= _args[0]>><<set $thirst -= _args[0]>>
-	<<else>>
-		<<set $milk_drank_stat += random(1, 5)>>
-		<<if random(1, 100) gte 70>>
-			<<if $NPCList[0].type and $NPCList[0].type is "wolfgirl">>
-				<<transform wolf 1>>
-			<<elseif $NPCList[0].type and $NPCList[0].type is "foxgirl">>
-				<<transform fox 1>>
-			<<else>>
-				<<transform cat 1>>
-			<</if>>
+	<<set $milk_drank_stat += _args[0] or random(1, 5)>>
+	<<if random(1, 100) gte 70>>
+		<<if $NPCList[0].type and $NPCList[0].type is "wolfgirl">>
+			<<transform wolf 1>>
+		<<elseif $NPCList[0].type and $NPCList[0].type is "foxgirl">>
+			<<transform fox 1>>
+		<<else>>
+			<<transform cat 1>>
 		<</if>>
-		<<if $milkdranktrait is 1>><<physique 1>><</if>>
-		<<purity -1>>
-		<<set $hunger -= 200>><<set $thirst -= 200>>
 	<</if>>
+	<<if $milkdranktrait is 1>><<physique 1>><</if>>
+	<<purity -1>>
+	<<set $hunger -= 200>><<set $thirst -= 200>>
 <</widget>>
 
 <<widget "nectarfed">>
@@ -3903,7 +3890,7 @@
 	<</if>>
 	<<if $backgroundTraits.includes("plantlover")>>
 		<<if $nectar_timer lte 14>>
-			<span class="green">You feel an overwhelming sense of relief.</span> <<stress -12>><<llstress>><<pain -4>><<lpain>>
+			<span class="green">당신은 힘이 넘치는 감각을 느낀다.</span> <<stress -12>><<llstress>><<pain -4>><<lpain>>
 		<<else>>
 			<<set _nectarStress to (-1 * _nectarGain)>>
 			<<physique 1 "invig">><<stress _nectarStress>><<lstress>>
@@ -3914,14 +3901,14 @@
 <</widget>>
 
 <<widget "setup_pillory">>
-	<<set $pillory.tenant to {person : clone(setup.baseNPC), exists : 0, duration : 0, served : 0, startTime: 0, endTime : 0,
-		crowd : 0, wet : 0, upperexposed : 0, lowerexposed : 0, fruit : 0, fruitstock: 0, face : 0, ass : 0, genital : 0, broken : 0,
+	<<set $pillory.tenant to {person : clone($baseNPC), exists : 0, duration : 0, served : 0, startTime: 0, endTime : 0,
+		crowd : 0, wet : 0, upperexposed : 0 , lowerexposed : 0, fruit : 0, fruitstock: 0, face : 0, ass : 0, genital : 0, broken : 0,
 		lastviewed : 0, special : {name : "", desc : ""}}>>
 <</widget>>
 
 <<widget "new_npc_pillory">>
 	<<if not _args[0]>>
-		<<if $rng gte 21>><<generate1>><<else>><<generatey1>><</if>>
+		<<if $rng gte 20>><<generate1>><<else>><<generatey1>><</if>>
 		<<set $_already_served to random(0,2)>>
 	<<else>>
 		<<set $_already_served to 0>>
@@ -3950,12 +3937,12 @@
 
 	<<person1>>
 	<<if $pillory.tenant.special.name is "">>
-		A <<person>> <<if $_already_served is 0>>is currently being locked into the pillory.<<else>>has recently been locked in the pillory.<</if>>
+		한 <<personPost "이">> <<if $_already_served is 0>>현재 구속대에 갇혀있다.<<else>>최근에 구속대에 갇혀있었다.<</if>>
 		<<endevent>>
 		<<npc_pillory_release_schedule>>
 		<br><br>
 	<<else>>
-		Rumour has it <<he>> is being sent to the pillory.
+		소문에 의하면 <<hePost "이">> 공개굴욕형에 처해질 것이라고 한다.
 		<br>
 		<<endevent>>
 	<</if>>
@@ -4000,13 +3987,13 @@
 	<<set $NPCList[0] to clone($pillory.tenant.person)>><<person1>>
 <</widget>>
 
-<<widget "A_pillory_person">> /* Can't simplify to <<pillory_person>> because: 'a thin man', but not 'a Whitney' */
+<<widget "A_pillory_person">>  /* Can't simplify to <<pillory_person>> because: 'a thin man', but not 'a Whitney') */
 	<<silently>><<set _out to "">>
 	<<get_pillory_npc>>
 	<<if $pillory.tenant.special.name is "">>
-		<<set _out += "A <<person>>">>
+		<<personPost _args[0]>><<set _out += "어떤 " + _trResult>>
 	<<else>>
-		<<set _out += $pillory.tenant.special.name>>
+		<<trNamedNPC $pillory.tenant.special.name "name" _args[0]>><<set _out += _trResult>>
 	<</if>>
 	<</silently>><<print _out>>
 <</widget>>
@@ -4015,9 +4002,9 @@
 	<<silently>><<set _out to "">>
 	<<get_pillory_npc>>
 	<<if $pillory.tenant.special.name is "">>
-		<<set _out += "The <<person>>">>
+		<<personPost _args[0]>><<set _out += "그 " + _trResult>>
 	<<else>>
-		<<set _out += $pillory.tenant.special.name>>
+		<<trNamedNPC $pillory.tenant.special.name "name" _args[0]>><<set _out += _trResult>>
 	<</if>>
 	<</silently>><<print _out>>
 <</widget>>
@@ -4026,9 +4013,9 @@
 	<<silently>><<set _out to "">>
 	<<get_pillory_npc>>
 	<<if $pillory.tenant.special.name is "">>
-		<<set _out += "a <<person>>">>
+		<<personPost _args[0]>><<set _out += "어떤 " + _trResult>>
 	<<else>>
-		<<set _out += $pillory.tenant.special.name>>
+		<<trNamedNPC $pillory.tenant.special.name "name" _args[0]>><<set _out += _trResult>>
 	<</if>>
 	<</silently>><<print _out>>
 <</widget>>
@@ -4037,9 +4024,9 @@
 	<<silently>><<set _out to "">>
 	<<get_pillory_npc>>
 	<<if $pillory.tenant.special.name is "">>
-		<<set _out += "the <<person>>">>
+		<<personPost _args[0]>><<set _out += "그 " + _trResult>>
 	<<else>>
-		<<set _out += $pillory.tenant.special.name>>
+		<<trNamedNPC $pillory.tenant.special.name "name" _args[0]>><<set _out += _trResult>>
 	<</if>>
 	<</silently>><<print _out>>
 <</widget>>
@@ -4048,15 +4035,15 @@
 	<<silently>><<set _out to "">>
 	<<get_pillory_npc>>
 	<<if $pillory.tenant.special.name is "">>
-		<<set _out += "<<person>>">>
+		<<personPost _args[0]>><<set _out += _trResult>>
 	<<else>>
-		<<set _out += $pillory.tenant.special.desc>>
+		<<trNamedNPC $pillory.tenant.special.desc 'title' _args[0]>><<set _out += _trResult>>
 	<</if>>
 	<</silently>><<print _out>>
 <</widget>>
 
 <<widget "npc_pillory">>
-	<<A_pillory_person>> is locked in the town pillory.
+	<<A_pillory_person "이">> 도시 구속대에 갇혀있다.
 	<<npc_pillory_release_schedule>>
 	<br><br>
 	<<endevent>>
@@ -4064,7 +4051,7 @@
 
 <<widget "npc_pillory_detail">>
 	<<get_pillory_npc>>
-	<<A_pillory_person>> is locked in the town pillory.
+	<<A_pillory_person "이">> 도시 구속대에 갇혀있다.
 	<<npc_pillory_appearance>>
 	<<npc_pillory_abuse>>
 	<<npc_pillory_release_schedule>>
@@ -4076,73 +4063,73 @@
 	<<update_npc_pillory_appearance>>
 	/*Desc*/
 	<<if Time.dayState is "night">>
-		<<if $pillory.tenant.crowd gte 10>>A huge, drunken mob surround
-		<<elseif $pillory.tenant.crowd gte 6>>A large, rowdy mob crowd around
-		<<elseif $pillory.tenant.crowd gte 4>>A sinister crowd huddle around
-		<<else>>A small but sinister group lurk around
+		<<if $pillory.tenant.crowd gte 10>>술에 취한, 엄청난 수의 군중들이,
+		<<elseif $pillory.tenant.crowd gte 6>>떠들썩한, 많은 수의 군중들이,
+		<<elseif $pillory.tenant.crowd gte 4>>불길한 느낌의 군중들이,
+		<<else>>작긴 하지만 불길한 느낌의 군중들이,
 		<</if>>
 	<<else>>
-		<<if $pillory.tenant.crowd gte 10>>An excited, jeering crowd surround
-		<<elseif $pillory.tenant.crowd gte 6>>A large crowd press around
-		<<elseif $pillory.tenant.crowd gte 4>>A curious group hang around
-		<<else>>A small group watch
+		<<if $pillory.tenant.crowd gte 10>>흥분해서, 야유하고 있는 군중들이,
+		<<elseif $pillory.tenant.crowd gte 6>>많은 수의 군중들이,
+		<<elseif $pillory.tenant.crowd gte 4>>주변을 돌아다니던 호기심에 찬 무리들이,
+		<<else>>작은 무리가,
 		<</if>>
-	<</if>>the <<pillory_type>> locked prone in the pillory.
-	<<if $pillory.tenant.broken gte 32>><<He>> looks traumatised, perhaps permanently broken by the abuse <<hes>> already suffered.
-	<<elseif $pillory.tenant.broken gte 16>><<He>> is weeping from the abuse <<hes>> already suffered.
-	<<elseif $pillory.tenant.broken gte 8>><<He>> is sobbing from the abuse.
-	<<elseif $pillory.tenant.broken gte 4>><<He>> is visibly upset, but trying hard to hide it.
-	<<else>><<He>> is defiant, showing a brave face.
+	<</if>>엎드린 상태로 구속대에 갇힌 <<pillory_type "을">> 둘러싸고 있다.
+	<<if $pillory.tenant.broken gte 32>><<HePost "은">> 엄청난 충격을 받은 것 같고, 어쩌면 <<hes_ ga>> 이미 겪은 학대로 영구히 망가졌을지도 모른다.
+	<<elseif $pillory.tenant.broken gte 16>><<HePost "은">> 이미 겪은 학대로 인해 눈물을 흘리고 있다.
+	<<elseif $pillory.tenant.broken gte 8>><<HePost "은">> 학대로 인해 흐느끼고 있다.
+	<<elseif $pillory.tenant.broken gte 4>><<hePost "이">> 속상하다는 것은 눈에 보이지만, 어떻게든 숨기려고 하고 있다.
+	<<else>><<HePost "은">> 반항적인 태도로, 태연한 척을 하고 있다.
 	<</if>>
 	<br>
 
 	/*describe exposure*/
 	<<if $pillory.tenant.upperexposed gte 3>>
-		<<His>> $pillory.tenant.person.breastsdesc are fully exposed to the crowd.
-		<<if $pillory.tenant.spank gte 8>><<His>> nipples are red from being pinched, slapped, sucked, bitten and pulled.
-		<<elseif $pillory.tenant.spank gte 4>><<His>> nipples look sore from abuse.
+		<<His_ yi>> <<trBreastsdesc $pillory.tenant.person.breastsdesc "이">>_trResult 군중에게 완전히 노출되어 있다.
+		<<if $pillory.tenant.spank gte 8>><<His_ yi>> 유두는 잔뜩 꼬집히고, 얻어맞고, 빨리고, 물리고 당겨진 탓에 붉게 부었다.
+		<<elseif $pillory.tenant.spank gte 4>><<His_ yi>> 유두는 학대당해 아파 보인다.
 		<</if>>
 	<<elseif $pillory.tenant.upperexposed gte 2>>
 		<<if $pronoun is "f">>
-			<<His>> top has been bared, with only <<his>> bra hiding <<his>> $pillory.tenant.person.breastsdesc from the crowd.
+			<<His_ yi>> 상의가 벗겨져, 오직 브라만이 군중으로부터 <<trBreastsdesc $pillory.tenant.person.breastsdesc "을">>_trResult 가려주고 있다.
 		<<else>>
-			<<His>> top has been bared, fully exposing <<his>> $pillory.tenant.person.breastsdesc to the crowd.
-			<<if $pillory.tenant.spank gte 8>><<His>> nipples are red from being pinched, slapped, bitten and pulled.
-			<<elseif $pillory.tenant.spank gte 4>><<His>> nipples look sore from abuse.
+			<<His_ yi>> 상의가 벗겨져, 군중에게 <<trBreastsdesc $pillory.tenant.person.breastsdesc "이">>_trResult 완전히 노출되었다.
+			<<if $pillory.tenant.spank gte 8>><<His_ yi>> 유두는 잔뜩 꼬집히고, 얻어맞고, 물리고 당겨진 탓에 붉게 부었다.
+			<<elseif $pillory.tenant.spank gte 4>><<His_ yi>> 유두는 학대당해 아파 보인다.
 			<</if>>
 		<</if>>
-	<<elseif $pillory.tenant.upperexposed gte 1>><<His>> upper clothes have been mauled, partially exposing <<his>> <<if $pronoun is "f">>bra<<else>>$pillory.tenant.person.breastsdesc<</if>> to the crowd.
+	<<elseif $pillory.tenant.upperexposed gte 1>><<His_ yi>> 상의가 찢어져, 군중에게 <<if $pronoun is "f">>브라가<<else>><<trBreastsdesc $pillory.tenant.person.breastsdesc "이">>_trResult<</if>> 부분적으로 노출되어 있다.
 	<</if>>
-	<<if $pillory.tenant.lowerexposed gte 2>><<His>> ass has <<if $pillory.tenant.upperexposed gte 1>>also<</if>> been exposed, making
-		<<if $pillory.tenant.person.gender is "f">><<his>> pussy
-		<<else>><<his>> $pillory.tenant.person.penisdesc
-		<</if>>visible to all.
-		<<if $pillory.tenant.spank gte 5>><<His>> ass shows signs of rough
-			<<if $pillory.tenant.fruit gte 5>>spanking, and <<his>> <<if $pillory.tenant.face gte 2>>cum<<if $pillory.tenant.face gte 4>>-coated<<else>>-stained<</if>><</if>> face is a mess of bruises and broken fruit.
-			<<else>>spanking.
+	<<if $pillory.tenant.lowerexposed gte 2>><<His_ yi>> <<if $pillory.tenant.upperexposed gte 1>>엉덩이 또한 <<else>>엉덩이가<</if>>노출되어,
+		<<if $pillory.tenant.person.gender is "f">><<his_ yi>> 보지가
+		<<else>><<his_ yi>> <<penisdesc_ ga $pillory.tenant.person.penisdesc>>
+		<</if>>모두에게 보인다.
+		<<if $pillory.tenant.spank gte 5>><<His_ yi>> 엉덩이는 거칠게
+			<<if $pillory.tenant.fruit gte 5>>얻어맞은 것으로 보이고, <<his_ yi>> <<if $pillory.tenant.face gte 2>>정액<<if $pillory.tenant.face gte 4>> 범벅인<<else>>이 묻은<</if>><</if>> 얼굴은 멍과 으깨진 과일로 엉망진창이다.
+			<<else>>얻어맞은 것으로 보인다.
 			<</if>>
-		<<elseif $pillory.tenant.fruit gte 6>><<His>> <<if $pillory.tenant.face gte 2>>cum<<if $pillory.tenant.face gte 4>>-coated<<else>>-stained<</if>><</if>> face is a mess of bruises and broken fruit.
-		<<elseif $pillory.tenant.fruit gte 2>><<His>> <<if $pillory.tenant.face gte 2>>cum<<if $pillory.tenant.face gte 4>>-coated<<else>>-stained<</if>><</if>> face is marked by bruises and broken fruit.
+		<<elseif $pillory.tenant.fruit gte 6>><<His_ yi>> <<if $pillory.tenant.face gte 2>>정액<<if $pillory.tenant.face gte 4>> 범벅인<<else>>이 묻은<</if>><</if>> 얼굴은 멍과 으깨진 과일로 엉망진창이다.
+		<<elseif $pillory.tenant.fruit gte 2>><<His_ yi>> <<if $pillory.tenant.face gte 2>>정액<<if $pillory.tenant.face gte 4>> 범벅인<<else>>이 묻은<</if>><</if>> 얼굴은 멍과 으깨진 과일 때문에 바로 눈에 들어온다.
 		<</if>>
-		<<if $pillory.tenant.ass gte 2>><<His>> ass has been raped more than
-			<<if $pillory.tenant.genital gte 2>>once, and
-				<<if $pillory.tenant.person.gender is "m">>slime coats <<his>> <<print either("raw","abused","sorry")>> penis.
-				<<else>>semen <<if $pillory.tenant.genital gte 4>>pours<<else>>drips<</if>> from <<his>> <<print either("raw","reddened","abused")>> pussy.
+		<<if $pillory.tenant.ass gte 2>><<His_ yi>> 엉덩이는 여러 번
+			<<if $pillory.tenant.genital gte 2>>강간당했고,
+				<<if $pillory.tenant.person.gender is "m">><<print either("노출된","학대당한","비참한")>> 자지는 점액으로 뒤덮혀 있다.
+				<<else>><<print either("노출된","붉어진","학대당한")>> 보지에서는 정액이 <<if $pillory.tenant.genital gte 4>>흘러나온다<<else>>방울방울 떨어진다<</if>>.
 				<</if>>
-			<<else>>once.
+			<<else>>한 번 강간당했다.
 			<</if>>
-		<<elseif $pillory.tenant.genital gte 5>><<His>> <<if $pillory.tenant.person.gender is "m">>penis<<else>>pussy<</if>> has been raped raw.
-		<<elseif $pillory.tenant.genital gte 2>><<He>> has been raped more than once.
+		<<elseif $pillory.tenant.genital gte 5>><<His_ yi>> <<if $pillory.tenant.person.gender is "m">>자지<<else>>보지<</if>>는 생으로 강간당했다.
+		<<elseif $pillory.tenant.genital gte 2>><<HePost "은">> 여러 번 강간당했다.
 		<</if>>
 	<<elseif $pillory.tenant.lowerexposed gte 1>>
-		<<His>> <<if $pronoun is "f">>dress has been pulled up over <<his>> waist,<<else>>trousers have been pulled down,<</if>>
-		exposing <<his>> underwear to the crowd.
-	<<elseif $pillory.tenant.wet is 2>><<His>> clothes are see-through from the rain.
-	<<elseif $pillory.tenant.wet is 1>><<His>> clothes are semi-translucent from damp, but are drying out.
+		<<His_ yi>> <<if $pronoun is "f">>드레스는 허리 위로 들춰져,<<else>>바지는 내려져,<</if>>
+		군중에게 속옷을 노출하고 있다.
+	<<elseif $pillory.tenant.wet is 2>>비로 인해 <<his_ yi>> 옷은 속이 다 비친다.
+	<<elseif $pillory.tenant.wet is 1>><<His_ yi>> 옷은 축축해서 반투명해진 상태이나, 점차 말라가고 있다.
 	<</if>>
 	<<if $pillory.tenant.upperexposed is 0 and $pillory.tenant.lowerexposed is 0 and $pillory.tenant.face is 0 and $pillory.tenant.fruit gte 1>>
-		<<if $pillory.tenant.fruit gte 6>><<His>> face is a mess of bruises and broken fruit.
-		<<elseif $pillory.tenant.fruit gte 2>><<His>> face is marked by bruises and broken fruit.
+		<<if $pillory.tenant.fruit gte 6>><<His_ yi>> 얼굴은 멍과 으깨진 과일로 엉망진창이다.
+		<<elseif $pillory.tenant.fruit gte 2>><<His_ yi>> 얼굴은 멍과 으깨진 과일 때문에 바로 눈에 들어온다.
 		<</if>>
 	<</if>>
 <</widget>>
@@ -4214,270 +4201,270 @@
 	<<if $_timeLeft / TimeConstants.secondsPerHour lte -2>>
 		<<set $pillory.tenant.lastViewed to Time.date.timeStamp>>
 		<<rng>><<generate2>><<person2>>
-		<<set $_ly to either("violently","openly","angrily","furiously","cheekily","repeatedly","clumsily","roughly","theatrically","dutifully","merrily","gleefully","drunkenly","ineptly")>>
+		<<set $_ly to either("난폭하게","대놓고","화난듯이","맹렬히","뻔뻔하게","계속해서","서투르게","거칠게","과장되게","예의 바르게","즐겁게","신난듯이","취한듯이","솜씨 없이")>>
 		<<if Time.dayState isnot "night">>
 			<<if $rng gte 56>> /* 45% chance of jeer and shout only, 55% chance of something active */
-				A number of people, led by a <<person>> jeer and shout abuse at the prisoner.
+				여러 사람들이 <<personPost "이">> 필두로 죄수를 조롱하며 욕설을 퍼붓는다.
 			<<elseif $rng gte 41>> /* 15% */
 				<<rng>>
-				<<if $pillory.tenant.person.pronoun is "f" and $rng gte 41>> /* 60% if upper-exposed F */
-					A <<person>> in rough farmer clothes approaches the pillory with a bucket.
-					Setting the bucket underneath the <<pillory_type>>'s chest, <<person2>><<he>>
-					<<if $pillory.tenant.upperexposed lte 1>>displaces the prisoner's top,<</if>>
-					<<if $pillory.tenant.upperexposed lte 2>><<set $pillory.tenant.upperexposed to 3>> slips off her bra,<</if>>
-					grabs the <<pillory_type>>'s $pillory.tenant.person.breastsdesc and sets about trying to milk her into the bucket.
+				<<if $pillory.tenant.person.pronoun is "f" and $rng gte 40>> /* 60% if upper-exposed F */
+					거친 농부 복장을 한 <<personPost "이">> 양동이를 들고 구속대로 다가간다.
+					그러고는 <<pillory_type>>의 가슴 아래에 양동이를 놓더니, <<person2>><<hePost "은">>
+					<<if $pillory.tenant.upperexposed lte 1>>죄수의 상의를 벗기고는,<</if>>
+					<<if $pillory.tenant.upperexposed lte 2>><<set $pillory.tenant.upperexposed to 3>> 그녀의 브라를 풀고,<</if>>
+					<<pillory_type>>의 <<trBreastsdesc $pillory.tenant.person.breastsdesc "을">>_trResult 잡고는 양동이에 우유를 짜는듯한 행동을 취한다.
 					<br><br>
 					<<if $rng % 3 is 0>>
 						<<if $rng % 2>>
-							Milk bursts from her breasts. Smiling, the farmer soon builds up a rhythm, adeptly milking both breasts.
+							곧 가슴에서 모유가 터져나온다. 농부는 미소를 짓더니, 곧 일정한 박자를 타면서 능숙하게 두 가슴에서 모유를 짜낸다.
 							<br>
-							"Good cow." The farmer ruffles <<the_pillory_person>>'s hair before leaving with an almost full bucket.
+							"착한 소로군." 농부는 <<the_pillory_person>>의 머리를 헝클어트리고는 거의 다 찬 양동이를 들고 떠난다.
 						<<else>><<set $pillory.tenant.spank += 1>>
-							Milk dribbles from the <<pillory_type>>'s breasts. With a lot of persistent squeezing and nipple pulling the farmer is eventually
-							able to	get a fair amount of milk from the prisoner. Her $pillory.tenant.person.breastsdesc look raw and painful afterward.
+							곧 <<pillory_type>>의 가슴에서 모유가 똑똑 떨어진다. 집요하게 유두를 쥐어짜고 당기고 한 뒤에야 농부는 죄수로부터 상당한 양의 모유를 짜낼 수 있었다. 
+							그녀의 <<trBreastsdesc $pillory.tenant.person.breastsdesc "은">>_trResult 피부가 벗겨져 아파 보인다.
 							<br>
-							The farmer pats the prisoner's head before leaving with <<person2>><<his>> half-filled bucket.
+							농부는 죄수의 머리를 쓰다듬고는 반쯤 찬 양동이를 들고 떠난다.
 						<</if>>
 					<<else>><<set $pillory.tenant.spank += 1>>
-						Despite increasingly rough squeezing and pulling on her nipples, no milk is forthcoming.
+						점차 유두를 거칠게 꼬집고 당겨봐도, 모유는 나오지 않는다.
 						<<if $rng % 2>>
-							Finally giving up, the <<person2>><<person>> pats her head. "Poor girl. You're all dried up."
+							결국 포기한 채로, <<person2>><<personPost "은">> <<his_ yi>> 머리를 쓰다듬는다. "가엽기도 하지. 텅 비어버렸구나."
 							<br>
-							<<He>> walks behind the <<pillory_type>> and
-							<<if $pillory.tenant.lowerexposed lte 1>>strips <<his>> <<print either("silk panties","plain panties","tattered undies","boyshorts")>>,
-							<<else>>holds <<his>> butt-cheeks spread apart<</if>> exposing <<if $pillory.tenant.person.gender is "f">><<his>> pussy <<else>><<his>> ass <</if>>to all.
+							<<HePost "은">> <<pillory_type>>의 뒤로 걸어가서는
+							<<if $pillory.tenant.lowerexposed lte 1>><<his_ yi>> <<print either("실크 팬티를","평범한 팬티를","망가진 속옷을","보이쇼츠를")>> 벗기고는,
+							<<else>>엉덩이를 양 옆으로 벌린 뒤<</if>> 모두에게 <<if $pillory.tenant.person.gender is "f">><<his_ yi>> 보지를 <<else>><<his_ yi>> 엉덩이를 <</if>>보여준다.
 							<br>
-							"This cow's dry," <<person2>><<he>> calls out to the crowd. <<if $pillory.tenant.person.gender is "f">>"Wants someone to put a calf in her."<<else>>"Wants someone to fill her up."<</if>>
+							"이 소는 다 말랐어," <<person2>><<hePost "이">> 군중을 향해 외친다. <<if $pillory.tenant.person.gender is "f">>"누가 송아지 한 마리쯤 임신하게 해보지 그래."<<else>>"누가 속 좀 채워주지 그래."<</if>>
 							<br>
-							<<He>> walks away with <<his>> empty bucket.
+							<<HePost "은">> 텅 빈 양동이를 들고 떠난다.
 							<<set $pillory.tenant.lowerexposed to 2>>
 						<<else>>
-							Finally giving up, the farmer walks away with <<his>> empty bucket.
+							결국 포기한 채로, 농부는 텅 빈 양동이를 들고 떠난다.
 						<</if>>
 						<br>
 					<</if>>
-				<<elseif $pillory.tenant.person.gender is "m" and $rng gte 41>>
-					A <<person>> in rough farmer clothes approaches the pillory with a clear glass.
+				<<elseif $pillory.tenant.person.gender is "m" and $rng gte 40>>
+					거친 농부 복장을 한 <<personPost "이">> 투명한 잔을 들고 구속대로 다가간다.
 					<br>
-					Setting the glass underneath the <<pillory_type>>'s groin, <<person2>><<he>>
-					<<if $pillory.tenant.lowerexposed lte 0>><<if $pillory.tenant.person.pronoun is "m">>pulls down the prisoner's trousers,<<else>>hitches up the prisoner's skirt,<</if>><</if>>
-					<<if $pillory.tenant.lowerexposed lte 1>><<set $pillory.tenant.lowerexposed to 2>><<if $pillory.tenant.person.pronoun is "m">> removes his underpants, <<else>> pulls down her panties, <</if>><</if>>
-					grabs the prisoner's $pillory.tenant.person.penisdesc and starts to rub.
-					The prisoner looks shocked, then angry, then conflicted, and then shocked again as <<person1>><<he>> cums into a glass in front of a jeering crowd.
+					그러고는 <<pillory_type>>의 가랑이 밑에 잔을 놓더니, <<person2>><<hePost "은">>
+					<<if $pillory.tenant.lowerexposed lte 0>><<if $pillory.tenant.person.pronoun is "m">>죄수의 바지를 내리고는,<<else>>죄수의 스커트를 끌어올리고는,<</if>><</if>>
+					<<if $pillory.tenant.lowerexposed lte 1>><<set $pillory.tenant.lowerexposed to 2>><<if $pillory.tenant.person.pronoun is "m">> 속바지도 벗긴 뒤, <<else>> 팬티도 내린 뒤, <</if>><</if>>
+					죄수의 <<trPenisdesc $pillory.tenant.person.penisdesc "을">>_trResult 잡고는 문지르기 시작한다.
+					죄수는 충격을 받은 듯한 얼굴을 하더니, 곧 분노에 찬 표정으로 바뀌고, 곧 갈등하는 듯한 표정을 짓더니, 곧 다시 충격받은 얼굴을 한 채로 조롱하는 군중 앞에서 잔에다가 사정을 한다.
 					<<person2>>
 					<<if $rng % 3>>
-						The farmer glances in the glass and then starts again. Seemingly an 'old hand,' <<he>> starts to browse <<his>> phone with
-						one hand, while bringing the <<pillory_type>> to several more orgasms with the other.
+						농부는 잔을 물끄러미 바라보더니 다시 시작한다. 숙련가인지, <<HePost "은">> 한 손으로는 핸드폰을 조작하고,
+						다른 한 손으로는 <<pillory_type>>에게 절정을 몇 번 더 안겨준다.
 						<br>
-						Ten minutes later, the farmer is walking off with a glassful of ejaculate, while <<the_pillory_person>> hangs in the pillory, <<his>> face
-						flickering between shock, shame, pain and satiation.
+						10분 뒤, 농부는 정액으로 가득 찬 잔을 들고 떠나고, <<the_pillory_person "은">>
+						충격, 수치심, 고통과 만족감이 뒤섞인 표정을 지은 채로 구속대에 매달려있다.
 					<<else>><<set $pillory.tenant.spank += 1>>
-						The farmer browses <<his>> phone with one hand, while trying to bring the <<pillory_type>> back to orgasm with the other.
+						농부는 한 손으로는 <<his_ yi>> 핸드폰을 조작하고, 다른 한 손으로는 <<pillory_type "을">> 절정시키려 한다.
 						<br>
-						After a minute or so, the farmer looks confused, then annoyed at <<the_pillory_person>>'s lack of response.
-						The <<person2>><<person>> pulls a device from <<his>> pocket. <<He>> clips one end of the device to the base of the <<pillory_type>>'s penis,
-						and slides the other deep into the prisoner's anus.
+						몇 분쯤 지난 뒤, 농부는 혼란스러운 듯한 표정을 짓더니, 곧 <<the_pillory_person "이">> 별다른 반응을 보이지 않는다는 것에 짜증을 낸다.
+						<<person2>><<personPost "은">> <<his_ yi>> 주머니에서 장치 하나를 꺼내든다. <<HePost "은">> 장치의 한쪽 끝부분을 <<pillory_type>>의 자지 뿌리 쪽에 붙이고,
+						다른 한쪽을 죄수의 항문 깊숙이 밀어넣는다.
 						<br>
-						The farmer presses a button and with a loud electric crackle, <<the_pillory_person>> yelps, jerks and starts to orgasm continually.
+						농부가 버튼을 누르자 전기가 타닥거리는 소리가 크게 울려퍼지더니, <<the_pillory_person "은">> 비명을 내지르고는, 경련하며 계속해서 가버린다.
 						<br>
-						After about 20 seconds of phone browsing the <<person2>><<person>> turns the device off, glances at the glass, and nods.
+						20초 정도 핸드폰을 들여다보던 <<person2>><<personPost "은">> 장치를 끄더니, 잔을 물끄러미 쳐다보고는 고개를 끄덕인다.
 						<br>
-						The crowd are engrossed as the farmer repeats this process several more times, until finally the farmer is walking away with a
-						glassful of ejaculate, while <<the_pillory_person>> hangs limp in the pillory, <<his>> face twitching with pain, shame and a strange satiation.
+						군중은 농부가 이 과정을 몇 번 반복하는 광경에 몰두한다. 마침내 농부는 정액으로 가득 찬 잔을 들고 떠나고,
+						<<the_pillory_person "은">> 고통, 수치심과 기이한 만족감에 얼굴을 움찔거리며 축 처진 채로 구속대에 매달려있다.
 					<</if>>
 					<br>
-				<<elseif $pillory.tenant.person.gender is "f" and $rng gte 21>>
-					A <<person>> in rough farmer clothes approaches the pillory with a glass beaker.
+				<<elseif $pillory.tenant.person.gender is "f" and $rng gte 20>>
+					거친 농부 복장을 한 <<personPost "이">> 유리 비커를 들고 구속대로 다가간다.
 					<br>
-					Setting the beaker underneath the <<pillory_type>>'s groin, <<person2>><<he>>
-					<<if $pillory.tenant.lowerexposed lte 0>><<if $pillory.tenant.person.pronoun is "f">>hitches up the prisoner's skirt,<<else>>pulls down the prisoner's trousers,<</if>><</if>>
-					<<if $pillory.tenant.lowerexposed lte 1>><<set $pillory.tenant.lowerexposed to 2>><<if $pillory.tenant.person.pronoun is "f">> pulls down her panties,<<else>> removes his underpants,<</if>><</if>>
-					grabs the prisoner's pussy and starts to rub.
-					After a moment's shock, <<the_pillory_person>> pouts and resigns <<himself>> to this debasement. That's when <<he>> feels cold metal shoved up
-					<<his>> pussy. A moment later panic crosses <<his>> face as something is clamped to <<his>> clit, and almost instantly waves of electricity hit <<him>>.
+					그러고는 <<pillory_type>>의 가랑이 밑에 비커를 놓더니, <<person2>><<hePost "은">>
+					<<if $pillory.tenant.lowerexposed lte 0>><<if $pillory.tenant.person.pronoun is "f">>죄수의 스커트를 끌어올리고는,<<else>>죄수의 바지를 내리고는,<</if>><</if>>
+					<<if $pillory.tenant.lowerexposed lte 1>><<set $pillory.tenant.lowerexposed to 2>><<if $pillory.tenant.person.pronoun is "f">> 팬티도 내린 뒤,<<else>> 속바지도 벗긴 뒤,<</if>><</if>>
+					죄수의 보지를 붙잡고는 문지르기 시작한다.
+					잠시 충격에 빠져있다가, <<the_pillory_person "은">> 입술을 비죽 내민 채로 이 수치스러운 상황을 받아들이기로 한다. 그 직후에 <<his_ yi>> 보지에 차가운 금속이 쑤셔박힌다.
+					곧 <<his_ yi>> 얼굴이 공포로 물들려는 순간 무언가 클리토리스를 꽉 물고, 곧바로 전기의 물결이 <<his_ yi>> 몸에 밀려든다.
 					<br>
-					The crowd are engrossed as <<the_pillory_person>> writhes in orgasm after shuddering orgasm. The farmer barely pays attention, holding
-					the beaker close underneath to catch <<the_pillory_person>>'s fluids, while browsing <<person2>><<his>> phone.
-					At last, the farmer turns off and extracts <<his>> machine. <<Hes>> still browsing <<his>> phone as <<he>> walks away with a
-					full beaker of fluids.
+					군중은 <<the_pillory_person "이">> 반복해서 휘몰아치는 절정에 몸을 비트는 과정에 몰두한다.
+					농부는 거의 신경을 쓰지 않으며, <<the_pillory_person>>의 액체를 놓치지 않기 위해 비커를 가까이 댄 상태에서, <<person2>><<his_ yi>> 핸드폰만 들여다본다.
+					마침내, 농부는 장치의 전원을 끈 뒤 빼낸다. 
+					<<HePost "은">> 핸드폰에서 시선을 돌리지 않은 채로 액체로 가득 찬 비커를 든 채 떠난다.
 					<br>
-					<<The_pillory_person>> looks mortified, <<his>> face flitting between shock, shame and sexual exhaustion.
+					<<The_pillory_person "은">> 굴욕감에 가득 차서, 충격과 수치심, 성적 탈진감이 뒤섞인 표정을 짓는다.
 				<<else>>
 					<<if Time.month > 4 && Time.month < 9 and $rng % 4>>
-						<<set _bug to either("bee","wasp","bumblebee")>>
-						<<The_pillory_person>> shouts and helplessly wriggles and flaps as a _bug starts to circle <<him>>.
+						<<set _bug to either("벌","말벌","호박벌")>>
+						<<The_pillory_person "은">> _bug이 주변에서 원을 그리는 모습에 비명을 지르며 어쩔 줄을 모르고 몸을 꿈틀거리고 퍼덕거리기만 한다.
 						<br>
 						<<if $rng % 3 is 0>>
-							A kindly spectator waves the _bug away.
+							상냥한 관중이 _bug을 손으로 쫓아낸다.
 						<<elseif $rng % 3 is 1>>
-							The crowd jeer and laugh. Eventually the _bug loses interest and flies away.
+							군중은 조롱하며 웃음을 터트린다. 결국 _bug은 흥미를 잃고는 다른 곳으로 날아간다.
 						<<else>>
 							<<if $pillory.tenant.lowerexposed is 2 and $rng % 2>>
-								<<if $pronoun is "m">><<set _part to either("butt","upper leg","inner thigh","dick","balls","hip")>>
-								<<else>><<set _part to either("ass","leg","inner thigh","pussy","hip")>>
+								<<if $pronoun is "m">><<set _part to either("엉덩이","다리 위쪽","허벅지 안쪽","자지","불알","허리")>>
+								<<else>><<set _part to either("엉덩이","다리","허벅지 안쪽","보지","허리")>>
 								<</if>>
 							<<elseif $pillory.tenant.upperexposed gte 3 and $pronoun is "f">>
-								<<set _part to either("breast","nipple","armpit","ribs","midriff","back")>>
+								<<set _part to either("가슴","유두","겨드랑이","늑골","몸통","등")>>
 							<<elseif $pillory.tenant.upperexposed gte 2>>
-								<<set _part to either("chest","armpit","ribs","belly","back")>>
+								<<set _part to either("가슴","겨드랑이","늑골","배꼽","등")>>
 							<<else>>
-								<<set _part to either("arm","shoulder","cheek","leg","waist","wrist","elbow")>>
+								<<set _part to either("팔","어깨","볼","다리","허리","손목","팔꿈치")>>
 							<</if>>
-							<<He>> <<print either("yells","screams","whines","cries")>> as it lands on <<his>> _part and stings <<him>>.
+							<<HePost "은">> _bug이 _part에 앉더니 침을 쏘자 <<print either("고함을 친다","비명을 지른다","칭얼거린다","엉엉 운다")>>.
 						<</if>>
 					<<else>>
-						A furious <<monk>> from the temple scolds the crowd for preying on the morally sick.
-						Many people look ashamed and some leave.
+						화난 사원의 <<monk_ ga>> 도덕적으로 병든 이를 착취한다며 군중을 꾸짖는다.
+						많은 사람들이 부끄러워하고, 몇몇은 자리를 떠난다.
 						<<set $pillory.tenant.crowd -= 1>>
 						<<if $pillory.tenant.upperexposed + $pillory.tenant.lowerexposed gte 1>>
 							<<set $pillory.tenant.upperexposed to 0>><<set $pillory.tenant.lowerexposed to 0>>
-							The <<monk>> finally restores the <<pillory_type>>'s dignity by replacing <<his>> clothes.
+							마침내 <<monk_ ga>> <<pillory_type>>의 옷을 다시 입혀주어 <<his_ yi>> 존엄성을 회복시켜준다.
 						<</if>>
 					<</if>>
 				<</if>>
 			<<elseif $rng gte 36>> /* 5% */
-				A <<person>> throws fruit at the <<pillory_type>>. Unable to move or defend, it hits <<him>> directly in the face.
-				It looks painful, especially as <<he>> cannot wipe the acids out of <<his>> eyes.
+				어떤 <<personPost "이">> <<pillory_type>>에게 과일을 던진다. 움직이거나 막을 방법이 없기에, 과일이 <<himPost>>의 얼굴에 정통으로 맞는다.
+				과일의 산성기를 눈에서 닦아낼 수가 없기에 더더욱 아파 보인다.
 				<<set $pillory.tenant.fruit += 1>>
 			<<elseif $rng gte 26>> /* 10% */
-				A <<person>> throws fruit at the <<pillory_type>> but misses completely.
+				어떤 <<personPost "이">> <<pillory_type>>에게 과일을 던지나 완전히 빗나간다.
 			<<elseif $rng gte 16>> /* 10% */
-				A <<person>> walks up to the pillory and $_ly fondles the <<pillory_type>>'s <<if $pronoun is "f">>breasts.<<else>>balls.<</if>>
+				어떤 <<personPost "이">> 구속대로 가더니 <<pillory_type>>의 <<if $pronoun is "f">>젖가슴<<else>>불알<</if>>을 $_ly 애무한다.
 			<<elseif $rng gte 11 and $pillory.tenant.upperexposed lt 3>>/* 5% */
-				A <<person>> walks up to the <<pillory_type>> and
+				어떤 <<personPost "이">> <<pillory_type>>에게로 다가가더니
 				<<if $pillory.tenant.upperexposed is 2>>
 					<<if $pronoun is "f">>
-					$_ly removes <<his>> bra, fully exposing <<his>> $pillory.tenant.person.breastsdesc to a jeering crowd.
+					$_ly 브라를 벗겨, 조롱하는 군중을 향해 <<his_ yi>> <<trBreastsdesc $pillory.tenant.person.breastsdesc "을">>_trResult 노출시킨다.
 					<<else>>
-					$_ly twists <<his>> nipples.
+					$_ly <<his_ yi>> 유두를 비튼다.
 					<<set $pillory.tenant.spank += 1>>
 					<</if>>
 				<<elseif $pillory.tenant.upperexposed is 1>>
 					<<if $pronoun is "f">>
-					fully removes <<his>> top, leaving <<him>> with <<his>> bra exposed to the jeering crowd.
+					완전히 상의를 벗기고는, 조롱하는 군중을 향해 <<his_ yi>> 브라를 노출시킨다.
 					<<else>>
-					fully removes <<his>> top, exposing <<his>> naked $pillory.tenant.person.breastsdesc to the jeering crowd.
+					완전히 상의를 벗기고는, 조롱하는 군중을 향해 <<his_ yi>> <<trBreastsdesc $pillory.tenant.person.breastsdesc "을">>_trResult 노출시킨다.
 					<</if>>
 				<<else>>
 					<<if $pronoun is "f">>
-					lifts <<his>> top, partially exposing <<his>> bra to a jeering crowd.
+					상의를 들춰, 조롱하는 군중을 향해 <<his_ yi>> 브라를 일부분 노출시킨다.
 					<<else>>
-					lifts <<his>> top, exposing much of <<his>> chest to the jeering crowd.
+					상의를 들춰, 조롱하는 군중을 향해 <<his_ yi>> 가슴 대부분을 노출시킨다.
 					<</if>>
 				<</if>><<set $pillory.tenant.upperexposed += 1>>
 			<<elseif $rng gte 6 and $pillory.tenant.lowerexposed lt 2>>/* 5% */
-				A <<person>> walks up to <<the_pillory_person>> and
+				<<personPost "이">> <<the_pillory_person>>에게로 다가가더니
 				<<if $pillory.tenant.lowerexposed is 1>>
-					<<if $pillory.tenant.person.gender is "f">>removes the <<pillory_type>>'s underwear, fully exposing <<his>> ass and pussy to the jeering crowd.
-					<<else>>fully removes the <<pillory_type>>'s underwear, exposing <<his>> ass and <<his>> $pillory.tenant.person.penisdesc to the jeering crowd.
+					<<if $pillory.tenant.person.gender is "f">><<pillory_type>>의 속옷을 벗기고는, 조롱하는 군중을 향해 <<his_ yi>> 엉덩이와 보지를 완전히 노출시킨다.
+					<<else>><<pillory_type>>의 속옷을 완전히 벗기고는, 조롱하는 군중을 향해 <<his_ yi>> 엉덩이와 <<trPenisdesc $pillory.tenant.person.penisdesc "을">>_trResult 노출시킨다.
 					<</if>>
 				<<else>>
-					<<if $pronoun is "f">>lifts the <<pillory_type>>'s skirt,<<else>>pulls down <<his>> trousers,<</if>> exposing <<his>> underwear to a jeering crowd.
+					<<if $pronoun is "f">><<pillory_type>>의 치마를 들추고는,<<else>>바지를 내리고는,<</if>> 조롱하는 군중을 향해 속옷을 노출시킨다.
 				<</if>><<set $pillory.tenant.lowerexposed += 1>>
 			<<else>><<set $pillory.tenant.spank += 1>>/* 5% */
-				A <<person>> walks up to the <<pillory_type>> and spanks <<him>> hard on the ass. The thwack echoes across the street.
+				어떤 <<personPost "이">> <<pillory_type>>에게로 다가가더니 <<his_ yi>> 엉덩이를 세게 때린다. 철썩 하는 소리가 거리에 울려퍼진다.
 			<</if>>
 		<<else>> /*night*/
 			<<if $rng gte 86>> /* 15% chance of jeer and shout only, 85% chance of something active */
-				A number of people, led by a <<person>> jeer and shout at the prisoner.
+				여러 사람들이 <<personPost "이">> 필두로 죄수를 조롱하며 고함을 친다.
 			<<elseif $rng gte 81>> /* 5% */
-				A <<person>> throws fruit at the <<pillory_type>>. Unable to move or defend <<himself>>, it hits <<the_pillory_person>> directly in the face. There is a loud cheer.
-				It looks painful, especially as <<he>> cannot wipe the acids out of <<his>> eyes.
+				어떤 <<personPost "이">> <<pillory_type>>에게 과일을 던진다. 움직이거나 막을 방법이 없기에, 과일이 <<the_pillory_person>>의 얼굴에 정통으로 맞는다. 커다란 환호성이 울려퍼진다.
+				과일의 산성기를 눈에서 닦아낼 수가 없기에 더더욱 아파 보인다.
 				<<set $pillory.tenant.fruit += 1>>
 			<<elseif $rng gte 76>> /* 5% */
-				A <<person>> throws fruit at the <<pillory_type>> but misses completely.
+				어떤 <<personPost "이">> <<pillory_type>>에게 과일을 던지나 완전히 빗나간다.
 			<<elseif $pillory.tenant.person.pronoun is "f" and $pillory.tenant.upperexposed lt 3>>
 				<<set $pillory.tenant.upperexposed to 3>>
-				A <<person>> walks up to the helpless <<pillory_type>> and displaces all <<his>> upper clothes, fully baring <<his>> <<if $pronoun is "f">>$pillory.tenant.person.breastsdesc<<else>>chest<</if>> to the crowd.
+				<<personPost "이">> 무력한 <<pillory_type>>에게로 다가가더니 상의를 전부 벗겨, <<his_ yi>> <<if $pronoun is "f">><<trBreastsdesc $pillory.tenant.person.breastsdesc "을">>_trResult<<else>>가슴을<</if>> 군중에게 완전히 드러낸다.
 			<<elseif $pillory.tenant.person.pronoun is "m" and $pillory.tenant.upperexposed lt 2>>
 				<<set $pillory.tenant.upperexposed to 2>>
-				A <<person>> walks up to the helpless <<pillory_type>> and displaces all <<his>> upper clothes, fully baring <<his>> <<if $pronoun is "f">>$pillory.tenant.person.breastsdesc<<else>>chest<</if>> to the crowd.
+				<<personPost "이">> 무력한 <<pillory_type>>에게로 다가가더니 상의를 전부 벗겨, <<his_ yi>> <<if $pronoun is "f">><<trBreastsdesc $pillory.tenant.person.breastsdesc "을">>_trResult<<else>>가슴을<</if>> 군중에게 완전히 드러낸다.
 			<<elseif $pillory.tenant.lowerexposed lt 2>>
 				<<set $pillory.tenant.lowerexposed to 2>>
-				A <<person>> walks up to the helpless <<pillory_type>> and displaces all <<his>> lower clothes, fully baring <<his>> <<if $pillory.tenant.person.gender is "f">>pussy<<else>>$pillory.tenant.person.penisdesc<</if>> to the crowd. There is a loud cheer.
+				<<personPost "이">> 무력한 <<pillory_type>>에게로 다가가더니 하의를 전부 벗겨, <<his_ yi>> <<if $pillory.tenant.person.gender is "f">>보지를<<else>><<penisdesc_ rul $pillory.tenant.person.penisdesc>><</if>> 군중에게 완전히 드러낸다. 커다란 환호성이 울려퍼진다.
 			<<elseif $rng gte 66>> /* 10% */
-				A <<person>> tries to incite a nearby dog to mount the prisoner's naked backside. It
-				<<if $rng % 2>>gives <<the_pillory_person>>'s ass a few tentative sniffs, but
-				<</if>>is not interested.
+				<<personPost "이">> 근처에 돌아다니던 개로 하여금 죄수의 헐벗은 엉덩이에 올라타도록 유도한다. 녀석은
+				<<if $rng % 2>>머뭇거리며 <<the_pillory_person>>의 엉덩이를 몇 번 킁킁거리나,
+				<</if>>별 흥미를 보이지 않는다.
 			<<elseif $rng gte 58>> /* 8% */
 				<<set $pillory.tenant.spank += 1>>
-				A <<person>> sneaks up behind the pillory and $_ly slaps the <<pillory_type>>'s exposed <<if $pillory.tenant.person.gender is "f">>cunt.<<else>>balls.<</if>> The crowd jeer and laugh as <<he>> howls in pain.
+				어떤 <<personPost "이">> 구속대 뒤로 몰래 다가가서는 <<pillory_type>>의 노출된 <<if $pillory.tenant.person.gender is "f">>보지를<<else>>고환을<</if>> $_ly 후려친다. <<hePost "이">> 고통에 울부짖는 동안 군중은 조롱하고 웃음을 터트린다.
 			<<elseif $rng gte 51>> /* 7% */
 				<<set $pillory.tenant.spank += 2>><br>
-				Some teacher you've seen around the school but never had classes with, walks drunkenly toward the pillory.
+				당신이 학교 주위에서 본 적이 있지만 수업을 들어본 적은 없는 어떤 선생이, 술취한 발걸음으로 구속대 앞으로 걸어간다.
 				<<if $pillory.tenant.special.name is "Whitney">>
 					<br><<set $pillory.tenant.spank += 1>>
-					"Well, hello, Whitney! <<print either("Fancy seeing you here!","Look who it is!","Are you stuck there? How unfortunate!","Isn't this quite the turnaround!?","Such a nice surprise to see you here!")>>" <<he>> slurs, grinning.
-					"<<print either("We both know that you've earned this.","We both know how richly you deserve this.","And today's lesson will be about consequences.","Do remember that mean little nickname you made up for me?","Do remember what you did in my class the other day?")>>"
+					"이런, 안녕, 휘트니! <<print either("여기서 보다니 반갑구나!","이게 누구야!","여기에서 움직일 수 없는 거니? 불행하게도!","이거 입장이 상당히 바뀐 것 같지 않니!?","너를 여기서 보다니 멋진 놀라움이구나!")>>" <<he_ ga>> 싱긋 웃으며, 혀 꼬부라진 소리로 말한다.
+					"<<print either("우리 둘 다 네가 이걸 벌어놨다는 것을 알고 있지.","우리 둘 다 네가 이걸 받기에 충분히 마땅하다는 것을 알고 있지.","그리고 오늘의 수업은 인과관계에 대한 것이란다.","네가 내게 지어준 못된 조그만 별명을 기억하니?","저번날에 네가 내 수업에서 무엇을 했는지 기억하니?")>>"
 				<<elseif $pillory.tenant.special.name is "Leighton">>
 					<br><<set $pillory.tenant.spank += 1>>
-					"Well, hello there. Is that you, boss?" <<he>> says, staying out of sight behind the pillory.
-					"<<print either("I think it's time for some 'anonymous staff feedback'.","Remember what you said about 'cruel to be kind?'","So I guess it's your turn for some 'frank and honest feedback'?","So is this the 'right forum' to air staff grievances?")>>"
+					"이런, 안녕하세요. 당신이세요, 교장님?" <<he_ ga>> 구속대 뒤에서, 시야에 들어가지 않도록 서서 말한다.
+					"<<print either("제 생각에는 지금이 어떤 '익명 직원 평가' 시간인 것 같네요.","교장님이 '친절하기 위한 잔인함'에 대해 뭐라고 말씀하셨는지 기억하시죠?","그러니까 제가 추측하기에는 지금이 교장님에 대한 '솔직담백한 평가'를 할 차례 같은데요?","그래서 여기가 직원 불만사항을 발표할 '적절한 토론장'인 거죠?")>>"
 				<<else>><br>
-					"Well, hello there," <<he>> slurs, grinning.
-					"<<print either("Looks like you've been naughty.","Discipline. So important.","Isn't it a lovely evening? Don't you think? Look at that full moon!")>>"
+					"이런, 안녕하신가 거기," <<he_ ga>> 싱긋 웃으며, 혀 꼬부라진 소리로 말한다.
+					"<<print either("보아하니 자네가 꽤 무례하게 굴었나 보군 그래.","징계라. 아주 중요하지.","좋은 저녁이지 않은가? 그렇게 생각하지 않나? 저 보름달 좀 보게나!")>>"
 				<</if>><br>
-				<<He>> spanks the <<pillory_type>>'s ass until <<person2>><<his>> arm tires. The crowd jeer and laugh as the <<person1>><<person>> howls in pain.
+				<<He_ nun>> <<pillory_type>>의 엉덩이를 <<person2>><<his_ yi>> 팔이 아플 때 까지 후려친다. 군중들은 <<person1>><<person_ i>> 아픔에 울부짖자  야유하며 웃는다.
 			<<elseif $rng gte 41>> /* 10% */
 				<<set $pillory.tenant.face += 1>>
-				A <<person>> walks in front of the pillory and $_ly masturbates in front of the <<pillory_type>>.
-				<<person2>><<if $pronoun is "m">>Cum soon splatters across <<the_pillory_person>>'s face.
-				<<else>><<He>> grinds <<his>> cunt against <<the_pillory_person>>'s<<person2>> face as <<he>> orgasms.
-				<</if>> The crowd cheer and laugh.
+				어떤 <<personPost "이">> 구속대 앞으로 가서는 <<pillory_type>> 앞에서 $_ly 자위하기 시작한다.
+				<<person2>><<if $pronoun is "m">>곧 <<the_pillory_person>>의 얼굴에 정액이 튄다.
+				<<else>><<HePost "은">> <<the_pillory_person>>의 얼굴에 <<person2>><<his_ yi>> 보지를 문지르며 가버린다.
+				<</if>> 군중은 조롱하며 웃음을 터트린다.
 			<<elseif $rng gte 31>> /* 10% */
 				<<set $pillory.tenant.ass += 1>>
-				A <<person>> walks behind the pillory and $_ly <<if $pronoun is "m">>rapes<<else>>fingers<</if>> the <<pillory_type>>'s asshole. The crowd cheer <<person2>><<him>> on.
+				어떤 <<personPost "이">> 구속대 뒤로 가서는 <<pillory_type>>의 항문을 $_ly <<if $pronoun is "m">>강간한다<<else>>손가락으로 쑤신다<</if>>. 군중은 <<person2>><<himPost "을">> 응원한다.
 			<<elseif $rng gte 21>> /* 10% */
 				<<set $pillory.tenant.genital += 1>>
-				A <<person>> walks behind the pillory and $_ly rapes <<if $pronoun is "m">><<the_pillory_person>>.<<else>><<the_pillory_person>> with a strap-on.<</if>><<person2>> The crowd take pictures and cheer <<him>> on.
+				어떤 <<personPost "이">> 구속대 뒤로 가서는 <<if $pronoun is "m">><<the_pillory_person "을">><<else>><<the_pillory_person "을">> 페니스 밴드로<</if>> $_ly 강간한다. <<person2>>군중은 사진을 찍으며 <<himPost "을">> 응원한다.
 			<<elseif $rng gte 11>> /* 10% */
 				<<set $pillory.tenant.genital += 1>><<set $pillory.tenant.ass += 1>>
-				The crowd watch and photograph as a stray dog rapes <<the_pillory_person>>. A <<person2>><<person>> rewards the dog with a <<print either("biscuit.","pat on the head.","sweet.","cream bun.")>>
+				들개가 _ly <<the_pillory_person "을">> 강간하는 동안 군중은 그걸 지켜보며 사진을 찍는다. 어떤 <<person2>><<personPost "이">> 보상으로 <<print either("개에게 비스킷을 준다.","개의 머리를 쓰다듬어준다.","개에게 단 것을 준다.","개에게 크림빵을 준다.")>>
 				<br>
-				The crowd enjoys such a perverted spectacle.
+				군중은 이 변태적인 구경거리를 즐긴다.
 			<<elseif $rng gte 6 and maleChance() gt 0 and (maleChance() lt 100 or $pillory.tenant.person.gender isnot "m")>> /* 5% - with men allowed */
 				<<set $pillory.tenant.ass += 1>><<set $pillory.tenant.face += 1>>
-				<<if $rng % 3 is 0>>A couple of off-duty policemen approach. They make a <<person>> record as they<<else>>Two men approach. Together they<</if>>
-				<<if $pillory.tenant.person.gender is "m">>anally-<<else>>$_ly <</if>>spit-roast <<the_pillory_person>>. The crowd enjoys the spectacle.
+				<<if $rng % 3 is 0>>비번인 남자 경찰 두 명이 다가온다. 그들은 어떤 <<personPost>> 에게 동영상을 찍게 하고 그들은<<else>>두 남자가 다가온다. 그들은 함께<</if>>
+				<<if $pillory.tenant.person.gender is "m">>항문을 써서 <<else>>$_ly <</if>>위와 아래로 <<the_pillory_person "을">> 범한다. 군중들은 이 구경거리를 즐긴다.
 			<<elseif $rng gte 6 and maleChance() lt 100 and (maleChance() gt 0 or $pillory.tenant.person.gender isnot "f")>> /* 5% - with women allowed */
 				<<set $pillory.tenant.ass += 1>><<set $pillory.tenant.face += 1>>
-				<<if $rng % 3 is 0>>A couple of off-duty policewomen approach. They make a <<person>> record as they<<else>>Two women approach. Together they<</if>>
-				<<if $pillory.tenant.person.gender is "m">>anally-<<else>>$_ly <</if>>spit-roast <<the_pillory_person>> with strap-ons. The crowd enjoys the spectacle.
+				<<if $rng % 3 is 0>>비번인 여자 경찰 두 명이 다가온다. 그들은 어떤 <<personPost>> 에게 동영상을 찍게 하고 그들은<<else>>두 여자가 다가온다. 그들은 함께<</if>>
+				<<if $pillory.tenant.person.gender is "m">>항문을 써서 <<else>>$_ly <</if>>위와 아래로 <<the_pillory_person "을">> 페니스 밴드를 찬 채로 범한다. 군중들은 이 구경거리를 즐긴다.
 			<<else>> /* 5% */
 				<<set $pillory.tenant.spank += 1>>
-				A <<person>> walks up to the <<pillory_type>> and spanks <<him>> hard on the ass. The thwack echoes across the street.
+				어떤 <<personPost "이">> <<pillory_type>>에게 다가와서는 엉덩이를 세게 때린다. 철썩 하는 소리가 거리에 울려퍼진다.
 			<</if>>
 		<</if>>
 	<<else>>/* already abused this hour - no action, don't want spamming this scene to accelerate things ridiculously */
-		The people around <<print either("jeer at","laugh at","point at","shout abuse at","taunt","mock","leer at")>>
+		사람들이
 		<<if Time.schoolDay and ((Time.hour gte 7 and Time.hour lte 8) or Time.hour is 15) and $rng lte 34>>
-			the <<pillory_type>>. A group of students from the nearby school pass by, gaping at
-			<<if $pillory.tenant.lowerexposed gte 2 or $pillory.tenant.upperexposed gte 3>>the lewdly exposed prisoner.
+			<<pillory_type "을">> 둘러싸고는 <<print either("야유한다","웃는다","손가락질 한다","욕설을 내뱉는다","놀린다","조롱한다","흘겨본다")>>. 인근 학교의 학생 무리가 지나가며, 넋을 놓고
+			<<if $pillory.tenant.lowerexposed gte 2 or $pillory.tenant.upperexposed gte 3>>음란하게 노출하고 있는 죄수를 쳐다본다.
 				<<if $rng % 3 is 0>>
-				An outraged bystander runs up to the pillory and replaces the <<pillory_type>>'s clothes.
+				격분한 구경꾼이 구속대로 달려가서는 <<pillory_type>>의 옷을 다시 입혀준다.
 				<<set $pillory.tenant.lowerexposed to 0>><<set $pillory.tenant.upperexposed to 0>><</if>>
-			<<else>>the prisoner.
+			<<else>>죄수를 쳐다본다.
 			<</if>>
 		<<elseif Time.dayState isnot "night">>
 			<<if $rng lte 80>>
-				the <<pillory_type>> and <<print either("mutter among themselves.","take photos.","amuse themselves.")>>
+				<<pillory_type "을">> 둘러싸고는 <<print either("야유하며","웃으며","손가락질 하며","욕설을 내뱉으며","놀리며","조롱하며","흘겨보며")>> <<print either("서로 뭔가를 중얼거린다.","사진을 찍는다.","흥겨워한다.")>>
 			<<elseif $rng lte 93>>
-				the <<pillory_type>>. Some get bored and leave.
+				<<pillory_type "을">> 둘러싸고는 <<print either("야유한다","웃는다","손가락질 한다","욕설을 내뱉는다","놀린다","조롱한다","흘겨본다")>>. 몇몇은 질렸는지 떠나간다.
 				<<set $pillory.tenant.crowd -= 1>>
 			<<else>>
-				the <<pillory_type>>. A bus drops some people off nearby. A few join the crowd around the pillory.
+				<<pillory_type "을">> 둘러싸고는 <<print either("야유한다","웃는다","손가락질 한다","욕설을 내뱉는다","놀린다","조롱한다","흘겨본다")>>. 버스 한 대가 근처에서 사람들을 내려준다. 몇몇이 구속대에 몰린 군중에 합류한다.
 				<<set $pillory.tenant.crowd += 1>>
 			<</if>>
 		<<else>>
 			<<if $rng lte 67>>
-				<<if $pillory.tenant.lowerexposed gte 2 and $rng % 4 is 0>>the <<pillory_type>> and take selfies posing around <<his>> exposed, naked ass.
-				<<else>>the <<pillory_type>> and <<print either("mutter darkly.","drink.","throw empty beer cans.","make sinister threats.","take selfies with the prisoner.","tell dirty jokes.")>>
+				<<if $pillory.tenant.lowerexposed gte 2 and $rng % 4 is 0>><<pillory_type "을">> 둘러싸고는 <<print either("야유하며","웃으며","손가락질 하며","욕설을 내뱉으며","놀리며","조롱하며","흘겨보며")>> <<his_ yi>> 노출된, 맨엉덩이 앞에서 포즈를 취하고는 셀카를 찍는다.
+				<<else>><<pillory_type "을">> 둘러싸고는 <<print either("야유하며","웃으며","손가락질 하며","욕설을 내뱉으며","놀리며","조롱하며","흘겨보며")>> <<print either("험악한 말들을 중얼거린다.","술을 마신다.","빈 맥주 캔을 던진다.","험악한 위협을 가한다.","죄수와 함께 셀카를 찍는다.","지저분한 농담을 던진다.")>>
 				<</if>>
 			<<elseif $rng lte 85>>
-				the <<pillory_type>>. Some get tired and leave.
+				<<pillory_type "을">> 둘러싸고는 <<print either("야유한다","웃는다","손가락질 한다","욕설을 내뱉는다","놀린다","조롱한다","흘겨본다")>>. 몇몇은 질렸는지 떠나간다.
 				<<set $pillory.tenant.crowd -= 1>>
 			<<else>>
-				the <<pillory_type>>. A few people passing by join the crowd around the pillory.
+				<<pillory_type "을">> 둘러싸고는 <<print either("야유한다","웃는다","손가락질 한다","욕설을 내뱉는다","놀린다","조롱한다","흘겨본다")>>. 지나가던 몇 사람이 구속대에 몰린 군중에 합류한다.
 				<<set $pillory.tenant.crowd += 1>>
 			<</if>>
 		<</if>>
@@ -4492,18 +4479,18 @@
 	<<set $_endTime to new DateTime($pillory.tenant.endTime)>>
 	<<set $_timeLeft to Time.date.compareWith($_endTime)>>
 	<<if $_timeLeft.days lt 1>>
-		<<He>> will be released
+		<<HePost "은">>
 		<<if $_timeLeft.hours gt 0>>
-			in $_timeLeft.hours <<pluralise $_timeLeft.hours "hour">>.
+			$_timeLeft.hours 시간 뒤에 풀려날 예정이다.
 		<<else>>
-			imminently.
+			즉시 풀려날 예정이다.
 		<</if>>
 	<<else>>
-		<<He>> is scheduled for release <<if $_timeLeft.days is 1>>tomorrow<<else>>in two days<</if>> at
+		<<He_ nun>> <<if $_timeLeft.days is 1>>내일<<else>>이틀 후<</if>>
 		<<switch $_endTime.hour>>
-			<<case 0>>midnight.
-			<<case 12>>noon.
-			<<default>><<ampm $_endTime.hour>>.
+			<<case 0>>자정에 풀려날 예정이다.
+			<<case 12>>정오에 풀려날 예정이다.
+			<<default>><<ampm $_endTime.hour>>에 풀려날 예정이다.
 		<</switch>>
 	<</if>>
 	<<endevent>>
@@ -4512,18 +4499,18 @@
 <<widget "end_npc_pillory">>
 	<<get_pillory_npc>>
 	<<if Time.minute lte 15>>
-		A police officer <<print either("is releasing","has just released","is struggling to release","is about to release")>>
-		<<the_pillory_person>> from the pillory. <<if Weather.precipitation is "rain">><<His>> clothes are see-through from the rain.<<elseif Weather.isFreezing>><<He>> shivers in the cold.<</if>>
+		경찰관 한 사람이 <<print either("지금","바로","끙끙거리며","이제")>>
+		<<the_pillory_person "을">> 구속대에서 풀어준다. <<if Weather.precipitation is "rain">><<His_ yi>> 옷은 비에 젖어 속이 비쳐보인다.<<elseif Weather.isFreezing>><<He_ nun>> 추위에 몸을 떤다.<</if>>
 	<<elseif Time.minute lte 30>>
-		<<The_pillory_person>> staggers away from the pillory with <<print either("tears","defiance","signs of trauma","fury")>> in <<his>> eyes.
-		<<if Weather.precipitation is "rain">><<His>> clothes are see-through from the rain.<</if>>
+		<<The_pillory_person "은">> <<print either("글썽이는","반항적인","트라우마의 징조가 보이는","격분한")>> 눈으로 비틀거리며 구속대에서 멀어져가고 있다.
+		<<if Weather.precipitation is "rain">><<His_ yi>> 옷은 비에 젖어 속이 비쳐보인다.<</if>>
 	<<else>>
-		<<The_pillory_person>> was released and has left. A couple of civil servants clean the pillory.
+		<<The_pillory_person "은">> 풀려나 돌아갔다. 몇몇 공무원들이 구속대를 청소하고 있다.
 	<</if>>
 	<<set _totalSeconds to Time.date.compareWith(new DateTime($pillory.tenant.startTime), true) / TimeConstants.secondsPerHour>>
 	<<set $_hours to _totalSeconds / TimeConstants.secondsPerHour>>
 	<<set $rng += $_hours>>
-	<<if $rng gte 67 or $rng gte 33 and Weather.precipitation is "rain">>A large crowd jeers and shouts.<</if>>
+	<<if $rng gte 67 or $rng gte 33 and Weather.precipitation is "rain">>많은 군중들이 야유하며 소리지르고 있다.<</if>>
 	<br><br>
 	<<clear_pillory>>
 	<<endevent>>
@@ -4554,7 +4541,7 @@
 <<widget "awarenessup">>
 	<<set _awareness to _args[1]>>
 	<<if $awareness gte _args[0]>>
-		<span class="pink">It's nothing you weren't aware of.</span>
+		<span class="pink">이미 다 알고 있던 것이다.</span>
 	<<else>>
 		<<gawareness>><<awareness _awareness>>
 	<</if>>
@@ -4575,72 +4562,73 @@
 					<</link>>
 				</span>
 			<</capture>>
+			|
 		<</for>>
 	</span>
 <</widget>>
 
 <<widget "deskText">>
-	<<if $studyBooks is undefined>>
-		<<set $studyBooks to {}>>
-		<<set $studyBooks.rented to "none">>
-		<<set $studyBooks.stolen to "none">>
-	<</if>>
-	<<set _desk to Furniture.get('desk')>>
-	<<set _chair to Furniture.get('chair')>>
-	<<set _projectOptions to [$scienceproject, $mathsproject].includes("ongoing")>>
-	<<set _bookOptions to ($studyBooks.stolen is 'Raul and Janet' or $studyBooks.rented is 'Raul and Janet' or $studyBooks.stolen is 'Pinch' or $studyBooks.rented is 'Pinch')>>
-	<<set _wardrobe to Furniture.get('wardrobe')>>
-	<<set _playOptions to ($englishPlay is 'ongoing' and $englishPlayRoles.Player isnot 'none')>>
+<<if $studyBooks is undefined>>
+	<<set $studyBooks to {}>>
+	<<set $studyBooks.rented to "none">>
+	<<set $studyBooks.stolen to "none">>
+<</if>>
+<<set _desk to Furniture.get('desk')>>
+<<set _chair to Furniture.get('chair')>>
+<<set _projectOptions to [$scienceproject, $mathsproject].includes("ongoing")>>
+<<set _bookOptions to ($studyBooks.stolen is 'Raul and Janet' or $studyBooks.rented is 'Raul and Janet' or $studyBooks.stolen is 'Pinch' or $studyBooks.rented is 'Pinch')>>
+<<set _wardrobe to Furniture.get('wardrobe')>>
+<<set _playOptions to ($englishPlay is 'ongoing' and $englishPlayRoles.Player isnot 'none')>>
 
-	<<if _projectOptions || _playOptions || _bookOptions || ($christmas_wrap is 1 && $christmas_gift_robin_wrapped isnot 1) || ($christmas_wrap is 1 && $christmas_gift is "clothes_unwrapped")>>
-		<<if _args[0] is "noicon">>
-			Your _desk.name and <<if _chair.name isnot "chair">>_chair.article <</if>>_chair.nameSolo are wedged next to your wardrobe.
-			<br>
-			<<projectoptions>>
-			<<homeStudyOptions>>
-			<<christmas_options>>
-			<br>
-		<</if>>
-	<<else>>
-		<<if _args[0] is "icon">>
-			<br>
-			<<deskchairicon>>Your _desk.name and <<if _chair.name isnot "chair">>_chair.article <</if>>_chair.nameSolo are wedged next to your wardrobe.
-		<</if>>
+<<if _projectOptions || _playOptions || _bookOptions || ($christmas_wrap is 1 && $christmas_gift_robin_wrapped isnot 1) || ($christmas_wrap is 1 && $christmas_gift is "clothes_unwrapped")>>
+	<<if _args[0] is "noicon">>
+		당신의 <<trFurniture _desk.name "name" "과">>_trResult <<trFurniture _chair.name "name" "이">>_trResult 옷장 옆에 끼워 넣어져 있다.
+		<br>
+		<<projectoptions>>
+		<<homeStudyOptions>>
+		<<christmas_options>>
+		<br>
 	<</if>>
+<<else>>
+	<<if _args[0] is "icon">>
+		<br>
+		<<deskchairicon>>당신의 <<trFurniture _desk.name "name" "과">>_trResult <<trFurniture _chair.name "name" "이">>_trResult 옷장 옆에 끼워 넣어져 있다.
+	<</if>>
+<</if>>
 <</widget>>
 
 
 <<widget "tableText">>
-	<<set _table to Furniture.get('table')>>
-	<<set _chair to Furniture.get('chair')>>
-	<<if $pregnancyStats.parasiteDoctorEvents gte 2>>
-		<<if _args[0] is "noicon">>
-			<<if _table>>
-				<br>
-				Your _table.name <<if _chair and _chair.name isnot "chair">>and one of your _chair.name are <<else>>is <</if>> situated next to a wall.
-				<br>
-			<<elseif _chair and _chair.name isnot "chair">>
-				<br>
-				One of your _chair.name is situated next to a wall.
-				<br>
-			<<else>>
-				<br>
-				Your fish tank sits on the floor.
-				<br>
-			<</if>>
-			<<containersLink>>
+<<set _table to Furniture.get('table')>>
+<<set _chair to Furniture.get('chair')>>
+<<if $pregnancyStats.parasiteDoctorEvents gte 2>>
+	<<if _args[0] is "noicon">>
+		<<if _table>>
+			<br>
+			당신의 <<if _chair and _chair.name isnot "chair">><<trFurniture _table.name "name" "과">>_trResult <<trFurniture _chair.name "name">>_trResult 하나가<<else>><<trFurniture _table.name "name" "이">>_trResult<</if>> 벽 옆에 놓여 있다.
+			<br>
+		<<elseif _chair and _chair.name isnot "chair">>
+			<br>
+			당신의 <<trFurniture _chair.name "name">>_trResult 하나가 벽 옆에 놓여 있다.
+			<br>
+		<<else>>
+			<br>
+			당신의 수조가 바닥에 놓여 있다.
+			<br>
 		<</if>>
-	<<else>>
-		<<if _args[0] is "icon">>
-			<<if _table>>
-				<br>
-				<<bedroomtablechairicon>> Your _table.name <<if _chair and _chair.name isnot "chair">>and a _chair.nameSolo are <<else>>is <</if>> situated next to a wall.
-			<<elseif _chair and _chair.name isnot "chair">>
-				<br>
-				<<bedroomtablechairicon>> A second _chair.nameSolo is situated next to a wall.
-			<</if>>
+		<<fishtankicon>><<containersLink>>
+	<</if>>
+<<else>>
+	<<if _args[0] is "icon">>
+		<<if _table>>
+			<br>
+			<<bedroomtablechairicon>> 당신의 <<if _chair and _chair.name isnot "chair">><<trFurniture _table.name "name" "과">>_trResult <<trFurniture _chair.nameSolo "name" "이">>_trResult<<else>><<trFurniture _table.name "name" "이">>_trResult<</if>> 벽 옆에 놓여 있다.
+		<<elseif _chair and _chair.name isnot "chair">>
+			<br>
+			<<bedroomtablechairicon>> 두번째 <<trFurniture _chair.name "name" "이">>_trResult 벽 옆에 놓여 있다.
 		<</if>>
 	<</if>>
+<</if>>
 <</widget>>
 
 <<widget "radiogroup">>
@@ -4681,14 +4669,17 @@
 <</widget>>
 
 <<widget "cheatStart">>
-	<<set $cheatdisable to "f">><<money 500000 "debug">>
+	<<set $cheatdisable to "f">><<set $money to 500000>>
 	<<set $rentmoney to 10000>><<rentmod>>
 	<<set $renttime to 7>><<set $rentday to Time.weekDay>>
 	<<set $rentstage to 1>>
 <</widget>>
 
 <<widget "swim_check">>
-	<<if ($worn.lower.type.includes("swim") or $worn.under_lower.type.includes("swim")) or ($worn.lower.type.includes("naked") and $worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked"))>>
+	<<if ($worn.upper.type.includes("naked") or $worn.upper.type.includes("swim")) and
+	($worn.lower.type.includes("naked") or $worn.lower.type.includes("swim")) and
+	($worn.under_upper.type.includes("naked") or $worn.under_upper.type.includes("swim")) and
+	($worn.under_lower.type.includes("naked") or $worn.under_lower.type.includes("swim"))>>
 		<<set _swim_check to 1>>
 	<</if>>
 <</widget>>
@@ -4711,51 +4702,20 @@
 	<</if>>
 <</widget>>
 
-/* 0: difficulty, 1: "locks"/"target", 2: additional progress */
 <<widget "skulduggeryuse">>
-	<<if _args[0]>>
-		<<set $_difficulty to _args[0]>>
-	<<else>>
-		<<set $_difficulty to ($skulduggerydifficulty + 100)>>
-	<</if>>
-
-	<<if currentSkillValue("skulduggery") lt $_difficulty>>
-		<<skulduggeryskilluse>>
-		<<if _args[2]>>
-			<<skulduggery _args[2]>>
-		<</if>>
-	<<elseif $skulduggerysuccess or _args[1]>>
-		<<if _args[1] is "locks">>
-			<span class="blue">There's nothing more you can learn from locks this simple.</span>
-		<<elseif _args[1] is "target">>
-			<span class="blue">There's nothing more you can learn from such an easy target.</span>
+	<<if _args[0] is true>>
+		<!-- This argument lets us use skulduggery without adding extra linebreaks that make formatting things a nightmare. -->
+		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+			<<combatskulduggeryskilluse>>
 		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
+			<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
 		<</if>>
-		<br><br>
-	<</if>>
-<</widget>>
-
-/* 0: difficulty, 1: "locks"/"target", 2: additional progress */
-<<widget "skulduggeryuseinline">>
-	<<if _args[0]>>
-		<<set $_difficulty to _args[0]>>
 	<<else>>
-		<<set $_difficulty to ($skulduggerydifficulty + 100)>>
-	<</if>>
-
-	<<if currentSkillValue("skulduggery") lt $_difficulty>>
-		<<combatskulduggeryskilluse>>
-		<<if _args[2]>>
-			<<skulduggery _args[2]>>
-		<</if>>
-	<<elseif $skulduggerysuccess or _args[1]>>
-		<<if _args[1] is "locks">>
-			<span class="blue">There's nothing more you can learn from locks this simple.</span>
-		<<elseif _args[1] is "target">>
-			<span class="blue">There's nothing more you can learn from such an easy target.</span>
+		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+			<<skulduggeryskilluse>>
 		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
+			<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
+			<br><br>
 		<</if>>
 	<</if>>
 <</widget>>
@@ -4836,23 +4796,23 @@
 <</widget>>
 
 <<widget "schoolrep_naked">>
-	/* _args[0] is used as an overwrite to perform retroactive school reputation changes. For example, if a video of the player
-	nude circulates. If we just call "schoolrep_naked" when the news breaks and the player is wearing a chasitiy belt right now,
-	but NOT in the video, reputaiton will update incorrectly. Same is true vice versa.
-
-	The intended use-case of _args[0] is by saving a boolean of the status of playerChasity(Hidden) *at the time the video was
-	recorded*, and then input that boolean into _args[0] when the video circulates. Look at my implimentation of $flyover_chaste
-	to see the intended use in action. */
-
-	<<if !playerChastity("hidden") or _args[0] is false>>
+	<<if !playerChastity("hidden")>>
 		<<if $player.penisExist and $player.vaginaExist>>
 			<<schoolrep herm 1>>
-		<<elseif isCrossdressing()>>
+		<<elseif $player.gender isnot $player.gender_appearance and $NudeGenderDC gt 0>>
+			/*increases crossdressing fame if NPCs judge gender based on genitals*/
 			<<schoolrep crossdress 1>>
-		<<elseif $player.sex is $player.gender_appearance and $schoolrep.crossdress gt 0 and !$daily.crossdressingFameReduction and !$weekly.crossdressingFameReduction and random(0,100) gte 100 - ($schoolrep.crossdress * 3)>>
+		<<elseif $player.gender is $player.gender_appearance and $schoolrep.crossdress gt 0 and !$daily.crossdressingFameReduction and !$weekly.crossdressingFameReduction and random(0,100) gte 100 - ($schoolrep.crossdress * 3)>>
 			<<schoolrep crossdress -1>>
 			<<set $daily.crossdressingFameReduction to true>>
 		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "event_trigger">>
+	<<set $danger to random(1, 10000)>>
+	<<if $danger gte (9900 - $allure)>>
+		<<set $event_trigger to 1>>
 	<</if>>
 <</widget>>
 
@@ -4916,7 +4876,6 @@
 	Argument 1 is base amount. You can also use decimals.
 	Argument 2 is variation.
 	Argument 3 is crime.
-	Argument 4 is source. Best to use <<money x>><<printmoney x>> when args 2 and 3 are both false.
 	<<moneyGain 1>> will give £1.00 which is not stolen.
 	<<moneyGain 1 false false>> will give £1.00 which is not stolen.
 	<<moneyGain 1 true>> will give between £0.80 and £1.20 which is not stolen.
@@ -4943,12 +4902,12 @@
 	<<if _args[2]>>
 		<<crimeUp `_money_gain / 100` "thievery">>
 	<</if>>
-	<<money _money_gain `_args[3] ? _args[3] : (_args[2] ? "thievery" : "")`>>
+	<<set $money += _money_gain>>
 <</silently>><<printmoney _money_gain>><</widget>>
 
 /*
 	Used like above, but only shows the money amount, doesn't add money or crime.
-	Use <<crimeUp `_money_gain / 100`>> and <<money _money_gain>> where necessary in links, etc.
+	Use <<crimeUp `_money_gain / 100`>> and <<set $money += _money_gain>> where necessary in links, etc.
 */
 <<widget "moneyGainDisplay">><<silently>>
 	<<if _args[0]>>
@@ -4979,14 +4938,14 @@
 <</silently>><<print $_text_output>><</widget>>
 
 <<widget "sadism">>
-	<<if _args[0] and $sadism lt 1000>>
+	<<if _args[0]>>
 		<<set $sadism += _args[0]>>
 		<<set $sadism to Math.clamp($sadism, 0, 1000)>>
 	<</if>>
 <</widget>>
 
 <<widget "masochism">>
-	<<if _args[0] and $masochism lt 1000>>
+	<<if _args[0]>>
 		<<set $masochism += _args[0]>>
 		<<set $masochism to Math.clamp($masochism, 0, 1000)>>
 	<</if>>
@@ -5077,9 +5036,9 @@
 		<!-- "cum" alternative because cum is a common descriptor -->
 		<<set $_liquids.push("semen")>>
 	<</if>>
-	<<if $_liquids.length is 0>>
+	 <<if $_liquids.length is 0>>
 		<<set $_fail to true>>
-	<</if>>
+	 <</if>>
 
 	<!-- process The Final Argument, if integer - assume amount, else default to 1 -->
 	<<if $_clear>>
@@ -5111,14 +5070,12 @@
 <<widget "semenswallowedstat">>
 	<<if $statFreeze isnot true and _args[0] isnot undefined>>
 		<<set $semenswallowedstat += _args[0]>>
-		<<purity -1>>
 	<</if>>
 <</widget>>
 
 <<widget "animalsemenswallowedstat">>
 	<<if $statFreeze isnot true and _args[0] isnot undefined>>
 		<<set $animalsemenswallowedstat += _args[0]>>
-		<<purity -1>>
 	<</if>>
 <</widget>>
 
@@ -5135,20 +5092,13 @@
 	<<set $worn.genitals to clone(setup.clothes.genitals[0])>>
 	<<run delete V.worn.butt_plug>>
 	<<set $clothingrebuy to 0>>
-	<<if $worn.neck.cursed is 1>>
-		<<set $worn.neck.type.push("broken")>>
-		<<neckruined>>
-	<</if>>
 
 	<<for _bodypart range $parasite.bodyparts>>
 		<<set $parasite[_bodypart] to {}>>
 	<</for>>
-	<<resetEarSlime>>
-	<<parasiteinit>>
 	<<bodyliquid "clear">>
 	<<bodywriting_init>>
 	<<set $player.virginity to {anal:true,oral:true,penile:true,vaginal:true,temple:false,handholding:true,kiss:true}>>
-	<<set $combat to 0>>
 
 	<<set $pain to 0>>
 	<<set $arousal to 0>>
@@ -5184,12 +5134,4 @@
 	<<set $spray to 0>>
 	<<set Skin.color.natural to "light">>
 	<<set Skin.color.tan to 0>>
-	<<set $facevariant to "default">>
-<</widget>>
-
-<<widget "angelBanishAction">>
-	<<set $angelBanish -->> /* Warning: assumes the player has at least 1 banishment charge*/
-
-	<<set _multi to $purity gte 1000 ? 2 : 1>>
-	<<defiance `($purity / 100) * _multi`>>
 <</widget>>

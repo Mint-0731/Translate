@@ -58,14 +58,14 @@ You approach the counter.
 <</if>>
 
 <<if hasSexStat("promiscuity", 3) and !$pubfame.hospital.seduce>>
-	<<link [[Seduce|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<promiscuous2>>
+	<<link [[유혹한다|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<promiscuous2>>
 	<br>
 <</if>>
 <<if !$pubfame.hospital.distract>>
 	<<link [[Distract|Hospital Keycard Distract]]>><<set $pubfame.hospital.distract to 1>><</link>><<skulduggerydifficulty>>
 	<br>
 <</if>>
-<<link [[Back|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+<<link [[뒤로|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
 
 :: Hospital Keycard Seduce
 <<effects>>
@@ -77,8 +77,8 @@ You approach the counter.
 	<<set $seductiondifficulty to 6000>>
 <</if>>
 <<seductioncheck>>
-<<seductionskilluptext>>
-<<seductionskilluse>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span><br><br><</if>><<seductionskilluse>>
 
 You lean on the counter. "This must be such a thankless job," you purr. "Maybe I could show you a good time?"
 <<promiscuity2>>
@@ -105,7 +105,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 	You got <<him>> to drop <<his>> guard. <span class="gold">Now you just need to steal the card from <<him>> during sex.</span>
 	<br><br>
 
-	<<link [[Next|Hospital Keycard Seduce Sex]]>><<set $sexstart to 1>><</link>>
+	<<link [[다음|Hospital Keycard Seduce Sex]]>><<set $sexstart to 1>><</link>>
 <<else>>
 	<<if $NPCList[0].skills.security gte 700>>
 		The <<person>> <span class="red">shakes <<his>> head</span>. "Not on the clock, I can't," <<he>> says. "This isn't a job I want to lose. Is there anything else I can help you with?"
@@ -128,7 +128,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 		<<link [[Distract|Hospital Keycard Distract]]>><<set $pubfame.hospital.distract to 1>><</link>><<skulduggerydifficulty>>
 		<br>
 	<</if>>
-	<<link [[Back|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+	<<link [[뒤로|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
 <</if>>
 
 :: Hospital Keycard Seduce Sex
@@ -157,9 +157,9 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 <<actionsman>>
 
 <<if _combatend or $speechsteal is 1>>
-	<span id="next"><<link [[Next|Hospital Keycard Seduce Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Hospital Keycard Seduce Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Hospital Keycard Seduce Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Hospital Keycard Seduce Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Hospital Keycard Seduce Sex Finish
@@ -195,7 +195,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 			<<endcombat>>
 			<<clotheson>>
 
-			<<link [[Next|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
+			<<link [[다음|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
 		<</if>>
 	<<elseif $NPCList[0].skills.security lte 300>>
 		The <<person>> stretches. "Yeah, that's what I'm talking about. Thanks for the good time. Think I should get back to my job, though."
@@ -214,7 +214,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 		<<endcombat>>
 		<<clotheson>>
 
-		<<link [[Next|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
+		<<link [[다음|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
 	<<else>>
 		The <<person>> lets out a breath. "Thanks for that. That was pretty nice." <<He>> glances at <<his>> watch. "Don't want to keep them waiting, though. I'm scheduled for somewhere else right now."
 		<br><br>
@@ -229,7 +229,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 		<<endcombat>>
 		<<clotheson>>
 
-		<<link [[Next|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
+		<<link [[다음|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
 	You shove the <<person>> against the closet wall. <<He>> crashes into a mop and trips on a bucket, sending <<him>> to the floor. "Agh," <<he>> gasps. "Didn't sign up for this..."
@@ -245,11 +245,11 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 	<<endcombat>>
 	<<clotheson>>
 
-	<<link [[Next|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><</link>>
+	<<link [[다음|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><</link>>
 <<elseif $finish is 1>>
 	<<if $NPCList[0].skills.security gte 700>>
 		<<if $pubfame.status is "done">>
-			The <<person>> smiles. "You want to stop? I'm fine with that." <<He>> gives you a wry grin. <span class="red">"I had a feeling you were only in it for the keycard, anyway."</span>
+			The <<person>> smiles. "You want to stop? I'm fine with that." <<He>> gives you a wry grin. "<span class="red">I had a feeling you were only in it for the keycard, anyway.</span>"
 			<br><br>
 
 			Without warning, <<he>> lunges for you and grabs your arm. "Walk with me," <<he>> says in a cheerful voice betrayed by the vice grip <<hes>> holding you in. "Let me tell you a story." <<He>> pulls you out of the closet and starts dragging you down the hall.
@@ -276,20 +276,20 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 			<<clotheson>>
 			<<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">>
 
-			<<link [[Next|Hospital Foyer]]>><<endevent>><</link>>
+			<<link [[다음|Hospital Foyer]]>><<endevent>><</link>>
 		<</if>>
 	<<elseif $NPCList[0].skills.security lte 300>>
 		<<if $pubfame.status is "done">>
 			The <<person>> sighs. "C'mon, I was so close. Why would you..." <<He>> pauses, and squints at you. <<He>> reaches a hand into <<his>> pocket and gasps. "<span class="red">You little thief!</span> That's why you wanted to bring me here!"
 			<br><br>
 
-			<<He>> lunges for you and grabs your arm, throwing open the door and yanking you through. "You're not getting away," <<he>> growls. "Not after you—"
+			<<He>> lunges for you and grabs your arm, throwing open the door and yanking you through. "You're not getting away," <<he>> growls. "Not after you-"
 			<br><br>
 
-			As soon as <<he>> steps through the door, <span class="green">a <<generatep2>><<person2>><<person>>, the nurse from before, pulls <<him>> off you</span>. "First you slack off, and now you're assaulting people?" <<he>> snarls. "Unbelievable! This is your worst offence yet!"
+			As soon as <<he>> steps through the door, <span class="green">a <<generatep2>><<person2>><<person>>, the nurse from before, pulls <<him>> off you</span>. "First you slack off, and now you're assaulting people?" <<he>> snarls. "Unbelievable! This is your worst offense yet!"
 			<br><br>
 
-			"Get off me!" the <<person1>><<person>> shouts, reaching for you. "That <<girl>> stole my—"
+			"Get off me!" the <<person1>><<person>> shouts, reaching for you. "That <<girl>> stole my-"
 			<br><br>
 
 			"Heard it all before," the <<person2>><<person>> grunts, not letting go of <<person1>><<him>>. "Come on." <<person2>><<He>> roughly pulls the <<person1>><<person>> down the hall.
@@ -302,7 +302,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 			<<clotheson>>
 			<<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">>
 
-			<<link [[Next|Hospital Foyer]]>><<endevent>><</link>>
+			<<link [[다음|Hospital Foyer]]>><<endevent>><</link>>
 		<<else>>
 			The <<person>> sighs. "C'mon, I was so close. Why would you wind me up like that?" <<He>> groans and stands up. "Fine. Guess I'll go back to my job..."
 			<br><br>
@@ -316,11 +316,11 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 			<<clotheson>>
 			<<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">>
 
-			<<link [[Next|Hospital Foyer]]>><<endevent>><</link>>
+			<<link [[다음|Hospital Foyer]]>><<endevent>><</link>>
 		<</if>>
 	<<else>>
 		<<if $pubfame.status is "done">>
-			The <<person>> frowns and untangles from you. "If you say so," <<he>> mutters. "Why would you want to stop, though?" <<He>> pauses, and pats <<his>> pocket. <<His>> eyes narrow. <span class="red">"Oh. That's why."</span>
+			The <<person>> frowns and untangles from you. "If you say so," <<he>> mutters. "Why would you want to stop, though?" <<He>> pauses, and pats <<his>> pocket. <<His>> eyes narrow. "<span class="red">Oh. That's why.</span>"
 			<br><br>
 
 			<<He>> lunges for you and grabs your arm, pulling the door open. "I'll bring you in for stealing, then get back to work," <<he>> says out loud. "Won't take five minutes, I'll be back before my break ends."
@@ -346,11 +346,11 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 			<<clotheson>>
 			<<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">>
 
-			<<link [[Next|Hospital Foyer]]>><<endevent>><</link>>
+			<<link [[다음|Hospital Foyer]]>><<endevent>><</link>>
 		<</if>>
 	<</if>>
 <<else>>
-	The <<person>> suddenly grabs your arm and stands up. "That's why you wanted to do this." <<He>> scowls. "<span class="red">You little thief.</span> Keep those wandering fingers away from me."
+	The <<person>> suddenly grabs your arm and stands up. "That's why you wanted to do this," <<he>> scowls. "<span class="red">You little thief.</span> Keep those wandering fingers away from me."
 	<br><br>
 
 	<<He>> pulls the door open and starts dragging you down the hall. "I'll bring you in for stealing, then get back to work," <<he>> says out loud. "Won't take five minutes, I'll be back before my break ends."
@@ -391,11 +391,10 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 
 	Glancing around to make sure nobody is watching, you tuck behind the counter and search the cabinets. You find a keycard in the top cabinet under the computer.
 	<br><br>
-	<<wearProp "keycard">>
 
 	<<pubfameComplete "hospital">>
 
-	<<link [[Next|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
+	<<link [[다음|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
 <<else>>
 	<<if $speech_attitude is "meek">>
 		"Hi, um," you say. "Could you... check something in the back? I heard someone... breaking in?"
@@ -421,9 +420,9 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 			The <<person>> blinks in confusion, and turns around. You try to reach over the counter, but <<he>> turns back around too fast and you're forced to pull your arm back. "Weird," <<he>> mumbles. "Must've missed it."
 			<br><br>
 
-			<<link [[Seduce|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<skulduggerydifficulty>>
+			<<link [[유혹한다|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<skulduggerydifficulty>>
 			<br>
-			<<link [[Back|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+			<<link [[뒤로|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
 		<<else>>
 			<<set $phase2 to 1>>
 			The <<person>> scowls. "That's it. I've had enough of your troublemaking." Without warning, <span class="red"><<he>> steps around the counter and grabs your arm</span>, marching you down the hall.
@@ -442,9 +441,9 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 		<</if>>
 		<br><br>
 
-		<<link [[Seduce|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>>
+		<<link [[유혹한다|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<skulduggerydifficulty>>
 		<br>
-		<<link [[Back|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+		<<link [[뒤로|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
 	<</if>>
 <</if>>
 
@@ -466,7 +465,7 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 	You run through the foyer, ending up in the street.
 	<br><br>
 
-	<<link [[Next|Nightingale Street]]>><<endevent>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><</link>>
+	<<link [[다음|Nightingale Street]]>><<endevent>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><</link>>
 <<else>>
 	<<if $phase isnot 1>>
 		You try to yank your arm from <<his>> grip, <span class="red">but can't free yourself</span>.
@@ -504,5 +503,5 @@ You lean on the counter. "This must be such a thankless job," you purr. "Maybe I
 	The door slams shut. There's no handle on your side<<if $skulduggery gte 300>>, or any mechanism that could be fiddled with<</if>>.
 	<br><br>
 
-	<<link [[Next|Abduction Hospital]]>><<endevent>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<set $pubfame.hospital.active to 0>><<set $phase to 1>><</link>>
+	<<link [[다음|Abduction Hospital]]>><<endevent>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<set $pubfame.hospital.active to 0>><<set $phase to 1>><</link>>
 <</if>>

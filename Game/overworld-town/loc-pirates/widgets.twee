@@ -27,7 +27,7 @@
 		<<lowerwear 22>>
 		<<upperwear 40>>
 	<<else>>
-		<<if $player.sex is "f" or $player.sex is "m" and $forcedcrossdressingdisable is "f">>
+		<<if $player.gender is "f" or $player.gender is "m" and $forcedcrossdressingdisable is "f">>
 			<<lowerwear 114>>
 		<<else>>
 			<<lowerwear 31>>
@@ -60,14 +60,14 @@
 
 <<widget "pirate_mate_work">>
 	<<if _args[0] is "deck">>
-		<<set $phase to 0>><<wearProp "mop">>
+		<<set $phase to 0>>
 		<<generateRole 0 0 "pirate">><<person1>>
 		A <<person>> shoves a mop in your hand. "Don't just stand there. Get swabbing."
 		<br><br>
 
 		<<link [[Swab the deck (2:00)|Pirate Swab]]>><<endevent>><<pirate_status 1 "mate">><<pass 120>><<tiredness 6>><</link>><<gtiredness>><<grespect "mate">>
 		<br>
-		<<link [[Refuse|Pirate Work Refuse]]>><<handheldon>><</link>>
+		<<link [[거절한다|Pirate Work Refuse]]>><</link>>
 		<br>
 	<<elseif _args[0] is "cabin">>
 		<<set $phase to 1>>
@@ -77,7 +77,7 @@
 
 		<<link [[Clean the cabin (2:00)|Pirate Cabin Clean]]>><<pirate_status 1 "mate">><<pass 120>><<tiredness 6>><</link>><<gtiredness>><<grespect "mate">>
 		<br>
-		<<link [[Refuse|Pirate Work Refuse]]>><</link>>
+		<<link [[거절한다|Pirate Work Refuse]]>><</link>>
 		<br>
 	<<elseif _args[0] is "bilge">>
 		<<set $phase to 2>>
@@ -87,20 +87,20 @@
 
 		<<link [[Plug leaks (2:00)|Pirate Bilge Plug]]>><<pirate_status 1 "mate">><<pass 120>><<tiredness 6>><</link>><<gtiredness>><<grespect "mate">>
 		<br>
-		<<link [[Refuse|Pirate Work Refuse]]>><</link>>
+		<<link [[거절한다|Pirate Work Refuse]]>><</link>>
 		<br>
 	<</if>>
 <</widget>>
 
 <<widget "pirate_mate_work_end_links">>
 	<<if $phase is 0>>
-		<<link [[Next|Pirate Deck]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Pirate Deck]]>><<endevent>><<set $eventskip to 1>><</link>>
 		<br>
 	<<elseif $phase is 1>>
-		<<link [[Next|Pirate Cabin]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Pirate Cabin]]>><<endevent>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <</widget>>
@@ -126,7 +126,7 @@
 		<br><br>
 		<<link [[Do as bid (0:10)|Pirate Scum Deck Rope]]>><<sub 1>><<pass 10>><</link>>
 		<br>
-		<<link [[Refuse|Pirate Scum Deck Rope Refuse]]>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+		<<link [[거절한다|Pirate Scum Deck Rope Refuse]]>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
 		<br>
 		<<link [[Offer to show them the ropes instead (0:10)|Pirate Scum Deck Rope Seduce]]>><<def 1>><<pass 10>><</link>>
 		<br>
@@ -161,7 +161,7 @@
 				The <<person>> doubles down on the humiliation by sitting on your back before you can stand, forcing you down further. <<He>> gives your <<bottom>> a spank, to the amusement of the crew.<<gpain>><<gtrauma>><<gstress>><<pain 4>><<trauma 6>><<stress 6>>
 				<br><br>
 
-				<<link [[Endure|Pirate Scum Deck Mop Endure]]>><<sub 1>><<arousal 1500>><</link>><<garousal>>
+				<<link [[Endure|Pirate Scum Deck Mop Endure]]>><<sub 1>><</link>><<garousal>>
 				<br>
 				<<link [[Threaten|Pirate Scum Deck Mop Threaten]]>><<def 1>><<pain 4>><<stress 6>><<pirate_status 1 "scum">><</link>><<gpain>><<gstress>><<grespect "scum">>
 			<</if>>
@@ -177,7 +177,7 @@
 		<br>
 		<<link [[Take the lead|Pirate Scum Deck Shanty Lead]]>><</link>><<if $harpy gte 6>><<harpy>><<else>><<englishdifficulty 1 1000>><</if>>
 		<br>
-		<<link [[Ignore|Pirate Scum Deck Shanty Ignore]]>><</link>>
+		<<link [[무시한다|Pirate Scum Deck Shanty Ignore]]>><</link>>
 		<br>
 	<</addinlineevent>>
 	<<runeventpool>>
@@ -191,7 +191,7 @@
 		<br><br>
 		<<link [[Do as bid|Pirate Scum Cabin Kiss]]>><<sub 1>><</link>><<kissvirginitywarning>>
 		<br>
-		<<link [[Ignore|Pirate Scum Cabin Ignore]]>><</link>>
+		<<link [[무시한다|Pirate Scum Cabin Ignore]]>><</link>>
 		<br>
 		<<link [[Insult|Pirate Scum Cabin Insult]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect>>
 	<</addinlineevent>>
@@ -213,15 +213,19 @@
 			"Nice <<breasts>>," laughs a <<person>>, pulling a phone from <<his>> pocket. <<covered>> "Give us a better look."<<gstress>><<stress 6>>
 			<br><br>
 
-			<<link [[Refuse|Pirate Scum Cabin Breast Refuse]]>><<def 1>><<pirate_status 1 "scum">><<pain 4>><</link>><<gpain>><<grespect "scum">>
+			<<link [[거절한다|Pirate Scum Cabin Breast Refuse]]>><<def 1>><<pirate_status 1 "scum">><<pain 4>><</link>><<gpain>><<grespect "scum">>
 			<br>
 			<<link [[Relent|Pirate Scum Cabin Show]]>><<sub 1>><<pirate_status -1>><<trauma 6>><</link>><<lrespect>><<gtrauma>>
 			<br>
 		<<else>>
-			"Take your top off," says a <<person>>. "I wanna see your <<if $player.gender_appearance is "m">>chest<<else>>breasts<</if>>."
+			<<if $player.gender_appearance is "m">>
+				"Take your top off," says a <<person>>. "I wanna see your chest."
+			<<else>>
+				"Take your top off," says a <<person>>. "I wanna see your breasts."
+			<</if>>
 			<br><br>
 
-			<<link [[Refuse|Pirate Scum Cabin Refuse]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+			<<link [[거절한다|Pirate Scum Cabin Refuse]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
 			<br>
 			<<set $skulduggerydifficulty to 600>>
 			<<link [[Trick|Pirate Scum Cabin Trick]]>><<def 1>><</link>><<skulduggerydifficulty>>
@@ -265,7 +269,7 @@
 			In your inebriated state, you're too clumsy to get away.
 			<br><br>
 
-			<<link [[Next|Pirate Scum Bilge Pair Rape]]>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Pirate Scum Bilge Pair Rape]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<<else>>
 			<<link [[Endure|Pirate Scum Bilge Endure]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>>
@@ -292,7 +296,7 @@
 	<<addinlineevent "pirate_scum_bilge_3" 1>>
 		You hear the ship groan around you. It almost sounds alive.<<gstress>><<stress 6>>
 		<br><br>
-		<<link [[Next|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
 		<br>
 	<</addinlineevent>>
 
@@ -305,7 +309,7 @@
 			<<link [[Slap|Pirate Scum Bilge Slap]]>><<pirate_status 1 "scum">><</link>><<promiscuous2>><<grespect "scum">>
 			<br>
 		<</if>>
-		<<link [[Ignore|Pirate Scum Bilge Slap Ignore]]>><</link>>
+		<<link [[무시한다|Pirate Scum Bilge Slap Ignore]]>><</link>>
 	<</addinlineevent>>
 	<<runeventpool>>
 <</widget>>
@@ -313,7 +317,7 @@
 <<widget "passoutpirates">>
 	You've pushed yourself too much. Everything fades to black.
 	<br><br>
-	<<link [[Next|Pirate Passout]]>><</link>>
+	<<link [[다음|Pirate Passout]]>><</link>>
 	<br>
 	<<pass 1 hour>>
 	<<trauma 6>><<passout>>

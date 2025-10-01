@@ -6,10 +6,10 @@
 The <<person1>><<person>> leads you through the station, until you emerge from a door at the side of the building.
 <br><br>
 
-"Remember, <<girl>>." <<He>> grins. "Every day. Starting tomorrow. Until your crimes are paid for." <<He>> closes the door.
+"Remember <<girl>>," <<he>> grins. "Every day. Starting tomorrow. Until your crimes are paid for." <<He>> closes the door.
 <br><br>
 
-<<link [[Next|Barb Street]]>><<endevent>><</link>>
+<<link [[다음|Barb Street]]>><<endevent>><</link>>
 <br>
 
 
@@ -43,7 +43,7 @@ You enter a room lined with benches. A number of rough-looking <<people>> sit al
 	You shuffle through with the other criminals. There's a large van inside. The <<person>> marches you onboard.
 	<br><br>
 
-	<<link [[Next|Police Community Clean]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
+	<<link [[다음|Police Community Clean]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
 	<br>
 <<elseif $rng is 2>>
 	<<generate2>>
@@ -53,7 +53,7 @@ You enter a room lined with benches. A number of rough-looking <<people>> sit al
 	You shuffle through with the other criminals. There's a large van inside. The <<person>> marches you onboard.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
+	<<link [[다음|Police Community Wasteland]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
 	<br>
 <<else>>
 	"Right, you scum," <<he>> says. "Today we'll be cleaning graffiti off alley walls. I bet you lot are responsible for some of it anyway. You'll carry your own bucket and brush." <<He>> opens a set of double doors behind <<him>>. "Let's move out."
@@ -62,7 +62,7 @@ You enter a room lined with benches. A number of rough-looking <<people>> sit al
 	You shuffle through with the other criminals, and emerge outside.
 	<br><br>
 
-	<<link [[Next|Police Community Graffiti]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
+	<<link [[다음|Police Community Graffiti]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
 	<br>
 <</if>>
 
@@ -74,22 +74,22 @@ You enter a room lined with benches. A number of rough-looking <<people>> sit al
 	You shuffle through with the other criminals, and emerge outside
 	<br><br>
 
-	<<link [[Next|Police Community Paint]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
+	<<link [[다음|Police Community Paint]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
 	<br>
 <<else>>
-	"Right, you scum," <<he>> says. "Today we'll be tidying up a forest trail. Cutting back the foliage." <<He>> opens a set of double doors behind <<him>>. "Let's move out."
+	"Right, you scum," <<He>> says. "Today we'll be tidying up a forest trail. Cutting back the foliage." <<He>> opens a set of double doors behind <<him>>. "Let's move out."
 	<br><br>
 
 	You shuffle through with the other criminals, and emerge outside.
 	<br><br>
-	<<link [[Next|Police Community Forest]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
+	<<link [[다음|Police Community Forest]]>><<set $community_service -= 1>><<set $community_service_done to 1>><<pass 20>><</link>>
 	<br>
 <</if>>
 */
 
 
 :: Police Community Graffiti
-<<set $location to "alley">><<set $bus to "commercial">><<effects>><<wearProp "bucket">>
+<<set $location to "alley">><<set $bus to "commercial">><<effects>>
 
 The <<person>> leads you and the other criminals across the road, and into the maze of commercial alleyways. <<He>> stops you beside a concrete wall. It's covered with graffiti.
 <br><br>
@@ -100,7 +100,7 @@ The <<person>> leads you and the other criminals across the road, and into the m
 Removing the paint with just water and a coarse brush is difficult. The <<person>> observes while marching up and down the alley.
 <br><br>
 
-<<link [[Next|Police Community Graffiti 2]]>><</link>>
+<<link [[다음|Police Community Graffiti 2]]>><</link>>
 <br>
 
 
@@ -120,15 +120,15 @@ Removing the paint with just water and a coarse brush is difficult. The <<person
 	<<else>>
 		They both walk over.
 	<</if>>
-	The officer carries a pair of cuffs. "Hold out your hands, <<girl>>," <<person1>><<he>> says. "This fine citizen wants your help inside. The cuffs are just a precaution." The <<person2>><<person>> smiles.
+	The officer carries a pair of cuffs. "Hold out your hands <<girl>>," <<person1>><<he>> says. "This fine citizen wants your help inside. The cuffs are just a precaution." The <<person2>><<person>> smiles.
 	<br><br>
 
-	<<link [[Hold out your hands|Police Community Graffiti Hold]]>><<handheldon>><<sub 1>><</link>>
+	<<link [[Hold out your hands|Police Community Graffiti Hold]]>><<sub 1>><</link>>
 	<br>
-	<<link [[Refuse|Police Community Graffiti Hold Refuse]]>><<handheldon>><<def 1>><</link>>
+	<<link [[거절한다|Police Community Graffiti Hold Refuse]]>><<def 1>><</link>>
 	<br>
 	<<if currentSkillValue('skulduggery') gte 400 and $awareness gte 200>>
-		<<link [[Accuse|Police Community Graffiti Accuse]]>><<handheldon>><<def 1>><</link>>
+		<<link [[Accuse|Police Community Graffiti Accuse]]>><<def 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $police_graffiti gte 2 and random(1, 2) is 2>>
@@ -148,15 +148,15 @@ Removing the paint with just water and a coarse brush is difficult. The <<person
 	<br><br>
 
 	<<if currentSkillValue('skulduggery') gte 400 and $awareness gte 200>>
-		<<link [[Intervene|Police Community Graffiti Intervene]]>><<handheldon>><<famegood 10>><</link>>
+		<<link [[개입한다|Police Community Graffiti Intervene]]>><<famegood 10>><</link>>
 		<br>
-		<<link [[Keep working|Police Community Graffiti Intervene Work]]>><<handheldon>><</link>>
+		<<link [[Keep working|Police Community Graffiti Intervene Work]]>><</link>>
 		<br>
 	<<else>>
 		The <<person2>><<person>> grasps the <<person3>><<person>> by the cuffs, and leads <<him>> into the building via a flight of stone steps.
 		<br><br>
 
-		<<link [[Next|Police Community Graffiti End]]>><<handheldon>><</link>>
+		<<link [[다음|Police Community Graffiti End]]>><</link>>
 		<br>
 	<</if>>
 <<elseif $police_graffiti gte 1 and random(1, 2) is 2>>
@@ -169,18 +169,18 @@ Removing the paint with just water and a coarse brush is difficult. The <<person
 	<<if $bodywritingLvl gte 2>>
 		They approach you. "You've earned a break," the officer says. "This is the owner of the establishment. <<Hes>> agreed to help with your rehabilitation."
 		<br><br>
-		"Come here, <<girl>>," the <<person>> says, <span class="pink">pulling the lid off a permanent marker.</span>
+		"Come here <<girl>>," the <<person>> says, <span class="pink">pulling the lid off a permanent marker.</span>
 		<br><br>
 
-		<<link [[Do as bid|Police Community Graffiti Pen]]>><<handheldon>><<sub 1>><</link>><<if !$worn.face.type.includes("mask")>><<gbodywriting>><</if>>
+		<<link [[Do as bid|Police Community Graffiti Pen]]>><<sub 1>><</link>><<if !$worn.face.type.includes("mask")>><<gbodywriting>><</if>>
 		<br>
-		<<link [[Refuse|Police Community Graffiti Refuse]]>><<handheldon>><<def 1>><</link>>
+		<<link [[거절한다|Police Community Graffiti Refuse]]>><<def 1>><</link>>
 		<br>
 	<<else>>
 		They don't approach.
 		<br><br>
 
-		<<link [[Next|Police Community Graffiti End]]>><<handheldon>><</link>>
+		<<link [[다음|Police Community Graffiti End]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -190,7 +190,7 @@ Removing the paint with just water and a coarse brush is difficult. The <<person
 	<<generate2>><<person2>>
 	A <<person>> enters the alley, and chats with the police officer. <<He>> leers at you as you work, but doesn't approach.
 	<br><br>
-	<<link [[Next|Police Community Graffiti End]]>><<handheldon>><</link>>
+	<<link [[다음|Police Community Graffiti End]]>><</link>>
 	<br>
 <</if>>
 
@@ -213,7 +213,7 @@ You enter a small room, lit by a single unshaded light in the middle. A thick wo
 <<loadNPC 0 "community_citizen">>
 
 
-<<link [[Next|Police Community Graffiti Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Police Community Graffiti Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 
@@ -237,9 +237,9 @@ You enter a small room, lit by a single unshaded light in the middle. A thick wo
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Police Community Graffiti Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Police Community Graffiti Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Police Community Graffiti Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Police Community Graffiti Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Police Community Graffiti Rape Finish
@@ -264,7 +264,7 @@ You enter a small room, lit by a single unshaded light in the middle. A thick wo
 	<br>
 	"Right." The officer turns to you. "Get back to work."
 	<br><br>
-	<<link [[Next|Police Community Graffiti End]]>><</link>>
+	<<link [[다음|Police Community Graffiti End]]>><</link>>
 	<br>
 
 <<else>>
@@ -287,13 +287,13 @@ You enter a small room, lit by a single unshaded light in the middle. A thick wo
 	<br>
 	"The <<bitch>> damn near broke my arm."
 	<br><br>
-	The officer grabs your cuffs as you pass, and unlocks them.<<unbind>> "Assaulting a member of the public," <<person1>><<he>> says. "<span class="red">That's an extra day of community service,</span> at least. I'll have to inform the station. Get back to work."<<crimeUp 100 "assault">><<crime "assault">>
+	The officer grabs your cuffs as you pass, and unlocks them.<<unbind>> "Assaulting a member of the public," <<person1>><<he>> says. <span class="red">"That's an extra day of community service,</span> at least. I'll have to inform the station. Get back to work."<<crimeUp 100 "assault">><<crime "assault">>
 	<br><br>
 
 	You return to the wall. The other criminals look amused, at least.
 	<br><br>
 
-	<<link [[Next|Police Community Graffiti End]]>><</link>>
+	<<link [[다음|Police Community Graffiti End]]>><</link>>
 	<br>
 
 <</if>>
@@ -316,7 +316,7 @@ You enter a small room, lit by a single unshaded light in the middle. A thick wo
 <br><br>
 <<set $community_service += 1>>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 
@@ -342,7 +342,7 @@ The officer releases the baton. "There is no money," <<he>> says, <<his>> voice 
 <<He>> walks away, the <<person2>><<person>> close behind.
 <br><br>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 :: Police Community Graffiti Intervene
@@ -369,7 +369,7 @@ The <<person2>><<person>> tries to grasp the <<person3>><<person>> by the cuffs,
 The officer releases the baton. "There is no money," <<he>> says, <<his>> voice now calmer. <<He>> removes the cuffs from the <<person3>><<person>>. "There'd be a problem if there was, wouldn't there?"
 <br><br>
 
-<<link [[Next|Police Community Graffiti Intervene 2]]>><</link>>
+<<link [[다음|Police Community Graffiti Intervene 2]]>><</link>>
 <br>
 
 :: Police Community Graffiti Intervene 2
@@ -381,7 +381,7 @@ The officer walks away, the <<person2>><<person>> close behind.
 "Thank you," the <<person3>><<person>> whispers once they're gone. "Last time was hell."
 <br><br>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 :: Police Community Graffiti Intervene Work
@@ -390,7 +390,7 @@ The officer walks away, the <<person2>><<person>> close behind.
 The <<person2>><<person>> grasps the <<person3>><<person>> by the cuffs, and leads <<him>> into the building via a flight of stone steps.
 <br><br>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 :: Police Community Graffiti Pen
@@ -405,7 +405,7 @@ You step closer.<<person2>>
 
 		<<link [[Take it off|Police Community Graffiti Take]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>><<gbodywriting>>
 		<br>
-		<<link [[Refuse|Police Community Graffiti Refuse]]>><<def 1>><</link>>
+		<<link [[거절한다|Police Community Graffiti Refuse]]>><<def 1>><</link>>
 		<br>
 	<<else>>
 		The <<person>> writes on your left cheek. <<bodywriting_criminal "left_cheek" marker>>
@@ -413,7 +413,7 @@ You step closer.<<person2>>
 		The officer smiles as <<he>> watches. "Now thank the good citizen for helping you pay your debt."
 		<br><br>
 
-		<<link [[Thank|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+		<<link [[감사한다|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
 		<br>
 		<<link [[Just get back to work|Police Community Graffiti Work]]>><<def 1>><</link>>
 		<br>
@@ -426,7 +426,7 @@ You step closer.<<person2>>
 
 		<<link [[Take it off|Police Community Graffiti Take]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>><<gbodywriting>>
 		<br>
-		<<link [[Refuse|Police Community Graffiti Refuse]]>><<def 1>><</link>>
+		<<link [[거절한다|Police Community Graffiti Refuse]]>><<def 1>><</link>>
 		<br>
 	<<else>>
 		The <<person>> writes on your right cheek. <<bodywriting_criminal "right_cheek" marker>>
@@ -434,7 +434,7 @@ You step closer.<<person2>>
 		The officer smiles as <<he>> watches. "Now thank the good citizen for helping you pay your debt."
 		<br><br>
 
-		<<link [[Thank|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+		<<link [[감사한다|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
 		<br>
 		<<link [[Just get back to work|Police Community Graffiti Work]]>><<def 1>><</link>>
 		<br>
@@ -445,7 +445,7 @@ You step closer.<<person2>>
 		The officer smiles as <<he>> watches. "Now thank the good citizen for helping you pay your debt."
 		<br><br>
 
-		<<link [[Thank|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+		<<link [[감사한다|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
 		<br>
 		<<link [[Just get back to work|Police Community Graffiti Work]]>><<def 1>><</link>>
 		<br>
@@ -455,7 +455,7 @@ You step closer.<<person2>>
 	"You heard <<him>>," the officer says. "Get back to work."
 	<br><br>
 
-	<<link [[Next|Police Community Graffiti End]]>><</link>>
+	<<link [[다음|Police Community Graffiti End]]>><</link>>
 	<br>
 <</if>>
 
@@ -475,7 +475,7 @@ You remove your mask.
 The officer smiles as <<he>> watches. "Now thank the good citizen for helping you pay your debt."
 <br><br>
 
-<<link [[Thank|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+<<link [[감사한다|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
 <br>
 <<link [[Just get back to work|Police Community Graffiti Work]]>><<def 1>><</link>>
 <br>
@@ -495,18 +495,18 @@ The officer smiles as <<he>> watches. "Now thank the good citizen for helping yo
 "Good <<girl>>," the officer says. "Now get back to work."
 <br><br>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 :: Police Community Graffiti Work
 <<effects>>
 
-The <<person2>><<person>> harrumphs as you turn away. "No gratitude."
+The <<person2>><<person>> hurrumphs as you turn away. "No gratitude."
 <br><br>
-"Can't expect much from this lot," the officer replies. "As I was saying, throw a few more bob in and—" <<His>> voice disappears behind the din of the traffic.
+"Can't expect much from this lot," the officer replies. "As I was saying, throw a few more bob in and-" <<his>> voice disappears behind the din of the traffic.
 <br><br>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 :: Police Community Graffiti Refuse
@@ -527,7 +527,7 @@ The <<person2>><<person>> harrumphs as you turn away. "No gratitude."
 The <<person>> looks disappointed as <<he>> puts the lid back on the pen.
 <br><br>
 
-<<link [[Next|Police Community Graffiti End]]>><</link>>
+<<link [[다음|Police Community Graffiti End]]>><</link>>
 <br>
 
 :: Police Community Graffiti End
@@ -538,7 +538,7 @@ The <<person>> looks disappointed as <<he>> puts the lid back on the pen.
 
 You follow the officer with the other criminals, until you arrive back at the police station.
 <br><br>
-<<link [[Next|Police Community End]]>><<pass 20>><<endevent>><</link>>
+<<link [[다음|Police Community End]]>><<pass 20>><<endevent>><</link>>
 <br>
 
 
@@ -549,9 +549,9 @@ You follow the officer with the other criminals, until you arrive back at the po
 The van rumbles into life. The <<person>> sat beside you rests <<his>> hand on your thigh.
 <br><br>
 
-<<link [[Get angry|Police Community Wasteland Angry]]>><<trauma -6>><</link>><<ltrauma>>
+<<link [[화를 낸다|Police Community Wasteland Angry]]>><<trauma -6>><</link>><<ltrauma>>
 <br>
-<<link [[Ignore|Police Community Wasteland Ignore]]>><<stress 6>><<arousal 600>><</link>><<gstress>><<garousal>>
+<<link [[무시한다|Police Community Wasteland Ignore]]>><<stress 6>><<arousal 600>><</link>><<gstress>><<garousal>>
 <br>
 <<if hasSexStat("promiscuity", 2)>>
 	<<link [[Grope back|Police Community Wasteland Grope]]>><</link>><<promiscuous2>>
@@ -570,7 +570,7 @@ You hear a thwump from the front of the vehicle. "No messing around back there,"
 The van rumbles to a halt, and the doors open.
 <br><br>
 
-<<link [[Next|Police Community Wasteland 2]]>><</link>>
+<<link [[다음|Police Community Wasteland 2]]>><</link>>
 <br>
 
 
@@ -588,7 +588,7 @@ You ignore the <<persons>> creeping hand.
 The van rumbles to a halt, and the doors open.
 <br><br>
 
-<<link [[Next|Police Community Wasteland 2]]>><</link>>
+<<link [[다음|Police Community Wasteland 2]]>><</link>>
 <br>
 
 :: Police Community Wasteland Grope
@@ -600,7 +600,7 @@ You rest your hand on the <<persons>> thigh in return, and have a cheeky squeeze
 The van rumbles to a halt, and the doors open.
 <br><br>
 
-<<link [[Next|Police Community Wasteland 2]]>><</link>>
+<<link [[다음|Police Community Wasteland 2]]>><</link>>
 <br>
 
 :: Police Community Wasteland 2
@@ -611,14 +611,13 @@ You line with the other criminals beside the road, in front of a hill. Brown bri
 
 <<person1>>
 "Right, you scum," the police officer says, dumping a box of gardening tools at <<his>> feet. "Today we're clearing these shrubs. Keeping them away from the road. Think you can manage that?"
-<<if pcAreArmsBound("any")>>
+<<if $leftarm is "bound" or $rightarm is "bound">>
 	<<He>> removes the bindings around your arms.
 	<<unbind>>
 <</if>>
 <br><br>
 
 <<if $police_wasteland gte 2 and random(1, 2) is 2 and $fame.scrap gte 100>>
-	<<wearProp "pickaxe">>
 	<<if $police_wasteland is 2>>
 		<<set $police_wasteland to 3>>
 		You queue in front of the officer as <<he>> hands out tools. <<He>> sizes you up. "I think you can handle this," <<he>> says, handing you an axe. "Go careful now."
@@ -645,7 +644,6 @@ You line with the other criminals beside the road, in front of a hill. Brown bri
 	<<link [[Threaten|Police Community Wasteland Threaten]]>><<def 1>><</link>><<skulduggerydifficulty>>
 	<br>
 <<elseif $police_wasteland gte 1 and random(1, 2) is 1>>
-	<<wearProp "shovel">>
 	<<if $police_wasteland is 1>>
 		<<set $police_wasteland to 2>>
 		You queue in front of the officer as <<he>> hands out tools. <<He>> sizes you up. "Let's try you with this," <<he>> says, handing you a shovel. "Some of these roots run deep."
@@ -660,13 +658,12 @@ You line with the other criminals beside the road, in front of a hill. Brown bri
 	You bend to tug a briar by its roots. "Nice," says the <<person2>><<person>> from the van. <<He>> delivers a quick smack to your rear.<<gstress>><<gpain>><<stress 6>><<pain 4>>
 	<br><br>
 
-	<<link [[Ignore|Police Community Wasteland Ignore 2]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+	<<link [[무시한다|Police Community Wasteland Ignore 2]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
 	<br>
 	<<set $skulduggerydifficulty to 400>>
 	<<link [[Whack|Police Community Wasteland Whack]]>><<def 1>><</link>><<skulduggerydifficulty>>
 	<br>
 <<else>>
-	<<wearProp "shears">>
 	<<if $police_wasteland is undefined>>
 		<<set $police_wasteland to 1>>
 		You queue in front of the officer as <<he>> hands out tools. <<He>> sizes you up. "This your first time? Stick with these." <<He>> gives you a pair of shears.
@@ -678,7 +675,7 @@ You line with the other criminals beside the road, in front of a hill. Brown bri
 	<br><br>
 
 	<<if $worn.upper.name isnot "naked" and random(1, 2) is 2>>
-		Your $worn.upper.name <<= $worn.upper.plural ? "get" : "gets">> caught on the thorns. <<= $worn.upper.plural ? "They" : "It">>'d take a minute to remove, and the officer might see it as slacking.
+		Your $worn.upper.name gets caught on the thorns. It'd take a minute to remove, and the officer might see it as slacking.
 		<br><br>
 
 		<<link [[Remove carefully|Police Community Wasteland Careful]]>><</link>><<difficulty 50>>
@@ -686,7 +683,7 @@ You line with the other criminals beside the road, in front of a hill. Brown bri
 		<<link [[Tear free|Police Community Wasteland Upper Tear]]>><</link>>
 		<br>
 	<<elseif $worn.lower.name isnot "naked" and random(1, 2) is 2>>
-		Your $worn.lower.name <<= $worn.lower.plural ? "get" : "gets">> caught on the thorns. <<= $worn.lower.plural ? "They" : "It">>'d take a minute to remove, and the officer might see it as slacking.
+		Your $worn.lower.name gets caught on the thorns. It'd take a minute to remove, and the officer might see it as slacking.
 		<br><br>
 
 		<<link [[Remove carefully|Police Community Wasteland Careful]]>><</link>><<difficulty 50>>
@@ -697,7 +694,7 @@ You line with the other criminals beside the road, in front of a hill. Brown bri
 		You scratch your arm on the thorns, but the process is otherwise uneventful, if arduous.<<gpain>><<gtiredness>><<pain 4>><<tiredness 6>>
 		<br><br>
 
-		<<link [[Next|Police Community Wasteland End]]>><</link>>
+		<<link [[다음|Police Community Wasteland End]]>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -716,7 +713,7 @@ The <<person>> pulls away from you. "I'll have to catch you at Briar's sometime.
 The rest of the process is uneventful.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 :: Police Community Wasteland Threaten
@@ -726,7 +723,7 @@ You twist from the <<persons>> grasp, and stand apart with your axe raised.
 <<if $speech_attitude is "meek">>
 	"St-stay back," you say. "I-I'm not harmless."
 <<elseif $speech_attitude is "bratty">>
-	"Touch me again," you say, "and you'll lose a hand."
+	"Touch me again," you say. "And you'll lose a hand."
 <<else>>
 	"Back off," you say. "I'm sick of perverts like you."
 <</if>>
@@ -735,7 +732,7 @@ The other criminals laugh, but the <<person>> raises <<his>> hands and steps awa
 
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
-	"Easy <<girl>>," <<he>> says. <span class="green"><<He>> sounds wary.</span> "I just meant you're a ho—" <<He>> trips over a root, and shouts as <<he>> falls into a briar. More laughter.
+	"Easy <<girl>>," <<he>> says. <span class="green"><<He>> sounds wary.</span> "I just meant you're a ho-" <<He>> trips over a root, and shouts as <<he>> falls into a briar. More laughter.
 	<br><br>
 
 	<<if $hallucinations gte 2>>
@@ -744,20 +741,20 @@ The other criminals laugh, but the <<person>> raises <<his>> hands and steps awa
 		<br><br>
 		<<link [[Rescue|Police Community Wasteland Rescue]]>><</link>><<willpowerdifficulty 1 1000>>
 		<br>
-		<<link [[Call for help|Police Community Wasteland Help]]>><</link>>
+		<<link [[도움을 요청한다|Police Community Wasteland Help]]>><</link>>
 		<br>
 	<<else>>
 		The police officer rushes over to investigate, <span class="green">but you're already back to work.</span><<ltrauma>><<trauma -6>>
 		<br><br>
 		<<skulduggeryuse>>
 		<<person1>>
-		<<link [[Next|Police Community Wasteland End]]>><</link>>
+		<<link [[다음|Police Community Wasteland End]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
 	<br><br>
 	<<person1>>
-	The police officer rushes over to investigate, <span class="red">and finds you still wielding the axe as a weapon.</span> <<person1>>"Unacceptable!" <<he>> shouts. "<span class="red">That's another day of community service,</span> and I'll be informing the station of this."<<crime "assault">><<crimeUp 100 "assault">><<set $community_service += 1>>
+	The police officer rushes over to investigate, <span class="red">and finds you still wielding the axe as a weapon.</span> <<person1>>"Unacceptable!" <<he>> shouts. <span class="red">"That's another day of community service,</span> and I'll be informing the station of this."<<crime "assault">><<crimeUp 100 "assault">><<set $community_service += 1>>
 	<br><br>
 
 	<<skulduggeryuse>>
@@ -765,7 +762,7 @@ The other criminals laugh, but the <<person>> raises <<his>> hands and steps awa
 	The rest of the process is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland End]]>><</link>>
+	<<link [[다음|Police Community Wasteland End]]>><</link>>
 	<br>
 
 
@@ -785,7 +782,7 @@ You hack at the tangle, careful not to injure the <<person>>. A branch launches 
 	Its branches ruined, the plant releases its grip on the <<person3>><<person>>. <<He>> struggles to <<his>> feet, then stumbles and collapses several feet away, panting.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland Rescue 2]]>><</link>>
+	<<link [[다음|Police Community Wasteland Rescue 2]]>><</link>>
 	<br>
 <<else>>
 	winds around the handle of your axe, <span class="red">and pulls it from your grip.</span> The other criminals watch in mute horror as the axe, and the <<person>>, disappear into the vegetation.<<gtrauma>><<gstress>><<ggwillpower>><<willpower 6>>
@@ -797,7 +794,7 @@ You hack at the tangle, careful not to injure the <<person>>. A branch launches 
 	The rest of the process is uneventful. Everyone keeps the briars at arm's reach.
 	<br><br>
 	<<person1>>
-	<<link [[Next|Police Community Wasteland End]]>><</link>>
+	<<link [[다음|Police Community Wasteland End]]>><</link>>
 	<br>
 <</if>>
 
@@ -809,16 +806,16 @@ You hack at the tangle, careful not to injure the <<person>>. A branch launches 
 <br><br>
 
 <<person1>>
-"Sleeping on the job, are we?" the officer says. "That's another day's service for you."
+"Sleeping on the job are we?" the officer says. "That's another day's service for you."
 <br>
-"B-but the plants attacked—"
+"B-but the plants attacked-"
 <br>
 "The plants what?" the officer spits. "Are you messing me around, or should I give the asylum a call?"
 <br><br>
 No one brings it up again, and the rest of the event is uneventful. Everyone keeps the briars at arm's reach.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 :: Police Community Wasteland Help
@@ -832,7 +829,7 @@ You call for the police officer, who arrives in time to see the <<persons>> feet
 The rest of the process is uneventful. Everyone keeps the plants at arm's reach.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 
@@ -845,7 +842,7 @@ You ignore the <<person2>><<person>>. <<He>> glances at the police officer, and 
 The rest of the process is uneventful, if arduous.<<gtiredness>><<tiredness 6>>
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 :: Police Community Wasteland Whack
@@ -865,7 +862,7 @@ You bolt upright, and whack the <<person>> across the chest with your shovel. <<
 
 <<else>>
 	<<person1>>
-	The police officer rushes over to investigate, <span class="red">and finds you still wielding the shovel like a weapon.</span> <<person1>>"Unacceptable!" <<he>> shouts. "<span class="red">That's another day of community service,</span> and I'll be informing the station of this."<<crime "assault">><<crimeUp 100 "assault">><<set $community_service += 1>>
+	The police officer rushes over to investigate, <span class="red">and finds you still wielding the shovel like a weapon.</span> <<person1>>"Unacceptable!" <<he>> shouts. <span class="red">"That's another day of community service,</span> and I'll be informing the station of this."<<crime "assault">><<crimeUp 100 "assault">><<set $community_service += 1>>
 	<br><br>
 
 	<<skulduggeryuse>>
@@ -875,7 +872,7 @@ You bolt upright, and whack the <<person>> across the chest with your shovel. <<
 The rest of the process is uneventful.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 :: Police Community Wasteland Careful
@@ -888,16 +885,16 @@ The rest of the process is uneventful.
 	The rest of the process is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland End]]>><</link>>
+	<<link [[다음|Police Community Wasteland End]]>><</link>>
 	<br>
 <<else>>
-	You pry the fabric free of the thorns. <span class="red">"Slacking, are we?"</span> shouts the police offer. <<Hes>> looking right at you. <span class="red">"You can make up for it with an extra day of community service."</span><<set $community_service += 1>>
+	You pry the fabric free of the thorns. <span class="red">"Slacking are we?"</span> shouts the police offer. <<Hes>> looking right at you. <span class="red">"You can make up for it with an extra day of community service."</span><<set $community_service += 1>>
 	<br><br>
 
 	The rest of the process is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland End]]>><</link>>
+	<<link [[다음|Police Community Wasteland End]]>><</link>>
 	<br>
 <</if>>
 
@@ -914,24 +911,24 @@ You tear the fabric away from the thorns.
 	<br><br>
 	"No slacking," the police officer shouts. "I don't care if you're naked. You're working."
 	<<if $player.gender_appearance is "f">>
-		One of the criminals whistles at you, and many more ogle.<<gstress>><<garousal>><<arousal 600>><<stress 6>><<incgbreastinsecurity>>
+		One of the criminals whistles at you, and many more ogle.<<gstress>><<garousal>><<arousal 600>><<stress 6>>
 		<br><br>
 		<<fameexhibitionism 10>>
-		<<link [[Next|Police Community Wasteland Topless]]>><</link>>
+		<<link [[다음|Police Community Wasteland Topless]]>><</link>>
 		<br>
 	<<else>>
-		<<if $player.sex is "f">>
+		<<if $player.gender is "f">>
 			You hear laughter, and catch the other criminals ogling, but they seem to think you're a boy.<<gstress>><<garousal>><<arousal 600>><<stress 6>>
+			<br><br>
 		<<else>>
 			You hear laughter, and catch the other criminals ogling.
+			<br><br>
 		<</if>>
-		<<incgbreastinsecurity>>
-		<br><br>
 
 		The rest of the process is uneventful.
 		<br><br>
 
-		<<link [[Next|Police Community Wasteland End]]>><</link>>
+		<<link [[다음|Police Community Wasteland End]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -941,7 +938,7 @@ You tear the fabric away from the thorns.
 	You return to work. The rest of the process is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland End]]>><</link>>
+	<<link [[다음|Police Community Wasteland End]]>><</link>>
 	<br>
 <</if>>
 
@@ -968,7 +965,7 @@ You tear the fabric away from the thorns.
 	You return to work. The rest of the process is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community Wasteland End]]>><</link>>
+	<<link [[다음|Police Community Wasteland End]]>><</link>>
 	<br>
 <</if>>
 
@@ -976,13 +973,13 @@ You tear the fabric away from the thorns.
 :: Police Community Wasteland Topless
 <<effects>>
 
-You keep one arm held to your chest as you work, but this makes it hard to operate the shears. You can feel the others watching. A few ogle too much, and get another day of community service added to their sentence for slacking. <<incgbreastinsecurity>>
+You keep one arm held to your chest as you work, but this makes it hard to operate the shears. You can feel the others watching. A few ogle too much, and get another day of community service added to their sentence for slacking.
 <br><br>
 
 Aside from your exposure, the rest of the process is uneventful.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 :: Police Community Wasteland Bottomless
@@ -997,13 +994,15 @@ Aside from your exposure, the rest of the process is uneventful.
 <</if>>
 <br><br>
 
+
+
 You can feel the others watching. A few ogle too much, and get another day of community service added to their sentence for slacking.
 <br><br>
 
 Aside from your exposure, the rest of the process is uneventful.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 
@@ -1020,19 +1019,12 @@ Aside from your exposure, the rest of the process is uneventful.
 <br><br>
 
 You can feel the others watching. A few ogle too much, and get another day of community service added to their sentence for slacking.
-<<if $player.penisExist>>
-	<<if $player.penissize gte 3>>
-		<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
-	<<else>>
-		<<insecurity "penis_small" 1>><<ginsecurity "penis_small">>
-	<</if>>
-<</if>>
 <br><br>
 
 Aside from your exposure, the rest of the process is uneventful.
 <br><br>
 
-<<link [[Next|Police Community Wasteland End]]>><</link>>
+<<link [[다음|Police Community Wasteland End]]>><</link>>
 <br>
 
 
@@ -1054,7 +1046,7 @@ Aside from your exposure, the rest of the process is uneventful.
 	<br><br>
 <</if>>
 
-<<link [[Next|Police Community End]]>><<pass 20>><<endevent>><</link>>
+<<link [[다음|Police Community End]]>><<pass 20>><<endevent>><</link>>
 <br>
 
 :: Police Community Clean
@@ -1068,12 +1060,12 @@ The van rumbles into life. You catch a <<person2>><<person>> sitting opposite ch
 <</if>>
 <br><br>
 
-<<link [[Get angry|Police Community Clean Angry]]>><<trauma -6>><</link>><<ltrauma>>
+<<link [[화를 낸다|Police Community Clean Angry]]>><<trauma -6>><</link>><<ltrauma>>
 <br>
-<<link [[Ignore|Police Community Clean Ignore]]>><<stress 6>><</link>><<gstress>>
+<<link [[무시한다|Police Community Clean Ignore]]>><<stress 6>><</link>><<gstress>>
 <br>
 <<if hasSexStat("exhibitionism", 2)>>
-	<<link [[Tease|Police Community Clean Tease]]>><</link>><<exhibitionist2>>
+	<<link [[희롱한다|Police Community Clean Tease]]>><</link>><<exhibitionist2>>
 	<br>
 <</if>>
 
@@ -1098,7 +1090,7 @@ The van rumbles into life. You catch a <<person2>><<person>> sitting opposite ch
 The van rumbles to a halt, and the <<person1>><<person>> opens the doors.
 <br><br>
 
-<<link [[Next|Police Community Clean 2]]>><</link>>
+<<link [[다음|Police Community Clean 2]]>><</link>>
 <br>
 
 :: Police Community Clean Angry
@@ -1121,7 +1113,7 @@ The van rumbles to a halt, and the <<person1>><<person>> opens the doors.
 You hear a thwump from the front of the frame, a reminder that you should be quiet. The van soon rumbles to a halt, and the <<person1>><<person>> opens the doors.
 <br><br>
 
-<<link [[Next|Police Community Clean 2]]>><</link>>
+<<link [[다음|Police Community Clean 2]]>><</link>>
 <br>
 
 :: Police Community Clean Ignore
@@ -1137,14 +1129,14 @@ You hear a thwump from the front of the frame, a reminder that you should be qui
 The van rumbles to a halt, and the <<person1>><<person>> opens the doors.
 <br><br>
 
-<<link [[Next|Police Community Clean 2]]>><</link>>
+<<link [[다음|Police Community Clean 2]]>><</link>>
 <br>
 
 :: Police Community Clean 2
 <<set $bus to "harvest">><<effects>>
-<<person1>><<wearProp "litter stick">>
+<<person1>>
 You line up along the side of the street, attracting looks from passers-by. The gutters here are filled with rubbish. "Right, you degenerates," the <<person>> says.
-<<if pcAreArmsBound("any")>>
+<<if $leftarm is "bound" or $rightarm is "bound">>
 	<<He>> removes the bindings around your arms while <<he>> talks.
 <</if>>
 "Each of you will take a stick and bag. You will clean up this mess. Put your backs into it. I'll check your bags when you're done. If I'm unsatisfied, I'll mark you down as absent. Now get to it."
@@ -1163,10 +1155,10 @@ You take a litter stick and get to work.
 	The police officer is busy down the line, and wouldn't notice a brief absence.
 	<br><br>
 	<<if hasSexStat("promiscuity", 3)>>
-		<<link [[Accept|Police Community Clean Accept]]>><<handheldon>><<set $phase to 0>><</link>><<promiscuous3>>
+		<<link [[받아들인다|Police Community Clean Accept]]>><<set $phase to 0>><</link>><<promiscuous3>>
 		<br>
 	<</if>>
-	<<link [[Refuse|Police Community Clean Refuse]]>><</link>>
+	<<link [[거절한다|Police Community Clean Refuse]]>><</link>>
 	<br>
 <<elseif random(1, 2) is 2 and $police_trash gte 1>>
 	<<if $police_trash is 1>>
@@ -1209,7 +1201,7 @@ You take a litter stick and get to work.
 	<br>
 	<<link [[Get even|Police Community Clean Even]]>><<trauma -6>><</link>><<ltrauma>>
 	<br>
-	<<link [[Ignore|Police Community Clean Ignore 2]]>><<trauma 6>><</link>><<gtrauma>>
+	<<link [[무시한다|Police Community Clean Ignore 2]]>><<trauma 6>><</link>><<gtrauma>>
 	<br>
 <<else>>
 	<<if $police_trash is undefined>>
@@ -1253,7 +1245,7 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 <<He>> pushes you down behind a dumpster, away from the view of the street.
 <br><br>
 
-<<link [[Next|Police Community Clean Sex]]>><<set $sexstart to 1>><</link>>
+<<link [[다음|Police Community Clean Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
 :: Police Community Clean Sex
@@ -1276,9 +1268,9 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Police Community Clean Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Police Community Clean Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Police Community Clean Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Police Community Clean Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Police Community Clean Sex Finish
@@ -1288,7 +1280,7 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 
 	<<ejaculation>>
 	<<if $phase is 1>>
-		"The rubbish is yours," the <<person>> laughs. "This too." <<He>> hands you <<printmoney 5000>><<money 5000 "prostitution">>.<<fameprostitution 5>>
+		"The rubbish is yours," the <<person>> laughs. "This too." <<He>> hands you <<moneyGain 50>>.<<fameprostitution 5>>
 	<<else>>
 		"The rubbish is yours," the <<person>> laughs. "I can get more."
 	<</if>>
@@ -1298,12 +1290,12 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 		<<clotheson>>
 		<<endcombat>>
 		<<generate1>><<generate2>><<generate3>>
-		You try to return to the line, but a <<fullGroup>> block your path. "Trading favours, are we?" the <<person1>><<person>> says. "Don't think our dear officer would like the sound of that." <<He>> steps forward. "Maybe you should give us a taste too. Keep us quiet."
+		You try to return to the line, but a <<fullGroup>> block your path. "Trading favours are we?" the <<person1>><<person>> says. "Don't think our dear officer would like the sound of that." <<He>> steps forward. "Maybe you should give us a taste too. Keep us quiet."
 		<br><br>
 
-		<<link [[Accept|Police Community Clean Rape Accept]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<<link [[받아들인다|Police Community Clean Rape Accept]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
-		<<link [[Scream|Police Community Clean Rape Scream]]>><</link>>
+		<<link [[비명을 지른다|Police Community Clean Rape Scream]]>><</link>>
 		<br>
 	<<else>>
 		<<clotheson>>
@@ -1320,7 +1312,7 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 		<<clearNPC "community_police">>
 		<<clearNPC "community_criminal">>
 
-		<<link [[Next|Police Community Clean Work]]>><</link>>
+		<<link [[다음|Police Community Clean Work]]>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
@@ -1336,10 +1328,10 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 	<<clearNPC "community_criminal">>
 	You continue gathering your own rubbish. The police officer didn't notice anything.<<gtiredness>><<gstress>><<tiredness 6>><<stress 6>>
 	<br><br>
-	<<link [[Next|Police Community Clean Work]]>><</link>>
+	<<link [[다음|Police Community Clean Work]]>><</link>>
 	<br>
 <<elseif $rescue is 1 and $alarm is 1>>
-	"Can't you animals behave for a single hour?" The police officer arrives in response to your cry, grabs the <<person>> by the collar, and pulls <<him>> back to the street. <<tearful>> you follow.
+	"Can't you animals behave for a single hour?" the police officer arrives in response to your cry, grabs the <<person>> by the collar, and pulls <<him>> back to the street. <<tearful>> you follow.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -1348,11 +1340,11 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 	<<person1>>
 	<<clearNPC "community_police">>
 	<<clearNPC "community_criminal">>
-	You emerge to see the <<person1>><<person>> shoving the <<person2>><<person>> into the back of the van, <<his>> protests unheeded. You help yourself to <<his>> unattended bag of rubbish.<<wearProp "trash bag">>
+	You emerge to see the <<person1>><<person>> shoving the <<person2>><<person>> into the back of the van, <<his>> protests unheeded. You help yourself to <<his>> unattended bag of rubbish.<<wearProp "trash">>
 	<br><br>
 	<<person1>>
 
-	<<link [[Next|Police Community Clean Work]]>><</link>>
+	<<link [[다음|Police Community Clean Work]]>><</link>>
 	<br>
 <<else>>
 	"Fucking slut," the <<person>> says. "Leading people on like that's gonna get you raped." <<He>> returns to the street.
@@ -1361,12 +1353,12 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 		<<clotheson>>
 		<<endcombat>>
 		<<generate1>><<generate2>><<generate3>>
-		You try to return to the line, but a <<fullGroup>> block your path. "Trading favours, are we?" the <<person1>><<person>> says. "Don't think our dear officer would like the sound of that." <<He>> steps forward. "Maybe you should give us a taste too. Keep us quiet."
+		You try to return to the line, but a <<fullGroup>> block your path. "Trading favours are we?" the <<person1>><<person>> says. "Don't think our dear officer would like the sound of that." <<He>> steps forward. "Maybe you should give us a taste too. Keep us quiet."
 		<br><br>
 
-		<<link [[Accept|Police Community Clean Rape Accept]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<<link [[받아들인다|Police Community Clean Rape Accept]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
-		<<link [[Scream|Police Community Clean Rape Scream]]>><<set $rescued to 1>><</link>>
+		<<link [[비명을 지른다|Police Community Clean Rape Scream]]>><<set $rescued to 1>><</link>>
 		<br>
 	<<else>>
 
@@ -1382,14 +1374,16 @@ The <<person>> leads you into the alley. A few of the other criminals glance ove
 		<<clearNPC "community_criminal">>
 		You continue gathering your own rubbish. The police officer didn't notice anything.<<gtiredness>><<gstress>><<tiredness 6>><<stress 6>>
 		<br><br>
-		<<link [[Next|Police Community Clean Work]]>><</link>>
+		<<link [[다음|Police Community Clean Work]]>><</link>>
 		<br>
 	<</if>>
 <</if>>
 
+
 :: Police Community Clean Rape Scream
-<<effects>><<wearProp "litter stick">>
-The criminals turn and run, right into the police officer.
+<<effects>>
+
+You scream for help. The criminals turn and run, right into the police officer.
 <br><br>
 <<endevent>>
 <<loadNPC 0 "community_police">>
@@ -1414,7 +1408,7 @@ They stammer excuses, and inform <<him>> that you were whoring yourself to get o
 <</if>>
 <br><br>
 
-<<link [[Next|Police Community Clean Work]]>><</link>>
+<<link [[다음|Police Community Clean Work]]>><</link>>
 <br>
 
 
@@ -1425,7 +1419,7 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 <br><br>
 
 
-<<link [[Next|Police Community Clean Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Police Community Clean Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 
@@ -1451,9 +1445,9 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Police Community Clean Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Police Community Clean Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Police Community Clean Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Police Community Clean Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Police Community Clean Rape Finish
@@ -1472,7 +1466,7 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 	<<person1>>
 	<<clearNPC "community_police">>
 	<<clearNPC "community_criminal">>
-	<<link [[Next|Police Community Clean Work]]>><</link>>
+	<<link [[다음|Police Community Clean Work]]>><</link>>
 	<br>
 
 <<elseif $enemyhealth lte 0>>
@@ -1488,12 +1482,12 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 	<<person1>>
 	<<clearNPC "community_police">>
 	<<clearNPC "community_criminal">>
-	<<link [[Next|Police Community Clean Work]]>><</link>>
+	<<link [[다음|Police Community Clean Work]]>><</link>>
 	<br>
 
 <<else>>
 	<<set $rescued += 1>>/*Unnecessary if rescue is impossible*/
-	"What the fuck are you up to?" the police officer says at the head of the alley. The <<person1>><<person>> and <<his>> colleagues back away from you. "This slut's selling <<pherself>>," <<he>> stammers.
+	"What the fuck are you up to?" the police offcier says at the head of the alley. The <<person1>><<person>> and <<his>> colleagues back away from you. "This slut's selling <<pherself>>," <<he>> stammers.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -1506,7 +1500,7 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 	<span class="red">"That's another day of community service,"</span> the officer says. "For all of you. Get back in line."
 	<br><br>
 	<<set $community_service += 1>>
-	<<wearProp "litter stick">>
+
 	<<if $speech_attitude is "meek">>
 		Afraid of worsening the situation, you pick up your litter stick and get back to work.
 	<<elseif $speech_attitude is "bratty">>
@@ -1516,7 +1510,7 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 	<</if>>
 	<br><br>
 
-	<<link [[Next|Police Community Clean Work]]>><</link>>
+	<<link [[다음|Police Community Clean Work]]>><</link>>
 	<br>
 <</if>>
 
@@ -1536,17 +1530,17 @@ You walk back to the sheltered area behind the dumpster, but the <<person1>><<pe
 The <<person>> pulls <<his>> hand away, but only to deliver a firm smack to your <<bottom>>.<<gpain>><<garousal>><<pain 4>><<arousal 600 "bottom">>
 <br><br>
 
-"Don't give me that, slut," <<he>> says. "You've sold yourself for less. I'm in a good mood though." <<He>> pulls <<printmoney 5000>> in bank notes from <<his>> pocket, and holds it in front of you. "I'll sweeten the offer."
+"Don't give me that, slut," <<he>> says. "You've sold yourself for less. I'm in a good mood though." <<He>> pulls <span class="gold">£50</span> in bank notes from <<his>> pocket, and holds it in front of you. "I'll sweeten the offer."
 <br><br>
 
 <<if hasSexStat("promiscuity", 3)>>
-	<<link [[Accept|Police Community Clean Accept]]>><<handheldon>><<set $phase to 1>><</link>><<promiscuous3>>
+	<<link [[받아들인다|Police Community Clean Accept]]>><<set $phase to 1>><</link>><<promiscuous3>>
 	<br>
 <<elseif $uncomfortable.prostituting is false>>
-	<<link [[Accept|Police Community Clean Accept]]>><<handheldon>><<set $phase to 1>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+	<<link [[받아들인다|Police Community Clean Accept]]>><<set $phase to 1>><<set $desperateaction to 1>><</link>><<promiscuous3>>
 	<br>
 <</if>>
-<<link [[Refuse|Police Community Clean Refuse 2]]>><<handheldon>><<tiredness 6>><<stress 6>><</link>><<gtiredness>><<gstress>>
+<<link [[거절한다|Police Community Clean Refuse 2]]>><<tiredness 6>><<stress 6>><</link>><<gtiredness>><<gstress>>
 <br>
 
 :: Police Community Clean Refuse 2
@@ -1555,7 +1549,7 @@ The <<person>> pulls <<his>> hand away, but only to deliver a firm smack to your
 You pull away from the <<person>>. "Fine," <<he>> says. "I can find sluts like you anywhere." <<He>> walks away. You return to work, now free of harassment.
 <br><br>
 
-<<link [[Next|Police Community Clean Work]]>><</link>>
+<<link [[다음|Police Community Clean Work]]>><</link>>
 <br>
 
 
@@ -1577,7 +1571,7 @@ The <<person1>><<person>> marches over. "Is this true?" <<he>> asks. The <<perso
 You return to work, now free of harassment.
 <br><br>
 
-<<link [[Next|Police Community Clean Work]]>><</link>>
+<<link [[다음|Police Community Clean Work]]>><</link>>
 <br>
 
 
@@ -1620,7 +1614,7 @@ You launch another attack, but the <<person>> is ready, and deflects your stick 
 You return to work, now free of harassment.
 <br><br>
 
-<<link [[Next|Police Community Clean Work]]>><</link>>
+<<link [[다음|Police Community Clean Work]]>><</link>>
 <br>
 
 
@@ -1631,7 +1625,7 @@ You return to work, now free of harassment.
 You move away from the <<person>>, and keep an eye on <<him>> as you work. You're not harassed again.
 <br><br>
 
-<<link [[Next|Police Community Clean Work]]>><</link>>
+<<link [[다음|Police Community Clean Work]]>><</link>>
 <br>
 
 
@@ -1650,7 +1644,7 @@ The landfill itself is gigantic, but there's a small area outside where citizens
 The journey back to the station is uneventful.
 <br><br>
 
-<<link [[Next|Police Community End]]>><<pass 20>><<endevent>><</link>>
+<<link [[다음|Police Community End]]>><<pass 20>><<endevent>><</link>>
 <br>
 
 
@@ -1694,7 +1688,7 @@ You stand next to where <<he>> works, and place your near-empty bag right next t
 	The journey back to the station is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community End]]>><<pass 20>><<endevent>><</link>>
+	<<link [[다음|Police Community End]]>><<pass 20>><<endevent>><</link>>
 	<br>
 
 <<else>>
@@ -1704,13 +1698,13 @@ You stand next to where <<he>> works, and place your near-empty bag right next t
 
 	<<skulduggeryuse>>
 
-	"Done," the <<person1>><<person>> says. <<He>> checks each bag, but stops when <<he>> gets to yours. "Not good enough. <span class="red">You can make up for it with another day of community service.</span>"<<set $community_service += 1>>
+	"Done," the <<person1>><<person>> says. <<He>> checks each bag, but stops when <<he>> gets to yours. "Not good enough. <span class="red">You can make up for it with another day of community service."</span><<set $community_service += 1>>
 	<br><br>
 
 	The journey back to the station is uneventful.
 	<br><br>
 
-	<<link [[Next|Police Community End]]>><<pass 20>><<endevent>><</link>>
+	<<link [[다음|Police Community End]]>><<pass 20>><<endevent>><</link>>
 	<br>
 
 <</if>>
@@ -1725,7 +1719,7 @@ You arrive back at the station.
 <<generatePolice 1>><<person1>>
 <<if $community_service lte 0>>
 	<<unset $community_service>>
-	<<unset $community_service_done>>
+	<<unset $commuity_service_done>>
 	The police officer at reception stops you on the way out. <span class="gold">"Looks like you've paid your debt to society,"</span> <<he>> says. "Congratulations."
 	<<earnFeat "Social Contract">>
 <<else>>
@@ -1742,10 +1736,10 @@ You arrive back at the station.
 <<if $exposed gte 1>>
 	<<link [[Ask for something to cover with|Police Station Cover]]>><</link>>
 	<br>
-	<<link [[Leave|Barb Street]]>><<endevent>><</link>>
+	<<link [[떠난다|Barb Street]]>><<endevent>><</link>>
 	<br>
 <<else>>
-	<<link [[Next|Police Station]]>><</link>>
+	<<link [[다음|Police Station]]>><</link>>
 	<br>
 <</if>>
 
@@ -1753,7 +1747,7 @@ You arrive back at the station.
 <<effects>>
 
 <<if $speech_attitude is "meek">>
-	"C-could you give me something to cover with?" you ask. "Please. E-even a towel would—"
+	"C-could you give me something to cover with?" you ask. "Please. E-even a towel would-"
 <<elseif $speech_attitude is "bratty">>
 	"You're gonna let me walk out of here without something to cover with?" you ask.
 <<else>>
@@ -1769,4 +1763,4 @@ You peek through the doors. It's not too busy outside. Perhaps you won't be spot
 You exit the building, rush around the corner, and hide in an alley.
 <br><br>
 
-<<link [[Leave|Barb Street]]>><<endevent>><</link>>
+<<link [[떠난다|Barb Street]]>><<endevent>><</link>>

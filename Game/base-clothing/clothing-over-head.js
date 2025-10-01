@@ -1,16 +1,11 @@
-// @ts-check
 /* For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites. */
 function initOverHead() {
-	/** @type {ClothesItem[]} */
-	const clothing = [
+	setup.clothes.over_head = [
 		{
 			index: 0,
-			slot: "over_head",
 			name: "naked",
 			name_cap: "Naked",
 			variable: "naked",
-			state: 0,
-			state_base: 0,
 			integrity: 0,
 			integrity_max: 0,
 			fabric_strength: 0,
@@ -38,12 +33,9 @@ function initOverHead() {
 
 		{
 			index: 1,
-			slot: "over_head",
 			name: "froggy hood",
 			name_cap: "Froggy hood",
 			variable: "froggy",
-			state: 0,
-			state_base: 0,
 			integrity: 300,
 			integrity_max: 300,
 			fabric_strength: 20,
@@ -70,7 +62,6 @@ function initOverHead() {
 			outfitSecondary: ["over_upper", "froggy coat"],
 		},
 	];
-	setup.clothes.over_head = clothing;
 
 	/*
 		Clothes that modders add go into this array, this should be empty in the base game at all times.

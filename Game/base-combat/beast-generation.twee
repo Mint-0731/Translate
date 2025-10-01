@@ -14,7 +14,7 @@
 
 	<!-- Check that Type is known -->
 	<<if !$BeastList.includes(_type)>>
-		<span class="red">ERROR: generateBEAST unknown type</span>
+		<span class="red">에러: 알 수 없는 generateBEAST 타입</span>
 	<</if>>
 
 	<!-- Set gender and pronoun, random if unspecified -->
@@ -45,7 +45,7 @@
 		head: 0,
 		genitals: 0,
 	}>>
-
+	
 	<<if $NPCList[_n].pregnancy is undefined>>
 		<<set $NPCList[_n].pregnancy to 0>>
 	<</if>>
@@ -97,8 +97,8 @@
 	<!-- v2.7 $BeastList is 0-7: "dog", "cat", "pig", "wolf", "dolphin", "lizard", "bear", "creature" -->
 	<!-- v2.13 "horse" added to $BeastList -->
 
-	<<set _h to [200,150,200,300,200,250,500,300,200,500,225,150,400,300,350]>> <!-- Health Max per type -->
-	<<set _t to ["dog","cat","pig","wolf","dolphin","lizard","bear","boar","creature","horse","fox","hawk","cow","spider","snake"]>> <!-- Name of each type -->
+	<<set _h to [200,150,200,300,200,250,500,300,200,500,225,150,400,300]>> <!-- Health Max per type -->
+	<<set _t to ["dog","cat","pig","wolf","dolphin","lizard","bear","boar","creature","horse","fox","hawk","cow","spider"]>> <!-- Name of each type -->
 	<<set _d to [["large"],
 		["large"],
 		["fat"],
@@ -112,12 +112,11 @@
 		["large"],
 		["fierce"],
 		["huge"],
-		["slimy"],
-		["scaly"]
+		["slimy"]
 		]>> <!-- Descriptor of each type -->
-	<<set _pd to ["knotted penis","spiked penis","penis","knotted penis","strange penis","penis","penis","penis","penis","equine cock","knotted penis","avian cock","bovine cock","arachnid penis","serpent penis"]>> <!-- Descriptor of Penises -->
+	<<set _pd to ["knotted penis","spiked penis","penis","knotted penis","strange penis","penis","penis","penis","penis","equine cock","knotted penis","avian cock","bovine cock","arachnid penis"]>> <!-- Descriptor of Penises -->
 	/% <<set _cla to [1,1,1,1,0,1,1,1]>> %/
-	<<set _ps to [2,2,2,3,2,2,3,3,2,5,2,2,4,2,2]>> <!-- Size of penises -->
+	<<set _ps to [2,2,2,3,2,2,3,3,2,5,2,2,4,2]>> <!-- Size of penises -->
 
 	<<set _i to $BeastList.indexOf(_type)>>
 	<<set $NPCList[_n].healthmax to _h[_i]>>
@@ -133,7 +132,7 @@
 
 	<!-- Check for beast-type specific changes -->
 	<<if $NPCList[_n].type is "horse">>
-		<<set $NPCList[_n].hair to either("appaloosa","bay","black","brown","buckskin","chestnut","cremello","dun","grey","overo","palomino","piebald","roan","skewbald","spotted","tobiano")>>
+		<<set $NPCList[_n].hair to either("아팔루사 종","적갈색","검은색","갈색","녹비색","밤색","크림색","회갈색","회색","오바로 무늬","팔로미노 종","흑백이 섞인","밤색과 흰색이 섞인","얼룩무늬","점박이","토비아노 무늬")>>
 		<<set $NPCList[_n].claws to "hooves">> <!-- Horses have hooves -->
 	<<elseif $NPCList[_n].type is "cow">>
 		<<if $NPCList[_n].gender is "m">>
@@ -150,36 +149,26 @@
 
 	<!-- Monster generation code -->
 	<<rng>>
+	<!-- Set hallucination creatures to always be monsters. Shadow types could be .monster = "shadow" -->
 	<<if $NPCList[_n].type is "creature" and !_tower_creature>>
-		<!-- Set hallucination creatures to always be monsters. tower creature is special and can be generated as a beast, even with bestiality disabled -->
 		<<set $NPCList[_n].monster to "monster">>
-	<<elseif _beast_monster is "beast">>
-		<!-- got explicit request to generate a beast, not a monster -->
-		<<set $NPCList[_n].monster to 0>>
-	<<elseif $bestialitydisable is "t" && $NPCList[0] is "monster">>
-		<!-- if bestiality is disabled, some scenes check if the first beast is generated as a monster to see if the encounter can proceed to be lewd. if so - all subsequent beasts must also be converted to monsters unless explicitly told not to -->
-		<!-- TODO: rewrite such encounters with a clearer distinction between lewd and non-lewd generated beasts -->
+	<<elseif _beast_monster isnot "beast" and ($monsterchance gte $rng and ($hallucinations gte 1 or $monsterhallucinations is "f")) or (_beast_monster is "monster") or ($bestialitydisable is "t" and $NPCList[0].monster is "monster")>>
 		<<set $NPCList[_n].monster to "monster">>
-	<<elseif $monsterchance gte $rng and ($hallucinations gte 1 or $monsterhallucinations is "f") or _beast_monster is "monster">>
-		<<set $NPCList[_n].monster to "monster">>
-	<</if>>
-
-	<<if $NPCList[_n].monster is "monster">>
-		<<if ["dog","pig","wolf","dolphin","boar","fox","hawk","cow","snake"].includes($NPCList[_n].type)>> <!-- Remove claws from many monster types -->
+		<<if ["dog","pig","wolf","dolphin","boar","fox","hawk","cow"].includes($NPCList[_n].type)>> <!-- Remove claws from many monster types -->
 			<<run delete $NPCList[_n].claws>> <!-- It can't have claws - using undefined to maintain back compat with previous saves mid-combat ($claws) -->
 		<</if>>
 		<<if $NPCList[_n].type is "horse">>
 			<<set $NPCList[_n].type to "centaur">>
 		<<elseif $NPCList[_n].type is "hawk">>
 			<<set $NPCList[_n].type to "harpy">>
-		<<elseif $NPCList[_n].type is "creature">>
-			<!-- do nothing so creatures don't become creatureboys -->
 		<<elseif $NPCList[_n].gender is "f">>
 			<<set $NPCList[_n].type to $NPCList[_n].type + "girl">>
 		<<else>>
 			<<set $NPCList[_n].type to $NPCList[_n].type + "boy">>
 		<</if>>
+	<</if>>
 
+	<<if $NPCList[_n].monster is "monster">>
 		<<set $NPCList[_n].lefthand to 0>>
 		<<set $NPCList[_n].righthand to 0>>
 		<!-- female monster people mammals have an accessible chest and might be able to lactate. -->
@@ -614,30 +603,4 @@
 
 <<widget "generatespider6">>
 	<<generateBEAST 6 spider>>
-<</widget>>
-
-
-<!-- creature snake calls -->
-<<widget "generatesnake1">>
-	<<generateBEAST 1 snake>>
-<</widget>>
-
-<<widget "generatesnake2">>
-	<<generateBEAST 2 snake>>
-<</widget>>
-
-<<widget "generatesnake3">>
-	<<generateBEAST 3 snake>>
-<</widget>>
-
-<<widget "generatesnake4">>
-	<<generateBEAST 4 snake>>
-<</widget>>
-
-<<widget "generatesnake5">>
-	<<generateBEAST 5 snake>>
-<</widget>>
-
-<<widget "generatesnake6">>
-	<<generateBEAST 6 snake>>
 <</widget>>

@@ -1,36 +1,34 @@
 :: Office Coffee Start
-<<if $avery_fate is "ascended">><<location "avery_skyscraper">><<else>><<location "office">><</if>><<effects>><<wearProp "paper" 0 "sheet">>
+<<location "office">><<effects>>
 You go to <<checkfloor>> and speak to the client, a <<generate1>><<person1>><<person>>. <<He>> hands you a list of drink orders.
 <br>
 "We need these brought back as soon as possible, so please hurry," <<he>> says. You take the list and return to the lifts.
 <<saveNPC 0 office_coffee>>
-<<clearsinglenpc 0>>
-
 <br><br>
-<<if $rng gte 76>>
-	<<link [[Next|Office Coffee Pond]]>><<handheldon>><</link>>
-<<elseif $rng gte 51>>
-	<<link [[Next|Office Coffee Lift]]>><</link>>
+<<if $rng gte 75>>
+	<<link [[다음|Office Coffee Pond]]>><</link>>
+<<elseif $rng gte 50>>
+	<<link [[다음|Office Coffee Lift]]>><</link>>
 <<else>>
-	<<link [[Next|Office Coffee Shop]]>><</link>>
+	<<link [[다음|Office Coffee Shop]]>><</link>>
 <</if>>
 
 :: Office Coffee Shop
-<<effects>><<wearProp "travel cup">>
+<<effects>>
 You take a lift to the lobby and run to the coffee shop near the entrance of the building. You place the orders, and after several minutes, the barista calls your name.
 <br><br>
 You take the order and return to the lifts.
 <br><br>
-<<link [[Next|Office Coffee End]]>><</link>>
+<<link [[다음|Office Coffee End]]>><</link>>
 
 :: Office Coffee Pond
-<<effects>><<wearProp "travel cup">>
+<<effects>>
 Your lift is delayed after stopping at nearly every floor between <<checkfloor>> and the lobby.
 <br>
 When it finally arrives, you rush towards the coffee shop and accidentally bump into a worker.
 <br>
-
-<<if dangerEvent(1, 8000, 300*$officeFloor)>>
+<<set $danger to random(1,10000)>>
+<<if $danger gte 8000 - (300 * $officeFloor)>>
 	The worker turns angrily and shoves you into the koi pond!
 	<br>
 	The commotion has gathered a small crowd of onlookers, none of whom rush to help you.
@@ -40,24 +38,24 @@ When it finally arrives, you rush towards the coffee shop and accidentally bump 
 	<<water>>
 	<<if $swarmdisable is "t">>
 		The whole lobby goes silent as you climb out of the pond, your clothes drenched in fishy water.
-		<<effectswater "water">>
+		<<effectswater>>
 		<br><br>
-		<<link [[Next|Office Lobby]]>><<handheldon>><</link>>
+		<<link [[다음|Office Lobby]]>><</link>>
 	<<else>>
 		Before you can climb to your feet, the fish in the pond begin to swarm around you.
 		<br><br>
-		<<link [[Next|Office Coffee Swarm]]>><<handheldon>><<effectswater "water">><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Office Coffee Swarm]]>><<effectswater>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <<else>>
 	"I'm such a klutz! Please forgive me," the worker apologises with a weak smile.
 	<br>
 	You make your way to the coffee shop and place your orders. After a few minutes, the barista calls to you, and you take your orders back to your client.
 	<br><br>
-<<link [[Next|Office Coffee End]]>><<handheldon>><</link>>
+<<link [[다음|Office Coffee End]]>><</link>>
 <</if>>
 
 :: Office Coffee Lift
-<<effects>><<outfitChecks>><<wearProp "travel cup">>
+<<effects>><<outfitChecks>>
 You take a lift to the lobby and run to the coffee shop near the entrance of the building. While waiting in queue to place your order, you hear two people talking behind you.
 <br><br>
 <<generate1>><<generate2>>
@@ -93,10 +91,11 @@ You place the orders. After several minutes, the barista calls you over.
 You take the order and return to the lifts.
 <br><br>
 
-<<if dangerEvent(1, 8000, 300*$officeFloor)>>
-	<<link [[Next|Office Coffee Lift02]]>><</link>>
+<<set $danger to random(1,10000)>>
+<<if $danger gte 8000 - (300 * $officeFloor)>>
+	<<link [[다음|Office Coffee Lift02]]>><</link>>
 <<else>>
-	<<link [[Next|Office Coffee End]]>><<endevent>><</link>>
+	<<link [[다음|Office Coffee End]]>><</link>>
 <</if>>
 
 :: Office Coffee Lift02
@@ -109,7 +108,7 @@ The lift arrives and the three of you get on. You press the button for your floo
 
 The lift reaches your floor, but before you can exit, the <<person1>><<person>> pushes past you, causing you to drop one of the packaged pastries from your order. As you bend over to retrieve it, the lift doors close around your waist! The <<person1>><<person>> turns around with a devious look in <<his>> eyes. Behind you, the <<person2>><<person>> grabs your <<bottom>>.
 <br><br>
-<<link [[Next|Office Coffee Lift Assault]]>><<handheldon>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Office Coffee Lift Assault]]>><<set $molestationstart to 1>><</link>>
 
 :: Office Coffee Lift Assault
 <<if $molestationstart is 1>>
@@ -130,9 +129,9 @@ The lift reaches your floor, but before you can exit, the <<person1>><<person>> 
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Office Coffee Lift Assault Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Coffee Lift Assault Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Office Coffee Lift Assault]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Coffee Lift Assault]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Office Coffee Lift Assault Finish
@@ -145,7 +144,9 @@ The lift reaches your floor, but before you can exit, the <<person1>><<person>> 
 	<<effects>>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Office Coffee End]]>><</link>>
+	<<loadNPC 0 office_coffee>>
+	<<clearNPC office_coffee>>
+	<<link [[다음|Office Coffee End]]>><</link>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	The doors slide open, and you crumple onto the ground. The <<person1>><<person>> picks up your client's order.
@@ -161,11 +162,11 @@ The lift reaches your floor, but before you can exit, the <<person1>><<person>> 
 	<<if $exposed gte 1>>
 		<<tearful>> you hide behind a large potted plant before you're seen. Even if you did have your client's order, you can't return dressed like this. It occurs to you that they may accuse you of stealing their money. <<gstress>><<stress 6>><<ggsecurity>> <<officeupdatecomplaints 2>>
 		<br><br>
-		<<link [[Next|Office Streak]]>><</link>>
+		<<link [[다음|Office Streak]]>><</link>>
 	<<else>>
-		<<tearful>> you call another lift and return to the lobby, too embarrassed to face your client without their order. It occurs to you that they may accuse you of stealing their money. <<gstress>><<stress 6>><<ggsecurity>> <<officeupdatecomplaints 2>>
+		<<tearful>> you call another lift and return to the lobby, too embarassed to face your client without their order. It occurs to you that they may accuse you of stealing their money. <<gstress>><<stress 6>><<ggsecurity>> <<officeupdatecomplaints 2>>
 		<br><br>
-		<<link [[Next|Office Lobby]]>><</link>>
+		<<link [[다음|Office Lobby]]>><</link>>
 		<br><br>
 	<</if>>
 <</if>>
@@ -196,11 +197,11 @@ The lift reaches your floor, but before you can exit, the <<person1>><<person>> 
 <<swarm>>
 <<swarmactions>>
 <<if $stress gte $stressmax>>
-	<span id="next"><<link [[Next|Office Coffee Swarm Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Coffee Swarm Finish]]>><</link>></span><<nexttext>>
 <<elseif $swimdistance lte 0>>
-	<span id="next"><<link [[Next|Office Coffee Swarm Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Coffee Swarm Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Office Coffee Swarm]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Office Coffee Swarm]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Office Coffee Swarm Finish
@@ -227,7 +228,7 @@ The lift reaches your floor, but before you can exit, the <<person1>><<person>> 
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Office Lobby]]>><</link>>
+	<<link [[다음|Office Lobby]]>><</link>>
 	<br>
 <</if>>
 
@@ -244,13 +245,11 @@ You wake up in the security office in the back of the lobby. All of your clothes
 <<He>> helps you to your feet and escorts you out into the lobby.
 <<endevent>>
 <br><br>
-<<link [[Next|Office Lobby]]>><</link>>
+<<link [[다음|Office Lobby]]>><</link>>
 
 
 :: Office Coffee End
-<<effects>><<wearProp "travel cup">>
-<<loadNPC 0 office_coffee>>
-<<clearNPC office_coffee>>
+<<effects>>
 You return to the <<person1>><<person>>, who points you to the recipients of the coffees. After you pass out all of the drinks, <<he>> hands you a tip. <<assignmenttip 5>>
 <br>
 "Thank you again. Here's a little extra for your troubles."

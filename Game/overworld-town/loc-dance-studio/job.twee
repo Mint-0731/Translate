@@ -9,7 +9,7 @@ You try to pay the receptionist, but <<he>> interrupts. "Charlie wanted to see y
 Charlie stands in front of the class, explaining the importance of proper warm up exercises. <<He>> glances at you and smiles. "I'll be right back," <<he>> tells the class. "Keep practising!"
 <br><br>
 
-<<link [[Next|Dancing Job Intro]]>><<set $dance_job_intro to 1>><</link>>
+<<link [[다음|Dancing Job Intro]]>><<set $dance_job_intro to 1>><</link>>
 <br>
 
 :: Dancing Job Intro
@@ -28,11 +28,11 @@ Charlie stands in front of the class, explaining the importance of proper warm u
 "You're a good dancer. People would pay to see you. It's a competitive field, but if you need work, I should be able to find something."
 <br><br>
 
-<<link [[Express doubt|Dancing Job Intro Doubt]]>><<npcincr Charlie love 5>><</link>><<gglove "Charlie">>
+<<link [[Express doubt|Dancing Job Intro Doubt]]>><<npcincr Charlie love 5>><</link>><<gglove>>
 <br>
-<<link [[Thank|Dancing Job Intro Thank]]>><<npcincr Charlie love 1>><</link>><<glove "Charlie">>
+<<link [[감사한다|Dancing Job Intro Thank]]>><<npcincr Charlie love 1>><</link>><<glove>>
 <br>
-<<link [[Be haughty|Dancing Job Intro Haughty]]>><<npcincr Charlie love -5>><</link>><<lllove "Charlie">>
+<<link [[거만하게 군다|Dancing Job Intro Haughty]]>><<npcincr Charlie love -5>><</link>><<lllove>>
 <br>
 
 
@@ -48,20 +48,20 @@ Charlie stands in front of the class, explaining the importance of proper warm u
 <</if>>
 <br><br>
 
-Charlie smiles. "I'm a good judge of this sort of thing," <<he>> says. "You're ready. <span class="gold">Just let reception know when you'd like work, and I'll see what I can dig up.</span>"
+Charlie smiles. "I'm a good judge of this sort of thing," <<he>> says. "You're ready. <span class="gold">Just let reception know when you'd like work, and I'll see what I can dig up."</span>
 <br><br>
 
-<<link [[Next|Dance Studio]]>><<endevent>><</link>>
+<<link [[다음|Dance Studio]]>><<endevent>><</link>>
 <br>
 
 
 :: Dancing Job Intro Thank
 <<effects>>
 
-You thank Charlie. <<He>> smiles. <span class="gold">"Just let reception know when you'd like work, and I'll see what I can dig up."</span>
+당신은 찰리에게 감사를 표한다. <<He_ nun>> 미소짓는다. "<span class="gold">일 할 생각이 있으면 접수처에 이야기 해 둬, 그럼 내가 알아볼게."</span>
 <br><br>
 
-<<link [[Next|Dance Studio]]>><<endevent>><</link>>
+<<link [[다음|Dance Studio]]>><<endevent>><</link>>
 <br>
 
 
@@ -77,10 +77,10 @@ You thank Charlie. <<He>> smiles. <span class="gold">"Just let reception know wh
 <</if>>
 <br><br>
 
-"Careful now," Charlie warns. "Pride comes before a fall. Anyway, <span class="gold">just let reception know when you'd like work, and I'll see what I can dig up.</span>"
+"Careful now," Charlie warns. "Pride comes before a fall. Anyway, <span class="gold">just let reception know when you'd like work, and I'll see what I can dig up."</span>
 <br><br>
 
-<<link [[Next|Dance Studio]]>><<endevent>><</link>>
+<<link [[다음|Dance Studio]]>><<endevent>><</link>>
 <br>
 
 
@@ -95,13 +95,13 @@ The receptionist lets you through to the dance studio proper, where you find Cha
 	"You ready for the dock job?" <<he>> asks.
 	<br><br>
 
-	<<ind>><<link [[Accept|Dance Job Docks]]>><<timeTrackingStartDanceJobs "docks">><<set $weekly.danceJob to "docks">><<dance_job_init 180 50>><</link>>
+	<<link [[받아들인다|Dance Job Docks]]>><<set $weekly.danceJob to "docks">><<dance_job_init 180 50>><</link>>
 	<br>
 	<<if $jordan_ritual_dance gte 1>>
-		<<socialiseicon "ask">><<link [[Ask if there's work at a Danube Street manor|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
+		<<askicon>><<link [["다뉴브 거리 저택의 일자리가 있는지 문의한다"|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
 		<br>
 	<<elseif $charlie_breakdown gte 1>>
-		<<socialiseicon "ask">><<link [[Ask for something more dangerous, but lucrative (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
+		<<askicon>><<link [[더 위험하지만, 벌이가 좋은 일을 문의한다 (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 
@@ -109,20 +109,20 @@ The receptionist lets you through to the dance studio proper, where you find Cha
 	"You ready for the party job?" <<he>> asks.
 	<br><br>
 
-	<<ind>><<link [[Accept|Dance Job Party]]>><<timeTrackingStartDanceJobs "party">><<set $weekly.danceJob to "party">><<dance_job_init 180 70>><</link>>
+	<<link [[받아들인다|Dance Job Party]]>><<set $weekly.danceJob to "party">><<dance_job_init 180 70>><</link>>
 	<br>
 	<<if $jordan_ritual_dance gte 1>>
-		<<socialiseicon "ask">><<link [[Ask if there's work at a Danube Street manor|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
+		<<askicon>>	<<link [["다뉴브 거리 저택의 일자리가 있는지 문의한다"|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
 		<br>
 	<<elseif $charlie_breakdown gte 1>>
-		<<socialiseicon "ask">><<link [[Ask for something more dangerous, but lucrative (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
+		<<askicon>><<link [[더 위험하지만, 벌이가 좋은 일을 문의한다 (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<elseif $weekly.danceJob is "stage">>
 	"You ready for that job at the fancy party?" <<he>> asks.
 	<br><br>
 
-	<<link [[Accept|Dance Job Stage]]>><<timeTrackingStartDanceJobs "danube">><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
+	<<link [[받아들인다|Dance Job Stage]]>><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
 	<br>
 <<else>>
 
@@ -140,31 +140,31 @@ The receptionist lets you through to the dance studio proper, where you find Cha
 		A friend of mine wants to throw a party on Domus Street, but they'd like entertainment. It's a casual thing. They're good people, so you should be safe. You'd get £300 for a few hours work. How about it?"
 		<br><br>
 
-		<<socialiseicon "dance">><<link [[Take job (3:00)|Dance Job Party]]>><<timeTrackingStartDanceJobs "party">><<set $weekly.danceJob to "party">><<dance_job_init 180 70>><</link>>
+		<<link [[Take job (3:00)|Dance Job Party]]>><<set $weekly.danceJob to "party">><<dance_job_init 180 70>><</link>>
 		<br>
 	<<elseif $weekly.danceJob is "docks">>
-		A group of students have rented out a building on Mer Street to throw a party. They just need entertainment. It should be safe." <<He>> doesn't sound certain. "You'd get £700 for a few hours work. How about it?"
+		A group of students have rented out a building on Mer street to throw a party. They just need entertainment. It should be safe." <<He>> doesn't sound certain. "You'd get £700 for a few hours work. How about it?"
 		<br><br>
 
-		<<mericon>><<link [[Take job (3:00)|Dance Job Docks]]>><<timeTrackingStartDanceJobs "docks">><<set $weekly.danceJob to "docks">><<dance_job_init 180 50>><</link>>
+		<<link [[Take job (3:00)|Dance Job Docks]]>><<set $weekly.danceJob to "docks">><<dance_job_init 180 50>><</link>>
 		<br>
 	<<else>>
-		An exclusive club on Danube Street is looking for entertainment." <<He>> hesitates. "I think they're trustworthy, but be on your guard. You'd get £2000 for a few hours work, which isn't too shabby. How about it?"
+		An exclusive club on Danube street is looking for entertainment." <<He>> hesitates. "I think they're trustworthy, but be on your guard. You'd get £2000 for a few hours work, which isn't too shabby. How about it?"
 		<br><br>
-		<<danubeicon>><<link [[Take job (3:00)|Dance Job Stage]]>><<timeTrackingStartDanceJobs "danube">><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
+		<<link [[Take job (3:00)|Dance Job Stage]]>><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
 		<br>
 	<</if>>
 
 	<<if $jordan_ritual_dance gte 1 and $weekly.danceJob isnot "stage">>
-		<<socialiseicon "ask">><<link [[Ask if there's any work in a Danube Street manor (3:00)|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
+		<<askicon>><<link [["다뉴브 거리 저택의 일자리가 있는지 문의한다 (3:00)"|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
 		<br>
 	<<elseif $charlie_breakdown gte 1 and $weekly.danceJob isnot "stage">>
-		<<socialiseicon "ask">><<link [[Ask for something more dangerous, but lucrative (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
+		<<askicon>><<link [[더 위험하지만, 벌이가 좋은 일을 문의한다 (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 
 <</if>>
-<<refuseicon>><<link [[Refuse|Dance Job Refuse]]>><</link>>
+<<refuseicon>><<link [[거절한다|Dance Job Refuse]]>><</link>>
 <br>
 
 :: Dance Job Refuse
@@ -173,7 +173,7 @@ The receptionist lets you through to the dance studio proper, where you find Cha
 Charlie nods. "The job's here if you want it."
 <br><br>
 
-<<link [[Next|Dance Studio]]>><<endevent>><</link>>
+<<link [[다음|Dance Studio]]>><<endevent>><</link>>
 <br>
 
 
@@ -198,7 +198,7 @@ It's a short trip, and you soon arrive beside a home on Domus Street, not too fa
 <<He>> chats with Charlie as you enter the building.
 <br><br>
 
-<<link [[Next|Dance Job Party 2]]>><</link>>
+<<link [[다음|Dance Job Party 2]]>><</link>>
 <br>
 
 
@@ -226,7 +226,7 @@ Charlie's friend must be the host of the party. It seems you have some time to y
 <<foodicon "eat">><<link [[Raid the buffet|Dance Job Party Buffet]]>><<stress -6>><</link>><<lstress>>
 <br>
 <<if !(playerIsPregnant() and playerAwareTheyArePregnant())>>
-	<<foodicon "beerbottle">><<link [[Find booze|Dance Job Party Booze]]>><<trauma -6>><<stress -6>><<alcohol 120>><</link>><<ltrauma>><<lstress>><<ggalcohol>>
+	<<link [[Find booze|Dance Job Party Booze]]>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
 	<br>
 <</if>>
 
@@ -240,7 +240,7 @@ You chat with the party-goers. Most seem to live in town, though others are visi
 They become curious when they realise you're the entertainment, and ask you all sorts of questions. Including where you live.
 <br><br>
 
-<<link [[Refuse to answer personal questions|Dance Job Party Refuse]]>><<stress 6>><</link>><<stress 6>>
+<<refuseicon>><<link [[Refuse to answer personal questions|Dance Job Party Refuse]]>><<stress 6>><</link>><<stress 6>>
 <br>
 <<link [[Bend the truth|Dance Job Party Bend]]>><<trauma 6>><</link>><<gtrauma>>
 <br>
@@ -253,7 +253,7 @@ They become curious when they realise you're the entertainment, and ask you all 
 You outright refuse to respond to their probing. You can tell some are intrigued by your reticence, but they don't press you.
 <br><br>
 
-<<link [[Next|Dance Job Party 3]]>><</link>>
+<<link [[다음|Dance Job Party 3]]>><</link>>
 <br>
 
 
@@ -265,7 +265,7 @@ You tell the truth, mostly. You leave out some details. There's no need to ruin 
 	They seem to believe you.
 	<br><br>
 
-	<<link [[Next|Dance Job Party 3]]>><</link>>
+	<<link [[다음|Dance Job Party 3]]>><</link>>
 	<br>
 <<else>>
 
@@ -275,7 +275,7 @@ You tell the truth, mostly. You leave out some details. There's no need to ruin 
 	<<link [[Brush them off|Dance Job Party 3]]>><</link>>
 	<br>
 	<<if $trauma gte $traumamax * 0.6>>
-		<<link [[Get angry|Dance Job Party Angry]]>><<trauma -12>><<stress -12>><</link>><<lltrauma>><<llstress>>
+		<<socialiseicon "angry">><<link [[화를 낸다|Dance Job Party Angry]]>><<trauma -12>><<stress -12>><</link>><<lltrauma>><<llstress>>
 		<br>
 	<</if>>
 <</if>>
@@ -293,10 +293,10 @@ You tell the truth, mostly. You leave out some details. There's no need to ruin 
 <</if>>
 <br><br>
 
-They give you a wide berth from then on.
+They give you a wide birth from then on.
 <br><br>
 
-<<link [[Next|Dance Job Party 3]]>><</link>>
+<<link [[다음|Dance Job Party 3]]>><</link>>
 <br>
 
 
@@ -314,9 +314,9 @@ You tell them the frank truth about your situation, the daily trials you face.
 
 	<<link [[Say you need the money|Dance Job Party Money]]>><</link>><<difficulty 50>>
 	<br>
-	<<link [[Leave early|Dance Job Party Leave]]>><</link>>
+	<<getouticon>><<link [[일찍 떠난다|Dance Job Party Leave]]>><</link>>
 	<br>
-	<<if $submissive gte 1500>>
+	<<if $speech_attitude is "meek">>
 		<<link [[Beg|Dance Job Party Beg]]>><</link>><<submissivetext>>
 		<br>
 	<</if>>
@@ -324,7 +324,7 @@ You tell them the frank truth about your situation, the daily trials you face.
 	They don't seem to believe you.<<gtrauma>><<trauma 6>>
 	<br><br>
 
-	<<link [[Next|Dance Job Party 3]]>><</link>>
+	<<link [[다음|Dance Job Party 3]]>><</link>>
 	<br>
 <</if>>
 
@@ -335,17 +335,16 @@ You tell them the frank truth about your situation, the daily trials you face.
 You tuck into the buffet. There are cheese rolls, potato salad, salmon blinis, sausage pâté, tiny pizzas, and more. You think the orphans would enjoy this.
 <br><br>
 
-<<link [[Next|Dance Job Party 3]]>><<handheldon>><</link>>
+<<link [[다음|Dance Job Party 3]]>><<handheldon>><</link>>
 <br>
 
 :: Dance Job Party Booze
-<<effects>>
-<<wearProp "alcohol" 0 "red wine">>
+<<effects>><<wearProp "wine">>
 
 You pour yourself a glass of wine, down it, then pour yourself another. You suspect you're attracting looks, but you try not to worry.
 <br><br>
 
-<<link [[Next|Dance Job Party 3]]>><<handheldon>><</link>>
+<<link [[다음|Dance Job Party 3]]>><<handheldon>><</link>>
 <br>
 
 
@@ -361,14 +360,14 @@ The <<person>> looks torn,
 	<span class="green">then nods.</span> "I've cleared that table as an impromptu stage. You can start when you're ready."
 	<br><br>
 
-	<<link [[Next|Dance Job Party Start]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Party Start]]>><<endevent>><</link>>
 	<br>
 
 <<else>>
 	<span class="red">then shakes <<his>> head.</span> "I'm sorry. I just can't be part of this."
 	<br><br>
 
-	<<link [[Next|Dance Job Party Leave]]>><</link>>
+	<<link [[다음|Dance Job Party Leave]]>><</link>>
 	<br>
 <</if>>
 
@@ -376,7 +375,7 @@ The <<person>> looks torn,
 :: Dance Job Party Leave
 <<effects>>
 <<pass 10>>
-<<timeTrackingEndDanceJobs>>
+
 Charlie's still outside, rummaging in <<nnpc_his Charlie>> car boot. <<nnpc_He Charlie>> looks up.
 <br><br>
 "This isn't going to work out," the <<person>> says. "The <<girl>> is lovely though. It's not <<pher>> fault." <<He>> walks back inside.
@@ -388,7 +387,7 @@ Charlie's still outside, rummaging in <<nnpc_his Charlie>> car boot. <<nnpc_He C
 	"Can I give you a lift back to the studio? Or are you okay here?"
 	<br><br>
 
-	<<socialiseicon "ask">><<link [[Ask for lift|Dance Job Party Lift]]>><</link>>
+	<<askicon>><<link [[Ask for lift|Dance Job Party Lift]]>><</link>>
 	<br>
 	<<link [["Say you're okay here"|Dance Job Party Okay]]>><</link>>
 	<br>
@@ -398,7 +397,7 @@ Charlie's still outside, rummaging in <<nnpc_his Charlie>> car boot. <<nnpc_He C
 	<br><br>
 
 	<<if $trauma gte $traumamax * 0.6>>
-		<<link [[Break down|Dance Job Party Break]]>><<set $charlie_breakdown to 1>><<npcincr Charlie love 20>><<trauma -12>><<stress 12>><</link>><<ggstress>><<lltrauma>><<gglove "Charlie">>
+		<<link [[Break down|Dance Job Party Break]]>><<set $charlie_breakdown to 1>><<npcincr Charlie love 20>><<trauma -12>><<stress 12>><</link>><<ggstress>><<lltrauma>><<gglove>>
 		<br>
 		<<link [[Bottle it|Dance Job Party Bottle]]>><</link>>
 		<br>
@@ -429,7 +428,7 @@ Charlie's still outside, rummaging in <<nnpc_his Charlie>> car boot. <<nnpc_He C
 <<pass 10>>
 The words come in a torrent, each point, each story bleeding into the next. You talk about Bailey, and about the dangers you face daily. By the end, Charlie has <<his>> arms around you.
 <br><br>
-"I'm sorry," <<he>> says. <<He>> looks at the orphanage, visible through a gap between two houses. "I'm so sorry. I don't—" <<He>> stops <<himself>>. "Here. Sit down. Let me get you some water."
+"I'm sorry," <<he>> says. <<He>> looks at the orphanage, visible through a gap between two houses. "I'm so sorry. I don't-" <<he>> stops <<himself>>. "Here. Sit down. Let me get you some water."
 <br><br>
 You sit in the car while Charlie fetches a bottle from the boot. <<He>> sits down beside you, and waits with you until you feel calmer.
 <br><br>
@@ -474,7 +473,7 @@ Charlie nods, but doesn't look convinced. "Can I give you a lift back to the stu
 The journey back to the studio isn't long. Charlie escorts you inside.
 <br><br>
 <<dance_job_end>>
-<<link [[Next|Dance Studio]]>><<endevent>><</link>>
+<<link [[다음|Dance Studio]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Okay
@@ -483,7 +482,7 @@ The journey back to the studio isn't long. Charlie escorts you inside.
 Charlie climbs into <<his>> car, and drives away.
 <br><br>
 <<dance_job_end>>
-<<link [[Next|Domus Street]]>><<endevent>><</link>>
+<<link [[다음|Domus Street]]>><<endevent>><</link>>
 <br>
 
 
@@ -493,10 +492,10 @@ Charlie climbs into <<his>> car, and drives away.
 You fall to your knees. "Pl-please no," you say. "I-I really need the money. Don't send me away!"
 <br><br>
 
-"It's okay!" the <<person>> says. "I'm going to pay you. Please don't cry." <<He>> rummages in <<his>> pockets, and pulls out <<his>> <<wallet>>. You make <<printmoney 30000>><<money 30000 "partyDanceJob">>.
+"It's okay!" the <<person>> says. "I'm going to pay you. Please don't cry." <<He>> rummages in <<his>> pockets, and pulls out <<his>> <<wallet>>. You make <<moneyGain 300>>.
 <br><br>
 
-<<link [[Next|Dance Job Party Leave]]>><</link>>
+<<link [[다음|Dance Job Party Leave]]>><</link>>
 <br>
 
 :: Dance Job Party 3
@@ -505,7 +504,7 @@ You fall to your knees. "Pl-please no," you say. "I-I really need the money. Don
 The <<person>> enters the room, and glances around until <<his>> eyes settle on you. "Ah," <<he>> says. "The performer. I've cleared that table as an impromptu stage. Start when you're ready."
 <br><br>
 
-<<link [[Next|Dance Job Party Start]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Start]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Start
@@ -519,7 +518,7 @@ You climb up the stage, drawing attention from the guests. More filter in from t
 
 <<dance_job_text>>
 
-<<link [[Next|Dance Job Party Dance]]>><<set $dancestart to 1>><</link>>
+<<link [[다음|Dance Job Party Dance]]>><<set $dancestart to 1>><</link>>
 <br>
 
 :: Dance Job Party Dance
@@ -552,18 +551,18 @@ You climb up the stage, drawing attention from the guests. More filter in from t
 
 
 <<if $danceevent is "finish">>
-	<<link [[Next|Dance Job Party Stop]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Party Stop]]>><<endevent>><</link>>
 <<elseif $danceevent is "dancepull">>
-	<<link [[Next|Dance Job Party Arousal]]>><</link>>
+	<<link [[다음|Dance Job Party Arousal]]>><</link>>
 <<elseif $danceevent is 0>>
-	<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1 and $dance_job_exposed isnot 1>>
-		<<runicon>><<link [[Flee|Dance Job Party Change]]>><<clotheson>><<endevent>><</link>>
-	<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and $dance_job_exposed isnot 1 and !$worn.under_lower.type.includes("dance")>>
-		<<runicon>><<link [[Flee|Dance Job Party Change]]>><<clotheson>><<endevent>><</link>>
+	<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1>>
+		<<runicon>><<link [[도망친다|Dance Job Party Change]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and !$worn.under_lower.type.includes("dance")>>
+		<<runicon>><<link [[도망친다|Dance Job Party Change]]>><<clotheson>><<endevent>><</link>>
 	<<elseif $timer lte 1>>
-		<<link [[Next|Dance Job Party Timeout]]>><<endevent>><</link>>
+		<<link [[다음|Dance Job Party Timeout]]>><<endevent>><</link>>
 	<<else>>
-		<<link [[Stop|Dance Job Party Stop]]>><<endevent>><</link>>
+		<<link [[그만둔다|Dance Job Party Stop]]>><<endevent>><</link>>
 	<</if>>
 <</if>>
 
@@ -585,7 +584,7 @@ The other party-goers interrupt <<him>>, and after a brief scrap, boot <<him>> f
 		<<link [[Just climb down|Dance Job Party Intermission]]>><<set $phase to 2>><</link>><<if !$dance_job_exhib>><<exhibitionist5>><<gginterest>><</if>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
+		<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<elseif $exposed gte 1 and hasSexStat("exhibitionism", 3)>>
@@ -595,11 +594,11 @@ The other party-goers interrupt <<him>>, and after a brief scrap, boot <<him>> f
 		<<link [[Just climb down|Dance Job Party Intermission]]>><<set $phase to 1>><</link>><<if !$dance_job_exhib>><<exhibitionist3>><<ginterest>><</if>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
+		<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<else>>
-	<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><<clotheson>><</link>>
+	<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><<clotheson>><</link>>
 	<br>
 <</if>>
 
@@ -624,13 +623,13 @@ You bolt through the room, and run up the stairs, taking cover in the bathroom.<
 
 	<<link [[Ask for something else|Dance Job Party Change Ask]]>><</link>>
 	<br>
-	<<link [[Wear it|Dance Job Party Change 2]]>><<dance_job_interest 5>><</link>><<ginterest>>
+	<img src="img/misc/icon/clothes/bunny_leotard.png"><<link [[Wear it|Dance Job Party Change 2]]>><<dance_job_interest 5>><</link>><<ginterest>>
 	<br>
 <<else>>
 	You adjust your clothes, and wait for your blush to subside before returning to the party.
 	<br><br>
 
-	<<link [[Next|Dance Job Party Intermission]]>><</link>>
+	<<link [[다음|Dance Job Party Intermission]]>><</link>>
 	<br>
 <</if>>
 
@@ -663,7 +662,7 @@ You bolt through the room, and run up the stairs, taking cover in the bathroom.<
 <</if>>
 
 <<silently>><<clotheson>><</silently>>
-<<underupperwear 8 "black">>
+<<underupperwear 8>>
 
 <<if _upperStripped>>
 	<<upperstrip>>
@@ -676,9 +675,9 @@ You put on the bunny leotard. "Oh," says the <<personsimple>>. "Don't forget the
 <br><br>
 
 
-<<link [[Wear|Dance Job Party Change Ears]]>><<dance_job_interest 5>><</link>><<ginterest>>
+<img src="img/misc/icon/clothes/bunny_ears.png"><<link [[Wear|Dance Job Party Change Ears]]>><<dance_job_interest 5>><</link>><<ginterest>>
 <br>
-<<link [[Refuse|Dance Job Party Ears Refuse]]>><</link>>
+<<refuseicon>><<link [[거절한다|Dance Job Party Ears Refuse]]>><</link>>
 <br>
 
 
@@ -691,7 +690,7 @@ You put on the bunny ears, and leave the bathroom. A <<person>> greets you. "Nic
 You walk downstairs. Your attire draws bashful gazes.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Ears Refuse
@@ -703,7 +702,7 @@ You leave the bunny ears where they lie. A <<person>> greets you. "That's a no t
 You walk downstairs. Your attire draws bashful gazes.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Change Escape
@@ -729,7 +728,7 @@ The door behind you opens a little more. "Everything okay?" the <<personsimple>>
 	<br><br>
 <</if>>
 
-<<link [[Next|Residential alleyways]]>><<endevent>><<dance_job_end>><</link>>
+<<link [[다음|Residential alleyways]]>><<endevent>><<dance_job_end>><</link>>
 <br>
 
 
@@ -742,7 +741,7 @@ You throw open the window, and peer outside. It backs onto an alley running betw
 <<covered>>
 <br><br>
 
-<<link [[Next|Residential alleyways]]>><<endevent>><<dance_job_end>><</link>>
+<<link [[다음|Residential alleyways]]>><<endevent>><<dance_job_end>><</link>>
 <br>
 
 
@@ -751,7 +750,7 @@ You throw open the window, and peer outside. It backs onto an alley running betw
 :: Dance Job Party Stop
 <<effects>>
 
-You climb down from the "stage". The audience seems disappointed.<<linterest>><<dance_job_interest -5>>
+You climb down from the "stage". The audience seem disappointed.<<linterest>><<dance_job_interest -5>>
 <br><br>
 
 <<if $exposed gte 2 and hasSexStat("exhibitionism", 5)>>
@@ -761,7 +760,7 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 		<<link [[Just climb down|Dance Job Party Intermission]]>><<set $phase to 2>><</link>><<if !$dance_job_exhib>><<exhibitionist5>><<gginterest>><</if>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
+		<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<elseif $exposed gte 1 and hasSexStat("exhibitionism", 3)>>
@@ -771,11 +770,11 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 		<<link [[Just climb down|Dance Job Party Intermission]]>><<set $phase to 1>><</link>><<if !$dance_job_exhib>><<exhibitionist3>><<ginterest>><</if>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
+		<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<else>>
-	<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><<clotheson>><</link>>
+	<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><<clotheson>><</link>>
 	<br>
 <</if>>
 
@@ -793,7 +792,7 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 		<<link [[Just climb down|Dance Job Party Intermission]]>><<set $phase to 2>><</link>><<if !$dance_job_exhib>><<exhibitionist5>><<gginterest>><</if>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
+		<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<elseif $exposed gte 1 and hasSexStat("exhibitionism", 3)>>
@@ -803,11 +802,11 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 		<<link [[Just climb down|Dance Job Party Intermission]]>><<set $phase to 1>><</link>><<if !$dance_job_exhib>><<exhibitionist3>><<ginterest>><</if>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
+		<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><</link>>
 		<br>
 	<</if>>
 <<else>>
-	<<link [[Next|Dance Job Party Intermission]]>><<set $phase to 0>><<clotheson>><</link>>
+	<<link [[다음|Dance Job Party Intermission]]>><<set $phase to 0>><<clotheson>><</link>>
 	<br>
 <</if>>
 
@@ -831,10 +830,10 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 <<if $timeStamp gte $dance_job_time>>
 	The party seems to be winding down. <<generate1>><<person1>>A <<person>> approaches you. "Thanks for coming," <<he>> says. "You really livened things up. Here." <<He>> hands you a wad of cash.
 	<<if $dance_job_interest gte 100>>
-		<span class="green">"There's a little extra in there."</span> <<He>> winks. You make <<printmoney 50000>><<money 50000 "partyDanceJob">>.
+		<span class="green">"There's a little extra in there."</span> <<He>> winks. You make <<moneyGain 500>>.
 		<<earnFeat "Life of the Party">>
 	<<else>>
-		You make <<printmoney 30000>><<money 30000 "partyDanceJob">>.
+		You make <<moneyGain 300>>.
 	<</if>>
 	<br><br>
 
@@ -849,13 +848,13 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 		<br><br>
 	<</if>>
 
-	<<link [[Next|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
 	<br>
 <<elseif $dance_job_interest lte 0>>
 	<<generate1>><<person1>>A <<person>> approaches you. "I'm sorry," <<he>> says. "This isn't working out. Thank you for coming." <<He>> points at the door.
 	<br><br>
 
-	<<link [[Leave|Dance Job Party Intermission Leave]]>><</link>>
+	<<link [[떠난다|Dance Job Party Intermission Leave]]>><</link>>
 	<br>
 	<<if $submissive lte 500>>
 		<<socialiseicon "angry">><<link [[Demand payment|Dance Job Party Demand]]>><<def 1>><</link>><<defianttext>>
@@ -899,14 +898,14 @@ You climb down from the "stage". The audience seems disappointed.<<linterest>><<
 		<br><br>
 
 		<<set $skulduggerydifficulty to 400>>
-		<<crimeicon "mark">><<link [[Secret some food away for the orphans|Dance Job Party Food]]>><</link>><<skulduggerydifficulty>>
+		<<link [[Secret some food away for the orphans|Dance Job Party Food]]>><</link>><<skulduggerydifficulty>>
 		<br>
 		<<socialiseicon>><<link [[Schmooze|Dance Job Party Schmooze]]>><</link>><<englishdifficulty 1 1000>>
 		<br>
 		<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
-			<<foodicon "beerbottle">><span class="blue">You can't bring yourself to drink while you know you're with child.</span>
+			<span class="blue">당신의 배 속에 아기가 있다는 걸 알면서도 술을 마실 수는 없다.</span>
 		<<else>>
-			<<foodicon "beerbottle">><<link [[Drink|Dance Job Party Drink]]>><<alcohol 5>><</link>><<galcohol>>
+		<<link [[마신다|Dance Job Party Drink]]>><<alcohol 5>><<wearProp "wine">><</link>>
 		<</if>>
 		<br>
 		<<foodicon "eat">><<link [[Eat|Dance Job Party Eat]]>><<stress -6>><</link>><<lstress>>
@@ -927,11 +926,11 @@ Some of the party-goers look wealthier than others. You try to ingratiate yourse
 	<br><br>
 <</if>>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Drink
-<<effects>><<wearProp "alcohol" 0 "red wine">>
+<<effects>>
 
 You pour yourself a glass of wine, and drink.
 <br><br>
@@ -940,7 +939,7 @@ You pour yourself a glass of wine, and drink.
 	A <<generate1>><<person1>><<person>> tops it up for you unprompted.
 	<br><br>
 
-	<<link [[Thank|Dance Job Party Thank]]>><<dance_job_interest 5>><<alcohol 60>><</link>><<ginterest>><<ggalcohol>>
+	<<link [[감사한다|Dance Job Party Thank]]>><<dance_job_interest 5>><<alcohol 60>><</link>><<ginterest>>
 	<br>
 	<<link [[Put the glass down|Dance Job Party Put]]>><<dance_job_interest -5>><<handheldon>><</link>><<linterest>>
 	<br>
@@ -948,7 +947,7 @@ You pour yourself a glass of wine, and drink.
 	No one pays you much mind.
 	<br><br>
 
-	<<link [[Next|Dance Job Party Intermission End]]>><<handheldon>><</link>>
+	<<link [[다음|Dance Job Party Intermission End]]>><<handheldon>><</link>>
 	<br>
 <</if>>
 
@@ -959,16 +958,16 @@ You pour yourself a glass of wine, and drink.
 You thank the <<person>> for the top-up, and drink. You feel a bit dizzy.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Put
-<<effects>><<handheldon>>
+<<effects>>
 
 You put down the drink. "Live a little," the <<person>> says, before taking a swig straight from the bottle.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Eat
@@ -982,7 +981,7 @@ You fill a plate with finger food, and sit on the sofa to eat.
 
 	<<link [[Allow|Dance Job Party Allow]]>><<stress 6>><<dance_job_interest 5>><</link>><<gstress>><<ginterest>>
 	<br>
-	<<socialiseicon "angry">><<link [[Get angry|Dance Job Party Eat Angry]]>><<stress -6>><<dance_job_interest -5>><</link>><<linterest>><<lstress>>
+	<<socialiseicon "angry">><<link [[화를 낸다|Dance Job Party Eat Angry]]>><<stress -6>><<dance_job_interest -5>><</link>><<linterest>><<lstress>>
 	<br>
 
 <<else>>
@@ -1002,7 +1001,7 @@ You fill a plate with finger food, and sit on the sofa to eat.
 You allow people to take food off your plate. It's a bit rude of them, but there's plenty more on the table.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Party Eat Angry
@@ -1011,7 +1010,7 @@ You allow people to take food off your plate. It's a bit rude of them, but there
 You slap the <<persons>> hand away, and scowl. <<He>> puts <<his>> arms up in a defensive posture. No one else tries to nick your food.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1021,7 +1020,7 @@ You slap the <<persons>> hand away, and scowl. <<He>> puts <<his>> arms up in a 
 You tolerate the <<persons>> behaviour while you eat. <<He>> chats with other party-goers, and aside from the arm around your waist, <<he>> ignores you.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1031,7 +1030,7 @@ You tolerate the <<persons>> behaviour while you eat. <<He>> chats with other pa
 You stand and search for an isolated chair to sit in. You hear the <<person>> scoff behind you.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1043,18 +1042,34 @@ You stand and search for an isolated chair to sit in. You hear the <<person>> sc
 <<if $skulduggerysuccess is 1>>
 
 	You squirrel away some treats for the orphans. <span class="green">People are too pre-occupied to notice.</span><<ghope>><<hope 1>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
 
 <<else>>
+
 	You squirrel away some treats for the orphans. As you turn away from the table, <<generate1>><<person1>><span class="red">you bump into a <<person>>. Food spills everywhere.</span>
 	<br><br>
 	People laugh and joke about how hungry you must be.<<linterest>><<dance_job_interest -5>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+
 <</if>>
-<br><br>
 
-<<skulduggeryuse>>
-
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1081,7 +1096,7 @@ You stand and search for an isolated chair to sit in. You hear the <<person>> sc
 You pull on the leotard, fitting the top snug around your chest. People pretend they're not watching you dress.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1109,7 +1124,7 @@ You pull on the leotard, fitting the top snug around your chest. People pretend 
 You pull on the leotard, and place the ears on your head. People pretend they're not watching you dress.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1120,7 +1135,7 @@ You pull on the leotard, and place the ears on your head. People pretend they're
 You thank the <<person>>, but tell <<him>> you're quite fine as you are. <<He>> nods. You continue to draw looks.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1131,7 +1146,7 @@ You thank the <<person>>, but tell <<him>> you're quite fine as you are. <<He>> 
 You take the bunny ears, place them on your head, and thank the <<person>>. <<He>> stands with the leotard still in <<his>> hands. <<He>> seems confused. Someone laughs.
 <br><br>
 
-<<link [[Next|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Party Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1141,7 +1156,7 @@ You take the bunny ears, place them on your head, and thank the <<person>>. <<He
 Someone turns up the music, and a crowd gathers around the table masquerading as a stage. You climb atop, and begin your performance.
 <br><br>
 
-<<link [[Next|Dance Job Party Dance]]>><<set $dancestart to 1>><</link>>
+<<link [[다음|Dance Job Party Dance]]>><<set $dancestart to 1>><</link>>
 <br>
 
 :: Dance Job Party Intermission Leave
@@ -1157,7 +1172,7 @@ You leave the party empty-handed.
 <</if>>
 <br><br>
 
-<<link [[Next|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
+<<link [[다음|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
 <br>
 
 
@@ -1167,7 +1182,7 @@ You leave the party empty-handed.
 "I busted my ass for your shitty party," you say. "Pay up."
 <br><br>
 
-Someone laughs. The <<person>> looks shocked by your boldness. <<He>> stammers an apology, then searches for <<his>> <<wallet>> and hands you the money. You make <<printmoney 30000>><<money 30000 "partyDanceJob">>.
+Someone laughs. The <<person>> looks shocked by your boldness. <<He>> stammers an apology, then searches for <<his>> <<wallet>> and hands you the money. You make <<moneyGain 300>>.
 <br><br>
 
 <<silently>><<clotheson>><</silently>>
@@ -1179,7 +1194,7 @@ You leave the party.
 <</if>>
 <br><br>
 
-<<link [[Next|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
+<<link [[다음|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
 <br>
 
 
@@ -1192,17 +1207,17 @@ You leave the party.
 <<effects>>
 
 <<if $phase is 1>>
-	Charlie frowns. "There is something," <<he>> says. "So long as you're careful. An exclusive club on Danube Street is looking for entertainment." <<He>> hesitates. "I think they're trustworthy, but be on your guard. You'd get £2000 for a few hours work, which isn't too shabby. How about it?"
+	Charlie frowns. "There is something," <<he>> says. "So long as you're careful. An exclusive club on Danube street is looking for entertainment." <<He>> hesitates. "I think they're trustworthy, but be on your guard. You'd get £2000 for a few hours work, which isn't too shabby. How about it?"
 	<br><br>
 <<else>>
-	Charlie nods. "Alright," <<he>> says. "So long as you're careful. An exclusive club on Danube Street is looking for entertainment." <<He>> hesitates. "I think they're trustworthy, but be on your guard. You'd get £2000 for a few hours work, which isn't too shabby. How about it?"
+	Charlie nods. "Alright," <<he>> says. "So long as you're careful. An exclusive club on Danube street is looking for entertainment." <<He>> hesitates. "I think they're trustworthy, but be on your guard. You'd get £2000 for a few hours work, which isn't too shabby. How about it?"
 	<br><br>
 <</if>>
 
 
-<<link [[Accept|Dance Job Stage]]>><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><<timeTrackingStartDanceJobs "danube">><</link>>
+<<link [[받아들인다|Dance Job Stage]]>><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
 <br>
-<<link [[Refuse|Dance Job Stage Refuse]]>><</link>>
+<<refuseicon>><<link [[거절한다|Dance Job Stage Refuse]]>><</link>>
 <br>
 
 :: Dance Job Stage Refuse
@@ -1211,7 +1226,7 @@ You leave the party.
 "I understand," Charlie says. "Ask me again if you change your mind."
 <br><br>
 
-<<link [[Next|Dance Studio]]>><<endevent>><</link>>
+<<link [[다음|Dance Studio]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Stage
@@ -1227,7 +1242,7 @@ You follow Charlie outside, around the side of the studio, and into a waiting ca
 <<He>> pulls to a stop outside a gated manor. A <<generate2>><<person2>><<person>> in a security uniform stands outside, holding a clipboard.
 <br><br>
 
-<<link [[Next|Dance Job Stage 2]]>><</link>>
+<<link [[다음|Dance Job Stage 2]]>><</link>>
 <br>
 
 
@@ -1248,7 +1263,7 @@ Charlie drives you down a side passage, around the back on the manor. It looks l
 "See you later," Charlie says. <<He>> drives away, though you notice <<his>> concerned eyes watching you in the rear-view mirror.
 <br><br>
 
-<<link [[Next|Dance Job Stage 3]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage 3]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Stage 3
@@ -1271,13 +1286,13 @@ You wait in front of a mirror while <<he>> rummages in a wardrobe, and pulls out
 	<br><br>
 <</if>>
 
-<span class="clothes-black"><<icon "clothes/skimpy_leotard.png">></span><<link [[Dress|Dance Job Stage Dress]]>><</link>>
+<<link [[Dress|Dance Job Stage Dress]]>><</link>>
 <br>
 <<if $worn.face.type.includes("mask")>>
-	<span class="clothes-black"><<icon "clothes/skimpy_leotard.png">></span><<link [[Dress and keep your mask on|Dance Job Stage Dress]]>><<set $phase to 1>><</link>>
+	<<link [[Dress and keep your mask on|Dance Job Stage Dress]]>><<set $phase to 1>><</link>>
 	<br>
 <</if>>
-<<socialiseicon "ask">><<link [[Ask for something more solid|Dance Job Stage Solid]]>><</link>>
+<<askicon>><<link [[Ask for something more solid|Dance Job Stage Solid]]>><</link>>
 <br>
 
 
@@ -1288,21 +1303,22 @@ You wait in front of a mirror while <<he>> rummages in a wardrobe, and pulls out
 <br><br>
 
 
-<span class="clothes-black"><<icon "clothes/skimpy_leotard.png">></span><<link [[Dress|Dance Job Stage Dress]]>><</link>>
+<<link [[Dress|Dance Job Stage Dress]]>><</link>>
 <br>
 <<if $worn.face.type.includes("mask")>>
-	<span class="clothes-black"><<icon "clothes/skimpy_leotard.png">></span><<link [[Dress and keep your mask on|Dance Job Stage Dress]]>><<set $phase to 1>><</link>>
+	<<link [[Dress and keep your mask on|Dance Job Stage Dress]]>><<set $phase to 1>><</link>>
 	<br>
 <</if>>
+<<refuseicon>><<link [[거절한다|Dance Job Stage End]]>><</link>>
+<br>
 <<if hasSexStat("exhibitionism", 5)>>
 	<<if $worn.face.type.includes("mask")>>
-		<<symbol "exhibitionism">> <<link [[Wear nothing but your mask|Dance Job Stage Nothing]]>><<set $phase to 1>><</link>><<exhibitionist5>>
+		<<link [[Wear nothing but your mask|Dance Job Stage Nothing]]>><<set $phase to 1>><</link>><<exhibitionist5>>
 		<br>
 	<</if>>
-	<<symbol "exhibitionism">> <<link [[Wear nothing|Dance Job Stage Nothing]]>><</link>><<exhibitionist5>>
+	<<link [[Wear nothing|Dance Job Stage Nothing]]>><</link>><<exhibitionist5>>
 	<br>
 <</if>>
-<<refuseicon>><<link [[Refuse|Dance Job Stage End]]>><</link>>
 
 :: Dance Job Stage End
 <<effects>>
@@ -1310,7 +1326,7 @@ You wait in front of a mirror while <<he>> rummages in a wardrobe, and pulls out
 The <<person>> shows you out the way you came. A member of security takes over once you're outside, and escorts you from the premises.
 <br><br>
 
-<<link [[Next|Danube Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
+<<link [[다음|Danube Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
 <br>
 
 
@@ -1328,7 +1344,7 @@ The <<person>> shows you out the way you came. A member of security takes over o
 <<set $dance_job_exposed to 1>>
 <<He>> doesn't know where to look. "Fine," <<he>> says. "That should be fine. Come this way."<<exhibitionism5>>
 
-<<link [[Next|Dance Job Stage 4]]>><</link>>
+<<link [[다음|Dance Job Stage 4]]>><</link>>
 <br>
 
 :: Dance Job Stage Dress
@@ -1347,7 +1363,7 @@ You squeeze into the tight leotard. It's barely opaque, and leaves no contour to
 "Good," the <<person>> says. "Come this way."
 <br><br>
 
-<<link [[Next|Dance Job Stage 4]]>><</link>>
+<<link [[다음|Dance Job Stage 4]]>><</link>>
 <br>
 
 :: Dance Job Stage 4
@@ -1362,9 +1378,9 @@ The <<person>> leads you down a thin corridor, and up a flight of steps. More st
 <<else>>
 	waiters and waitresses.
 <</if>>
-Their outfits are rather skimpy.
+Their outifts are rather skimpy.
 <br><br>
-"The audience is being warmed up," <<he>> says. "You'll be expected among the guests between performances. Just be courteous and you'll be fine."
+"The audience are being warmed up," <<he>> says. "You'll be expected among the guests between performances. Just be courteous and you'll be fine."
 <br><br>
 
 <<generatev3>><<person3>>
@@ -1376,7 +1392,7 @@ The <<person2>><<person>> lifts a microphone from a stand near the stage. "Pleas
 
 <<saveNPC 1 "dance_job_stage">>
 
-<<link [[Next|Dance Job Stage Start]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage Start]]>><<endevent>><</link>>
 <br>
 
 
@@ -1393,12 +1409,12 @@ You step onto the stage. The blinding spotlight hides the audience, but you can 
 <</if>>
 <br><br>
 
-<i>You will be penalised if the audience isn't at least <span class="blue">interested</span> before you stop, and <span class="lblue">impressing</span> them would be better, but arousing them too much could lead to violence. Be cautious.</i>
+<i>You will be penalised if the audience aren't at least <span class="blue">interested</span> before you stop, and <span class="lblue">impressing</span> them would be better, but arousing them too much could lead to violence. Be cautious.</i>
 <br><br>
 
 <<dance_job_text>>
 
-<<link [[Next|Dance Job Stage Dance]]>><<set $dancestart to 1>><</link>>
+<<link [[다음|Dance Job Stage Dance]]>><<set $dancestart to 1>><</link>>
 <br>
 
 
@@ -1413,37 +1429,40 @@ You step onto the stage. The blinding spotlight hides the audience, but you can 
 	<<set $audience to 50>>
 	<<set $venuemod to 3>>
 	<<set $dancelocation to "stage">>
+	<<if $dance_job_exposed gte 1>>
+		<<set $forceddance to 1>>
+	<</if>>
 <</if>>
 
 <<danceeffects>>
 <<danceaudience>>
 <<danceactions>>
 
-<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance"))) and $forceddance isnot 1 and $dance_job_exposed isnot 1>>
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance"))) and $forceddance isnot 1>>
 	There's no way you could normally continue dancing while so exposed.
-<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2 and $forceddance isnot 1 and $dance_job_exposed isnot 1>>
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2 and $forceddance isnot 1>>
 	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
 	<br><br>
-<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance") and $forceddance isnot 1 and $dance_job_exposed isnot 1>>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance") and $forceddance isnot 1>>
 	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
 	<br><br>
 <</if>>
 
 
 <<if $danceevent is "finish">>
-	<<link [[Next|Dance Job Stage Stop]]>><<clotheson>><</link>>
+	<<link [[다음|Dance Job Stage Stop]]>><<clotheson>><</link>>
 <<elseif $danceevent is "rape">>
-	<<link [[Next|Dance Job Stage Rape]]>><<set $molestationstart to 1>><</link>>
-<<elseif $danceevent is "light" and $forceddance isnot 1 and $dance_job_exposed isnot 1>>
-	<<link [[Flee the stage|Dance Job Stage Change]]>><<clotheson>><<set $phase to 1>><</link>>
+	<<link [[다음|Dance Job Stage Rape]]>><<set $molestationstart to 1>><</link>>
+<<elseif $danceevent is "light" and $forceddance isnot 1>>
+	<<runicon>><<link [[무대에서 도망친다|Dance Job Stage Change]]>><<clotheson>><<set $phase to 1>><</link>>
 	<br>
 <<elseif $danceevent is 0>>
-	<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1 and $dance_job_exposed isnot 1>>
-		<<link [[Flee|Dance Job Stage Change]]>><<clotheson>><<set $phase to 0>><</link>>
-	<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and $dance_job_exposed isnot 1 and !$worn.under_lower.type.includes("dance")>>
-		<<link [[Flee|Dance Job Stage Change]]>><<clotheson>><<set $phase to 0>><</link>>
+	<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1>>
+		<<runicon>><<link [[도망친다|Dance Job Stage Change]]>><<clotheson>><<set $phase to 0>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and !$worn.under_lower.type.includes("dance")>>
+		<<runicon>><<link [[도망친다|Dance Job Stage Change]]>><<clotheson>><<set $phase to 0>><</link>>
 	<<else>>
-		<<link [[Stop|Dance Job Stage Stop]]>><<clotheson>><</link>>
+		<<runicon>><<link [[그만둔다|Dance Job Stage Stop]]>><<clotheson>><</link>>
 	<</if>>
 <</if>>
 
@@ -1453,24 +1472,24 @@ You step onto the stage. The blinding spotlight hides the audience, but you can 
 You bow.
 
 <<if $audienceexcitement gte 60>>
-	<span class="green">The audience cheers.</span><<gginterest>><<dance_job_interest 10>>
+	<span class="green">The audience cheer.</span><<gginterest>><<dance_job_interest 10>>
 <<elseif $audienceexcitement gte 40>>
-	<span class="blue">The audience claps half-heartedly.</span>
+	<span class="blue">The audience clap half-heartedly.</span>
 <<else>>
-	<span class="red">The audience boos.</span><<llinterest>><<dance_job_interest -10>>
+	<span class="red">The audience boo.</span><<llinterest>><<dance_job_interest -10>>
 <</if>>
 <br><br>
 
 <<if $dance_job_stage is 1>>
 	<<set $dance_job_stage to 2>>
-	The spotlight dims, revealing a large audience of <<people>> in formal attire.
+	The spotlight dims, revealing a large audience of
 
 	<<if maleChance() gte 100>>
-		Most have discarded their jackets, revealing their shirts and waistcoats.
+		men in formal attire. Most have discarded their jackets, revealing their shirts and waistcoats.
 	<<elseif maleChance() lte 0>>
-		Most are quite regal, though some have elected to show off their thighs and cleavage.
+		women in formal attire. Most are quite regal, though some have elected to show off their thighs and cleavage.
 	<<else>>
-		The men have discarded their jackets, revealing their shirts and waistcoats. Some of the women have elected to show off their thighs and cleavage.
+		men and women in formal attire. The men have discarded their jackets, revealing their shirts and waistcoats. Some of the women have elected to show off their thighs and cleavage.
 	<</if>>
 	They all wear masks.
 	<br><br>
@@ -1481,7 +1500,7 @@ You bow.
 You step down from the stage.
 <br><br>
 
-<<link [[Next|Dance Job Stage Intermission]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage Intermission]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Stage Change
@@ -1527,7 +1546,7 @@ You rush into the arms of the <<person>>. <<covered>>
 
 <<link [[Walk back out onto the stage|Dance Job Stage Exposed]]>><<trauma 12>><<stress 18>><<dance_job_interest 20>><</link>><<ggtrauma>><<gggstress>><<ggginterest>>
 <br>
-<<link [[Leave|Dance Job Stage Leave]]>><<endevent>><</link>>
+<<link [[떠난다|Dance Job Stage Leave]]>><<endevent>><</link>>
 <br>
 
 
@@ -1557,7 +1576,7 @@ You exit to find a <<generate1>><<person1>><<person>> in a security uniform wait
 <<He>> leads you outside, and escorts you from the premises.
 <br><br>
 
-<<link [[Next|Danube Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
+<<link [[다음|Danube Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Dance Job Stage Exposed
@@ -1568,7 +1587,7 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 <<set $dance_job_exposed to 1>>
 <br><br>
 
-<<link [[Next|Dance Job Stage Dance]]>><<endevent>><<set $dancestart to 1>><</link>>
+<<link [[다음|Dance Job Stage Dance]]>><<endevent>><<set $dancestart to 1>><</link>>
 <br>
 
 :: Dance Job Stage Rape
@@ -1591,9 +1610,9 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Dance Job Stage Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Dance Job Stage Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Dance Job Stage Rape Finish
@@ -1605,7 +1624,7 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 	<<clotheson>>
 	<<endcombat>>
 <<elseif $enemyhealth lte 0>>
-	The audience backs away from you, surprised by your assault. <<tearful>> you struggle to your feet.<<llinterest>><<dance_job_interest -10>>
+	The audience back away from you, surprised by your assault. <<tearful>> you struggle to your feet.<<llinterest>><<dance_job_interest -10>>
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -1614,16 +1633,17 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 
 <<if $dance_job_stage is 1>>
 	<<set $dance_job_stage to 2>>
-	The spotlight dies, and other lights come alive around the room, revealing the audience once more. <<silently>><<people>><</silently>><<capitalise>> in formal attire.
+	The spotlight dies, and other lights come alive around the room, revealing the audience once more.
 
 	<<if maleChance() gte 100>>
-		Most have discarded their jackets, and stand around you in a circle.
+		Men in formal attire. Most have discarded their jackets, and stand around you in a circle.
 	<<elseif maleChance() lte 0>>
-		Most are quite regal, and stand around you in a circle.
+		Women in formal attire. Most are quite regal, and stand around you in a circle.
 	<<else>>
-		They stand around you in a circle.
+		men and women in formal attire. They stand around you in a circle.
 	<</if>>
 	They all wear masks.
+	<br><br>
 <<else>>
 	The spotlight dies, and other lights come alive around the room, revealing the audience once more.
 <</if>>
@@ -1632,10 +1652,10 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 <<if $exposed gte 2 and $exhibitionism lte 74 and $dance_job_exposed isnot 1>>
 	<<covered>> You rush behind the stage, to some semblance of safety.
 	<br><br>
-	<<link [[Next|Dance Job Stage Change]]>><</link>>
+	<<link [[다음|Dance Job Stage Change]]>><</link>>
 	<br>
 <<else>>
-	<<link [[Next|Dance Job Stage Intermission]]>><</link>>
+	<<link [[다음|Dance Job Stage Intermission]]>><</link>>
 	<br>
 <</if>>
 
@@ -1650,14 +1670,21 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 <<if $timeStamp gte $dance_job_time>>
 	<<loadNPC 0 "dance_job_stage">><<person1>>
 	You hear a clatter of cutlery on glass.
-	"<<Ladies_gentlemen>>," says a voice from the other side of the room. It's the <<person>> who showed you in. The guests all turn to face <<him>>. "Thank you for making it this day. I fear our time together draws to a close, but fret not! We have a final treat for you."
+	<<if maleChance() gte 100>>
+		"Gentlemen,"
+	<<elseif maleChance() lte 0>>
+		"Ladies,"
+	<<else>>
+		"Ladies and gentlemen,"
+	<</if>>
+	says a voice from the other side of the room. It's the <<person>> who showed you in. The guests all turn to face <<him>>. "Thank you for making it this day. I fear our time together draws to a close, but fret not! We have a final treat for you."
 	<br><br>
 	<<endevent>>
 	<<beastNEWinit 1 horse>><<person1>>
 	You feel a rumble. Masked faces turn in unison, this time towards the wide set of doors leading into a hall outside. The main entryway. A <<beasttype>> steps through, pulling a wheeled glass cabin, banded with bronze.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Horse End]]>><</link>>
+	<<link [[다음|Dance Job Stage Horse End]]>><</link>>
 	<br>
 <<elseif $dance_job_interest lte 0>>
 	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>A <<person>> steps in front of you. "It's a shame the original dancer... couldn't make it," <<he>> says. Other bodies form around you, trapping you in the centre. "This one doesn't have the same grace."
@@ -1667,7 +1694,7 @@ You feel your legs carry you back outside. A great cheer goes up from the dark.
 	Someone presses their body against yours from behind.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage End Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Dance Job Stage End Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	You have some time before they want you on stage again. Masked figures in formal attire drink and schmooze.
@@ -1691,13 +1718,13 @@ You try to endear yourself to the guests,
 	<span class="green">and soon become the centre of attention.</span> They hang on your every word.<<famesocial 20>><<gginterest>><<dance_job_interest 10>>
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Intermission End]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Stage Intermission End]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<span class="red">but they're not interested.</span> "Why is the dancer talking to me?" asks a <<person>> without looking at you. "Someone shoo them away!"<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Intermission End]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Stage Intermission End]]>><<endevent>><</link>>
 	<br>
 <</if>>
 
@@ -1734,7 +1761,7 @@ You chat with servants carrying trays of wine and canapés. They seem happy for 
 <<runeventpool>>
 
 <br><br>
-<<link [[Next|Dance Job Stage Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -1750,9 +1777,14 @@ A small door leads deeper into the manor. Servants often pass through it. A bead
 	You wait until security is distracted, then slip through behind a servant carrying an empty tray.
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Next|Dance Job Stage Explore 2]]>><</link>>
+	<<link [[다음|Dance Job Stage Explore 2]]>><</link>>
 	<br>
 
 <<else>>
@@ -1760,9 +1792,14 @@ A small door leads deeper into the manor. Servants often pass through it. A bead
 	You try to slip through behind a servant carrying an empty tray, but security puts an arm in your way. "Not your place. They'll want you on stage soon."
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Next|Dance Job Stage Intermission End]]>><</link>>
+	<<link [[다음|Dance Job Stage Intermission End]]>><</link>>
 <br>
 
 <</if>>
@@ -1783,9 +1820,9 @@ The manor's halls are luxurious and extravagant.
 		You turn in the direction of the voices, coming face to face with an old tapestry. You feel a draught. You pull the tapestry aside, revealing a dark passage.
 		<br><br>
 
-		<<link [[Enter|Dance Job Stage Passage]]>><</link>>
+		<<link [[들어간다|Dance Job Stage Passage]]>><</link>>
 		<br>
-		<<link [[Turn away|Dance Job Stage Explore End]]>><<stress -6>><</link>><<lstress>>
+		<<getouticon>><<link [[Turn away|Dance Job Stage Explore End]]>><<stress -6>><</link>><<lstress>>
 		<br>
 	<</addinlineevent>>
 <</if>>
@@ -1852,7 +1889,7 @@ The manor's halls are luxurious and extravagant.
 
 	<<link [[Search their belongings for valuables|Dance Job Stage Explore Pool]]>><</link>><<crime "petty">><<skulduggerydifficulty 1 800>>
 	<br>
-	<<link [[Leave|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<<link [[떠난다|Dance Job Stage Explore End]]>><<endevent>><</link>>
 	<br>
 <</addinlineevent>>
 
@@ -1866,15 +1903,18 @@ Necklaces and bracelets, rings and watches, all laid out for you to snatch.
 
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
-	<<set _prop to either("necklace", "bracelet", "ring", "watch")>>
-	<<wearProp _prop>>
 	One by one, you render the locks useless, and slip your hand beneath the glass to snatch the goodies. The <<person>> doesn't wake, and you make it away with a hefty haul.
 	<<set $blackmoney += 1000>><<crimeUp 1000>>
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Next|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Stage Explore End]]>><<endevent>><</link>>
 	<br>
 
 <<else>>
@@ -1882,12 +1922,17 @@ Necklaces and bracelets, rings and watches, all laid out for you to snatch.
 	You fiddle with the closest lock with too much eagerness, and trip some security mechanism. <span class="red">An alarm blares, waking the <<person>>.</span>
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
 	You run for the exit, but not before <<he>> catches sight of you.<<crimeUp 200 "thievery">>
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Stage Explore End]]>><<endevent>><</link>>
 	<br>
 
 <</if>>
@@ -1907,9 +1952,15 @@ Modern necklaces, bracelets, watches, and other gaudy objects are laid out to se
 	<<set $antiquemoney += 500>><<museumAntiqueStatus "antiquegoldbrooch" "found">>
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Next|Dance Job Stage Explore End]]>><<endevent>><</link>>
+
+	<<link [[다음|Dance Job Stage Explore End]]>><<endevent>><</link>>
 	<br>
 
 <<else>>
@@ -1917,12 +1968,17 @@ Modern necklaces, bracelets, watches, and other gaudy objects are laid out to se
 	You fiddle with the closest lock with too much eagerness, and trip some security mechanism. <span class="red">An alarm blares, waking the <<person>>.</span>
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
 	You run for the exit, but not before <<he>> catches sight of you.<<crimeUp 200 "thievery">>
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<<link [[다음|Dance Job Stage Explore End]]>><<endevent>><</link>>
 	<br>
 
 <</if>>
@@ -1940,9 +1996,14 @@ One of the tapestries looks older than the others, the art more primitive. You p
 	You feel a draught, and voices. Chanting? You pull the tapestry aside, revealing a dark passage hidden behind.
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Next|Dance Job Stage Passage]]>><</link>>
+	<<link [[다음|Dance Job Stage Passage]]>><</link>>
 	<br>
 
 <<else>>
@@ -1950,9 +2011,14 @@ One of the tapestries looks older than the others, the art more primitive. You p
 	You hear footsteps approach, and are forced to move on.
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Next|Dance Job Stage Explore End]]>><</link>>
+	<<link [[다음|Dance Job Stage Explore End]]>><</link>>
 	<br>
 
 <</if>>
@@ -1968,9 +2034,9 @@ You come to a wooden door. Pulsing red light seeps around the edges. The chantin
 At your touch, engravings in the wood light up, bristling with energy. <span class="red">You feel something drain through your hand.</span> You jerk away from the door.
 <br><br>
 
-<<link [[Enter|Dance Job Stage Passage 2]]>><<stress 12>><<awareness 12>><</link>><<ggstress>><<ggawareness>>
+<<link [[들어간다|Dance Job Stage Passage 2]]>><<stress 12>><<awareness 12>><</link>><<ggstress>><<ggawareness>>
 <br>
-<<link [[Leave|Dance Job Stage Explore End]]>><<stress -6>><</link>><<lstress>>
+<<link [[떠난다|Dance Job Stage Explore End]]>><<stress -6>><</link>><<lstress>>
 <br>
 
 :: Dance Job Stage Passage 2
@@ -1992,7 +2058,7 @@ The red light emanates from the stone itself, through fissures in the rock. The 
 <</if>>
 <br><br>
 
-<<link [[Leave|Dance Job Stage Ritual End]]>><</link>>
+<<link [[떠난다|Dance Job Stage Ritual End]]>><</link>>
 <br>
 <<link [[Interrupt the ritual|Dance Job Stage Ritual]]>><<stress 12>><<awareness 12>><<scienceskill -12>><<mathsskill -12>><<englishskill -12>><<historyskill -12>><</link>><<lscience>><<lmaths>><<lenglish>><<lhistory>><<ggstress>><<ggawareness>>
 <br>
@@ -2005,7 +2071,7 @@ The red light emanates from the stone itself, through fissures in the rock. The 
 You turn and leave before you're spotted, back through the door and down the passage, until you emerge at the tapestry.
 <br><br>
 
-<<link [[Next|Dance Job Stage Explore End]]>><</link>>
+<<link [[다음|Dance Job Stage Explore End]]>><</link>>
 <br>
 
 
@@ -2018,7 +2084,7 @@ You walk up to the pillar. Each step is more difficult than the last. Something 
 You can't make out their faces beneath the shrouds, but the chanting figures seem unaware of your presence. You climb the rock, using the warm fissures for purchase, until you reach the top. You can see the victim more closely now, a <<person>>. <<He>> sobs.
 <br><br>
 
-<<link [[Reassure|Dance Job Stage Ritual Reassure]]>><</link>>
+<<link [[안심시킨다|Dance Job Stage Ritual Reassure]]>><</link>>
 <br>
 <<link [[Break the chains|Dance Job Stage Ritual Break]]>><</link>>
 <br>
@@ -2038,7 +2104,7 @@ You can't make out their faces beneath the shrouds, but the chanting figures see
 The <<person>> raises <<his>> head in surprise, then tugs against the chains binding <<his>> arms. They're bolted haphazardly into the rock, and together you're able to work them free.
 <br><br>
 
-<<link [[Next|Dance Job Stage Ritual Escape]]>><</link>>
+<<link [[다음|Dance Job Stage Ritual Escape]]>><</link>>
 <br>
 
 :: Dance Job Stage Ritual Break
@@ -2047,7 +2113,7 @@ The <<person>> raises <<his>> head in surprise, then tugs against the chains bin
 The chains are bolted haphazardly into the rock, and you feel them loosen as you pull. The <<person>> jerks in surprise, but seems to realise what you're doing, and adds <<his>> strength to the effort. Together, you're able to work them free.
 <br><br>
 
-<<link [[Next|Dance Job Stage Ritual Escape]]>><</link>>
+<<link [[다음|Dance Job Stage Ritual Escape]]>><</link>>
 <br>
 
 :: Dance Job Stage Ritual Escape
@@ -2058,7 +2124,7 @@ As soon as <<his>> arms are free, the <<person>> removes the blindfold from <<hi
 As soon as your bottoms leave the rock, a horrifying shriek replaces the chanting. The cowled figures grasp the sides of their heads and writhe on the spot.
 <br><br>
 
-<<link [[Next|Dance Job Stage Ritual Escape 2]]>><</link>>
+<<link [[다음|Dance Job Stage Ritual Escape 2]]>><</link>>
 <br>
 
 :: Dance Job Stage Ritual Escape 2
@@ -2070,7 +2136,7 @@ You run through the door and back down the passage, the <<person>> at your side.
 You hear panicked shouts before you emerge through the tapestry. Others have been torn from the walls. Paintings lie face-down on the floor, and a great gash has been torn out of the wall in front of you. A scream cuts through the shouting.
 <br><br>
 
-<<link [[Next|Dance Job Stage Ritual Escape 3]]>><</link>>
+<<link [[다음|Dance Job Stage Ritual Escape 3]]>><</link>>
 <br>
 
 :: Dance Job Stage Ritual Escape 3
@@ -2098,14 +2164,14 @@ A crowd of masked guests surround the front gate, demanding to be let out, and t
 	<br><br>
 	"You must let us in," <<he>> says. "And these people out. It's urgent."
 	<br>
-	"I have orders from the master," the guard responds. "No one in or out until the party—"
+	"I have orders from the master," the guard responds. "No one in or out until the party-"
 	<br>
 	"The party's over!" cries one of the masked guests. "Let us out before those things get here!"
 	<br><br>
 	Surrounded by agitated voices, the guard relents, and opens the gates.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Jordan Intro]]>><</link>>
+	<<link [[다음|Dance Job Stage Jordan Intro]]>><</link>>
 	<br>
 <<else>>
 	<<npc "Jordan" 3>><<person3>>
@@ -2113,14 +2179,14 @@ A crowd of masked guests surround the front gate, demanding to be let out, and t
 	<br><br>
 	"You must let us in," <<he>> says. "And these people out. It's urgent."
 	<br>
-	"I have orders from the master," the guard responds. "No one in or out until the party—"
+	"I have orders from the master," the guard responds. "No one in or out until the party-"
 	<br>
 	"The party's over!" cries one of the masked guests. "Let us out before those things get here!"
 	<br><br>
 	Surrounded by agitated voices, the guard relents, and opens the gates.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Jordan]]>><</link>>
+	<<link [[다음|Dance Job Stage Jordan]]>><</link>>
 	<br>
 <</if>>
 
@@ -2142,10 +2208,10 @@ stride through the frightened crowd, eyes fixed on the manor, one hand hidden in
 
 Jordan squeezes the <<person1>><<personsimple>>. "Thank you," <<person3>><<he>> says to you. "I'm Jordan. Priest at the temple on Wolf Street. You have what it takes to be initiated. Visit us, if you like." A
 <<generate4>><<person4>>
-<<person>> arrives at <<person3>><<his>> side, and takes the <<person1>><<personsimple>>'s hand. "I'll be with you soon." <<person3>><<He>> reaches into <<his>> clothes, and marches after the others. <<npcincr "Jordan" love 5>><<gglove>>
+<<person>> arrives at <<person3>><<his>> side, and takes the <<person1>><<personsimple>>'s hand. "I'll be with you soon." <<person3>><<He>> reaches into <<his>> clothes, and marches after the others.
 <br><br>
 
-<<link [[Next|Dance Job Stage Jordan End]]>><</link>>
+<<link [[다음|Dance Job Stage Jordan End]]>><</link>>
 <br>
 
 :: Dance Job Stage Jordan
@@ -2163,16 +2229,21 @@ stride through the frightened crowd, eyes fixed on the manor, one hand hidden in
 "Jordan!" the <<personsimple>> says, rushing the priest, who catches <<him>> in an embrace. "I was so scared. This <<girl>> rescued me."
 <br><br>
 
-Jordan squeezes the <<person1>><<person>>.
-<<if $jordan_ritual_dance is 1>>
-	"I didn't want to put you in danger," <<person3>><<he>> says, looking at you. "But thank you. You've done a great thing today."
-<<else>>
-	"You've done a great thing today," <<person3>><<he>> says. "Thank you."
-<</if>>
-A <<generate4>><<person4>><<person>> arrives at <<person3>><<his>> side, and takes the <<person1>><<personsimple>>'s hand. "I'll be with you soon." <<person3>><<He>> reaches into <<his>> clothes, and marches after the others. <<if $jordan_ritual_dance isnot 1>><<npcincr "Jordan" love 5>><<gglove>><</if>>
-<br><br>
 
-<<link [[Next|Dance Job Stage Jordan End]]>><</link>>
+<<if $jordan_ritual_dance is 1>>
+	Jordan squeezes the <<person1>><<personsimple>>. "I didn't want to put you in danger," <<person3>><<he>> says, looking at you. "But thank you. You've done a great thing today." A
+	<<generate4>><<person4>>
+	<<person>> arrives at <<person3>><<his>> side, and takes the <<person1>><<personsimple>>'s hand. "I'll be with you soon." <<person3>><<He>> reaches into <<his>> clothes, and marches after the others.
+	<br><br>
+<<else>>
+	Jordan squeezes the <<person1>><<person>>. "You've done a great thing today," <<he>> says. "Thank you." A
+	<<generate4>><<person4>>
+	<<person>> arrives at <<person3>><<his>> side, and takes the <<person1>><<personsimple>>'s hand. "I'll be with you soon." <<person3>><<He>> reaches into <<his>> clothes, and marches after the others.
+	<br><br>
+<</if>>
+
+
+<<link [[다음|Dance Job Stage Jordan End]]>><</link>>
 <br>
 
 :: Dance Job Stage Jordan End
@@ -2203,7 +2274,7 @@ A <<generate4>><<person4>><<person>> arrives at <<person3>><<his>> side, and tak
 
 
 
-<<link [[Next|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
+<<link [[다음|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
 <br>
 
 :: Dance Job Stage Explore Safe
@@ -2214,13 +2285,18 @@ You press your ear against the safe, and listen close as you turn the dial.
 
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
-	<<wearProp "wallet" 0 "money">>
-	A satisfying click, and the safe swings open, revealing its innards. Hard cash. You make it away <<moneyGain 300 true true "danubeDanceJob">> richer.
+
+	A satisfying click, and the safe swings open, revealing its innards. Hard cash. You make it away <<moneyGain 300 true true>> richer.
 	<br><br>
 
-	<<skulduggeryuse>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
 
-	<<link [[Return to party|Dance Job Stage Explore End]]>><<handheldon>><</link>>
+	<<link [[Return to party|Dance Job Stage Explore End]]>><</link>>
 	<br>
 
 <<else>>
@@ -2234,9 +2310,15 @@ You press your ear against the safe, and listen close as you turn the dial.
 	<<npcClothesType $NPCList[0] "formal">><<npcClothesType $NPCList[1] "formal">>
 	<br><br>
 
-	<<skulduggeryuse>>
 
-	<<link [[Next|Dance Job Stage Explore Rape]]>><<set $molestationstart to 1>><</link>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[다음|Dance Job Stage Explore Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 
 <</if>>
@@ -2260,9 +2342,9 @@ You press your ear against the safe, and listen close as you turn the dial.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Dance Job Stage Explore Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage Explore Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Dance Job Stage Explore Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage Explore Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Dance Job Stage Explore Rape Finish
@@ -2271,16 +2353,16 @@ You press your ear against the safe, and listen close as you turn the dial.
 	<<ejaculation>>
 	"Now get the fuck out," the <<person>> says. <<tearful>> you scramble from the room. The door shuts behind you.
 	<br><br>
-	<<tearful>> you recover.
+	<<tearful>> 당신은 몸을 추스른다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 
 	<<if $exposed lte 1 or $dance_job_exposed gte 1>>
-		<<link [[Next|Dance Job Stage Explore End]]>><</link>>
+		<<link [[다음|Dance Job Stage Explore End]]>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Stage Explore Exposed]]>><</link>>
+		<<link [[다음|Dance Job Stage Explore Exposed]]>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -2289,10 +2371,10 @@ You press your ear against the safe, and listen close as you turn the dial.
 	<<clotheson>>
 	<<endcombat>>
 	<<if $exposed lte 1 or $dance_job_exposed gte 1>>
-		<<link [[Next|Dance Job Stage Explore End]]>><</link>>
+		<<link [[다음|Dance Job Stage Explore End]]>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Dance Job Stage Explore Exposed]]>><</link>>
+		<<link [[다음|Dance Job Stage Explore Exposed]]>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -2323,7 +2405,7 @@ You rush into the arms of the <<person>>. <<covered>>
 
 <<link [[Return to the party|Dance Job Stage Explore Exposed 2]]>><<trauma 12>><<stress 18>><<dance_job_interest 20>><</link>><<ggtrauma>><<gggstress>><<ggginterest>>
 <br>
-<<link [[Leave|Dance Job Stage Leave]]>><<endevent>><</link>>
+<<link [[떠난다|Dance Job Stage Leave]]>><<endevent>><</link>>
 <br>
 
 :: Dance Job Stage Explore Exposed 2
@@ -2336,7 +2418,7 @@ Heads turns as you enter. Laughs are stifled, but leers are not.
 <<set $dance_job_exposed to 1>>
 <br><br>
 
-<<link [[Next|Dance Job Stage Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -2351,7 +2433,7 @@ You open your mouth to speak, but the <<person>> cuts you off. "I won't hear it!
 <br>
 
 :: Dance Job Stage Explore Carrots
-<<effects>><<wearProp "knife">>
+<<effects>>
 
 
 You chop the carrots. "Faster!" the <<person>> says after several minutes, dumping a sackful onto the counter beside you.
@@ -2363,7 +2445,7 @@ A <<generate2>><<person2>><<person>> arrives to rescue you. "They want you on st
 You return to the party.
 <br><br>
 
-<<link [[Next|Dance Job Stage Intermission End]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage Intermission End]]>><<endevent>><</link>>
 <br>
 
 
@@ -2376,14 +2458,35 @@ You sneak to their discarded clothes, and rifle for jewellery and anything else 
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
 
-	You squirrel away <<printmoney 50000>> in stolen goods, and escape without detection. <<set $blackmoney += 500>><<crimeUp 500 "thievery">>
-<<else>>
-	The <<person1>><<person>> screeches. <<crimeUp 100 "thievery">>You turn and dash back to the staircase empty-handed.
-<</if>>
-<br><br>
-<<skulduggeryuse>>
+	You squirrel away <span class="gold">£500</span> in stolen goods, and escape without detection. <<set $blackmoney += 500>><<crimeUp 500 "thievery">>
+	<br><br>
 
-<<link [[Leave|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[떠난다|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	The <<person1>><<person>> screeches. <<crimeUp 100 "thievery">>You turn and dash back to the staircase empty-handed.
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">That was too easy. You didn't learn anything.</span>
+		<br><br>
+	<</if>>
+
+	<<link [[떠난다|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+
+<</if>>
 
 :: Dance Job Stage Explore End
 <<effects>>
@@ -2391,7 +2494,7 @@ You sneak to their discarded clothes, and rifle for jewellery and anything else 
 You return to the party before anyone notices your absence.
 <br><br>
 
-<<link [[Next|Dance Job Stage Intermission End]]>><</link>>
+<<link [[다음|Dance Job Stage Intermission End]]>><</link>>
 <br>
 
 
@@ -2401,7 +2504,7 @@ You return to the party before anyone notices your absence.
 The lights around the room dim, aside from the spotlight, which fixes on you. It follows you onto the stage as you prepare for the next performance.
 <br><br>
 
-<<link [[Next|Dance Job Stage Dance]]>><<set $dancestart to 1>><</link>>
+<<link [[다음|Dance Job Stage Dance]]>><<set $dancestart to 1>><</link>>
 <br>
 
 :: Dance Job Stage End Rape
@@ -2422,9 +2525,9 @@ The lights around the room dim, aside from the spotlight, which fixes on you. It
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Dance Job Stage End Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage End Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Dance Job Stage End Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage End Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Dance Job Stage End Rape Finish
@@ -2442,7 +2545,7 @@ The lights around the room dim, aside from the spotlight, which fixes on you. It
 	<<storeon "dance_job_stage">>
 	<<endcombat>>
 
-	<<link [[Next|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
+	<<link [[다음|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
 	<br>
 
 <<else>>
@@ -2453,7 +2556,7 @@ The lights around the room dim, aside from the spotlight, which fixes on you. It
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|Dance Job Stage End 2]]>><</link>>
+	<<link [[다음|Dance Job Stage End 2]]>><</link>>
 	<br>
 
 
@@ -2475,7 +2578,7 @@ The <<beasttype>> pulls the contraption right in front of you. Now close, you ca
 
 <<link [[Squeeze through the aperture|Dance Job Stage Cabin]]>><</link>>
 <br>
-<<link [[Walk away|Dance Job Stage Cabin Walk]]>><</link>>
+<<link [[물러난다|Dance Job Stage Cabin Walk]]>><</link>>
 <br>
 <<if $submissive lte 500>>
 	<<link [[Smash the glass|Dance Job Stage Cabin Smash]]>><<def 5>><</link>><<defianttext>><<physiquedifficulty 1 16000>>
@@ -2488,7 +2591,7 @@ The <<beasttype>> pulls the contraption right in front of you. Now close, you ca
 You turn and walk away. They can keep the money. A disappointed sigh follows as you disappear behind the stage.
 <br><br>
 
-<<link [[Next|Dance Job Stage End 2]]>><<endevent>><</link>>
+<<link [[다음|Dance Job Stage End 2]]>><<endevent>><</link>>
 
 :: Dance Job Stage Cabin Smash
 <<effects>>
@@ -2503,16 +2606,16 @@ You swing at the glass!
 
 	You reach into the cabin, careful not to step on the broken remnants, and take the money.
 	<<if $dance_job_interest gte 100>>
-		You've gained <<printmoney 500000>><<money 500000 "danubeDanceJob">>.
+		You've gained <<moneyGain 5000>>.
 	<<else>>
-		You've gained <<printmoney 200000>><<money 200000 "danubeDanceJob">>.
+		You've gained <<moneyGain 2000>>.
 	<</if>>
 	<br><br>
 
 	That should give the perverts something to talk about.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage End 2]]>><</link>>
+	<<link [[다음|Dance Job Stage End 2]]>><</link>>
 	<br>
 <<else>>
 	<span class="red">Your blow bounces off.</span> You try again, but the glass only wobbles. You hear a sigh of relief.
@@ -2520,7 +2623,7 @@ You swing at the glass!
 
 	<<link [[Squeeze through the aperture|Dance Job Stage Cabin]]>><</link>>
 	<br>
-	<<link [[Walk away|Dance Job Stage Cabin Walk]]>><</link>>
+	<<link [[물러난다|Dance Job Stage Cabin Walk]]>><</link>>
 	<br>
 <</if>>
 
@@ -2530,16 +2633,16 @@ You swing at the glass!
 You have to bend over to fit. You push your arms through, then your head, and your shoulders. You can almost reach the money. You push yourself further in, up to your waist, and your hand clasps around the cash. You've gained
 
 <<if $dance_job_interest gte 100>>
-	<<printmoney 500000>><<money 500000 "danubeDanceJob">>.
+	<<moneyGain 5000>>.
 <<else>>
-	<<printmoney 200000>><<money 200000 "danubeDanceJob">>.
+	<<moneyGain 2000>>.
 <</if>>
 <br><br>
 
 As you touch it, <span class="pink">a brass contraption closes around your waist, locking you in place.</span> You try to squirm free, but you're stuck firm. You hear laughter through the glass.<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 <br><br>
 
-<<link [[Next|Dance Job Stage Cabin 2]]>><</link>>
+<<link [[다음|Dance Job Stage Cabin 2]]>><</link>>
 <br>
 
 
@@ -2551,17 +2654,24 @@ As you touch it, <span class="pink">a brass contraption closes around your waist
 	"Is it worth it?" asks once of the masked guests, peering at you through one of the panes. "Taking a horse for so little money." You feel fur press against your <<bottom>>.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Cabin Horse]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Dance Job Stage Cabin Horse]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	<<endevent>>
 	<<loadNPC 0 "dance_job_stage">><<person1>>
-	"<<Ladies_gentlemen>>," announces the <<person>>. "Shall we send our entertainment off in style?" You feel a sharp whack to your <<bottom>>. <<gpain>><<pain 4>>
+	<<if maleChance() gte 100>>
+		"Gentlemen,"
+	<<elseif maleChance() lte 0>>
+		"Ladies,"
+	<<else>>
+		"Ladies and gentlemen,"
+	<</if>>
+	announces the <<person>>. "Shall we send our entertainment off in style?" You feel a sharp whack to your <<bottom>>. <<gpain>><<pain 4>>
 	<br><br>
 	"You'll have to hit harder than that if you want to get anywhere," <<he>> continues. "Who's up next?" You feel another whack, this one harder. The force jolts the cabin forwards a little.<<gpain>><<pain 4>>
 	<br><br>
 
-	<<link [[Next|Dance Job Stage Cabin Spank]]>><</link>>
+	<<link [[다음|Dance Job Stage Cabin Spank]]>><</link>>
 	<br>
 <</if>>
 
@@ -2579,7 +2689,7 @@ You see a hall through the glass, and a flight of steps leading down. The cabin 
 "Thank you for coming," says the <<person>>, right behind you. "Until next time." Another smack to your rear. This one harder than any before. The cabin lurches forward.
 <br><br>
 
-<<link [[Next|Dance Job Stage Cabin Spank 2]]>><</link>>
+<<link [[다음|Dance Job Stage Cabin Spank 2]]>><</link>>
 <br>
 
 
@@ -2598,7 +2708,7 @@ The contraption loosens, freeing you. You're stood on the street outside.
 <<set $worn.under_lower to clone(setup.clothes.under_lower[0])>>
 <<storeon "dance_job_stage">>
 
-<<link [[Next|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
+<<link [[다음|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
 <br>
 
 
@@ -2633,9 +2743,9 @@ The contraption loosens, freeing you. You're stood on the street outside.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Dance Job Stage Cabin Horse Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Dance Job Stage Cabin Horse Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|$passage]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|$passage]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Dance Job Stage Cabin Horse Finish
@@ -2653,7 +2763,7 @@ The contraption loosens, freeing you. You're stood on the street outside.
 	<<tearful>> you steady yourself. <<loadNPC 0 "dance_job_stage">><<person1>>"A round of applause for our entertainment this evening!" shouts the <<person>>. Polite clapping erupts as you hurry behind the stage.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage End 2]]>><</link>>
+	<<link [[다음|Dance Job Stage End 2]]>><</link>>
 	<br>
 
 <<else>>
@@ -2666,7 +2776,7 @@ The contraption loosens, freeing you. You're stood on the street outside.
 	The contraption around your waist loosens, freeing you. <<tearful>> you steady yourself. <<loadNPC 0 "dance_job_stage">><<person1>>"A round of applause for our entertainment this evening!" shouts the <<person>>. Polite clapping erupts as you hurry behind the stage.
 	<br><br>
 
-	<<link [[Next|Dance Job Stage End 2]]>><</link>>
+	<<link [[다음|Dance Job Stage End 2]]>><</link>>
 	<br>
 <</if>>
 
@@ -2687,4 +2797,4 @@ You emerge after dressing, and find a <<generate1>><<person1>><<person>> in a se
 <<He>> leads you outside, and escorts you from the premises.
 <br><br>
 
-<<link [[Next|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>
+<<link [[다음|Danube Street]]>><<endevent>><<dance_job_end>><<clearNPC "dance_job_stage">><<set $eventskip to 1>><</link>>

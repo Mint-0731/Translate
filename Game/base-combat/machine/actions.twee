@@ -31,22 +31,22 @@
 		<<case 0>>
 			<<if $orgasmdown gte 1>>
 				<<set _leftOptions to "orgasm">>
-				<span class="lewd">Your left arm is free, but you can't stop the spasms.</span>
+				<span class="lewd">당신의 왼팔은 자유로우나, 경련을 멈출 수가 없다.</span>
 			<<elseif $pain gte 100 and $willpowerpain is 0>>
 				<<set _leftOptions to "pain">>
-				<span class="red">Your left arm is free, but hurts to move.</span>
+				<span class="red">당신의 왼팔은 자유로우나, 아파서 움직일 수가 없다.</span>
 			<<elseif $dissociation gte 2>>
 				<<set _leftOptions to "unreal">>
-				<span class="pink">Your left arm is free, but doesn't feel real.</span>
+				<span class="pink">당신의 왼팔은 자유로우나, 진짜처럼 느껴지지 않는다.</span>
 			<<else>>
 				<<if _targetYourself is true and _targetnumber gt 1>>
-					<<set _targetlistarms["Yourself"] to "self">>
+					<<set _targetlistarms["당신 자신"] to "self">>
 				<</if>>
 				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
 					<<targetListBox "left" _targetlistarms>>
 				<</if>>
 				<<set _leftOptions to "free">>
-				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">Your left arm is free.</span>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">당신의 왼팔은 자유롭다.</span>
 				<<if $options.combatControls.includes("adio") and _targetnumber gt 1>>
 					<br>
 					<<targetListBox "left" _targetlistarms>>
@@ -56,32 +56,32 @@
 		<<case "mechgrappled">>
 			<<if $orgasmdown gte 1>>
 				<<set _leftOptions to "bound">>
-				<span class="lewd">Your left arm jerks against its bonds.</span>
+				<span class="lewd">당신의 왼팔은 묶인 상태로 경련하고 있다.</span>
 			<<elseif $pain gte 100 and $willpowerpain is 0>>
 				<<set _leftOptions to "bound">>
-				<span class="red">Your left arm is held in a painful bind.</span>
+				<span class="red">당신의 왼팔은 아프게 묶여 있다.</span>
 			<<elseif $dissociation gte 2>>
 				<<set _leftOptions to "bound">>
-				<span class="pink">Your left arm lies limp in its bonds.</span>
+				<span class="pink">당신의 왼팔은 묶인 상태로 축 처져 있다.</span>
 			<<else>>
 				<<set _leftOptions to "mech">>
-				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">Your left arm is held down.</span>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">당신의 왼팔은 묶여 있다.</span>
 			<</if>>
 		<<case "swarmgrappled">>
 			<<set $_changetype to true>><<leftActionInitSwarm>>
 		<<case "bound">>
 			<<if $orgasmdown gte 1>>
 				<<set _leftOptions to "bound">>
-				<span class="lewd">Your left arm jerks against its bonds.</span>
+				<span class="lewd">당신의 왼팔은 묶인 상태로 경련하고 있다.</span>
 			<<elseif $pain gte 100 and $willpowerpain is 0>>
 				<<set _leftOptions to "bound">>
-				<span class="red">Your left arm is held in a painful bind.</span>
+				<span class="red">당신의 왼팔은 아프게 묶여 있다.</span>
 			<<elseif $dissociation gte 2>>
 				<<set _leftOptions to "bound">>
-				<span class="pink">Your left arm lies limp in its bonds.</span>
+				<span class="pink">당신의 왼팔은 묶인 상태로 축 처져 있다.</span>
 			<<else>>
 				<<set _leftOptions to "bound">>
-				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">Your left arm is bound and helpless.</span>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">당신의 왼팔은 무력하게 묶여있다.</span>
 			<</if>><<if $options.combatControls.includes("adio")>><br><</if>>
 		<<case "trapped">>
 			<<set $_changetype to true>><<leftActionInitVore>>
@@ -99,8 +99,9 @@
 				<<set $leftactiondefault to "rest">>
 			<</if>>
 			<<set $leftaction to $leftactiondefault>>
+			<<set _textColor to combatListColor('leftaction', (Object.values(_leftaction).includes($leftaction) ? $leftaction : Object.values(_leftaction)[0]), "Machine")>>
 			<div class="extraMargin">
-				<<generateCombatAction _leftaction "leftaction" "Machine">>
+				<<generateCombatActionOthers _leftaction "leftaction" _textColor $leftaction "Machine">>
 			</div>
 			<<if $options.combatControls.includes("ists")>>
 				<div id="leftactionDifficulty">
@@ -122,43 +123,43 @@
 		<<case "free">>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
-					<<set _leftaction["Pull on the chains"] to "chain_struggle">>
+					<<set _leftaction["체인을 당긴다"] to "chain_struggle">>
 				<</if>>
 			<</if>>
 			<<if $machine.tattoo>>
 				<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
-					<<set _leftaction["Whack the tattoo gun"] to "whack">>
+					<<set _leftaction["타투건을 세게 친다"] to "whack">>
 				<</if>>
 			<</if>>
 			<<if $machine.vaginal>>
 				<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
-					<<set _leftaction["Whack the phallic machine"] to "vaginal_whack">>
-					<<set _leftaction["Push the phallic machine away"] to "vaginal_push">>
+					<<set _leftaction["남근 기계를 세게 친다"] to "vaginal_whack">>
+					<<set _leftaction["남근 기계를 밀어낸다"] to "vaginal_push">>
 				<</if>>
 			<</if>>
 			<<if $machine.anal>>
 				<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
-					<<set _leftaction["Whack the small phallic machine"] to "anal_whack">>
-					<<set _leftaction["Push the small phallic machine away"] to "anal_push">>
+					<<set _leftaction["작은 남근 기계를 세게 친다"] to "anal_whack">>
+					<<set _leftaction["작은 남근 기계를 밀어낸다"] to "anal_push">>
 				<</if>>
 			<</if>>
-			<<set _leftaction["Rest"] to "rest">>
+			<<set _leftaction["쉰다"] to "rest">>
 		<<case "mech">>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
-					<<set _leftaction["Pull on the chains"] to "chain_struggle">>
+					<<set _leftaction["체인을 당긴다"] to "chain_struggle">>
 				<</if>>
 			<</if>>
-			<<set _leftaction["Rest"] to "rest">>
+			<<set _leftaction["쉰다"] to "rest">>
 		<<case "orgasm">>
-			<<set _leftaction["Fold"] to "leftfold">>
-			<<set _leftaction["Grip"] to "leftgrip">>
+			<<set _leftaction["팔을 붙잡는다"] to "leftfold">>
+			<<set _leftaction["움켜쥔다"] to "leftgrip">>
 		<<case "pain">>
-			<<set _leftaction["Struggle"] to "leftstruggleweak">>
-			<<set _leftaction["Protect"] to "leftprotect">>
+			<<set _leftaction["몸부림친다"] to "leftstruggleweak">>
+			<<set _leftaction["몸을 지킨다"] to "leftprotect">>
 		<<case "unreal">>
-			<<set _leftaction["Poke yourself"] to "leftpoke">>
-			<<set _leftaction["Keep your arms out of the way"] to "leftcurl">>
+			<<set _leftaction["자신을 찌른다"] to "leftpoke">>
+			<<set _leftaction["당신의 팔을 그대로 놔둔다"] to "leftcurl">>
 	<</switch>>
 <</widget>>
 
@@ -168,22 +169,22 @@
 		<<case 0>>
 			<<if $orgasmdown gte 1>>
 				<<set _rightOptions to "orgasm">>
-				<span class="lewd">Your right arm is free, but you can't stop the spasms.</span>
+				<span class="lewd">당신의 오른팔은 자유로우나, 경련을 멈출 수가 없다.</span>
 			<<elseif $pain gte 100 and $willpowerpain is 0>>
 				<<set _rightOptions to "pain">>
-				<span class="red">Your right arm is free, but hurts to move.</span>
+				<span class="red">당신의 오른팔은 자유로우나, 아파서 움직일 수가 없다.</span>
 			<<elseif $dissociation gte 2>>
 				<<set _rightOptions to "unreal">>
-				<span class="pink">Your right arm is free, but doesn't feel real.</span>
+				<span class="pink">당신의 오른팔은 자유로우나, 진짜처럼 느껴지지 않는다.</span>
 			<<else>>
 				<<if _targetYourself is true and _targetnumber gt 1>>
-					<<set _targetlistarms["Yourself"] to "self">>
+					<<set _targetlistarms["당신 자신"] to "self">>
 				<</if>>
 				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
 					<<targetListBox "right" _targetlistarms>>
 				<</if>>
 				<<set _rightOptions to "free">>
-				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">Your right arm is free.</span>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">당신의 오른팔은 자유롭다.</span>
 				<<if $options.combatControls.includes("adio") and _targetnumber gt 1>>
 					<br>
 					<<targetListBox "right" _targetlistarms>>
@@ -193,32 +194,32 @@
 		<<case "mechgrappled">>
 			<<if $orgasmdown gte 1>>
 				<<set _rightOptions to "bound">>
-				<span class="lewd">Your right arm jerks against its bonds.</span>
+				<span class="lewd">당신의 오른팔은 묶인 상태로 경련하고 있다.</span>
 			<<elseif $pain gte 100 and $willpowerpain is 0>>
 				<<set _rightOptions to "bound">>
-				<span class="red">Your right arm is held in a painful bind.</span>
+				<span class="red">당신의 오른팔은 아프게 묶여 있다.</span>
 			<<elseif $dissociation gte 2>>
 				<<set _rightOptions to "bound">>
-				<span class="pink">Your right arm lies limp in its bonds.</span>
+				<span class="pink">당신의 오른팔은 묶인 상태로 축 처져 있다.</span>
 			<<else>>
 				<<set _rightOptions to "mech">>
-				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">Your right arm is held down.</span>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">당신의 오른팔은 묶여 있다.</span>
 			<</if>>
 		<<case "swarmgrappled">>
 			<<set $_changetype to true>><<rightActionInitSwarm>>
 		<<case "bound">>
 			<<if $orgasmdown gte 1>>
 				<<set _rightOptions to "bound">>
-				<span class="lewd">Your right arm jerks against its bonds.</span>
+				<span class="lewd">당신의 오른팔은 묶인 상태로 경련하고 있다.</span>
 			<<elseif $pain gte 100 and $willpowerpain is 0>>
 				<<set _rightOptions to "bound">>
-				<span class="red">Your right arm is held in a painful bind.</span>
+				<span class="red">당신의 오른팔은 아프게 묶여 있다.</span>
 			<<elseif $dissociation gte 2>>
 				<<set _rightOptions to "bound">>
-				<span class="pink">Your right arm lies limp in its bonds.</span>
+				<span class="pink">당신의 오른팔은 묶인 상태로 축 처져 있다.</span>
 			<<else>>
 				<<set _rightOptions to "bound">>
-				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">Your right arm is bound and helpless.</span>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">당신의 오른팔은 무력하게 묶여있다.</span>
 			<</if>><<if $options.combatControls.includes("adio")>><br><</if>>
 		<<case "trapped">>
 			<<set $_changetype to true>><<rightActionInitVore>>
@@ -236,8 +237,9 @@
 				<<set $rightactiondefault to "rest">>
 			<</if>>
 			<<set $rightaction to $rightactiondefault>>
+			<<set _textColor to combatListColor('rightaction', (Object.values(_rightaction).includes($rightaction) ? $rightaction : Object.values(_rightaction)[0]), "Machine")>>
 			<div class="extraMargin">
-				<<generateCombatAction _rightaction "rightaction" "Machine">>
+				<<generateCombatActionOthers _rightaction "rightaction" _textColor $rightaction "Machine">>
 			</div>
 			<<if $options.combatControls.includes("ists")>>
 				<div id="rightactionDifficulty">
@@ -259,43 +261,43 @@
 		<<case "free">>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
-					<<set _rightaction["Pull on the chains"] to "chain_struggle">>
+					<<set _rightaction["체인을 당긴다"] to "chain_struggle">>
 				<</if>>
 			<</if>>
 			<<if $machine.tattoo>>
 				<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
-					<<set _rightaction["Whack the tattoo gun"] to "whack">>
+					<<set _rightaction["타투건을 세게 친다"] to "whack">>
 				<</if>>
 			<</if>>
 			<<if $machine.vaginal>>
 				<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
-					<<set _rightaction["Whack the phallic machine"] to "vaginal_whack">>
-					<<set _rightaction["Push the phallic machine away"] to "vaginal_push">>
+					<<set _rightaction["남근 기계를 세게 친다"] to "vaginal_whack">>
+					<<set _rightaction["남근 기계를 밀어낸다"] to "vaginal_push">>
 				<</if>>
 			<</if>>
 			<<if $machine.anal>>
 				<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
-					<<set _rightaction["Whack the small phallic machine"] to "anal_whack">>
-					<<set _rightaction["Push the small phallic machine away"] to "anal_push">>
+					<<set _rightaction["작은 남근 기계를 세게 친다"] to "anal_whack">>
+					<<set _rightaction["작은 남근 기계를 밀어낸다"] to "anal_push">>
 				<</if>>
 			<</if>>
-			<<set _rightaction["Rest"] to "rest">>
+			<<set _rightaction["쉰다"] to "rest">>
 		<<case "mech">>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
-					<<set _rightaction["Pull on the chains"] to "chain_struggle">>
+					<<set _rightaction["체인을 당긴다"] to "chain_struggle">>
 				<</if>>
 			<</if>>
-			<<set _rightaction["Rest"] to "rest">>
+			<<set _rightaction["쉰다"] to "rest">>
 		<<case "orgasm">>
-			<<set _rightaction["Fold"] to "rightfold">>
-			<<set _rightaction["Grip"] to "rightgrip">>
+			<<set _rightaction["팔을 붙잡는다"] to "rightfold">>
+			<<set _rightaction["움켜쥔다"] to "rightgrip">>
 		<<case "pain">>
-			<<set _rightaction["Struggle"] to "rightstruggleweak">>
-			<<set _rightaction["Protect"] to "rightprotect">>
+			<<set _rightaction["몸부림친다"] to "rightstruggleweak">>
+			<<set _rightaction["몸을 지킨다"] to "rightprotect">>
 		<<case "unreal">>
-			<<set _rightaction["Poke yourself"] to "rightpoke">>
-			<<set _rightaction["Keep your arms out of the way"] to "rightcurl">>
+			<<set _rightaction["자신을 찌른다"] to "rightpoke">>
+			<<set _rightaction["당신의 팔을 그대로 놔둔다"] to "rightcurl">>
 	<</switch>>
 <</widget>>
 
@@ -305,7 +307,7 @@
 		<<switch $feetuse>>
 			<<case 0>>
 				<<if _targetYourself is true and _targetnumber gt 1>>
-					<<set _targetlistall["Yourself"] to "self">>
+					<<set _targetlistall["당신 자신"] to "self">>
 				<</if>>
 				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
 					<<if ($leftleg is "grappled" and $rightleg is "grappled") or ($leftleg is "bound" and $rightleg is "bound")>>
@@ -315,14 +317,14 @@
 				<</if>>
 				<<if $leftleg is 0 and $rightleg is 0>>
 					<<set _feetOptions to "free">>
-					<span @class="($lastOptions.feet isnot _feetOptions ?'gold':'')">Your legs are free.</span>
+					<span @class="($lastOptions.feet isnot _feetOptions ?'gold':'')">당신의 양다리는 자유롭다.</span>
 				<<elseif $leftleg is "grappled" or $rightleg is "grappled">>
 					<<set $_changetype to true>><<feetActionInitTentacle>>
 				<<elseif $leftleg is "bound" and $rightleg is "bound">>
 					<<set $_changetype to true>><<feetActionInitTentacle>>
 				<<else>>
 					<<set _feetOptions to "free">>
-					<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your legs are free.</span>
+					<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">당신의 양다리는 자유롭다.</span>
 				<</if>>
 				<<if $options.combatControls.includes("adio") and _targetnumber gt 1 and _feetOptions.toLowerCase().includes("free")>>
 					<br>
@@ -333,7 +335,7 @@
 				<</if>>
 			<<case "mechgrappled">>
 				<<set _feetOptions to "mech">>
-				<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">Your legs are chained.</span>
+				<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">당신의 양다리는 사슬로 묶여 있다.</span>
 			<<case "bound" "penis" "othervagina" "walk" "run" "strut" "none">>
 				<<set $_changetype to true>><<feetActionInit>>
 			<<default>>
@@ -349,8 +351,9 @@
 					<<set $feetactiondefault to "rest">>
 				<</if>>
 				<<set $feetaction to $feetactiondefault>>
+				<<set _textColor to combatListColor('feetaction', (Object.values(_feetaction).includes($feetaction) ? $feetaction : Object.values(_feetaction)[0]), "Machine")>>
 				<div class="extraMargin">
-					<<generateCombatAction _feetaction "feetaction" "Machine">>
+					<<generateCombatActionOthers _feetaction "feetaction" _textColor $feetaction "Machine">>
 				</div>
 				<<if $options.combatControls.includes("ists")>>
 					<div id="feetactionDifficulty">
@@ -377,34 +380,34 @@
 		<<case "free">>
 			<<if $machine.leg_chains>>
 				<<if $machine.leg_chains.use isnot "inert" and $machine.leg_chains.use isnot "destroyed">>
-					<<set _feetaction["Pull on the chains"] to "chain_struggle">>
+					<<set _feetaction["체인을 당긴다"] to "chain_struggle">>
 				<</if>>
 			<</if>>
 			<<if $machine.tattoo>>
 				<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
-					<<set _feetaction["Kick the tattoo gun"] to "whack">>
+					<<set _feetaction["타투건을 찬다"] to "whack">>
 				<</if>>
 			<</if>>
 			<<if $machine.vaginal>>
 				<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
-					<<set _feetaction["Kick the phallic machine"] to "vaginal_whack">>
-					<<set _feetaction["Push the phallic machine away"] to "vaginal_push">>
+					<<set _feetaction["남근 기계를 찬다"] to "vaginal_whack">>
+					<<set _feetaction["남근 기계를 밀어낸다"] to "vaginal_push">>
 				<</if>>
 			<</if>>
 			<<if $machine.anal>>
 				<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
-					<<set _feetaction["Kick the small phallic machine"] to "anal_whack">>
-					<<set _feetaction["Push the small phallic machine away"] to "anal_push">>
+					<<set _feetaction["작은 남근 기계를 찬다"] to "anal_whack">>
+					<<set _feetaction["작은 남근 기계를 밀어낸다"] to "anal_push">>
 				<</if>>
 			<</if>>
-			<<set _feetaction["Rest"] to "rest">>
+			<<set _feetaction["쉰다"] to "rest">>
 		<<case "mech">>
 			<<if $machine.leg_chains>>
 				<<if $machine.leg_chains.use isnot "inert" and $machine.leg_chains.use isnot "destroyed">>
-					<<set _feetaction["Pull against the chains"] to "chain_struggle">>
+					<<set _feetaction["체인을 당긴다"] to "chain_struggle">>
 				<</if>>
 			<</if>>
-			<<set _feetaction["Rest"] to "rest">>
+			<<set _feetaction["쉰다"] to "rest">>
 	<</switch>>
 <</widget>>
 
@@ -427,234 +430,242 @@
 
 		<<if $leftarm is 0>>
 			<br>
-			Your left arm is free.
+			당신의 왼팔은 자유롭다.
 			<br>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
 					<<if $leftactiondefault is "chain_struggle">>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$leftaction" "chain_struggle" checked>></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$leftaction" "chain_struggle" checked>></label>
 					<<else>>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$leftaction" "chain_struggle">></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$leftaction" "chain_struggle">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.tattoo>>
 				<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
 					<<if $leftactiondefault is "whack">>
-						| <label><span class="def">Whack the tattoo gun</span> <<radiobutton "$leftaction" "whack" checked>></label>
+						| <label><span class="def">타투건을 세게 친다</span> <<radiobutton "$leftaction" "whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Whack the tattoo gun</span> <<radiobutton "$leftaction" "whack">></label>
+						| <label><span class="def">타투건을 세게 친다</span> <<radiobutton "$leftaction" "whack">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.vaginal>>
 				<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
 					<<if $leftactiondefault is "vaginal_whack">>
-						| <label><span class="def">Whack the phallic machine</span> <<radiobutton "$leftaction" "vaginal_whack" checked>></label>
+						| <label><span class="def">남근 기계를 세게 친다</span> <<radiobutton "$leftaction" "vaginal_whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Whack the phallic machine</span> <<radiobutton "$leftaction" "vaginal_whack">></label>
+						| <label><span class="def">남근 기계를 세게 친다</span> <<radiobutton "$leftaction" "vaginal_whack">></label>
 					<</if>>
 					<<if $leftactiondefault is "vaginal_push">>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$leftaction" "vaginal_push" checked>></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$leftaction" "vaginal_push" checked>></label>
 					<<else>>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$leftaction" "vaginal_push">></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$leftaction" "vaginal_push">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.anal>>
 				<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
 					<<if $leftactiondefault is "anal_whack">>
-						| <label><span class="def">Whack the small phallic machine</span> <<radiobutton "$leftaction" "anal_whack" checked>></label>
+						| <label><span class="def">작은 남근 기계를 세게 친다</span> <<radiobutton "$leftaction" "anal_whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Whack the small phallic machine</span> <<radiobutton "$leftaction" "anal_whack">></label>
+						| <label><span class="def">작은 남근 기계를 세게 친다</span> <<radiobutton "$leftaction" "anal_whack">></label>
 					<</if>>
 					<<if $leftactiondefault is "anal_push">>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$leftaction" "anal_push" checked>></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$leftaction" "anal_push" checked>></label>
 					<<else>>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$leftaction" "anal_push">></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$leftaction" "anal_push">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $leftactiondefault is "rest">>
-				| <label>Rest <<radiobutton "$leftaction" "rest" checked>></label>
+				| <label>쉰다 <<radiobutton "$leftaction" "rest" checked>></label>
 			<<else>>
-				| <label>Rest <<radiobutton "$leftaction" "rest">></label>
+				| <label>쉰다 <<radiobutton "$leftaction" "rest">></label>
 			<</if>>
 		<<elseif $leftarm is "mechgrappled">>
 			<br>
-			Your left arm is held down.
+			당신의 왼팔은 눌려있다.
 			<br>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
 					<<if $leftactiondefault is "chain_struggle">>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$leftaction" "chain_struggle" checked>></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$leftaction" "chain_struggle" checked>></label>
 					<<else>>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$leftaction" "chain_struggle">></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$leftaction" "chain_struggle">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $leftactiondefault is "rest">>
-				| <label>Rest <<radiobutton "$leftaction" "rest" checked>></label>
+				| <label>쉰다 <<radiobutton "$leftaction" "rest" checked>></label>
 			<<else>>
-				| <label>Rest <<radiobutton "$leftaction" "rest">></label>
+				| <label>쉰다 <<radiobutton "$leftaction" "rest">></label>
 			<</if>>
 		<<elseif $leftarm is "bound">>
 			<br>
-			Your left arm is bound.
+			당신의 왼팔은 묶여있다.
 		<</if>>
 
 		<<if $rightarm is 0>>
 			<br>
-			Your right arm is free.
+			당신의 오른팔은 자유롭다.
 			<br>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
 					<<if $rightactiondefault is "chain_struggle">>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$rightaction" "chain_struggle" checked>></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$rightaction" "chain_struggle" checked>></label>
 					<<else>>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$rightaction" "chain_struggle">></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$rightaction" "chain_struggle">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.tattoo>>
 				<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
 					<<if $rightactiondefault is "whack">>
-						| <label><span class="def">Whack the tattoo gun</span> <<radiobutton "$rightaction" "whack" checked>></label>
+						| <label><span class="def">타투건을 세게 친다</span> <<radiobutton "$rightaction" "whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Whack the tattoo gun</span> <<radiobutton "$rightaction" "whack">></label>
+						| <label><span class="def">타투건을 세게 친다</span> <<radiobutton "$rightaction" "whack">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.vaginal>>
 				<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
 					<<if $rightactiondefault is "vaginal_whack">>
-						| <label><span class="def">Whack the phallic machine</span> <<radiobutton "$rightaction" "vaginal_whack" checked>></label>
+						| <label><span class="def">남근 기계를 세게 친다</span> <<radiobutton "$rightaction" "vaginal_whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Whack the phallic machine</span> <<radiobutton "$rightaction" "vaginal_whack">></label>
+						| <label><span class="def">남근 기계를 세게 친다</span> <<radiobutton "$rightaction" "vaginal_whack">></label>
 					<</if>>
 					<<if $rightactiondefault is "vaginal_push">>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$rightaction" "vaginal_push" checked>></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$rightaction" "vaginal_push" checked>></label>
 					<<else>>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$rightaction" "vaginal_push">></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$rightaction" "vaginal_push">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.anal>>
 				<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
 					<<if $rightactiondefault is "anal_whack">>
-						| <label><span class="def">Whack the small phallic machine</span> <<radiobutton "$rightaction" "anal_whack" checked>></label>
+						| <label><span class="def">작은 남근 기계를 세게 친다</span> <<radiobutton "$rightaction" "anal_whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Whack the small phallic machine</span> <<radiobutton "$rightaction" "anal_whack">></label>
+						| <label><span class="def">작은 남근 기계를 세게 친다</span> <<radiobutton "$rightaction" "anal_whack">></label>
 					<</if>>
 					<<if $rightactiondefault is "anal_push">>
-						| <label><span class="brat">Push the small phallic machine away</span> <<radiobutton "$rightaction" "anal_push" checked>></label>
+						| <label><span class="brat">작은 남근 기계를 밀어낸다</span> <<radiobutton "$rightaction" "anal_push" checked>></label>
 					<<else>>
-						| <label><span class="brat">Push the small phallic machine away</span> <<radiobutton "$rightaction" "anal_push">></label>
+						| <label><span class="brat">작은 남근 기계를 밀어낸다</span> <<radiobutton "$rightaction" "anal_push">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $rightactiondefault is "rest">>
-				| <label>Rest <<radiobutton "$rightaction" "rest" checked>></label>
+				| <label>쉰다 <<radiobutton "$rightaction" "rest" checked>></label>
 			<<else>>
-				| <label>Rest <<radiobutton "$rightaction" "rest">></label>
+				| <label>쉰다 <<radiobutton "$rightaction" "rest">></label>
 			<</if>>
 		<<elseif $rightarm is "mechgrappled">>
 			<br>
-			Your right arm is chained.
+			당신의 오른팔은 체인에 묶여있다.
 			<br>
 			<<if $machine.arm_chains>>
 				<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
 					<<if $rightactiondefault is "chain_struggle">>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$rightaction" "chain_struggle" checked>></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$rightaction" "chain_struggle" checked>></label>
 					<<else>>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$rightaction" "chain_struggle">></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$rightaction" "chain_struggle">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $rightactiondefault is "rest">>
-				| <label>Rest <<radiobutton "$rightaction" "rest" checked>></label>
+				| <label>쉰다 <<radiobutton "$rightaction" "rest" checked>></label>
 			<<else>>
-				| <label>Rest <<radiobutton "$rightaction" "rest">></label>
+				| <label>쉰다 <<radiobutton "$rightaction" "rest">></label>
 			<</if>>
 		<<elseif $rightarm is "bound">>
 			<br>
-			Your right arm is bound.
+			당신의 오른팔은 묶여있다.
 		<</if>>
 
 		<<if $feetuse is 0>>
 			<br>
-			Your legs are free.
+			당신의 다리는 자유롭다.
 			<br>
 			<<if $machine.leg_chains>>
 				<<if $machine.leg_chains.use isnot "inert" and $machine.leg_chains.use isnot "destroyed">>
 					<<if $feetactiondefault is "chain_struggle">>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$feetaction" "chain_struggle" checked>></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$feetaction" "chain_struggle" checked>></label>
 					<<else>>
-						| <label><span class="def">Pull on the chains</span> <<radiobutton "$feetaction" "chain_struggle">></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$feetaction" "chain_struggle">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.tattoo>>
 				<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
 					<<if $feetactiondefault is "whack">>
-						| <label><span class="def">Kick the tattoo gun</span> <<radiobutton "$feetaction" "whack" checked>></label>
+						| <label><span class="def">타투건을 찬다</span> <<radiobutton "$feetaction" "whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Kick the tattoo gun</span> <<radiobutton "$feetaction" "whack">></label>
+						| <label><span class="def">타투건을 찬다</span> <<radiobutton "$feetaction" "whack">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.vaginal>>
 				<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
 					<<if $feetactiondefault is "vaginal_whack">>
-						| <label><span class="def">Kick the phallic machine</span> <<radiobutton "$feetaction" "vaginal_whack" checked>></label>
+						| <label><span class="def">남근 기계를 찬다</span> <<radiobutton "$feetaction" "vaginal_whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Kick the phallic machine</span> <<radiobutton "$feetaction" "vaginal_whack">></label>
+						| <label><span class="def">남근 기계를 찬다</span> <<radiobutton "$feetaction" "vaginal_whack">></label>
 					<</if>>
 					<<if $feetactiondefault is "vaginal_push">>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$feetaction" "vaginal_push" checked>></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$feetaction" "vaginal_push" checked>></label>
 					<<else>>
-						| <label><span class="brat">Push the phallic machine away</span> <<radiobutton "$feetaction" "vaginal_push">></label>
+						| <label><span class="brat">남근 기계를 밀어낸다</span> <<radiobutton "$feetaction" "vaginal_push">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $machine.anal>>
 				<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
 					<<if $feetactiondefault is "anal_whack">>
-						| <label><span class="def">Kick the small phallic machine</span> <<radiobutton "$feetaction" "anal_whack" checked>></label>
+						| <label><span class="def">작은 남근 기계를 찬다</span> <<radiobutton "$feetaction" "anal_whack" checked>></label>
 					<<else>>
-						| <label><span class="def">Kick the small phallic machine</span> <<radiobutton "$feetaction" "anal_whack">></label>
+						| <label><span class="def">작은 남근 기계를 찬다</span> <<radiobutton "$feetaction" "anal_whack">></label>
 					<</if>>
 					<<if $feetactiondefault is "anal_push">>
-						| <label><span class="brat">Push the small phallic machine away</span> <<radiobutton "$feetaction" "anal_push" checked>></label>
+						| <label><span class="brat">작은 남근 기계를 밀어낸다</span> <<radiobutton "$feetaction" "anal_push" checked>></label>
 					<<else>>
-						| <label><span class="brat">Push the small phallic machine away</span> <<radiobutton "$feetaction" "anal_push">></label>
+						| <label><span class="brat">작은 남근 기계를 밀어낸다</span> <<radiobutton "$feetaction" "anal_push">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $feetactiondefault is "rest">>
-				| <label>Rest <<radiobutton "$feetaction" "rest" checked>></label>
+				| <label>쉰다 <<radiobutton "$feetaction" "rest" checked>></label>
 			<<else>>
-				| <label>Rest <<radiobutton "$feetaction" "rest">></label>
+				| <label>쉰다 <<radiobutton "$feetaction" "rest">></label>
 			<</if>>
 		<<elseif $feetuse is "mechgrappled">>
 			<br>
-			Your legs are chained.
+			당신의 다리는 체인에 묶여있다.
 			<br>
 			<<if $machine.leg_chains>>
 				<<if $machine.leg_chains.use isnot "inert" and $machine.leg_chains.use isnot "destroyed">>
 					<<if $feetactiondefault is "chain_struggle">>
-						| <label><span class="def">Pull against the chains</span> <<radiobutton "$feetaction" "chain_struggle" checked>></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$feetaction" "chain_struggle" checked>></label>
 					<<else>>
-						| <label><span class="def">Pull against the chains</span> <<radiobutton "$feetaction" "chain_struggle">></label>
+						| <label><span class="def">체인을 당긴다</span> <<radiobutton "$feetaction" "chain_struggle">></label>
 					<</if>>
 				<</if>>
 			<</if>>
 			<<if $feetactiondefault is "rest">>
-				| <label>Rest <<radiobutton "$feetaction" "rest" checked>></label>
+				| <label>쉰다 <<radiobutton "$feetaction" "rest" checked>></label>
 			<<else>>
-				| <label>Rest <<radiobutton "$feetaction" "rest">></label>
+				| <label>쉰다 <<radiobutton "$feetaction" "rest">></label>
 			<</if>>
 		<</if>>
+	<</if>>
+
+
+	<<if $options.images is 1 and $options.combatImages is 1>>
+		<<timed 100ms>>
+			<<combatimg>>
+			<br>
+		<</timed>>
 	<</if>>
 
 	<br><br>

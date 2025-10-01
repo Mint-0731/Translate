@@ -1,5 +1,15 @@
 :: Feats [widget]
 
+<<widget "earnFeat">>
+	<<if _args[0] and $feats.locked is false and $cheatdisable is "t" and $debug is 0 and $gamemode isnot "soft" and $alluremod gte 1>>
+		<<if $feats.currentSave[_args[0]] is undefined and (!$feats.soft or !setup.feats[_args[0]].softLockable) and (!$feats.pregnancyLocked or !setup.feats[_args[0]].pregnancyLockable) and (!$feats.pregnancySillyLocked or !setup.feats[_args[0]].pregnancySillyLockable)>>
+			<<set $feats.currentSave[_args[0]] to Date()>>
+
+			<<displayFeat _args[0]>>
+		<</if>>
+	<</if>>
+<</widget>>
+
 <<widget "updateFeats">>
 	<<if _passageCheck is "Start">>
 		<<set _recalledFeats to JSON.parse(localStorage.getItem("dolFeats"))>>
@@ -93,6 +103,7 @@
 				newLife:0,
 				aNewBestFriend:0,
 				tattoos:0,
+				defaultMoves: 0,
 				randomClothing:0,
 				specialClothing:0,
 				sexToys:0,
@@ -113,48 +124,51 @@
 				newLife:{cost:20, limit: _newLifeLimit, minCount: 1, count:_newLife, exclusive:""},
 				aNewBestFriend:{cost:10, limit: 10 * _earSlimeFeats, minCount: 1, count:_earSlimeFeats, exclusive:""},
 				tattoos:{cost:5, limit: 25, minCount: 2, count:_tattoosFeats, exclusive:""},
+				defaultMoves:{cost:5, limit: 25, minCount: 1, count:_keys.count("A New Life"), exclusive:""},
 				randomClothing:{cost:1, limit: 20, minCount: 0, count:0, exclusive:""},
 				specialClothing:{cost:40, limit: 40, minCount: 1, count:_keys.count("Curious Attire"), exclusive:""},
 				sexToys:{cost:30, limit: 30 * _sexToysFeats, minCount: 1, count:_sexToysFeats, exclusive:""},
 			},
 			missing:{
-				money:"Unlock this boost by obtaining the 'Pocket Change' feat",
-				grades:"Unlock this boost by obtaining the 'Perfect Record' feat",
-				skulduggery:"Unlock this boost by obtaining the 'Thief' feat",
-				dancing:"Unlock this boost by obtaining the 'May I have this Dance?' feat",
-				swimming:"Unlock this boost by obtaining the 'Aquanaut' feat",
-				athletics:"Unlock this boost by obtaining the 'Swift' feat",
-				tending:"Unlock this boost by obtaining the 'Green Fingered' feat",
-				housekeeping:"Unlock this boost by obtaining the 'Majordomo' feat",
-				seduction:"Unlock this boost by obtaining the 'Seductress' feat",
-				purity:"Unlock this boost by obtaining the 'Walk Like an Angel' and 'Falling, Falling, Falling...' feats",
-				impurity:"Unlock this boost by obtaining the 'Devilish Looks' feat",
-				newLife:"Unlock this boost by obtaining a hidden feat (" + setup.feats["Broodmother Host"].hint + ")",
-				aNewBestFriend:"Unlock this boost by obtaining a hidden feat (" + setup.feats["Ear Slime Lover"].hint + ")",
-				tattoos:"Unlock this boost by obtaining the 'Billboard' and 'A Living Canvas' feats",
+				money:"'잔돈' 도전과제를 달성하면 해금",
+				grades:"'완벽한 성적표' 도전과제를 달성하면 해금",
+				skulduggery:"'도둑' 도전과제를 달성하면 해금",
+				dancing:"'한 곡 추시겠어요?' 도전과제를 달성하면 해금",
+				swimming:"'잠수부' 도전과제를 달성하면 해금",
+				athletics:"'재빠름' 도전과제를 달성하면 해금",
+				tending:"'초록 손가락' 도전과제를 달성하면 해금",
+				housekeeping:"'집사' 도전과제를 달성하면 해금",
+				seduction:"'요부' 도전과제를 달성하면 해금",
+				purity:"'천사처럼 걷기'와 '추락하고, 추락하고, 추락하고...' 도전과제를 달성하면 해금",
+				impurity:"'악마같은 모습' 도전과제를 달성하면 해금",
+				newLife:"숨겨진 도전과제를 달성하면 해금 (" + setup.feats["Broodmother Host"].hint + ")",
+				aNewBestFriend:"숨겨진 도전과제를 달성하면 해금 (" + setup.feats["Ear Slime Lover"].hint + ")",
+				tattoos:"'광고판'과 '살아있는 캔버스' 도전과제를 달성하면 해금",
+				defaultMoves:"숨겨진 도전과제를 달성하면 해금 (" + setup.feats["A New Life"].hint + ")",
 				randomClothing:"",
-				specialClothing:"Unlock this boost by obtaining a hidden feat (" + setup.feats["Curious Attire"].hint + ")",
-				sexToys:"Unlock this boost by obtaining a hidden feat (" + setup.feats["Opened Pandoras Box"].hint + ")",
+				specialClothing:"숨겨진 도전과제를 달성하면 해금 (" + setup.feats["Curious Attire"].hint + ")",
+				sexToys:"숨겨진 도전과제를 달성하면 해금 (" + setup.feats["Opened Pandoras Box"].hint + ")",
 			},
 			name:{
-				money:"Starting Money",
-				grades:"School Grades",
-				skulduggery:"Skulduggery Grade",
-				dancing:"Dancing Grade",
-				swimming:"Swimming Grade",
-				athletics:"Athletics Grade",
-				tending:"Tending Grade",
-				greenThumb:"Green Thumb Trait",
-				housekeeping:"Housekeeping Grade",
-				seduction:"Seduction Grade",
-				purity:"Daily Purity Boost",
-				impurity:"Daily Impurity Boost",
-				newLife:"A New Life",
-				aNewBestFriend:"A New Best Friend",
-				tattoos:"Starting Tattoos",
-				randomClothing:"Random Clothing",
-				specialClothing:"Special Clothing",
-				sexToys:"Sex Toys",
+				money:"소지금",
+				grades:"학교 성적",
+				skulduggery:"속임수 기술 등급",
+				dancing:"춤 기술 등급",
+				swimming:"수영 기술 등급",
+				athletics:"운동 기술 등급",
+				tending:"관리 기술 등급",
+				greenThumb:"원예가 특성",
+				housekeeping:"정리정돈 기술 등급",
+				seduction:"유혹 스킬 등급",
+				purity:"일일 순결도 상승 보너스",
+				impurity:"일일 순결도 하락 보너스",
+				newLife:"새로운 생명",
+				aNewBestFriend:"새로운 절친",
+				tattoos:"문신",
+				defaultMoves:"기본 행동 세트 추가",
+				randomClothing:"무작위 의상 추가",
+				specialClothing:"특수한 의상",
+				sexToys:"섹스 장난감",
 			},
 			pointsUsed: 0,
 			clothingGender:"Either",
@@ -195,7 +209,7 @@
 		<<earnFeat "A New Life">>
 	<</if>>
 	<<if _upgrades.money gt 0>>
-		<<money `_upgrades.money * _details.money.count / _details.money.cost * 5000` "startingMoney">>
+		<<set $money += _upgrades.money * _details.money.count / _details.money.cost * 5000>>
 	<</if>>
 	<<if _upgrades.grades gt 0>>
 		<<set $sciencetrait += _upgrades.grades / _details.grades.cost * 1>>
@@ -330,9 +344,6 @@
 					<<set _item.accessory_colourCustom to customColour(random(0,360), (random(0,20)/10), (random(5,40)/10), (random(0,20)/10), (random(0,100)/100))>>
 				<</if>>
 			<</if>>
-			<<if _item.pattern_options and _item.pattern_options.length gt 0>>
-				<<set _item.pattern to clone(_item.pattern_options).random()>>
-			<</if>>
 
 			<<set $_.outfitPrimary to _item.outfitPrimary>>
 			<<set $_.items to {}>>
@@ -344,7 +355,6 @@
 							<<set $_.items[_labelf] to clone(setup.clothes[_labelf][_j])>>
 							<<set $_.items[_labelf].colour to clone($_.items[_slot].colour)>>
 							<<set $_.items[_labelf].accessory_colour to clone($_.items[_slot].accessory_colour)>>
-							<<if $_.items[_labelf].pattern_options and $_.items[_labelf].pattern_options.length gt 0>><<set $_.items[_labelf].pattern to clone($_.items[_slot].pattern)>><</if>>
 							<<if $featsBoosts.clothingCustomColors is true and _item.colour is "custom">>
 								<<set $_.items[_labelf].colourCustom to clone($_.items[_slot].colourCustom)>>
 							<</if>>
@@ -427,6 +437,9 @@
 			<</for>>
 		<</for>>
 		<<bodywritingExposureCheck true>>
+	<</if>>
+	<<if _upgrades.defaultMoves gt 0>>
+		<<set $maxDefaultActionSets to 2 + _upgrades.defaultMoves / _details.defaultMoves.cost>>
 	<</if>>
 	<<if _upgrades.specialClothing gt 0>>
 		<<set _unlocked to $feats.allSaves.specialClothes>>

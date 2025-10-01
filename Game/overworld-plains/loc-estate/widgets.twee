@@ -33,7 +33,7 @@
 
 	<!-- if not defined, it means the player has agreed to Wren's demand and will receive their clothing back
 		after satisfying the goons. contains the terms (the amount Wren has asked for) -->
-	<!-- $estate.cards.clothesRebuyTerms can't set it to null because some old saves had NaNs turn into nulls, so now we avoid nulls -->
+	<!-- $estate.cards.clothesRebuyTerms  can't set it to null because some old saves had NaNs turn into nulls, so now we avoid nulls -->
 	<<set $estate.cards.bettingEnabled to true>>
 	<<set $_ante to setup.estateBlackjack.anteSizes[$_anteNum]>>
 	<<set $estate.cards.betStep to setup.estateBlackjack.betSteps[$_anteNum]>>
@@ -44,7 +44,7 @@
 	<<set $estate.cards.currentBetInput to 0>>
 
 	<!-- taking away player's money -->
-	<<money `-$_ante` "estateBetting">>
+	<<set $money -= $_ante>>
 <</widget>>
 
 <<widget "estate_end">>
@@ -53,7 +53,7 @@
 <</widget>>
 
 <<widget "estate_chaos_bar">>
-	Chaos:
+	혼란:
 	<<statbarinverted $estate.chaos 100>>
 	<div style="clear:both;"></div>
 <</widget>>
@@ -72,16 +72,16 @@
 
 <<widget "estate_stone_links">>
 	<<if !$estate.vials>>
-		<<link [[Approach the shelf|Estate Stone Shelf]]>><</link>>
+		<<link [[선반에 다가간다|Estate Stone Shelf]]>><</link>>
 		<br>
 	<</if>>
 	<<if $exposed gte 1 or $estate.vials is "shattered">>
-		<<link [[Approach the carriage|Estate Stone Carriage]]>><</link>>
+		<<link [[객차에 다가간다|Estate Stone Carriage]]>><</link>>
 		<br>
 	<<elseif $estate.carriage_attempt isnot true>>
-		<<link [[Approach the carriage|Estate Stone Carriage Stop]]>><<set $estate.carriage_attempt to true>><</link>>
+		<<link [[객차에 다가간다|Estate Stone Carriage Stop]]>><<set $estate.carriage_attempt to true>><</link>>
 		<br>
 	<</if>>
-	<<link [[Leave (0:03)|Estate Stone Leave]]>><<pass 3>><<endevent>><</link>>
+	<<link [[떠난다 (0:03)|Estate Stone Leave]]>><<pass 3>><<endevent>><</link>>
 	<br>
 <</widget>>
