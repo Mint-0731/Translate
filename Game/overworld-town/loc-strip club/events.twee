@@ -5,7 +5,7 @@ You return to work. The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
 <<clotheson>>
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Compete
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -50,7 +50,7 @@ You look over your shoulder. The pair have forgotten about the <<person3>><<pers
 	<</if>>
 	The pair leave you a handsome tip. <<tipreceive>>
 	<br><br>
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 <<else>>
 	The <<person3>><<person>> gives you an evil look. Not wanting to be outdone, <<he>> coughs as well. The pair turn to <<him>>.
@@ -91,7 +91,7 @@ You look over your shoulder. The pair have forgotten about the <<person3>><<pers
 		You thrust out your <<breasts>>, covered only by your $worn.upper.name and $worn.under_upper.name.
 	<</if>>
 <</if>>
-<<if pcAreArmsBound("any")>>
+<<if $leftarm is "bound" or $rightarm is "bound">>
 	You twirl to remind them of your bound arms. It does the trick.
 <<else>>
 	You make peace signs with both hands. It does the trick.
@@ -112,7 +112,7 @@ The pair have forgotten about the <<person3>><<person>>, and stare at you instea
 	<br><br>
 	<<clotheson>>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 <<else>>
 	The <<person3>><<person>> gives you an evil look. Not wanting to be outdone, <<he>> coughs as well. The pair turn to <<him>>.
@@ -178,7 +178,7 @@ The <<person1>><<person>> and <<person2>><<person>> cheer you on. You look strai
 
 	<<clotheson>>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 <<else>>
 
@@ -241,7 +241,7 @@ The pair look at each other, <span class="pink">and share a grin.</span> The <<p
 Security watches, unsure if they should intervene.
 <br><br>
 
-<<link [[Call for help|Bartending VIP Compete Help]]>><<stress 6>><<trauma 6>><</link>><<gstress>><<gtrauma>>
+<<link [[도움을 요청한다|Bartending VIP Compete Help]]>><<stress 6>><<trauma 6>><</link>><<gstress>><<gtrauma>>
 <br>
 <<if hasSexStat("promiscuity", 4)>>
 <<link [[Allow it|Bartending VIP Compete Allow]]>><</link>><<promiscuous4>>
@@ -258,7 +258,7 @@ The <<person3>><<person>> looks on the verge of tears. <<He>> picks up <<his>> t
 <br><br>
 
 <<endevent>>
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Compete Allow
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -279,7 +279,7 @@ You shake your head at security, leaving you at the mercy of the <<person2>><<pe
 		<<bodyliquid "bottom" "semen">><<ejacstat>>
 	<</if>>
 <<else>>
-	The <<person2>><<person>> thrusts against your <<genitals>>. <<if $player.penisExist>>Each time it feels like they're about to envelop you, <<if playerChastity()>>despite your $worn.genitals.name,<</if>> but <<he>> seems content to frot against you.<</if>> <<He>> keeps glancing at security. Seems both are unsure how things can be pushed.
+	The <<person2>><<person>> thrusts against your <<genitals>>. <<if $player.penisExist>>Each time it feels like they're about to envelope you, <<if playerChastity()>>despite your $worn.genitals.name,<</if>> but <<he>> seems content to frot against you.<</if>> <<He>> keeps glancing at security. Seems both are unsure how things can be pushed.
 	<<if $NPCList[0].penis isnot "none">>
 		Beside you, the <<person3>><<person>> clenches <<his>> fists as the <<person1>><<person>> thrusts against <<person3>><<his>> bottom. At last, the <<person2>><<person>> <span class="pink">shudders into orgasm.</span> The <<person1>><<person>> finishes soon after.
 	<<else>>
@@ -300,7 +300,7 @@ The <<person3>><<person>> looks on the verge of tears, but <<he>> takes <<his>> 
 
 <<clotheson>>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Strip Work
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -308,7 +308,7 @@ The <<person3>><<person>> looks on the verge of tears, but <<he>> takes <<his>> 
 You get back to work. You keep an eye on the <<person>> and <<his>> admirers. They're more lecherous than ever, but <<he>> seems in control. After a while <<he>> leaves for the dressing room, despite their protests.
 <br><br>
 
-You're pouring a <<person2>><<person>> a beer towards the end of your shift when you hear a voice. "Thanks love," it says. You look up to see the <<person1>><<person>> smiling at you across the counter, now dressed in everyday clothes. "They ate that routine right up. Tipped generously." <<He>> reaches into a pocket. "Only fair you share some." <<He>> places some money on the counter and leaves without another word.
+You're pouring a <<person2>><<person>> a beer towards the end of your shift when you hear a voice. "Thanks love," it says. You look up to see the <<person1>><<person>> smiling at you across the counter, now dressed in everyday clothes. "They ate that routine right up. Tipped generously," <<he>> reaches into a pocket. "Only fair you share some," <<he>> places some money on the counter and leaves without another word.
 <br><br>
 <<if $phase is 2>>
 	<<set $tipmod to 0.8>>
@@ -324,26 +324,26 @@ You're pouring a <<person2>><<person>> a beer towards the end of your shift when
 <</if>> <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Strip
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
 <<wearProp "rag" "white">>
-You grab a cloth and pretend to clean the bar, moving towards the leaning <<person1>><<person>>. Once close, you reach over the counter and <span class="lewd">rip the <<if $pronoun is "m">>shirt<<else>>top half of <<his>> dress<</if>> right off <<his>> back.</span> It comes away easy, no doubt designed to be easily removed.
+You grab a cloth and pretend to clean the bar, moving towards the leaning <<person1>><<person>>. Once close, you reach over the counter and <span class="lewd">rip the <<if $pronoun is "m">>shirt<<else>>top half of their dress<</if>> right off their back.</span> It comes away easy, no doubt designed to be easily removed.
 <<promiscuity2>>
 
-The onlookers hoot and cheer as the <<person>> <<if $pronoun is "f">>covers <<his>> $NPCList[0].breastsdesc and <</if>>pretends to try to get <<his>> top back. You step back and hold it up in the air, well out of the <<persons>> reach.
+The onlookers hoot and cheer as the <<person>> <<if $pronoun is "m">>pretends to try to get <<his>> top back.<<else>> covers <<his>> $NPCList[0].breastsdesc and pretends to try to get <<his>> top back.<</if>> You step back and hold it up in the air, well out of the <<persons>> reach.
 <br><br>
 
 <span class="gold">That should make them part with more cash.</span>
 <br><br>
 
-<<if hasSexStat("promiscuity", 3)>>
-	<<link [[Take it further|Bartending VIP Strip 2]]>><<handheldon>><</link>><<promiscuous3>>
-	<br>
-<</if>>
 <<link [[Return to work|Bartending VIP Strip Work]]>><<handheldon>><<set $phase to 0>><</link>>
 <br>
+<<if hasSexStat("promiscuity", 3)>>
+<<link [[Take it further|Bartending VIP Strip 2]]>><<handheldon>><</link>><<promiscuous3>>
+<br>
+<</if>>
 
 :: Bartending VIP Strip 2
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -351,26 +351,28 @@ The onlookers hoot and cheer as the <<person>> <<if $pronoun is "f">>covers <<hi
 You throw the <<person1>><<persons>> top at the onlookers. They jump to catch it. The <<person>> reaches for it too, now facing away from you. You reach over the counter and <span class="lewd">snatch <<his>> <<if $pronoun is "m">>trousers<<else>>skirt<</if>> clean off <<his>> body,</span> leaving <<him>> naked save a pair of socks and gloves.
 <<promiscuity3>>
 
-The onlookers cheer and shout, so loud that security takes notice.
-<br>
-The <<person>> pretends to try to cover <<his>> <<if $NPCList[0].penis isnot "none">>$NPCList[0].penisdesc<<else>>pussy<</if>><<if $pronoun is "f">> and $NPCList[0].breastsdesc<</if>> as best <<he>> can, without managing to conceal anything. <<Hes>> a good actor, but you're sure that blush is real.
+The onlookers cheer and shout, so loud that security take notice.
+<<if $pronoun is "m">>
+	The <<person>> pretends to try to cover their <<if $NPCList[0].penis isnot "none">>$NPCList[0].penisdesc<<else>>pussy<</if>> as best they can, without managing to conceal anything. <<Hes>> a good actor, but you're sure that blush is real.
+<<else>>
+	The <<person>> pretends to try to cover their <<if $NPCList[0].penis isnot "none">>$NPCList[0].penisdesc<<else>>pussy<</if>> and $NPCList[0].breastsdesc as best they can, without managing to conceal anything. <<Hes>> a good actor, but you're sure that blush is real.
+<</if>>
 <br><br>
 
 <span class="gold">That should make them part with yet more cash.</span>
 <br><br>
 
-<<if hasSexStat("promiscuity", 4)>>
-	<<link [[Take it further|Bartending VIP Strip 3]]>><</link>><<promiscuous4>>
-	<br>
-<</if>>
 <<link [[Return to work|Bartending VIP Strip Work]]>><<set $phase to 1>><</link>>
 <br>
-
+<<if hasSexStat("promiscuity", 4)>>
+<<link [[Take it further|Bartending VIP Strip 3]]>><</link>><<promiscuous4>>
+<br>
+<</if>>
 
 :: Bartending VIP Strip 3
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
 
-You walk around the counter and approach the <<person>> and onlookers. <<Hes>> stood well away from the bar now, surrounded by leering and groping clientele. You sneak up behind <<him>>, until you're close, then lunge. You grasp both of <<his>> arms in yours, pulling them away from <<his>> body and <span class="lewd">baring everything to the crowd.</span><<promiscuity4>>
+You walk around the counter and approach the <<person>> and onlookers. <<Hes>> stood well away from the bar now, surrounded by leering and groping clientele. You sneak up behind <<him>>, until you're close, then lunge. You grasp both <<his>> arms in yours, pulling them away from <<his>> body and <span class="lewd">baring everything to the crowd.</span><<promiscuity4>>
 
 The <<person>> feigns a struggle as the onlookers feast on <<his>> exposed body. The <<person2>><<person>> seizes the opportunity and
 <<if $NPCList[0].penis isnot "none" and !npcHasStrapon(0)>>
@@ -409,6 +411,7 @@ You're pouring a pint when you notice the crowd looking at you, smiling.
 		<br><br>
 		"Thought I'd return the favour," a voice whispers in your ear. It's the <<person1>><<person>>. The <<person2>><<person>> reaches across the counter and snatches away your $worn.under_upper.name, <span class="purple">exposing your <<breasts>>.</span>
 		<<upperstrip>><<underupperstrip>>
+		<br><br>
 	<<else>>
 		You hear rapid footsteps behind you. Before you can turn, a pair of hands invade your space and <<pullup>> your $worn.upper.name, <span class="purple">exposing your <<breasts>>.</span>
 		<br><br>
@@ -416,28 +419,30 @@ You're pouring a pint when you notice the crowd looking at you, smiling.
 		"Thought I'd return the favour," a voice whispers in your ear. It's the <<person1>><<person>>. The <<person2>><<person>> reaches across the counter and fondles your chest.
 		<<garousal>><<arousal 600 "breasts">>
 		<<upperstrip>>
+		<br><br>
 	<</if>>
 <<elseif !$worn.under_upper.type.includes("naked")>>
 	You hear rapid footsteps behind you. Before you can turn, a pair of hands invade your space and pull up your $worn.under_upper.name, <span class="purple">exposing your <<breasts>>.</span>
-	<br><br>
+		<br><br>
 
-	"Thought I'd return the favour," a voice whispers in your ear. It's the <<person1>><<person>>. The <<person2>><<person>> reaches across the counter and fondles your chest.
-	<<garousal>><<arousal 600 "breasts">>
+		"Thought I'd return the favour," a voice whispers in your ear. It's the <<person1>><<person>>. The <<person2>><<person>> reaches across the counter and fondles your chest.
+		<<garousal>><<arousal 600 "breasts">>
 
 	<<underupperstrip>>
+	<br><br>
 <<else>>
 	You hear rapid footsteps behind you. Before you can turn, a pair of hands invade your space and <span class="purple">pull back your arms.</span>
-	<br><br>
+		<br><br>
 
-	"Thought I'd return the favour," a voice whispers in your ear. It's the <<person1>><<person>>. The <<person2>><<person>> reaches across the counter and fondles your chest.
-	<<garousal>><<arousal 600 "breasts">>
+		"Thought I'd return the favour," a voice whispers in your ear. It's the <<person1>><<person>>. The <<person2>><<person>> reaches across the counter and fondles your chest.
+		<<garousal>><<arousal 600 "breasts">>
+		<br><br>
 <</if>>
-<br><br>
 
 <<if !$worn.lower.type.includes("naked")>>
 	Your heart beats faster as you feel the <<person1>><<person>> <span class="pink">grasp your $worn.lower.name.</span>
 <<elseif !$worn.under_lower.type.includes("naked")>>
-	Your heart beats faster as you feel the <<person1>><<person>> grasp your <span class="pink">$worn.under_lower.name</span>.
+	Your heart beats faster as you feel the <<person1>><<person>> grasp your <span class="pink">$worn.under_lower.name.</span>
 <<else>>
 	They can't see your bare lower half so long as you stay near the counter, but <span class="pink">the <<person1>><<person>> tries to pull you into the open.</span>
 <</if>>
@@ -447,17 +452,17 @@ You're pouring a pint when you notice the crowd looking at you, smiling.
 <span class="gold">They should tip generously after this.</span>
 <br><br>
 
+<<link [[도움을 요청한다|Bartending VIP Help]]>><<trauma -6>><<stress -6>><</link>><<gtrauma>><<gstress>>
+<br>
 <<if hasSexStat("exhibitionism", 4)>>
-	<<link [[Go along with it|Bartending VIP Strip 5]]>><</link>><<exhibitionist4>>
+	<<link [[따라간다|Bartending VIP Strip 5]]>><</link>><<exhibitionist4>>
 	<br>
 <</if>>
-<<link [[Call for help|Bartending VIP Help]]>><<trauma -6>><<stress -6>><</link>><<gtrauma>><<gstress>>
-<br>
 
 :: Bartending VIP Help
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
 
-You call for security. The <<person1>><<person>> releases you and waves them away before they arrive. "Sorry," <<he>> says. <<Hes>> now dressed in everyday clothes. "I thought you'd be up for it. They loved that little routine. Tipped generously." <<He>> reaches into <<his>> pocket and pulls out some cash. "Only fair you share some." <<He>> places it on the counter and leaves without another word.
+You call for security. The <<person1>><<person>> releases you and waves them away before they arrive. "Sorry," <<he>> says. <<Hes>> now dressed in everyday clothes. "I thought you'd be up for it. They loved that little routine. Tipped generously," <<he>> reaches into <<his>> pocket and pulls out some cash. "Only fair you share some." <<He>> places it on the counter and leaves without another word.
 <br><br>
 
 <<set $tipmod to 0.8>>
@@ -470,7 +475,7 @@ You call for security. The <<person1>><<person>> releases you and waves them awa
 
 <<clotheson>>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Strip 5
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -485,8 +490,9 @@ You allow the <<person1>><<person>> to continue.
 <</if>>
 You feel their eyes feast on every inch of your body.
 <<exhibitionism4>>
+<br><br>
 
-<<link [[Flaunt|Bartending VIP Strip Flaunt]]>><</link>>
+<<link [[과시한다|Bartending VIP Strip Flaunt]]>><</link>>
 <br>
 <<link [[Pretend to struggle|Bartending VIP Strip Struggle]]>><</link>>
 <br>
@@ -511,12 +517,12 @@ The <<person>> plays along, releasing your arms. Now free, you climb the counter
 A member of security rushes over.
 <br><br>
 
+<<link [[아무것도 하지 않는다|Bartending VIP Strip Security]]>><</link>>
+<br>
 <<if hasSexStat("exhibitionism", 5)>>
 	<<link [[Wave security away|Bartending VIP Strip 6]]>><</link>><<exhibitionist5>>
 	<br>
 <</if>>
-<<link [[Do nothing|Bartending VIP Strip Security]]>><</link>>
-<br>
 
 :: Bartending VIP Strip Struggle
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -529,13 +535,12 @@ The crowd reaches for you. The <<person>> tries to pull you back, but it's too l
 
 A member of security rushes over.
 <br><br>
-
+<<link [[아무것도 하지 않는다|Bartending VIP Strip Security]]>><</link>>
+<br>
 <<if hasSexStat("exhibitionism", 5)>>
 	<<link [[Wave security away|Bartending VIP Strip 6]]>><</link>><<exhibitionist5>>
 	<br>
 <</if>>
-<<link [[Do nothing|Bartending VIP Strip Security]]>><</link>>
-<br>
 
 :: Bartending VIP Strip Security
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -557,7 +562,7 @@ The crowd disperses, leaving you with the <<person1>><<person>>. <<Hes>> wearing
 
 <<clotheson>>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Strip 6
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -571,6 +576,7 @@ No part of your body is safe. You stop someone groping your <<breasts>>, only to
 
 <<if $arousal gte $arousalmax>>
 	<<orgasm>>
+	<br><br>
 
 	The crowd lets out a final cheer as you cum, so loud that it drowns out the music of the club. Everyone looks over.
 	<<if $player.penisExist and !$femaleclimax and !_deniedOrgasm>>
@@ -614,7 +620,7 @@ No part of your body is safe. You stop someone groping your <<breasts>>, only to
 
 <<clotheson>>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Patron Ignore
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
@@ -634,7 +640,7 @@ No part of your body is safe. You stop someone groping your <<breasts>>, only to
 	You ignore the <<person>> and continue working. You hear <<him>> insult you under <<his>> breath, but <<he>> leaves without a fuss. <<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 <</if>>
 
@@ -646,7 +652,7 @@ You continue to ignore the <<person>>. <<He>> insults you under <<his>> breath, 
 <<if !$per_npc.bartend and random(1, 2) is 2>>
 	<<saveNPC 0 bartend>>
 <</if>>
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 :: Bartending VIP Patron
@@ -656,7 +662,7 @@ You walk over to the <<person>>. <<He>> doesn't look at your face the entire tim
 
 <<He>> continues to stare even after you arrive.
 <<if $speech_attitude is "meek">>
-	"H-how can I help you?" you ask.
+	"How can I help you?" you ask.
 <<elseif $speech_attitude is "bratty">>
 	"What do you want?" you ask. "I'm busy."
 <<else>>
@@ -668,12 +674,12 @@ You walk over to the <<person>>. <<He>> doesn't look at your face the entire tim
 <br><br>
 
 <<if hasSexStat("promiscuity", 2)>>
-	<<link [[Accept|Bartending VIP Patron 2]]>><</link>><<promiscuous2>>
+	<<link [[받아들인다|Bartending VIP Patron 2]]>><</link>><<promiscuous2>>
 <<else>>
-	<<insufficientStat "promiscuity" "to take up such an offer">>
+	You're not lewd enough to take up such an offer.
 <</if>>
 <br>
-<<link [[Refuse|Bartending VIP Patron Refuse]]>><</link>>
+<<link [[거절한다|Bartending VIP Patron Refuse]]>><</link>>
 <br>
 
 :: Bartending VIP Patron Refuse
@@ -693,9 +699,9 @@ You try to turn away from the <<person>>, but <<he>> <span class="red">grasps yo
 <<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 <br><br>
 
-<<link [[Comply|Bartending VIP Patron Comply]]>><</link>>
+<<link [[응한다|Bartending VIP Patron Comply]]>><</link>>
 <br>
-<<link [[Refuse|Bartending VIP Patron Refuse 2]]>><</link>>
+<<link [[거절한다|Bartending VIP Patron Refuse 2]]>><</link>>
 <br>
 
 <<else>>
@@ -706,7 +712,7 @@ You turn away from the <<person>>. <<He>> insults you under <<his>> breath, but 
 	<<saveNPC 0 bartend>>
 <</if>>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 <</if>>
@@ -726,7 +732,7 @@ You leave the club with the <<person>>, emerging in an alley outside. The escape
 The <<person1>><<person>> grasps you from behind.
 <br><br>
 
-<<link [[Next|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 <<else>>
@@ -734,7 +740,7 @@ The <<person1>><<person>> grasps you from behind.
 The <<person>> grasps you from behind.
 <br><br>
 
-<<link [[Next|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 <</if>>
@@ -757,7 +763,7 @@ You return to the bar. A few moments later the <<person2>><<person>> approaches 
 	<<saveNPC 0 bartend>>
 <</if>>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 <<else>>
@@ -765,9 +771,9 @@ You return to the bar. A few moments later the <<person2>><<person>> approaches 
 <span class="red">Security pretend not to see.</span>
 <br><br>
 
-<<link [[Struggle|Bartending VIP Patron Struggle]]>><</link>><<physiquedifficulty>>
+<<link [[몸부림친다|Bartending VIP Patron Struggle]]>><</link>><<physiquedifficulty>>
 <br>
-<<link [[Don't struggle|Bartending VIP Patron Dragged]]>><</link>>
+<<link [[저항하지 않는다|Bartending VIP Patron Dragged]]>><</link>>
 <br>
 
 <</if>>
@@ -796,7 +802,7 @@ You struggle against the <<persons>> grip.
 	<<saveNPC 0 bartend>>
 	<</if>>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <<else>>
 
@@ -817,7 +823,7 @@ You struggle against the <<persons>> grip.
 		The <<person1>><<person>> grasps you from behind.
 		<br><br>
 
-		<<link [[Next|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
 		<br>
 
 	<<else>>
@@ -825,7 +831,7 @@ You struggle against the <<persons>> grip.
 		The <<person>> grasps you from behind.
 		<br><br>
 
-		<<link [[Next|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
 		<br>
 
 	<</if>>
@@ -848,7 +854,7 @@ You're dragged to the alley outside. The escape door shuts behind you.
 	The <<person1>><<person>> grasps you from behind.
 	<br><br>
 
-	<<link [[Next|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 
 <<else>>
@@ -856,7 +862,7 @@ You're dragged to the alley outside. The escape door shuts behind you.
 	The <<person>> grasps you from behind.
 	<br><br>
 
-	<<link [[Next|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 
 <</if>>
@@ -878,15 +884,15 @@ You glance at security. They're not watching, and shouldn't notice if you're qui
 	<br><br>
 
 	<<if hasSexStat("promiscuity", 3)>>
-		<<link [[Accept|Bartending VIP Patron Gang Accept]]>><</link>><<promiscuous3>>
+		<<link [[받아들인다|Bartending VIP Patron Gang Accept]]>><</link>><<promiscuous3>>
 		<br>
 	<<else>>
-		<<insufficientStat "promiscuity" "to take up such an offer, but you're afraid they'll hurt you if you refuse" "red">>
+		<span class="red">You're not lewd enough to take up such an offer, but you're afraid they'll hurt you if you refuse.</span>
 		<br><br>
-		<<link [[Accept|Bartending VIP Patron Gang Coerced]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<<link [[받아들인다|Bartending VIP Patron Gang Coerced]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
 		<br>
 	<</if>>
-	<<link [[Refuse|Bartending VIP Patron Gang Refuse]]>><</link>><<physiquedifficulty>>
+	<<link [[거절한다|Bartending VIP Patron Gang Refuse]]>><</link>><<physiquedifficulty>>
 	<br>
 
 <<else>>
@@ -894,7 +900,7 @@ You glance at security. They're not watching, and shouldn't notice if you're qui
 	The <<person>> grasps you from behind.
 	<br><br>
 
-	<<link [[Next|Bartending VIP Patron Sex]]>><<set $sexstart to 1>><</link>>
+	<<link [[다음|Bartending VIP Patron Sex]]>><<set $sexstart to 1>><</link>>
 	<br>
 
 <</if>>
@@ -905,7 +911,7 @@ You glance at security. They're not watching, and shouldn't notice if you're qui
 You beckon the <<person1>><<persons>> friends closer. They don't need to be asked twice.
 <<promiscuity3>>
 
-<<link [[Next|Bartending VIP Patron Gang Sex]]>><<set $sexstart to 1>><</link>>
+<<link [[다음|Bartending VIP Patron Gang Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
 :: Bartending VIP Patron Gang Coerced
@@ -914,7 +920,7 @@ You beckon the <<person1>><<persons>> friends closer. They don't need to be aske
 You look down at your feet and nod. The <<person1>><<person>> starts groping you from behind as <<his>> friends close in.
 <br><br>
 
-<<link [[Next|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 :: Bartending VIP Patron Gang Refuse
@@ -951,7 +957,7 @@ You try to break free,
 	<<saveNPC 0 bartend>>
 <</if>>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <<else>>
 
@@ -964,7 +970,7 @@ You try to break free,
 	<<pain 6>><<gpain>>
 	<br><br>
 
-	<<link [[Next|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <</if>>
 
@@ -987,9 +993,9 @@ You try to break free,
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bartending VIP Patron Sex Finish
@@ -1011,7 +1017,7 @@ You try to break free,
 	<<tearful>> you return to work. The rest of the shift passes without event.
 	<<tipreceive>>
 	<br><br>
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 
 <<elseif $enemyhealth lte 0>>
@@ -1024,7 +1030,7 @@ You try to break free,
 	<<tearful>> you return to work. The rest of the shift passes without event. <<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <<else>>
 	The <<person>> looks angry, but doesn't refuse. "Don't expect to get paid, whore," <<he>> says. They fix their clothes and walk away.
@@ -1036,7 +1042,7 @@ You try to break free,
 	<<tearful>> you return to work. The rest of the shift passes without event. <<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <</if>>
 
@@ -1059,15 +1065,15 @@ You try to break free,
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bartending VIP Patron Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-	<<ejaculation>>
+<<ejaculation>>
 
 	<<set $tipmod to 1>><<tipset "serving">>
 	<<set $tip += 500>>
@@ -1083,7 +1089,7 @@ You try to break free,
 	<<tearful>> you return to work. The rest of the shift passes without event.
 	<<tipreceive>>
 	<br><br>
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 
 <<else>>
@@ -1098,7 +1104,7 @@ You try to break free,
 	<<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 
 <</if>>
@@ -1122,9 +1128,9 @@ You try to break free,
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Gang Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Gang Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Gang Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Gang Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bartending VIP Patron Gang Sex Finish
@@ -1148,7 +1154,7 @@ You try to break free,
 	<<tearful>> you return to work. The rest of the shift passes without event.
 	<<tipreceive>>
 	<br><br>
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <<elseif $enemyhealth lte 0>>
 	You shove the <<person1>><<person>> onto a pile of rubbish, creating an opening. You run to the escape door. The others try to keep up, but you're too quick. You slam the door in their faces. Security look amused. One walks over and holds the door shut.
@@ -1161,7 +1167,7 @@ You try to break free,
 	<<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 
 <<else>>
@@ -1175,7 +1181,7 @@ You try to break free,
 	<<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <</if>>
 
@@ -1198,9 +1204,9 @@ You try to break free,
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Gang Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Gang Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bartending VIP Patron Gang Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bartending VIP Patron Gang Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bartending VIP Patron Gang Rape Finish
@@ -1223,7 +1229,7 @@ You try to break free,
 	<<tearful>> you return to work. The rest of the shift passes without event.
 	<<tipreceive>>
 	<br><br>
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 <<elseif $enemyhealth lte 0>>
 	You shove the <<person1>><<person>> onto a pile of rubbish, creating an opening. You run to the escape door. The others try to keep up, but you're too quick. You slam the door in their faces. Security look amused. One walks over and holds the door shut.
@@ -1236,7 +1242,7 @@ You try to break free,
 	<<tipreceive>>
 	<br><br>
 
-	<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 	<br>
 
 <</if>>
@@ -1247,7 +1253,7 @@ You try to break free,
 You pretend you didn't hear anything. The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending Listen Smuggling
 <<effects>>
@@ -1291,7 +1297,7 @@ You clean the counter near the pair.
 The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 <<else>>
 
@@ -1303,7 +1309,7 @@ They glance at you, <span class="red">and fall quiet.</span> They don't speak ag
 The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 <</if>>
 
@@ -1324,7 +1330,7 @@ You return to the bar. The rest of the shift passes without event.
 <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending VIP Darryl Refuse
 <<effects>>
@@ -1335,7 +1341,7 @@ You decide not to worry anyone, and keep it to yourself.
 The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 
 :: Bartending Listen Darryl
 <<effects>>
@@ -1350,7 +1356,7 @@ You tell <<him>> what you heard, and about how you fear for your colleague's saf
 You return to the bar. The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 :: Bartending Listen Darryl Refuse
@@ -1361,6 +1367,6 @@ You decide it's nothing to worry about, and get back to work.
 The rest of the shift passes without event. <<tipreceive>>
 <br><br>
 
-<<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Strip Club]]>><<endevent>><<pass 30>><</link>>
 <br>
 

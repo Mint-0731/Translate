@@ -1,30 +1,29 @@
 :: Widgets presets [widget]
 <!--Needs to be json strings, not json objects-->
 <<widget "presets">>
-	<<unset _preset>>
-	<<unset _presetName>>
 	<<if _args[0]>>
+		<<set _preset to "">>
 		<<switch _args[0]>>
 			<<case "vrelDefault">>
-				<<set _preset to '{"general":{"options":{"tipdisable":"f","numberify_enabled":1,"timestyle":"military","showCaptionText":true,"sidebarStats":"disabled","sidebarTime":"disabled","combatControls":"radio","images":1,"silhouetteEnabled":true,"sidebarAnimations":true,"blinkingEnabled":true,"combatAnimations":true},{"map":{"movement":true,"top":false,"markers":false},"malechance":50,"dgchance":0,"cbchance":0,"malevictimchance":50,"homochance":4,"breast_mod":0,"penis_mod":0,"blackchance":10,"straponchance":0,"alluremod":1,"beastmalechance":80,"monsterchance":50,"monsterhallucinations":"t","blackwolfmonster":0,"bestialitydisable":"f","swarmdisable":"f","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"f","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"f","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"f","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f","slugdisable":"f","waspdisable":"f","lurkerdisable":"f","beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":12,"bottomsizemax":8,"penissizemax":4,"penissizemin":-1,"debugdisable":"t","statdisable":"f","cheatdisabletoggle":"t","confirmSave":false,"confirmLoad":false,"confirmDelete":true,"reducedLineHeight":false},"npc":{"Avery":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Bailey":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Briar":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Charlie":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Darryl":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Doren":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Eden":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Gwylan":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Harper":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Jordan":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Kylar":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Landry":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Leighton":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Mason":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Morgan":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"River":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Robin":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Sam":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Sirris":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Whitney":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Winter":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Black Wolf":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Niki":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Quinn":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Remy":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Alex":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}, "Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"f","gender_body":"a","bodyshape":"slender","ballsExist":false,"freckles":false,"breastsize":0,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":2,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif","gamemode":"normal","asphyxiaLvl":3,"pbdisable":"t"}}'>>
+				<<set _preset to '{"general":{"options":{"tipdisable":"f","numberify_enabled":1,"timestyle":"military","showCaptionText":true,"sidebarStats":"disabled","sidebarTime":"disabled","combatControls":"radio","images":1,"silhouetteEnabled":true,"tanImgEnabled":true,"sidebarAnimations":true,"blinkingEnabled":true,"combatAnimations":true},{"map":{"movement":true,"top":false,"markers":false},"malechance":50,"dgchance":0,"cbchance":0,"malevictimchance":50,"homochance":4,"breast_mod":0,"penis_mod":0,"blackchance":10,"straponchance":0,"alluremod":1,"beastmalechance":80,"monsterchance":50,"monsterhallucinations":"t","blackwolfmonster":0,"bestialitydisable":"f","swarmdisable":"f","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"f","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"f","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"f","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f","slugdisable":"f","waspdisable":"f","lurkerdisable":"f","beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":12,"bottomsizemax":8,"penissizemax":4,"penissizemin":-1,"debugdisable":"t","statdisable":"f","cheatdisabletoggle":"t","confirmSave":false,"confirmLoad":false,"confirmDelete":true,"reducedLineHeight":false},"npc":{"Avery":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Bailey":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Briar":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Charlie":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Darryl":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Doren":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Eden":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Gwylan":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Harper":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Jordan":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Kylar":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Landry":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Leighton":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Mason":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Morgan":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"River":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Robin":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Sam":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Sirris":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Whitney":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Winter":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Black Wolf":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Niki":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Quinn":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Remy":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Alex":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}, "Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"f","gender_body":"a","ballsExist":false,"freckles":false,"breastsize":0,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":2,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif","gamemode":"normal","asphyxiaLvl":3,"pbdisable":"t"}}'>>
 			<<case "lollipopScythe">>
-				<<set _preset to '{"general":{"options":{"tipdisable":"t","numberify_enabled":1,"timestyle":"military","showCaptionText":true,"sidebarStats":"disabled","sidebarTime":"disabled","combatControls":"radio","images":1,"silhouetteEnabled":true,"sidebarAnimations":true,"blinkingEnabled":true,"combatAnimations":true},"map":{"movement":true,"top":true,"markers":true},"malechance":75,"dgchance":25,"cbchance":0,"malevictimchance":90,"homochance":75,"breast_mod":0,"penis_mod":2,"blackchance":10,"straponchance":25,"alluremod":1,"beastmalechance":100,"monsterchance":0,"monsterhallucinations":"t","blackwolfmonster":0,"bestialitydisable":"f","swarmdisable":"f","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"t","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"t","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"f","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f", "slugdisable":"f", "waspdisable":"f", "lurkerdisable":"f", "beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":12,"bottomsizemax":8,"penissizemax":4,"penissizemin":-1,"debugdisable":"f","statdisable":"f","cheatdisabletoggle":"t","confirmSave":false,"confirmLoad":false,"confirmDelete":true,"reducedLineHeight":true},"npc":{"Avery":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Bailey":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Briar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Charlie":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Darryl":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Doren":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Eden":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Gwylan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":5},"Harper":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Jordan":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Kylar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Landry":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Leighton":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Mason":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Morgan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":5},"River":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Robin":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Sam":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Sirris":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Whitney":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Winter":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Black Wolf":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Niki":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Quinn":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Remy":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Alex":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"h","gender_body":"f","bodyshape":"curvy","ballsExist":true,"freckles":false,"breastsize":4,"penissize":0,"bottomsize":0},"skinColor":{"natural":"light","range":40},"bodysize":0,"breastsensitivity":3,"genitalsensitivity":3,"eyeselect":"pink","hairselect":"platinumblond","hairlength":400,"awareselect":"innocent","background":"beautiful","gamemode":"hard","asphyxiaLvl":3,"pbdisable":"t"}}'>>
+				<<set _preset to '{"general":{"options":{"tipdisable":"t","numberify_enabled":1,"timestyle":"military","showCaptionText":true,"sidebarStats":"disabled","sidebarTime":"disabled","combatControls":"radio","images":1,"silhouetteEnabled":true,"tanImgEnabled":true,"sidebarAnimations":true,"blinkingEnabled":true,"combatAnimations":true},"map":{"movement":true,"top":true,"markers":true},"malechance":75,"dgchance":25,"cbchance":0,"malevictimchance":90,"homochance":75,"breast_mod":0,"penis_mod":2,"blackchance":10,"straponchance":25,"alluremod":1,"beastmalechance":100,"monsterchance":0,"monsterhallucinations":"t","blackwolfmonster":0,"bestialitydisable":"f","swarmdisable":"f","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"t","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"t","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"f","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f", "slugdisable":"f", "waspdisable":"f", "lurkerdisable":"f", "beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":12,"bottomsizemax":8,"penissizemax":4,"penissizemin":-1,"debugdisable":"f","statdisable":"f","cheatdisabletoggle":"t","confirmSave":false,"confirmLoad":false,"confirmDelete":true,"reducedLineHeight":true},"npc":{"Avery":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Bailey":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Briar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Charlie":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Darryl":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Doren":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Eden":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Gwylan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":5},"Harper":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Jordan":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Kylar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Landry":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Leighton":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Mason":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Morgan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":5},"River":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Robin":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Sam":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Sirris":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Whitney":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Winter":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Black Wolf":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Niki":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Quinn":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Remy":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Alex":{"pronoun":"m","gender":"m","penissize":4,"breastsize":0},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"h","gender_body":"f","ballsExist":true,"freckles":false,"breastsize":4,"penissize":0,"bottomsize":0},"skinColor":{"natural":"light","range":40},"bodysize":0,"breastsensitivity":3,"genitalsensitivity":3,"eyeselect":"pink","hairselect":"platinumblond","hairlength":400,"awareselect":"innocent","background":"beautiful","gamemode":"hard","asphyxiaLvl":3,"pbdisable":"t"}}'>>
 			<<case "purityGuy">>
-				<<set _preset to '{"general":{"options":{"tipdisable":"f","numberify_enabled":1,"timestyle":"ampm","showCaptionText":true,"sidebarStats":"all","sidebarTime":"top","combatControls":"radio","images":1,"silhouetteEnabled":true,"sidebarAnimations":true,"blinkingEnabled":true,"combatAnimations":true},"map":{"movement":true,"top":false,"markers":true},"malechance":50,"dgchance":0,"cbchance":0,"malevictimchance":10,"homochance":10,"breast_mod":0,"penis_mod":0,"blackchance":0,"straponchance":0,"alluremod":1.2,"beastmalechance":50,"monsterchance":100,"monsterhallucinations":"f","blackwolfmonster":2,"bestialitydisable":"f","swarmdisable":"t","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"t","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"t","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"t","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f","slugdisable":"f","waspdisable":"f","lurkerdisable":"f","beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":6,"bottomsizemax":4,"penissizemax":4,"penissizemin":-1,"debugdisable":"f","statdisable":"f","cheatdisabletoggle":"t","confirmSave":true,"confirmLoad":true,"confirmDelete":true,"reducedLineHeight":false},"npc":{"Avery":{"pronoun":"f","gender":"f","penissize":1,"breastsize":4},"Bailey":{"pronoun":"m","gender":"m","penissize":3,"breastsize":2},"Briar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Charlie":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Darryl":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Doren":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Eden":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Gwylan":{"pronoun":"f","gender":"f","penissize":1,"breastsize":0},"Harper":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Jordan":{"pronoun":"f","gender":"f","penissize":3,"breastsize":5},"Kylar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Landry":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Leighton":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Mason":{"pronoun":"f","gender":"f","penissize":3,"breastsize":2},"Morgan":{"pronoun":"f","gender":"f","penissize":3,"breastsize":3},"River":{"pronoun":"f","gender":"f","penissize":3,"breastsize":0},"Robin":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Sam":{"pronoun":"f","gender":"f","penissize":1,"breastsize":3},"Sirris":{"pronoun":"f","gender":"f","penissize":3,"breastsize":0},"Whitney":{"pronoun":"f","gender":"f","penissize":4,"breastsize":0},"Winter":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Black Wolf":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Niki":{"pronoun":"f","gender":"f","penissize":3,"breastsize":2},"Quinn":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Remy":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Alex":{"pronoun":"f","gender":"f","penissize":1,"breastsize":0},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"f","gender_body":"f","bodyshape":"curvy","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":1},"skinColor":{"natural":"light","range":0},"bodysize":2,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"amber","hairselect":"blond","hairlength":400,"awareselect":"innocent","background":"beautiful","gamemode":"normal","asphyxiaLvl":3,"pbdisable":"t"}}'>>
+				<<set _preset to '{"general":{"options":{"tipdisable":"f","numberify_enabled":1,"timestyle":"ampm","showCaptionText":true,"sidebarStats":"all","sidebarTime":"top","combatControls":"radio","images":1,"silhouetteEnabled":true,"tanImgEnabled":true,"sidebarAnimations":true,"blinkingEnabled":true,"combatAnimations":true},"map":{"movement":true,"top":false,"markers":true},"malechance":50,"dgchance":0,"cbchance":0,"malevictimchance":10,"homochance":10,"breast_mod":0,"penis_mod":0,"blackchance":0,"straponchance":0,"alluremod":1.2,"beastmalechance":50,"monsterchance":100,"monsterhallucinations":"f","blackwolfmonster":2,"bestialitydisable":"f","swarmdisable":"t","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"t","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"t","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"t","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f","slugdisable":"f","waspdisable":"f","lurkerdisable":"f","beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":6,"bottomsizemax":4,"penissizemax":4,"penissizemin":-1,"debugdisable":"f","statdisable":"f","cheatdisabletoggle":"t","confirmSave":true,"confirmLoad":true,"confirmDelete":true,"reducedLineHeight":false},"npc":{"Avery":{"pronoun":"f","gender":"f","penissize":1,"breastsize":4},"Bailey":{"pronoun":"m","gender":"m","penissize":3,"breastsize":2},"Briar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Charlie":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Darryl":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Doren":{"pronoun":"m","gender":"m","penissize":1,"breastsize":0},"Eden":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Gwylan":{"pronoun":"f","gender":"f","penissize":1,"breastsize":0},"Harper":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Jordan":{"pronoun":"f","gender":"f","penissize":3,"breastsize":5},"Kylar":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Landry":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Leighton":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Mason":{"pronoun":"f","gender":"f","penissize":3,"breastsize":2},"Morgan":{"pronoun":"f","gender":"f","penissize":3,"breastsize":3},"River":{"pronoun":"f","gender":"f","penissize":3,"breastsize":0},"Robin":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Sam":{"pronoun":"f","gender":"f","penissize":1,"breastsize":3},"Sirris":{"pronoun":"f","gender":"f","penissize":3,"breastsize":0},"Whitney":{"pronoun":"f","gender":"f","penissize":4,"breastsize":0},"Winter":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Black Wolf":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Niki":{"pronoun":"f","gender":"f","penissize":3,"breastsize":2},"Quinn":{"pronoun":"m","gender":"m","penissize":3,"breastsize":0},"Remy":{"pronoun":"m","gender":"m","penissize":2,"breastsize":0},"Alex":{"pronoun":"f","gender":"f","penissize":1,"breastsize":0},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"f","gender_body":"f","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":1},"skinColor":{"natural":"light","range":0},"bodysize":2,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"amber","hairselect":"blond","hairlength":400,"awareselect":"innocent","background":"beautiful","gamemode":"normal","asphyxiaLvl":3,"pbdisable":"t"}}'>>
 			<<case "fangi">>
-				<<set _preset to '{"general":{"options":{"tipdisable":"f","numberify_enabled":1,"timestyle":"military","showCaptionText":true,"sidebarStats":"disabled","sidebarTime":"disabled","combatControls":"radio","images":1,"silhouetteEnabled":true,"blinkingEnabled":true,"sidebarAnimations":true,"combatAnimations":true},"map":{"movement":true,"top":false,"markers":false},"malechance":0,"dgchance":0,"cbchance":0,"malevictimchance":1,"homochance":75,"breast_mod":0,"penis_mod":0,"blackchance":10,"straponchance":0,"alluremod":1,"beastmalechance":0,"monsterchance":100,"monsterhallucinations":"f","blackwolfmonster":1,"bestialitydisable":"f","swarmdisable":"f","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"t","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"t","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"f","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f","slugdisable":"f","waspdisable":"f","lurkerdisable":"f","beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":12,"bottomsizemax":8,"penissizemax":4,"penissizemin":-1,"debugdisable":"f","statdisable":"f","cheatdisabletoggle":"f","confirmSave":false,"confirmLoad":false,"confirmDelete":true,"reducedLineHeight":false},"npc":{"Avery":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Bailey":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Briar":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Charlie":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Darryl":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Doren":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Eden":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Gwylan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Harper":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Jordan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Kylar":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Landry":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Leighton":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Mason":{"pronoun":"f","gender":"f","penissize":0,"breastsize":2},"Morgan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":5},"River":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Robin":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Sam":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Sirris":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Whitney":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Winter":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Black Wolf":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Niki":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Quinn":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Remy":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Alex":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"f","gender_body":"f","bodyshape":"curvy","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif","gamemode":"normal","asphyxiaLvl":3,"pbdisable":"t"}}'>>
+				<<set _preset to '{"general":{"options":{"tipdisable":"f","numberify_enabled":1,"timestyle":"military","showCaptionText":true,"sidebarStats":"disabled","sidebarTime":"disabled","combatControls":"radio","images":1,"silhouetteEnabled":true,"tanImgEnabled":true,"blinkingEnabled":true,"sidebarAnimations":true,"combatAnimations":true},"map":{"movement":true,"top":false,"markers":false},"malechance":0,"dgchance":0,"cbchance":0,"malevictimchance":1,"homochance":75,"breast_mod":0,"penis_mod":0,"blackchance":10,"straponchance":0,"alluremod":1,"beastmalechance":0,"monsterchance":100,"monsterhallucinations":"f","blackwolfmonster":1,"bestialitydisable":"f","swarmdisable":"f","slimedisable":"f","voredisable":"f","tentacledisable":"f","analdisable":"f","analdoubledisable":"t","footdisable":"f","analingusdisablegiving":"f","analingusdisablereceiving":"f","vaginaldoubledisable":"t","transformdisable":"f","transformdisabledivine":"f","breastfeedingdisable":"f","analpregdisable":"f","watersportsdisable":"f","facesitdisable":"f","spiderdisable":"f","bodywritingdisable":"f","parasitedisable":"f","slugdisable":"f","waspdisable":"f","lurkerdisable":"f","beedisable":"f","horsedisable":"f","pregnancyspeechdisable":"f","breastsizemax":12,"bottomsizemax":8,"penissizemax":4,"penissizemin":-1,"debugdisable":"f","statdisable":"f","cheatdisabletoggle":"f","confirmSave":false,"confirmLoad":false,"confirmDelete":true,"reducedLineHeight":false},"npc":{"Avery":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Bailey":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Briar":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Charlie":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Darryl":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Doren":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Eden":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Gwylan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Harper":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Jordan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Kylar":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Landry":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Leighton":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Mason":{"pronoun":"f","gender":"f","penissize":0,"breastsize":2},"Morgan":{"pronoun":"f","gender":"f","penissize":0,"breastsize":5},"River":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Robin":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Sam":{"pronoun":"f","gender":"f","penissize":0,"breastsize":4},"Sirris":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Whitney":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Winter":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Black Wolf":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Niki":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Quinn":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Remy":{"pronoun":"f","gender":"f","penissize":0,"breastsize":3},"Alex":{"pronoun":"f","gender":"f","penissize":0,"breastsize":1},"Great Hawk":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0},"Zephyr":{"pronoun":"none","gender":"none","penissize":0,"breastsize":0}},"starting":{"player":{"gender":"f","gender_body":"f","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif","gamemode":"normal","asphyxiaLvl":3,"pbdisable":"t"}}'>>
 			<<case "femaleWaif">>
-				<<set _preset to '{"starting":{"player":{"gender":"f","gender_body":"f","bodyshape":"curvy","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif"}}'>>
+				<<set _preset to '{"starting":{"player":{"gender":"f","gender_body":"f","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif"}}'>>
 			<<case "maleWaif">>
-				<<set _preset to '{"starting":{"player":{"gender":"m","gender_body":"m","bodyshape":"classic","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"brown","hairlength":0,"awareselect":"innocent","background":"waif"}}'>>
+				<<set _preset to '{"starting":{"player":{"gender":"m","gender_body":"m","ballsExist":false,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"purple","hairselect":"brown","hairlength":0,"awareselect":"innocent","background":"waif"}}'>>
 			<<case "hermaphroditeWaif">>
-				<<set _preset to '{"starting":{"player":{"gender":"h","gender_body":"a","bodyshape":"slender","ballsExist":true,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":3,"genitalsensitivity":3,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif"}}'>>
+				<<set _preset to '{"starting":{"player":{"gender":"h","gender_body":"a","ballsExist":true,"freckles":false,"breastsize":3,"penissize":1,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":3,"genitalsensitivity":3,"eyeselect":"purple","hairselect":"red","hairlength":200,"awareselect":"innocent","background":"waif"}}'>>
 			<<case "vrel">>
-				<<set _preset to '{"starting":{"player":{"gender":"f","gender_body":"f","bodyshape":"curvy","ballsExist":false,"freckles":false,"breastsize":0,"penissize":0,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":5,"genitalsensitivity":3,"eyeselect":"purple","hairselect":"burntorange","hairlength":400,"awareselect":"knowledgeable","background":"beautiful"}}'>>
+				<<set _preset to '{"starting":{"player":{"gender":"f","gender_body":"f","ballsExist":false,"freckles":false,"breastsize":0,"penissize":0,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":3,"breastsensitivity":5,"genitalsensitivity":3,"eyeselect":"purple","hairselect":"burntorange","hairlength":400,"awareselect":"knowledgeable","background":"beautiful"}}'>>
 			<<case "crossdresser">>
-				<<set _preset to '{"starting":{"player":{"gender":"m","gender_body":"f","bodyshape":"curvy","ballsExist":false,"freckles":false,"breastsize":2,"penissize":0,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":0,"breastsensitivity":3,"genitalsensitivity":1,"eyeselect":"light blue","hairselect":"blond","hairlength":400,"awareselect":"innocent","background":"crossdresser"}}'>>
+				<<set _preset to '{"starting":{"player":{"gender":"m","gender_body":"f","ballsExist":false,"freckles":false,"breastsize":2,"penissize":0,"bottomsize":0},"skinColor":{"natural":"light","range":0},"bodysize":0,"breastsensitivity":3,"genitalsensitivity":1,"eyeselect":"light blue","hairselect":"blond","hairlength":400,"awareselect":"innocent","background":"crossdresser"}}'>>
 			<<case "toughGuy">>
-				<<set _preset to '{"starting":{"player":{"gender":"m","gender_body":"m","bodyshape":"classic","ballsExist":false,"freckles":false,"breastsize":0,"penissize":3,"bottomsize":0},"skinColor":{"natural":"light","range":50},"bodysize":2,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"light blue","hairselect":"brown","hairlength":0,"awareselect":"knowledgeable","background":"athlete"}}'>>
+				<<set _preset to '{"starting":{"player":{"gender":"m","gender_body":"m","ballsExist":false,"freckles":false,"breastsize":0,"penissize":3,"bottomsize":0},"skinColor":{"natural":"light","range":50},"bodysize":2,"breastsensitivity":1,"genitalsensitivity":1,"eyeselect":"light blue","hairselect":"brown","hairlength":0,"awareselect":"knowledgeable","background":"athlete"}}'>>
 			<<case "genericNpcDefaultGender">>
 				<<set _preset to '{"general":{"maleChanceMale":50,"maleChanceFemale":50,"malevictimchance":50}}'>>
 			<<case "genericNpcAllMaleGender">>
@@ -74,13 +73,13 @@
 			<<case _monstersPreset>>
 				<<switch _monstersPreset>>
 					<<case "monstersDefault">>
-						<<set _preset to '{"general":{"monsterchance":20,"monsterhallucinations":"t","blackwolfmonster":0,"greathawkmonster":0}}'>>
+						<<set _preset to '{"general":{"monsterchance":20,"monsterhallucinations":"t","blackwolfmonster":0,"greathawkmonster":0,"bestialitydisable":"f"}}'>>
 					<<case "monstersNone">>
-						<<set _preset to '{"general":{"monsterchance":0,"monsterhallucinations":"f","blackwolfmonster":0,"greathawkmonster":0}}'>>
+						<<set _preset to '{"general":{"monsterchance":0,"monsterhallucinations":"f","blackwolfmonster":0,"greathawkmonster":0,"bestialitydisable":"f"}}'>>
 					<<case "monstersAll">>
-						<<set _preset to '{"general":{"monsterchance":100,"monsterhallucinations":"f","blackwolfmonster":2,"greathawkmonster":2}}'>>
+						<<set _preset to '{"general":{"monsterchance":100,"monsterhallucinations":"f","blackwolfmonster":2,"greathawkmonster":2,"bestialitydisable":"f"}}'>>
 					<<default>>
-						<<set _preset to '{"general":{"monsterchance":20,"monsterhallucinations":"t","blackwolfmonster":0,"greathawkmonster":0}}'>>
+						<<set _preset to '{"general":{"monsterchance":20,"monsterhallucinations":"t","blackwolfmonster":0,"greathawkmonster":0,"bestialitydisable":"f"}}'>>
 				<</switch>>
 			<<case "randomize">>
 				<<set _preset to _args[2]>>
@@ -92,7 +91,7 @@
 	<<else>>
 		<<set _presetPage to "characterSettings">>
 	<</if>>
-	<<run importSettings(_preset, "function")>><<if StartConfig.enableImages is true and $passage is "Start" and _presetPage is "characterSettings">><<startingPlayerImageUpdate>><<removeclass #startingPlayerImage "hidden">><</if>>
+    <<run importSettings(_preset, "function")>><<if StartConfig.enableImages is true and $passage is "Start" and _presetPage is "characterSettings">><<startingPlayerImageUpdate>><<removeclass #startingPlayerImage "hidden">><</if>>
 	<<if _args[1] isnot "save">>
 		<<displaySettings _presetPage>>
 	<</if>>
@@ -101,10 +100,10 @@
 <<widget "presetConfirmDetails">>
 	<<set _presetObject to JSON.parse(_preset)>>
 	<div style="padding:5px 0px 0px 10px">
-	<span class="green">Change the below settings?</span><br>
+	<span class="green">아래와 같이 설정을 변경하겠습니까?</span><br>
 	<div class="presetButtons">
-	<<button "Yes">><<run importSettings(_preset, "function")>><<displaySettings "quickStart">><<if StartConfig.enableImages is true and $passage is "Start">><<startingPlayerImageUpdate>><<removeclass #startingPlayerImage "hidden">><</if>><</button>>
-	<<button "No">><<displaySettings "quickStart">><</button>>
+	<<button "네">><<run importSettings(_preset, "function")>><<displaySettings "quickStart">><<if StartConfig.enableImages is true and $passage is "Start">><<startingPlayerImageUpdate>><<removeclass #startingPlayerImage "hidden">><</if>><</button>>
+	<<button "아니오">><<displaySettings "quickStart">><</button>>
 	</div>
 	</div>
 	<<importDetailsDisplay _presetObject>>
@@ -113,15 +112,15 @@
 <<widget "importConfirmDetails">>
 	<<if isJsonString($importString)>>
 		<div style="padding:5px 0px 0px 10px">
-		<span class="green">Change the below settings?</span><br>
+		<span class="green">아래와 같이 설정을 변경하겠습니까?</span><br>
 		<div class="presetButtons">
-		<<button "Yes">><<run importSettings($importString, "function")>><<displaySettings "exportsettings">><<if StartConfig.enableImages is true and $passage is "Start">><<startingPlayerImageUpdate>><<startingPlayerImageUpdate>><</if>><</button>>
-		<<button "No">><<displaySettings "exportsettings">><</button>>
+		<<button "네">><<run importSettings($importString, "function")>><<displaySettings "exportsettings">><<if StartConfig.enableImages is true and $passage is "Start">><<startingPlayerImageUpdate>><<startingPlayerImageUpdate>><</if>><</button>>
+		<<button "아니오">><<displaySettings "exportsettings">><</button>>
 		</div>
 		</div>
 		<<importDetailsDisplay `JSON.parse($importString)`>>
 	<<else>>
-		<<link "Back">><<displaySettings "exportsettings">><</link>>
+		<<link "뒤로">><<displaySettings "exportsettings">><</link>>
 		<br><br>
 		<span class="red">Import is invalid</span>. Please double check the settings import string before importing again.
 	<</if>>
@@ -132,59 +131,54 @@
 		<div class="presetConfirm settingsGrid">
 			<<if _args[0].starting isnot undefined>>
 				<div class="settingsHeader">
-					Imported Settings
+					가져온 설정
 				</div>
 				<div class="settingsToggleItem">
-					<span class="gold">Base:</span>
+					<span class="gold">기초:</span>
 					<<set _validatorObject to settingsObjects("starting")>>
 					<<presetConfirm _args[0].starting>>
 				</div>
 				<<if _args[0].starting.player isnot undefined>>
 				<div class="settingsToggleItem">
-					<span class="gold">Player:</span>
+					<span class="gold">플레이어:</span>
 					<<set _validatorObject to settingsObjects("starting")>>
 					<<presetConfirm _args[0].starting.player>>
-					<<if _args[0].starting.skinColor isnot undefined>>
-						<hr style="border-top:1px solid var(--700)">
-						<span class="gold">Skin Colour:</span>
-						<<set _validatorObject to settingsObjects("starting")>>
-						<<presetConfirm _args[0].starting.skinColor>>
-					<</if>>
+				<<if _args[0].starting.skinColor isnot undefined>>
+				<hr style="border-top:1px solid var(--700)">
+					<span class="gold">피부색:</span>
+					<<set _validatorObject to settingsObjects("starting")>>
+					<<presetConfirm _args[0].starting.skinColor>>
+				<</if>>
 				</div>
 				<</if>>
 			<</if>>
 
 			<<if _args[0].general isnot undefined>>
 				<div class="settingsToggleItem">
-				<span class="gold">General Settings:</span>
+				<span class="gold">일반 설정:</span>
 				<<set _validatorObject to settingsObjects("general")>>
 				<<presetConfirm _args[0].general>>
 				<<silently>>
 				<<if _args[0].general.skinColor isnot undefined>>
-					<span class="gold">Skin Colour:</span>
+					<span class="gold">피부색:</span>
 					<<set _validatorObject to settingsObjects("general")>>
 					<<presetConfirm _args[0].general.skinColor>>
 				<</if>>
 				<<if _args[0].general.map isnot undefined>>
-					<span class="gold">Map Settings:</span>
+					<span class="gold">지도 설정:</span>
 					<<set _validatorObject to settingsObjects("general")>>
 					<<presetConfirm _args[0].general.map>>
 				<</if>>
 				<<if _args[0].general.shopDefaults isnot undefined>>
-					<span class="gold">Shop Settings:</span>
+					<span class="gold">상점 설정:</span>
 					<<set _validatorObject to settingsObjects("general")>>
 					<<presetConfirm _args[0].general.shopDefaults>>
-				<</if>>
-				<<if _args[0].general.wardrobeDefaults isnot undefined>>
-					<span class="gold">Wardrobe Settings:</span>
-					<<set _validatorObject to settingsObjects("general")>>
-					<<presetConfirm _args[0].general.wardrobeDefaults>>
 				<</if>>
 				<</silently>>
 				</div>
 				<div class="settingsToggleItem">
 				<<if _args[0].general.options isnot undefined>>
-					<span class="gold">Options:</span>
+					<span class="gold">옵션:</span>
 					<<set _validatorObject to settingsObjects("general")>>
 					<<presetConfirm _args[0].general.options>>
 				<</if>>
@@ -193,7 +187,7 @@
 
 			<<if _args[0].npc isnot undefined>>
 				<div class="settingsHeader">
-				Imported NPCs
+				가져온 NPC들
 				<<set _validatorObject to settingsObjects("npc")>>
 				</div>
 				<<for $_label, $_value range _args[0].npc>>
@@ -201,7 +195,7 @@
 						<<continue>>
 					<<else>>
 						<div class="settingsToggleItem">
-							<span class="gold"><<print $_label>>:</span>
+							<span class="gold"><<trNamedNPC $_label>><<print _trResult>>:</span>
 							<<presetConfirm $_value $_label>>
 						</div>
 					<</if>>
@@ -227,7 +221,7 @@
 		<<for $_label, $_value range _args[0]>>
 			<<unset _altValue>>
 			<<unset _altValue2>>
-			<<if ["player","skinColor","map","shopDefaults","options", "wardrobeDefaults"].includes($_label)>>
+			<<if ["player","skinColor","map","shopDefaults","options"].includes($_label)>>
 				<<continue>>
 			<</if>>
 			<<unset _object>>
@@ -238,14 +232,14 @@
 				<<if Object.keys(_object).includes("boolLetter")>>
 					<<set _oldValue to V[$_label]>>
 					<<if _oldValue is "t">>
-						<<set _altValue to "True">>
+						<<set _altValue to "네">>
 					<<elseif _oldValue is "f">>
-						<<set _altValue to "False">>
+						<<set _altValue to "아니오">>
 					<</if>>
 					<<if $_value is "t">>
-						<<set _altValue2 to "True">>
+						<<set _altValue2 to "네">>
 					<<elseif $_value is "f">>
-						<<set _altValue2 to "False">>
+						<<set _altValue2 to "아니오">>
 					<</if>>
 				<</if>>
 			<</if>>
@@ -256,7 +250,7 @@
 						<<if _object isnot undefined>>
 							<<set _valid to validateValue(_object, $_value)>>
 						<</if>>
-						Numbered link navigation: <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "Disabled" : "Enabled">></span>
+						숫자 링크 이동 활성화: <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "비활성화" : "활성화">></span>
 					<<case "malechance" "maleChanceMale" "maleChanceFemale" "dgchance" "cbchance" "malevictimchance" "npcVirginityChance" "npcVirginityChanceAdult" "straponchance" "blackchance" "beastmalechance" "beastMaleChanceMale" "beastMaleChanceFemale" "monsterchance">>
 						<<set _object to _validatorObject[$_label]>>
 						<<if _object isnot undefined>>
@@ -272,7 +266,7 @@
 						<<set _displayName to _validatorObject[$_label]["displayName"]>>
 						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value)>>
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
-					<<case "bodysize" "breastsensitivity" "genitalsensitivity" "mouthsensitivity" "bottomsensitivity" "facevariant">>
+					<<case "bodysize" "breastsensitivity" "genitalsensitivity" "mouthsensitivity" "bottomsensitivity" >>
 						<<set _object to _validatorObject[$_label]>>
 						<<if _object isnot undefined>>
 							<<set _valid to validateValue(_object, $_value)>>
@@ -282,24 +276,24 @@
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
 					<<case "hairlength">>
 						<<set _displayName to _validatorObject[$_label]["displayName"]>>
-						<<print _displayName>> <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value) gte 400 ? "Chest" : (_altValue2 isnot undefined ? _altValue2 : $_value) gte 200 ? "Neck" : "Ear">></span>
+						<<print _displayName>> <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value) gte 400 ? "목" : (_altValue2 isnot undefined ? _altValue2 : $_value) gte 200 ? "가슴" : "귀">></span>
 					<<case "ironmanmode">>
-						Ironman Mode: <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "Disabled" : "Enabled">></span>
+						철인 모드: <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "비활성화" : "활성화">></span>
 					<<case "timestyle">>
 						<<set _object to _validatorObject["options"][$_label]>>
 						<<if _object isnot undefined>>
 							<<set _valid to validateValue(_object, $_value)>>
 						<</if>>
 						<<set _displayName to _validatorObject["options"][$_label]["displayName"]>>
-						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is "military" ? "Military (24-Hour)" : "AM/PM (12-Hour)">>
+						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is "military" ? "24시간" : "12시간">>
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
-					<<case "images" "combatImages" "bodywritingImages" "silhouetteEnabled" "characterLightEnabled" "halfClosedEnabled" "combatAnimations" "blinkingEnabled" "sidebarAnimations" "dateFormat" "historyControls" "clothingCaption">>
+					<<case "images" "combatImages" "bodywritingImages" "silhouetteEnabled" "tanImgEnabled" "characterLightEnabled" "halfClosedEnabled" "combatAnimations" "blinkingEnabled" "sidebarAnimations">>
 						<<set _object to _validatorObject["options"][$_label]>>
 						<<if _object isnot undefined>>
 							<<set _valid to validateValue(_object, $_value)>>
 						<</if>>
 						<<set _displayName to _validatorObject["options"][$_label]["displayName"]>>
-						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is 1 ? "Enabled" : (_altValue2 isnot undefined ? _altValue2 : $_value) is true ? "Enabled" : "Disabled">>
+						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is 1 ? "활성화" : (_altValue2 isnot undefined ? _altValue2 : $_value) is true ? "활성화" : "비활성화">>
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
 					<<case "basePlayerPregnancyChance" "baseNpcPregnancyChance">>
 						<<set _displayName to _validatorObject[$_label]["displayName"]>>
@@ -324,7 +318,7 @@
 						<<if _object isnot undefined>>
 							<<set _valid to validateValue(_object, $_value)>>
 						<</if>>
-						Changes <<print $_label>> from <span class="green"><<print `$shopDefaults.`+$_label>></span> to <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value)>></span>
+						<<print $_label>> 설정을 <span class="green"><<print `$shopDefaults.`+$_label>></span>에서 <span class="green"><<print (_altValue2 isnot undefined ? _altValue2 : $_value)>></span>으로 변경
 					<<case "neverNudeMenus" "showCaptionText" "sidebarStats" "sidebarTime" "combatControls" "mapMovement" "mapTop" "mapMarkers" "images" "combatImages" "bodywritingImages" "silhouetteEnabled" "images" "sidebarAnimations" "blinkingEnabled" "combatAnimations" "halfClosedEnabled" "characterLightEnabled" "lightSpotlight" "lightGradient" "lightGlow" "lightFlat" "lightCombat" "lightTFColor" "maxStates" "useNarrowMarket" "skipStatisticsConfirmation" "passageCount" "playtime" "pepperSprayDisplay" "condomsDisplay" "closeButtonMobile" "showDebugRenderer" "numpad" "traitOverlayFormat" "font" "passageLineHeight" "overlayLineHeight" "sidebarLineHeight" "passageFontSize" "overlayFontSize" "sidebarFontSize">>
 						<<set _object to _validatorObject["options"][$_label]>>
 						<<if _object isnot undefined>>
@@ -339,7 +333,7 @@
 							<<set _valid to validateValue(_object, $_value)>>
 						<</if>>
 						<<set _displayName to _validatorObject["options"][$_label]["displayName"]>>
-						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "Enabled" : "Disabled">>
+						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "활성화" : "비활성화">>
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
 					<<case "skin">>
 						<<set _object to _validatorObject.player.skin>>
@@ -357,9 +351,9 @@
 						<<set _displayName to _validatorObject[$_label]["displayName"]>>
 						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value)>>
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
-					<<case "bestialitydisable" "slimedisable" "voredisable" "tentacledisable" "analdisable" "analdoubledisable" "analingusdisablegiving" "analingusdisablereceiving" "vaginaldoubledisable" "transformdisable" "transformdisabledivine" "pbdisable" "breastfeedingdisable" "parasitepregdisable" "watersportsdisable" "spiderdisable" "facesitdisable" "parasitedisable" "swarmdisable" "slugdisable" "waspdisable" "beedisable" "lurkerdisable" "horsedisable" "pregnancyspeechdisable" "plantdisable" "footdisable" "toydildodisable" "toywhipdisable" "toymultiplepenetration" "hypnosisdisable" "ruffledisable" "forcedcrossdressingdisable" "playerPregnancyHumanDisable" "playerPregnancyBeastDisable" "playerPregnancyEggLayingDisable" "npcPregnancyDisable" "incompletePregnancyDisable" "cycledisable" "cheatdisabletoggle">>
+					<<case 	"bestialitydisable" "slimedisable" "voredisable" "tentacledisable" "analdisable" "analdoubledisable" "analingusdisablegiving" "analingusdisablereceiving" "vaginaldoubledisable" "transformdisable" "transformdisabledivine" "pbdisable" "breastfeedingdisable" "parasitepregdisable" "watersportsdisable" "spiderdisable" "facesitdisable" "parasitedisable" "swarmdisable" "slugdisable" "waspdisable" "beedisable" "lurkerdisable" "horsedisable" "pregnancyspeechdisable" "plantdisable" "footdisable" "toydildodisable" "toywhipdisable" "toymultiplepenetration" "hypnosisdisable" "ruffledisable" "forcedcrossdressingdisable" "playerPregnancyHumanDisable" "playerPregnancyBeastDisable" "playerPregnancyEggLayingDisable" "npcPregnancyDisable" "incompletePregnancyDisable" "cycledisable" "cheatdisabletoggle">>
 						<<set _displayName to _validatorObject[$_label]["displayName"]>>
-						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "Enabled" : "Disabled">>
+						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value) is false ? "활성화" : "비활성화">>
 						<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
 					<<case "breastsizemin" "breastsizemax" "penissizemin" "penissizemax" "bottomsizemin" "bottomsizemax" "blackwolfmonster" "greathawkmonster" "bodywritingLvl" "asphyxiaLvl" "NudeGenderDC" "condomLvl">>
 						<<set _object to _validatorObject[$_label]>>
@@ -370,7 +364,7 @@
 						<<set _currentValue to (_altValue2 isnot undefined ? _validatorObject[$_label]["textMap"][_altValue2] : _validatorObject[$_label]["textMap"][$_value])>>
 
 						<<if $_label is "penissizemin" or $_label is "penissizemax">>
-							<<if $_currentSex is "Female">>
+							<<if $_currentGender is "Female">>
 								<<print _displayName>> <span class="green">Not Applicable</span> /*Don't show min/max penis size for players without a penis*/
 							<<else>>
 								<<print _displayName>> <span class="green"><<print _currentValue>></span>
@@ -382,7 +376,7 @@
 						<<set _displayName to _validatorObject[$_label]["displayName"]>>
 						<<set _currentValue to (_altValue2 isnot undefined ? _altValue2 : $_value)>>
 						<<print _displayName>> <span class="green"><<print _currentValue * 100 + "%">></span>
-					<<case "pronoun" "sex" "gender" "skincolour" "penissize" "breastsize" "bottomsize" "gender_body" "ballsExist" "freckles" "bodyshape">>
+					<<case "pronoun" "gender" "skincolour" "penissize" "breastsize" "bottomsize" "gender_body" "ballsExist" "freckles">>
 						<<if _args[1]>>
 							<<set _object to _validatorObject[$_label]>>
 							<<set _displayName to _validatorObject[$_label]["displayName"]>>
@@ -400,14 +394,14 @@
 							<<if $_value is "none" and $passage is "Start">>
 								<<set _valid to true>>
 							<</if>>
-						<<elseif $_label is "sex">>
+						<<elseif $_label is "gender">>
 							<<set _object to _validatorObject["player"][$_label]>>
 							<<if _object isnot undefined>>
 								<<set _valid to validateValue(_object, $_value)>>
 							<</if>>
 							<<set _displayName to _validatorObject["player"][$_label]["displayName"]>>
-							<<set $_currentSex to (_altValue2 isnot undefined ? _validatorObject["player"][$_label]["textMap"][_altValue2] : _validatorObject["player"][$_label]["textMap"][$_value])>>
-							<<print _displayName>> <span class="green"><<print $_currentSex>></span>
+							<<set $_currentGender to (_altValue2 isnot undefined ? _validatorObject["player"][$_label]["textMap"][_altValue2] : _validatorObject["player"][$_label]["textMap"][$_value])>>
+							<<print _displayName>> <span class="green"><<print $_currentGender>></span>
 						<<elseif $_label is "penissize">>
 							<<set _object to _validatorObject["player"][$_label]>>
 							<<if _object isnot undefined>>
@@ -415,7 +409,7 @@
 							<</if>>
 							<<set _displayName to _validatorObject["player"][$_label]["displayName"]>>
 							<<set _currentValue to (_altValue2 isnot undefined ? _validatorObject["player"][$_label]["textMap"][_altValue2] : _validatorObject["player"][$_label]["textMap"][$_value])>>
-							<<if $_currentSex is "Female">>
+							<<if $_currentGender is "Female">>
 								<<print _displayName>> <span class="green">None</span> /*Don't show penis size for players without a penis*/
 							<<else>>
 								<<print _displayName>> <span class="green"><<print _currentValue .toString().toUpperFirst()>></span>
@@ -427,7 +421,7 @@
 							<</if>>
 							<<set _displayName to _validatorObject["player"][$_label]["displayName"]>>
 							<<set _currentValue to (_altValue2 isnot undefined ? _validatorObject["player"][$_label]["textMap"][_altValue2] : _validatorObject["player"][$_label]["textMap"][$_value])>>
-							<<if $_currentSex is "Male">>
+							<<if $_currentGender is "Male">>
 								<<print _displayName>> <span class="green">Existent</span> /*Don't show 'nonexistent' for players who have a penis*/
 							<<else>>
 								<<print _displayName>> <span class="green"><<print _currentValue>></span>
@@ -453,9 +447,9 @@
 						<</if>>
 				<</switch>>
 				<<if _valid is undefined>>
-					<span class="red">(Setting is not recognised so will not be imported)</span>
+					<span class="red">(설정값이 인식되지 않아 가져올 수 없습니다)</span>
 				<<elseif _valid is false>>
-					<span class="red">(Value is not valid so will not be imported)</span>
+					<span class="red">(설정값이 유효하지 않아 가져올 수 없습니다)</span>
 				<</if>>
 			</li>
 		<</for>>

@@ -20,7 +20,6 @@
 		neverNudeMenus: _globalGeneralDefaults.neverNudeMenus or false,
 		autosaveDisabled: false,
 		showCaptionText: true,
-		showSidebarEffects: true,
 		clothingCaption: true,
 		sidebarStats: "all",
 		sidebarTime: "top",
@@ -35,12 +34,12 @@
 		combatImages: 1,
 		bodywritingImages: true,
 		silhouetteEnabled: true,
+		tanImgEnabled: true,
 		tanLines: true,
 		sidebarAnimations: true,
 		locationAnimations: true,
 		blinkingEnabled: true,
 		combatAnimations: true,
-		textAnimations: true,
 		halfClosedEnabled: false,
 		characterLightEnabled: true,
 		lightSpotlight: 0.2,
@@ -55,7 +54,6 @@
 		useNarrowMarket: false,
 		skipStatisticsConfirmation: false,
 		showDebugRenderer: false,
-		showCombatTools: false,
 		pepperSprayDisplay: "sprays",
 		condomsDisplay: "standard",
 		closeButtonMobile: _globalGeneralDefaults.closeButtonMobile or false,
@@ -88,6 +86,11 @@
 		<<set $options.combatImages to 0>>
 	<</if>>
 
+	<!-- ToDo: Canvas, remove block when combat is updated to canvas renderer -->
+	<<if Browser.isMobile.any()>>
+		<<set $options.combatAnimations to false>>
+	<</if>>
+
 	<<if StartConfig.debug is true>>
 		<<set $debug to 1>>
 	<<else>>
@@ -96,16 +99,16 @@
 
 	<<if $objectVersion is undefined>>
 		<<set $objectVersion to {
-			"updateClothes": 70,
-			"specialClothes": 19,
+			"updateClothes": 52,
 			"feats": 1,
 			"wardrobes": 2,
 			"customColors": 4,
 			"uncomfortable": 2,
+			"special_clothes": 5,
 			"chastity": 3,
 			"skinColor": 1,
 			"prenancyObjectRepair": 2,
-			"museumAntiques": 20,
+			"museumAntiques": 9,
 			"npcClothes": 1,
 			"animations": 1,
 		}>>
@@ -171,12 +174,6 @@
 	<<init_names>>
 
 	<<set $money to 500>>
-	<<set $moneyStats to {
-		cheats: { earned: 0, earnedCount: 1 },
-		startingMoney: { earned: 500, earnedCount: 1 },
-	}>>
-	<<set $timeStats to {}>>
-	<<set $badEndStats to []>>
 	<<set $awareness to 0>>
 	<<set $awarelevel to 0>>
 	<<set $purity to 1000>>
@@ -241,6 +238,7 @@
 	<<set $baileydefeatedlewd to 0>>
 	<<set $baileydefeatedchain to 0>>
 	<<set $baileyRefusedToPay to 0>>
+	<<set $baileyPaidStat to 0>>
 	/* Dupicate stats are intentional to use as a potential gameplay mode */
 	<<set $baileyRefusedToPayTotal to 0>>
 	<<set $baileyRefusedToPayTotalStat to 0>>
@@ -284,7 +282,6 @@
 	<<set $smuggler_stolen_stat to 0>>
 	<<set $pub_task_stat to 0>>
 	<<set $player.gender_body to "a">>
-	<<set $player.bodyshape to "classic">>
 	<<set $closinghour to 21>>
 	<<set $openinghours to 1>>
 	<<set $dontHide to false>>
@@ -326,7 +323,6 @@
 	<<set $stat_police.prison to 0>>
 	<<set $child_played to []>>
 	<<set $speech_attitude to "neutral">>
-	<<set $housekeepingTips to []>>
 
 	<<set $orgasmtrait to 0>>
 	<<set $ejactrait to 0>>
@@ -551,12 +547,13 @@
 	<<set $analchastity to 0>>
 	<<set $penilechastity to 0>>
 	<<set $drinksservedstat to 0>>
+	<<set $dockhours to 0>>
 
-	<<if $rng gte 96>>
+	<<if $rng gte 95>>
 		<<set $brothel_basement_price to 3000>>
-	<<elseif $rng gte 86>>
+	<<elseif $rng gte 85>>
 		<<set $brothel_basement_price to 2000>>
-	<<elseif $rng gte 46>>
+	<<elseif $rng gte 45>>
 		<<set $brothel_basement_price to 1000>>
 	<<else>>
 		<<set $brothel_basement_price to 500>>
@@ -645,6 +642,7 @@
 	<<set $exhibitionism to 0>>
 	<<set $promiscuity to 0>>
 	<<set $diagnosis to 0>>
+	<<set $psych to 0>>
 	<<set $asylum to 0>>
 	<<set $audience to 0>>
 	<<set $audienceexcitement to 0>>
@@ -653,11 +651,13 @@
 	<<set $venuemod to 1>>
 	<<set $danceevent to 0>>
 	<<set $dancephysique to 0>>
+	<<set $hypnosis to 0>>
 	<<set $hypnotised to 0>>
 	<<set $pillsconsumed to 0>>
 	<<set $medicated to 0>>
 	<<set $trance to 0>>
-	<<set $schoolLessonsMissed = { science: 0, maths: 0, english: 0, history: 0, swimming: 0, housekeeping: 0 }>>
+	<<set $harperexam to 0>>
+	<<set $schoolLessonsMissed = { science: 0, maths: 0, english: 0, history: 0, swimming: 0 }>>
 
 	<<set $science_star to 0>>
 	<<set $maths_star to 0>>
@@ -821,7 +821,6 @@
 	<<set $mouthactioncarrypain to "letout">>
 	<<set $leftactioncarryorgasm to "leftgrip">>
 	<<set $rightactioncarryorgasm to "rightgrip">>
-	<<set $feetactioncarryorgasm to "feetCurl">>
 	<<set $mouthactioncarryorgasm to "letoutorgasm">>
 	<<set $leftactioncarrydissociation to "leftcurl">>
 	<<set $rightactioncarrydissociation to "rightcurl">>
@@ -849,14 +848,18 @@
 
 	<<set $whitneypantiescheck to 0>>
 
+	<<set $insecurity_penis_tiny to 0>>
 	<<set $insecurity_penis_small to 0>>
 	<<set $insecurity_penis_big to 0>>
+	<<set $insecurity_breasts_tiny to 0>>
 	<<set $insecurity_breasts_small to 0>>
 	<<set $insecurity_breasts_big to 0>>
 	<<set $insecurity_pregnancy to 0>>
 
+	<<set $acceptance_penis_tiny to 0>>
 	<<set $acceptance_penis_small to 0>>
 	<<set $acceptance_penis_big to 0>>
+	<<set $acceptance_breasts_tiny to 0>>
 	<<set $acceptance_breasts_small to 0>>
 	<<set $acceptance_breasts_big to 0>>
 	<<set $acceptance_pregnancy to 0>>
@@ -929,9 +932,6 @@
 	<<if $facestyle is undefined>>
 		<<set $facestyle to "default">>
 	<</if>>
-	<<if $facevariant is undefined>>
-		<<set $facevariant to "default">>
-	<</if>>
 
 	<<if $makeup is undefined>>
 		<<set $makeup = {}>>
@@ -941,10 +941,8 @@
 		<<set $makeup.owned.eyelenses = []>>
 		<<set $makeup.owned.hairdye = []>>
 		<<set $makeup.owned.mascara = []>>
-		<<set $makeup.owned.blusher = []>>
 		<<set $makeup.lipstick = 0>>
 		<<set $makeup.eyeshadow = 0>>
-		<<set $makeup.blusher = 0>>
 		<<set $makeup.eyelenses = {"left":0, "right":0}>>
 		<<set $makeup.mascara = 0>>
 		<<set $makeup.mascara_running = 0>>
@@ -1004,11 +1002,6 @@
 		"compactMode": false,
 	}>>
 
-	<<set $wardrobeDefaults to {
-		"showTraits": false,
-		"extraInfo": false,
-	}>>
-
 	<<initAllNNPCVirginities>>
 
 	<<set $templePromised to "">>
@@ -1030,6 +1023,4 @@
 
 	<<set $passageCount to 0>>
 	<<set $passageChangesCount to 0>>
-
-	<<set $timeMessages to []>>
 <</widget>>

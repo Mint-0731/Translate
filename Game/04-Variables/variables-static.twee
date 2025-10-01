@@ -31,42 +31,6 @@
 	<<set setup.baseNNPC = {penis : 0, vagina: 0, gender: "none", description: 0, title: 0, insecurity: 0, pronoun: "none", penissize: 0, penisdesc: "none", bottomsize: 0, ballssize: 0, breastsize: 0, breastdesc: 0, breastsdesc: 0, skincolour: 0, teen: 0, adult: 0, init: 0, intro: 0, type: "human", trust: 0, love: 0, dom: 0, lust: 0, rage: 0, state: "", trauma: 0, eyeColour: 0, hairColour: 0, chastity: {penis: "", vagina: "", anus: ""}}>>
 	<<set setup.NPCNameList = ["Avery","Bailey","Briar","Charlie","Darryl","Doren","Eden","Gwylan","Harper","Jordan","Kylar","Landry","Leighton","Mason","Morgan","River","Robin","Sam","Sirris","Whitney","Winter","Black Wolf","Niki","Quinn","Remy","Alex","Great Hawk","Wren","Sydney","Ivory Wraith","Zephyr"]>>
 
-	<<set setup.loveInterestNpc = ["Robin","Whitney","Kylar","Sydney","Eden","Avery","Black Wolf","Great Hawk","Alex"]>>
-
-	<<set setup.loveAlias to {
-		"Avery": () => "Love",
-		"Bailey": () => "Respect",
-		"Briar": () => "Respect",
-		"Charlie": () => "Respect",
-		"Darryl": () => "Affection",
-		"Doren": () => "Affection",
-		"Eden": () => "Love",
-		"Gwylan": () => "Interest",
-		"Harper": () => "Interest",
-		"Jordan": () => "Respect",
-		"Kylar": () => "Love",
-		"Landry": () => "Interest",
-		"Leighton": () => "Interest",
-		"Mason": () => "Affection",
-		"Morgan": () => "Affection",
-		"River": () => "Respect",
-		"Robin": () => "Love",
-		"Sam": () => "Respect",
-		"Sirris": () => "Affection",
-		"Whitney": () => "Love",
-		"Winter": () => "Affection",
-		"Black Wolf": () => "Love",
-		"Niki": () => "Respect",
-		"Quinn": () => "Interest",
-		"Remy": () => "Interest",
-		"Alex": () => "Love",
-		"Great Hawk": () => "Love",
-		"Wren": () => "Affection",
-		"Sydney": () => "Love",
-		"Ivory Wraith": () => "Love",
-		"Zephyr": () => "Interest"
-	}>>
-
 	/* this initialises the C.npc object */
 	<<run initCNPC()>>
 
@@ -84,11 +48,11 @@
 	}>>
 
 	<<set setup.crimeDescs to {
-		default: "general",
-		legacy: "a string of crimes that slipped through the cracks",
-		escape: "escaping prison",
-		cake: "a high-profile theft involving a noble's wedding cake",
-		kylarPrison: "assisting in a prison escape",
+		default: "일반",
+		legacy: "틈 사이로 빠져나간 일련의 범죄",
+		escape: "감옥 탈출",
+		cake: "어떤 귀족의 웨딩케이크가 관련된 세간의 이목을 끄는 절도",
+		kylarPrison: "감옥 탈출의 조력",
 	}>>
 
 	/* this initialises the C.crime object */
@@ -551,9 +515,6 @@
 		"bodyparts": [
 			"neck","rightarm","leftarm","thigh","bottom","tummy","chest","face","hair","feet","vaginaoutside","vagina","penis","anus","mouth"
 		],
-		"outerbodyparts": [
-			"neck","rightarm","leftarm","thigh","bottom","tummy","chest","face","hair","feet","vaginaoutside","penis"
-		],
 		"innerbodyparts": [
 			"vagina","anus","mouth"
 		],
@@ -625,12 +586,11 @@
 	}>>
 
 	<<set setup.npcPenisRemarks to {
-		"big": ["Your body feels weak at the sight.","You shudder at the sight.","You moan involuntarily at its size.","You gasp at its massive girth.","Your thighs feel weak as you look on."],
-		"small": ["You stifle a laugh at the sight.","You smirk at the sight.","You stifle a chuckle at the sight.","You stifle a giggle at the sight.","You try not to laugh."]
+		"big": ["그것을 보고 당신의 몸에서 힘이 빠지는 것을 느낀다.","그것을 보고 당신은 몸서리친다.","그 크기를 보고 무의식중에 신음소리를 낸다.","그 거대한 두께에 헉 소리를 낸다.","그것을 보고 있자니 당신의 허벅지에 힘이 풀리는 것을 느낀다."],
+		"small": ["그것을 보고 당신은 비웃음을 꾹 참는다.","그것을 보고 당신은 실실 웃는다.","그것을 보고 당신은 나오려는 웃음을 꾹 참는다.","그것을 보고 당신은 킥킥 웃으려는 것을 꾹 참는다.","당신은 웃지 않으려 노력한다."]
 	}>>
 
-	<<set setup.breastsizes to ["", "budding", "tiny", "small", "pert", "modest", "full", "large", "ample", "massive", "huge", "gigantic", "enormous"]>>
-	<<set setup.penisSizes to ["micro", "mini", "tiny", "small", "normal", "large", "enormous"]>>
+	<<set setup.breastsizes to ["", "약간 솟아오른", "조그마한", "작은", "앙증맞은", "평범한", "봉긋한", "큰", "풍만한", "커다란", "매우 큰", "엄청난", "거대한"]>>
 
 	<<set setup.NPCVirginityTypes to {"anal": false, "oral": false, "penile": false, "vaginal": false, "handholding": false, "temple": false, "kiss": false}>>
 	<<set setup.NPCVirginityTypesVirgin to {"anal": true, "oral": true, "penile": true, "vaginal": true, "handholding": true, "temple": false, "kiss": true}>>
@@ -727,15 +687,15 @@
 		/* primary requirements given which the player can choose a given ante */
 		"primaryRequirements": [
 			{
-				"message": "Win at least 10 rounds of blackjack, or have £2,500 on you.",
+				"message": "최소한 블랙잭 10판을 이기거나, £2,500를 소유하자.",
 				"check": "$estatePersistent.totalRoundsWon gte 10"
 			},
 			{
-				"message": "Win at least £500 worth of bets, or have £5,000 on you.",
+				"message": "최소한 £500가 걸린 판에서 이기거나, £5,000를 소유하자.",
 				"check": "$estatePersistent.totalBetMoneyMade gte 50000"
 			},
 			{
-				"message": "Win at least £1,000 worth of bets, or have £10,000 on you.",
+				"message": "최소한 £1,000가 걸린 판에서 이기거나, £10,000를 소유하자.",
 				"check": "$estatePersistent.totalBetMoneyMade gte 100000"
 			}
 		],
@@ -773,268 +733,7 @@
 		canImpregnatePlayer: ["Alex","Black Wolf","Great Hawk"],
 		infertile: ["Bailey", "Leighton"],
 		ignoresIncompleteCheck: ["Ivory Wraith"],
-		typesEnabled: ["human", "wolf", "wolfboy", "wolfgirl", "hawk", "harpy"],
+		typesEnabled: ["human" , "wolf", "wolfboy", "wolfgirl", "hawk", "harpy"],
 		randomAlwaysKeep: ["wolf_cave"]
 	}>>
-
-	/* The list of art styles for the face. Please follow this convention: */
-	/*	{	"Name presented ingame to players": "actual value within the code / folder name"	} */
-	<<set setup.faceStyleOptions to {
-		"Traditional": "default"
-	}>>
-
-	/* The list of $facevariant options grouped by $facestyle. Please follow this convention: */
-	/* 	{	"$facestyle value":  */
-	/* 			{ "Face variant name": "actual value / folder name" } */
-	/*  } */
-	/* Please update whenever a new face variant or face style is added */
-	/* 		The first variant of a style should always be assigned the value "default" within the code, regardless of */
-	/* 		what it is presented as to players. As an example: players will see it called "Gentle" variant, but its value */
-	/* 		in code, and its folder name shall be "default" */
-	<<set setup.faceVariantOptions to {
-		"default": {
-			"Gentle": "default",
-			"Catty": "catty",
-			"Aloof": "aloof",
-			"Sweet": "sweet",
-			"Foxy": "foxy",
-			"Gloomy": "gloomy",
-		},
-	}>>
-
-	<<set setup.badEndReasonText = {
-		abductedMoor: "Abducted by Remy's goons on the moor",
-		arrested: "Arrested by corrupt cops",
-		asylumBlackWolf: "Rescued by the Black Wolf",
-		asylumDischarged: "Discharged by Harper",
-		asylumDischargedLabour: "Discharged by Harper after giving birth",
-		asylumEden: "Rescued by Eden",
-		asylumHospital: "Hospital bed examination",
-		asylumHospital2: "Asked for an emergency appointment",
-		asylumSabotage: "Escaped by sabotage",
-		asylumTentacle: "Escaped through your mirror in the tentacle plains",
-		asylumTentacleAngel: "Escaped by the tentacle plains with angelic power",
-		cardCheating: "Caught cheating at cards",
-		edenAccepted: "Accepted Eden",
-		edenEscape: "Escaped",
-		edenEscapeNight: "Escaped at night",
-		edenHunted: "Hunted and caught by Eden",
-		edenHuntedSubmitted: "Hunted and submitted to Eden",
-		escaped: "Escaped",
-		escapedSoaring: "Escaped by soaring away",
-		kylarAbduction: "",
-		kylarAbductionLeave: "Escaped",
-		kylarAbductionRescued: "Rescued by Jordan and Bailey",
-		kylarAbductionReleased: "Released by Kylar",
-		kylarStockholm: "Accepted by Kylar",
-		kylarStockholmRefused: "Accepted by Kylar",
-		labour: "Went into labour",
-		minesEscapedBasement: "Found an entrance to a basement",
-		minesEscapedDrain: "Found the town drains",
-		minesEscapedPassoutDrain: "Passed out and found the town drains",
-		minesSold: "Sold to the mines",
-		poundMistake: "Mistaken for a dog",
-		poundSubmitted: "Submitted after freeing the black dog",
-		poundCaught: "Caught after freeing the black dog",
-		poundEscapeCages: "Escaped after opening all of the cages",
-		poundEscapeDoor: "Escaped through the metal door",
-		poundEscapeWon: "Won the pound show",
-		prisonWren: "Escaped on Wren's boat",
-		prisonWrenKylar: "Escaped on Wren's boat with Kylar",
-		prisonRut: "Passed out in the rut",
-		prisonSentenced: "Sentenced to prison",
-		prisonServed: "Served your sentence",
-		prisonSwimming: "Escaped by swimming away",
-		soldBailey: "Sold by Bailey",
-		soldBaileyRobin: "Sold with Robin by Bailey",
-		soldBriar: "Sold out by Briar",
-		tempPassout: "Caught when passed out due to extreme temperatures",
-		uDungeonDefeated: "Defeated molester and escaped",
-		uDungeonDumped: "Dumped down a hole",
-		uDungeonLake: "Escaped into the underground lake",
-		uDungeonLakeRobin: "Escaped into the underground lake with Robin",
-		uDungeonOutran: "Outran the hunters",
-		uDungeonOutranRobin: "Outran the hunters with Robin",
-		uDungeonPolice: "Abducted while trying to escape the police",
-		uDungeonPresented: "Escaped while being presented",
-		uDungeonSaved: "Saved by a plant person",
-		uFarmBetrayedLost: "Lost a fight after being betrayed by the van owner",
-		uFarmBetrayed: "Betrayed by the van owner",
-		uFarmEscaptedCentaurKiss: "Escaped after kissing the centaur",
-		uFarmEscaptedCentaurThank: "Escaped after thanking the centaur",
-		uFarmEscaptedHorse: "Escaped on a horse",
-		uFarmEscaptedNightRiver: "Escaped into the river at night",
-		uFarmEscaptedNightHole: "Escaped at night after digging a hole",
-		wolfCaveCaptured: "",
-		wolfCaveAccepted: "Accepted as a member of the pack",
-		wolfCaveDiggingAHole: "Escaped after digging a hole",
-		wolfCaveDefeated: "Defeated the pack",
-		wolfCaveFeared: "Feared enough to walk away",
-		wolfCaveTrusted: "Trusted enough to walk away",
-		teleportCheater: "Teleported out. You cheater.",
-	}>>
-
-	/*
-	key: internal name of the challenge. used to determine what set a challenge is part of with regex .split(), so all keys must be camelCase and start with their set
-	name: the name that gets printed, the name the player sees
-	desc1: the full description. if solo, the second sentence is isolated for the summary
-	desc2: the summary. optional, only included for cases where it's different from the second sentence of desc1, like handLongPatrol, where desc1 has "He" and desc2 has "The Bishop's Hand"
-	 */
-	<<set setup.hopelessCycleChallenges to [
-		{
-			key: "handLongPatrol",
-			name: "A Steady Hand",
-			desc1: "The Bishop's Hand is dedicated to his job. He will patrol the dungeon one hour earlier and one hour later each day.",
-			desc2: "The Bishop's Hand will patrol the dungeon one hour earlier and one hour later each day.",
-		},
-		{
-			key: "handStrict",
-			name: "A Firm Hand",
-			desc1: "The Bishop's Hand is strict about prisoner inspection. If he notices something about the witch before penance, he will comment on it even if he commented on it a previous day.",
-			desc2: "If the Bishop's Hand notices something about the witch during penance, he will comment on it, even if he commented on it a previous day.",
-		},
-		{
-			key: "handCruel",
-			name: "A Cruel Hand",
-			desc1: "The Bishop's Hand seeks to make the witch suffer. Damage dealt to the witch during penance is increased, and penance will always result in a physical punishment.",
-		},
-		{
-			key: "torchFaster",
-			name: "Drown in Smoke",
-			desc1: "Kindling is in short supply. Any torches that can be taken as items only have half the lifespan, though dungeon torches are unaffected.",
-		},
-		{
-			key: "torchSnuffer",
-			name: "Not Up to Snuff",
-			desc1: "Dungeon equipment is heavily monitored. The snuffer can only be used to snuff the dungeon torches, and cannot be taken as an item.",
-		},
-		{
-			key: "torchDarker",
-			name: "Artificial Daylight",
-			desc1: "The sunlight doesn't reach so far down. Torches are required to see the witch, even during the day.",
-		},
-		{
-			key: "faithBanish",
-			name: "Wavering Resolve",
-			desc1: "The gaoler lacks faith in his beliefs. The 'Banish' action is restricted to once for the entire week.",
-		},
-		{
-			key: "faithBurden",
-			name: "A Heart So Burdened",
-			desc1: "The gaoler shoulders as much as he can muster, for Holy Virgo's sake. Permanent 50% temple burden.",
-		},
-		{
-			key: "faithBlooms",
-			name: "Cruelty's Sake",
-			desc1: "The gaoler's charge has been victimized. There is a new requirement to achieve Ending S.",
-		},
-		{
-			key: "forestFurther",
-			name: "Nature's Encroachment",
-			desc1: "The wild forest grows uncontrolled. Traversing the forest takes longer.",
-		},
-		{
-			key: "forestNoShortcut",
-			name: "Glass Gatekeeper",
-			desc1: "The disposal channel hides a hall of mirrors. You must pay tribute before taking the shortcut from the disposal channel to the forest.",
-		},
-		{
-			key: "forestItem",
-			name: "Thieving Spirits",
-			desc1: "There have been whispers of mischievous spirits, as much plant as they are people. Dropped items in the forest will disappear extremely quickly.",
-		},
-		{
-			key: "waterLeaky",
-			name: "Leaky Buckets",
-			desc1: "The buckets are full of holes. Water can only remain in a bucket for five hours before automatically spilling out.",
-		},
-		{
-			key: "waterDirty",
-			name: "Inefficient Cleaning",
-			desc1: "Cleaning is less effective. Water becomes tainted after only being used once.",
-		},
-		{
-			key: "waterEarly",
-			name: "Unwell",
-			desc1: "Disaster strikes. The well is tainted from the start.",
-		},
-		{
-			key: "itemDirty",
-			name: "Unclean Floors",
-			desc1: "The temple floors are unswept. All items will immediately become dirty upon being placed down, unless they are in buckets.",
-		},
-		{
-			key: "itemFind",
-			name: "Keen-Eyed Clergy",
-			desc1: "The faith has eyes everywhere. Items left on the ground will be discovered twice as fast.",
-		},
-		{
-			key: "itemNoHide",
-			name: "Thin Sheets",
-			desc1: "The bedsheets are very thin. Bedsheets on the ground no longer hide items, though they still hide items in buckets.",
-		},
-		{
-			key: "suspicionIncrease",
-			name: "High-Strung",
-			desc1: "The flock is antsy. All suspicion increases will be doubled.",
-		},
-		{
-			key: "suspicionDecrease",
-			name: "Unforgiving",
-			desc1: "The flock does not forget so easily. All suspicion decreases will be halved.",
-		},
-		{
-			key: "suspicionSermon",
-			name: "Mandatory Sermons",
-			desc1: "Attendance is no longer merely expected. Attending sermons no longer lowers suspicion, and missing sermons is considered a sign of bewitchment.",
-		},
-		{
-			key: "prisonerFood",
-			name: "Small Stomach",
-			desc1: "The witch's appetite is reduced from her mistreatment. She can only eat one meal per day.",
-			desc2: "The witch can only eat one meal per day.",
-		},
-		{
-			key: "prisonerHealth",
-			name: "Fragile",
-			desc1: "The witch's constitution is feeble. Her health degrades more each night.",
-			desc2: "The witch's health degrades more each night.",
-		},
-		{
-			key: "prisonerClean",
-			name: "Foul Wounds",
-			desc1: "The witch's corruption spreads. Her body, and bandages, will always be as dirty as possible by morning.",
-			desc2: "The witch's body, and bandages, will always be as dirty as possible by morning.",
-		},
-		{
-			key: "dogsTwice",
-			name: "Bothersome Dogs",
-			desc1: "The dogs are extra neglected. The dog will need to be quieted twice per day.",
-		},
-		{
-			key: "dogsEarly",
-			name: "Dogbotherers",
-			desc1: "You can't remember the last time you woke up without barking. Dogs will be present from the start.",
-		},
-		{
-			key: "dogsDouble",
-			name: "Double Trouble",
-			desc1: "Another dog awaits its turn. There are two dogs instead of one.",
-		},
-		{
-			key: "timeSleep",
-			name: "Poor Beds",
-			desc1: "It's hard to get comfortable. Less fatigue reduction from sleeping.",
-		},
-		{
-			key: "timeLonger",
-			name: "Work Ethic",
-			desc1: "All tasks must be done thoroughly. Tasks in the temple take 50% longer to complete.",
-		},
-		{
-			key: "timePrayer",
-			name: "New Priests",
-			desc1: "The priests standing watch at the dungeon are inexperienced. Sanctification takes 50% longer when entering and exiting the dungeon.",
-		}
-	]>>
 <</widget>>

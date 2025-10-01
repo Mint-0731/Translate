@@ -207,7 +207,12 @@
 	<div @class="($debugLines ? 'debugLines-actionstentacles' : '')">
 		<<set $enemyarousal to $arousal>>
 		<<if $vorecreature is 0 and _swarmcreature is undefined>>
-			<<animateCombat>>
+			<<if $options.images is 1 and $options.combatImages is 1>>
+				<<timed 100ms>>
+					<<combatimg>>
+					<br>
+				<</timed>>
+			<</if>>
 		<</if>>
 		<<willpowerpain>>
 		<<willpowerorgasm>>
@@ -264,42 +269,42 @@
 
 <<widget "upperslither">>
 	<<if $worn.over_upper.name isnot "naked">>
-		then <<slithers>> beneath your $worn.over_upper.name<<if $worn.upper.name isnot "naked">> and $worn.upper.name<</if>>
+		그러더니 당신의 <<worn_over_upper_name_ gwa "sep">><<if $worn.upper.name isnot "naked">>_trPost <<worn_upper_name>><</if>> 아래에서 <<slithers>>
 	<<elseif $worn.upper.name isnot "naked">>
-		then <<slithers>> beneath your $worn.upper.name
+		그러더니 당신의 <<worn_upper_name>> 아래에서 <<slithers>>
 	<<else>>
-		then <<slithers>> across your bare skin
+		그러더니 당신의 맨살을 가로지르며 <<slithers>>
 	<</if>>
 <</widget>>
 
 <<widget "lowerslither">>
 	<<if $worn.over_lower.name isnot "naked">>
-		then <<slithers>> beneath your $worn.over_lower.name<<if $worn.lower.name isnot "naked">> and $worn.lower.name<</if>>
+		그러더니 당신의 <<worn_over_lower_name_ gwa "sep">><<if $worn.lower.name isnot "naked">>_trPost <<worn_lower_name>><</if>> 아래에서 <<slithers>>
 	<<elseif $worn.lower.name isnot "naked">>
-		then <<slithers>> beneath your $worn.lower.name
+		그러더니 당신의 <<worn_lower_name>> 아래에서 <<slithers>>
 	<<else>>
-		then <<slithers>> across your bare skin
+		그러더니 당신의 맨살을 가로지르며 <<slithers>>
 	<</if>>
 <</widget>>
 
 <<widget "underslither">>
 	<<if $worn.lower.name isnot "naked">>
 		<<if !$worn.under_lower.type.includes("naked")>>
-			then <<slithers>> beneath your $worn.lower.name and $worn.under_lower.name
+			그러더니 당신의 <<trClothes "lower" $worn.lower.name "name" "과">>_trResult <<trClothes "under_lower" $worn.under_lower.name>>_trResult 아래에서 <<slithers>>
 		<<elseif playerChastity()>>
-			then <<slithers>> beneath your $worn.lower.name against your <<print $worn.genitals.name>>
+			그러더니 당신의 <<trClothes "lower" $worn.lower.name "name">>_trResult 아래의 <<worn_genitals_name>>에 가까이 붙어 <<slithers>>
 		<<else>>
 		<</if>>
 	<<else>>
 		<<if !$worn.under_lower.type.includes("naked")>>
-			then <<slithers>> beneath your $worn.under_lower.name
+			그러더니 당신의 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 아래에서 <<slithers>>
 			<<if playerChastity("hidden")>>
-				against your <<print $worn.genitals.name>>.
+				그러더니 당신의 <<worn_genitals_name>>에 가까이 붙는다.
 			<</if>>
 		<<elseif $worn.under_lower.type.includes("naked") and playerChastity("hidden")>>
-			then <<slithers>> against your <<print $worn.genitals.name>>
+			그러더니 당신의 <<worn_genitals_name>>에 가까이 붙어서 <<slithers>>
 		<<else>>
-			then <<slithers>> across your bare skin
+			그러더니 당신의 맨살을 가로지르며 <<slithers>>
 		<</if>>
 	<</if>>
 <</widget>>
@@ -315,7 +320,7 @@
 	<</for>>
 <<sexcheck>>
 <<if $ejaculating isnot 1>>
-	You count <<number $tentacles.active>> <<print $tentacles[0].type>><<if $tentacles.active isnot 1>>s<</if>> surrounding you.
+	당신은 <<trNumber $tentacles.active>> 마리의 <<trTentacle $tentacles[0].type "이">> 당신 주위를 둘러싸고 있는 것을 본다.
 	<br><br><br>
 <</if>>
 <</widget>>

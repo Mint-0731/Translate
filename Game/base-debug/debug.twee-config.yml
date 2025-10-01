@@ -3,18 +3,10 @@ aliases:
     border: 0px
 sugarcube-2:
   macros:
-    addLayerDialog:
-      name: addLayerDialog
-    addLayerElements:
-      name: addLayerElements
-    bindCombatDebugControls:
-      name: bindCombatDebugControls
-    canvasCombatEditor:
-      name: canvasCombatEditor
     changeCheatClass:
       description: |-
         Swaps between on/off classes of a cheat DOM element
-
+        
         `<<changeCheatClass selector var>>`
         - **selector**: `string` - CSS selector to find element for
         - **onOff**: `string` - Cheat activation status
@@ -27,8 +19,6 @@ sugarcube-2:
       name: characterViewerModelClothes
     characterViewerModelClothesControls:
       name: characterViewerModelClothesControls
-    characterViewerModelClothesControlsColour:
-      name: characterViewerModelClothesControlsColour
     characterViewerModelExportControls:
       name: characterViewerModelExportControls
     cheatsBody:
@@ -40,7 +30,7 @@ sugarcube-2:
     checkEventNPC:
       description: |-
         Checks that npc at given slot was properly closed
-
+        
         `<<checkEventNPC slot>>`
         - **slot**: `number` - slot to check (zero-based)
       parameters:
@@ -59,10 +49,6 @@ sugarcube-2:
       name: clothesTestingImageUpdate
     clothesTestingTransformationsControls:
       name: clothesTestingTransformationsControls
-    combatdemotools:
-      name: combatdemotools
-    combatsetup:
-      name: combatsetup
     debug:
       name: debug
     debugactionsman:
@@ -83,8 +69,6 @@ sugarcube-2:
       name: debugMain
     ejaculation-demon:
       name: ejaculation-demon
-    endcombatdemo:
-      name: endcombatdemo
     eventExtraInfo:
       name: eventExtraInfo
     freezePlayerStats:
@@ -92,9 +76,9 @@ sugarcube-2:
         Clones current story variables into the `$frozenValues` object, as well as stores all current story variable names in the `$frozenKeys` array
 
         Some variables, like ones with names starting with `real_` are ignored
-
+        
         Also sets `$statFreeze` to `true`, which other widgets can use to determine if they should be active or not
-
+        
         To restore the variables, use `<<unfreezePlayerStats>>`
     resetDebugLinks:
       decoration: *unused
@@ -134,9 +118,9 @@ sugarcube-2:
     unfreezePlayerStats:
       description: |-
         Restores the story variables saved by `<<freezePlayerStats>>` and unsets `$statFreeze`
-
+        
         Any new story variables not present in `$frozenKeys` also get removed
-
+        
         After restoring the values, it runs `<<doVersionCheck>>` in case the game was updated while values were frozen
     updateSceneViewer:
       name: updateSceneViewer

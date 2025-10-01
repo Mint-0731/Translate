@@ -8,37 +8,37 @@
 	<</if>>
 
 	<<set _tmpcam to "none">>
-	<<set _tmpsmoving to "creeping">>
+	<<set _tmpsmoving to "기어다니는">>
 	<<set _tmppspot to "">>
 	<<set _tmpproof to "t">>
 
 	<<if $swarm.type is "slimes" or $swarm.type is "pale slimes">>
-		<<set _tmpsmoving to "slurping">>
+		<<set _tmpsmoving to "후루룩 소리를 내는">>
 	<<elseif $swarm.type is "worms">>
-		<<set _tmpsmoving to "wiggling">>
+		<<set _tmpsmoving to "꼼지락거리는">>
 	<<elseif $swarm.type is "snakes" or $swarm.type is "eels">>
-		<<set _tmpsmoving to "slithering">>
+		<<set _tmpsmoving to "미끄러지듯 움직이는">>
 	<</if>>
 
 	<<rng>>
 	<<if $rng gte 81 and $facepic isnot 1>>
 		<<set $facepic to 1>>
-		The $audiencedesc $audiencecamera points <<ahis>> camera at your face. A light flashes as <<ahe>> takes a picture.
+		$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 얼굴로 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 		<br>
 		<<set _tmpcam to "face">>
 	<<elseif $rng gte 41 and $bottompic isnot 1>>
 		<<set $bottompic to 1>>
-		The $audiencedesc $audiencecamera points <<ahis>> camera at your <<bottom>>. A light flashes as <<ahe>> takes a picture.
+		$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의 <<bottomPost "으로">> 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 		<br>
 		<<set _tmpcam to "bottom">>
 	<<elseif $rng gte 21 and $genitalpic isnot 1>>
 		<<set $genitalpic to 1>>
-		The $audiencedesc $audiencecamera points <<ahis>> camera at your <<genitals>>. A light flashes as <<ahe>> takes a picture.
+		$audiencedesc <<putpost $audiencecamera "이">> 카메라를 당신의  <<genitalsPost "으로">>로 향했다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 		<br>
 		<<set _tmpcam to "front">>
 	<<elseif $bodypic isnot 1>>
 		<<set $bodypic to 1>>
-		The $audiencedesc $audiencecamera leans back so <<ahis>> camera can take in the whole scene. A light flashes as <<ahe>> takes a picture.
+		$audiencedesc <<putpost $audiencecamera "은">> 장면 전체를 촬영하기 위해 몸을 뒤로 뺐다. 플래시가 터지고, <<ahe "은">> 사진을 찍었다.
 		<br>
 		<<set _tmpcam to "full">>
 	<</if>>
@@ -63,52 +63,52 @@
 		<<set _tmporgasm to "">>
 		<<if $orgasmdown gte 1>>
 			<<if $orgasmcount gt 3>>
-				<<aHe>> is yelling again: "You're a real <<print either("slut", "dirty slut", "bitch", "whore", "worthless slut", "extreme pervert")>> cumming again from these <<print $swarm.type>>
-				<<set _tmporgasm to "<span class=\"pink\"> cumming hard</span> ">>
+				<<aHe "은">> 다시 외친다: "<<trSwarm $swarm.type>>_trResult에게 또 가버리다니, 넌 정말 <<print either("걸레", "더러운 걸레", "발정난 암캐", "창녀", "보잘것 없는 걸레", "엄청난 변태")>>야.
+				<<set _tmporgasm to "<span class=\"pink\"> 엄청 가버린</span> ">>
 				<<set _tmpmark to "?">>
 			<<else>>
-				Suddenly <<ahe>> yells at you: "You're such a <<print either("slut", "whore", "pervert")>> cumming from these <<print $swarm.type>>
-				<<set _tmporgasm to "<span class=\"pink\"> cumming</span> ">>
+				갑자기 <<ahe "이">> 당신에게 외친다: "<<trSwarm $swarm.type>>_trResult에게 가버리다니, 넌 <<print either("걸레", "창녀", "변태")>>구나.
+				<<set _tmporgasm to "<span class=\"pink\"> 가버린</span> ">>
 			<</if>>
 		<<else>>
 			<<if _tmpcam is "none">>
-				The $audiencedesc $audiencecamera exclaims "I love how
+				$audiencedesc <<putpost $audiencecamera "은">> 탄성을 지른다. 
 			<<else>>
-				<<aHe>> says "I love how
+				<<aHe "은">> 말한다, 
 			<</if>>
 			<<if $swarm.amount.active[0] lte 4>>
-				the squirming <<print $swarm.type>> are
+				"내가 얼마나 꿈틀거리는 <<trSwarm $swarm.type "이">>_trResult
 			<<elseif $swarm.amount.active[0] lte 8>>
-				the swarming <<print $swarm.type>> are
+				"내가 얼마나 우글거리는 <<trSwarm $swarm.type "이">>_trResult
 			<<else>>
-				the milling mass of <<print $swarm.type>> are
+				"내가 얼마나 떼지어 다니는 <<trSwarm $swarm.type>>_trResult 덩어리가
 			<</if>>
 		<</if>>
-		<<print _tmpsmoving>>
+		<<print "">>
 		<<if _tmppspot is "g">>
-			over your <<genitals>><<print _tmpmark>>"
+			네 <<genitals>> 위에서 <<print _tmpsmoving>> 것을 좋아하는 지 알아<<print _tmpmark>>"
 		<<elseif _tmppspot is "gi">>
-			over your <<genitals>><<print _tmpmark>>"
+			<span class="red">네 <<genitalsPost>> 속에서</span> <<print _tmpsmoving>> 것을 좋아하는 지 알아<<print _tmpmark>>"
 		<<elseif _tmppspot is "b">>
-			over your <<bottom>><<print _tmpmark>>"
+			네 <<bottomPost>> <<print _tmpsmoving>> 것을 좋아하는 지 알아<<print _tmpmark>>"
 		<<elseif _tmppspot is "bi">>
-			<span class="red"> inside your <<bottom>></span><<print _tmpmark>>"
+			<span class="red">네 <<bottomPost>> 속에서</span> <<print _tmpsmoving>> 것을 좋아하는 지 알아<<print _tmpmark>>"
 		<<elseif _tmppspot is "i">>
-			<span class="red">inside your body<<print _tmpmark>></span>"
+			<span class="red">네 몸속에서 <<print _tmpsmoving>> 것을 좋아하는 지 알아<<print _tmpmark>></span>"
 			<<set _tmpproof to "f">>
 		<<else>>
-			over you<<print _tmpmark>>"
+			네 위에서 <<print _tmpsmoving>> 것을 좋아하는 지 알아<<print _tmpmark>>"
 			<<set _tmpproof to "f">>
 		<</if>>
 
 		<<if _tmpcam is "face">>
-			proudly <<ahe>> looks at <<ahis>> phone: "I've got a nice closeup of <<pher>> face<<print _tmporgasm>><<if _tmpproof is "t">> to prove it."<<else>>."<</if>>
+			자랑스럽게 <<ahe "은">> <<ahis>> 폰을 본다 : "내가 <<print _tmporgasm>> <<pherPost "의">> 얼굴을 <<print (_tmpproof is "t" ? "증명할": "찍은")>> 클로즈업 사진을 얻었어<<print (_tmpproof is "t" ? "!": ".")>>"
 		<<elseif _tmpcam is "bottom">>
-			proudly <<ahe>> displays <<ahis>> phone: "I've got a nice closeup of <<pher>> <<bottom>><<print _tmporgasm>><<if _tmpproof is "t">> to prove it!"<<else>>."<</if>>
+			자랑스럽게 <<ahe "은">> <<ahis>> 폰을 내보인다 : "내가 <<print _tmporgasm>> <<pherPost "의">> <<bottomPost "을">> <<print (_tmpproof is "t" ? "증명할": "찍은")>> 클로즈업 사진을 얻었어<<print (_tmpproof is "t" ? "!": ".")>>"
 		<<elseif _tmpcam is "front">>
-			proudly <<ahe>> holds up <<ahis>> phone: "I've got a nice closeup of <<pher>> <<genitals>><<print _tmporgasm>><<if _tmpproof is "t">> to prove it!"<<else>>."<</if>>
+			자랑스럽게 <<ahe "은">> <<ahis>> 폰을 들어올린다 : "내가 <<print _tmporgasm>> <<pherPost "의">> <<genitalsPost "을">> <<print (_tmpproof is "t" ? "증명할": "찍은")>> 클로즈업 사진을 얻었어<<print (_tmpproof is "t" ? "!": ".")>>"
 		<<elseif _tmpcam is "full">>
-			proudly <<ahe>> shows the pictures on <<ahis>> phone: "I've got the pictures of this slut to prove it."
+			자랑스럽게 <<ahe "은">> <<ahis>> 폰에 있는 사진을 보여준다 : "내가 이<<print ($player.gender_appearance is "m" ? "놈" : "년")>>이 걸레라는 증거를 얻었어!"
 			<<set _tmpproof to "f">>
 		<</if>>
 	<</if>>
@@ -116,12 +116,12 @@
 
 <<widget "aHe">>
 	<<if $audiencecamera is "man">>
-		He
+		<<set _trResult to "그">><<trPost 1 _args[0] _args[1]>><<print _trResult>>
 	<<elseif $audiencecamera is "boy">>
-		He
+		<<set _trResult to "그">><<trPost 1 _args[0] _args[1]>><<print _trResult>>
 	<<elseif $audiencecamera is "woman">>
-		She
+		<<set _trResult to "그녀">><<trPost 1 _args[0] _args[1]>><<print _trResult>>
 	<<elseif $audiencecamera is "girl">>
-		She
+		<<set _trResult to "그녀">><<trPost 1 _args[0] _args[1]>><<print _trResult>>
 	<</if>>
 <</widget>>

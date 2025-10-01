@@ -24,6 +24,7 @@
 	<</if>>
 	<<combateffects>>
 	<div id="storyCaptionDiv" @class="($extendedStats ? 'statsExtended' : '')">
+
 	<div id="debugWindow"></div>
 	<<if $options.images is 1>>
 		<div id="stats" onclick="extendStats()">
@@ -78,11 +79,11 @@
 
 		<<if $physiquechange is 1>><<set $physiquechange to 0>>
 			<<if $physiqueuse gte $physique / 1000>>
-				<span class="gold"><<possessedWord 'Your' 'gold'>> physique is improving due to all the exercise <<possessedWord 'you' 'gold'>> are getting.</span>
+				<span class="gold">그동안 해온 운동 덕분에 신체 능력이 좋아지고 있다.</span>
 				<<set $physiqueuse to 0>>
 				<br><br>
 			<<else>>
-				<span class="pink"><<possessedWord 'You' 'pink'>> didn't get enough exercise yesterday, <<possessedWord 'your' 'pink'>> physique has deteriorated slightly as a result.</span>
+				<span class="pink">어제는 운동을 충분히 하지 않았기에, 그 결과로 신체 능력이 약간 떨어졌다.</span>
 				<<set $physiqueuse to 0>>
 				<br><br>
 			<</if>>
@@ -90,32 +91,26 @@
 		<<if !$lessonmissedtext>>
 		<<else>>
 			<<if $lessonmissedtext is 1>>
-				<span class="pink"><<possessedWord 'You' 'pink'>> missed a lesson yesterday.</span>
+				<span class="pink">어제 수업을 하나 빼먹었다.</span>
 			<<elseif $lessonmissedtext gte 2>>
-				<span class="pink"><<possessedWord 'You' 'pink'>> missed $lessonmissedtext lessons yesterday.</span>
+				<span class="pink">어제 $lessonmissedtext개의 수업을 빼먹었다.</span>
 			<</if>>
-			/* give players a grace period of 2 weeks worth of skipped lessons before penalizing them for not attending the school in case they're stuck in a bad end, and wait a weak before doing that again */
-			<<if $lessonmissed gte 50 && !$truancytimer>>
-				<span class="red"><<possessedWord "You've" 'red'>> missed many lessons. <<possessedWord 'Your' 'red'>> reputation has taken a hit.</span>
-				<<delinquency 50>><<gggdelinquency>><<status -5>><<lcool>>
-				<<set $truancytimer to 7>>
-			<<elseif $truancytimer>>
-				<<set $truancytimer-->>
+			<<if $lessonmissed gte 25>>
+				<span class="red">지금까지 수업을 많이 빼먹었다. 당신의 평판이 나빠졌다.</span>
+				<<detention 50>><<gggdelinquency>><<status -5>><<lcool>>
 			<</if>>
-			/* don't let $lessonmissed get out of control */
-			<<set $lessonmissed to Math.clamp($lessonmissed, 0, 75)>>
 			<<set $lessonmissedtext to 0>>
 			<br>
 		<</if>>
 		<<if $options.images is 0>>
 			<div id="money-noimg">
-				<<possessedWord 'You'>> have <<printmoney $money true>><br>
+				당신은 <<printmoney $money true>>를 가지고 있다<br>
 			</div>
 			<br>
 
-			It is <<ampm>>.
+			지금은 <<ampm>> 이다.
 			<br>
-			It is <<print Time.weekDayName>>.
+			오늘은 <<trDaysOfWeek `Time.weekDayName` "이다">>_trResult.
 			<br>
 		<</if>>
 		<<schoolday>>
@@ -133,24 +128,24 @@
 		<<rng>>
 
 		<<if $worn.neck.collared gte 1>>
-			<span class="pink">A collar encases <<possessedWord 'your' 'pink'>> neck.</span>
+			<span class="pink">개목걸이가 당신의 목을 감싸고 있다.</span>
 			<br>
 		<</if>>
 
 		<<if $penilechastityparasite isnot 0>>
-			<span class="pink"><<possessedWord 'You' 'pink'>> feel $penilechastityparasite squirming around <<possessedWord 'your' 'pink'>> penis.</span>
+			<span class="pink"><<trChastityParasite $penilechastityparasite "이">>_trResult 자지를 감싼 채로 꿈틀거리는 것이 느껴진다.</span>
 			<br>
 		<</if>>
 		<<if $vaginalchastityparasite isnot 0 and $vaginalchastityparasite eq $analchastityparasite>>
-			<span class="pink"><<possessedWord 'You' 'pink'>> feel $vaginalchastityparasite squirming inside <<possessedWord 'your' 'pink'>> vagina and lower intestine.</span>
+			<span class="pink"><<trChastityParasite $vaginalchastityparasite "이">>_trResult 보지와 하복부 안에서 꿈틀거리는 것이 느껴진다.</span>
 			<br>
 		<<else>>
 			<<if $vaginalchastityparasite isnot 0>>
-				<span class="pink"><<possessedWord 'You' 'pink'>> feel $vaginalchastityparasite squirming inside <<possessedWord 'your' 'pink'>> vagina.</span>
+				<span class="pink"><<trChastityParasite $vaginalchastityparasite "이">>_trResult 보지 안에서 꿈틀거리는 것이 느껴진다.</span>
 				<br>
 			<</if>>
 			<<if $analchastityparasite isnot 0>>
-				<span class="pink"><<possessedWord 'You' 'pink'>> feel $analchastityparasite squirming inside <<possessedWord 'your' 'pink'>> lower intestine.</span>
+				<span class="pink"><<trChastityParasite $analchastityparasite "이">>_trResult 하복부 안에서 꿈틀거리는 것이 느껴진다.</span>
 				<br>
 			<</if>>
 		<</if>>
@@ -160,21 +155,21 @@
 			<<case 0>>
 			<<case 1>>
 				<<if $parasite[_type][0] is "nipples">>
-					<span class="pink">The _type parasites clinging to <<possessedWord 'your' 'pink'>> <<print $parasite[_type][0]>> suck and massage <<possessedWord 'you' 'pink'>>.</span>
+					<span class="pink"><<trParasite _type "이">>_trResult <<trBodypart $parasite[_type][0]>>_trResult에 달라붙어 물고 빨고 하고 있다.</span>
 				<<else>>
-					<span class="pink">The _type parasite clinging to <<possessedWord 'your' 'pink'>> <<print $parasite[_type][0]>> sucks and massages <<possessedWord 'you' 'pink'>>.</span>
+					<span class="pink"><<trParasite _type "이">>_trResult <<trBodypart $parasite[_type][0]>>_trResult에 달라붙어 물고 빨고 하고 있다.</span>
 				<</if>>
 				<br>
 			<<case 2>>
-				<span class="pink">The _type parasites clinging to <<possessedWord 'your' 'pink'>> <<print $parasite[_type][0]>> and <<print $parasite[_type][1]>> suck and massage <<possessedWord 'you' 'pink'>>.</span>
+				<span class="pink"><<trParasite _type "이">>_trResult <<trBodypart $parasite[_type][0] "과">>_trResult <<trBodypart $parasite[_type][1]>>_trResult에 달라붙어 물고 빨고 하고 있다.</span>
 				<br>
 			<<default>>
-				<<set _pstring to $parasite[_type][0]>>
+				<<trBodypart $parasite[_type][0] "과">><<set _pstring to _trResult>>
 				<<for _i to 1; _i lt $parasite[_type].length - 1; _i++>>
-					<<set _pstring += ", " + $parasite[_type][_i]>>
+					<<trBodypart $parasite[_type][_i]>><<set _pstring += ", " + _trResult>>
 				<</for>>
-				<<set _pstring += ", and " + $parasite[_type][_i]>>
-				<span class="pink">The _type parasites clinging to <<possessedWord 'your' 'pink'>> _pstring suck and massage <<possessedWord 'you' 'pink'>>.</span>
+				<<trBodypart $parasite[_type][_i]>><<set _pstring += ", " + _trResult>>
+				<span class="pink"><<trParasite _type "이">>_trResult _pstring에 달라붙어 물고 빨고 하고 있다.</span>
 				<br>
 			<</switch>>
 		<</for>>
@@ -182,57 +177,56 @@
 		<<if $worn.genitals.name isnot "chastity parasite">>
 			<<if $parasite.penis.name and $parasite.penis.name is "parasite">>
 				<<if $earSlime.defyCooldown>>
-					<span class="red">The parasite compresses <<possessedWord 'your' 'red'>> <<if $player.ballsExist>>balls<<else>>penis<</if>>.</span>
+					<span class="red">기생충이 당신의 <<if $player.ballsExist>>고환을<<else>>자지를<</if>> 압박하고 있다.</span>
 				<<elseif $earSlime.vibration and $earSlime.vibration lte 20>>
-					<span class="pink">The parasite pulsates around <<possessedWord 'your' 'pink'>> penis.</span>
+					<span class="pink">기생충이 당신의 자지 주위에서 고동치고 있다.</span>
 				<<elseif $earSlime.vibration>>
-					<span class="pink">The parasite vibrates around <<possessedWord 'your' 'pink'>> penis.</span>
+					<span class="pink">기생충이 당신의 자지 주위에서 진동하고 있다.</span>
 				<</if>>
 			<<elseif $parasite.clit.name and $parasite.clit.name is "parasite">>
 				<<if $earSlime.defyCooldown>>
-					<span class="red">The parasite<<if $earSlime.focus isnot "pregnancy">> penis<</if>> compresses <<possessedWord 'your' 'red'>> clit.</span>
+					<span class="red">기생충<<if $earSlime.focus isnot "pregnancy">> 자지가<<else>>이<</if>> 당신의 클리토리스를 압박하고 있다.</span>
 				<<elseif $earSlime.vibration and $earSlime.vibration lte 20>>
-					<span class="pink">The parasite<<if $earSlime.focus isnot "pregnancy">> penis<</if>> pulsates around <<possessedWord 'your' 'pink'>> clit.</span>
+					<span class="pink">기생충<<if $earSlime.focus isnot "pregnancy">> 자지가<<else>>이<</if>> 당신의 클리토리스 주위에서 고동치고 있다.</span>
 				<<elseif $earSlime.vibration>>
-					<span class="pink">The parasite<<if $earSlime.focus isnot "pregnancy">> penis<</if>> vibrates around <<possessedWord 'your' 'pink'>> clit.</span>
+					<span class="pink">기생충<<if $earSlime.focus isnot "pregnancy">> 자지가<<else>>이<</if>> 신의 클리토리스 주위에서 진동하고 있다.</span>
 				<</if>>
 			<</if>>
 		<</if>>
 
 		<<if $parasite.left_ear.name and $parasite.left_ear.name eq $parasite.right_ear.name>>
 			<<if $parasite.left_ear.name is "slime">>
-				<span class="lewd">The $parasite.left_ear.name in each ear influences <<possessedWord 'your' 'lewd'>> thoughts<<if $earSlime.growth gte 100>> and actions<</if>>.</span>
+				<span class="lewd">양쪽 귀의 <<trParasite $parasite.left_ear.name "이">>_trResult 당신의 사고<<if $earSlime.growth gte 100>>와 움직임<</if>>에 영향을 주고 있다.</span>
 				<br>
 			<</if>>
 		<<else>>
 			<<if $parasite.left_ear.name is "slime">>
-				<span class="lewd">The $parasite.left_ear.name in <<possessedWord 'your' 'lewd'>> left ear influences <<possessedWord 'your' 'lewd'>> thoughts.</span>
+				<span class="lewd">왼쪽 귀의 <<trParasite $parasite.left_ear.name "이">>_trResult 당신의 사고에 영향을 주고 있다.</span>
 				<br>
 			<</if>>
 			<<if $parasite.right_ear.name is "slime">>
-				<span class="lewd">The $parasite.right_ear.name in <<possessedWord 'your' 'lewd'>> right ear influences <<possessedWord 'your' 'lewd'>> thoughts.</span>
+				<span class="lewd">오른쪽 귀의 <<trParasite $parasite.right_ear.name "이">>_trResult 당신의 사고에 영향을 주고 있다.</span>
 				<br>
 			<</if>>
 		<</if>>
 
-		<<switch pcGetArmsBound()>>
-			<<case "both">>
-				<span class="pink"><<possessedWord 'Your' 'pink'>> arms are bound.</span>
-				<br>
-			<<case "left">>
-				<span class="purple"><<possessedWord 'Your' 'purple'>> left arm is bound.</span>
-				<br>
-			<<case "right">>
-				<span class="purple"><<possessedWord 'Your' 'purple'>> right arm is bound.</span>
-				<br>
-		<</switch>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<span class="pink">당신의 양팔이 묶여있다.</span>
+			<br>
+		<<elseif $leftarm is "bound">>
+			<span class="purple">당신의 왼팔이 묶여있다.</span>
+			<br>
+		<<elseif $rightarm is "bound">>
+			<span class="purple">당신의 오른팔이 묶여있다.</span>
+			<br>
+		<</if>>
 		<<if $feetuse is "bound" or $worn.feet.type.includes("shackle")>>
-			<span class="pink"><<possessedWord 'Your' 'pink'>> legs are bound.</span>
+			<span class="pink">당신의 양다리가 묶여있다.</span>
 			<br>
 		<</if>>
 		<<goo>>
 
-		<div id="statmeters" @class="($options.showCaptionText is true ? '' : 'condensed')">
+		<div id="statmeters">
 			<<if $gamemode isnot "soft">>
 				<<paincaption>>
 			<</if>>
@@ -255,38 +249,38 @@
 		</div>
 		<br>
 
-		<<if $options.tipdisable is "f" and (!$statFreeze or $hc)>>
-			<span class="gold">Tip:</span> <<tips>>
+		<<if $options.tipdisable is "f" and !$statFreeze>>
+			<span class="gold">팁:</span> <<tips>>
 			<br><br>
 		<</if>>
 
 		<div id="overlayButtons">
-			<<button CHARACTERISTICS>>
+			<<button 정보>>
 				<<overlayReplace "characteristics">>
 			<</button>>
-			<<button SOCIAL>>
+			<<button 관계>>
 				<<overlayReplace "social">>
 			<</button>>
 			<div class="sidebarButtonSplit">
-				<<button TRAITS>>
+				<<button 특성>>
 					<<overlayReplace "traits">>
 				<</button>>
-				<<button JOURNAL>>
+				<<button 일지>>
 					<<overlayReplace "journal">>
 				<</button>>
 			</div>
 			<div class="sidebarButtonSplit">
-				<<button STATS>>
+				<<button 통계>>
 					<<overlayReplace "statistics">>
 				<</button>>
-				<<button FEATS>>
+				<<button 도전과제>>
 					<<overlayReplace "gameFeats">>
 				<</button>>
 			</div>
 			<br>
 			<div class="sidebarButtonSplit">
 				<<if $dancing is 0 and $combat is 0 and $passage isnot "Start2" and $cheatdisable is "f" or $debug is 1>>
-					<<button CHEATS>>
+					<<button 치트>>
 						<<overlayReplace "cheats">>
 					<</button>>
 				<</if>>
@@ -320,10 +314,10 @@
 				<<button "DEBUG RENDERER">><<overlayReplace "canvasModel">><</button>>
 			<</if>>
 			<div class="sidebarButtonSplit">
-				<<button OPTIONS>>
+				<<button 옵션>>
 					<<overlayReplace "options">>
 				<</button>>
-				<<button SAVES>>
+				<<button 세이브>>
 					<<overlayReplace "saves">>
 				<</button>>
 			</div>
@@ -354,7 +348,7 @@
 		<div id="startingPlayerImage" class="hidden"></div>
 	<</if>>
 	<div id="startCaption">
-		<<startCaption>>
+		<<if _warningConfirm>><<startCaption>><<else>><<coveredStartCaption>><</if>>
 	</div>
 <</if>>
 
@@ -365,28 +359,120 @@
 
 :: Widgets Clothing Caption [widget]
 <<widget "startCaption">>
-	<<versioninfo>>
+	<<versioninfo>><<koTransInfo>>
 
 	<div class="my-4">
 		<<linkinformation>>
 	</div>
 
-	<<button SAVES>>
+	<<button 세이브>>
 		<<overlayReplace "saves">>
 	<</button>>
 	<div class="sidebarButtonSplit">
-		<<button OPTIONS>>
+		<<button 옵션>>
 			<<overlayReplace "options">>
 		<</button>>
-		<<button FEATS>>
+		<<button 도전과제>>
 			<<overlayReplace "startFeats">>
 		<</button>>
 	</div>
 <</widget>>
 
+<<widget "calculateallure">>
+	<<if Weather.dayState is "night">>
+		<<set $nightmod to 1.5>>
+	<<else>>
+		<<set $nightmod to 1>>
+	<</if>>
+
+	<<if $exposed gte 2>>
+		<<set $exposedmod to 1.4>>
+	<<elseif $exposed gte 1>>
+		<<set $exposedmod to 1.2>>
+	<<else>>
+		<<set $exposedmod to 1>>
+	<</if>>
+
+	<<set $allure to (($beauty / 3) + $hairlength / 4 + $worn.upper.reveal + $worn.lower.reveal)>>
+	<<if $worn.upper.type.includes("naked")>><<set $allure += $worn.under_upper.reveal>><</if>>
+	<<if $worn.lower.type.includes("naked")>><<set $allure += $worn.under_lower.reveal>><</if>>
+	<<set $allure *= $nightmod>>
+	<<set $allure *= $exposedmod>>
+	<<set $allure += $worn.head.reveal>>
+	<<set $allure += $worn.face.reveal>>
+	<<set $allure += $worn.neck.reveal>>
+	<<set $allure += $worn.legs.reveal>>
+	<<set $allure += $worn.feet.reveal>>
+	<<if $wolfgirl gte 6>><<set $allure += 500>><</if>>
+	<<if $demon gte 6>><<set $allure += 500>><</if>>
+	<<if $angel gte 6>><<set $allure += 500>><</if>>
+	<<if $fallenangel gte 2>><<set $allure += 500>><</if>>
+	<<if $cat gte 6>><<set $allure += 500>><</if>>
+	<<if $cow gte 6>><<set $allure += 500>><</if>>
+	<<if $harpy gte 6>><<set $allure += 500>><</if>>
+	<<if $fox gte 6>><<set $allure += 750>><</if>>
+	<<goocount>><<set $allure += ($liquidcount * 50)>>
+
+	<<if $makeup.lipstick != 0>><<set $allure += 100>><</if>>
+	<<if $makeup.eyeshadow != 0>><<set $allure += 100>><</if>>
+	<<if $makeup.mascara != 0>><<set $allure += 100>><</if>>
+
+	<<if $earSlime.growth gt 50>><<set $allure += ($earSlime.growth - 50) * 10>><</if>>
+	<<if !["island"].includes($location)>>
+		<<set $allure += ($fame.sex / 10)>>
+		<<set $allure += ($fame.prostitution / 10)>>
+		<<set $allure += ($fame.rape / 10)>>
+		<<set $allure += ($fame.bestiality / 10)>>
+		<<set $allure += ($fame.exhibitionism / 10)>>
+		<<set $allure += ($fame.pregnancy / 10)>>
+		<<set $allure += ($fame.impreg / 10)>>
+
+		<<set $allure -= ($fame.scrap / 2)>>
+		<<set $allure -= ($fame.good / 2)>>
+		<<set $allure -= ($fame.business / 2)>>
+		<<set $allure -= ($fame.social / 2)>>
+		<<set $allure -= ($fame.model / 2)>>
+		<<if $debug is 1>>
+			<<set $allure -= ($fame.pimp / 2)>>
+		<</if>>
+	<</if>>
+	<<if Time.isBloodMoon()>>
+		<<set $allure += 2000>>
+	<</if>>
+	<<set $baseAllure to $allure>>
+	<<set $allure *= $alluremod>>
+	<<if $allure gte 8000 * $alluremod>><<set $allure to 8000 * $alluremod>><</if>>
+	<<if $moorLuck gt 0>>
+		<<set $allure to Math.floor($allure * (1 - ($moorLuck / 100)))>>
+	<</if>>
+	<<if $allure lt 0>>
+		<<set $allure to 0>>
+	<</if>>
+
+	<<set $attractiveness to (($beauty / 3) + $hairlength / 4 + $worn.upper.reveal + $worn.lower.reveal)>>
+	<<if $worn.upper.type.includes("naked")>><<set $attractiveness += $worn.under_upper.reveal>><</if>>
+	<<if $worn.lower.type.includes("naked")>><<set $attractiveness += $worn.under_lower.reveal>><</if>>
+	<<set $attractiveness += $worn.head.reveal>>
+	<<set $attractiveness += $worn.face.reveal>>
+	<<set $attractiveness += $worn.neck.reveal>>
+	<<set $attractiveness += $worn.legs.reveal>>
+	<<set $attractiveness += $worn.feet.reveal>>
+	<<if $wolfgirl gte 6>><<set $attractiveness += 500>><</if>>
+	<<if $demon gte 6>><<set $attractiveness += 500>><</if>>
+	<<if $angel gte 6>><<set $attractiveness += 500>><</if>>
+	<<if $fallenangel gte 2>><<set $attractiveness += 500>><</if>>
+	<<if $cat gte 6>><<set $attractiveness += 500>><</if>>
+	<<if $cow gte 6>><<set $attractiveness += 500>><</if>>
+	<<if $harpy gte 6>><<set $attractiveness += 500>><</if>>
+	<<if $fox gte 6>><<set $attractiveness += 750>><</if>>
+	<<if $makeup.lipstick != 0>><<set $attractiveness += 100>><</if>>
+	<<if $makeup.eyeshadow != 0>><<set $attractiveness += 100>><</if>>
+	<<if $makeup.mascara != 0>><<set $attractiveness += 100>><</if>>
+<</widget>>
+
 <<widget "statsCaption">>
 	<<set $_icon to $outside ? "icon_open.png" : "icon_closed.png">>
-	<<set _message to $outside ? "<<possessedWord 'You'>> are outside." : "<<possessedWord 'You'>> are inside.">>
+	<<set _message to $outside ? "당신은 실외에 있다." : "당신은 실내에 있다.">>
 	<<if $extendedStats>>
 		<div class="left-fixed expanded" tooltip="_message">
 			<img class="icon_ui" @src="'img/ui/' + $_icon">
@@ -412,7 +498,7 @@
 				<<if !$extendedStats>>
 					<div>
 						<img class="icon_ui" src="img/ui/icon_day.png">
-						<<print Time.weekDayName.slice(0, 3)>>
+						<<trDaysOfWeek `Time.weekDayName` 1>>_trResult
 					</div>
 				<</if>>
 			</div>
@@ -421,8 +507,8 @@
 			<div class="second-row">
 				<div>
 					<img class="icon_ui" src="img/ui/icon_day.png">
-					<<print Time.weekDayName.slice(0, 3)>>
-					<<print getShortFormattedDate(Time.date)>>
+					<<trDaysOfWeek `Time.weekDayName` 1>>_trResult
+					<<trMonth `Time.monthName`>><<print _trResult + " " + Time.monthDay + "일">>
 				</div>
 			</div>
 		<</if>>
@@ -458,18 +544,18 @@
 
 	<<if $player.gender is "m">>
 		<<set _clothesType to "male">>
-	<<elseif $player.gender is "f">>
-		<<set _clothesType to "female">>
-	<<else>>
+	<<elseif $player.gender is "h">>
 		<<if $player.gender_body is "m" or ($player.gender_body is "a" and $player.breastsize lte 3)>>
 			<<set _clothesType to "male">>
 		<<else>> <!-- if $player.gender_body is "f" or ($player.gender_body is "a" and $player.breastsize gt 3)) -->
 			<<set _clothesType to "female">>
 		<</if>>
+	<<else>> <!-- if $player.gender is "f" -->
+		<<set _clothesType to "female">>
 	<</if>>
 
 	<<if $background is "crossdresser">>
-		<<set _clothesType to ($player.sex is "m" ? "female" : "male")>>
+		<<set _clothesType to (_clothesType is "male" ? "female" : "male")>>
 	<</if>>
 
 	<div id="startImg" @class="'hair-'+ $hairselect + ' noAnimations'">
@@ -490,7 +576,7 @@
 		<<default>>
 			<<set _breastSize to 0>>
 		<</switch>>
-		<<if $player.sex is "m" or $player.sex is "h">>
+		<<if $player.gender is "m" or $player.gender is "h">>
 			<<set _penisSize to $player.penissize>>
 		<<else>>
 			<<unset _penisSize>>
@@ -504,13 +590,13 @@
 
 		<<selectmodel "main" "sidebar">> <!-- reuse sidebar cache slot -->
 		<<twinescript>>
-			_modeloptions.body_type = $player.bodyshape;
+			_modeloptions.body_type = $player.gender_body;
 			_modeloptions.breast_size = _breastSize;
 			_modeloptions.breasts = (!_showUnderwear && !_showClothes) ? "default" : "cleavage";
 			if (_penisSize isnot undefined) {
 				_modeloptions.penis = $player.virginity.penile is true ? "virgin" : "default";
 				_modeloptions.penis_size = _penisSize;
-				_modeloptions.balls = $player.sex is "h" ? $player.ballsExist : true;
+				_modeloptions.balls = $player.gender is "h" ? $player.ballsExist : true;
 			}
 
 			_modeloptions.skin_type = Skin.color.natural;
@@ -522,11 +608,9 @@
 			_modeloptions.hair_sides_length = _hairlengthstage;
 			_modeloptions.hair_fringe_length = _hairlengthstage;
 
-			_modeloptions.facestyle = $facestyle;
-			_modeloptions.facevariant = $facevariant;
 			_modeloptions.left_eye = $eyeselect;
 			_modeloptions.right_eye = $eyeselect;
-			_modeloptions.mouth = "smile";
+			_modeloptions.mouth = "neutral";
 			_modeloptions.freckles = $player.freckles is true;
 			_modeloptions.toast = _toast is true;
 
@@ -534,7 +618,7 @@
 			_modeloptions.angel_wings_type = $transformationParts.angel.wings;
 			_modeloptions.fallen_wings_type = $transformationParts.fallenAngel.wings;
 
-			_modeloptions.worn = {};
+			_modeloptions.worn =  {};
 			if (_clothesType is "male") {
 				if (_showClothes) {
 					_modeloptions.worn = {

@@ -3,71 +3,66 @@
 <<set $outside to 0>><<set $location to "town">><<effects>>
 <<set $pregnancyStats.parasiteDoctorEvents to 2>>
 <<harper_intro>>
-"You're experiencing strange sensations in your abdomen?" <<he>> asks. You nod. <<He>> wheels <<his>> chair closer, and places <<his>> stethoscope to your tummy.
+"복부에서 이상한 느낌이 들고 있다고?" <<he_ ga>> 묻는다. 당신은 끄덕인다. <<He_ nun>> <<his_ yi>> 의자를 가까이 끌어와, <<his_ yi>> 청진기를 당신의 배에 댄다.
 <br><br>
-<<He>> listens for a moment, then wheels away and types something into <<his>> computer. "You have a parasite problem," <<he>> says. "They're using you as part of their reproductive cycle." <<He>> notices the look on your face, and smiles. "Don't be concerned. They won't harm you. They'll remove themselves when they're ready."
+<<He_ nun>> 잠시 동안 듣더니, <<his_ yi>> 컴푸터 쪽으로 의자를 끌고 가 무언가를 입력한다. "너는 기생충 문제를 앓고 있구나," <<he_ ga>> 말한다. "그 녀석들은 너를 그들의 생식 주기의 일부로 사용하고 있는 거란다." <<He_ nun>> 당신의 얼굴 표정을 알아채고 싱긋 웃는다. "걱정하지 마라. 그 녀석들은 너를 해치지는 못해. 그 녀석들은 때가 되면 네게서 빠져나갈 거란다."
 <br><br>
-<<He>> spends several minutes explaining how to "birth" the creatures. What to do, and what not to do. It sounds simple. Drop to all fours, and squeeze.
+<<He_ nun>> 몇 분 동안 그 생물체의 "탄생"이 어떻게 되는지에 대해 설명한다. 무엇을 하고, 무엇을 하지 않는지를. 그것은 간단하게 들렸다. 네 발로 바닥에 엎드려서, 그리고 짜낸다.
 <br><br>
-<<He>> turns back to <<his>> computer. "Species like this are of scientific interest," <<he>> continues. "If you're interested in making a bit of money, I'm able to pay you for them on behalf of a local company." <<He>> rises to <<his>> feet. "Is there anything else?"
+<<He_ nun>> <<his_ yi>> 컴퓨터로 몸을 돌린다. "이런 생물종들은 과학적 연구 대상이란다," <<he_ ga>> 계속 말한다. "만약 네가 돈을 좀 버는 데 관심이 있다면, 그것들을 필요로 할 지역 업체를 대신해서 내가 그것들을 살 수도 있단다." <<He_ nun>> <<his_ yi>> 발로 일어선다. "다른 궁금한 점은?"
 <br><br>
-You shake your head. <<He>> holds open the door for you, and you leave the office. "Be well," <<he>> says as you pass.
+당신은 머리를 젓는다. <<He_ nun>> 당신을 위해 문을 잡아 열고, 당신은 진찰실을 나간다. "건강하거라," 당신이 지나가자 <<he_ ga>> 말한다.
 <br><br>
-<<link [[Return to foyer|Hospital Foyer]]>><<endevent>><</link>>
+<<link [[대기실로 돌아간다|Hospital Foyer]]>><<endevent>><</link>>
 
 :: Pregnancy Discussion
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
-<<if $hospitalintro is 0 or $hospitalintro is "livestock" or $hospitalintro is "party">>
-	<<harper_intro>>
-<<else>>
-	<<if $firstOption is undefined>><<set $firstOption to true>><</if>>
-<</if>>
+<<if $firstOption is undefined>><<set $firstOption to true>><</if>>
 
 <<if $firstOption is true>>
-	<<npc Harper>><<person1>>You don't have to wait long. Doctor Harper emerges from <<his>> office and beckons you over. You enter <<his>> office and take a seat.
+	<<npc Harper>><<person1>>당신은 오래 기다릴 필요가 없었다. 하퍼 선생님이 <<his_ yi>> 진찰실에서 모습을 드러내 당신에게 손짓한다. 당신은 <<his_ yi>> 진찰실에 들어가 의자에 앉는다.
 	<br><br>
 
-	"How can I help you?" <<he>> asks.
+	"무슨 일로 왔니?" <<he_ ga>> 묻는다.
 	<br><br>
-<<elseif $firstOption is false>>
-	You are in Doctor Harper's office. "Is there anything else I can help you with?" <<he>> asks.
+<<else>>
+	당신은 하퍼 선생님의 진찰실에 있다. "내가 도와줄 게 또 뭐가 있을까?" <<he_ ga>> 묻는다.
 	<br><br>
 <</if>>
 
 <<if $pregnancyStats.parasiteDoctorEvents gte 2 and $container.portable.value gt 0>>
 	<<if $pregnancyStats.namesParasitesChild is true>>
-		<<link [[Sell the children you are carrying (0:05)|Sell Children]]>><<pass 5>><<set $firstOption to false>><</link>>
+		<<link [[당신이 데리고 온 아기들을 판다 (0:05)|Sell Children]]>><<pass 5>><<set $firstOption to false>><</link>>
 		<br>
 	<<else>>
-		<<link [[Sell the parasites you are carrying (0:05)|Sell Children]]>><<pass 5>><<set $firstOption to false>><</link>>
+		<<link [[당신이 데리고 온 기생충들을 판다 (0:05)|Sell Children]]>><<pass 5>><<set $firstOption to false>><</link>>
 		<br>
 	<</if>>
 <</if>>
 <<if $pregnancyStats.parasiteDoctorEvents is 3>>
-	<<link [[Enquire about feeling something large in your stomach (0:10)|Pregnancy Futa Introduction]]>><<pass 10>><<set $firstOption to false>><</link>>
+	<<link [[당신 뱃속에 느껴지는 무언가 거대한 것에 대해 묻는다 (0:10)|Pregnancy Futa Introduction]]>><<pass 10>><<set $firstOption to false>><</link>>
 	<br>
 <</if>>
 <<if $pregnancyStats.parasiteDoctorEvents gte 4 and ($sexStats.anus.pregnancy.motherStatus is 2 or ($sexStats.vagina.pregnancy.motherStatus is 2 and !$worn.genitals.type.includes("hidden")))>>
-	<<link [[Enquire about parasite hermaphrodite removal (0:30)|Remove Futa Pregnancy]]>><<pass 30>><<set $futaCheck to true>><<set $firstOption to false>><</link>>
+	<<link [[후타나리 기생충 제거에 대해 묻는다 (0:30)|Remove Futa Pregnancy]]>><<pass 30>><<set $futaCheck to true>><<set $firstOption to false>><</link>>
 	<br>
 <</if>>
 <<if $pregnancyStats.parasiteTypesSeen.length gte 4 and $pregnancyStats.parasiteBook is 1>>
-	<<link [[Enquire about information on parasites (0:05)|Harper Parasite Book]]>><<pass 5>><<set $firstOption to false>><</link>>
+	<<link [[기생충들의 정보에 대해 묻는다 (0:05)|Harper Parasite Book]]>><<pass 5>><<set $firstOption to false>><</link>>
 	<br>
 <</if>>
 
-<<link [[Return to foyer|Hospital Foyer]]>><<endevent>><<unset $firstOption>><</link>>
+<<link [[대기실로 돌아간다|Hospital Foyer]]>><<endevent>><<unset $firstOption>><</link>>
 
 :: Sell Children
 
 <<set $outside to 0>><<set $location to "town">><<effects>>
-Doctor Harper walks over to <<his>> office door, and locks it. <<He>> sits back down. "What have you brought me today?" <<he>> asks.
+하퍼 선생님은 <<his_ yi>> 진찰실 문으로 걸어가, 문을 잠근다. <<He_ nun>> 등을 대고 앉는다. "오늘은 무엇을 가지고 왔니?" <<he_ ga>> 묻는다.
 <br><br>
-/* the 100 multiplier is intentional, used to use the moneyGain widget */
-You pull out the small container <<he>> gave you. <<He>> looks inside. Seeming satisfied, <<he>> produces another, larger container from beneath <<his>> desk. <<He>> transfers the contents and hands the empty container to you. <<He>> opens a drawer, and counts out <<money `$container.portable.value * 100` "hospitalParasitesSold">><<printmoney `$container.portable.value * 100`>>. <<He>> hands it to you.
+당신은 <<he_ ga>> 당신에게 주었던 작은 상자를 꺼낸다. <<He_ nun>> 안을 쳐다본다. 만족한 듯이, <<he_ nun>> <<his_ yi>> 책상 아래에서 다른, 더 큰 상자를 꺼낸다. <<He_ nun>> 그 내용물을 옮기고 빈 상자를 당신 손에 돌려준다. <<He_ nun>> 서랍을 열고, <<moneyGain $container.portable.value>>를 센다. <<He_ nun>> 그것을 당신의 손에 쥐어준다.
 <br><br>
-"The community thanks you," <<he>> says.
+"지역 사회는 고마워할 거다," <<he_ ga>> 말한다.
 <br><br>
 <<set _paleAmount to 0>>
 <<for _i to 0; _i lt $container.portable.creatures.length; _i++>>
@@ -84,29 +79,29 @@ You pull out the small container <<he>> gave you. <<He>> looks inside. Seeming s
 	<<else>>
 		<<set $wraithAngerCooldown to (15 * _paleAmount)>>
 	<</if>>
-	You feel a sudden sense of dread and regret as you watch your pale <<pluralise _paleAmount "child" "children">> slip out of your reach. <<gobsession _paleAmount>>
+	당신의 창백한 <<if _paleAmount gt 1>>아이들이<<else>>아이가<</if>> 손에서 빠져나가는 모습을 보자 당신은 순간적으로 공포와 후회가 느껴진다. <<gobsession _paleAmount>>
 	<br><br>
 <</if>>
 <<set $container.portable.value to 0>>
 <<set $container.portable.creatures to []>>
-<<link [[Next|Pregnancy Discussion]]>><</link>>
+<<link [[다음|Pregnancy Discussion]]>><</link>>
 
 :: Pregnancy Futa Introduction
 
-<<set $outside to 0>><<set $location to "town">><<effects>><<earnFeat "Broodmother Host">>
+<<set $outside to 0>><<set $location to "town">><<effects>>
 <<set $pregnancyStats.parasiteDoctorEvents to 4>>
-"Strange," <<he>> says. "N-not that there's anything to be alarmed about." <<He>> pulls <<his>> chair back to <<his>> computer and types something in.
+"신기하군," <<he_ ga>> 말한다. "아-아무것도 불안해 할 필요는 없단다." <<He_ nun>> <<his_ yi>> 의자를 <<his_ yi>> 컴퓨터로 밀고 무언가를 입력한다.
 <br><br>
-You wait as <<he>> reads the screen, occasionally tapping on the keyboard. <<He>> pulls a large book from a drawer, blows off dust, and flips through the pages. At last, <<he>> puts the book away and turns to face you.
+당신은 <<he_ ga>> 화면을 읽고, 가끔 키보드를 치는 동안 기다린다. <<He_ nun>> 서랍에서 커다란 책을 꺼내, 먼지를 불어 날리고, 페이지를 넘긴다. 드디어, <<he_ nun>> 책을 밀어놓고 돌아 당신을 바라본다.
 <br><br>
-"You have a parasite," <<he>> says. "An unusual one. It has both sex organs, and is able to mate with itself. We'll need to perform a procedure here in order to remove it. Until then, you'll continue to birth its offspring."
+"네 복부에는 기생충이 있는데," <<he_ ga>> 말한다. "드문 종류야. 그건 두 생식기를 다 가지고 있고, 그 자신과 교미가 가능하단다. 그걸 꺼내기 위해서는 수술이 필요하겠구나. 그걸 빼낼 때 까지는, 너는 계속 그것의 새끼들을 낳게 될 거란다."
 <br><br>
-<<link [[Next|Pregnancy Discussion]]>><</link>>
+<<link [[다음|Pregnancy Discussion]]>><</link>>
 
 :: Pregnancy Clear
 
 <br><br>
-<<link [[Next|Pregnancy Discussion]]>><</link>>
+<<link [[다음|Pregnancy Discussion]]>><</link>>
 
 :: Remove Futa Pregnancy
 
@@ -156,33 +151,33 @@ You wait as <<he>> reads the screen, occasionally tapping on the keyboard. <<He>
 	<<clearToDeleteParasiteFetus>>
 <</if>>
 
-"Please undress and lie on the table," <<he>> says while pulling on a latex glove. "No need to be shy." <<He>> turns and rummages through a drawer.
+"옷을 벗고 수술대에 눕거라," 라텍스 장갑을 끼면서 <<he_ ga>> 말한다. "부끄러워 할 필요는 없어." <<He_ nun>> 뒤로 돌아 서랍을 뒤진다.
 <br><br>
 
-You <<nervously>> remove your clothing while <<his>> back is turned. You lie down on the table, conscious of your <<lewdness>>. <<His>> face neutral, the doctor grasps your legs and pushes them against your shoulders, before tying them down with straps.
+당신은 <<his_ yi>> 등이 돌아 있는 동안 <<nervously>> 당신의 옷을 벗는다. 당신은 수술대에 누워, 당신의 <<lewdness_ rul>> 의식한다. <<His_ yi>> 얼굴은 무표정인 채로, 의사는 당신의 다리를 잡아 당신의 어깨에 밀고, 끈으로 묶는다.
 <br><br>
 
-"It will be easier if you're still," <<he>> affirms as <<he>> ties down your wrists. You can barely move.
+"네가 가만히 있으면 일이 쉬워질 거란다," <<he_ ga>> 당신의 손목을 묶으며 <<he_ nun>> 단언한다. 당신은 거의 움직일 수가 없다.
 <br><br>
 
 <<if _anusFuta && playerChastity("anus")>>
-	<<He>> examines your $worn.under_lower.name, then produces a strange metal device from <<his>> coat. <<He>> taps the metal, and your anal shield falls loose. "I'll return it when I'm done," <<he>> says.
+	<<He_ nun>> 당신의 <<worn_under_lower_name_ ul>> 조사하더니, 이상한 금속 기기를 <<his_ yi>> 코트에서 꺼낸다. <<He_ ga>> 그 금속으로 톡톡 치니까, 당신의 애널 보호대가 떨어진다. "끝나면 다시 돌려놓을 거란다," <<he_ ga>> 말한다.
 	<br><br>
 <</if>>
 
-<<He>> opens another drawer, and pulls out a smooth white rod with a round ball on one end. <<He>> pushes the thin end against your <<bottom>>. "Just relax,<<if playerBellyVisible() and !_vaginaFuta>> this won't hurt the baby,<</if>>" <<he>> says. It slides in without pain, as if lubricated. Harper twists the other side, and you feel it pulse within you.
+<<He_ nun>> 다른 서랍을 열고, 동그란 구슬이 끝에 달린 매끈한 하얀 막대를 꺼낸다. <<He_ nun>> 그것의 얇은 끝을 당신의 <<bottomPost>>에 밀어넣는다. "그냥 긴장을 풀고 있거라,<<if playerBellyVisible() and !_vaginaFuta>> 이건 아기를 해치지 않으니까,<</if>>" <<he_ ga>> 말한다. 그것은 마치 윤활제가 발린 듯이, 아픔 없이 미끄러져 들어온다. 하퍼가 반대쪽 끝을 이리저리 비틀자, 당신은 당신 안에서 그것이 고동치는 것을 느낀다.
 <<garousal>><<arousal 1200 "bottom">>
 <br><br>
 
-Harper stares unblinking at your <<bottom>> as the pulsing increases in intensity. Just when you feel like you can't take any more, <<he>> eases it out. The <<if $pregnancyStats.namesParasitesChild is true>>baby <</if>>parasite is wrapped around the end<<if _analFutaOther or _vaginaFutaOther>> alongside a smaller one<</if>>. <<He>> puts it in an opaque container, and seals it shut.
+그 고동의 세기가 점점 세지는 동안 하퍼는 눈도 깜박이지 않고 당신의 <<bottom_ ul>> 주시한다. 당신이 더 이상 참을 수 없다고 느끼려는 찰나, <<he_ ga>> 그것을 빼낸다. 그 <<if $pregnancyStats.namesParasitesChild is true>>아기 <</if>>기생충은<<if _analFutaOther or _vaginaFutaOther>> 더 작은 녀석과 함께<</if>> 그 끝에 감겨 있다. <<He_ nun>> 그것을 불투명한 상자 안에 넣고, 상자를 꽉 닫는다.
 <<if _vaginaFuta and _anusFuta>>
-	<<He>> repeats the procedure on the other sets of parasites inside you and more are wrapped and sealed.
+	<<He_ nun>> 그 작업을 당신 안의 다른 쪽의 기생충들에게도 반복했고 더 많은 기생충들이 상자에 담겨 봉해진다.
 <</if>>
 <br><br>
 
-"All done," <<he>> says as <<he>> unties the straps. <<He>> turns away as you dress.
+"다 됐다," <<he_ ga>> 끈을 풀며 말한다. <<He_ nun>> 당신이 옷을 다시 입을 동안 뒤로 몸을 돌린다.
 <br><br>
-<<link [[Next|Pregnancy Discussion]]>><<unset $futaCheck>><</link>>
+<<link [[다음|Pregnancy Discussion]]>><<unset $futaCheck>><</link>>
 
 :: GiveBirth
 
@@ -198,7 +193,7 @@ Harper stares unblinking at your <<bottom>> as the pulsing increases in intensit
 <<set _newlyBirthed to {}>>
 <<set _allSeen to $pregnancyStats.parasiteTypesSeen.length + $pregnancyStats.parasiteVariantsSeen.length>>
 
-Following the directions from Doctor Harper, you get into position and attempt to deliver <<if $pregnancyStats.namesParasitesChild is true>>your baby<<else>>the parasites<</if>>. <<if _stressMulti gt 0>><<gstress>><</if>><<set $stress += 250 * _stressMulti>>
+하퍼 선생님이 알려준 방법대로, 당신은 자세를 잡고 <<if $pregnancyStats.namesParasitesChild is true>>당신의 아기를<<else>>기생충들을<</if>> 낳으려 시도한다. <<if _stressMulti gt 0>><<gstress>><</if>><<set $stress += 250 * _stressMulti>>
 <br><br>
 
 <<for _i to 0; _i lt _pregnancy.fetus.length; _i++>>
@@ -215,18 +210,18 @@ Following the directions from Doctor Harper, you get into position and attempt t
 <</for>>
 
 <<if $pregResult is "notReady">>
-	Despite your efforts, none of <<if $pregnancyStats.namesParasitesChild is true>>your children<<else>>the parasites<</if>> are ready to leave you.
+	당신의 시도에도 불구하고, <<if $pregnancyStats.namesParasitesChild is true>>당신의 아기들<<else>>기생충들<</if>> 중 아무도 당신에게서 나올 준비가 되지 않은 듯 하다.
 	<br><br>
 
-	<<link [[Next|Containers]]>><<unset $pregResult>><<unset $giveBirthLocation>><</link>>
+	<<link [[다음|Containers]]>><<unset $pregResult>><<unset $giveBirthLocation>><</link>>
 <<else>>
-	Your body shudders, and to the floor falls <<if $pregnancyStats.namesParasitesChild is true>><<number $pregResult.length>> <<print $pregResult.length gt 1 ? 'babies' : 'baby'>><<else>><<number $pregResult.length>> <<print $pregResult.length gt 1 ? 'parasites' : 'parasite'>><</if>>.
+	당신의 몸이 전율하며, 바닥에 <<if $pregnancyStats.namesParasitesChild is true>><<trNumber $pregResult.length>> 명의 <<print $pregResult.length gt 1 ? '아기들이' : '아기가'>><<else>><<trNumber $pregResult.length>> 마리의 <<print $pregResult.length gt 1 ? '기생충들이' : '기생충이'>><</if>> 떨어진다.
 
 	<ul>
 		<<for _i to 0; _i lt $pregResult.length; _i++>>
 			<<set _result to _pregnancy.fetus[$pregResult[_i]]>>
 			<!-- Printing the checkbox -->
-			<li><label><<print '<<checkbox "$checkboxResult[' + clone($pregResult[_i]) + ']" false true checked>>'>> - <<print _result.creature>> - <<creatureActivity _result.stats.speed>></label></li>
+			<li><label><<print '<<checkbox "$checkboxResult[' + clone($pregResult[_i]) + ']" false true checked>>'>> - <<trCreature "all" _result.creature>><<print _trResult>> - <<creatureActivity _result.stats.speed>></label></li>
 			<<if _result.creature.includes(" ")>>
 				<!-- If the creature has a variant, like Pale. Currently does not account for creatures with more than one variant, because those don't yet exist -->
 				<!-- Possible task for the future: turn parasite variants into variables, so there can be multiple -->
@@ -252,38 +247,20 @@ Following the directions from Doctor Harper, you get into position and attempt t
 	<<for _n to 0; _n lt Object.values(_newlyBirthed).length; _n++>>
 		<<switch Object.keys(_newlyBirthed)[_n]>>
 			<<case "Tentacle">>
-				You watch the tentacle in fascination. It writhes around blindly and coils around itself, almost like a snake. It's so energetic, just looking at it makes you feel less tired.
+				당신은 넋을 잃고 촉수를 바라본다. 그것은 아무것도 보이지 않는 채로 몸을 뒤틀고 또아리를 틀어, 거의 뱀과 같아 보인다. 촉수는 너무 활기차게 움직여, 그저 바라보는 것만으로도 당신의 피로를 덜어 준다.
 			<<case "Slime">>
-				The slime doesn't move for a while. You poke at it, a little worried, and it jiggles. It has an indescribable consistency. It looks almost without flaw, and you feel <<if $pregnancyStats.namesParasitesChild is true>>proud to have birthed<<else>>almost proud to have hosted<</if>> such a creature.
+				슬라임은 한동안 움직이지 않는다. 당신이 약간 걱정하며 찔러 보자, 슬라임이 움찔거린다. 그건 이루 말할 수 없이 일관된 모습을 지녔다. 슬라임은 거의 결점이 없어 보이며, 당신은 이런 생물체<<if $pregnancyStats.namesParasitesChild is true>>를 낳았다는 데 자부심을<<else>>의 숙주가 되었다는 데 거의 자부심을<</if>> 느낀다.
 			<<case "Worm">>
-				Almost immediately, the worm tries to find somewhere to dig. It has little success, and squirms in agitation until you place it in the <<print _container.name.toLowerCase()>>. You feel odd, having <<if $pregnancyStats.namesParasitesChild is true>>birthed<<else>>hosted<</if>> such a creature.
+				거의 즉각적으로, 벌레는 무언가 파고들 만한 것을 찾으려 시도한다. 그러한 시도는 성공을 거두지 못하고, 당신이 <<putpost _container.name>> 안으로 옮길 때까지 동요 속에서 꿈틀거린다. 당신은 이런 생물체<<if $pregnancyStats.namesParasitesChild is true>>를 낳았다는 데<<else>>의 숙주가 되었다는 데<</if>>에, 기이한 감정을 느낀다.
 			<<case "Lurker">>
-				The lurker moves mainly by crawling, but sometimes hops surprising distances. You quickly place it in the <<print _container.name.toLowerCase()>> before you can lose it.
+				럴커는 주로 기어서 이동하나, 가끔씩 놀라울 정도로 멀리 도약하기도 한다. 당신은 럴커를 잃어버리기 전에 서둘러 <<putpost _container.name>> 안으로 옮긴다.
 			<<case "Vine">>
-				You worry that the vine won't be able to survive without being planted in a better environment, but it seems to be fine in the <<print _container.name.toLowerCase()>>, writhing around. You suspect it's not strictly plant life.
+				당신은 식물아기가 더 나은 환경에 심어지지 않으면 살아남지 못할 거라 걱정했으나, 그것은 당신의 <<putpost _container.name>> 안에서 꿈틀거리는 모습이, 괜찮아 보인다. 당신은 그것이 엄밀하게는 식물이라고 할 수 없다고 의심한다.
 			<<case "Metal">>
-				Upon closer inspection, the metal <<print _newlyBirthed.Metal>> isn't truly metal. It has a metallic colour and pattern, but it bends and writhes in ways that steel wouldn't be able to. You hope it doesn't need anything in particular to eat.
-			<<case "Eel">>
-				The eel immediately starts squirming around wildly. You try to grab it, but it resists you with surprising strength. Despite its struggling, you move it to the <<print _container.name.toLowerCase()>>. It calms down as soon as it touches the water.
-			<<case "Snake">>
-				The snake tries to slither away and hide from you. You gently grab it by the neck, avoiding its attempts to bite your hand, and place it in the <<print _container.name.toLowerCase()>>.
-			<<case "Fish">>
-				The fish flops around on the ground, gasping for air. You quickly scoop it up and put it in the <<print _container.name.toLowerCase()>>. You watch it swim around. Hopefully the water is safe for <<= $pregnancyStats.namesParasitesChild ? "your child" : "the parasite">>.
-			<<case "Spider">>
-				You watch as the spider tries to upright itself, legs wiggling. It succeeds and crawls in your general direction. You hold out your hand, and it climbs up, allowing you to safely put it in the <<print _container.name.toLowerCase()>>.
-			<<case "Bee">>
-				The bee uses its front legs to clean itself off. It tilts its head as it looks at you, and lets you pick up its fuzzy body without much resistance. You place it in the <<print _container.name.toLowerCase()>>.
-			<<case "Wasp">>
-				You try to pick up the wasp, but it points its stinger toward you, abdomen pulsating. You slowly reach out, trying not to startle it, and it eventually lets you place it in the <<print _container.name.toLowerCase()>>.
-			<<case "Slug">>
-				The slug's eyestalks emerge from its head as it slowly slides around the floor, leaving traces of slime. You hold it gently, trying not to squish it, and put it in the <<print _container.name.toLowerCase()>>.
-			<<case "Squid">>
-				You touch the squid to move it, and it squirts some ink on your hand. You wipe it off and put the squid in the <<print _container.name.toLowerCase()>>. The squid swims around. It almost looks proud of itself.
-			<<case "Maggot">>
-				The maggot crawls around the floor, its fat white body pulsating. As you move it to the <<print _container.name.toLowerCase()>>, you wonder what it will grow into, if anything.
+				더 자세히 검토해 보니, 금속 <<trCreature "all" _newlyBirthed.Metal "은">><<print _trResult>> 완전히 금속이 아니다. 그것은 금속 색상과 무늬가 있긴 하지만, 일반 금속이 할 수 없는 방법으로 구부러지고 꿈틀거린다. 당신은 그것이 특수한 먹이가 필요하지 않기를 바란다.
 			<<case "Pale">>
-				Your hands seem to move on their own, and you find yourself holding the pale <<print _newlyBirthed.Pale>>. It's so pale that it's almost translucent. You feel a twinge of dread, but it's quickly replaced by an odd contentment.
-				<span class="blue">You should be careful deciding whether to keep it.</span>
+				당신의 양손은 마치 그 자신의 의지가 있는 듯이 움직였고, 당신은 당신이 그 창백한 <<trCreature "all" _newlyBirthed.Pale "을">><<print _trResult>> 잡고 있다는 것을 알아챈다. 그것은 너무 창백해서 거의 투명하게 비쳐보인다. 당신은 두려움의 통증을 느꼈으나, 그것은 빠르게 이상한 만족감으로 대체된다.
+				<span class="blue">당신은 그것을 남겨둘지 말지에 대해 조심스럽게 결정하는 것이 좋다.</span>
 			<<default>>
 				<!-- This way, species like Wasp that don't have a unique line don't print <br>s for no reason -->
 				<<continue>>
@@ -291,15 +268,15 @@ Following the directions from Doctor Harper, you get into position and attempt t
 		<br><br>
 	<</for>>
 	<<if $pregnancyStats.parasiteBook is 3 and $pregnancyStats.parasiteTypesSeen.length + $pregnancyStats.parasiteVariantsSeen.length gt _allSeen>>
-		You write about <<if $pregnancyStats.namesParasitesChild is true>>your new children<<else>>the new parasites<</if>> in your notebook.
+		당신은 공책에 <<if $pregnancyStats.namesParasitesChild is true>>당신의 새 아이들<<else>>새로운 기생충들<</if>>을 기록한다.
 		<br><br>
 	<<elseif $pregnancyStats.parasiteTypesSeen.length gte 4 and (!$pregnancyStats.parasiteBook or $pregnancyStats.parasiteBook is 1)>>
 		<<set $pregnancyStats.parasiteBook to 1>>
 		<br><br>
-		You find yourself wondering at the sheer number of different types of creatures you've birthed, and wonder if there's any way to know more. <span class="gold">Doctor Harper might be able to help you.</span>
+		당신은 당신이 가진 생물체들의 정확한 가짓수와, 그에 대해 더 자세히 알 방도가 있는지 궁금해진다. <span class="gold">하퍼 의사 선생님이라면 도와줄 수 있을 지도 모른다.</span>
 	<</if>>
 	<<if $pregResult.length gt (_container.maxCount - _container.count)>>
-		Please select any required to replace, it will replace from top to bottom:
+		대체할 생물체를 선택해 주세요. 위에서 아래로 대체됩니다:
 		<br>
 		<ul>
 			<<for _i to 0; _i lt _container.maxCount; _i++>>
@@ -336,7 +313,7 @@ Following the directions from Doctor Harper, you get into position and attempt t
 	<</for>>
 
 	<<if $debug is 1>>
-		Debug - Keep selected babies result (ID - Checkbox - Result)
+		디버그 - Keep selected babies result (ID - Checkbox - Result)
 		<br>
 		<<for _i to 0; _i lt $pregResult.length;_i++>>
 			<<if $checkboxResult[$pregResult[_i]] is true>>
@@ -353,11 +330,11 @@ Following the directions from Doctor Harper, you get into position and attempt t
 	<<if $parasiteSelectionCount lte _availableStorage>>
 		<<if $parasiteSelectionCount gt 0>>
 			<<if $pregnancyStats.namesParasitesChild is true>>
-				<<link [[Keep selected babies|PregEventsResult2]]>>
+				<<link [[선택한 아기들을 남겨둔다|PregEventsResult2]]>>
 					<<set $pregChoice to "KeepSelected">>
 				<</link>>
 			<<else>>
-				<<link [[Keep selected parasites|PregEventsResult2]]>>
+				<<link [[선택한 기생충을 남겨둔다|PregEventsResult2]]>>
 					<<set $pregChoice to "KeepSelected">>
 				<</link>>
 			<</if>>
@@ -367,11 +344,11 @@ Following the directions from Doctor Harper, you get into position and attempt t
 		<br>
 		<<if ($parasiteSelectionCount - $parasiteReplaceArray.length) lte _availableStorage>>
 			<<if $pregnancyStats.namesParasitesChild is true>>
-				<<link [[Replace selected babies|PregEventsResult2]]>>
+				<<link [[선택한 아기들을 대체한다|PregEventsResult2]]>>
 					<<set $pregChoice to "ReplaceSelected">>
 				<</link>>
 			<<else>>
-				<<link [[Replace selected parasites|PregEventsResult2]]>>
+				<<link [[선택한 기생충들을 대체한다|PregEventsResult2]]>>
 					<<set $pregChoice to "ReplaceSelected">>
 				<</link>>
 			<</if>>
@@ -380,11 +357,11 @@ Following the directions from Doctor Harper, you get into position and attempt t
 	<<if $pregResult.length lte _availableStorage>>
 		<br>
 		<<if $pregnancyStats.namesParasitesChild is true>>
-			<<link [[Keep all babies|PregEventsResult2]]>>
+			<<link [[모든 아기들을 남겨둔다|PregEventsResult2]]>>
 				<<set $pregChoice to "keepAll">>
 			<</link>>
 		<<else>>
-			<<link [[Keep all parasites|PregEventsResult2]]>>
+			<<link [[모든 기생충들을 남겨둔다|PregEventsResult2]]>>
 				<<set $pregChoice to "keepAll">>
 			<</link>>
 		<</if>>
@@ -392,11 +369,11 @@ Following the directions from Doctor Harper, you get into position and attempt t
 
 	<br><br>
 	<<if $pregnancyStats.namesParasitesChild is true>>
-		<<link [[Sell all babies|PregEventsResult2]]>>
+		<<link [[모든 아기들을 판다|PregEventsResult2]]>>
 			<<set $pregChoice to "sellAll">>
 		<</link>>
 	<<else>>
-		<<link [[Sell all parasites|PregEventsResult2]]>>
+		<<link [[모든 기생충들을 판다|PregEventsResult2]]>>
 			<<set $pregChoice to "sellAll">>
 		<</link>>
 	<</if>>
@@ -414,7 +391,6 @@ Following the directions from Doctor Harper, you get into position and attempt t
 
 <<switch $pregChoice>>
 <<case "ReplaceSelected">>
-	<<set _parasiteReplaceCount to $parasiteReplaceArray.length>>
 	<<for _i to 0; _i lt $pregResult.length;_i++>>
 		<<if $checkboxResult[$pregResult[_i]] is true>>
 			<<if $parasiteReplaceArray.length gt 0>>
@@ -427,7 +403,7 @@ Following the directions from Doctor Harper, you get into position and attempt t
 			<<moveCreature $pregResult[_i] "portable" undefined $giveBirthLocation>>
 		<</if>>
 	<</for>>
-	You decide to keep <<number $parasiteSelectionCount>> of <<if $pregnancyStats.namesParasitesChild is true>>your children<<else>>the parasites<</if>>, and place <<pluralise $parasiteSelectionCount "it" "them">> in your <<print $container[$phase].name.toLowerCase()>> in place of <<number _parasiteReplaceCount>> <<if _parasiteReplaceCount gt 1>>others<<else>>other<</if>>, while preparing the rest for Doctor Harper.
+	당신은 <<trNumber $parasiteSelectionCount>> <<if $pregnancyStats.namesParasitesChild is true>>명의 당신 아기들을<<else>>마리의 기생충들을<</if>> 남겨두기로 결정하고, <<if $parasiteSelectionCount isnot 1>>그들을<<else>>그것을<</if>> <<putpost_ yi $container[$phase].name>> <<trNumber $parasiteReplaceArray.length>> <<if $parasiteReplaceArray.length gt 1>>녀석들과<<else>>녀석과<</if>> 바꾸어 보관하고 나머지는 하퍼 선생님에게 가져갈 준비를 한다.
 	<br><br>
 <<case "KeepSelected">>
 	<<for _i to 0; _i lt $pregResult.length;_i++>>
@@ -437,25 +413,25 @@ Following the directions from Doctor Harper, you get into position and attempt t
 			<<moveCreature $pregResult[_i] "portable" undefined $giveBirthLocation>>
 		<</if>>
 	<</for>>
-	You decide to keep <<number $parasiteSelectionCount>> of <<if $pregnancyStats.namesParasitesChild is true>>your children<<else>>the parasites<</if>>, and place <<pluralise $parasiteSelectionCount "it" "them">> in your <<print $container[$phase].name.toLowerCase()>> while preparing the rest for Doctor Harper.
+	당신은 <<trNumber $parasiteSelectionCount>> <<if $pregnancyStats.namesParasitesChild is true>>명의 당신 아기들을<<else>>마리의 기생충들을<</if>> 남겨두기로 결정하고, <<if $parasiteSelectionCount isnot 1>>그들을<<else>>그것을<</if>> <<putpost $container[$phase].name>>에 보관하고 나머지는 하퍼 선생님에게 가져갈 준비를 한다.
 	<br><br>
 <<case "keepAll">>
 	<<for _i to 0; _i lt $pregResult.length;_i++>>
 		<<moveCreature $pregResult[_i] "container" undefined $giveBirthLocation>>
 	<</for>>
-	You decide to keep all of <<if $pregnancyStats.namesParasitesChild is true>>your children<<else>>the parasites<</if>>, and place them in your <<print $container[$phase].name.toLowerCase()>>.
+	당신은  <<if $pregnancyStats.namesParasitesChild is true>>당신 아기들을<<else>>기생충들을<</if>> 모두 남겨두기로 결정하고, <<putpost $container[$phase].name>>에 보관한다.
 	<br><br>
 <<case "sellAll">>
 	<<for _i to 0; _i lt $pregResult.length;_i++>>
 		<<moveCreature $pregResult[_i] "portable" undefined $giveBirthLocation>>
 	<</for>>
-	You decide to sell all <<if $pregnancyStats.namesParasitesChild is true>>your children<<else>>the parasites<</if>>, and prepare to take them to Doctor Harper.
+	당신은 <<if $pregnancyStats.namesParasitesChild is true>>당신 아기들을<<else>>기생충들을<</if>> 모두 팔기로 결정하고, 그들을 하퍼 선생님에게 가져갈 준비를 한다.
 	<br><br>
 <</switch>>
 
 <<clearToDeleteParasiteFetus>>
 
-<<link [[Next|Containers]]>>
+<<link [[다음|Containers]]>>
 	<<unset $pregChoice>><<unset $pregResult>>
 	<<unset $checkboxResult>><<unset $checkboxReplace>>
 	<<unset $parasiteSelectionCount>><<unset $parasiteReplaceArray>>
@@ -471,7 +447,7 @@ Harper nods approvingly. "It's good that you want to know more." <<He>> brings o
 <<He>> thinks for a few seconds. "<span class="gold">The pet shop on High Street may have something.</span> If nothing else, you could pick up a notebook and fill out info you gather yourself."
 <br><br>
 
-<<link [[Next|Pregnancy Discussion]]>><</link>>
+<<link [[다음|Pregnancy Discussion]]>><</link>>
 
 /*Passing out without rescue*/
 :: Pregnancy Birth Hospital Passout
@@ -487,7 +463,7 @@ You collapse on the spot. The last thing you hear is a rush of footsteps.
 <</switch>>
 <<set _hours to Math.floor(_time / 60)>>
 <<set _minutes to _time % 60>>
-<<link [["Next ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital]]>><<pass _time>><<set $phase to 1>><</link>>
+<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital]]>><<pass _time>><<set $phase to 1>><</link>>
 
 /*Rescued by someone*/
 :: Pregnancy Birth Hospital Rescue
@@ -504,57 +480,44 @@ You feel yourself being lifted. You hear a voice, but the words don't make sense
 <</switch>>
 <<set _hours to Math.floor(_time / 60)>>
 <<set _minutes to _time % 60>>
-<<link [["Next ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital]]>><<pass _time>><<set $phase to 1>><</link>>
+<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital]]>><<pass _time>><<set $phase to 1>><</link>>
 
 :: Pregnancy Birth Hospital
 <<set $outside to 0>><<set $location to "hospital">><<effects>>
 <<set $first_birth to !$pregnancyStats.humanToysUnlocked>>
 <<npc "Harper">><<person1>>
 <<setKnowsAboutPregnancy "pc" "Harper">>
-
-<<if $hospitalintro isnot 1>>
+<<if $hospitalintro is 0>>
+	<<set $hospitalintro to 1>>
 	<<if $phase is 1>>
-		You awaken in a hospital bed. Several blurry figures move around. One leans closer, <<his>> features coalescing into those of a young <<personsimple>>.
-		<<if $hospitalintro is 0>>
-			"I'm Doctor Harper," <<he>> says, brushing <<his>> blond fringe away from <<his>> eyes. "Please don't be alarmed, but your waters have broken. You're in the hospital." <<Hes>> young for a doctor, can't be older than 25.
-		<<else>>
-			It's the doctor from the farm. The one who experimented on you. "I'm Doctor Harper," <<he>> says. There's no recognition on <<his>> face. "Please don't be alarmed, but your waters have broken. You're in the hospital."
-		<</if>>
+		You awaken in a hospital bed. Several blurry figures move around. One leans closer, <<his>> features coalescing into those of a young <<personsimple>>. "I'm Doctor Harper," <<he>> says, brushing <<his>> blond fringe away from <<his>> eyes. "Please don't be alarmed, but your waters have broken. You're in the hospital." <<He>>'s young for a doctor, can't be older than 25.
+		<br><br>
 	<<else>>
 		The receptionist nods. "Please take a seat, the doctor will be right with you."
 		<br><br>
-
-		You don't need to wait long. A young <<personsimple>> dressed like a doctor arrives.
-		<<if $hospitalintro is 0>>
-			"I'm Doctor Harper," <<he>> says, brushing <<his>> blond fringe away from <<his>> eyes. "We've prepared a bed for you. This way." <<Hes>> young for a doctor, can't be older than 25.
-		<<else>>
-			It's the doctor from the farm. The one who experimented on you. "I'm Doctor Harper," <<he>> says. There's no recognition on <<his>> face. "We've prepared a bed for you. This way."
-		<</if>>
+		You don't need to wait long. A young <<personsimple>> dressed like a doctor arrives. "I'm Doctor Harper," <<he>> says, brushing <<his>> blond fringe from away from <<his>> eyes. "We've prepared a bed for you. This way."
 		<br><br>
-
 		<<He>> leads you through the hospital, to a room in the labour ward. A midwife adjusts a machine by the bed.
+		<br><br>
 	<</if>>
-
-	<<set $hospitalintro to 1>>
 <<else>>
 	<<if $phase is 1>>
 		You awaken in a hospital bed. Several blurry figures move around. One leans closer, <<his>> features coalescing into those of Doctor Harper. "Please don't be alarmed, but your waters have broken. You're in the hospital."
+		<br><br>
 	<<else>>
 		The receptionist nods. "Please take a seat, the doctor will be right with you."
 		<br><br>
 		Doctor Harper soon arrives. "We've prepared a bed for you. This way."
 		<br><br>
 		<<He>> leads you through the hospital, to a room in the labour ward. A midwife adjusts a machine by the bed.
+		<br><br>
 	<</if>>
 <</if>>
-<br><br>
-
 <<if $exposed lt 2 and $phase isnot 1>>
 	"Please undress," the doctor says.
 <<else>>
 	"Please take a deep breath," the doctor says.
 <</if>>
-
 <<if playerChastity("hidden")>>
 	<<He>> notices your <<print $worn.genitals.name>>, and opens a chest-high cupboard. <<He>> retrieves a tool shaped like a pair of prongs, but bulkier. "We need to remove that device. <<if $phase isnot 1>>Please lie down.<</if>> This won't hurt."
 	<br><br>
@@ -566,7 +529,7 @@ You feel yourself being lifted. You hear a voice, but the words don't make sense
 <br><br>
 <<wash>><<undress "hospital_birth">><<upperwear 87 "teal">>
 
-<<link [[Next|Pregnancy Birth Hospital 2]]>><</link>>
+<<link [[다음|Pregnancy Birth Hospital 2]]>><</link>>
 <br>
 
 :: Pregnancy Birth Hospital 2
@@ -616,18 +579,18 @@ The midwife places a mask over your face. You feel your consciousness fade. Seve
 		<br><br>
 
 		<<if $dissociation gte 1>>
-			Everything slowly fades away once again. You stand in a black abyss. Your whole body feels fuzzy, and the pain is gone. You stand there, alone in the dark. In the distance, a bright white light hovers. It must be several kilometres away. You begin walking towards it, when you suddenly realise that you're stepping in shallow water. You step forward again to the sound of sloshing. Another step. Another. You need to get to the light. You aren't sure why, but you know you must. Something's waiting for you there, you can feel it.
+			Everything slowly fades away once again. You stand in a black abyss. Your whole body feels fuzzy, and the pain is gone. You stand there, alone in the dark. In the distance, a bright white light hovers. It must be several kilometers away. You begin walking towards it, when you suddenly realize that you're stepping in shallow water. You step forward again to the sound of sloshing. Another step. Another. You need to get to the light. You aren't sure why, but you know you must. Something's waiting for you there, you can feel it.
 			<br><br>
 
 			You start to run. As you get closer, the darkness around you dissipates until only the light surrounds you.	You continue running until you come to a wooden door with a golden handle. You grasp it and open it slowly. The light drowns you.
 			<br><br>
 		<</if>>
 
-		<<link [["Next ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+		<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
 	<<case "wolf">>
 		Harper's voice floats through the fog. "Not human. This will be an abnormal delivery. Follow my instructions to the letter..."
 		<br><br>
-		<<link [["Next ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital Wolf]]>><<endevent>><<pass _timeCalc>><</link>>
+		<<link [["다음 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital Wolf]]>><<endevent>><<pass _timeCalc>><</link>>
 <</switch>>
 
 :: Pregnancy Birth Hospital 3
@@ -722,7 +685,7 @@ The midwife places a mask over your face. You feel your consciousness fade. Seve
 	<br><br>
 <</if>>
 
-<<link [[Next|Pregnancy Birth Hospital 5]]>><<storeon "hospital_birth">><<pass 24 hour>><<stress -40>><</link>>
+<<link [[다음|Pregnancy Birth Hospital 5]]>><<storeon "hospital_birth">><<pass 24 hour>><<stress -40>><</link>>
 <br><br>
 
 
@@ -764,7 +727,7 @@ The midwife places a mask over your face. You feel your consciousness fade. Seve
 
 	The midwife still insists on helping you dress. "You should be good to go," <<he>> says.
 <<elseif playerNormalPregnancyTotal() gte 50>>
-	You stand up without assistance, feeling empty inside. You already miss the feeling of being pregnant.
+	You stand up without assistace, feeling empty inside. You already miss the feeling of being pregnant.
 	<br><br>
 
 	<<He>> stares at you, mouth agape, as you walk without any assistance. You throw your clothes back on quickly.
@@ -780,14 +743,14 @@ The midwife places a mask over your face. You feel your consciousness fade. Seve
 		Your <<if C.npc.Alex.pronoun is "f">>girlfriend<<else>>boyfriend<</if>> I think."
 		<br><br>
 
-		<<link [[Next|Pregnancy Birth Hospital Alex]]>><</link>>
+		<<link [[다음|Pregnancy Birth Hospital Alex]]>><</link>>
 
 	<<else>>
 		<<set C.npc.Alex.pregnancy.hospitalBirth to true>>
 		Your <<if C.npc.Bailey.pronoun is "f">>mum<<else>>dad<</if>> I think."
 		<br><br>
 
-		<<link [[Next|Pregnancy Birth Hospital 6]]>><<endevent>><</link>>
+		<<link [[다음|Pregnancy Birth Hospital 6]]>><<endevent>><</link>>
 
 	<</if>>
 
@@ -795,7 +758,7 @@ The midwife places a mask over your face. You feel your consciousness fade. Seve
 	Your <<if C.npc.Bailey.pronoun is "f">>mum<<else>>dad<</if>> I think."
 	<br><br>
 
-	<<link [[Next|Pregnancy Birth Hospital 6]]>><<endevent>><</link>>
+	<<link [[다음|Pregnancy Birth Hospital 6]]>><<endevent>><</link>>
 <</if>>
 
 :: Pregnancy Birth Hospital 6
@@ -822,6 +785,7 @@ The engine comes to life.
 	"They don't leave the nursery," <<he>> adds as <<he>> drives from the hospital car park. "Ever."
 <<elseif _knownPregnancyCount lte 4>>
 	"Remember that you're responsible for your offspring's care," <<he>> says. "If I have to intervene, it'll cost you an extra <span class="red">£100</span> a week.<<if $litter_size gte 2>> Each.<</if>>"
+	<br><br>
 <<else>>
 	"You're an irresponsible slut," <<he>> says. "Remember that if I have to intervene in the care of your offspring, it'll cost you an extra <span class="red">£100</span> a week.<<if $litter_size gte 2>> Each.<</if>>"
 <</if>>
@@ -877,7 +841,7 @@ You arrive at Domus Street. Bailey holds open the car door for you.
 	<br><br>
 <</if>>
 
-<<link [[Next|Pregnancy Birth Hospital 8]]>><</link>>
+<<link [[다음|Pregnancy Birth Hospital 8]]>><</link>>
 <br>
 
 :: Pregnancy Birth Hospital 8
@@ -908,7 +872,7 @@ You arrive at Domus Street. Bailey holds open the car door for you.
 	<br><br>
 <</if>>
 
-<<link [[Next|Orphanage]]>><<unset $litter_size>><<unset $first_birth>><<endevent>><<set $ward_unlocked to true>><<unset $bornChildrenIds>><</link>>
+<<link [[다음|Orphanage]]>><<unset $litter_size>><<unset $first_birth>><<endevent>><<set $ward_unlocked to true>><<unset $bornChildrenIds>><</link>>
 
 :: Pregnancy Birth Hospital Wolf
 <<set $outside to 0>><<set $location to "hospital">><<effects>>
@@ -923,7 +887,7 @@ You feel a rumbling all around you. Then a pain in your abdomen. You're tied dow
 	<br><br>
 <</if>>
 
-<<link [[Next (0:15)|Pregnancy Birth Hospital Wolf 2]]>><<pass 15>><<endevent>><</link>>
+<<link [[다음 (0:15)|Pregnancy Birth Hospital Wolf 2]]>><<pass 15>><<endevent>><</link>>
 
 :: Pregnancy Birth Hospital Wolf 2
 <<location "forest">><<effects>>
@@ -931,7 +895,7 @@ You feel a rumbling all around you. Then a pain in your abdomen. You're tied dow
 You awaken again. You hang limp between two figures. The branches of the forest hang overhead. You're being carried, but you're too weak to move. Your consciousness slips once more.
 
 <br><br>
-<<link [[Next (0:15)|Pregnancy Birth Hospital Wolf 3]]>><<pass 15>><<endevent>><</link>>
+<<link [[다음 (0:15)|Pregnancy Birth Hospital Wolf 3]]>><<pass 15>><<endevent>><</link>>
 
 /* From the hospital or dropped by non-wolf rescuers */
 :: Pregnancy Birth Hospital Wolf 3
@@ -944,7 +908,7 @@ You hit the ground. A pair of footsteps rush away from you.
 	You're outside a cave. It's shelter, at least. You stumble inside.
 <</if>>
 <br><br>
-<<link [[Next (0:15)|Pregnancy Birth Wolf Cave 1]]>><<pass 15>><<endevent>><<set $phase to 3>><</link>>
+<<link [[다음 (0:15)|Pregnancy Birth Wolf Cave 1]]>><<pass 15>><<endevent>><<set $phase to 3>><</link>>
 
 /* Rescued by wolves */
 :: Pregnancy Birth Wolf Rescue
@@ -957,7 +921,7 @@ The movement stops. You feel yourself being lowered onto something soft.
 	You're in a cave. It's shelter, at least.
 <</if>>
 <br><br>
-<<link [[Next (0:15)|Pregnancy Birth Wolf Cave 1]]>><<pass 15>><<endevent>><<set $phase to 3>><</link>>
+<<link [[다음 (0:15)|Pregnancy Birth Wolf Cave 1]]>><<pass 15>><<endevent>><<set $phase to 3>><</link>>
 
 
 /* Note: Pregnancy - Unused passages */
@@ -973,13 +937,13 @@ Player reaches the wolf cave, is guided to the inside of the cave to give birth.
 	<<genitalsruined>>
 	<br><br>
 <</if>>
-<<link [[Next (0:15)|Pregnancy Birth Wolf Cave 1]]>><<pass 15>><<endevent>><<set $phase to 3>><</link>>
+<<link [[다음 (0:15)|Pregnancy Birth Wolf Cave 1]]>><<pass 15>><<endevent>><<set $phase to 3>><</link>>
 
 :: Pregnancy Birth Hospital Wolf 5
 <<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
 The others wolves leave the player alone for them to give birth, sequence should follow similar to the normal birth, though alone this time.
 <br><br>
-<<link [[Next (0:15)|Pregnancy Birth Hospital Wolf 6]]>><<pass 15>><<endevent>><</link>>
+<<link [[다음 (0:15)|Pregnancy Birth Hospital Wolf 6]]>><<pass 15>><<endevent>><</link>>
 
 :: Pregnancy Birth Hospital Wolf 6
 <<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
@@ -1009,82 +973,82 @@ Player re-equips clothes.
 	<<set $wolfpackferocity to 10>>
 	<<set $wolfpackharmony to 10>>
 <</if>>
-<<link [[Next (24:00)|Wolf Cave]]>><<pass 15>><<endevent>><<set $wolfevent to 0>><</link>>
+<<link [[다음 (24:00)|Wolf Cave]]>><<pass 15>><<endevent>><<set $wolfevent to 0>><</link>>
 /*Player giving birth ends here*/
 
 /*ToDo: Pregnancy Story Content: add in additional location*/
 :: pregnancyTest
-<<effects>><<wearProp "pregnancy test">>
+<<effects>>
 <<set $pregnancyTest-->>
 <<switch $lastPassage>>
 	<<case "Bedroom">>
-		You take the pregnancy test, before returning to the bedroom. The test sits on your bed, as you pace back and forth waiting for it to finish.
+		당신은 침실로 돌아가기 전, 임신 테스트를 한다. 테스트기를 침대에 올려둔 채, 당신은 테스트 결과가 나오기를 기다리며 앞뒤로 서성인다.
 	<<case "Eden Cabin">>
-		You take the pregnancy test in Eden's bathroom, before returning to the main room. You stare at the test in your hand, not daring to look away, waiting for it to finish.
+		당신은 에덴의 화장실에서 안방으로 돌아가기 전, 임신 테스트를 한다. 당신은 테스트기를 손에 쥔 채, 눈을 돌릴 엄두도 내지 못하고 테스트 결과가 나오기를 기다린다.
 	<<case "Wolf Cave Clearing">>
-		You take the pregnancy test out of view from the wolves. You stare at the test in your hand, not daring to look away, waiting for it to finish.
+		당신은 늑대들의 시선에서 벗어나 임신 테스트를 한다. 당신은 테스트기를 손에 쥔 채, 눈을 돌릴 엄두도 내지 못하고 테스트 결과가 나오기를 기다린다.
 	<<case "Farm Shed">>
-		You take the pregnancy test. You stare at the test in your hand, not daring to look away, waiting for it to finish.
+		당신은 임신 테스트를 한다. 당신은 테스트기를 손에 쥔 채, 눈을 돌릴 엄두도 내지 못하고 테스트 결과가 나오기를 기다린다.
 	<<default>>
-		You take the pregnancy test. You stare at the test in your hand, not daring to look away, waiting for it to finish.
+		당신은 임신 테스트를 한다. 당신은 테스트기를 손에 쥔 채, 눈을 돌릴 엄두도 내지 못하고 테스트 결과가 나오기를 기다린다.
 <</switch>>
-The packaging said to wait 3 minutes, but it feels like an eternity passes. <<gstress>><<stress 3>>
+포장에는 결과가 나오기까지 3분간 기다리라고 했지만, 당신에게 그 순간은 마치 영원처럼 느껴진다. <<gstress>><<stress 3>>
 <br><br>
 <<set $pregnancyStats.pregnancyTestsTaken++>>
 <<if !$player.vaginaExist>>
 	<<set _pregnancyTest to $sexStats.anus.pregnancy>>
 	<<if _pregnancyTest.type is null or _pregnancyTest.type is "parasite" or _pregnancyTest.timer is 0 or (between(_pregnancyTest.timer, 0, 3) and random(0,100) gte 10) or (between(_pregnancyTest.timer, 3, 6) and random(0,100) gte 15)>>
-		<span class="green">It's negative.</span> You wonder how it could ever be positive.
+		<span class="green">음성이다.</span> 당신은 양성이 나올 수는 있는지 궁금해한다.
 	<<elseif _pregnancyTest.givenBirth >= 1>>
-		<span class="lewd">It's positive.</span> Many thoughts rush through your head, and you sit to collect yourself. <<gstress>><<stress 3>><<garousal>><<arousal 100>>
+		<span class="lewd">양성이다.</span> 많은 생각들이 당신의 머리를 스쳐지나가고, 당신은 생각을 가다듬으려 앉는다. <<gstress>><<stress 3>><<garousal>><<arousal 100>>
 		<br><br>
 		<<if _pregnancyTest.potentialFathers.length is 1>>
-			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>>
-			<span class="lewd">It's clear that <<print _fatherName === "yourself" ? "you are" : _fatherName + " is">> the father.</span>
+			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>><<trPost _postNum "이">>
+			<span class="lewd">아기 아빠는 <<print _fatherName === "당신 자신" ? "당신이" : _trResult>> 확실하다.</span>
 		<<else>>
-			<span class="red">You wonder who the father is.</span>
+			<span class="red">당신은 누가 아기 아빠일지 궁금해한다.</span>
 		<</if>>
 		<<set _pregnancyTest.awareOf to "pregnancyTest">>
 	<<else>>
 		<span class="lewd">It's positive.</span> You briefly wonder if you're seeing things or have gone crazy. Many thoughts rush through your head, and you sit to collect yourself. <<ggstress>><<stress 10>><<ggarousal>><<arousal 200>>
 		<br><br>
 		<<if _pregnancyTest.potentialFathers.length is 1>>
-			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>>
-			<span class="lewd">It's clear that <<print _fatherName === "yourself" ? "you are" : _fatherName + " is">> the father.</span>
+			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>><<trPost _postNum "이">>
+			<span class="lewd">아기 아빠는 <<print _fatherName === "당신 자신" ? "당신이" : _trResult>> 확실하다.</span>
 		<<else>>
-			<span class="red">You wonder who the father is.</span>
+			<span class="red">당신은 누가 아기 아빠일지 궁금해한다.</span>
 		<</if>>
 		<<set _pregnancyTest.awareOf to "pregnancyTest">>
 	<</if>>
 <<else>>
 	<<set _pregnancyTest to $sexStats.vagina.pregnancy>>
 	<<if _pregnancyTest.type is null or _pregnancyTest.type is "parasite" or _pregnancyTest.timer is 0 or (between(_pregnancyTest.timer, 0, 3) and random(0,100) gte 10) or (between(_pregnancyTest.timer, 3, 6) and random(0,100) gte 15)>>
-		<span class="green">It's negative.</span>
+		<span class="green">음성이다.</span>
 	<<else>>
-		<span class="lewd">It's positive.</span> Many thoughts rush through your head, and you sit to collect yourself. <<gstress>><<stress 3>><<garousal>><<arousal 100>>
+		<span class="lewd">양성이다.</span> 많은 생각들이 당신의 머리를 스쳐지나가고, 당신은 생각을 가다듬으려 앉는다. <<gstress>><<stress 3>><<garousal>><<arousal 100>>
 		<br><br>
 		<<if _pregnancyTest.potentialFathers.length is 1>>
-			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>>
-			<span class="lewd">It's clear that <<print _fatherName === "yourself" ? "you are" : _fatherName + " is">> the father.</span>
+			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>><<trPost _postNum "이">>
+			<span class="lewd">아기 아빠는 <<print _fatherName === "당신 자신" ? "당신이" : _trResult>> 확실하다.</span>
 		<<else>>
-			<span class="red">You wonder who the father is.</span>
+			<span class="red">당신은 누가 아기 아빠일지 궁금해한다.</span>
 		<</if>>
 		<<set _pregnancyTest.awareOf to "pregnancyTest">>
 	<</if>>
 <</if>>
 
 <br><br>
-<<link [[Next|$lastPassage]]>><<endevent>><<unset $lastPassage>><<set $eventskip to 1>><</link>>
+<<link [[다음|$lastPassage]]>><<unset $lastPassage>><<set $eventskip to 1>><</link>>
 
 :: pregnancyTestWidget [widget]
 <<widget "pregnancyTest">>
 	<<if _args[0]>>
 		<<if $pregnancyTest gt 0>>
 			<<if !getPregnancyObject().awareOf>>
-				<<pregnancytesticon>><<link [[Take a pregnancy test (0:05)|pregnancyTest]]>><<pass 5>><<set $lastPassage to _args[0]>><</link>>
+				<<pregnancytesticon>><<link [[임신 테스트를 한다 (0:05)|pregnancyTest]]>><<pass 5>><<set $lastPassage to _args[0]>><</link>>
 				<br>
 			<<elseif getPregnancyObject().awareOf>>
-				<<pregnancytesticon>><span class="lewd"> You have a pregnancy test, but you already know you're pregnant.</span>
+				<<pregnancytesticon>><span class="lewd"> 당신은 임신 테스트를 하지만, 당신은 임신했다는 걸 이미 알고 있다.</span>
 				<br>
 			<</if>>
 		<</if>>
@@ -1116,7 +1080,7 @@ The packaging said to wait 3 minutes, but it feels like an eternity passes. <<gs
 "Please undress down to your underwear," the doctor says.
 <br><br>
 
-<<link [[Next|Pregnancy ultrasound 2]]>><<overupperstrip>><<upperstrip>><<underupperstrip>><</link>>
+<<link [[다음|Pregnancy ultrasound 2]]>><<overupperstrip>><<upperstrip>><<underupperstrip>><</link>>
 
 :: Pregnancy ultrasound 2
 <<set $outside to 0>><<set $location to "hospital">><<effects>>
@@ -1155,7 +1119,7 @@ You strip and lie down.
 	<br><br>
 
 	<<if $cowbuild gte 20>>
-		You suppress the urge to moo. Your teats tingle with anticipation.<<garousal>> <<arousal 3>> <br><br>
+		You supress the urge to moo. Your teats tingle with anticipation.<<garousal>> <<arousal 3>> <br><br>
 	<<elseif $wolfbuild gte 20>>
 		/* Your wolf fur gets slightly matted by the gel.<br><br> */
 	<<elseif $catbuild gte 20>>
@@ -1164,7 +1128,7 @@ You strip and lie down.
 	<<He>> runs the wand left and right over your lower abdomen as the screen changes and flashes different shades of grey over <<his>> face.
 	<br>
 	<<if _pregnancy.type isnot "human">>
-		Harper is quiet for a while as <<he>> pores over the equipment, and the technician gives a look of concern. It's making you nervous. There's a lot of clicking and typing on the computer as the technician measures different parts. Femur, head, humerus, and amniotic fluid levels.
+		Harper is quiet for a while as <<he>> pours over the equipment, and the technician gives a look of concern. It's making you nervous. There's a lot of clicking and typing on the computer as the technician measures different parts. Femur, head, humerous, and amniotic fluid levels.
 	<<else>>
 		There's a lot of clicking and typing on the computer as the technician measures different parts.
 	<</if>>
@@ -1226,7 +1190,7 @@ You strip and lie down.
 				<<set _pregnancy.genderKnown to true>>
 				"It's time," the doctor announces.
 				<<if _multiple>>
-					"I hope you're excited to know your children's sex."
+					"I hope you're excited to know your childrens' sex."
 					<br><br>
 
 					<<He>> glides the wand over your gently bulging belly. The pressure is uncomfortable.
@@ -1258,7 +1222,7 @@ You strip and lie down.
 				<br><br>
 			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.8>>
 			/*32-36 weeks, preterm */
-				You feel several fluttery kicks as the doctor continues to probe. "Based on these measurements," the technician says, "you'll be full term in a few weeks. Have you made birth plans yet? Make sure you're getting rest and nutrition."
+				You feel several fluttery kicks as the doctor continues to probe. "Based on these measurements," the technician says, "You'll be full term in a few weeks. Have you made birth plans yet? Make sure you're getting rest and nutrition."
 				<br><br>
 				You know you'll need rest, and money.<<gstress>><<stress 6>>
 				<br><br>
@@ -1348,7 +1312,7 @@ You strip and lie down.
 				<<set _pregnancy.genderKnown to true>>
 				"It's time," the doctor announces.
 				<<if _multiple>>
-					"I hope you're excited to know your children's sex."
+					"I hope you're excited to know your childrens' sex."
 					<br><br>
 
 					<<He>> glides the wand over your gently bulging belly. The pressure is uncomfortable.
@@ -1380,7 +1344,7 @@ You strip and lie down.
 				<br><br>
 			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.8>>
 			/*32-36 weeks, preterm */
-				You feel several fluttery kicks as the doctor continues to probe. "Based on these measurements," the technician says, "you'll be full term very soon. We think. It's very hard to tell with a... non-human pregnancy. Have you made birth plans yet? Make sure you're getting rest and nutrition."
+				You feel several fluttery kicks as the doctor continues to probe. "Based on these measurements," the technician says, "You'll be full term very soon. We think. It's very hard to tell with a... non-human pregnancy. Have you made birth plans yet? Make sure you're getting rest and nutrition."
 				<br><br>
 				You know you'll need rest, and money. You wonder where you'll keep them.<<gstress>><<stress 6>>
 				<br><br>
@@ -1478,7 +1442,7 @@ You strip and lie down.
 				It'll be time to deliver soon. The doctor hands you some literature about labour, and what to do when it begins. There's nothing in it about birds or eggs, though. "The laying process should be something you can do at home. However, don't hesitate to come see us if you have further questions."
 				<br><br>
 			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.6>>
-				You feel a low rumble from within yourself. "Based on these measurements," the technician says, "you'll be full term very soon. We think. It's very hard to tell with a... non-human pregnancy. Have you made birth plans yet? Make sure you're getting rest and nutrition."
+				You feel a low rumble from within yourself. "Based on these measurements," the technician says, "You'll be full term very soon. We think. It's very hard to tell with a... non-human pregnancy. Have you made birth plans yet? Make sure you're getting rest and nutrition."
 				<br><br>
 				You know you'll need rest. You think about where to keep them. A nest? <<if _pregnancy.fetus[0].father is "Great Hawk">>The castle's tower comes to mind.<</if>>
 				<br><br>
@@ -1504,23 +1468,23 @@ You strip and lie down.
 				<br><br>
 			<<else>>
 			/* Shouldn't get here. */
-			<</if>>
+			<</if>>		
 		<<default>>
 	<</switch>>
 	<<makeAwareOfDetails>>
 	<<set _pregnancy.awareOfMultiple to true>>
 <</if>>
 
-<<link [[Next|Pregnancy ultrasound 3]]>><</link>>
+<<link [[다음|Pregnancy ultrasound 3]]>><</link>>
 
 :: Pregnancy ultrasound 3
-<<set $outside to 0>><<set $location to "hospital">><<effects>><<wearProp "rag">>
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
 
-You thank Doctor Harper for the scan as <<he>> hands you a warm towel. You wipe off the gel, but some still sticks.
+You thank Doctor Harper for the scan as <<he>> hands you a warm towel. You wipe off the gel.
 <br><br> <<bodyliquid "vaginaoutside" "goo" -1>>
 <<clotheson>>
 
-<<link [[Return to foyer|Hospital Foyer]]>><<endevent>><</link>>
+<<link [[대기실로 돌아간다|Hospital Foyer]]>><<endevent>><</link>>
 
 :: Pregnancy Birth Hospital Alex
 <<effects>>
@@ -1553,18 +1517,18 @@ You thank Doctor Harper for the scan as <<he>> hands you a warm towel. You wipe 
 <<effects>>
 
 <<if $phase is 1>>
-	"Here, you should hold <<if $litter_size is 1>><<childhim>><<else>>them<</if>> too," you say, passing <<if $litter_size is 1>><<childname>><<else>><<childrenNames $bornChildrenIds>><</if>> to Alex.
+    "Here, you should hold <<if $litter_size is 1>><<childhim>><<else>>them<</if>> too," you say, passing <<if $litter_size is 1>><<childname>><<else>><<childrenNames $bornChildrenIds>><</if>> to Alex.
 	<br><br>
 
-	<<He>> doesn't have a problem holding <<if $litter_size is 1>><<childhim>><<else>>them<</if>>. Actually, it looks like <<hes>> used to it. "So cute," <<he>> says with a giggle as <<he>> hands <<if $litter_size is 1>><<childname>><<else>>them<</if>> back to you.
+    <<He>> doesn't have a problem holding <<if $litter_size is 1>><<childhim>><<else>>them<</if>>. Actually, it looks like <<hes>> used to it. "So cute," <<he>> says with a giggle as <<he>> hands <<if $litter_size is 1>><<childname>><<else>>them<</if>> back to you.
 	<br><br>
 
 <<else>>
-	<<if $litter_size gte 2>>
-		You hold your babies to your chest. <<childname>> yawns.
-	<<else>>
-		You hold your baby to your chest. <<childHe>> yawns.
-	<</if>>
+    <<if $litter_size gte 2>>
+        You hold your babies to your chest. <<childname>> yawns.
+    <<else>>
+        You hold your baby to your chest. <<childHe>> yawns.
+    <</if>>
 	<br><br>
 
 <</if>>
@@ -1588,10 +1552,10 @@ Alex laughs. "I know, dummy. You didn't really think I would do that, do you?" <
 <br><br>
 
 <<if pregnancyCountBetweenParents("pc","Alex") gte 2 or pregnancyCountBetweenParents("Alex","pc") gte 2>>
-	<<link [[Next|Pregnancy Birth Hospital Alex 5]]>><<endevent>><</link>>
+	<<link [[다음|Pregnancy Birth Hospital Alex 5]]>><<endevent>><</link>>
 
 <<else>>
-	<<link [[Next|Pregnancy Birth Hospital Alex 3]]>><</link>>
+	<<link [[다음|Pregnancy Birth Hospital Alex 3]]>><</link>>
 
 <</if>>
 
@@ -1617,13 +1581,13 @@ Bailey ignores Alex's question and glares at you. "We've a place prepared at the
 Bailey turns <<nnpc_his "Bailey">> gaze to Alex. "Look, 'cow<<if _alex.pronoun is "f">>girl<<else>>boy<</if>>', you could've fucked any whore and I wouldn't care, but you hitched yourself to MY ward."
 <br>
 
-Alex clenches <<his>> fists. "And who exactly said <<pshe>> is yours? <<pShes>> MY <<if $player.gender_appearance is "f">>woman<<else>>man<</if>>."
+Alex clenches <<his>> fists. "And who exactly said <<pshe>> is yours? <<pShe>>'s MY <<if $player.gender_appearance is "f">>woman<<else>>man<</if>>."
 <br>
 
 Bailey fixes Alex with a piercing gaze. "And how exactly do you plan on taking care of a kid on that shithole you call a farm?"
 <br><br>
 
-<<link [[Next|Pregnancy Birth Hospital Alex 4]]>><</link>>
+<<link [[다음|Pregnancy Birth Hospital Alex 4]]>><</link>>
 
 :: Pregnancy Birth Hospital Alex 4
 <<effects>>
@@ -1640,55 +1604,55 @@ A long and deafening silence fills the environment. Bailey keeps staring at you 
 "I'm glad that's over," Alex says. "Let's just get to where the vehicle is parked."
 <br><br>
 
-<<link [[Next|Pregnancy Birth Hospital Alex 5]]>><<endevent>><</link>>
+<<link [[다음|Pregnancy Birth Hospital Alex 5]]>><<endevent>><</link>>
 
 :: Pregnancy Birth Hospital Alex 5
 <<effects>>
 <<set _alex to statusCheck("Alex")>>
 <<generate1>><<person1>>
-<<npc "Alex" 2>><<person2>>
-<<if $pronoun is "f">>
+
+<<if $NPCList[0].gender is "f">>
 	<<set $alex_parent to "mother">>
 <<else>>
 	<<set $alex_parent to "father">>
 <</if>>
 
 <<run Object.values(V.children).filter(child => {
-	if (child.location === "home" && (child.father === "Alex" || child.mother === "Alex")) child.location = "alex_cottage";
+    if (child.location === "home" && (child.father === "Alex" || child.mother === "Alex")) child.location = "alex_cottage";
 })>>
 
 Alex's $alex_parent waves at you two.
 <br><br>
 
-Alex opens the door for you. <<person2>><<He>> helps you in before settling into the seat next to you.
+Alex opens the door for you. <<He>> helps you in before settling into the seat next to you.
 <br><br>
 
 <<if pregnancyCountBetweenParents("pc", "Alex") gte 2>>
-	"Again?" <<nnpc_His "Alex">> $alex_parent laughs. "My <<if _alex.pronoun is "f">>daughter<<else>>son<</if>> is sure keeping you busy, ain't <<nnpc_he "Alex">>?"
+    "Again?" <<nnpc_His "Alex">> $alex_parent laughs. "My <<if _alex.pronoun is "f">>daughter<<else>>son<</if>> is sure keeping you busy, ain't <<nnpc_he "Alex">>?"
 	<br><br>
 
-	Alex blushes and looks away.
+    Alex blushes and looks away.
 	<br><br>
 
 <<else>>
-	"My little <<nnpc_gendery "Alex">> is finally settling down," <<nnpc_his "Alex">> $alex_parent says with a laugh.
+    "My little <<if _alex.gender is "f">>girl<<else>>boy<</if>> is finally settling down," <<he>> says with a laugh.
 	<br>
 
-	Alex blushes and looks away.
+    Alex blushes and looks away.
 	<br><br>
 
-	"And with such a <<if $player.gender_appearance is "f">>beautiful woman<<else>>handsome man<</if>>!" <<person1>><<he>> adds.
+    "And with such a <<if $player.gender_appearance is "f">>beautiful woman<<else>>handsome man<</if>>!" <<he>> adds.
 	<br>
 
-	"<<if $alex_parent is "mother">>Mum<<else>>Pa<</if>>!" Alex protests.
+    "<<if $alex_parent is "mother">>Mum<<else>>Pa<</if>>!" Alex protests.
 	<br>
 
-	"What? I'm telling the truth," <<he>> says. You don't think Alex's face can get any redder.
+    "What? I'm telling the truth," <<he>> says. You don't think Alex's face can get any redder.
 	<br><br>
 
 <</if>>
 
-<<link [[Next|Pregnancy Birth Hospital Alex 6]]>><</link>>
+<<link [[다음|Pregnancy Birth Hospital Alex 6]]>><</link>>
 
 :: Pregnancy Birth Hospital Alex 6
 <<effects>>
@@ -1703,13 +1667,13 @@ Alex helps you leave the vehicle and take your <<print $litter_size > 1 ? "child
 <br><br>
 
 <<if pregnancyCountBetweenParents("pc", "Alex") gte 2>>
-	Alex's $alex_parent turns to Alex. "Look, I'm happy you're settling down, but try using some protection, would you? Unless you want your kids to have more siblings than you do." <<He>> laughs before driving away.
+    Alex's $alex_parent turns to Alex. "Look, I'm happy you're settling down, but try using some protection, would you? Unless you want your kids to have more siblings than you do." <<He>> laughs before driving away.
 	<br><br>
 
 <<else>>
-	Alex's $alex_parent turns to Alex. "I need to get back to work now, but listen, I'm proud of you. You're finally making this place look like a home," <<he>> says before driving away.
+    Alex's $alex_parent turns to Alex. "I need to get back to work now, but listen, I'm proud of you. You're finally making this place look like a home," <<he>> says before driving away.
 	<br><br>
 
 <</if>>
 
-<<link [[Next|Farm Work]]>><<endevent>><<unset $litter_size>><<unset $alex_pregnancy>><<unset $alex_parent>><</link>>
+<<link [[다음|Farm Work]]>><<endevent>><<unset $litter_size>><<unset $alex_pregnancy>><<unset $alex_parent>><</link>>

@@ -63,7 +63,7 @@ End of '<<print $replayScene.name>>' scene.
 		<<set _exitpassage to clone($replayScene.exitpassage)>>
 		<<unset $replayScene>>
 		<<unfreezePlayerStats>>
-		<<link [[Back|_exitpassage]]>>
+		<<link [[뒤로|_exitpassage]]>>
 		<</link>>
 <</switch>>
 <<unset $sceneViewSwitch>>
@@ -71,7 +71,7 @@ End of '<<print $replayScene.name>>' scene.
 :: Scene Viewer Widgets [widget]
 
 <<widget "setupReplayScene">>
-	/*In case the object isn't setup correctly*/
+	/*In case the object isnt setup correctly*/
 	<<set _passages to ["Scene Viewer End"]>>
 	<<if Array.isArray(_args[2])>>
 		<<set _passages to _args[2]>>
@@ -86,7 +86,7 @@ End of '<<print $replayScene.name>>' scene.
 	}>>
 <</widget>>
 
-/*Scenes when player viewing can't be tracked*/
+/*Scenes when player viewing cant be tracked*/
 <<widget "seenPassage">>
 	<<if $scenePassages is undefined>>
 		<<set $scenePassages to []>>
@@ -277,48 +277,30 @@ End of '<<print $replayScene.name>>' scene.
 		<<if $nightmaresSeen.includes("harper")>>
 			<<set $scenePassages.pushUnique("NightmareHarper")>>
 		<</if>>
-		<<if $nightmaresSeen.includes("sydneyCorrupt")>>
-			<<set $scenePassages.pushUnique("NightmareCorruptSydney")>>
-		<</if>>
 	<</if>>
-	<<if $harper_appointments.hypnosis gte 1>>
+	<<if $hypnosis gte 1>>
 		<<set $scenePassages.pushUnique("HarperHypnosisIntro")>>
 	<</if>>
-	<<if $harper_appointments.hypnosis gte 2>>
+	<<if $hypnosis gte 2>>
 		<<set $scenePassages.pushUnique("HarperHypnosisTrance1")>>
 	<</if>>
-	<<if $harper_appointments.hypnosis gte 3>>
+	<<if $hypnosis gte 3>>
 		<<set $scenePassages.pushUnique("HarperHypnosisTrance2")>>
 	<</if>>
-	<<if $harper_appointments.hypnosis gte 4>>
+	<<if $hypnosis gte 4>>
 		<<set $scenePassages.pushUnique("HarperHypnosisTrance3")>>
 	<</if>>
-	<<if $harper_appointments.hypnosis gte 5>>
+	<<if $hypnosis gte 5>>
 		<<set $scenePassages.pushUnique("HarperHypnosisTrance4")>>
 	<</if>>
-	<<if $harper_appointments.exam gte 1>>
+	<<if $harperexam gte 1>>
 		<<set $scenePassages.pushUnique("HarperHypnosisExam1")>>
 	<</if>>
-	<<if $harper_appointments.exam gte 2>>
+	<<if $harperexam gte 2>>
 		<<set $scenePassages.pushUnique("HarperHypnosisExam2")>>
 	<</if>>
-	<<if $harper_appointments.exam gte 3>>
+	<<if $harperexam gte 3>>
 		<<set $scenePassages.pushUnique("HarperHypnosisExam3")>>
-	<</if>>
-	<<if $harper_appointments.dog gte 1>>
-		<<set $scenePassages.pushUnique("HarperDogIntro")>>
-	<</if>>
-	<<if $harper_appointments.dog gte 2>>
-		<<set $scenePassages.pushUnique("HarperDog1")>>
-	<</if>>
-	<<if $harper_appointments.dog gte 3>>
-		<<set $scenePassages.pushUnique("HarperDog2")>>
-	<</if>>
-	<<if $harper_appointments.dog gte 4>>
-		<<set $scenePassages.pushUnique("HarperDog3")>>
-	<</if>>
-	<<if $harper_appointments.dog gte 5>>
-		<<set $scenePassages.pushUnique("HarperDog4")>>
 	<</if>>
 	<<if $hookah_plot gte 1>>
 		<<set $scenePassages.pushUnique("TentacleForestDoor")>>
@@ -372,7 +354,7 @@ End of '<<print $replayScene.name>>' scene.
 			"Tutorial":{
 				name:"Tutorial",
 				startPassage:"SV Tutorial",
-				passages: ["SV Tutorial","Tutorial","Tutorial Finish","Tutorial Flirt","Tutorial Thank","Rent Intro","Tutorial Bailey","Garden Fence","Robin's Lemonade Set Tutorial","Robin's Lemonade Set Tutorial 2","Robin Chocolate Set Tutorial","Robin Chocolate Set Tutorial 2","Robin Walk School","Robin Walk School Tutorial"],
+				passages: ["SV Tutorial","Tutorial","Tutorial Finish","Tutorial Flirt","Tutorial Thank","Rent Intro","Tutorial Bailey","Garden Fence Undies Day","Garden Fence Undies Night","Robin's Lemonade Set Tutorial","Robin's Lemonade Set Tutorial 2","Robin Chocolate Set Tutorial","Robin Chocolate Set Tutorial 2","Robin Walk School","Robin Walk School Tutorial"],
 				manualVariableChanges: "<<set $tutorial to 0>><<set $debug to 0>>",
 				unlocked: $scenePassages.includes("Tutorial"),
 				lockedMessage: "Locked." /* Intention change */
@@ -608,7 +590,7 @@ End of '<<print $replayScene.name>>' scene.
 				passages:["Bully Fight","Bully Fight Finish","Bully Skirt"],
 				manualVariableChanges:"<<set $sceneViewSwitch to 'schoolBully'>><<set $bullyevent to 15>><<set $whitneyskirtcheck to 0>><<set $forcedcrossdressingdisable to 'f'>><<set C.npc.Whitney.dom to 18>><<unset $whitneyReunionScene>>",
 				unlocked: $scenePassages.includes("WhitneySchoolBullySkirt"),
-				lockedMessage: $player.sex isnot "m" ? "Male exclusive scene" : "Locked"
+				lockedMessage: $player.gender isnot "m" ? "Male exclusive scene" : "Locked"
 			},
 			"WhitneySchoolBullyChastity":{
 				name:"Whitney School Bully Chastity Rule",
@@ -616,7 +598,7 @@ End of '<<print $replayScene.name>>' scene.
 				passages:["Bully Chastity"],
 				manualVariableChanges:"<<set $sceneViewSwitch to 'schoolBully'>><<set $bullyevent to 15>><<set $whitneyskirtcheck to 1>><<set $forcedcrossdressingdisable to 'f'>><<set C.npc.Whitney.dom to 18>><<set $worn.genitals to setup.clothes.genitals[0]>><<unset $whitneychastity>><<unset $whitneyReunionScene>>",
 				unlocked: $scenePassages.includes("WhitneySchoolBullySkirt"),
-				lockedMessage: $player.sex isnot "m" ? "Male exclusive scene" : "Locked"
+				lockedMessage: $player.gender isnot "m" ? "Male exclusive scene" : "Locked"
 			},
 			"WhitneyShoppingCentreHairDressers":{
 				name:"Whitney Shopping Centre Hairdressers",
@@ -645,7 +627,7 @@ End of '<<print $replayScene.name>>' scene.
 				passages:["Bully Fight","Bully Fight Finish","Bully Changing Room"],
 				manualVariableChanges:"<<set $sceneViewSwitch to 'schoolBully'>><<set $bullyevent to 11>><<set $whitneyCrossdressSwimwear to 0>><<set $forcedcrossdressingdisable to 'f'>><<set C.npc.Whitney.dom to 18>><<unset $whitneyReunionScene>>",
 				unlocked: $scenePassages.includes("WhitneySchoolBullySkirt"),
-				lockedMessage: $player.sex isnot "m" ? "Male exclusive scene" : "Locked"
+				lockedMessage: $player.gender isnot "m" ? "Male exclusive scene" : "Locked"
 			},
 			"WhitneyOrphanageVisit":{
 				name:"Whitney Orphanage Visit",
@@ -894,7 +876,7 @@ End of '<<print $replayScene.name>>' scene.
 				name:"Temple Vigil",
 				startPassage:"SV Temple Vigil Inquire",
 				passages:["SV Temple Vigil Inquire","Temple Vigil Inquire","Temple Vigil","Temple Vigil 2","Temple Vigil 3","Temple Vigil 4","Temple Vigil Undress","Temple Vigil Undress Refuse","Temple Vigil Undress Refuse 2","Temple Vigil 5","Temple Vigil Abandon","Temple Vigil End","Temple Vigil End 2","Temple Vigil End Sydney","Temple Vigil End Sydney 2","Temple Vigil 6","Temple Vigil 7","Temple Vigil 8","Temple Vigil 9","Temple Vigil 10","Temple Vigil Refuse","Temple Vigil Refuse 2","Temple Vigil 11","Temple Vigil 12","Temple Vigil 13","Temple Vigil Focus","Temple Vigil Yield","Temple Vigil 14","Temple Vigil 15","Temple Vigil 15 Sydney"],
-				manualVariableChanges:"<<set $outside to 0>><<set $location to 'temple'>><<run Time.setDate(Time.getNextWeekdayDate(1))>><<run Time.setTime(20,0)>><<set $grace to 100>>",
+				manualVariableChanges:"<<set $outside to 0>><<set $location to 'temple'>><<run Time.setDate(Time.getNextWeekdayDate(1))>><<run Time.setTime(20,0)>>",
 				unlocked: $scenePassages.includes("TempleVigil")
 			},
 			"TempleConfessorIntro":{
@@ -946,13 +928,6 @@ End of '<<print $replayScene.name>>' scene.
 				manualVariableChanges:"<<set $sleephour to 1>><<set $nightmareExit to 'Bird Tower Bed'>>",
 				unlocked: $scenePassages.includes("NightmareBird")
 			},
-			"NightmareCorruptSydney":{
-				name:"Nightmare Corrupt Sydney",
-				startPassage:"Nightmare Corrupt Sydney",
-				passages:["Nightmare Corrupt Sydney","Nightmare Corrupt Sydney Wake","Nightmare Corrupt Sydney 2","Nightmare Corrupt Sydney 3","Nightmare Corrupt Sydney 4","Nightmare Corrupt Sydney 5","Nightmare Corrupt Sydney 6","Nightmare Corrupt Sydney 7","Nightmare Corrupt Sydney 8","Nightmare Corrupt Sydney 9","Nightmare Corrupt Sydney 10","Nightmare Corrupt Sydney 11","Nightmare Corrupt Sydney 12","Nightmare Corrupt Sydney Rape","Nightmare Corrupt Sydney Rape Finish","Nightmare Corrupt Sydney Rape Finish 2","Nightmare Corrupt Sydney End"],
-				manualVariableChanges:"<<set $sleephour to 1>><<set $nightmareExit to 'Bed'>>",
-				unlocked: $scenePassages.includes("NightmareCorruptSydney")
-			},
 			"NightmareHarper":{
 				name:"Nightmare Harper",
 				startPassage:"Nightmare Harper",
@@ -962,93 +937,59 @@ End of '<<print $replayScene.name>>' scene.
 			},
 			"HarperHypnosisIntro":{
 				name:"Harper Hypnosis Intro",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Trance", "Doctor Harper's Office Trance Resist"],
-				manualVariableChanges:"<<set $harper_appointments.hypnosis to 0>><<set $phase to 'intro'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Trance"],
+				manualVariableChanges:"<<unset $harperintro>><<set $hypnosis to 0>>",
 				unlocked: $scenePassages.includes("HarperHypnosisIntro")
 			},
 			"HarperHypnosisTrance1":{
 				name:"Harper Hypnosis Trance 1",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Camera Resist"],
-				manualVariableChanges:"<<set $harper_appointments.hypnosis to 1>><<set $phase to 'hypno'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $hypnosis to 1>><<set $rng to 100>>",
 				unlocked: $scenePassages.includes("HarperHypnosisTrance1")
 			},
 			"HarperHypnosisTrance2":{
 				name:"Harper Hypnosis Trance 2",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera2", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Camera Resist"],
-				manualVariableChanges:"<<set $harper_appointments.hypnosis to 2>><<set $phase to 'hypno'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera2"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $hypnosis to 2>><<set $rng to 100>>",
 				unlocked: $scenePassages.includes("HarperHypnosisTrance2")
 			},
 			"HarperHypnosisTrance3":{
 				name:"Harper Hypnosis Trance 3",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera3", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Camera Resist"],
-				manualVariableChanges:"<<set $harper_appointments.hypnosis to 3>><<set $phase to 'hypno'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera3"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $hypnosis to 3>><<set $rng to 100>>",
 				unlocked: $scenePassages.includes("HarperHypnosisTrance3")
 			},
 			"HarperHypnosisTrance4":{
 				name:"Harper Hypnosis Trance 4",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera3","Doctor Harper's Office Camera Molestation","Doctor Harper's Office Camera Molestation Finish", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Camera Resist"],
-				manualVariableChanges:"<<set $harper_appointments.hypnosis to 4>><<set $phase to 'hypno'>>",				unlocked: $scenePassages.includes("HarperHypnosisTrance4")
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Trance","Doctor Harper's Office Camera3","Doctor Harper's Office Camera Molestation","Doctor Harper's Office Camera Molestation Finish"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $hypnosis to 4>><<set $rng to 100>>",
+				unlocked: $scenePassages.includes("HarperHypnosisTrance4")
 			},
 			"HarperHypnosisExam1":{
 				name:"Harper Hypnosis Exam 1",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Exam"],
-				manualVariableChanges:"<<set $harper_appointments.exam to 0>><<set $phase to 'exam1'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Exam"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $harperexam to 0>><<set $rng to 0>>",
 				unlocked: $scenePassages.includes("HarperHypnosisExam1")
 			},
 			"HarperHypnosisExam2":{
 				name:"Harper Hypnosis Exam 2",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Exam"],
-				manualVariableChanges:"<<set $harper_appointments.exam to 1>><<set $phase to 'exam2'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Exam"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $harperexam to 1>><<set $rng to 0>>",
 				unlocked: $scenePassages.includes("HarperHypnosisExam2")
 			},
 			"HarperHypnosisExam3":{
 				name:"Harper Hypnosis Exam 3",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office","Doctor Harper's Office Exam"],
-				manualVariableChanges:"<<set $harper_appointments.exam to 2>><<set $phase to 'exam3'>>",
+				startPassage:"Doctor Harper's Office",
+				passages:["Doctor Harper's Office","Doctor Harper's Office Exam"],
+				manualVariableChanges:"<<set $harperintro to 1>><<set $harperexam to 2>><<set $rng to 0>>",
 				unlocked: $scenePassages.includes("HarperHypnosisExam3")
-			},
-			"HarperHypnosisDogIntro":{
-				name:"Harper Dog Intro",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office", "Doctor Harper's Office Trance Dog", "Doctor Harper's Office Trance Resist"],
-				manualVariableChanges:"<<set $harper_appointments.dog to 0>><<unset $harper_appointments.dog_intro>><<set $phase to 'dog'>>",
-				unlocked: $scenePassages.includes("HarperDogIntro")
-			},
-			"HarperHypnosisDog1":{
-				name:"Harper Dog 1",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office", "Doctor Harper's Office Trance Dog", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Trance Dog Resist", "Doctor Harper's Office Dog Happy"],
-				manualVariableChanges:"<<set $harper_appointments.dog to 1>><<set $phase to 'dog'>>",
-				unlocked: $scenePassages.includes("HarperDog1")
-			},
-			"HarperHypnosisDog2":{
-				name:"Harper Dog 2",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office", "Doctor Harper's Office Trance Dog", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Trance Dog Resist", "Doctor Harper's Office Dog Strip", "Doctor Harper's Office Dog Strip Licking"],
-				manualVariableChanges:"<<set $harper_appointments.dog to 2>><<set $phase to 'dog'>>",
-				unlocked: $scenePassages.includes("HarperDog2")
-			},
-			"HarperHypnosisDog3":{
-				name:"Harper Dog 3",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office", "Doctor Harper's Office Trance Dog", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Trance Dog Resist", "Doctor Harper's Office Dog Strip"],
-				manualVariableChanges:"<<set $harper_appointments.dog to 3>><<set $phase to 'dog'>>",
-				unlocked: $scenePassages.includes("HarperDog3")
-			},
-			"HarperHypnosisDog4":{
-				name:"Harper Dog 4",
-				startPassage:"SV Doctor Harper's Office",
-				passages:["SV Doctor Harper's Office", "Doctor Harper's Office Trance Dog", "Doctor Harper's Office Trance Resist", "Doctor Harper's Office Trance Dog Resist", "Doctor Harper's Office Dog Strip", "Doctor Harper's Office Dog Strip Licking", "Doctor Harper's Office Dog Molestation", "Doctor Harper's Office Dog Molestation Finish", "Doctor Harper's Office Dog Focus", "Doctor Harper's Office Dog Wake"],
-				manualVariableChanges:"<<set $harper_appointments.dog to 4>><<set $phase to 'dog'>>",
-				unlocked: $scenePassages.includes("HarperDog4")
 			},
 			"MoorFlower":{
 				name:"Moor Flower",
@@ -1066,7 +1007,7 @@ End of '<<print $replayScene.name>>' scene.
 			},
 			"HookahPlot2":{
 				name:"Hookah Plot 2: Town Hall Computer",
-				startPassage:"Town Hall Computer",
+				startPassage:"Tentacle Forest Door",
 				passages:["Town Hall Computer","Town Hall Computer 2","Town Hall Computer 3","Town Hall Computer 4","Town Hall Computer 5","Town Hall Computer 6","Town Hall Computer 7","Town Hall Computer 8"],
 				manualVariableChanges:"<<set $location to 'town'>>",
 				unlocked: $scenePassages.includes("TownHallComputer")
@@ -1166,7 +1107,7 @@ End of '<<print $replayScene.name>>' scene.
 		<<if $scenesSearch.hideLocked and !_value.unlocked>><<continue>><</if>>
 		<<set _lowerName to clone(_value.name).toLowerCase()>>
 		<<set _lowerPassages to "".concat(_value.startPassage).toLowerCase()>>
-		<<if $scenesSearch.text.length is 0 or ((_value.unlocked or $debug is 1) and (_value.name.toLowerCase().includes($scenesSearch.text.toLowerCase()) or "".concat(_value.startPassage).toLowerCase().includes($scenesSearch.text.toLowerCase())))>>
+		<<if $scenesSearch.text.length is 0 or (_value.unlocked and (_value.name.toLowerCase().includes($scenesSearch.text.toLowerCase()) or "".concat(_value.startPassage).toLowerCase().includes($scenesSearch.text.toLowerCase())))>>
 			<<run _scenes[_label] to clone(_value)>>
 		<</if>>
 	<</for>>
@@ -1300,18 +1241,13 @@ End of '<<print $replayScene.name>>' scene.
 <<widget "unfreezePlayerStats">>
 	<<if $replayScene>><<exit>><</if>> /* Should never be run when a scene is running */
 	<<script>>
-		const skipKeysOnFreeze = ["replayScene", "frozenValues", "statFreeze", "passage", "debug", "debugMenu", "options", "hcChallenge", "hcChallengesCompleted"];
-		const objectsToHardRestore = ["skin", "worn", "prof", "player", "transformationParts", "sexStats", "hypnosis_traits", "parasite"];
+		const skipKeysOnFreeze = ["replayScene", "frozenValues", "statFreeze", "passage", "debug", "debugMenu", "options"];
 		delete V.statFreeze;
 		if (V.frozenValues) {
 			const retainedKeys = Object.fromEntries(
 				Object.entries(V).filter(([key]) => skipKeysOnFreeze.includes(key))
 			);
-			const cleanedObjects = Object.fromEntries(
-				Object.entries(V.frozenValues).filter(([key]) => objectsToHardRestore.includes(key))
-			);
 			V.deepMerge(V.frozenValues, "strict-replace");
-			Object.assign(V, cleanedObjects);
 			Object.assign(V, retainedKeys);
 			delete V.frozenValues;
 			Time.set();
@@ -1414,7 +1350,7 @@ You go to Robin's room. There's a note on the door. "Please don't enter!"
 
 <<link [[Enter|Robin Caught CD]]>><</link>>
 <br>
-<<link [[Leave|Orphanage]]>><<set $fromRobinRoom to true>><<endevent>><</link>>
+<<link [[떠난다|Orphanage]]>><<set $fromRobinRoom to true>><<endevent>><</link>>
 <br>
 
 :: Robin CD Door SV Start
@@ -1452,7 +1388,7 @@ You see Robin talking with a <<person2>><<person>>. Robin waves you over.
 
 <<link [[Go over|Robin CD Socialise]]>><</link>>
 <br>
-<<link [[Ignore|Orphanage]]>><<endevent>><</link>>
+<<link [[무시한다|Orphanage]]>><<endevent>><</link>>
 
 :: Robin's Stand CD SV Intro
 <<set _uniqueoptions to true>>
@@ -1481,7 +1417,7 @@ Robin looks at the clock on the wall and sighs. "I need to get my _stand set up.
 	<<link [[Offer to help set up (0:30)|Robin's Lemonade Set]]>><<pass 30>><<npcincr Robin love 1>><</link>><<glove>>
 <</if>>
 <br>
-<<link [[Leave|Orphanage]]>><<set $fromRobinRoom to true>><<endevent>><</link>>
+<<link [[떠난다|Orphanage]]>><<set $fromRobinRoom to true>><<endevent>><</link>>
 <br>
 
 :: Robin School CD SV Intro
@@ -1498,7 +1434,7 @@ You enter Robin's room, <<hes>> standing in front of <<his>> mirror holding a
 	<<link [[Interrupt|Robin School CD Interrupt]]>><</link>>
 <</if>>
 <br>
-<<link [[Leave|Orphanage]]>><</link>>
+<<link [[떠난다|Orphanage]]>><</link>>
 <br>
 
 :: SV Temple Kylar Monstrance
@@ -1572,7 +1508,7 @@ You are on Wolf Street. The nearby forest bleeds into the town here, particularl
 <</switch>>
 <br><br>
 
-<<link [[Next|Temple Confess Purge Sex]]>><<set $sexstart to 1>><</link>>
+<<link [[다음|Temple Confess Purge Sex]]>><<set $sexstart to 1>><</link>>
 <br>
 
 :: SV Island Castle Approach
@@ -1587,9 +1523,9 @@ You approach the guards, a <<person>> and <<person2>><<person>>.
 <br><br>
 "Halt," the <<person1>><<person>> says. "What gives you the right to enter here?" <span class="green">You should be able to respond in their language.</span>
 <br><br>
-<<link [[Act dignified|Island Castle Dignified]]>><</link>>
+<<ind>><<link [[Act dignified|Island Castle Dignified]]>><</link>>
 <br>
-<<link [[Act cute|Island Castle Cute]]>><</link>>
+<<ind>><<link [[Act cute|Island Castle Cute]]>><</link>>
 <br>
 
 :: SV Moor Flower
@@ -1616,7 +1552,7 @@ You smell a sweet fragrance. A pink flower alongside an odd plant grows among th
 <br>
 <<link [[Investigate the odd plant|Moor Phallus Plant]]>><<arousal 600>><<drugs 60>><<set $moorFlower to "phallus plant">><</link>><<garousal>>
 <br>
-<<link [[Ignore|Moor Flower Ignore]]>><</link>><<willpowerdifficulty `1 + $moorFlowerMod` `600 + $moorFlowerMod`>>
+<<link [[무시한다|Moor Flower Ignore]]>><</link>><<willpowerdifficulty `1 + $moorFlowerMod` `600 + $moorFlowerMod`>>
 <br>
 
 :: SV Tutorial
@@ -1626,11 +1562,11 @@ You smell a sweet fragrance. A pink flower alongside an odd plant grows among th
 		<<replace "#SVTutorial">>
 			<<generate1>><<person1>>As you leave the orphanage you bump into a <<person>> passing by. <<He>> staggers back and looks at you with anger, but <<his>> rage turns to lechery as <<he>> beholds you. "You're the cutest thing I've seen all week! Come 'ere."
 			<br><br>
-			<<link [[Next|Tutorial]]>><<set $molestationstart to 1>><<set $tutorialExit to "Domus Street">><</link>>
+			<<link [[다음|Tutorial]]>><<set $molestationstart to 1>><<set $tutorialExit to "Domus Street">><</link>>
 		<</replace>>
 	<</link>>
 	<br>
-	<<link [[Climbing a Fence in just underwear|Garden Fence]]>><<SVTutorial>><</link>>
+	<<link [[Climbing a Fence in just underwear at day|Garden Fence Undies Day]]>><<SVTutorial>><</link>> and <<link [[night|Garden Fence Undies Night]]>><<SVTutorial>><</link>>
 	<br>
 	<<link [[Walking to school with Robin|Robin Walk School]]>><</link>>
 	<br>
@@ -1691,7 +1627,7 @@ A hand lands on your shoulder from behind. "You've been busy," a <<person>> says
 <br><br>
 <<His>> grip tightens. "I reckon it's time I got my slice of the pie. <<if $fame.prostitution gte 400>>Hope you don't mind that I'm not paying for it.<<elseif $fame.rape gte 400>>You like it rough, right? That's what I've heard.<</if>> Come 'ere, sweetheart."
 <br><br>
-<<link [[Next|Pub Fame Intro]]>><</link>>
+<<link [[다음|Pub Fame Intro]]>><</link>>
 
 :: SV Avery Helicopter
 <<npc Avery>><<person1>>
@@ -1703,7 +1639,7 @@ As you are about to leave the building, you hear a great uproar. Dozens of stude
 
 <<link [[Board helicopter (0:20)|Avery Helicopter]]>><<npcincr Avery love 2>><</link>><<gglove>>
 <br>
-<<link [[Walk away|Avery Helicopter Walk]]>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<garage>><<llove>>
+<<link [[물러난다|Avery Helicopter Walk]]>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<garage>><<llove>>
 
 :: SV Street Bully Orphanage Go
 
@@ -1738,14 +1674,14 @@ Time of day: <span id="timeOfDay">Current Save</span>
 
 :: SV Street Bully Orphanage Go 2
 <<npc Whitney>><<person1>>
-"Just the slut I was looking for," <<he>> says. "Come on. I'm visiting your home. The orphanage." <<He>> flicks a fresh cigarette butt into the gutter, and takes your arm in <<his>> own.
+"Just the slut I was looking for," <<he>> says, "Come on. I'm visiting your home. The orphanage." <<He>> flicks a fresh cigarette butt into the gutter, and takes your arm in <<his>> own.
 <br><br>
 
 <<link [[Make Whitney promise to be nice to the other residents (0:25)|Street Bully Orphanage Promise]]>><<pass 25>><</link>>
 <br>
 <<link [[Go to the orphanage (0:25)|Street Bully Orphanage Go]]>><<npcincr Whitney love 1>><<pass 25>><</link>><<glove>>
 <br>
-<<link [[Refuse|Street Bully Orphanage Refuse]]>><<npcincr Whitney love -3>><</link>><<lllove>>
+<<link [[거절한다|Street Bully Orphanage Refuse]]>><<npcincr Whitney love -3>><</link>><<lllove>>
 <br>
 
 :: SV Sydney Temple Pure
@@ -1898,26 +1834,3 @@ Sydney takes a deep breath. "I'm ready." <<He>> begins to count the number of <<
 <br><br>
 <<link [[Start|Prison Scarred]]>><</link>>
 <br>
-
-:: SV Doctor Harper's Office
-<<set $outside to 0>>
-<<set $location to "hospital">>
-<<effects>>
-<<npc Harper>><<person1>>
-
-You knock on the door, and hear <<if $hospitalintro isnot 1>>a <<personsimple>><<else>>Harper<</if>>'s voice on the other side. "Come in." You enter.
-<br><br>
-
-<<if $phase is "intro">>
-	<<include "Doctor Harper's Office Intro">>
-<<elseif $phase is "hypno">>
-	<<include "Doctor Harper's Office Hypnosis">>
-<<elseif $phase is "exam1">>
-	<<include "Doctor Harper's Office Exam 1">>
-<<elseif $phase is "exam2">>
-	<<include "Doctor Harper's Office Exam 2">>
-<<elseif $phase is "exam3">>
-	<<include "Doctor Harper's Office Exam 3">>
-<<elseif $phase is "dog">>
-	<<include "Doctor Harper's Office Dog">>
-<</if>>

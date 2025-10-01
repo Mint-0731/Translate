@@ -7,11 +7,6 @@ var Renderer;
     const millitime = function () {
         return performance.now();
     };
-    function getUniqueCanvas(image) {
-        let copy = createCanvas(image.width, image.height);
-        copy.drawImage(image, 0, 0);
-        return copy.canvas;
-    }
     function rescaleImageToCanvasHeight(scale, image, targetHeight) {
         const aspectRatio = image.width / image.height;
         const scaledWidth = scale ? targetHeight * aspectRatio : image.width;
@@ -21,21 +16,6 @@ var Renderer;
         i2.drawImage(image, 0, 0, scaledWidth, scaledHeight);
         return i2.canvas;
     }
-    function isMaskObject(mask) {
-        const maskObj = mask;
-        return maskObj != undefined && maskObj.path !== undefined;
-    }
-    Renderer.isMaskObject = isMaskObject;
-    function isMaskOffsetObject(mask) {
-        const maskObj = mask;
-        return maskObj != undefined && maskObj.path !== undefined && (maskObj.offsetX !== undefined || maskObj.offsetY !== undefined);
-    }
-    Renderer.isMaskOffsetObject = isMaskOffsetObject;
-    function isMaskConvertObject(mask) {
-        const maskObj = mask;
-        return maskObj != undefined && maskObj.path !== undefined && maskObj.convert !== undefined;
-    }
-    Renderer.isMaskConvertObject = isMaskConvertObject;
     Renderer.DefaultImageLoader = {
         loadImage(src, layer, successCallback, errorCallback) {
             if (src instanceof HTMLCanvasElement) {
@@ -626,43 +606,11 @@ var Renderer;
         },
         render(image, compositeLayer, renderContext) {
             const maskCanvas = Renderer.ensureCanvas(image).getContext('2d');
-            // If convert is true, forget about the rest, can't be asked to integrate it atm. Rushed for time.
-            function processConvertStep(image, layer, parentCtx) {
-                let maskImg = layer.mask;
-                // No need to support arrays of masks yet. Can be done later.
-                if (Array.isArray(maskImg)) {
-                    if (maskImg.length === 0) {
-                        return;
-                    }
-                    maskImg = maskImg[0];
-                }
-                if (!layer.maskOptions?.convert) {
-                    return;
-                }
-                // Our mask should be a proper CanvasImageSource by this point.
-                const ctx = Renderer.createCanvas(image.width, image.height);
-                ctx.fillStyle = "#fff";
-                ctx.fillRect(0, 0, image.width, image.height);
-                ctx.globalCompositeOperation = "destination-in";
-                ctx.drawImage(maskImg, 0, 0, image.width, image.height);
-                // Our ctx should be prepared for the final cutout
-                return Renderer.cutoutFrom(maskCanvas, ctx.canvas, layer.maskBlendMode).canvas;
-            }
-            const stepOne = processConvertStep(image, compositeLayer, renderContext);
-            if (stepOne) {
-                return stepOne;
-            }
             let finalMask = compositeLayer.mask;
             if (Array.isArray(compositeLayer.mask)) {
                 const combinedCtx = Renderer.createCanvas(image.width, image.height);
-                if (compositeLayer.worn) {
-                    combinedCtx.fillStyle = '#ffffff';
-                    combinedCtx.fillRect(0, 0, image.width, image.height);
-                }
                 compositeLayer.mask.forEach((maskItem, index) => {
                     const offset = compositeLayer.maskOffsets[index] || { x: 0, y: 0 };
-                    if (compositeLayer.worn)
-                        combinedCtx.globalCompositeOperation = 'destination-in';
                     combinedCtx.drawImage(maskItem, offset.x, offset.y);
                 });
                 finalMask = combinedCtx.canvas;
@@ -704,7 +652,7 @@ var Renderer;
     function processLayer(layer, rects, listener) {
         let context = {
             layer: layer,
-            image: getUniqueCanvas(layer.image),
+            image: layer.image,
             needsCutout: false,
             rects: rects,
             listener: listener
@@ -726,8 +674,8 @@ var Renderer;
         const frameWidth = targetWidth / frameCount;
         const subspriteWidth = layer.width || frameWidth;
         const subspriteHeight = layer.height || targetHeight;
-        const dx = (layer.dx || 0) + (layer.frameDx || 0);
-        const dy = (layer.dy || 0) + (layer.frameDy || 0);
+        const dx = layer.dx || 0;
+        const dy = layer.dy || 0;
         const subspriteFrameCount = layerImageWidth / subspriteWidth;
         return {
             width: targetWidth,
@@ -842,13 +790,8 @@ var Renderer;
                     return;
                 if (layer.masksrc && !layer.mask)
                     return;
-                if (Array.isArray(layer.masksrc) && Array.isArray(layer.mask)) {
-                    if (layer.mask.length != layer.masksrc.length)
-                        return;
-                    for (let i = 0; i < layer.masksrc.length; i++)
-                        if (!layer.mask[i])
-                            return;
-                }
+                if ((Array.isArray(layer.masksrc) && layer.masksrc.length < 1) && !layer.mask)
+                    return;
             }
             if (listener && listener.loadingDone)
                 listener.loadingDone(millitime() - t0, layersLoaded);
@@ -893,13 +836,7 @@ var Renderer;
             const masksLoaded = [];
             let masksToLoad = layer.masksrc.length;
             layer.masksrc.forEach((src, index) => {
-                let imgSrc = src.toString();
-                let convert = false;
-                if (isMaskObject(src)) {
-                    imgSrc = src.path;
-                    convert = !!src.convert;
-                }
-                Renderer.ImageLoader.loadImage(imgSrc, layer, (src, layer, image) => {
+                Renderer.ImageLoader.loadImage(src, layer, (src, layer, image) => {
                     masksLoaded[index] = image;
                     masksToLoad--;
                     if (!(src instanceof HTMLCanvasElement)) {
@@ -945,16 +882,10 @@ var Renderer;
                 }
             }
             layer.maskOffsets = [];
-            layer.maskOptions = {
-                convert: false,
-            };
             if (Array.isArray(layer.masksrc)) {
                 layer.masksrc = layer.masksrc
                     .map(item => {
-                    if (isMaskConvertObject(item)) {
-                        layer.maskOptions.convert = item.convert;
-                    }
-                    if (isMaskOffsetObject(item)) {
+                    if (item?.path) {
                         layer.maskOffsets.push({ x: item.offsetX || 0, y: item.offsetY || 0 });
                         return item.path;
                     }
@@ -965,14 +896,9 @@ var Renderer;
                     layer.masksrc = null;
                 }
             }
-            else {
-                if (isMaskConvertObject(layer.masksrc)) {
-                    layer.maskOptions.convert = layer.masksrc.convert;
-                }
-                if (isMaskOffsetObject(layer.masksrc)) {
-                    layer.maskOffsets.push({ x: layer.masksrc.offsetX || 0, y: layer.masksrc.offsetY || 0 });
-                    layer.masksrc = layer.masksrc.path;
-                }
+            else if (layer.masksrc?.path) {
+                layer.maskOffsets.push({ x: layer.masksrc.offsetX || 0, y: layer.masksrc.offsetY || 0 });
+                layer.masksrc = layer.masksrc.path;
             }
             let needMask = !!layer.masksrc;
             if (layer.mask) {
@@ -1042,15 +968,6 @@ var Renderer;
         }
     }
     Renderer.invalidateLayerCaches = invalidateLayerCaches;
-    function refreshLayer(model, layerName, options = model.options) {
-        const layer = model.layers?.[layerName];
-        if (!layer)
-            return;
-        delete layer.show;
-        Renderer.invalidateLayerCaches([layer]);
-        model.redraw(options);
-    }
-    Renderer.refreshLayer = refreshLayer;
     function animateLayersAgain() {
         return animateLayers.apply(Renderer, Renderer.lastAnimateCall);
     }
@@ -1226,18 +1143,9 @@ var Renderer;
         }
         function applyKeyframe(keyframe, layer) {
             layer.frames = [keyframe.frame];
-            for (const ap of Renderer.AnimatableProps) {
-                if (ap in keyframe) {
-                    if (ap === "dx") {
-                        layer.frameDx = keyframe.dx;
-                        continue;
-                    }
-                    if (ap === "dy") {
-                        layer.frameDy = keyframe.dy;
-                        continue;
-                    }
+            for (let ap of Renderer.AnimatableProps) {
+                if (ap in keyframe)
                     layer[ap] = keyframe[ap];
-                }
             }
         }
         function nextKeyframe(animation) {

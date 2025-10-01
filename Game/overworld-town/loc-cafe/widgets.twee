@@ -21,42 +21,49 @@
 	<</addinlineevent>>
 <</if>>
 <<addinlineevent "chef_thief" 0.7>>
-		You hear the back door squeak.
+		<<generatey1>><<person1>>
+		문이 끼익거리는 소리가 들려온다.
 		<<if random(1, 1000) gte $skulduggery>>
-			You turn to look, <span class="red">but don't see anything out of the ordinary.</span>
+			뭔지 보려고 고개를 돌리나, <span class="red">별다른 것은 보이지 않는다.</span>
 			<br><br>
+			<<endevent>>
+
 			<<chefwork>>
 		<<else>>
-			<<generatey1>><<person1>>
-			Trying to be inconspicuous, you glance over. At first nothing appears out of the ordinary. <span class="green">Then you spot a hand reach up from beneath a table,</span> and snatch one of the buns.
+			최대한 눈에 띄지 않으려 하며, 당신은 소리가 들려온 쪽을 흘낏 쳐다본다. 처음에는 별다른 것이 보이지 않는다. <span class="green">곧 손 하나가 테이블 밑에서 튀어나오더니,</span> 빵 하나를 낚아채가는 것이 보인다.
 			<br><br>
-			<<link [[Intervene|Chef Thief Intervene]]>><<handheldon>><</link>>
+			<<link [[개입한다|Chef Thief Intervene]]>><</link>>
 			<br>
-			<<link [[Ignore|Chef Thief Ignore]]>><<handheldon>><</link>>
+			<<link [[무시한다|Chef Thief Ignore]]>><</link>>
 			<br>
 		<</if>>
 		<</addinlineevent>>
 <<addinlineevent "chef_chat" 0.7>>
-		<<npc Sam>><<person1>>Sam comes in to check on you. You end up chatting for several minutes, before a shatter in the main room steals <<his>> attention.
+		<<npc Sam>><<person1>>샘이 확인하러 온다. 당신은 결국 몇 분간 잡담을 나눈다. 곧 홀에서 뭔가 부서지는 소리가 나면서 <<hisPost "의">> 이목을 끈다.
 		<<lstress>><<stress -6>><<ltrauma>><<trauma -6>>
 		<br><br>
+
+		<<endevent>>
 
 		<<chefwork>>
 <</addinlineevent>>
 <<addinlineevent "chef_rape" 0.7>>
 		<<generate1>><<person1>>
-		The back door opens. A <<person>> enters, ass first, carrying a large sack of flour. <<He>> places it on the ground, then fishes a notepad out of <<his>> pocket. "Mind signing this?" <<he>> says, holding it out.
+		뒷문이 열린다. <<personPost "이">> 커다란 밀가루 자루를 든 채로, 엉덩이부터 들어온다. <<HePost "은">> 밀가루 자루를 바닥에 내려놓은 뒤, 주머니에서 메모지 하나를 꺼내든다. "이것 좀 사인해주시겠어요?" <<HePost "이">> 메모지를 내밀며 말한다.
 		<br><br>
 
 		<<if random(1, 100) gte 61>>
-			You reach out to sign, and <<he>> grabs your arm. <<He>> tugs you closer.
+			당신이 사인을 하러 손을 내밀자, <<hePost "은">> 당신의 팔을 붙잡는다. 그러고는 당신을 가까이 끌어당긴다.
 			<br><br>
 
-			<<link [[Next|Chef Work Rape]]>><<handheldon>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Chef Work Rape]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<<else>>
-			You sign the paper. <<He>> thanks you and leaves the way <<he>> came.
+			당신은 종이에 사인한다. <<HePost "은">> 감사인사를 하고는 들어온 길로 다시 나간다.
 			<br><br>
+
+			<<endevent>>
+
 			<<chefwork>>
 		<</if>>
 <</addinlineevent>>
@@ -64,59 +71,59 @@
 		<<if random(1, 100) gte 51 and !$worn.upper.type.includes("naked") or !$worn.over_upper.type.includes("naked")>>
 			<<if !$worn.over_upper.type.includes("naked")>>
 				<<set $worn.over_upper.integrity -= 5>>
-				Your $worn.over_upper.name snag<<if !$worn.over_upper.plural>>s<</if>> on a corner, tearing <<overupperit>>.
+				당신의 <<worn_over_upper_name_ i>> 모서리에 걸려, 찢어진다.
 				<br><br>
 				<<if $worn.over_upper.integrity lte 0>>
-					<span class="red">The worn fabric falls to pieces around you.</span>
+					<span class="red">찢어진 천조각이 주변에 떨어진다.</span>
 					<<integritycheck>><<exposure>>
 					<<if $exposed gte 1>>
-						You cover up with a towel.<<towelup>>
+						당신은 수건으로 몸을 가린다.<<towelup>>
 					<</if>>
-					<br><br>
 				<</if>>
+				<br><br>
 			<<elseif $worn.upper.type.includes("naked")>>
-				Your $worn.upper.name snag<<if !$worn.upper.plural>>s<</if>> on a corner. <<if $worn.upper.plural>>They're<<else>>It's<</if>> made for such kitchen mishaps however, <span class="green">and remain<<if !$worn.upper.plural>>s<</if>> sturdy.</span>
+				당신의<<worn_upper_name_ i>> 모서리에 걸린다. 하지만 이런 식으로 주방 내에서 사고가 일어날 것을 상정하여 만들어진 옷이기에, <span class="green">별 손상이 없다.</span>
 				<br><br>
 			<<else>>
 				<<set $worn.upper.integrity -= 5>>
-				Your $worn.upper.name snag<<if !$worn.upper.plural>>s<</if>> on a corner, tearing <<upperit>>.
+				당신의 <<worn_upper_name_ i>> 모서리에 걸려, 찢어진다.
 				<br><br>
 				<<if $worn.upper.integrity lte 0>>
-					<span class="red">The worn fabric falls to pieces around you.</span>
+					<span class="red">찢어진 천조각이 주변에 떨어진다.</span>
 					<<integritycheck>><<exposure>>
 					<<if $exposed gte 1>>
-						You cover up with a towel.<<towelup>>
+						당신은 수건으로 몸을 가린다.<<towelup>>
 					<</if>>
-					<br><br>
 				<</if>>
+				<br><br>
 			<</if>>
 		<<else>>
 			<<if !$worn.over_lower.type.includes("naked")>>
 				<<set $worn.over_lower.integrity -= 5>>
-				Your $worn.over_lower.name snag<<if !$worn.over_lower.plural>>s<</if>> on a corner, tearing <<overlowerit>>.
+				당신의 <<worn_over_lower_name_ i>> 모서리에 걸려, 찢어진다.
 				<br><br>
 				<<if $worn.over_lower.integrity lte 0>>
-					<span class="red">The worn fabric falls to pieces around you.</span>
+					<span class="red">찢어진 천조각이 주변에 떨어진다.</span>
 					<<integritycheck>><<exposure>>
 					<<if $exposed gte 1>>
-						You cover up with a towel.<<towelup>>
+						당신은 수건으로 몸을 가린다.<<towelup>>
 					<</if>>
-					<br><br>
 				<</if>>
+				<br><br>
 			<<elseif $worn.lower.type.includes("naked")>>
-				Your $worn.lower.name snag<<if !$worn.lower.plural>>s<</if>> on a corner. <<if $worn.lower.plural>>They're<<else>>It's<</if>> made for such kitchen mishaps however, <span class="green">and remain<<if !$worn.lower.plural>>s<</if>> sturdy.</span>
+				당신의 <<worn_lower_name_ i>> 모서리에 걸린다. 하지만 이런 식으로 주방 내에서 사고가 일어날 것을 상정하여 만들어진 옷이기에, <span class="green">별 손상이 없다.</span>
 				<br><br>
 			<<else>>
 				<<set $worn.lower.integrity -= 5>>
-				Your $worn.lower.name snag<<if !$worn.lower.plural>>s<</if>> on a corner, tearing <<lowerit>>.
+				당신의 <<worn_lower_name_ i>> 모서리에 걸려, 찢어진다.
 				<br><br>
 				<<if $worn.lower.integrity lte 0>>
-					<span class="red">The worn fabric falls to pieces around you.</span>
+					<span class="red">찢어진 천조각이 주변에 떨어진다.</span>
 					<<integritycheck>><<exposure>>
 					<<if $exposed gte 1>>
-						You cover up with a towel.<<towelup>>
+						당신은 수건으로 몸을 가린다.<<towelup>>
+						<br><br>
 					<</if>>
-					<br><br>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -125,9 +132,9 @@
 <</addinlineevent>>
 <<addinlineevent "chef_spill" 0.7>>
 		<<if C.npc.Sam.love gte 30>>
-			You spill a little. Sam appears, as if sensing the mistake, and cleans it up for you.
+			당신은 내용물을 약간 흘린다. 마치 실수를 감지라도 한듯 샘이 나타나더니, 대신 청소를 해준다.
 		<<else>>
-			You spill a little, and have to divert attention to cleaning it up.
+			당신은 내용물을 약간 흘리고, 주의를 다른 곳으로 분산시켜 청소를 한다.
 			<<gstress>><<stress 6>>
 		<</if>>
 		<br><br>
@@ -135,7 +142,7 @@
 		<<chefwork>>
 <</addinlineevent>>
 <<addinlineevent "chef_consistency" 0.7>>
-		Getting the consistency right is a little troublesome, but you manage to balance the ingredients properly.
+		배합을 일정하게 맞추는 것은 약간 어렵지만, 어쨌든 제대로 재료들을 섞는 데에 성공한다.
 		<br><br>
 
 		<<chefwork>>
@@ -144,34 +151,33 @@
 <</widget>>
 
 <<widget "chefwork">>
-	The dough prepared and in the oven, it's time to make the cream.
+	도우가 완성되어 오븐에 들어갔으니, 크림을 만들 차례다.
 	<br><br>
 
 	<<if $chef_job is "special">>
-		<<link [[Next|Chef Work Masturbation]]>><<handheldon>><<set $masturbationstart to 1>><</link>>
+		<<link [[다음|Chef Work Masturbation]]>><<set $masturbationstart to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Chef Work Regular]]>><<handheldon>><</link>>
+		<<link [[다음|Chef Work Regular]]>><</link>>
 		<br>
 	<</if>>
 <</widget>>
 
 <<widget "sellbuns">>
 	<<set _bun_money to (1000 + (($bun_value * $bun_cut) * _buns_sold))>>
-	Buns sold: _buns_sold
+	판매한 빵: _buns_sold개
 	<br>
-	Bun Value: £<<print ($bun_value / 100)>>
+	빵 매출: £<<print ($bun_value / 100)>>
 	<br>
-	Your cut: <<print ($bun_cut * 100)>>%
+	당신의 몫: <<print ($bun_cut * 100)>>%
 	<br>
-	Labour value: £10
+	노동 가치: £10
 	<br>
-	Total earned: <span class="gold">£<<print (_bun_money / 100)>></span>
-	<<money 1000 "cafeChef">>
-	<<money `_bun_money - 1000` "cafeBuns">>
+	전체 수입: <span class="gold">£<<print (_bun_money / 100)>></span>
+	<<set $money += _bun_money>>
 	<<set $bunstat += _buns_sold>>
 	<br>
-	Suspicion:
+	의심:
 	<div class="meter">
 		<<set _percent=Math.floor(($chef_sus / 100)*100)>>
 		<<print '<div class="redbar" style="width:' + _percent + '%"></div>'>>
@@ -180,7 +186,7 @@
 	<<if $options.images is 1>>
 		<<set _buns_sold to Math.clamp(_buns_sold, 0, 200)>>
 		<<for _i to 0; _i lt _buns_sold; _i++>>
-			<<foodicon "creambun">>
+			<<icon "food_creambun.png">>
 		<</for>>
 		<br><br>
 	<</if>>
@@ -188,9 +194,9 @@
 
 :: Cafe Exhibitionism Legs Part Widgets [widget]
 <<widget "CafeExhibitionismLegsPartSuccessS1">>
-	Knowing you're exposing yourself sends a gentle shiver down your spine but you make sure not to give any indication of your building arousal. Noticing <<his>> increased interest you decide to tease a little more. <<Seatedflashcrotchunderskirt>>, giving <<him>> a clear view of your $worn.under_lower.name covered crotch.
+	스스로 노출하고 있자니 등골이 살짝 오싹거리나, 당신은 최대한 흥분하고 있다는 티를 내지 않으려 한다. <<hisPost "의">> 관심이 커지는 걸 확인하자 당신은 조금 더 애태우기로 한다. <<Seatedflashcrotchunderskirt>>. 그 바람에 <<hePost "은">> <<trClothes "under_lower" $worn.under_lower.name "name" "으로">>_trResult 가려진 당신의 가랑이를 뚜렷이 볼 수 있다.
 	<br><br>
-	The act of exposing your underwear to a stranger in a cafe gives you a lewd thrill.
+	카페에서 처음 보는 사람에게 속옷을 노출하는 것에서 음란한 스릴이 느껴진다.
 	<<exhibitionism2>>
 
 	/* check for photo scene */
@@ -219,50 +225,50 @@
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartPhotoDecision">>
-	The <<person>> carefully pulls out their phone and fiddles with it for a few moments, before slowly positioning it towards you and your exposed $worn.under_lower.name with obvious intent.
+	<<personPost "은">> 조심스레 휴대전화를 꺼내 잠시동안 만지작거리더니, 천천히 당신 쪽으로 향하게 한다. 노출된 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 찍으려는 의도가 너무나도 확연하다.
 	<br><br>
-	<<link [[Let them take it|Cafe Exhibitionism Legs Part Photo]]>><</link>>
+	<<link [[찍게 내버려 둔다|Cafe Exhibitionism Legs Part Photo]]>><</link>>
 	<br>
-	<<link [[Don't let them|Cafe Exhibitionism Legs Part No Photo]]>><</link>>
+	<<link [[찍지 못하게 한다|Cafe Exhibitionism Legs Part No Photo]]>><</link>>
 	<br>
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartPantyTakeoffDecision">>
-	A naughty thought occurs to you. The cafe has a bathroom you could use to have a little more fun with the unsuspecting <<person>> if you wanted.
+	짓궂은 생각이 떠오른다. 카페에는 화장실이 있어서, 원한다면 아무 것도 모르는 <<personPost "을">> 가지고 재미를 더 볼 수 있을 것이다.
 	<br><br>
-	<<link [[Go take off your panties|Cafe Exhibitionism Legs Part Panty Takeoff]]>><</link>> <<exhibitionist5>>
+	<<link [[화장실에서 팬티를 벗고 온다|Cafe Exhibitionism Legs Part Panty Takeoff]]>><</link>> <<exhibitionist5>>
 	<br>
-	<<link [[Fun's over|Cafe Exhibitionism Legs Part Premature End]]>><</link>>
+	<<link [[여기까지 한다|Cafe Exhibitionism Legs Part Premature End]]>><</link>>
 	<br>
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartEnd">>
-	<<His>> attempts to hide <<his>> gaze get poorer as time goes on. You decide to finish up your plate and head off before <<he>> realises you're letting <<him>> look up your skirt on purpose.
+	시간이 갈수록 <<His_ yi>> 시선을 감추려는 시도가 점차 사라지고 있다. 당신은 접시를 비운 뒤 <<hePost "이">> 당신이 일부러 보여주고 있다는 것을 깨닫기 전에 떠나기로 한다.
 	<br><br>
 	<<CafeExhibitionismLegsPartNormalTerminate>>
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartNormalTerminate">>
-	<<link [[Next|Ocean Breeze]]>><<endevent>><</link>>
+	<<link [[다음|Ocean Breeze]]>><<endevent>><</link>>
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartPantilessPhotoDecision">>
-	The <<person>> carefully pulls out their phone and fiddles with it for a few moments, before slowly positioning it towards you and your exposed $worn.under_lower.name with obvious intent.
+	<<personPost "은">> 조심스레 휴대전화를 꺼내 잠시동안 만지작거리더니, 천천히 당신 쪽으로 향하게 한다. 노출된 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 찍으려는 의도가 너무나도 확연하다.
 	<br><br>
-	<<link [[Let them take it|Cafe Exhibitionism Legs Part Pantiless Photo]]>><</link>>
+	<<link [[찍게 내버려 둔다|Cafe Exhibitionism Legs Part Pantiless Photo]]>><</link>>
 	<br>
-	<<link [[Don't let them|Cafe Exhibitionism Legs Part Pantiless No Photo]]>><</link>>
+	<<link [[찍지 못하게 한다|Cafe Exhibitionism Legs Part Pantiless No Photo]]>><</link>>
 	<br>
 <</widget>>
 
 :: Cafe Exhibitionism Window Widgets [widget]
 <<widget "cafecoffeeflasharousal">>
-	You feel
+	이토록 많은
 	<<if ($worn.under_lower.exposed and $uncomfortable.nude is true) or (!$worn.under_lower.exposed and $uncomfortable.underwear is true)>>
-		extremely embarrassed letting so many strangers see your <<undies>> in public like this, but despite the feeling of <<print ["embarrassment", "humiliation", "vulnerability", "exposure"].pluck()>> you crave more.
+		모르는 사람들에게 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 매우 당황스러우나, 거기서 느껴지는 <<print ["난처함", "굴욕감", "취약함", "노출감"].pluck()>>에도 불구하고 당신은 더더욱 탐닉하게 된다.
 	<<else>>
-		<<print ["excited", "exhillerated", "turned on", "thrilled", "horny", "lewd"].pluck()>> showing so many strangers your <<undies>> in public like this.
-		<<if $assertiveaction is "trauma">> You're so naughty. <<trauma -2>><<ltrauma>><<if $phase isnot 4>><br><br><</if>><</if>>
+		모르는 사람들에게 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 당신은 <<print ["흥분된다", "신이 난다", "발정한다", "스릴이 느껴진다", "꼴린다", "음란한 기분이 든다"].pluck()>>.
+		<<if $assertiveaction is "trauma">> 참 짓궂기도 하지. <<trauma -2>><<ltrauma>> <</if>>
 	<</if>>
 
 	<<switch $phase>>
@@ -286,13 +292,13 @@
 
 :: Chef Speech Options [widget]
 <<widget "chefspeechoptions">>
-	<<link [[Socialise with local elites (4:00)|Chef Opening Local]]>><<pass 240>><<if $chef_speech is "refuse">><<famesocial 100>><</if>><<famebusiness 50>><</link>>
+	<<link [[지역 엘리트들과 어울린다 (4:00)|Chef Opening Local]]>><<pass 240>><<if $chef_speech is "refuse">><<famesocial 100>><</if>><<famebusiness 50>><</link>>
 	<br>
-	<<link [[Socialise with foreign visitors (4:00)|Chef Opening Foreign]]>><<pass 240>><<if $chef_speech is "refuse">><<famebusiness 50>><<famesocial 50>><</if>><<famebusiness 50>><</link>>
+	<<link [[해외 방문객들과 어울린다 (4:00)|Chef Opening Foreign]]>><<pass 240>><<if $chef_speech is "refuse">><<famebusiness 50>><<famesocial 50>><</if>><<famebusiness 50>><</link>>
 	<br>
-	<<link [[Chat with staff (4:00)|Chef Opening Staff]]>><<pass 240>><<trauma -18>><<stress -6>><</link>><<lltrauma>><<lstress>>
+	<<link [[직원들과 잡담한다 (4:00)|Chef Opening Staff]]>><<pass 240>><<trauma -18>><<stress -6>><</link>><<lltrauma>><<lstress>>
 	<br>
-	<<link [[Just enjoy yourself (4:00)|Chef Opening Enjoy]]>><<pass 240>><<stress -18>><<trauma -6>><</link>><<llstress>><<ltrauma>><<if !(playerIsPregnant() and playerAwareTheyArePregnant())>><<galcohol>><</if>>
+	<<link [[그냥 혼자서 즐긴다 (4:00)|Chef Opening Enjoy]]>><<pass 240>><<stress -18>><<trauma -6>><</link>><<llstress>><<ltrauma>>
 	<br>
 <</widget>>
 
@@ -302,51 +308,47 @@
 <</widget>>
 
 <<widget "earSlimeCafeLinks">>
-	<<set _linkName to _args[0] or "Next">>
+	<<set _linkName to _args[0] or "다음">>
 	<<switch $daily.earSlimeOceanBreezeCafeEat>>
 		<<case "coffee">>
 			<<link [[_linkName|Cafe Coffee]]>>
-				<<set $daily.cafeEaten to 1>><<money -200 "cafe">><<tiredness -4>><<pass 2>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -9>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<ltiredness>>
+				<<set $daily.cafeEaten to 1>><<set $money -= 200>><<tiredness -4>><<pass 2>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -9>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<ltiredness>>
 		<<case "winter ale">>
 			<<link [[_linkName|Cafe Eat]]>>
-				<<set $daily.cafeEaten to 1>><<set $phase to "winter ale">><<money -700 "cafe">><<alcohol 100>><<pass 10>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<ggalcohol>>
+				<<set $daily.cafeEaten to 1>><<set $phase to "winter ale">><<set $money -= 700>><<alcohol 100>><<pass 10>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
 		<<case "fruity ale">>
 			<<link [[_linkName|Cafe Eat]]>>
-				<<set $daily.cafeEaten to 1>><<set $phase to "fruity ale">><<money -700 "cafe">><<alcohol 60>><<pass 10>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
+				<<set $daily.cafeEaten to 1>><<set $phase to "fruity ale">><<set $money -= 700>><<alcohol 60>><<pass 10>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
 		<<case "shandy">>
 			<<link [[_linkName|Cafe Eat]]>>
-				<<set $daily.cafeEaten to 1>><<set $phase to "shandy">><<money -700 "cafe">><<alcohol 40>><<pass 10>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
+				<<set $daily.cafeEaten to 1>><<set $phase to "shandy">><<set $money -= 700>><<alcohol 40>><<pass 10>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
 		<<case "autumn ale">>
 			<<link [[_linkName|Cafe Eat]]>>
-				<<set $daily.cafeEaten to 1>><<set $phase to "autumn ale">><<money -700 "cafe">><<alcohol 80>><<pass 10>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
+				<<set $daily.cafeEaten to 1>><<set $phase to "autumn ale">><<set $money -= 700>><<alcohol 80>><<pass 10>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<galcohol>>
 		<<case "fruit salad">>
 			<<link [[_linkName|Cafe Eat]]>>
-				<<set $daily.cafeEaten to 1>><<set $phase to "fruit salad">><<money -500 "cafe">><<pass 20>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+				<<set $daily.cafeEaten to 1>><<set $phase to "fruit salad">><<set $money -= 500>><<pass 20>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
 		<<case "pancake">>
 			<<link [[_linkName|Cafe Pancakes]]>>
-				<<set $daily.cafeEaten to 1>><<money -1000 "cafe">><<tiredness -6>><<pass 20>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<ltiredness>>
+				<<set $daily.cafeEaten to 1>><<set $money -= 1000>><<tiredness -6>><<pass 20>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>><<ltiredness>>
 		<<case "deluxe cream bun">>
 			<<link [[_linkName|Cafe Cream Bun]]>>
-				<<set $daily.cafeEaten to 1>><<transform cat 1>><<money -5000 "cafe">><<pass 20>>
-				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -24>><<trauma -12>><<sub 2>><</if>>
-			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<llstress>><</if>>
+				<<set $daily.cafeEaten to 1>><<transform cat 1>><<set $money -= 5000>><<pass 20>>
+				<<if _linkName is "복종한다">><<corruption 1>><<pain -4>><<stress -24>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "복종한다">><<gcorruption>><<lpain>><<lltrauma>><<llstress>><</if>>
 	<</switch>>
-<</widget>>
-
-<<widget "timeTrackingEndCafe">>
-	<<timeTrackingEnd "cafe">><<timeTrackingEnd "cafeWaiter">><<timeTrackingEnd "cafeChef">><<timeTrackingEnd "cafeBuns">>
 <</widget>>

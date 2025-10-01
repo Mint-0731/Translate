@@ -810,7 +810,6 @@
 	<<set $rapeavoid to 1>>
 	<<set $orgasmdown to 0>>
 	<<set $penisbitten to 0>>
-	<<set $mouthsubmit to 0>>
 	<<set $apologised to 0>>
 	<<set $underlowerstruggle to 0>>
 	<<set $lowerstruggle to 0>>
@@ -830,7 +829,7 @@
 <<widget "crossdressing_check">>
 	<<if $player.penisExist and $player.vaginaExist>>
 		<<set $crossdressing to 2>>
-	<<elseif isCrossdressing()>>
+	<<elseif $player.gender isnot $player.gender_appearance>>
 		<<set $crossdressing to 1>>
 	<<else>>
 		<<set $crossdressing to 0>>
@@ -844,8 +843,7 @@
 <</widget>>
 
 <<widget "combatinit">>
-	<<if !_controlloss>>
-		/* save $control state at the combat start, unless it's already been saved by <<controlloss>> earlier in the passage */
+	<<if $consensual is 1>>
 		<<set $controlstart to $control>>
 	<</if>>
 	<<set $arousalmasochism to 0>>
@@ -876,7 +874,7 @@
 
 	<<if $enemytype is "beast">>
 		<<if $NPCList[0].penis is "none" and $player.penisExist>>
-			<<set $position to "missionary">>
+		<<set $position to "missionary">>
 		<<else>>
 			<<if random(1, 100) gte 20>>
 			<<set $position to "doggy">>
@@ -903,15 +901,6 @@
 	<<for _i to 0; _i lt $enemynomax; _i++>>
 		<<if $NPCList[_i].stance isnot "defeated">>
 			<<set $NPCList[_i].active to "active">>
-		<</if>>
-		<<if $NPCList[_i].fullDescription is "Avery">>
-			<<if $avery_mansion>>
-				<<if $avery_mansion.injury_timer gte 1>>
-					<<set $NPCList[_i].righthand to "idle">>
-					<span class="lblue">Avery's right hand is too injured to engage.</span>
-					<br>
-				<</if>>
-			<</if>>
 		<</if>>
 	<</for>>
 
@@ -967,7 +956,7 @@
 			<</for>>
 			<<if $oxygen lt $oxygenmax and $underwater isnot 1 and _strangle is 1>>
 				<<unset _strangle>>
-				Air: <<oxygencaption>>
+				공기: <<oxygencaption>>
 				<br>
 			<</if>>
 		</div>
@@ -979,7 +968,7 @@
 		<<run $npc.forEach(npc => $genderknown.pushUnique(npc))>>
 	<</if>>
 
-	<<if $worn.genitals.type.includesAll("chastity", "hidden") or $NPCList[0].state is "stalk" or $NPCList[0].state is "pursuit" or $NPCList[0].state is "chased" or $gloryhole>>
+	<<if $worn.genitals.type.includesAll("chastity", "hidden") or $NPCList[0].state is "stalk" or $NPCList[0].state is "pursuit">>
 	<<elseif $crossdressing gte 1 and $worn.over_lower.vagina_exposed gte 1 and $worn.under_lower.vagina_exposed gte 1 and $worn.lower.vagina_exposed gte 1>>
 		<<exposedcheck true>>
 		<<if $NPCList[0].teen is 1 and $location is "school" and !($npc.length is 1 and (["Kylar","Sydney"].includes($npc[0])))>>
@@ -993,48 +982,48 @@
 				<<if $npc[0] is "Sydney" and !$sydneySeen.includes("herm")>>
 					<<set $sydneySeen.pushUnique("herm")>>
 					<<if _sydneyStatus.includes("corrupt")>>
-						<<He>> stares with wonder at your <<genitals>>.
+						<<He_ nun>> 당신의 <<genitals_ rul>> 경이에 차서 주시한다.
 					<<else>>
-						<<He>> eyes your <<genitals>> with great curiosity.
+						<<He_ nun>> 당신의 <<genitals_ rul>> 대단한 호기심으로 쳐다본다.
 					<</if>>
 					<<npcincr Sydney purity -2>><<lspurity>><<set $speechhermaroused to 2>>
 				<<elseif $npc[0] is "Kylar">>
 					<!-- TODO: Give Kylar a unique reaction? -->
-					<span class="purple"><<His>> hands shake and <<his>> breath quickens at the sight of your <<genitals>>.</span>
+					<span class="purple">저들은 당신의 <<genitalsPost "을">> 보고 손을 떨며 숨을 가파르게 쉰다.</span>
 					<<set $enemyarousal += 50>><<set $speechhermaroused to 2>>
 				<</if>>
-			<<elseif $NPCList[0].type is "plant" or $rng lte 30>>
+			<<elseif $NPCList[0].type is "plant" or $rng lt 30>>
 				<<if $enemyno gte 2>>
-					They take both your <<genitals>> in stride, seeming unbothered.
+					저들은 개의치 않고 당신의 <<genitalsPost "을">> 거침없이 만진다.
 				<<else>>
-					<<He>> takes both your <<genitals>> in stride, seeming unbothered.
+					저들은 개의치 않고 당신의 <<genitalsPost "을">> 거침없이 만진다.
 				<</if>>
-			<<elseif $rng lte 50>>
+			<<elseif $rng lt 50>>
 				<<if $enemyno gte 2>>
-					They're taken aback by your <<genitals>>. They don't seem angry, at least.
+					저들은 당신의 <<genitalsPost "을">> 보고 물러선다. 저들은 그나마 화난 것처럼 보이진 않는다.
 				<<else>>
-					<<Hes>> taken aback by your <<genitals>>. <<He>> doesn't seem angry, at least.
+					저들은 당신의 <<genitalsPost "을">> 보고 물러선다. 저들은 그나마 화난 것처럼 보이진 않는다.
 				<</if>>
 				<<set $enemyarousal -= 100>><<set $enemytrust -= 50>><<set $speechhermdisappointed to 2>>
-			<<elseif $rng lte 85>>
+			<<elseif $rng lt 85>>
 				<<if $enemyno gte 2>>
-					<span class="blue">They recoil in shock at the sight of your <<genitals>>.</span>
+					<span class="blue">저들은 당신의 <<genitalsPost "을">> 보고 충격에 물러선다.</span>
 				<<else>>
-					<span class="blue"><<He>> recoils in shock at the sight of your <<genitals>>.</span>
+					<span class="blue"><<He_ nun>> 당신의 <<genitalsPost "을">> 보고 충격에 물러선다.</span>
 				<</if>>
 				<<set $enemyanger -= 50>><<set $enemytrust -= 50>><<set $speechhermshock to 2>>
-			<<elseif $rng lte 95>>
+			<<elseif $rng lt 95>>
 				<<if $enemyno gte 2>>
-					<span class="purple">Their hands shake and their breath quickens at the sight of your <<genitals>>.</span>
+					<span class="purple">저들은 당신의 <<genitalsPost "을">> 보고 손을 떨며 숨을 가파르게 쉰다.</span>
 				<<else>>
-					<span class="purple"><<His>> hands shake and <<his>> breath quickens at the sight of your <<genitals>>.</span>
+					<span class="purple">저들은 당신의 <<genitalsPost "을">> 보고 손을 떨며 숨을 가파르게 쉰다.</span>
 				<</if>>
 				<<set $enemyarousal += (50 * $enemyno)>><<set $speechhermaroused to 2>>
 			<<else>>
 				<<if $enemyno gte 2>>
-					<span class="red">They recoil in horror and disgust at the sight of your <<genitals>>!</span>
+					<span class="red">저들은 당신의 <<genitalsPost "을">> 보고 공포와 역겨움에 물러선다!</span>
 				<<else>>
-					<span class="red"><<He>> recoils in horror and disgust at the sight of your <<genitals>>!</span>
+					<span class="red">저들은 당신의 <<genitalsPost "을">> 보고 공포와 역겨움에 물러선다!</span>
 				<</if>>
 				<<set $enemyanger += 200>><<set $enemytrust -= 100>><<set $speechhermangry to 2>>
 			<</if>>
@@ -1044,54 +1033,54 @@
 					<<set $sydneySeen.pushUnique("crossdress")>>
 					<<run statusCheck("Sydney")>>
 					<<if _sydneyStatus.includes("corrupt")>>
-						<<He>> looks taken aback by your <<genitals>>. It wasn't what <<he>> was expecting, but <<he>> doesn't seem to mind.
+						<<He_ nun>> 당신의 <<genitals_ rul>> 보고 깜짝 놀란 듯 보인다. 그것은 <<he_ ga>> 예상했던 것은 아니지만, <<he_ nun>> 신경쓰지 않는 것 같다.
 					<<else>>
-						<<He>> stares at your <<genitals>> with confusion. It wasn't what <<he>> was expecting, but <<he>> doesn't seem to mind.
+						<<He_ nun>> 당신의 <<genitals_ rul>> 혼란스러워 하며 주시한다. 그것은 <<he_ ga>> 예상했던 것은 아니지만, <<he_ nun>> 신경쓰지 않는 것 같다.
 					<</if>>
 					<<npcincr Sydney purity -2>><<lspurity>><<set $speechcrossdressaroused to 2>>
 				<<elseif $npc[0] is "Kylar">>
 					<!-- TODO: Give Kylar unique reactions? -->
 					<<set _kylar to statusCheck("Kylar")>>
-					<<if _kylar.gender isnot $player.sex or _kylar.gender is "h">>
-						Your <<genitals 1>> was clearly not what <<he>> was expecting, but <<he>> doesn't seem to mind. <<if _kylar.gender isnot "h">><span class="purple">In fact, if <<his>> shaking hands are anything to go by <<he>> is quite pleased.</span><</if>>
+					<<if _kylar.gender isnot $player.gender or _kylar.gender is "h">>
+						당신의 <<genitals_ nun 1>> 확실히 <<he_ ga>> 예상했던 것은 아니었지만, <<he_ nun>> 신경쓰지 않는 것 같다. <<if _kylar.gender isnot "h">><span class="purple">사실, <<his_ yi>> 떨리는 손만 놓고 본다면 <<he_ nun>> 꽤나 기뻐하는 것 같다.</span><</if>>
 						<<set $enemyarousal += 50>><<set $speechcrossdressaroused to 2>>
 					<<else>>
-						<<He>> looks disappointed by your <<genitals>>. It wasn't what <<he>> was expecting.
+						<<HePost "이">> 당신의 <<genitalsPost "을">> 보고 실망한다. 이건 <<HePost "이">> 기대하던 것이 아니었다.
 						<<set $enemyarousal -= 100>><<set $enemytrust -= 50>><<set $speechcrossdressdisappointed to 2>>
 					<</if>>
 				<</if>>
-			<<elseif $NPCList[0].type is "plant" or $rng lte 30>>
+			<<elseif $NPCList[0].type is "plant" or $rng lt 30>>
 				<<if $enemyno gte 2>>
-					Your <<genitals>> was clearly not what they were expecting, but they don't seem to mind.
+					당신의 <<genitalsPost "은">> 완전히 저들이 예측한 것과 딴판이었다. 하지만 저들은 신경 쓰지 않는 것 같다.
 				<<else>>
-					Your <<genitals 1>> was clearly not what <<he>> was expecting, but <<he>> doesn't seem to mind.
+					당신의 <<genitalsPost 1 "은">> 완전히 <<HePost "이">> 예측한 것과 딴판이었다. 하지만 <<HePost "은">> 신경 쓰지 않는 것 같다.
 				<</if>>
-			<<elseif $rng lte 50>>
+			<<elseif $rng lt 50>>
 				<<if $enemyno gte 2>>
-					They look disappointed by your <<genitals>>. It wasn't what they were expecting.
+					저들은 당신의 <<genitalsPost "을">> 보고 실망한다. 이건 저들이 기대하던 것이 아니었다.
 				<<else>>
-					<<He>> looks disappointed by your <<genitals>>. It wasn't what <<he>> was expecting.
+					<<HePost "이">> 당신의 <<genitalsPost "을">> 보고 실망한다. 이건 <<HePost "이">> 기대하던 것이 아니었다.
 				<</if>>
 				<<set $enemyarousal -= 100>><<set $enemytrust -= 50>><<set $speechcrossdressdisappointed to 2>>
-			<<elseif $rng lte 85>>
+			<<elseif $rng lt 85>>
 				<<if $enemyno gte 2>>
-					Their eyes widen in shock when they see your <<genitals>>. They seem unsure what to do.
+					저들이 당신의 <<genitalsPost "을">> 보자 충격에 눈이 휘둥그레진다. 그들은 뭘 해야 할지 모르는 것 같다.
 				<<else>>
-					<<His>> eyes widen in shock when <<he>> sees your <<genitals>>. <<He>> seems unsure what to do.
+					<<HePost "이">> 당신의 <<genitalsPost "을">> 보자 충격에 눈이 휘둥그레진다. <<HePost "은">> 뭘 해야 할지 모르는 것 같다.
 				<</if>>
 				<<set $enemyanger -= 50>><<set $enemytrust -= 50>><<set $speechcrossdressshock to 2>>
-			<<elseif $rng lte 95>>
+			<<elseif $rng lt 95>>
 				<<if $enemyno gte 2>>
-					Your <<genitals>> was clearly not what they were expecting, but they don't seem to mind. <span class="purple">In fact, if their shaking hands are anything to go by they're quite pleased.</span>
+					당신의 <<genitalsPost "은">> 완전히 저들이 예측한 것과 딴판이었다. 하지만 저들은 신경 쓰지 않는 것 같다. <span class="purple">사실, 저들은 그저 욕구를 배출할 생각에 가득찬 것 같다.</span>
 				<<else>>
-					Your <<genitals 1>> was clearly not what <<he>> was expecting, but <<he>> doesn't seem to mind. <span class="purple">In fact, if <<his>> shaking hands are anything to go by <<he>> is quite pleased.</span>
+					당신의 <<genitalsPost "은">> 완전히 <<HePost "이">> 예측한 것과 딴판이었다. 하지만 저들은 신경 쓰지 않는 것 같다. <span class="purple">사실, <<HePost "은">> 그저 욕구를 배출할 생각에 가득찬 것 같다.</span>
 				<</if>>
 				<<set $enemyarousal += (50 * $enemyno)>><<set $speechcrossdressaroused to 2>>
 			<<else>>
 				<<if $enemyno gte 2>>
-					<span class="red">They recoil in horror upon seeing your <<genitals>>. The deception has driven them mad with rage!</span>
+					<span class="red">저들은 당신의 <<genitalsPost "을">> 보고 공포에 물러선다. 속았다 느낀 저들은 분노로 미쳐버린 것 같다!</span>
 				<<else>>
-					<span class="red"><<He>> recoils in horror upon seeing your <<genitals>>. The deception has driven <<him>> mad with rage!</span>
+					<span class="red"><<HePost "이">> 당신의 <<genitalsPost "을">> 보고 공포에 물러선다. 속았다 느낀 <<HePost "은">> 분노에 미쳐 버린 것 같다!</span>
 				<</if>>
 				<<set $enemyanger += 200>><<set $enemytrust -= 100>><<set $speechcrossdressangry to 2>>
 			<</if>>
@@ -1101,7 +1090,7 @@
 					<<run $backgroundTraits.pushUnique("crossdresser")>>
 					<br><br>
 
-					<span class="gold">Being seen crossdressing makes you feel happy inside.</span>
+					<span class="gold">크로스드레싱인 것을 보여지자 당신은 안에서부터 기쁨을 느낀다.</span>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -1113,7 +1102,7 @@
 	/* NPC reactions to revealing your sex toys */
 	<<if $dildoreveal gt 0>>
 		<<set $dildoreveal to 0>>
-		<<set $_sexToy to ($rightarm is "heldSexToy" and $leftarm is "heldSexToy" ? "sex toys" : "sex toy")>>
+		<<set $_sexToy to ($rightarm is "heldSexToy" and $leftarm is "heldSexToy" ? "섹스 장난감들" : "섹스 장난감")>>
 		<<set $_was to ($rightarm is "heldSexToy" and $leftarm is "heldSexToy" ? "were" : "was")>>
 
 		<<if $enemyno gte 2>>
@@ -1122,38 +1111,38 @@
 			<<switch $speechSextoyState>>
 				<<case "aroused">>
 					<<addinlineevent>>
-						Their breath quickens at the sight of your $_sexToy.
+						당신의 $_sexToy을 보고 그들의 숨소리가 빨라진다.
 						<<set $enemyarousal += 50>>
 					<</addinlineevent>>
 					<<addinlineevent>>
-						They seem pleased to see your $_sexToy.
+						그들은 당신의 $_sexToy을 보고 기뻐하는 듯 하다.
 					<</addinlineevent>>
 					<<addinlineevent>>
-						They're taken aback by your $_sexToy, but seem excited by it.
+						그들은 당신의 $_sexToy을 보고 어리둥절한 듯 하지만, 또한 흥분한 것 같다.
 					<</addinlineevent>>
 				<<case "neutral">>
 					<<addinlineevent>>
-						Your $_sexToy $_was clearly unexpected, but they don't seem to mind.
+						당신의 $_sexToy은 뜻밖인게 확실했지만, 그들은 신경쓰지 않는 듯 하다.
 					<</addinlineevent>>
 				<<case "disappointed">>
 					<<addinlineevent 0.5>>
-						They look disappointed by your $_sexToy. It wasn't what they was expecting.
+						그들은 당신의 $_sexToy을 보고 실망한 듯 하다. 그들은 그게 뜻밖인 것 같다.
 						<<set $enemyarousal -= 100>><<set $enemytrust -= 50>>
 					<</addinlineevent>>
 				<<case "shocked">>
 					<<addinlineevent 0.5>>
-						Their eyes widen in shock at the reveal of your $_sexToy.
+						그들의 눈은 당신의 $_sexToy을 본 충격으로 커진다.
 						<<set $enemyanger -= 50>><<set $enemytrust -= 50>>
 					<</addinlineevent>>
 				<<case "angry">>
 					<<addinlineevent 0.5>>
-						They recoil in disgust at the sight of your $_sexToy.
+						그들은 당신의 $_sexToy을 보고 혐오감에 움찔한다.
 						<<set $enemyanger += 75>><<set $enemytrust -= 75>>
 					<</addinlineevent>>
 				<<default>>
 					<<addinlineevent>>
-						They appear confused. Not sure what to think of your $_sexToy.
-						<span class="blue">You should inform Vrelnir.</span>
+						그들은 당신의 $_sexToy을 보고 어리둥절한 듯 하다. 당신의 $_sexToy을 어떻게 생각하는지는 잘 모르겠다.
+						<span class="blue">오류 같으니 Vrelnir에게 알려주는게 좋을 것 같다.</span>
 					<</addinlineevent>>
 			<</switch>>
 			<<runeventpool>>
@@ -1182,38 +1171,38 @@
 					<<switch $speechSextoyState>>
 						<<case "aroused">>
 							<<addinlineevent>>
-								<<His>> breath quickens at the sight of your $_sexToy.
+								당신의 $_sexToy을 보고 <<His_ yi>> 숨소리가 빨라진다.
 								<<set $enemyarousal += 50>>
 							<</addinlineevent>>
 							<<addinlineevent>>
-								<<He>> seems pleased to see your $_sexToy.
+								<<He_ nun>> 당신의 $_sexToy을 보고 기뻐하는 듯 하다.
 							<</addinlineevent>>
 							<<addinlineevent>>
-								<<Hes>> taken aback by your $_sexToy, but seems excited by it.
+								<<He_ nun>> 당신의 $_sexToy을 보고 어리둥절한 듯 하지만, 또한 흥분한 것 같다.
 							<</addinlineevent>>
 						<<case "neutral">>
 							<<addinlineevent>>
-								Your $_sexToy $_was clearly unexpected, but <<he>> doesn't seem to mind.
+								당신의 $_sexToy은 뜻밖인게 확실했지만, <<he_ nun>> 신경쓰지 않는 듯 하다.
 							<</addinlineevent>>
 						<<case "disappointed">>
 							<<addinlineevent 0.5>>
-								<<He>> looks disappointed by your $_sexToy. It wasn't what <<he>> was expecting.
+								<<He_ nun>> 당신의 $_sexToy을 보고 실망한 듯 하다. <<he_ nun>> 그게 뜻밖인 것 같다.
 								<<set $enemyarousal -= 100>><<set $enemytrust -= 50>>
 							<</addinlineevent>>
 						<<case "shocked">>
 							<<addinlineevent 0.5>>
-								<<His>> eyes widen in shock at the reveal of your $_sexToy.
+								<<His_ yi>> 눈은 당신의 $_sexToy을 본 충격으로 커진다.
 								<<set $enemyanger -= 50>><<set $enemytrust -= 50>>
 							<</addinlineevent>>
 						<<case "angry">>
 							<<addinlineevent 0.5>>
-								<<He>> recoils in disgust at the sight of your $_sexToy.
+								<<He_ nun>> 당신의 $_sexToy을 보고 혐오감에 움찔한다.
 								<<set $enemyanger += 75>><<set $enemytrust -= 75>>
 							<</addinlineevent>>
 						<<default>>
 							<<addinlineevent>>
-								<<He>> appears confused. Not sure what to think of your $_sexToy.
-								<span class="blue">You should inform Vrelnir.</span>
+								<<He_ nun>> 당신의 $_sexToy을 보고 어리둥절한 듯 하다. 당신의 $_sexToy을 어떻게 생각하는지는 잘 모르겠다.
+								<span class="blue">오류 같으니 Vrelnir에게 알려주는게 좋을 것 같다.</span>
 							<</addinlineevent>>
 					<</switch>>
 					<<runeventpool>>
@@ -1225,28 +1214,28 @@
 <</widget>>
 
 <<widget "printCombatMenu">>
-	<<set $_combatTypes to {'Radio': 'radio', 'Radio (c)': 'columnRadio', 'Lists': 'lists', 'List (w)': 'limitedLists'}>>
+	<<set $_combatTypes to {'라디오 버튼': 'radio', '라디오 버튼 (c)': 'columnRadio', '리스트': 'lists', '리스트 (w)': 'limitedLists'}>>
 	<div id="cbtToggleMenu">
 		<label class="cbtToggle">
-			<p>Combat menu</p>
+			<p>전투 설정</p>
 		</label>
 		<hr>
 		<label class="cbtOption">
-			<p>Control types</p>
+			<p>행동 표시 형식</p>
 			<<listbox "$options.combatControls" autoselect>>
 				<<optionsfrom $_combatTypes>>
 			<</listbox>>
 		</label>
 		<label class="cbtOption">
-			<p>Scroll lock</p>
+			<p>스크롤 위치 기억</p>
 			<<checkbox "$options.scrollRemember" false true autocheck>>
 		</label>
 		<label class="cbtOption">
-			<p>Target yourself</p>
+			<p>"당신 자신"을 대상에 추가</p>
 			<<checkbox "$options.targetYourself" false true autocheck>>
 		</label>
 		<label class="cbtOption">
-			<p>Combat images</p>
+			<p>전투 이미지</p>
 			<<checkbox "$options.combatImages" 0 1 autocheck>>
 		</label>
 	</div>

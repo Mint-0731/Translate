@@ -4,78 +4,74 @@
 <<npc "Wren">><<person1>>
 <<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
 <<if $wren_intro is undefined>>
-	"Sneaking where we don't belong?" says a young <<if $pronoun is "m">>man with short<<else>>woman with shoulder-length<</if>> hair.
+	"있으면 안 될 곳에 살금살금 들어오는 건가요?" <<if $pronoun is "m">>짧은 머리를 한 젊은 남자<<else>>어깨까지 오는 머리를 한 젊은 여자<</if>>가 말한다.
 	<<if $wrenSeenLast is "pregnancy">>
-		<span class="gold">It's the person who rescued you when you were in labour.</span> "Dangerous caves aren't the only place you like to poke around, I guess. <<= playerBellyVisible() ? "Already knocked up again, huh?" : "At least you're otherwise staying out of trouble.">>" <<He>> nods at your belly, flashing an amused grin. "Try not to pass out this time."
+		<span class="gold">그 사람은 당신이 부두에서 진통을 느끼고 있을 때 당신을 구해 준 사람이다.</span> "내 생각에, 당신이 들쑤시고 다니는 곳이 위험한 동굴만은 아닌 모양이군요. <<= playerBellyVisible() ? "그새 또 임신한 건가요, 네?" : "최소한 그때 말고는 말썽에 휘말리지는 않은 모양이군요.">>" <<He_ ga>> 당신의 배를 보며 끄덕이면서, 재미있어 하는 얼굴로 활짝 웃는다. "이번에는 정신을 잃지 않도록 조심해요."
 	<<elseif $wrenSeenLast is "catsuit">>
-		<span class="gold">It's Wren.</span> "Just like you were when we met at the docks." <<He>> doesn't look armed this time.
+		<span class="gold">렌이다.</span> "우리가 부두에서 만났던 그대로군요." <<He_ nun>> 이번에는 무기를 가지고 있지 않은 듯 보인다.
 	<<elseif $wrenSeenLast is "prison">>
-		<span class="gold">It's Wren.</span> "Hope you stay out of prison this time."
+		<span class="gold">렌이다.</span> "이번에는 교도소에 들어갈 일이 아니기를 바라죠."
 	<<else>>
-		"Naughty."
+		"무례하시군요."
 	<</if>>
 	<br>
-	"Maybe <<pshe>> wants to play?" a <<person2>><<person>> suggests, eyeing up your body. "<<pShe>> has a few assets I'd see <<phim>> lose."
+	"혹시 <<pShePost>>도 놀고 싶은 걸까?" 한 <<person2>><<person_ i>> 말하며, 당신의 몸을 훑어본다. "<<pShePost>>에게는 <<phim_ i>> 걸 수 있는 게 좀 있어 보이는데."
 	<br>
-	"How about it <<girl>>?" the first <<person1>><<nnpc_gender "Wren">> asks. <<Hes>> not much older than you. "Fancy some blackjack?"
+	"거기 <<girlPost>> 당신은?" 먼저 말하던 <<person1>><<nnpc_gender_ ga "Wren">> 묻는다. <<Hes_ nun>> 당신보다 그리 나이가 많을 것 같지 않다. "블랙잭 어때요?"
 	<br><br>
 	<<if $farm_stage lte 4 or $farm_stage is undefined>>
-		<i><span class="blue">A realisation strikes you.</span> This is likely the Wren that Mickey mentioned.</i>
+		<i><span class="blue">어떤 깨달음이 당신의 머리를 치고 지나간다.</span> 이 사람이 미키가 언급했던 그 렌이 분명하다.</i>
 	<<else>>
-		<i><span class="blue">An idea strikes you.</span> They don't seem hostile. For now. You could twist the situation to your advantage, but be careful.</i>
+		<i><span class="blue">어떤 생각이 머리를 치고 지나간다.</span> 그들은 적대적이지 않아 보인다. 지금은. 당신은 이 상황을 당신에게 이롭게 만들 수도 있을 것이지만, 조심해야 할 것이다.</i>
 	<</if>>
 	<br><br>
 <<else>>
 
-	<<if $wrenHeistMissed is true or ($wrenHeist is true and $wrenHeistDance.attended isnot true and Time.hour gte 21)>>
-		"Look who it is," Wren says. "You stood me up," <<= C.npc.Wren.love gte 40 ? "You know Wren well enough by now to see" : "You can't tell if">> <<hes>> hurt. "Luckily, I didn't need your help."<<npcincr Wren love -1>><<llove>><<set $wrenHeist to false>><<unset $wrenHeistMissed>><<unset $wrenHeistDance>>
-	<<elseif $wrenSeenLast is "letter">>
-		"Look who it is," Wren says. "Got another letter for me, or are you up for a game?"
-	<<elseif $wrenSeenLast is "winter">>
-		"Look who it is," Wren says. "Taking a break from helping the fossil dig up graves?"
-	<<elseif $wrenSeenLast is "catsuit">>
-		"Look who it is," Wren says. "It was fun to run into you during work."
-	<<elseif $wrenSeenLast is "pregnancy">>
-		"Look who it is," Wren says. "I didn't expect to see you poking around that cave. Naughty <<girl>>." <<His>> eyes land on your belly.
-		<<if playerBellyVisible()>>
-			"You're already knocked up again?" <<He>> laughs. "Careful not to pass out this time.
-		<<else>>
-			"At least you're otherwise staying out of trouble. Mind where you pass out next time.
-		<</if>>
-		I won't always be around to save you."
-	<<elseif $wrenSeenLast is "heist">>
-		"Look who it is," Wren says. "Fancy seeing you here, partner.<<if $wrenHeistCricketBall is true>> You owe me. Big.<<set $wrenHeistCricketBall to false>><</if>>"
-	<<elseif $estate_cards_end is "naked">>
-		"Look who it is," Wren says, a smug smile on <<his>> face. "We left you with nothing last time. Hope the journey home wasn't too cold." <<His>> friends laugh.
+	<<if $estate_cards_end is "naked">>
+		"이게 누구야," 렌이 <<his_ yi>> 만면에 웃음기를 머금고 말한다. "지난번에는 우리가 아무것도 안 남겨줬죠. 귀갓길이 너무 춥지는 않았기를." <<His_ yi>> 동료들은 웃는다.
 	<<elseif $estate_cards_end is "left_early">>
-		"Look who it is," Wren says. "Planning to stay around a bit longer this time, I hope."
+		"이게 누구야," 렌이 말한다. "이번에는, 좀 더 오래 여기 머물기를 바라죠."
 	<<elseif $estate_cards_end is "wren_finished_early">>
-		"Look who it is," Wren says. "I was <i>this</i> close to taking you last time."
+		"이게 누구야," 렌이 말한다. "저번에는 <i>요만큼만</i> 더 하면 당신을 이길 수 있었을 텐데 말이에요."
 	<<elseif $estate_cards_end is "chaos">>
 		<!-- this check is currently always false -->
-		"Look who it is," Wren says. "You left us in quite a mess last time. Barely dodged the blame. I'm always eager for another game though."
+		"이게 누구야," 렌이 말한다. "당신, 지난번에는 그 혼란의 장에 우리를 남겨두고 떠났잖아요. 간신히 책임을 면했다고요. 그렇지만 언제나 다음 판을 간절히 기대하고 있어요."
 	<<elseif $estate_cards_end is "run">>
-		"Look who it is," Wren says, smiling. "You did a runner last time. Hope there won't be a repeat."
+		"이게 누구야," 렌이 미소를 띄우고 말한다. "당신, 지난번에는 잘도 달아나 주셨지요. 이번에는 그럴 일 없기를."
 	<<elseif $estate_cards_end is "sex">>
-		"Look who it is," Wren says, grinning. "I said you'd be back for more." <<His>> friends laugh.
+		"이게 누구야," 렌이 씩 웃으며 말한다. "더 하기 위해 돌아올 거라고 내가 말했죠." <<His_ yi>> 동료들은 웃는다.
 	<<elseif $estate_cards_end is "sex_safe">>
-		"Look who it is," Wren says. "Still playing it safe with that belt of yours, I bet."
+		"이게 누구야," 렌이 말한다. "아직도 그 정조대 벨트로 안전하게 놀아제끼고 있겠죠, 뻔하죠."
 	<<elseif $estate_cards_end is "oral" or $estate_cards_end is "pc_won_and_oral">>
-		"Look who it is," Wren says. "Glad you're here. My friends enjoyed you last time. I promised I'd have you on your knees again."
+		"이게 누구야," 렌이 말한다. "다시 만나 기쁘군요. 내 친구들이 지난번엔 즐거웠다네요. 내가 당신을 또 한 번 무릎 꿇리겠다고 약속했죠."
 	<<elseif $estate_cards_end is "cheat_run">>
-		"Look who it is," Wren says. "You were a very bad <<girl>> last time, cheating and booking it like that. Ready to be taught a lesson?"
+		"이게 누구야," 렌이 말한다. "당신 지난번엔 아주 못된 <<girl_ iut>>지요, 그렇게 사기를 치고 도망쳐 버리다니. 혼쭐날 준비는 되셨나요?"
 	<<elseif $estate_cards_end is "cheat_moor">>
-		"Look who it is," Wren says. "You were a bad <<girl>> last time, cheating like that. Hope you've learned your lesson."
+		"이게 누구야," 렌이 말한다. "당신 지난번엔 참 못된 <<girl_ iut>>지요, 그런 사기를 치고 말이에요. 교훈을 얻었기를 바래요."
 	<<elseif $estate_cards_end is "pc_won">>
-		"Look who it is," Wren says. "You left us hanging last time, blanking on favours like that. Fancy a game?"
+		"이게 누구야," 렌이 말한다. "당신, 지난번에는 우릴 마지막까지 탈탈 털어 매달아두고 떠나버렸지요. 한 판 어때요?"
 	<<elseif $estate_cards_end is "cheat_remy">>
 		<<if C.npc.Wren.love gte 20>>
-			"Look who it is," Wren says. "I knew you'd be back soon - you won me a bet."
+			"이게 누구야," 렌이 말한다. "다시 돌아와줄 거라 생각했지요 - 당신이 내기에서 이겼었으니까."
 		<<else>>
-			"Look who it is," Wren says. "Not too surprised to meet you again. Hope you didn't cause them too much trouble."
+			"이게 누구야," 렌이 말한다. "다시 만난 것도 놀랍지는 않군요. 그들에게 큰 손해를 입히진 않았기를 바라죠."
 		<</if>>
+	<<elseif $wrenSeenLast is "letter">>
+		"이게 누구야," 렌이 말한다. "또 다른 편지 배달인가요, 아니면 게임하려고?"
+	<<elseif $wrenSeenLast is "winter">>
+		"이게 누구야," 렌이 말한다. "그 늙은이가 묘지를 파내는 것을 돕다가 한숨 돌리고 있는 건가요?"
+	<<elseif $wrenSeenLast is "catsuit">>
+		"이게 누구야," 렌이 말한다. "업무 도중에 마주친 거 재미있더군요."
+	<<elseif $wrenSeenLast is "pregnancy">>
+		"이게 누구야," 렌이 말한다. "당신이 그 동굴을 들쑤시고 다니리라고는 생각하지 못했었죠. 무례한 <<girlPost>> 같으니라고." <<His_ yi>> 눈이 당신의 배로 향한다.
+		<<if playerBellyVisible()>>
+			"그새 또 임신한 건가요?" <<He_ ga>> 웃는다. "이번에는 정신을 잃지 않도록 조심해요.
+		<<else>>
+			"최소한 그때 말고는 말썽에 휘말리지는 않은 모양이군요. 다음번에 정신을 잃을 때는 어디에서 잃을 건지 고심해 봐요.
+		<</if>>
+		내가 항상 당신을 구하려 근처에 있지는 않을 테니까요."
 	<<else>>
-		"Look who it is," Wren says. "Fancy a game?"
+		"이게 누구야," 렌이 말한다. "한 판 어때요?"
 	<</if>>
 	<<unset $estate_cards_end>>
 <</if>>
@@ -88,15 +84,15 @@
 :: Estate Cards Intro Leave
 <<effects>><<set $outside to 0>>
 
-You turn to leave.
+당신은 뒤로 돌아 나간다.
 <<if $wren_intro is undefined>>
-	"Suit yourself," says the young <<personsimple>>. "Come back when there's something you want."
+	"편할 대로 해요," 젊은 <<personsimple_ i>> 말한다. "원하는 게 생기면 다시 돌아오시길."
 <<else>>
-	"Suit yourself," Wren says. "Come back when there's something you want."
+	"편할 대로 해요," 렌이 말한다. "원하는 게 생기면 다시 돌아오시길."
 <</if>>
 <br><br>
 
-<<link [[Next|Estate]]>><<endevent>><</link>>
+<<link [[다음|Estate]]>><<endevent>><</link>>
 <br>
 
 :: Estate Cards Enter
@@ -104,10 +100,10 @@ You turn to leave.
 <<set $outside to 0>>
 
 
-You enter the cottage. A group of <<people>> play cards around a table. They all face you. <<covered>>
+당신은 오두막으로 들어선다. 한 무리의 <<peoplePost "이">> 테이블에 앉아 카드놀이를 하고 있다. 모두의 시선이 당신에게로 향한다. <<covered>>
 <br><br>
 
-<<link [[Next|Estate Cards Intro]]>><</link>>
+<<link [[다음|Estate Cards Intro]]>><</link>>
 <br>
 
 
@@ -119,30 +115,30 @@ You enter the cottage. A group of <<people>> play cards around a table. They all
 
 <<person1>>
 <<if $speech_attitude is "meek">>
-	"S-sorry, um... I've been thinking, about the rules," you say. "I d-don't think it's fair..."
+	"죄-죄송하지만, 음... 조건에 대해, 생각을 좀 해 봤어요," 당신이 말한다. "공정하지가 않은 것 같은데..."
 <<elseif $speech_attitude is "bratty">>
-	"Nah, I'm good," you say. "I know the house always wins, but you're pushing it with these rules."
+	"뭐, 좋아," 당신이 말한다. "본진 쪽이 매번 이득이란 건 알겠네, 당신네들이 그 조건으로 미니까."
 <<else>>
-	"I'm not sure I want to play with these rules," you say. "They're too unfair."
+	"난 이 조건 별로인 것 같아요," 당신이 말한다. "너무 불공정해."
 <</if>>
 <br><br>
 <<person1>>
-Wren raises <<his>> eyebrows in curiosity, a smirk playing on <<his>> lips.<br><br>
-"Oh, really? What's the problem?" <<he>> says.
+렌은 호기심에 차 <<his_ yi>> 눈썹을 치켜올리며, 입가를 능글맞게 말아올린다.<br><br>
+"호오, 그래요? 뭐가 문제인데요?" <<he_ ga>> 말한다.
 <br><br>
 
 <<if $speech_attitude is "meek">>
-	"I-I pay a lot for my clothes," you say, "and y-you get to keep your clothes, so... M-maybe if I g-got something from you when you lost..."
+	"저-저는 옷을 사는데 돈을 많이 쓴다고요," 당신은 말한다, "그런데 당-당신은 옷들을 잃지 않아도 되니까, 그래서... 호-혹시 당신이 졌을 때 제가 뭔가를 받-받을 수 있다면..."
 	<br><br>
 <<elseif $speech_attitude is "bratty">>
-	"Do you even have to ask?" You glare at <<him>>. "You want to take my hard-earned clothing when I lose, and in return you do some stupid dare?"
+	"그걸 물어봐야 알아요?" 당신은 <<him_ ul>> 노려본다. "내가 뼈 빠지게 벌어서 산 옷들을 가져가고 싶어하면서, 그 대가로 당신은 멍청한 용기만 내잖아?"
 	<br><br>
 <<else>>
-	"I don't feel like the favours are enough compensation for the clothes I lose," you say.
+	"제가 잃는 옷에 대한 가치가 부탁을 들어주는 것 만으로는 충분하지 않다고 생각해요," 당신은 말한다.
 	<br><br>
 <</if>>
 
-<<link [[Next|Estate Cards Suggest Betting Init 2]]>><</link>>
+<<link [[다음|Estate Cards Suggest Betting Init 2]]>><</link>>
 
 
 :: Estate Cards Suggest Betting Init 2
@@ -150,31 +146,31 @@ Wren raises <<his>> eyebrows in curiosity, a smirk playing on <<his>> lips.<br><
 
 <<person1>>
 <<if $speech_attitude is "meek">>
-	Wren looks at you with amusement. "Playing for <i>'favours'</i> was your idea," <<he>> says, "and I'm already risking a lot, you know."
+	렌은 흥미롭게 당신을 바라본다. "<i>"부탁"</i>을 걸고 게임하자고 한 건 당신이었죠," <<he_ ga>> 말한다, "알다시피, 난 이미 상당한 위험을 감수하고 있고요."
 	<br><br>
 
-	"I-I'm sorry... C-could you give me some money back for the clothes if I win?" you ask.
+	"미-미안해요... 만약 제가 이기면 오-옷값만이라도 어느 정도 돌려주실 수 있나요?" 당신은 묻는다.
 <<elseif $speech_attitude is "bratty">>
-	"Those 'stupid' <i>favours</i> were your idea, you know?" Wren says, <<his>> relaxed expression unchanged. "Do you have any idea how risky some of them are for me?"
+	"그 "멍청한" <i>부탁</i>들은 다 당신 생각이었다는 거, 당신도 알죠?" 렌이 말한다. <<his_ yi>> 여유로운 표정은 변함없다. "개중 일부가 내게는 얼마나 위험한 일인지 알고나 있는 걸까요?"
 	<br><br>
 
-	"You keeping my damn clothes wasn't my idea," you argue back. "Least you can do is put some money forward when you lose, you know."
+	"당신이 내 옷들을 해먹는 건 내 생각 아니었는데," 당신은 다시 응수한다. "최소한 졌을 때 돈을 좀 꺼내주기라도 해요, 당신도 알겠지만."
 <<else>>
-	"You say that, even though the favours were your idea..." Wren says, leaning back on <<his>> chair. "Real shame you consider them unfair, considering how risky they can get for me."
+	"그렇게 말하는군요, 그 부탁들은 당신이 꺼낸 얘기였으면서..." 렌이 의자에 등을 기대며 말한다. "당신이 불공정하다고 느낀다니 참으로 유감이에요, 그 일들이 내게는 얼마나 위험할지 생각해본다면 말예요."
 	<br><br>
 
-	"Risking going back home buck naked is also risky, and for what?" you argue. "It will be a bit more fair if I make some money back if I win."
+	"그래서 뭐요, 벌거벗은 채로 집으로 돌아가는 일도 위험하긴 매한가지잖아요?" 당신은 응수한다. "제가 이겼을 때 돈을 좀 받게 된다면 조금은 더 공정해질 것 같아요."
 <</if>>
 
 <br><br>
-Wren lets out a light chuckle before turning to <<his>> friends. You can hear them discussing it for a few seconds, before Wren turns back to you.
+렌은 가볍게 웃고는 <<his_ yi>> 동료들을 돌아본다. 그들이 몇 분간 그것에 대해 이야기하는 소리가 들리고, 렌은 다시 당신을 돌아본다.
 <br><br>
 
 <<if C.npc.Wren.love gte 20>>
 	<<set $phase to 1>>
-	<<link [[Next|Estate Cards Suggest Betting Success]]>><</link>>
+	<<link [[다음|Estate Cards Suggest Betting Success]]>><</link>>
 <<else>>
-	<<link [[Next|Estate Cards Suggest Betting Failure]]>><</link>>
+	<<link [[다음|Estate Cards Suggest Betting Failure]]>><</link>>
 <</if>>
 
 
@@ -184,23 +180,23 @@ Wren lets out a light chuckle before turning to <<his>> friends. You can hear th
 
 <<person1>>
 <<if $phase is 1>>
-	Wren looks deep in thought for a few seconds. You open your mouth to add something, but Wren interrupts you.
+	렌은 잠시 깊게 생각하는 듯하다. 당신은 무언가 덧붙이려고 입을 열지만, 렌이 끼어든다.
 	<br><br>
-	<span class="green">"Fine. You have a point,"</span> Wren says.
+	<span class="green">"좋아요. 일리 있네요,"</span> 렌은 말한다.
 <<else>>
-	A few seconds pass. You are about to open your mouth to say something, but Wren interrupts you.<br><br>
+	몇 초가 흐른다. 당신이 무언가 말하려고 입을 열던 참에, 렌이 끼어든다.<br><br>
 
-	<span class="green">"Ah, whatever. Fine,"</span> Wren says.
+	<span class="green">"아, 그러든가. 좋아요."</span> 렌은 말한다.
 <</if>>
 
 <br><br>
-"We can add some money into the mix, on top of the favours and the clothes. My friends over here also wouldn't mind to throw in some extra for the eye candy, isn't that right?" Wren says, turning to look at <<his>> goons.
+"돈을 약간 거는 걸로 합시다, 부탁과 옷 외에도 말이에요. 여기 내 친구들도 눈요기를 위해 팁을 좀 내는 걸 마다하지 않을 거고, 안 그래?" 렌이 <<his_ 의>> 동료들을 돌아보며 말한다.
 <br><br>
 
-The goons look up and down your body, and you don't hear any objections.
+동료들은 당신의 몸을 위아래로 훑어보고는, 어떤 이의도 제기하지 않는다.
 <br><br>
 
-<<link [[Next|Estate Cards Suggest Betting Success 2]]>><</link>>
+<<link [[다음|Estate Cards Suggest Betting Success 2]]>><</link>>
 
 
 
@@ -208,17 +204,17 @@ The goons look up and down your body, and you don't hear any objections.
 <<effects>><<set $outside to 0>>
 
 <<person1>>
-"However," <<he>> continues. "You'll obviously need to put forward some money, as well. I'm sure you didn't think I'd just give you free money, did you?" Wren says with a smirk.
+"하지만," <<he_ 가>> 덧붙인다. "마찬가지로, 당신도 돈을 확실히 걸어야 할 거예요. 설마 그냥 공짜로 돈을 갖다바칠 거라고 생각하진 않겠죠, 그렇죠?" 렌은 능글거리는 웃음을 지으며 말한다.
 <br><br>
 
-"Whatever you bet, I will match, and my friends will throw in some extra. We'll ante up before the game, and we'll bet hand-to-hand, before the cards are dealt," Wren says.<br><br>
+"당신이 뭘 걸든 난 받아들일 거고, 내 친구들이 추가로 팁을 던질 겁니다. 게임 시작 전에 판돈을 정하고, 카드가 배분되기 전에, 동일한 양을 겁시다." 렌이 말한다.<br><br>
 
-"Of course, you still want the favours, so I still want the clothes. We're just adding a bit of money to the mix. Sound good?" Wren asks.
+"물론, 당신은 계속 부탁을 하고 싶을 테고, 그럼 나도 계속 옷을 원할 거예요. 거기에다 돈을 살짝 추가할 뿐이죠. 마음에 들어요?" 렌은 묻는다.
 <br><br>
 
-<<link [[Accept|Estate Cards Accept Betting]]>><</link>>
+<<link [[받아들인다|Estate Cards Accept Betting]]>><</link>>
 <br>
-<<link [[Refuse|Estate Cards Reject Betting]]>><</link>>
+<<link [[거부한다|Estate Cards Reject Betting]]>><</link>>
 <br>
 
 :: Estate Cards Reject Betting
@@ -228,17 +224,17 @@ The goons look up and down your body, and you don't hear any objections.
 
 <<person1>>
 <<if $speech_attitude is "meek">>
-	"I-I'm sorry," you say. "I d-don't think I can bet money."
+	"죄-죄송해요," 당신이 말한다. "도-돈을 걸지는 못하겠어요."
 	<br><br>
-	"Don't tell me you were expecting literal charity," Wren says with a smile. "Well, I'm fine either way. So, wanna play the usual way then?"
+	"말 그대로 자선을 기대했다는 말은 말아줘요," 렌이 웃으며 말한다. "뭐, 난 어느 쪽이든 괜찮아요. 그럼, 평소처럼 놀까요?"
 <<elseif $speech_attitude is "bratty">>
-	"You're just introducing betting, that's hardly making it any more fair," you say. "No deal."
+	"그냥 도박을 하자는 거잖아요, 그런 걸로 판을 공정하게 만들긴 더 힘들죠." 당신이 말한다. "됐어요."
 	<br><br>
-	"Even though I was so generous to ask my friends to cash in, as well," Wren says, shaking <<his>> head. "Well, your loss, I'm fine either way. So, wanna play the usual way then?"
+	"친구들에게 돈을 달라고 부탁할 정도로, 나는 관대하게 굴어줬는데도 말이죠," 렌이 <<his_ yi>> 고개를 저으며 말한다. "당신 손해죠, 뭐, 난 어느 쪽이든 괜찮아요. 그럼, 평소처럼 놀까요?"
 <<else>>
-	"Sorry, I can't accept your offer, it doesn't seem fair enough," you say.
+	"미안하지만, 그 제안은 받아들일 수 없어요, 충분히 공정한 것 같지 않아서요," 당신이 말한다.
 	<br><br>
-	Wren shrugs. "Even though I was so generous to ask my friends to cash in," Wren says. "Oh well, I'm fine either way. So, wanna play the usual way then?"
+	렌이 으쓱인다. "난 친구들에게 돈을 달라고 부탁할 정도로 관대하게 굴어줬는데도 말이죠," 렌이 말한다. "그렇다면야, 난 어느 쪽이든 괜찮아요. 그럼, 평소처럼 놀까요?"
 <</if>>
 
 <br><br>
@@ -253,15 +249,15 @@ The goons look up and down your body, and you don't hear any objections.
 
 <<person1>>
 <<if $speech_attitude is "meek">>
-	You meekly nod your head.
+	당신은 온순하게 고개를 끄덕인다.
 <<elseif $speech_attitude is "bratty">>
-	"Of course. I expected as much. Fine, whatever, works with me," you say.
+	"물론이죠. 기대했던 만큼이네. 어쨌든, 좋아요, 그거라면 되겠네요," 당신이 말한다.
 <<else>>
-	"Hmm. Okay, sounds fair," you say.
+	"흐음. 좋아요, 공정한 것 같네요," 당신이 말한다.
 <</if>>
 <br><br>
 
-Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
+렌은 미소짓는다. "좋습니다. 그렇게 정해졌고," <<he_ 가>> 말한다. "그럼, 놀아볼까요?"
 
 <br><br>
 <<cards_start_play_options>>
@@ -270,12 +266,12 @@ Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
 :: Estate Cards Suggest Betting Failure
 <<effects>><<set $outside to 0>>
 
-<span class="red">"Nah. No deal,"</span> Wren says. "This isn't a charity."
+<span class="red">"아니, 됐습니다,"</span> 렌이 말한다. "자선사업도 아니고."
 <br><br>
-<i>Perhaps <<he>> would be more willing to consider this if <<he>> had a better opinion of you.</i>
+<i>아마도 <<he_ ga>> 당신에 대해 더 나은 인상을 가지게 된다면 <<he_ ga>> 이것에 대해 더 고려해 볼 것이다.</i>
 <br><br>
 
-"So, wanna play?" Wren asks.
+"그럼, 놀아볼까요?" 렌이 묻는다.
 
 <br><br>
 <<cards_start_play_options>>
@@ -295,21 +291,21 @@ Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
 <</if>>
 <br><br>
 
-"You're a persistent one," Wren says. <<He>> turns to look at <<his>> goons, before turning back to you.
+"당신 정말 끈질긴 사람이군요." 렌이 말한다. <<He_ 는>> 동료들을 돌아보고는, 당신에게로 다시 고개를 돌린다.
 <br><br>
 
 <<if C.npc.Wren.love gte 20>>
-	"You're just gonna keep asking, aren't you?" Wren says.
+	"당신 계속 이렇게 물어볼 생각이죠, 그렇죠?" 렌이 말한다.
 	<br><br>
 
 	<<set $phase to 2>>
-	<<link [[Next|Estate Cards Suggest Betting Success]]>><</link>>
+	<<link [[다음|Estate Cards Suggest Betting Success]]>><</link>>
 <<else>>
-	<span class="red">"You just don't get it, do you? No deal,"</span> Wren says. "As I've said, this isn't a charity."
+	<span class="red">"전혀 이해를 못한 것 같은데, 그렇죠? 됐습니다,"</span> 렌이 말한다. "말했듯이, 자선사업 하는 거 아냐."
 	<br><br>
-	<i>Perhaps <<he>> would be more willing to consider this if <<he>> had a better opinion of you.</i>
+	<i>아마도 <<he_ ga>> 당신에 대해 더 나은 인상을 가지게 된다면 <<he_ ga>> 이것에 대해 더 고려해 볼 것이다.</i>
 	<br><br>
-	"So, wanna play?" Wren asks.
+	"그럼, 놀아볼까요?" 렌이 묻는다.
 	<br><br>
 
 	<<cards_start_play_options>>
@@ -333,7 +329,7 @@ Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
 	"I changed my mind, I'm fine with betting some money as well," you say. "Don't get the wrong idea though, you won't get to see much of it."
 	<br><br>
 
-	Wren chuckles. "Confident, aren't we? Let's see you put your money where your mouth is," Wren says. "Wanna play?"
+	Wren chuckles. "Confident, aren't we? Let's see you put your money where your mouth is," 렌이 말한다. "Wanna play?"
 <<else>>
 	"I thought about it, and I accept your proposition," you say.
 	<br><br>
@@ -359,7 +355,7 @@ Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
 		You climb off Wren, and run for the door before <<he>> can grab you.
 	<</if>>
 <<else>>
-	You turn and run.
+	당신은 뒤돌아 달린다.
 <</if>>
 <<if $athleticsSuccess>>
 	You hear footsteps pursue, but you dash around the outside of the cottage <span class="green">and outpace them.</span> You drop down a ditch to hide.
@@ -369,7 +365,7 @@ Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
 	<<card_pot_confiscated>>
 	<<estate_cards_finish>>
 
-	<<link [[Next|Estate]]>><<endevent>><</link>>
+	<<link [[다음|Estate]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	You hear footsteps pursue. You've barely made it outside when Wren <span class="red">tackles you to the ground.</span> "What should we do with <<phim>>?" <<he>> asks as more arms hold you down.
@@ -395,14 +391,14 @@ Wren smiles. "Alright, it's decided then," <<he>> says. "So, wanna play?"
 	<<card_pot_confiscated>>
 	<<estate_cards_finish>>
 
-	<<link [[Next|Moor]]>><<endevent>><<set $eventskip to 1>><<estate_end>><</link>>
+	<<link [[다음|Moor]]>><<endevent>><<set $eventskip to 1>><<estate_end>><</link>>
 	<br>
 <</if>>
 
 
 :: Estate Cards Cheating Run
 <<effects>>
-You turn and run.
+당신은 뒤돌아 달린다.
 <!-- estate ends 5 and 6 -->
 <<if $athleticsSuccess>>
 	<<if $wren_intro isnot undefined>>
@@ -418,12 +414,12 @@ You turn and run.
 	<<card_pot_confiscated>>
 	<<estate_cards_finish>>
 
-	<<link [[Next|Estate]]>><<endevent>><</link>>
+	<<link [[다음|Estate]]>><<endevent>><</link>>
 	<br>
 <<else>>
-	You hear footsteps pursue. You've barely made it outside when Wren <span class="red">tackles you to the ground.</span>
+	뒤쫓는 발자국 소리가 들린다. 당신이 간신히 빠져나가려 할 때, 렌이 <span class="red">당신을 땅에 쓰러트린다.</span>
 	<br><br>
-	"Got you," Wren says, now on top of you. "Now, stop resisting. You're gonna be in good hands - <<nnpc_he "Remy">> will whip you into shape."
+	"잡았다," 당신 위에 올라탄 채로, 렌이 말한다. "이제 저항은 그만둬요. 당신은 제법 보살핌받을 거예요 - <<nnpc_he_ 가 "Remy">> 채찍질로 건강한 몸을 만들어줄 테지요."
 	<br><br>
 
 	<!-- estate end 6. <<estate_end>> and <<endevent>> called within -->
@@ -433,15 +429,15 @@ You turn and run.
 
 :: Estate Cards Cheating Plead
 <<effects>>
-<!-- <<if $estate.cards.state is "ride">> is omitted because in that state the apologise option isn't given -->
+<!-- <<if $estate.cards.state is "ride">>  is omitted because in that state the apologise option isn't given -->
 
 
 <<if $speech_attitude is "meek">>
-	"I'm sorry for cheating, please forgive me!" you plead.
+	"속여서 정말 죄송해요, 부탁이니 용서해주세요!" 당신은 애원한다.
 <<elseif $speech_attitude is "bratty">>
-	"Well shit, you got me," you say. "Forgive and forget?"
+	"이런 젠장, 인정할게요." 당신이 말한다. "용서해 주고 잊어버리지 않을래요?"
 <<else>>
-	"You got me," you say. "Sorry."
+	"인정할게요," 당신이 말한다. "죄송해요."
 <</if>>
 
 <<set _plead_points to $estate._base_plead_points + random($estate._plead_rng_min, $estate._plead_rng_max)>>
@@ -455,7 +451,7 @@ You turn and run.
 	Wren sighs. "What am I going to do with you?" <<he>> says.<br><br>
 	<span class="green">Your pleas seem to have reached <<him>>.</span>
 	<br><br>
-	"Can't give this one to <span class="pink"><<nnpc_him "Remy">></span>, would cause them too much trouble," Wren says.
+	"Can't give this one to <span class="pink"><<nnpc_him "Remy">></span>, would cause them too much trouble," 렌이 말한다.
 	<br>
 	"What should we do with <<phim>>?" <<he>> asks <<his>> friends, who have completely surrounded you.
 	<br><br>
@@ -477,21 +473,21 @@ You turn and run.
 	<<card_pot_confiscated>>
 	<<estate_cards_finish>>
 
-	<<link [[Next|Moor]]>><<endevent>><<set $eventskip to 1>><<estate_end>><</link>>
+	<<link [[다음|Moor]]>><<endevent>><<set $eventskip to 1>><<estate_end>><</link>>
 	<br>
 <<else>>
 	<<if $estate.prev_apologised>>
 		<br><br>
-		Wren looks at you in disbelief for a second and scoffs.
+		렌은 잠시 믿을 수 없다는 듯이 쳐다보더니 코웃음친다.
 		<br><br>
-		"You're shameless, you know that?" <<he>> says. <span class="red">"That's exactly what you told us last time."</span>
+		"낯짝도 두껍군요. 그거 알아요?" <<he_ ga>> 말한다. <span class="red">"지난번에도 그거랑 똑같은 소리 했잖아요."</span>
 	<<else>>
 		<br><br>
-		<span class="red">"Sorry won't cut it, <<lass>>,"</span> Wren says. "Gotta make sure you learn your lesson."
+		<span class="red">"미안해도 소용없어요, <<lassPost>>,"</span> 렌은 말한다. "가서 확실히 교육받고 오시길."
 	<</if>>
 
 	<br><br>
-	"Now, be a good <<girl>> and don't try anything stupid," <<he>> says with a smile.
+	"자, 허튼짓 할 생각 말고 착한 <<girl_ 이>> 되도록 해요." <<he_ ga>> 웃으며 말한다.
 
 	<br><br>
 	<<blackjackCaughtControls 2>>
@@ -501,28 +497,28 @@ You turn and run.
 <<effects>><<set $outside to 0>>
 
 <<if $speech_attitude is "meek">>
-	"T-this is a misunderstanding, please!" you plead.<br><br>
+	"이건 오해예요, 제발!" 당신은 애원한다.<br><br>
 <<elseif $speech_attitude is "bratty">>
-	"Oh come on, this is bullshit!" you cry out. "You're a cheat yourself. You don't even have any proof!"
+	"아 좀, 헛소리하지 마세요!" 당신은 외친다. "당신 혼자 오해하는 거예요. 증거도 없으면서!"
 <<else>>
-	"I have no idea what you're talking about," you say. "You're making a mistake."
+	"무슨 말인지 모르겠어요." 당신은 말한다. "잘못 보신 것 같은데요."
 <</if>>
 
 <br><br>
-Your words fall on deaf ears. "We both know what you did," Wren says. "Gotta make sure you learn your lesson."
+당신의 말은 무시당한다. "당신이 무슨 짓을 했는지 우리 둘 다 알잖아요," 렌이 말한다. "가서 확실히 교육받고 오시길."
 <br><br>
 
-"Now, be a good <<girl>> and don't try anything stupid," <<he>> says with a smile.
+"자, 허튼짓 할 생각 말고 착한 <<girl_ 이>> 되도록 해요." <<he_ ga>> 웃으며 말한다.
 <br><br>
 <<blackjackCaughtControls 2>>
 
 :: Estate Cards Cheat Surrender
 <<effects>><<set $outside to 0>>
-You stay in place, allowing Wren's goons to surround you.
+당신은 제자리에 서서, 렌의 동료들이 당신을 포위하도록 둔다.
 <br><br>
 <!-- estate end 4 -->
 <<blackjackCaughtCheatingSurrender>>
-<!-- basically same stuff as in run, but less forced -->
+<!--  basically same stuff as in run, but less forced -->
 
 
 :: Estate Cards Intro 2
@@ -533,36 +529,36 @@ You stay in place, allowing Wren's goons to surround you.
 <<set $wrenSeenLast to "cards">>
 <<if $wren_intro is undefined>>
 	<<set $wren_intro to true>>
-	You pull back a chair, and sit at the table. "Nice," the <<if $pronoun is "m">>blond man<<else>>blonde woman<</if>> says. "<span class="gold">The name's Wren.</span> Now, how about we make this interesting?"
+	당신은 의자를 끌어와, 테이블에 앉는다. "좋아요," the <<if $pronoun is "m">>blond man<<else>>blonde woman<</if>> says. "<span class="gold">The name's Wren.</span> Now, how about we make this interesting?"
 	<br><br>
 
 	<<if $speech_attitude is "meek">>
-		"I-If I win," you say, "you have to do me a favour."
+		"마-만약 제가 이기면요," 당신이 말한다. "부탁을 들어주셔야 해요."
 	<<elseif $speech_attitude is "bratty">>
-		"I don't want your money," you say. "If I win, you owe me a favour."
+		"돈은 필요없고," 당신이 말한다. "내가 이기면, 내 부탁을 들어줘요."
 	<<else>>
-		"Instead of money," you say, "if I win, you owe me a favour."
+		"돈 대신에," 당신이 말한다. "내가 이기면, 내 부탁을 들어줘요."
 	<</if>>
 
 	<br><br>
-	Wren laughs. "I like that. And if I win." <<He>> pauses.
+	렌은 웃는다. "좋네요. 그리고 내가 이기면." <<He_ ga>> 뜸들인다.
 	<<estate_cards_bet>>
 <<else>>
-	You pull back a chair, and sit at the table. "Nice," Wren says. "You win, I do you a favour. I win." <<He>> pauses.
+	당신은 의자를 끌어와 테이블에 앉는다. "좋아요," 렌이 말한다. "당신이 이기면, 부탁을 들어드리죠. 내가 이기면." <<He_ 가>> 잠시 멈춘다.
 	<<estate_cards_bet>>
 	<<if $estatePersistent.stakesRaised>>
 		<<if $estate.cards.bettingEnabled>>
 			<br><br>
-			"You can also throw in some extra cash into the mix from your pot. I'll match the bet, and my friends will throw in some extra," Wren says.
+			"You can also throw in some extra cash into the mix from your pot. I'll match the bet, and my friends will throw in some extra," 렌이 말한다.
 		<<else>>
 			<br><br>
-			"We won't be betting this time, it seems," Wren says. "Running low?" Wren asks with a smile.
+			"We won't be betting this time, it seems," 렌이 말한다. "Running low?" Wren asks with a smile.
 		<</if>>
 	<</if>>
 
 	<<if $estatePersistent.newDeckTimer is 0 and $estatePersistent.markedCards.size gt 0>>
 		<br><br>
-		"Oh, and by the way," Wren says. "<span class="blue">We've replaced the deck after our last game.</span> Though I'm sure you would've noticed that," <<he>> says with a smirk.
+		"아, 그리고 말인데," 렌이 말한다. "<span class="blue">카드는 지난번 게임 이후로 새 걸로 교체했어요.</span> 물론 당신도 이미 알아차리고 있을 거라고 생각하지만," <<he_ nun>> 능글맞게 웃는다.
 		<<set $estatePersistent.markedCards to new Set()>>
 		<<set $estatePersistent.newDeckTimer to 3>>
 	<</if>>
@@ -609,38 +605,36 @@ You stay in place, allowing Wren's goons to surround you.
 		<br><br>
 		<<skulduggeryuse>>
 
-		<<link [[Next|Estate Blackjack]]>><</link>>
+		<<link [[다음|Estate Blackjack]]>><</link>>
 	<<else>>
 		<<if $estatePersistent.suspicion lt 100>>
 			<<blackjackSuspicion 10000 "caughtmarkingcardfail">>
 		<</if>>
 		<br><br>
 		<<if $estate.cards.state is "ride">>
-			Suddenly, the dealer approaches Wren and whispers something. Afterwards, you hear Wren <span class="red">chuckling.</span>
-			<br><br>
-
+			별안간, 딜러가 렌에게 다가가 귓속말로 무언가를 전한다. 그러자, 렌이 <span class="red">큭큭 웃는다.</span>
+			<br>
 			<<skulduggeryuse>>
-
+			<br><br>
 			<<He>> reaches <<his>> hand behind <<his>> back and snatches the card from your grasp. <<He>> then shows you the mark you've placed on it.
 			<br>
 		<<else>>
 			When you look back up, you see Wren <span class="red">staring right into your eyes.</span>
-			<br><br>
-
+			<br>
 			<<skulduggeryuse>>
-
+			<br><br>
 			<<He>> takes your card and points to the mark you've just placed. "Good thing I caught you right in the act."
 			<br>
 		<</if>>
 
-		"Ruining our cards, eh? Thought we wouldn't notice?" <<he>> says. "Tsk, tsk. This won't do."
+		"카드를 망가뜨려놓고는, 응? 눈치채지 못할 줄 알았나요?" <<he_ ga>> 말한다. "쯧, 쯧. 그러면 못 쓰지요."
 		<br><br>
 		<<if $speech_attitude is "meek">>
-			"I-I'm sorry, it was an accident!" you say.
+			"미, 미안해요, 실수로 그랬어요!" 당신은 말한다.
 		<<elseif $speech_attitude is "bratty">>
-			"Blame your dealer, I'm not the one who damaged the card," you say.
+			"당신 딜러 탓이겠지. 난 카드에 아무 짓도 안 했다고요." 당신은 말한다.
 		<<else>>
-			"I didn't do anything," you say.
+			"난 아무 짓도 안 했는데요." 당신은 말한다.
 		<</if>>
 		<br><br>
 
@@ -662,70 +656,70 @@ You stay in place, allowing Wren's goons to surround you.
 
 <<switch $estate.cards.daring>>
 <<case 0>>
-	Wren spreads <<his>> hands. "I'm a <<personsimple>> of my word," <<he>> says. "Name your favour."
+	렌은 <<his_ yi>> 양팔을 벌린다. "나는 뱉은 말은 지키는 <<personsimple_ iji>>요." <<he_ ga>> 말한다. "뭐든 말해봐요."
 <<case 1>>
-	Wren runs <<his>> fingers over the table. "Don't be shy," <<he>> says. "Name your favour."
+	Wren runs <<his>> fingers over the table. "빼지 말고," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 2>>
-	Wren stares at your cards longer than needed. "Fine," <<he>> says. "Name your favour."
+	Wren stares at your cards longer than needed. "좋아요," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 3>>
-	Wren glances at the cards again. "So what will it be?" <<he>> asks. "Name your favour."
+	Wren glances at the cards again. "So what will it be?" <<he_ ga>> 묻는다. "원하는 걸 말해봐요."
 <<case 4>>
-	Wren reclines in <<his>> chair. "Another win for you," <<he>> says. "Name your favour."
+	Wren reclines in <<his>> chair. "Another win for you," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 5>>
-	Wren folds <<his>> arms. "Not bad," <<he>> says. "Name your favour."
+	렌은 두 팔로 팔짱을 낀다. "나쁘진 않군," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 6>>
-	Wren leans forward. "Don't hesitate," <<he>> says. "Name your favour."
+	렌은 몸을 앞으로 기울인다. "망설이지 말고," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 7>>
-	Wren grins. "So that's how it is," <<he>> says. "Name your favour."
+	Wren grins. "So that's how it is," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 8>>
-	Wren laughs. "So what will it be this time?" <<he>> asks. "Name your favour."
+	렌은 웃는다. "So what will it be this time?" <<he_ ga>> 묻는다. "원하는 걸 말해봐요."
 <<case 9>>
-	Wren laughs. "I wonder what <<pshe>> has brewing," <<he>> says. "Name your favour."
+	렌은 웃는다. "I wonder what <<pshe>> has brewing," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<case 10>>
-	Wren laughs. "Don't go easy on me," <<he>> says. "Name your favour."
+	렌은 웃는다. "봐줄 생각 말고," <<he_ ga>> 말한다. "원하는 걸 말해봐요."
 <<default>>
-	Wren laughs. "So who do you want dead?" <<he>> asks. "I'm joking, but name your favour."
+	렌은 웃는다. "그래서, 누구를 묻고 싶다고?" <<he_ ga>> 묻는다. "농담이었고, 원하는 걸 말해봐요."
 <</switch>>
 <<ldom>><<npcincr Wren dom -1>>
 <br><br>
 
 <<if $estate.cards.daring is 0>>
-	<i>Despite <<his>> words, you know <<he>> won't be willing to do just anything. Not at first. You'll need to start with easy demands.</i>
+	<i>말은 그렇게 하지만, 당신은 <<he_ ga>> 그냥은 아무것도 하지 않을 것임을 안다. 처음에는 쉬운 요구부터 시작해야 할 것이다.</i>
 	<br><br>
 <</if>>
 
 <<switch $estate.cards.daring>>
 <<case 0>>
-	<span class="red">Wren smirks at you.</span>
+	<span class="red">렌은 당신을 향해 능글맞게 웃는다.</span>
 <<case 1>>
-	<span class="pink">Wren looks cautious.</span>
+	<span class="pink">렌은 주의하는 것 같다.</span>
 <<case 2>>
-	<span class="pink">Wren looks wary.</span>
+	<span class="pink">렌은 조심스러워 보인다.</span>
 <<case 3>>
-	<span class="purple">Wren looks relaxed.</span>
+	<span class="purple">렌은 여유로워 보인다.</span>
 <<case 4>>
-	<span class="purple">Wren looks at ease.</span>
+	<span class="purple">렌은 느긋해 보인다.</span>
 <<case 5>>
-	<span class="blue">Wren looks amused.</span>
+	<span class="blue">렌은 재미있어 보인다.</span>
 <<case 6>>
-	<span class="blue">Wren looks entertained.</span>
+	<span class="blue">렌은 즐거워 보인다.</span>
 <<case 7>>
-	<span class="lblue">Wren looks adventurous.</span>
+	<span class="lblue">렌은 도전적이다.</span>
 <<case 8>>
 	<span class="lblue">Wren looks bold.</span>
 <<case 9>>
-	<span class="teal">Wren looks brave.</span>
+	<span class="teal">렌은 용감해 보인다.</span>
 <<case 10>>
-	<span class="teal">Wren looks audacious.</span>
+	<span class="teal">렌은 거리낄 것이 없다.</span>
 <<default>>
-	<span class="green">Wren is fearless.</span>
+	<span class="green">렌은 두려움을 모른다.</span>
 <</switch>>
 <br><br>
 
-What do you ask?
+무엇을 부탁할까?
 <br><br>
 
-<<link [[Drink a shot of whisky|Estate Cards Whisky]]>><<set $estate.cards.daring += 1>><</link>><<gdaring>>
+<<link [[위스키 한 잔을 마실 것|Estate Cards Whisky]]>><<set $estate.cards.daring += 1>><</link>><<gdaring>>
 <br>
 
 <<set _favoursRemaining to 0>>
@@ -733,10 +727,10 @@ What do you ask?
 <<if $estate.cards.kiss isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 1>>
-		<<link [[Kiss a colleague|Estate Cards Kiss]]>><<set $estate.cards.daring += 2>><<set $estate.cards.kiss to 1>><<arousal 600 "mouth">><</link>><<ggdaring>><<garousal>>
+		<<link [[동료에게 키스할 것|Estate Cards Kiss]]>><<set $estate.cards.daring += 2>><<set $estate.cards.kiss to 1>><<arousal 600 "mouth">><</link>><<ggdaring>><<garousal>>
 		<br>
 	<<else>>
-		<span class="blue">Kiss a colleague: More daring required.</span>
+		<span class="blue">동료에게 키스할 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -744,10 +738,10 @@ What do you ask?
 <<if $estate.cards.steeds isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 3>>
-		<<link [[Agitate the steeds (0:10)|Estate Cards Steeds]]>><<pass 10>><<farm_aggro -5>><<set $estate.cards.steeds to 1>><<set $estate.cards.daring -= 1>><</link>><<laggro>><<ldaring>>
+		<<link [[말들을 자극할 것 (0:10)|Estate Cards Steeds]]>><<pass 10>><<farm_aggro -5>><<set $estate.cards.steeds to 1>><<set $estate.cards.daring -= 1>><</link>><<laggro>><<ldaring>>
 		<br>
 	<<else>>
-		<span class="blue">Agitate the steeds: More daring required.</span>
+		<span class="blue">말들을 자극할 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -755,10 +749,10 @@ What do you ask?
 <<if $estate.cards.rumour isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 3>>
-		<<link [[Spread a rumour (0:10)|Estate Cards Rumour]]>><<pass 10>><<estate_chaos 10>><<set $estate.cards.rumour to 1>><<set $estate.cards.daring -= 1>><</link>><<gchaos>><<ldaring>>
+		<<link [[헛소문을 퍼트릴 것 (0:10)|Estate Cards Rumour]]>><<pass 10>><<estate_chaos 10>><<set $estate.cards.rumour to 1>><<set $estate.cards.daring -= 1>><</link>><<gchaos>><<ldaring>>
 		<br>
 	<<else>>
-		<span class="blue">Spread a rumour: More daring required.</span>
+		<span class="blue">헛소문을 퍼트릴 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -766,10 +760,10 @@ What do you ask?
 <<if $estate.cards.wren_top is 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 3>>
-		<<link [[Strip your top|Estate Cards Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<<link [[상의를 벗을 것|Estate Cards Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<br>
 	<<else>>
-		<span class="blue">Strip your top: More daring required.</span>
+		<span class="blue">상의를 벗을 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -777,10 +771,10 @@ What do you ask?
 <<if $estate.cards.weapons isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 5>>
-		<<link [[Hide Remy's weapons (0:10)|Estate Cards Weapons]]>><<pass 10>><<farm_aggro -5>><<set $estate.cards.weapons to 1>><<set $estate.cards.daring -= 1>><</link>><<laggro>><<ldaring>>
+		<<link [[레미의 무기를 숨길 것 (0:10)|Estate Cards Weapons]]>><<pass 10>><<farm_aggro -5>><<set $estate.cards.weapons to 1>><<set $estate.cards.daring -= 1>><</link>><<laggro>><<ldaring>>
 		<br>
 	<<else>>
-		<span class="blue">Hide Remy's weapons: More daring required.</span>
+		<span class="blue">레미의 무기를 숨길 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -789,16 +783,16 @@ What do you ask?
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 5>>
 		<<if C.npc.Wren.pronoun is "f">>
-			<<link [[Strip your skirt|Estate Cards Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+			<<link [[치마를 벗을 것|Estate Cards Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<<else>>
-			<<link [[Strip your trousers|Estate Cards Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+			<<link [[바지를 벗을 것|Estate Cards Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<</if>>
 		<br>
 	<<else>>
 		<<if C.npc.Wren.pronoun is "f">>
-			<span class="blue">Strip your skirt: More daring required.</span>
+			<span class="blue">치마를 벗을 것: 더 대담해져야 함.</span>
 		<<else>>
-			<span class="blue">Strip your trousers: More daring required.</span>
+			<span class="blue">바지를 벗을 것: 더 대담해져야 함.</span>
 		<</if>>
 		<br>
 	<</if>>
@@ -807,10 +801,10 @@ What do you ask?
 <<if $estate.cards.cars isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 7>>
-		<<link [[Disable Remy's cars (0:10)|Estate Cards Cars]]>><<pass 10>><<farm_aggro -15>><<set $estate.cards.cars to 1>><<set $estate.cards.daring -= 1>><</link>><<llaggro>><<ldaring>>
+		<<link [[레미의 차들을 고장낼 것 (0:10)|Estate Cards Cars]]>><<pass 10>><<farm_aggro -15>><<set $estate.cards.cars to 1>><<set $estate.cards.daring -= 1>><</link>><<llaggro>><<ldaring>>
 		<br>
 	<<else>>
-		<span class="blue">Disable Remy's cars: More daring required.</span>
+		<span class="blue">레미의 차들을 고장낼 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -818,10 +812,10 @@ What do you ask?
 <<if $estate.cards.window isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 7>>
-		<<link [[Smash a mansion window (0:10)|Estate Cards Window]]>><<pass 10>><<estate_chaos 20>><<set $estate.cards.window to 1>><<set $estate.cards.daring -= 1>><</link>><<ggchaos>><<ldaring>>
+		<<link [[건물 유리창을 깰 것 (0:10)|Estate Cards Window]]>><<pass 10>><<estate_chaos 20>><<set $estate.cards.window to 1>><<set $estate.cards.daring -= 1>><</link>><<ggchaos>><<ldaring>>
 		<br>
 	<<else>>
-		<span class="blue">Smash a mansion window: More daring required.</span>
+		<span class="blue">건물 유리창을 깰 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -830,16 +824,16 @@ What do you ask?
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 7>>
 		<<if C.npc.Wren.pronoun is "f">>
-			<<link [[Strip your bra|Estate Cards Under Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+			<<link [[브라를 벗을 것|Estate Cards Under Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<<else>>
-			<<link [[Strip your vest|Estate Cards Under Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+			<<link [[조끼를 벗을 것|Estate Cards Under Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<</if>>
 		<br>
 	<<else>>
 		<<if C.npc.Wren.pronoun is "f">>
-			<span class="blue">Strip your bra: More daring required.</span>
+			<span class="blue">브라를 벗을 것: 더 대담해져야 함.</span>
 		<<else>>
-			<span class="blue">Strip your vest: More daring required.</span>
+			<span class="blue">조끼를 벗을 것: 더 대담해져야 함.</span>
 		<</if>>
 		<br>
 	<</if>>
@@ -848,10 +842,10 @@ What do you ask?
 <<if $estate.cards.cattle isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 9>>
-		<<link [[Free the cattle (0:10)|Estate Cards Cattle]]>><<pass 10>><<estate_chaos 20>><<set $estate.cards.cattle to 1>><<set $estate.cards.daring -= 1>><</link>><<ggchaos>><<ldaring>>
+		<<link [[소들을 풀어줄 것 (0:10)|Estate Cards Cattle]]>><<pass 10>><<estate_chaos 20>><<set $estate.cards.cattle to 1>><<set $estate.cards.daring -= 1>><</link>><<ggchaos>><<ldaring>>
 		<br>
 	<<else>>
-		<span class="blue">Free the cattle: More daring required.</span>
+		<span class="blue">소들을 풀어줄 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -860,16 +854,16 @@ What do you ask?
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 9>>
 		<<if C.npc.Wren.pronoun is "f">>
-			<<link [[Strip your panties|Estate Cards Under Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+			<<link [[팬티를 벗을 것|Estate Cards Under Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<<else>>
-			<<link [[Strip your briefs|Estate Cards Under Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+			<<link [[속옷을 벗을 것|Estate Cards Under Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
 		<</if>>
 		<br>
 	<<else>>
 		<<if C.npc.Wren.pronoun is "f">>
-			<span class="blue">Strip your panties: More daring required.</span>
+			<span class="blue">팬티를 벗을 것: 더 대담해져야 함.</span>
 		<<else>>
-			<span class="blue">Strip your briefs: More daring required.</span>
+			<span class="blue">속옷을 벗을 것: 더 대담해져야 함.</span>
 		<</if>>
 		<br>
 	<</if>>
@@ -878,14 +872,14 @@ What do you ask?
 <<if $estate.cards.fire isnot 1>>
 	<<set _favoursRemaining += 1>>
 	<<if $estate.cards.daring gte 11>>
-		<<link [[Start a fire (0:10)|Estate Cards Fire]]>><<pass 10>><<farm_aggro -30>><<estate_chaos 50>><<set $estate.cards.fire to 1>><</link>><<garousal>><<lllaggro>><<gggchaos>>
+		<<link [[불을 지를 것 (0:10)|Estate Cards Fire]]>><<pass 10>><<farm_aggro -30>><<estate_chaos 50>><<set $estate.cards.fire to 1>><</link>><<garousal>><<lllaggro>><<gggchaos>>
 		<br>
 	<<elseif _favoursRemaining is 1>>
 		<!-- if this is the very last favour remaining, but daring is low - we let the player know about this option,
-			 so that they realise they've mismanaged the daring and need to increase it again so that they can get all favours
+		     so that they realise they've mismanaged the daring and need to increase it again so that they can get all favours
 			 we do not show this option if they haven't gotten all other favours first, though
 		-->
-		<span class="blue">Start a fire: More daring required.</span>
+		<span class="blue">불을 지를 것: 더 대담해져야 함.</span>
 		<br>
 	<</if>>
 <</if>>
@@ -893,19 +887,19 @@ What do you ask?
 
 <!-- we could allow the player to announce victory earlier, too, but it makes sense to require ALL dares to be completed -->
 <!-- we could also ignore the ones where we get Wren to get more daring with no actual benefit for us
-	 since PC doesn't particularly care about Wren's state of undress
-	 however, I figured I'll count them too since Wren being undressed definitely plays a role in them feeling defeated when the PC leaves -->
+     since PC doesn't particularly care about Wren's state of undress
+	 however, I figured I'll count them too since Wren being undressed definitely plays a role in them feeling defeated when the PC leaves  -->
 <<if _favoursRemaining is 0>>
-	<i>You realise there are no more favours you can think of. You could end the game by declaring yourself victorious.</i>
+	<i>당신은 생각할 수 있는 부탁이 이제 더는 없다는 것을 깨닫는다. 승리를 선언함으로써 게임을 끝낼 수 있을 것이다.</i>
 	<<if $estate.cards.confiscatedClothes and $estate.cards.confiscatedClothes.length gt 0>>
 		<br>
 		<span class="gold">Wren might feel defeated enough to consider returning you your clothes.</span>
 	<</if>>
 	<br>
-	<<link [[Declare your victory|Estate Cards Player Victory]]>><<npcincr Wren dom -5>><</link>><<lldom>>
+	<<link [[승리를 선언한다|Estate Cards Player Victory]]>><<npcincr Wren dom -5>><</link>><<lldom>>
 	<br>
 <<else>>
-	<span class="blue">Declare your victory: Request all other favours first.</span>
+	<span class="blue">승리를 선언한다: 먼저 다른 모든 부탁을 하자.</span>
 <</if>>
 
 
@@ -914,11 +908,11 @@ What do you ask?
 
 <<person1>>
 <<if $speech_attitude is "meek">>
-	"I-I've asked for every favour I had thought of already," you say.
+	"제-제가 생각했던 건 이제 모두 부탁드린 것 같아요." 당신이 말한다.
 <<elseif $speech_attitude is "bratty">>
-	"I've gotten everything I wanted from you," you say with a smirk. "I've milked you dry. The game is over."
+	"이제 원하는 건 전부 얻었어요." 당신은 씩 웃는다. "끝까지 쫙 짜내드렸다고요. 게임 끝났어요."
 <<else>>
-	"I have no more favours to ask. Does this mean the game is over?" you say.
+	"이제 부탁할 게 없는데요. 이건 게임이 끝났다는 뜻인가요?" 당신이 말한다.
 <</if>>
 
 <br><br>
@@ -933,36 +927,32 @@ Wren raises <<his>> eyebrows in surprise. It looks like your comment has caught 
 	<span class="gold">Normally, Wren would be feeling too confident to even consider returning your clothing, but this might be your chance.</span>
 	<br><br>
 
-	<<link [[Say you want your clothing back|Estate Cards Rebuy Clothing]]>><</link>>
+	<<link [[옷을 돌려달라고 말한다|Estate Cards Rebuy Clothing]]>><</link>>
 	<br>
-	<<link [[Leave your clothing behind|Estate Cards Player Victory Leave]]>><</link>>
+	<<link [[옷을 두고 떠난다|Estate Cards Player Victory Leave]]>><</link>>
 <<else>>
-	<<link [[Leave|Estate Cards Player Victory Leave]]>><</link>>
+	<<link [[떠난다|Estate Cards Player Victory Leave]]>><</link>>
 <</if>>
 <br>
 
 :: Estate Cards Player Victory Leave
 <<effects>>
 
-"Is that so?" Wren says. The surprise on <<his>> face has faded, replaced by <<his>> usual, relaxed smile.
+"그런가요?" 렌이 말한다. <<his_ yi>> 얼굴에서 놀라움이 가시고, <<his_ nun>> 다시 언제나와 같은, 여유로운 웃음을 띄운다.
 <br><br>
 
 "Well, don't let us stop you," <<he>> says. "When you want to play again, you know where to find us."
 <br><br>
 
-<<if $estate.cards.confiscatedClothes and $estate.cards.confiscatedClothes.length gt 0>>
-	You walk outside, leaving your confiscated clothing behind.
-<<else>>
-	You walk outside.
-<</if>>
+당신은 압수당한 옷을 뒤로 하고, 바깥으로 걸어나온다.
 <<if $exposed gte 2>>
-	A breeze makes you shiver.
+	산들바람이 당신을 떨게 한다.
 <</if>>
 
 <<estate_cards_finish>>
 <br><br>
 
-<<link [[Next|Estate]]>><<endevent>><</link>>
+<<link [[다음|Estate]]>><<endevent>><</link>>
 
 
 :: Estate Cards Rebuy Clothing
@@ -998,7 +988,7 @@ Before <<he>> can say anything, you continue.
 <<His>> face lights up, and you can see a devious glint form in <<his>> eyes. After a moment of deliberation, <<he>> looks back at you.
 <br><br>
 
-<<link [[Next|Estate Cards Rebuy Clothing 2]]>><</link>>
+<<link [[다음|Estate Cards Rebuy Clothing 2]]>><</link>>
 
 
 :: Estate Cards Rebuy Clothing 2
@@ -1009,22 +999,22 @@ Before <<he>> can say anything, you continue.
 
 <<if $estate.cards.clothesRebuyTerms.price gt 0>>
 	<<set _s2 to $estate.cards.confiscatedClothes.length gt 1 ? "it all" : "it">>
-	"Sure, I can give our _s1 back to you, for the low price of <<printmoney $estate.cards.clothesRebuyTerms.price>>," Wren says. "That's much less than it'd cost to rebuy _s2, so I'm being generous here."
+	"Sure, I can give our _s1 back to you, for the low price of <<printmoney $estate.cards.clothesRebuyTerms.price>>," 렌이 말한다. "That's much less than it'd cost to rebuy _s2, so I'm being generous here."
 	<br><br>
 
-	"A great offer like that needs to be earned, though," Wren says. "I think my friends here deserve some fun."
+	"A great offer like that needs to be earned, though," 렌이 말한다. "I think my friends here deserve some fun."
 	<br><br>
 
-	"Satisfy them with your mouth," <<he>> continues, "and I'll cut you that sweet deal."
+	"Satisfy them with your mouth," <<he>> continues. "And I'll cut you that sweet deal."
 	<br><br>
 <<else>>
-	"Sure, I can give our _s1 back to you," Wren says. "Tell you what, I don't even want your money for it."
+	"Sure, I can give our _s1 back to you," 렌이 말한다. "Tell you what, I don't even want your money for it."
 	<br><br>
 
-	"A gift like that needs to be earned, though," Wren says. "I think my friends here deserve some fun."
+	"A gift like that needs to be earned, though," 렌이 말한다. "I think my friends here deserve some fun."
 	<br><br>
 
-	"Satisfy them with your mouth," <<he>> continues, "and you can have it back."
+	"Satisfy them with your mouth," <<he>> continues. "And you can have it back."
 	<br><br>
 <</if>>
 
@@ -1045,27 +1035,24 @@ Before <<he>> can say anything, you continue.
 <<case "over_upper">>
 	<<set _cards_desire to "strip">>
 	<<cards_strip_text>>
+	<br><br>
 
 	<<if $worn.over_upper.set is $worn.over_lower.set>>
 		<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
 			<<if $worn.under_upper.type.includes("naked") and $worn.under_upper.type.includes("naked")>>
-				<br><br>
 				<<set $estate.cards.exposure to 5>>
 				<span class="pink">They don't know you're naked beneath.</span>
-			<<elseif $worn.under_upper.type.includes("naked") and ($player.sex is "f" or $player.gender_appearance is "f")>>
-				<br><br>
+			<<elseif $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
 				<<set $estate.cards.exposure to 4>>
 				<span class="purple">They don't know you're topless beneath.</span>
 			<<elseif $worn.under_lower.type.includes("naked")>>
-				<br><br>
 				<<set $estate.cards.exposure to 5>>
 				<span class="pink">They don't know you're bottomless beneath.</span>
 			<<else>>
 
 			<</if>>
 		<<elseif $worn.upper.type.includes("naked")>>
-			<br><br>
-			<<if $worn.under_upper.type.includes("naked") and ($player.sex is "f" or $player.gender_appearance is "f")>>
+			<<if $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
 				<<set $estate.cards.exposure to 4>>
 				<span class="purple">They don't know you're topless beneath.</span>
 			<<else>>
@@ -1073,7 +1060,6 @@ Before <<he>> can say anything, you continue.
 				<span class="blue">They don't know you're only wearing underwear beneath.</span>
 			<</if>>
 		<<elseif $worn.lower.type.includes("naked")>>
-			<br><br>
 			<<if $worn.under_lower.type.includes("naked")>>
 				<<set $estate.cards.exposure to 5>>
 				<span class="pink">They don't know you're bottomless beneath.</span>
@@ -1086,11 +1072,10 @@ Before <<he>> can say anything, you continue.
 		<</if>>
 	<<else>>
 		<<if $worn.upper.type.includes("naked")>>
-			<br><br>
-			<<if $worn.under_upper.type.includes("naked") and ($player.sex is "f" or $player.gender_appearance is "f")>>
+			<<if $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
 				<<set $estate.cards.exposure to 4>>
 				<span class="purple">They don't know you're topless beneath.</span>
-			<<elseif $player.sex is "f" or $player.gender_appearance is "f">>
+			<<elseif $player.gender is "f" or $player.gender_appearance is "f">>
 				<<set $estate.cards.exposure to 3>>
 				<span class="blue">They don't know you're only wearing underwear beneath.</span>
 			<</if>>
@@ -1101,8 +1086,8 @@ Before <<he>> can say anything, you continue.
 <<case "over_lower">>
 	<<set _cards_desire to "strip">>
 	<<cards_strip_text>>
+	<br><br>
 	<<if $worn.lower.type.includes("naked")>>
-		<br><br>
 		<<if $worn.under_lower.type.includes("naked")>>
 			<<set $estate.cards.exposure to 5>>
 			<span class="pink">They don't know you're bottomless beneath.</span>
@@ -1116,25 +1101,22 @@ Before <<he>> can say anything, you continue.
 <<case "upper">>
 	<<set _cards_desire to "strip">>
 	<<cards_strip_text>>
+	<br><br>
 	<<if $worn.upper.set is $worn.lower.set>>
 		<<if $worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
-			<br><br>
 			<<set $estate.cards.exposure to 5>>
 			<span class="pink">They don't know you're naked beneath.</span>
-		<<elseif $worn.under_upper.type.includes("naked") and ($player.sex is "f" and $player.gender_appearance is "f")>>
-			<br><br>
+		<<elseif $worn.under_upper.type.includes("naked") and ($player.gender is "f" and $player.gender_appearance is "f")>>
 			<<set $estate.cards.exposure to 4>>
 			<span class="purple">They don't know you're topless beneath.</span>
 		<<elseif $worn.under_lower.type.includes("naked")>>
-			<br><br>
 			<<set $estate.cards.exposure to 5>>
 			<span class="pink">They don't know you're bottomless beneath.</span>
 		<<else>>
 
 		<</if>>
 	<<else>>
-		<<if $worn.under_upper.type.includes("naked") and ($player.gender_appearance is "f" or $player.sex is "f")>>
-			<br><br>
+		<<if $worn.under_upper.type.includes("naked") and ($player.gender_appearance is "f" or $player.gender is "f")>>
 			<<set $estate.cards.exposure to 4>>
 			<span class="purple">They don't know you're topless beneath.</span>
 		<<else>>
@@ -1144,8 +1126,8 @@ Before <<he>> can say anything, you continue.
 <<case "lower">>
 	<<set _cards_desire to "strip">>
 	<<cards_strip_text>>
+	<br><br>
 	<<if $worn.under_lower.type.includes("naked")>>
-		<br><br>
 		<<set $estate.cards.exposure to 5>>
 		<span class="pink">They don't know you're wearing nothing beneath.</span>
 	<<else>>
@@ -1194,9 +1176,9 @@ Before <<he>> can say anything, you continue.
 		<<set _rng to random(1, 3)>>
 		<<switch _rng>>
 		<<case 1>>
-			Wren pinches your nipples, and tugs your <<breasts>>. "You're a good size," <<he>> says. "I'd bet you get stared at often."
+			Wren pinches your nipples, and tugs your <<breasts>>. "좋은 크기네요," <<he>> says. "남들 눈에 자주 띄겠군요."
 		<<case 2>>
-			Wren rests <<his>> fingertips on your <<breasts>>, and strokes them. "Are they sensitive?" <<he>> asks. "Can you cum from this teasing alone?" <<He>> flicks your nipple.
+			Wren rests <<his>> fingertips on your <<breasts>>, and strokes them. "여기 민감한가요?" <<he_ ga>> 묻는다. "여기만 괴롭히는 걸로도 갈 수 있어요?" <<He>> flicks your nipple.
 		<<default>>
 			Wren grasps your <<breasts>> in <<his>> palms. "You should be proud of these milkers," <<he>> says, squeezing them and pinching your nipples between <<his>> fingers. "Don't let the boss see them. <<nnpc_He "Remy">> won't let you leave the estate."
 		<</switch>>
@@ -1204,21 +1186,21 @@ Before <<he>> can say anything, you continue.
 		<<set _rng to random(1, 3)>>
 		<<switch _rng>>
 		<<case 1>>
-			Wren rests <<his>> fingers on your <<nipples>>, and rubs. "Such cute buds," <<he>> says, giving them a flick. "I'd bet I can make you cum with this alone."
+			Wren rests <<his>> fingers on your <<nipples>>, and rubs. "젖꼭지 귀여워라," <<he>> says, giving them a flick. "이것만으로도 당신을 보내버릴 수 있을 것 같군요."
 		<<case 2>>
 			Wren grasps your chest, and rubs <<his>> thumbs over your <<nipples>>. "You like this, don't you," <<he>> says. "Are you losing on purpose?"
 		<<default>>
-			Wren grasps your <<nipples>> between thumb and forefinger, and gives them a little squeeze. "How long can you resist, I wonder?" <<he>> says.
+			Wren grasps your <<nipples>> between thumb and forefinger, and gives them a little squeeze. "얼마나 버틸 수 있을까, 궁금해지는걸요?" <<he>> says.
 		<</switch>>
 	<<else>>
 		<<set _rng to random(1, 3)>>
 		<<switch _rng>>
 		<<case 1>>
-			Wren pinches your nipples, and tugs your <<breasts>>. "You're enjoying this," <<he>> says. "I can see it on your face."
+			Wren pinches your nipples, and tugs your <<breasts>>. "지금 즐기고 있나 보네요," <<he>> says. "얼굴에 다 보여요."
 		<<case 2>>
-			Wren rests <<his>> fingertips on your <<breasts>>, and strokes them. "Are they sensitive?" <<he>> asks. "Can you cum from this teasing alone?" <<He>> flicks your nipple.
+			Wren rests <<his>> fingertips on your <<breasts>>, and strokes them. "여기 민감한가요?" <<he_ ga>> 묻는다. "여기만 괴롭히는 걸로도 갈 수 있어요?" <<He>> flicks your nipple.
 		<<default>>
-			Wren pushes <<his>> palms against your <<breasts>>, and massages them. "Are you losing on purpose?" <<he>> asks. "I wouldn't complain."
+			Wren pushes <<his>> palms against your <<breasts>>, and massages them. "Are you losing on purpose?" <<he_ ga>> 묻는다. "I wouldn't complain."
 		<</switch>>
 	<</if>>
 <<case "bottom_grope">>
@@ -1239,7 +1221,7 @@ Before <<he>> can say anything, you continue.
 		<<case 1>>
 			Wren grasps your <<bottom>>, and squeezes. "Bet you can cum from having your ass toyed with alone," <<he>> says as <<he>> massages your cheeks. "Such a slut."
 		<<case 2>>
-			Wren plants <<his>> hands on your <<bottom>>, and squeezes. "A good size," <<he>> says, giving you a small spank. "Not too soft either."
+			Wren plants <<his>> hands on your <<bottom>>, and squeezes. "좋은 크기네요," <<he>> says, giving you a small spank. "너무 말랑하지도 않고."
 		<<default>>
 			Wren spanks your <<bottom>>. "Do you like having your ass bullied like this?" <<he>> asks, spanking you again. "I bet you do."
 		<</switch>>
@@ -1261,9 +1243,9 @@ Before <<he>> can say anything, you continue.
 	<<case 1>>
 		Wren runs a finger over your <<pussy>>. "This is taking a lot of self-control, you know," Wren says as <<he>> fondles you. "Having such a cute <<girl>> <<if $estate.cards.position is "pc_lap" or $estate.cards.position is "penile">>beneath me<<else>>on my lap<</if>>. A lesser <<personsimple>> would have ravaged you already."
 	<<case 2>>
-		You feel Wren's eyes on your <<pussy>> as <<his>> finger teases your entrance. "I'll be inside you soon," <<he>> says as <<he>> strokes. "Just you wait."
+		You feel Wren's eyes on your <<pussy>> as <<his>> finger teases your entrance. "이제 곧 안에 집어넣어 줄게요," <<he>> says as <<he>> strokes. "그냥 기다리기만 해요."
 	<<default>>
-		Wren presses a finger against your <<clit>>. "You want to lose," Wren says as <<he>> strokes. "Don't deny it. You want to be bent over that table."
+		Wren presses a finger against your <<clit>>. "당신 사실은 지고 싶죠," Wren says as <<he>> strokes. "부정하지 말아요. 테이블 위에 엎드려지고 싶겠죠."
 	<</switch>>
 <<case "penis_grope">>
 	<<set _cards_desire to "ride">>
@@ -1275,7 +1257,7 @@ Before <<he>> can say anything, you continue.
 		<<case 2>>
 			Wren stares at your <<penis>>, a rapt expression on <<his>> face, as <<his>> fingers wrap around it. "Can't believe the size," <<he>> says. "Will it even fit?"
 		<<default>>
-			Wren holds your <<penis>> in <<his>> hand while rubbing <<his>> crotch against your length. "Not sure if such a monster will fit," Wren says. "But I have to try."
+			Wren holds your <<penis>> in <<his>> hand while rubbing <<his>> crotch against your length. "Not sure if such a monster will fit," 렌이 말한다. "But I have to try."
 		<</switch>>
 	<<elseif $player.penissize gte 3>>
 		<<set _rng to random(1, 3)>>
@@ -1293,9 +1275,9 @@ Before <<he>> can say anything, you continue.
 		<<case 1>>
 			Wren strokes the head of your <<penis>>. "This is taking a lot of self-control, you know," Wren says as <<he>> fondles you. "Sitting on such a cute <<girl>>'s lap. A lesser <<personsimple>> would have ravaged you already."
 		<<case 2>>
-			Wren stares at your <<penis>> as <<his>> fingers wrap around it. "You want to lose," <<he>> says, stroking your length. "You can't resist."
+			Wren stares at your <<penis>> as <<his>> fingers wrap around it. "당신 사실은 지고 싶죠," <<he>> says, stroking your length. "You can't resist."
 		<<default>>
-			Wren holds your <<penis>> in <<his>> hand while rubbing <<his>> crotch against your length. "It'll be inside me soon," <<he>> says. "Just you wait."
+			Wren holds your <<penis>> in <<his>> hand while rubbing <<his>> crotch against your length. "이게 곧 내 안에 들어갈 거예요," <<he>> says. "그냥 기다리기만 해요."
 		<</switch>>
 	<<else>>
 		<<set _rng to random(1, 3)>>
@@ -1305,7 +1287,7 @@ Before <<he>> can say anything, you continue.
 		<<case 2>>
 			Wren stares at your <<penis>> as <<he>> takes it between thumb and forefinger. "It's so cute," <<he>> says, stroking your length. "You're about to spurt all over me, aren't you?"
 		<<default>>
-			Wren holds a finger against your <<penis>> while grinding <<his>> crotch against it. "You want to lose," <<he>> says with a smirk. "Don't deny it."
+			Wren holds a finger against your <<penis>> while grinding <<his>> crotch against it. "당신 사실은 지고 싶죠," <<he>> says with a smirk. "부정하지 말아요."
 		<</switch>>
 	<</if>>
 <<case "kiss">>
@@ -1316,7 +1298,7 @@ Before <<he>> can say anything, you continue.
 		<<He>> wraps <<his>> arms around your neck, and pulls you closer.
 	<</if>>
 <<case "wren_lap">>
-	"Get your ass over here."
+	"엉덩이 이리 대요."
 	<br><br>
 
 	<span class="pink"><<His>> friends watch, hoping to get a better look as you walk across the room.</span>
@@ -1329,12 +1311,12 @@ Before <<he>> can say anything, you continue.
 	<<He>> rises from <<his>> seat, and walks around the table.
 
 <<case "vaginal">>
-	"Get your ass over here."
+	"엉덩이 이리 대요."
 	<br><br>
 
 	<span class="pink"><<His>> friends watch, hoping to get a better look as you walk across the room.</span>
 <<case "anal">>
-	"Get your ass over here."
+	"엉덩이 이리 대요."
 	<br><br>
 
 	<span class="pink"><<His>> friends watch, hoping to get a better look as you walk across the room.</span>
@@ -1366,10 +1348,10 @@ Before <<he>> can say anything, you continue.
 
 	<</if>>
 <<elseif _cards_desire is "still">>
-	<<link [[Stay still|Estate Cards Strip]]>><<set $phase to 0>><<stress 6>><<npcincr Wren love 1>><</link>><<gstress>><<glove>>
+	<<link [[가만히 있는다|Estate Cards Strip]]>><<set $phase to 0>><<stress 6>><<npcincr Wren love 1>><</link>><<gstress>><<glove>>
 	<br>
 	<<if hasSexStat("promiscuity", 2)>>
-		<<link [[Flirt|Estate Cards Strip]]>><<set $phase to 1>><<npcincr Wren love 1>><<set $estate.cards.degree to "promiscuity2">><</link>><<promiscuous2>>
+		<<link [[추파를 던진다|Estate Cards Strip]]>><<set $phase to 1>><<npcincr Wren love 1>><<set $estate.cards.degree to "promiscuity2">><</link>><<promiscuous2>>
 		<br>
 	<</if>>
 <<elseif _cards_desire is "ride">>
@@ -1384,7 +1366,7 @@ Before <<he>> can say anything, you continue.
 	<<link [[Do as asked|Estate Cards Strip]]>><<set $phase to 0>><<stress 6>><<npcincr Wren love 1>><</link>><<gstress>><<glove>>
 	<br>
 	<<if hasSexStat("exhibitionism", 5)>>
-		<<link [[Flaunt|Estate Cards Strip]]>><<set $phase to 1>><<npcincr Wren love 1>><<set $estate.cards.degree to "exhibitionism5">><</link>><<exhibitionist5>><<glove>>
+		<<link [[과시한다|Estate Cards Strip]]>><<set $phase to 1>><<npcincr Wren love 1>><<set $estate.cards.degree to "exhibitionism5">><</link>><<exhibitionist5>><<glove>>
 		<br>
 	<</if>>
 <</if>>
@@ -1419,7 +1401,7 @@ Before <<he>> can say anything, you continue.
 				<<cards_naked_cover>>
 				Wren just smiles, taking in the sight.
 				<br><br>
-			<<elseif $worn.under_upper.type.includes("naked") and ($player.sex is "f" or $player.gender_appearance is "f")>>
+			<<elseif $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
 				<span class="purple">revealing your <<breasts>>.</span> Someone laughs. "You really are a naughty <<girl>>," Wren laughs.
 				<br><br>
 
@@ -1436,8 +1418,8 @@ Before <<he>> can say anything, you continue.
 				<<cards_underwear_cover>>
 			<</if>>
 		<<elseif $worn.upper.type.includes("naked") and !$worn.lower.type.includes("covered")>>
-			pull off your $worn.over_upper.name,
-			<<if $worn.under_upper.type.includes("naked") and ($player.sex is "f" or $player.gender_appearance is "f")>>
+			pull off your $worn.over_upper,
+			<<if $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
 				<<set $estate.cards.exposure to 4>>
 				<span class="purple">revealing your <<breasts>>.</span> "I knew it," a <<person2>><<person>> says. "The slut's half stripped already."
 				<br><br>
@@ -1464,7 +1446,7 @@ Before <<he>> can say anything, you continue.
 				<<cards_bottom_cover>>
 			<<else>>
 				<<set $estate.cards.exposure to 3>>
-				<span class="blue">revealing your underwear.</span> The room laughs in surprise. "Don't lie," Wren says. "You wanted to strip."
+				<span class="blue">revealing your underwear.</span> The room laughs in surprise. "시치미 떼지 말아요," 렌이 말한다. "벗고 싶었으면서."
 				<br><br>
 
 				<<cards_underwear_cover>>
@@ -1478,15 +1460,15 @@ Before <<he>> can say anything, you continue.
 	<<else>>
 		remove your $worn.over_upper.name,
 		<<if $worn.upper.type.includes("naked")>>
-			<<if $worn.under_upper.type.includes("naked") and ($player.sex is "f" or $player.gender_appearance is "f")>>
+			<<if $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
 				<<set $estate.cards.exposure to 4>>
 				<span class="purple">revealing your <<breasts>>.</span> A cheer erupts as they see you're already topless. Wren leers at you.
 				<br><br>
 
 				<<cards_top_cover>>
-			<<elseif $player.sex is "f" or $player.gender_appearance is "f">>
+			<<elseif $player.gender is "f" or $player.gender_appearance is "f">>
 				<<set $estate.cards.exposure to 3>>
-				<span class="blue">revealing your $worn.under_upper.name.</span> "Not wearing much," Wren says. "Are we? I won't complain."
+				<span class="blue">revealing your $worn.under_upper.name.</span> "Not wearing much," 렌이 말한다. "Are we? I won't complain."
 				<br><br>
 
 				<<cards_underwear_cover>>
@@ -1536,7 +1518,7 @@ Before <<he>> can say anything, you continue.
 			<br><br>
 
 			<<cards_naked_cover>>
-		<<elseif $worn.under_upper.type.includes("naked") and ($player.sex is "f" and $player.gender_appearance is "f")>>
+		<<elseif $worn.under_upper.type.includes("naked") and ($player.gender is "f" and $player.gender_appearance is "f")>>
 			<<set $estate.cards.exposure to 4>>
 			<span class="purple">revealing your <<breasts>>.</span> The room cheers. Wren leans forward for a closer look. "I knew you weren't a bra wearer," <<he>> says.
 			<br><br>
@@ -1557,7 +1539,7 @@ Before <<he>> can say anything, you continue.
 		<<card_clothes_lost "upper">><<card_clothes_lost "lower">>
 	<<else>>
 		pull off your $worn.upper.name,
-		<<if $worn.under_upper.type.includes("naked") and ($player.gender_appearance is "f" or $player.sex is "f")>>
+		<<if $worn.under_upper.type.includes("naked") and ($player.gender_appearance is "f" or $player.gender is "f")>>
 			<<set $estate.cards.exposure to 4>>
 			<span class="purple">revealing your <<breasts>>.</span> The room cheers. "No bra?" Wren muses. "Should have guessed."
 			<br><br>
@@ -1669,7 +1651,7 @@ Before <<he>> can say anything, you continue.
 	<<if $phase is 1>>
 		<<flaunting>> you turn and climb onto your chair. You stick your <<bottom>> out, and wiggle. You know they can see your <<genitals 1>> from this angle.
 	<<else>>
-		You turn and climb onto the chair. You feel self-conscious as you stick out your <<bottom>>. You keep your thighs closed tight, but you suspect they can see your <<genitals 1>> from this angle.
+		You turn and climb onto the chair. You feel self conscious as you stick out your <<bottom>>. You keep your thighs closed tight, but you suspect they can see your <<genitals 1>> from this angle.
 	<</if>>
 	The room gathers around Wren for a better look.
 <<case "chest_grope">>
@@ -1713,7 +1695,7 @@ Before <<he>> can say anything, you continue.
 	"This way we can't see each other's cards."
 	<br><br>
 
-	"We'll keep playing," <<he>> continues. "<span class="blue">Until you cum.</span> How's that?"
+	"We'll keep playing," <<he>> continues. <span class="blue">"당신이 가버릴 때까지.</span> 어때요?"
 <<case "penile">>
 	<<set $estate.cards.position to $estate.cards.desire>>
 	<<set $estate.cards.state to "ride">>
@@ -1721,7 +1703,7 @@ Before <<he>> can say anything, you continue.
 		<<if $speech_attitude is "meek">>
 			"B-be gentle," you say.
 		<<elseif $speech_attitude is "bratty">>
-			"I haven't got all day," you say. "Get your ass over here."
+			"I haven't got all day," you say. "엉덩이 이리 대요."
 		<<else>>
 			"Always happy to let a cute <<nnpc_gendery "Wren">> do all the work," you say.
 		<</if>>
@@ -1747,7 +1729,7 @@ Before <<he>> can say anything, you continue.
 	<</if>>
 	<br><br>
 
-	"We'll keep playing," <<he>> continues. "<span class="blue">Until you cum.</span> How's that?"
+	"We'll keep playing," <<he>> continues. <span class="blue">"Until you cum.</span> How's that?"
 <<case "vaginal">>
 	<<set $estate.cards.position to $estate.cards.desire>>
 	<<set $estate.cards.state to "ride">>
@@ -1762,7 +1744,7 @@ Before <<he>> can say anything, you continue.
 	<<cards_lap_clothes_intro>>
 	<br><br>
 
-	"Don't worry," <<he>> says. "I won't just take you. <span class="purple">I'm gonna make you cum first.</span> <span class="pink">Then your pussy's mine.</span>"
+	"Don't worry," <<he>> says. "I won't just take you. <span class="purple">I'm gonna make you cum first.</span> <span class="pink">Then your pussy's mine."</span>
 <<case "anal">>
 	<<set $estate.cards.position to $estate.cards.desire>>
 	<<set $estate.cards.state to "ride">>
@@ -1777,7 +1759,7 @@ Before <<he>> can say anything, you continue.
 	<<cards_lap_clothes_intro>>
 	<br><br>
 
-	"Don't worry," <<he>> says. "I won't just take you. <span class="purple">I'm gonna make you cum first.</span> <span class="pink">Then your ass is mine.</span>"
+	"걱정 말아요," <<he>> says. "그냥은 당신을 가지지 않을 테니까. <span class="purple">우선은 당신을 보내버리고.</span> <span class="pink">Then your ass is mine."</span>
 
 <</switch>>
 
@@ -1832,14 +1814,14 @@ Before <<he>> can say anything, you continue.
 	<<earnFeat "Playing with Fire">>
 	<br><br>
 
-	<<link [[Next|Estate Cards Orgasm]]>><</link>>
+	<<link [[다음|Estate Cards Orgasm]]>><</link>>
 	<br>
 <<elseif _cards_orgasm is true>>
 	<<if $estate.cards.position isnot "wren_lap">>
-		<<link [[Next|Estate Cards Sex]]>><</link>>
+		<<link [[다음|Estate Cards Sex]]>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Estate Cards Sex Safe]]>><</link>>
+		<<link [[다음|Estate Cards Sex Safe]]>><</link>>
 		<br>
 	<</if>>
 
@@ -1849,7 +1831,7 @@ Before <<he>> can say anything, you continue.
 		<<case "penile">>
 			<<He>> throws <<his>> arms around your neck and cries out as <<his>> body spasms in orgasm.
 		<<case "vaginal">>
-			<<bodyliquid "tummy" "semen">>
+			 <<bodyliquid "tummy" "semen">>
 			<<He>> grasps your hips and thrusts as <<he>> ejaculates on your tummy.
 		<<case "anal">>
 			<<bodyliquid "bottom" "semen">>
@@ -1861,97 +1843,97 @@ Before <<he>> can say anything, you continue.
 	<</switch>>
 	<<earnFeat "Playing with Fire">>
 	<br><br>
-	<<link [[Next|Estate Cards Orgasm]]>><</link>>
+	<<link [[다음|Estate Cards Orgasm]]>><</link>>
 	<br>
 <<else>>
 	<<rng>>
 	<<if $worn.over_lower.name isnot "naked">>
 		<<if $rng gte 81>>
-			"I know what I want next," Wren says.
+			"I know what I want next," 렌이 말한다.
 		<<elseif $rng gte 61>>
-			"You've more to lose, <<girl>>," Wren says.
+			"You've more to lose, <<girl>>," 렌이 말한다.
 		<<elseif $rng gte 41>>
 			"How far do you think <<pshe>> will go?" Wren asks the room.
 		<<elseif $rng gte 21>>
-			"Not done yet," Wren says.
+			"안 끝났어요." 렌이 말한다.
 		<<else>>
-			"We're just getting started," Wren says.
+			"이제 막 시작한 거예요," 렌이 말한다.
 		<</if>>
 	<<elseif $worn.upper.name isnot "naked">>
 		<<if $rng gte 81>>
-			"I'll have you naked soon," Wren says.
+			"곧 발가벗게 해 드리죠," 렌이 말한다.
 		<<elseif $rng gte 61>>
 			"Anyone else wondering what <<pshe>> has going on under there?" Wren asks.
 		<<elseif $rng gte 41>>
 			<<if $player.gender_appearance is "m">>
-				"I wonder if you're wearing anything under there," Wren says.
+				"I wonder if you're wearing anything under there," 렌이 말한다.
 			<<else>>
-				"Hope you're wearing a bra," Wren says.
+				"브라 입었길 바랍니다," 렌이 말한다.
 			<</if>>
 		<<elseif $rng gte 21>>
-			"I love the anticipation," Wren says.
+			"느낌이 좋은데요," 렌이 말한다.
 		<<else>>
 			<<if $player.perceived_breastsize gte 7>>
-				"Think <<pher>> breasts are as big as they look?" Wren laughs. <<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+				"<<pher_ yi>> 가슴이 보이는 것만큼 클 것 같아?" 렌이 웃는다.
 			<<else>>
-				"I bet you look good without a top on." Wren smirks.
+				"윗옷이 없어도 분명 보기 좋을걸요," 렌이 능글맞게 웃는다.
 			<</if>>
 		<</if>>
 	<<elseif $worn.lower.name isnot "naked">>
 		<<if $rng gte 81>>
-			"I know what I want next," Wren says.
+			"I know what I want next," 렌이 말한다.
 		<<elseif $rng gte 61>>
 			"How far do you think <<pshe>> will go?" Wren asks the room.
 		<<elseif $rng gte 41>>
 			<<if $player.gender_appearance is "m">>
-				"Are you wearing boxers or briefs? I'm about to find out," Wren says.
+				"Are you wearing boxers or briefs? I'm about to find out," 렌이 말한다.
 			<<else>>
-				"Are you wearing panties? I'm about to find out," Wren says.
+				"Are you wearing panties? I'm about to find out," 렌이 말한다.
 			<</if>>
 		<<elseif $rng gte 21>>
-			"I wonder what sort of underwear <<pshe>> has on," Wren says.
+			"I wonder what sort of underwear <<pshe>> has on," 렌이 말한다.
 		<<else>>
 			"Feeling cold?" Wren asks.
 		<</if>>
 	<<elseif $worn.under_upper.name isnot "naked">>
 		<<if $rng gte 81>>
-			"Wanna keep going? You're getting a bit undressed there," Wren says.
+			"Wanna keep going? You're getting a bit undressed there," 렌이 말한다.
 		<<elseif $rng gte 61>>
-			"You'll be left without a stitch at this rate," Wren says.
+			"You'll be left without a stitch at this rate," 렌이 말한다.
 		<<elseif $rng gte 41>>
-			"I think you know what I'll ask for next," Wren says.
+			"I think you know what I'll ask for next," 렌이 말한다.
 		<<elseif $rng gte 21>>
-			"Sure you want to continue?" Wren asks.
+			"정말 계속 하고 싶어요?" Wren asks.
 		<<else>>
-			"I bet your journey home will be fun with so little clothing," Wren says.
+			"I bet your journey home will be fun with so little clothing," 렌이 말한다.
 		<</if>>
 	<<elseif $worn.under_lower.name isnot "naked">>
 		<<if $rng gte 81>>
-			"You don't have much left to lose," Wren says.
+			"You don't have much left to lose," 렌이 말한다.
 		<<elseif $rng gte 61>>
-			"No shame quitting while you have a little dignity," Wren says.
+			"No shame quitting while you have a little dignity," 렌이 말한다.
 		<<elseif $rng gte 41>>
-			"Just one thing between you and total nudity," Wren says.
+			"Just one thing between you and total nudity," 렌이 말한다.
 		<<elseif $rng gte 21>>
 			"Do you know what's coming next?" Wren asks.
 		<<else>>
-			"You'll be left without a stitch," Wren says.
+			"You'll be left without a stitch," 렌이 말한다.
 		<</if>>
 	<<else>>
 		<<if $rng gte 91>>
-			"There are more ways you can debase yourself," Wren says.
+			"There are more ways you can debase yourself," 렌이 말한다.
 		<<elseif $rng gte 81>>
-			"I'm not done yet if you're not." Wren smirks.
+			"I'm not done yet if you're not," Wren smirks.
 		<<elseif $rng gte 71>>
-			"Wanna keep going? There's more you can give," Wren says.
+			"Wanna keep going? There's more you can give." 렌이 말한다.
 		<<elseif $rng gte 61>>
-			"What shall I have <<phim>> do next?" Wren says.
+			"What shall I have <<phim>> do next?" 렌이 말한다.
 		<<elseif $rng gte 51>>
-			"Not done yet," Wren says.
+			"Not done yet," 렌이 말한다.
 		<<elseif $rng gte 41>>
-			"I know," Wren says.
+			"I know," 렌이 말한다.
 		<<elseif $rng gte 31>>
-			"Let me think," Wren says.
+			"어디 보자," 렌이 말한다.
 		<<elseif $rng gte 21>>
 			Wren taps <<his>> chin.
 		<<elseif $rng gte 11>>
@@ -1975,9 +1957,9 @@ Before <<he>> can say anything, you continue.
 :: Estate Cards Leave
 <<effects>><<set $outside to 0>>
 
-<!-- estate end 9 -->
+<!--  estate end 9 -->
 <<if $exposed gte 2>>
-	You leave your seat. You feel Wren and <<his>> friends stare at your <<bottom>>. "Have a safe trip home," Wren says. <<His>> friends laugh.
+	You leave your seat. You feel Wren and <<his>> friends stare at your <<bottom>>. "안전한 귀가 하시길," 렌이 말한다. <<His_ yi>> 동료들은 웃는다.
 	<br><br>
 	<<card_pot_collected>>
 	<<set $estate_cards_end to "naked">>
@@ -1992,7 +1974,7 @@ Before <<he>> can say anything, you continue.
 		<br><br>
 
 		<<if $money gte 15000>>
-			<<link [[Pay|Passout Estate Wren Pay]]>><<money -15000>><</link>>
+			<<link [[Pay|Passout Estate Wren Pay]]>><<set $money -= 15000>><</link>>
 		<<else>>
 			<span class="blue">You can't afford it.</span>
 		<</if>>
@@ -2002,7 +1984,7 @@ Before <<he>> can say anything, you continue.
 		Wren's friends murmur their disappointment. "We won't keep you," Wren says. "If you want favours, you know where to find me."
 		<br><br>
 		<<card_pot_collected>>
-		<<link [[Next|Estate]]>><<unset $passoutReason>><<endevent>><</link>>
+		<<link [[다음|Estate]]>><<unset $passoutReason>><<endevent>><</link>>
 	<</if>>
 	<<estate_cards_finish>>
 	<<set $estate_cards_end to "left_early">>
@@ -2020,27 +2002,25 @@ Wren doesn't hesitate.
 	<<if $player.virginity.penile is true>>
 		<span class="red">Your foreskin separates from your glans, forever robbing you of your purity.</span>
 		<br><br>
+		<<penileejacstat>>
 		You feel <<his>> breath on your ear. "I felt that," <<he>> whispers, low enough that only you can hear. "Bold to put your virginity on the line. I think I like you."<<ggglove>><<npcincr Wren love 12>>
 	<<else>>
 		<<He>> gasps against your ear as you enter <<him>>. "I need this," <<he>> whispers. "Now be a good <<girl>> and hold still."
 	<</if>>
 	<<takeVirginity "Wren" "penile">><<takeNPCVirginity "Wren" "vaginal">>
 	<br><br>
-	<<penileejacstat>><<internalejac>><<creampie "npc" "vagina">><<bruise penis>><<penilestat>><<raped>><<penisraped>>
+	<<bruise penis>><<penilestat>><<raped>><<penisraped>>
 	<<if $semen_amount gte 1>>
 		You twitch inside <<him>>, spurting cum into <<his>> womb as <<he>> fucks you.
 	<<else>>
 		You twitch inside <<him>> as <<he>> fucks you.
 	<</if>>
 	<<He>> speeds up as your spasms subside, <<his>> bottom slapping against your thighs each time <<he>> brings <<his>> body down. <<His>> friends are too busy enjoying the show for their usual banter.
+	<br><br>
 <<elseif $estate.cards.position is "vaginal">>
 	<<He>> grasps your <<bottom>> and lifts you, pushing your <<pussy>> against the tip of <<his>> <<print $NPCList[0].penisdesc>>. <<He>> eases you down, your spasms leaving you helpless as <<he>> <span class="pink">pushes into you,</span>
 	<<if $player.virginity.vaginal is true>>
-		<<if $sexStats.vagina.pregnancy.totalBirthEvents gt 0>>
-			<span class="red">despite your lack of a hymen, you feel something inside you change as your virginity and purity are taken.</span>
-		<<else>>
-			<span class="red"><<if $NPCList[0].penissize gte 4>>obliterating<<elseif $NPCList[0].penissize lte 1>>breaking<<else>>tearing<</if>> your hymen and forever robbing you of your purity.</span>
-		<</if>>
+		<span class="red">tearing your hymen and forever robbing you of your purity.</span>
 		<br><br>
 
 		You feel <<his>> breath on your ear. "I felt that," <<he>> whispers, low enough that only you can hear. "Bold to put your virginity on the line. I think I like you."<<ggglove>><<npcincr Wren love 12>>
@@ -2052,6 +2032,7 @@ Wren doesn't hesitate.
 	<<bruise vagina>><<vaginalstat>><<raped>><<vaginaraped>>
 
 	You twitch around <<his>> length as <<he>> fucks you, lifting you in time with <<his>> thrusts. <<He>> speeds up as your spasms subside. <<His>> friends are too busy enjoying the show for their usual banter.
+	<br><br>
 <<elseif $estate.cards.position is "anal">>
 	<<He>> grasps your <<bottom>> and lifts you, pushing your <<bottom>> against the tip of <<his>> <<print $NPCList[0].penisdesc>>. <<He>> eases you down, your spasms leaving you helpless as <<he>> <span class="pink">pushes into you,</span>
 	<<if $player.virginity.anal is true>>
@@ -2066,16 +2047,17 @@ Wren doesn't hesitate.
 	<br><br>
 	<<bruise anus>><<analstat>><<raped>><<anusraped>>
 	<<He>> fucks you, lifting you in time with <<his>> thrusts. <<He>> speeds up as your spasms subside. <<His>> friends are too busy enjoying the show for their usual banter.
+	<br><br>
 <<elseif $estate.cards.position is "pc_lap">>
 	One leg hooks around your waist, the other weaves under yours. From cramped to constricted, you're left helpless as <<he>> <span class="pink">grinds against your crotch,</span> pressing your pussies together. <<Hes>> already wet. "I need this," <<he>> whispers. "Now be a good <<girl>> and hold still."
 	<<purity -10>>
 	<br><br>
 
 	<<He>> fucks you, your body pinned tight beneath <<hers>>. You can hardly move in <<his>> embrace, only permitted a few fleeting spasms. <<His>> friends are too busy enjoying the show for their usual banter.
+	<br><br>
 <</if>>
-<br><br>
 
-<<link [[Next|Estate Cards Sex 2]]>><</link>>
+<<link [[다음|Estate Cards Sex 2]]>><</link>>
 <br>
 
 
@@ -2085,7 +2067,7 @@ Wren doesn't hesitate.
 <<if $estate.cards.position is "penile">>
 	Your arousal builds as Wren bounces on your <<penis>>. "Almost there," <<he>> says, <<his>> voice a higher pitch than normal.
 	<br><br>
-	<<penileejacstat>><<internalejac>><<creampie "npc" "vagina">>
+	<<penileejacstat>>
 	<<orgasm>>
 	<<recordVaginalSperm "Wren" "pc" "human">>
 	<br>
@@ -2094,6 +2076,9 @@ Wren doesn't hesitate.
 	<br><br>
 
 	<<He>> leans against you, panting into your chest. <<He>> recovers fast, climbing from your body and rearranging <<his>> clothes.
+	<br><br>
+
+
 <<elseif $estate.cards.position is "vaginal">>
 	Your arousal builds as Wren bounces you on <<his>> <<print $NPCList[0].penisdesc>>. "Almost there," <<he>> says.
 	<br><br>
@@ -2101,21 +2086,23 @@ Wren doesn't hesitate.
 	<<orgasm>>
 	<<recordVaginalSperm "pc" "Wren" "human">>
 	<br>
-	Your second orgasm pushes Wren over the edge. <span class="lewd"><<His>> body shakes in ecstasy as <<he>> pumps your <<pussy>> full of semen.</span><<bodyliquid "vagina" "semen">>
+	Your second orgasms pushes Wren over the edge. <span class="lewd"><<His>> body shakes in ecstasy as <<he>> pumps your <<pussy>> full of semen.</span><<bodyliquid "vagina" "semen">>
 	<br><br>
 
 	You slump against <<his>> chest as <<he>> gasps and wraps an arm around your waist. <<He>> recovers fast, and lifts you to your feet before rearranging <<his>> clothes.
+	<br><br>
 <<elseif $estate.cards.position is "anal">>
 	Your arousal builds as Wren bounces you on <<his>> <<print $NPCList[0].penisdesc>>. "Almost there," <<he>> says.
 	<br><br>
 	<<analejacstat>>
 	<<orgasm>>
-
-	Your second orgasm pushes Wren over the edge. <span class="lewd"><<His>> body shakes in ecstasy as <<he>> pumps your <<bottom>> full of semen.</span><<bodyliquid "anus" "semen">>
+	<br>
+	Your second orgasms pushes Wren over the edge. <span class="lewd"><<His>> body shakes in ecstasy as <<he>> pumps your <<bottom>> full of semen.</span><<bodyliquid "anus" "semen">>
 	<<recordAnusSperm "pc" "Wren" "human">>
 	<br><br>
 
 	You slump against <<his>> chest as <<he>> gasps and wraps an arm around your waist. <<He>> recovers fast, and lifts you to your feet before rearranging <<his>> clothes.
+	<br><br>
 <<elseif $estate.cards.position is "pc_lap">>
 	Your arousal builds as Wren grinds on your <<pussy>>. "Almost there," <<he>> says, <<his>> voice a higher pitch than normal.
 	<br><br>
@@ -2132,11 +2119,11 @@ Wren doesn't hesitate.
 	<br><br>
 
 	<<He>> leans against you, chest heaving against yours. <<He>> recovers fast, untwining <<himself>> and rearranging <<his>> clothes.
+	<br><br>
 <</if>>
-<br><br>
 <<fetishPregnancyImg>>
 
-<<link [[Next|Estate Cards Sex 3]]>><</link>>
+<<link [[다음|Estate Cards Sex 3]]>><</link>>
 <br>
 
 
@@ -2176,14 +2163,14 @@ Wren smirks as <<he>> reclines. "You're a good lay," <<he>> says. "That's all I 
 <<effects>>
 
 <<if $exposed gte 2>>
-	"Suit yourself," Wren says. "Good luck."
+	"Suit yourself," 렌이 말한다. "Good luck."
 	<br><br>
 
 	You walk outside. A breeze makes you shiver.
 	<br><br>
 <<else>>
 	<!-- means PC won, lost at least one piece of clothing, refused the clothes rebuy offer, and is at least somewhat clothed -->
-	"Suit yourself," Wren says. "So long, then."
+	"Suit yourself," 렌이 말한다. "So long, then."
 	<br><br>
 
 	You walk outside, leaving your confiscated clothing behind.
@@ -2192,7 +2179,7 @@ Wren smirks as <<he>> reclines. "You're a good lay," <<he>> says. "That's all I 
 
 <<estate_cards_finish>>
 
-<<link [[Next|Estate]]>><<endevent>><</link>>
+<<link [[다음|Estate]]>><<endevent>><</link>>
 <br>
 
 
@@ -2215,13 +2202,13 @@ Wren smirks as <<he>> reclines. "You're a good lay," <<he>> says. "That's all I 
 	<br><br>
 <</if>>
 
-Wren's friends cheer. "Get under the table then," Wren says. "Don't keep 'em waiting."
+Wren's friends cheer. "Get under the table then," 렌이 말한다. "Don't keep em waiting."
 <br><br>
 
 You drop to your knees, and crawl beneath the table. They're already beginning another game of cards.
 <br><br>
 <<set $estate.cards.oral to 2>>
-<<link [[Next|Estate Cards Oral 2]]>><</link>>
+<<link [[다음|Estate Cards Oral 2]]>><</link>>
 <br>
 
 :: Estate Cards Oral 2
@@ -2288,7 +2275,7 @@ You drop to your knees, and crawl beneath the table. They're already beginning a
 			<br>
 			<<if $ejactrait gte 1>>
 				<<if $exposed gte 2>>
-					<<link [[Put on a show|Estate Cards Oral Penis Cumslut]]>><</link>><<ejacTrait>><<oralvirginitywarning>>
+					<<link [[Put on a show|Estate Cards Oral Penis Cumslut]]>><</link>><<ejacTrait>>
 					<<arousal 600>><<garousal>>
 				<<else>>
 					<!-- means PC won, lost at least one piece of clothing, refused the clothes rebuy offer, and is at least somewhat clothed -->
@@ -2327,7 +2314,7 @@ You drop to your knees, and crawl beneath the table. They're already beginning a
 			If they wanted to rob you, they would've done so already. You hand Wren the <<printmoney `_price`>>.
 			<br><br>
 
-			<<money `-_price` "blackjack">>
+			<<set $money -= _price>>
 
 			Wren tosses your clothing to you, with a satisfied smirk.
 			<br><br>
@@ -2350,7 +2337,7 @@ You drop to your knees, and crawl beneath the table. They're already beginning a
 
 		<<estate_cards_finish>>
 
-		<<link [[Next|Estate]]>><<endevent>><</link>>
+		<<link [[다음|Estate]]>><<endevent>><</link>>
 		<br>
 
 	<<else>>
@@ -2391,7 +2378,7 @@ You drop to your knees, and crawl beneath the table. They're already beginning a
 "Good luck," Wren laughs as you leave the cottage.
 <br><br>
 
-<<link [[Next|Estate]]>><<endevent>><</link>>
+<<link [[다음|Estate]]>><<endevent>><</link>>
 <br>
 
 :: Estate Cards Oral Penis
@@ -2409,7 +2396,7 @@ You stroke the tip of the <<print $NPCList[($estate.cards.oral - 1)].penisdesc>>
 	<br><br>
 
 	<<set $estate.cards.oral += 1>>
-	<<link [[Next|Estate Cards Oral 2]]>><</link>>
+	<<link [[다음|Estate Cards Oral 2]]>><</link>>
 	<br>
 
 <<else>>
@@ -2428,7 +2415,7 @@ You stroke the tip of the <<print $NPCList[($estate.cards.oral - 1)].penisdesc>>
 
 	<<link [[Suck|Estate Cards Oral Penis 2]]>><<arousal 600 "mouth">><</link>><<garousal>><<oralvirginitywarning>>
 	<br>
-	<<link [[Pull away|Estate Cards Oral End]]>><</link>>
+	<<link [[밀친다|Estate Cards Oral End]]>><</link>>
 	<br>
 <</if>>
 
@@ -2443,7 +2430,7 @@ You flick the <<persons>> pussy with your tongue, then <<oraltext>> run the tip 
 	<br><br>
 
 	<<set $estate.cards.oral += 1>>
-	<<link [[Next|Estate Cards Oral 2]]>><</link>>
+	<<link [[다음|Estate Cards Oral 2]]>><</link>>
 	<br>
 <<else>>
 	<<if $estate.cards.clothesRebuyTerms>>
@@ -2456,7 +2443,7 @@ You flick the <<persons>> pussy with your tongue, then <<oraltext>> run the tip 
 
 	<<link [[Lick|Estate Cards Oral Vagina 2]]>><<arousal 600 "mouth">><</link>><<garousal>>
 	<br>
-	<<link [[Pull away|Estate Cards Oral End]]>><</link>>
+	<<link [[밀친다|Estate Cards Oral End]]>><</link>>
 	<br>
 <</if>>
 
@@ -2486,7 +2473,7 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 <<oralejacstat>><<bodyliquid "face" "semen">>
 
 <<set $estate.cards.oral += 1>>
-<<link [[Next|Estate Cards Oral 2]]>><</link>>
+<<link [[다음|Estate Cards Oral 2]]>><</link>>
 <br>
 
 :: Estate Cards Oral Penis Cumslut
@@ -2494,10 +2481,6 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 <<set _penisdesc to $NPCList[($estate.cards.oral - 1)].penisdesc>>
 <<if $NPCList[($estate.cards.oral - 1)].penissize lte 1>>
 	You <<oraltext>> suck on the <<persons>> _penisdesc.
-	<<if $player.virginity.oral is true>>
-		<<takeVirginity $NPCList[($estate.cards.oral - 1)].fullDescription "oral">>
-		<span class="red">It tastes strange.</span>
-	<</if>>
 	<<if $speech_attitude is "bratty">>
 		After a couple of minutes, the goon twitches and ejaculates a string of semen that you swirl and swallow before moving on.
 	<<else>>
@@ -2513,10 +2496,6 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 	<<switch $estate.cards.oral>>
 	<<case 2>>
 		You engulf the _penisdesc with your mouth, <<oraltext>> deepthroating as it hardens.
-		<<if $player.virginity.oral is true>>
-			<<takeVirginity $NPCList[($estate.cards.oral - 1)].fullDescription "oral">>
-			<span class="red">It tastes strange.</span>
-		<</if>>
 		<br><br>
 
 		The <<person>> grasps the back of your head <span class="red">forcing <<his>> _penisdesc down your throat.</span>
@@ -2539,12 +2518,9 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 		<<ejacstat>>
 		<<oralejacstat>>
 		<<set $hygiene += 500>>
+
 	<<case 3>>
 		The second goon, a <<person>>, is ready and erect, waiting for you as soon as you turn to face <<him>>. You <<oraltext>> work the _penisdesc with your mouth while they begin a game of cards.
-		<<if $player.virginity.oral is true>>
-			<<takeVirginity $NPCList[($estate.cards.oral - 1)].fullDescription "oral">>
-			<span class="red">It tastes strange.</span>
-		<</if>>
 		<br><br>
 		<<He>> starts twitching, and you pull the cock from your mouth, letting the <span class="lewd">massive spurt of cum unload over your forehead</span> while you milk it with your hand.
 		<br><br>
@@ -2574,12 +2550,7 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 		<<set $hygiene += 500>>
 		<<arousal 600>><<garousal>><<lstress>><<stress -5>>
 	<<case 4>>
-		You start sucking a <<persons>> _penisdesc. 
-		<<if $player.virginity.oral is true>>
-			<<takeVirginity $NPCList[($estate.cards.oral - 1)].fullDescription "oral">>
-			<span class="red">It tastes strange.</span>
-		<</if>>
-		<<He>> watches you from above. "What nice <<haircolourtext>> hair you've got. But I can make it nicer."
+		You start sucking a <<persons>> _penisdesc. <<He>> watches you from above. "What nice <<haircolourtext>> hair you've got. But I can make it nicer."
 		<br><br>
 		<<He>> shoves you away, and <span class="lewd">aims <<his>> cock at your scalp as <<he>> ejaculates.</span> "Something to wash your hair with."
 		<br><br>
@@ -2592,11 +2563,12 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 		<<set $hygiene += 500>>
 		<<arousal 600>><<garousal>><<lstress>><<stress -5>>
 	<<case 5>>
-		The <<persons>> _penisdesc is already hard when you turn to it. "Aah, aah..." <<He>> twitches and, without further warning, <span class="lewd">ejaculates over your body.</span> <<He>> looks at you kneeling between <<his>> thighs, panting.
+		The <<persons>> _penisdesc is already hard when you turn to it. "Aah, aah..." <<he>> twitches and, without further warning, <span class="lewd">ejaculates over your body.</span> <<He>> looks at you kneeling between <<his>> thighs, panting.
 		<br><br>
 
+
 		<<if $speech_attitude is "bratty">>
-			"You're a quick shot," you exclaim while restraining a laugh. The other goons show less restraint, and openly mock the <<person>>. <<His>> face reddens. "F-fucking <<bitch>>," <<he>> says. "I'd slap that smug look off your face if it wasn't covered in jizz."
+			"You're a quickshot," you exclaim while restraining a laugh. The other goons show less restraint, and openly mock the <<person>>. <<His>> face reddens. "F-fucking <<bitch>>," <<he>> says. "I'd slap that smug look off your face if it wasn't covered in jizz."
 		<<else>>
 			"I'm sorry <<sir>>," you whisper. "I might have been too eager." <span class="lewd">You pretend to suck on <<his>> limp dick while rubbing the semen over your neck and <<breasts>>.</span>
 		<</if>>
@@ -2608,19 +2580,14 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 		<<set $hygiene += 500>>
 		<<arousal 600>><<garousal>><<lstress>><<stress -5>>
 	<<case 6>>
-		You suck the <<persons>> _penisdesc. 
-		<<if $player.virginity.oral is true>>
-			<<takeVirginity $NPCList[($estate.cards.oral - 1)].fullDescription "oral">>
-			<span class="red">It tastes strange.</span>
-		<</if>>
-		It's the last one. <<He>> soon twitches, the <span class="lewd">hard cock pulsating in your mouth.</span>
+		You suck the <<persons>> _penisdesc. It's the last one. <<He>> soon twitches, the <span class="lewd">hard cock pulsating in your mouth.</span>
 		<br><br>
 
 		"I've been waiting for this," <<he>> says, holding your head firm with both hands. <<He>> starts thrusting.
 		<br><br>
 
 		The first spurt is so voluminous that it <span class="lewd">makes you cough and splutter, and comes bursting out of your nose.</span> It comes too quick, and too thick, to swallow it all in time. With every thrust, more cum surges into your mouth, spilling out the sides of your lips.
-		<<cumswallow "human" 80>><<oralejacstat>>
+		<<cumswallow "human" 80>>
 		<br><br>
 
 		"Fuck," the <<person>> says. <<He>> shoves you away. "Look at this fucking slut." The other goons interrupt their game of cards. Everyone stares at you, the kneeling, naked, cum-covered mess trying to catch <<pher>> breath.
@@ -2629,12 +2596,12 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 		White strings still dangle from your chin. With all eyes on you, <span class="green">you smile and take a bow.</span> The room erupts in cheer.
 		<br><br>
 
-		"Hey," Wren says. "You're not going anywhere until you clean this up. We're not touching this." <<person1>><<He>> points at the floor in front of you, splattered with pooling semen.
+		"이봐요," 렌이 말한다. "당신 이거 다 치울 때까지는 아무 데도 못 가요. 우린 안 만질 거거든요." <<person1>><<He>> points at the floor in front of you, splattered with pooling semen.
 		<br><br>
 		<<if $speech_attitude is "bratty">>
 			Still kneeling, you scoop up the semen and <span class="lewd">rub it over your chest.</span>
-			<<if random(0,1) is 1>><<bodyliquid "rightarm" "semen">><<else>><<bodyliquid "leftarm" "semen">><</if>>
-			<<bodyliquid "chest" "semen">>
+			<<bodyliquid "leftarm" "semen">>
+			<<bodyliquid "rightarm" "semen">>
 		<<else>>
 			You get on your hands and knees, <span class="lewd">and lick the floor clean of semen.</span> "Hey <<girl>>," says the <<person6>><<person>>. "You got some on my shoes." You lick them next. You swallow the last of it.
 			<<semenswallowedstat 100>>
@@ -2650,15 +2617,18 @@ Your lips part as the <<person>> pushes your face against <<his>> <<print $NPCLi
 		<<bodyliquid "tummy" "semen">>
 		<<set $hygiene += 1000>>
 		<<arousal 600>><<garousal>><<lstress>><<stress -5>>
+
 	<</switch>>
+	<br><br>
+
 <</if>>
 <br><br>
 
 <<set $estate.cards.oral += 1>>
 <<if $arousal gte $arousalmax>>
-	<<link [[Next|Estate Cards Oral Cumslut Orgasm]]>><</link>>
+	<<link [[다음|Estate Cards Oral Cumslut Orgasm]]>><</link>>
 <<else>>
-	<<link [[Next|Estate Cards Oral 2]]>><</link>>
+	<<link [[다음|Estate Cards Oral 2]]>><</link>>
 <</if>>
 <br>
 
@@ -2669,9 +2639,9 @@ The building arousal overwhelms you. Your muscles spasm as a <span class="lewd">
 The <<person6>><<person>> notices. "This slut's really gonna cum from being jizzed on," <<he>> says.
 <br><br>
 <<if $speech_attitude is "bratty">>
-	"F-fuck," you say. "Fuck you."
+	"이-이런," 당신이 말한다. "씨발."
 <<else>>
-	"I-I'm sorry," you say. "I'm so sorry."
+	"미-미안해요," 당신이 말한다. "실례했습니다."
 <</if>>
 You spread your knees wide, trying to keep your balance. The goons cheer again. <span class="red">A swarm of smartphones surrounds you.</span>
 <br><br>
@@ -2680,7 +2650,8 @@ They record as you shake and moan uncontrollably, cumming beneath their blackjac
 <<orgasm>>
 <<famesex 4>>
 
-<<link [[Next|Estate Cards Oral 2]]>><</link>>
+<br><br>
+<<link [[다음|Estate Cards Oral 2]]>><</link>>
 
 :: Estate Cards Oral Vagina 2
 <<effects>><<set $outside to 0>>
@@ -2690,7 +2661,7 @@ You fuck the <<person>> with your tongue, until you feel <<his>> pussy shudder i
 <br><br>
 
 <<set $estate.cards.oral += 1>>
-<<link [[Next|Estate Cards Oral 2]]>><</link>>
+<<link [[다음|Estate Cards Oral 2]]>><</link>>
 <br>
 
 :: Estate Cards Oral Anus
@@ -2730,20 +2701,20 @@ You <<oraltext>> lap at <<his>> asshole.
 <br><br>
 
 <<set $estate.cards.oral += 1>>
-<<link [[Next|Estate Cards Oral 2]]>><</link>>
+<<link [[다음|Estate Cards Oral 2]]>><</link>>
 <br>
 
 
 :: Estate Cards Oral End
 <<effects>>
-You break free of the <<persons>> grasp, and crawl from the table. <<person1>>"Suit yourself," Wren says. <<if $exposed gte 2>>"Good luck."<<else>>"So long, then."<</if>>
+You break free of the <<persons>> grasp, and crawl from the table. <<person1>>"Suit yourself," 렌이 말한다. <<if $exposed gte 2>>"Good luck."<<else>>"So long, then."<</if>>
 <br><br>
 
 You walk outside. <<if $exposed gte 2>>A breeze makes you shiver.<</if>>
 <br><br>
 
 <<estate_cards_finish>>
-<<link [[Next|Estate]]>><<endevent>><</link>>
+<<link [[다음|Estate]]>><<endevent>><</link>>
 <br><br>
 
 
@@ -2766,24 +2737,24 @@ You walk outside. <<if $exposed gte 2>>A breeze makes you shiver.<</if>>
 <<cards_naked_end>>
 
 :: Estate Fame Letter
-<<effects>><<set $outside to 0>><<person1>><<set $wrenSeen.pushUnique("letter")>><<set $wrenSeenLast to "letter">><<wearProp "envelope" 0 "manila">>
+<<effects>><<set $outside to 0>><<person1>><<set $wrenSeen.pushUnique("letter")>><<set $wrenSeenLast to "letter">>
 
 <<if $wren_intro is undefined>>
 	<<set $wren_intro to true>>
 	<<if $speech_attitude is "meek">>
-		"A-Are you Wren?" you ask. "I'm supposed to give something to Wren."
+		"다-당신이 렌씨?" 당신이 묻는다. "렌에게 전해줄 것이 있어요."
 	<<elseif $speech_attitude is "bratty">>
-		"Got a delivery for Wren," you say. "Don't suppose you're <<him>>?"
+		"렌에게 배달하러 왔는데요," 당신은 말한다. "당신이 <<himPost>>인 건 아닐까?"
 	<<else>>
-		"I'm supposed to give something to Wren," you say. "Are you <<him>>?"
+		"렌에게 전해줄 것이 있어요." 당신은 말한다. "당신이 <<himPost>>인가요?"
 	<</if>>
 	<br><br>
 
-	<span class="gold">"Yep, that's me,"</span> the <<personsimple>> says. "Who sent you? Santa Claus?"
+	"<span class="gold">그래, 나예요.</span>" the <<personsimple>> says. "누가 보내서 왔죠? 산타클로스?"
 	<br><br>
 <</if>>
 
-You take out the manila envelope Mickey gave you and hold it out to Wren.
+You take out the Manila envelope Mickey gave you and hold it out to Wren.
 <<if $speech_attitude is "meek">>
 	"This is from the old man."
 <<elseif $speech_attitude is "bratty">>
@@ -2812,7 +2783,7 @@ Wren takes it, examines it from both sides and smirks. <<He>> tosses it onto a n
 	"You mind asking 'Mickey' why they sent you instead of Landry?" Wren whispers. "Seems like they're going a bit out of their way."
 
 <<elseif $pubfame.seen.includes("wrenKiss")>>
-	You hold your hand out for Wren, and <<he>> takes it and winks. <<takeHandholdingVirginity "Wren" "romantic" null true>> In one smooth, familiar motion, <<he>> pulls you toward <<him>>, leans back in <<his>> chair and pulls you under the table. <<He>> leans in until you're face to face. <<His>> friends whoop and cheer. "<<pShes>> down bad for <<him>>," the <<person2>><<person>> laughs.
+	You hold your hand out for Wren, and <<he>> takes it and winks. <<takeHandholdingVirginity "Wren" "romantic">> In one smooth, familiar motion, <<he>> pulls you toward <<him>>, leans back in <<his>> chair and pulls you under the table. <<He>> leans in until you're face to face. <<His>> friends whoop and cheer. "<<pShes>> down bad for <<him>>," the <<person2>><<person>> laughs.
 	<br><br>
 
 	"So?" you ask. "Do you have any more of Mickey's secrets to dig up?"
@@ -2831,9 +2802,9 @@ Wren takes it, examines it from both sides and smirks. <<He>> tosses it onto a n
 <</if>>
 <br><br>
 
-<<link [[Kiss|Estate Fame Letter 2]]>><<handheldon>><<set $phase to 0>><<arousal 1000 "mouth">><<npcincr Wren love 3>><</link>><<promiscuous1>><<ggarousal>><<glove>><<kissvirginitywarning>>
+<<link [[키스한다|Estate Fame Letter 2]]>><<set $phase to 0>><<arousal 1000 "mouth">><<npcincr Wren love 3>><</link>><<promiscuous1>><<ggarousal>><<glove>><<kissvirginitywarning>>
 <br>
-<<link [[Pull away|Estate Fame Letter 2]]>><<handheldon>><<set $phase to 1>><</link>>
+<<link [[Pull away|Estate Fame Letter 2]]>><<set $phase to 1>><</link>>
 
 :: Estate Fame Letter 2
 <<effects>><<set $outside to 0>>
@@ -2844,13 +2815,13 @@ Wren takes it, examines it from both sides and smirks. <<He>> tosses it onto a n
 		<<Hes>> caught off guard for a second, but then <<he>> smiles and kisses back. <<He>> sucks on your upper lip for a moment, before pushing <<his>> tongue into your mouth.
 		<<promiscuity1>>
 
-		Eventually <<he>> pulls away and grins at you. "You saw an opportunity and took it, huh? You're fun. I think I like you."
+		Eventually <<he>> pulls away and grins at you. "You saw an opportunity and took it, huh? 흥미롭군요. 당신이 좋아진 것 같아요."
 		<<glove>>
 	<<else>>
 		<<He>> smiles against your mouth and pushes <<his>> tongue between your lips, twirling around your own tongue playfully. One of <<his>> hands cups the back of your head, holding you in place. <<He>> uses this leverage to thoroughly assail your mouth.
 		<<promiscuity1>>
 
-		Eventually <<he>> pulls away and grins at you. "You've gotta come by more often. You're fun."
+		마침내 <<he_ nun>> 손을 때고 당신을 향해 씩 웃는다. "좀 더 자주 들르시죠. 당신 재미있거든."
 		<<glove>>
 	<</if>>
 	<br><br>
@@ -2858,7 +2829,7 @@ Wren takes it, examines it from both sides and smirks. <<He>> tosses it onto a n
 	Wren releases you, and you stand back up<<if $arousal gte 6000>> on wobbly legs<</if>>. "You had <<phim>> under there for quite a while," the <<person3>><<person>> chuckles.
 	<br><br>
 
-	"Not my fault," Wren says, smirking. "I was only gonna keep <<phim>> for a few seconds, but <<pshe>> demanded more." <<person1>><<His>> eyes flicker to you. "Thank the old man for me when you get back to him. He knows how to pick the cutest delivery <<girls>>."
+	"내 잘못 아니야," 렌이 능글대는 미소로 답한다. "아주 잠시만 <<phim_ ul>> 데리고 있을 생각이었는데, <<pshe_ ga>> 더 많이 요구했다고." <<person1>><<His>> eyes flicker to you. "Thank the old man for me when you get back to him. He knows how to pick the cutest delivery <<girls>>."
 
 <<else>>
 	You try to pull away from Wren's grip. <<He>> <<if $pubfame.seen.includes("wrenKiss")>>raises an eyebrow, but<<else>>smirks and<</if>> releases you. "Wasn't that romantic," the <<person3>><<person>> chuckles as you stand up.
@@ -2872,7 +2843,7 @@ Wren takes it, examines it from both sides and smirks. <<He>> tosses it onto a n
 <<if $farm_stage lte 4 or $farm_stage is undefined>>
 	"Well, good seeing you," Wren says, nodding. "Take care."
 	<br><br>
-	<<link [[Leave|Estate Cards Intro Leave]]>><</link>>
+	<<link [[떠난다|Estate Cards Intro Leave]]>><</link>>
 <<else>>
 	"While you're here, fancy some blackjack?" Wren asks.
 	<br><br>

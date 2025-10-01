@@ -1,22 +1,28 @@
 :: Passout park
-You've pushed yourself too much.
+당신은 스스로를 너무 혹사시켰다.
 <br><br>
 <<passout>>
 <<set $bus to "park">>
+<<set $dangerpark to 0>>
+<<set $safepark to 0>>
+<<set $danger to random(1, 10000)>>
 
-<<if dangerEvent()>>
-	<<if random(1, 100) gte 81>>
-		<<link [[Wake up|Abduction]]>><<set $molestationstart to 1>><</link>>
-	<<else>>
-		<<if $monster is 1 or $bestialitydisable is "f">>
-			<<link [[Wake up|Dog Park]]>><<set $molestationstart to 1>><</link>>
-		<<else>>
-			<<link [[Wake up|Dog Park 2]]>><</link>>
-		<</if>>
-	<</if>>
-<<else>>
-	<<ambulance>>
+<<if $danger gte (9900 - $allure)>>
+	<<set $dangerpark to random(1, 100)>>
+<<elseif $danger lt (9900 - $allure)>>
+	<<set $safepark to random(1, 100)>>
 <</if>>
+
+<<if $dangerpark gte 81>>
+	<<link [[일어난다|Abduction]]>><<set $molestationstart to 1>><</link>>
+<<elseif $dangerpark gte 1>>
+	<<link [[일어난다|Dog Park]]>><<set $molestationstart to 1>><</link>>
+	<!--
+		<<link [[일어난다|Abduction]]>><<set $molestationstart to 1>><</link>>
+	-->
+<</if>>
+
+<<if $safepark gte 1>><<ambulance>><</if>>
 
 <<pass 1 hour>>
 
@@ -31,7 +37,7 @@ You've pushed yourself too much.
 	<<molested>>
 	<<beastNEWinit 1 dog>>
 	<<beastCombatInit>>
-	You awaken to find yourself being dragged behind a bush by a strange <<beasttype>>.
+	당신은 깨어나고 낯선 <<beasttype_ i>> 덤불 뒤로 자신을 끌고 가고 있다는 것을 알아차린다.
 <</if>>
 
 <<effects>>
@@ -48,34 +54,20 @@ You've pushed yourself too much.
 	<<set $alarm to 0>>
 	<br><br>
 	<<if $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[Next|Dog Park Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Dog Park Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[Next|Dog Park Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Dog Park Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[Next|Dog Park]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Dog Park]]>><</link>></span><<nexttext>>
 	<</if>>
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Dog Park Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Dog Park Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Dog Park Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Dog Park Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Dog Park]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Dog Park]]>><</link>></span><<nexttext>>
 <</if>>
-
-:: Dog Park 2
-<<set $outside to 1>><<effects>>
-<<beastNEWinit 1 dog>>
-
-You awaken to find yourself being dragged behind a bush by a strange <<beasttype>>.
-<br><br>
-
-You manage to struggle yourself free and escape, but not unscathed. <<beastescape>>
-<br><br>
-
-<<endevent>>
-<<set $stress -= 1000>><<set $eventskip to 1>>
-<<destination>>
 
 :: Park Woman
 <<if $molestationstart is 1>>
@@ -99,43 +91,43 @@ You manage to struggle yourself free and escape, but not unscathed. <<beastescap
 	<<set $alarm to 0>>
 	<br><br>
 	<<if $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[Next|Park Woman Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Park Woman Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[Next|Park Woman Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Park Woman Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[Next|Park Woman]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Park Woman]]>><</link>></span><<nexttext>>
 	<</if>>
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Park Woman Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Park Woman Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Park Woman Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Park Woman Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Park Woman]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Park Woman]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Park Woman Ejaculation
 <<effects>>
 
-<<He>> tenses and presses <<his>> mouth against your neck to muffle the sound of <<his>> climax.
+<<He_ nun>> 긴장해서 절정으로 향하는 목소리를 죽이기 위해 <<his_ yi>> 입을 당신의 목에 갖다댄다.
 <br><br>
 
 <<ejaculation>>
 
 <<if $enemyanger gte ($enemyangermax / 5) * 3>>
-	<<He>> gives you a hard bite then leaves you without a word.<<violence 3>>
+	<<He_ nun>> 당신을 세게 깨물고선 말없이 떠난다. <<violence 3>>
 	<br><br>
 <<elseif $enemyanger gte 1>>
-	Without a word, <<he>> gets up and leaves you lying on the grass.
+	아무 말 없이 <<He_ nun>> 일어나선 풀밭에 당신을 두고 떠난다.
 	<br><br>
 <<else>>
-	Smiling, <<he>> kisses you on the cheek. "This is for you." <<He>> leaves you lying on the grass.
+	 <<He_ nun>> 웃으며 당신의 볼에 키스하곤 말한다. "내 선물이야." <<He_ nun>> 당신을 풀밭에 두고 떠난다.
 	<br>
-	You've gained <<printmoney 500>><<money 500 "prostitution">>.
+	당신은 <<moneyGain 5>>를 얻었다.
 	<br><br>
 <</if>>
 
-<<tearful>> you struggle to your feet. You know you're not out of danger yet.
+<<tearful>> 당신은 발버둥쳐 일어난다. 당신은 아직 위험에서 벗어나지 못한걸 느끼고 있다.
 <br><br>
 
 <<clotheson>>
@@ -147,7 +139,7 @@ You manage to struggle yourself free and escape, but not unscathed. <<beastescap
 :: Park Woman Escape
 <<effects>>
 
-<<He>> recoils in pain, giving you the chance you need to escape. <<tearful>> you run, giving little heed to prying eyes, before collapsing in a bed of flowers. You're safe.
+<<He_ nun>> 고통에 몸부림치며, 당신이 벗어날 기회를 준다. <<tearful>> 당신은 주변 시선을 신경쓰지 않고 도망가다가, 꽃발에 쓰러진다. 당신은 이제 안전하다.
 <br><br>
 
 <<clotheson>>
@@ -159,19 +151,19 @@ You manage to struggle yourself free and escape, but not unscathed. <<beastescap
 <<beastejaculation>>
 
 <<if $enemyanger gte ($enemyangermax / 5) * 3>>
-	<<bHe>> bites you on the thigh, then leaves you lying on the grass.
+	<<bHe_ nun>> 당신의 허벅지를 깨물고, 풀밭에 당신을 두고 떠난다.
 	<<violence 3>>
 	<br><br>
 <<elseif $enemyanger gte 1>>
-	<<bHe>> barks, then leaves you lying on the grass.
+	<<bHe_ nun>> 짖고선, 당신을 풀밭에 두고 떠난다.
 	<br><br>
 <<else>>
-	<<bHe>> licks your <<genitals>> then darts away.
+	<<bHe_ nun>> 당신의 <<genitals_ rul 1>> 핥고선 빠르게 달아난다.
 	<<neutral 5 "genitals">>
 	<br><br>
 <</if>>
 
-<<tearful>> you rise to your feet.
+<<tearful>> 당신은 일어선다.
 <br><br>
 
 <<clotheson>>
@@ -183,7 +175,7 @@ You manage to struggle yourself free and escape, but not unscathed. <<beastescap
 :: Dog Park Escape
 <<effects>>
 
-The <<beasttype>> whimpers and flees into a bush. <<tearful>> you gather yourself.
+<<beasttype_ un>> 낑낑거리며 덤불속으로 뛰어들어 도망친다. <<tearful>> 당신은 마음을 가다듬는다.
 <br><br>
 
 <<clotheson>>
@@ -195,10 +187,10 @@ The <<beasttype>> whimpers and flees into a bush. <<tearful>> you gather yoursel
 :: Men's Toilets
 <<set $outside to 0>><<set $location to "park">><<effects>><<set $bus to "parkmens">>
 
-You are in the men's toilets in the park.
+당신은 공원의 남자 화장실에 있다.
 <<storeon "parkmens" "check">>
 <<if _store_check is 1>>
-	Your clothes are stored beneath the sinks.
+	당신의 옷은 세면대 아래에 보관되어 있다.
 <</if>>
 <br><br>
 
@@ -206,51 +198,51 @@ You are in the men's toilets in the park.
 	<<passoutpark>>
 <<else>>
 
-	
-		<<if dangerEvent() and $player.gender_appearance is "f" and $eventskip is 0>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $player.gender_appearance is "f" and $eventskip is 0>>
 			<<eventstoilets>>
 		<<else>>
 			<<storeactions "parkmens">>
 			<<if hasSexStat("exhibitionism", 5) and Time.dayState is "day" and $exposed gte 2 and !$daily.parkStreak>>
-				<span class="lewd">Standing naked in the bathroom, you have the lewd urge to go streaking through the park. So many people would see you.</span>
+				<span class="lewd">화장실에 벌거벗은 채로 서서, 당신은 공원을 가로질러 가고 싶다는 음란한 충동이 든다. 그렇게 한다면 수많은 사람들이 당신을 볼 것이다.</span>
 				<br><br>
-				<<ind>><<link [[Go streaking|Park Streak]]>><<set $daily.parkStreak to true>><<pass 1>><<arousal 100>><</link>><<exhibitionist5>><<garousal>>
+				<<ind>><<link [[벌거벗고 달려나간다|Park Streak]]>><<set $daily.parkStreak to true>><<pass 1>><<arousal 100>><</link>><<exhibitionist5>><<garousal>>
 				<br>
 			<<elseif hasSexStat("exhibitionism", 4)>>
-				<span class="lewd">A lewd idea strikes you.</span> You could strip and wait in one of the stalls for an unsuspecting passerby to see you.
+				<span class="lewd">음란한 생각이 떠오른다.</span> 당신은 화장실을 이용하려는 사람이 당신을 볼 수 있도록 화장실 한 켠에서 옷을 벗고 기다릴 수 있다.
 				<<if Time.dayState is "dusk" or Time.dayState is "night">>
 					<br><br>
-					<<skinicon "strip">><<link [[Strip and wait in a stall (0:20)|Toilets Stall]]>><<pass 20>><</link>><<exhibitionist4>>
+					<<skinicon "strip">><<link [[벌거벗고 화장실 칸에서 기다린다 (0:20)|Toilets Stall]]>><<pass 20>><</link>><<exhibitionist4>>
 					<br>
 				<<else>>
-					<span class="blue">However, it would be best to wait until night falls.</span>
+					<span class="blue">하지만, 밤이 될 때까지 기다리는 것이 가장 좋을 것 같다.</span>
 					<br><br>
 				<</if>>
 			<</if>>
-			<<mirroricon>><<link [[Look in the mirror (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+			<<mirroricon>><<link [[거울을 바라본다 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
 			<br>
 			<<if hasSexStat("exhibitionism", 3) or $arousal gte 9000>>
-				<<skinicon "masturbate">><<link [[Masturbate|Men's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
+				<<skinicon "masturbate">><<link [[자위한다|Men's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
 				<br>
 			<</if>>
 			<<if setup.bodyliquid.combined("face") gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-				<<bathroomicon "sink">><<link [[Wash face (0:05)|Men's Toilets Wash]]>><<pass 5>><</link>>
+				<<bathroomicon "sink">><<link [[얼굴을 씻는다 (0:05)|Men's Toilets Wash]]>><<pass 5>><</link>>
 				<br>
 			<</if>>
 			<<if setup.bodyliquid.combined("mouth") gte 1>>
-				<<bathroomicon "sink">><<link [[Rinse mouth (0:05)|Men's Toilets Rinse]]>><<pass 5>><</link>>
+				<<bathroomicon "sink">><<link [[입을 헹군다 (0:05)|Men's Toilets Rinse]]>><<pass 5>><</link>>
 				<br>
 			<</if>>
 			<<pregnancyTest "Men's Toilets">>
 			<<storeon "parkmens" "check">>
 			<<if _store_check isnot 1>>
-				<<getouticon>><<link [[Leave|Park]]>><</link>>
+				<<getouticon>><<link [[떠난다|Park]]>><</link>>
 			<<elseif $exposed gte 2 and hasSexStat("exhibitionism", 3)>>
-				<<sneakicon>><<link [[Sneak out|Park Toilets Sneak]]>><<set $phase to 2>><</link>><<exhibitionist3>>
+				<<sneakicon>><<link [[몰래 나간다|Park Toilets Sneak]]>><<set $phase to 2>><</link>><<exhibitionist3>>
 			<<elseif $exposed is 1>>
-				<<sneakicon>><<link [[Sneak out|Park Toilets Sneak]]>><<set $phase to 1>><</link>><<exhibitionist1>>
+				<<sneakicon>><<link [[몰래 나간다|Park Toilets Sneak]]>><<set $phase to 1>><</link>><<exhibitionist1>>
 			<<elseif $exposed lte 0>>
-				<<getouticon>><<link [[Leave|Park]]>><</link>>
+				<<getouticon>><<link [[떠난다|Park]]>><</link>>
 			<</if>>
 		<</if>>
 <</if>>
@@ -263,97 +255,97 @@ You are in the men's toilets in the park.
 
 <<if setup.bodyliquid.combined("face") gte 1>>
 	<<if $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen">>
-		Bending over the sink, you wash the lewd fluid and ink from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 잉크와 음란한 액체들을 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-		Bending over the sink, you wash the lewd fluid and lipstick from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 립스틱과 음란한 액체들을 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-		Bending over the sink, you wash the lewd fluid and mud from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 진흙과 음란한 액체들을 씻어낸다.
 	<<else>>
-		Bending over the sink, you wash the lewd fluid from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 음란한 액체들을 씻어낸다.
 	<</if>>
 <<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-	Bending over the sink, you wash the lipstick from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 립스틱을 닦아낸다.
 <<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-	Bending over the sink, you wash the mud from your face.
+	세면대에 몸을 숙여, 당신은 얼굴에 묻은 진흙을 닦아낸다.
 <<else>>
-	Bending over the sink, you wash the ink from your face.
+	세면대에 몸을 숙여, 당신은 얼굴에 묻은 잉크를 닦아낸다.
 <</if>>
 <<wash_face>>
 <br><br>
 
-<<link [[Next|Men's Toilets]]>><</link>>
+<<link [[다음|Men's Toilets]]>><</link>>
 <br>
 
 :: Men's Toilets Rinse
 <<effects>>
 
-You bend over a sink and rinse out your mouth.
+세면대에 몸을 숙여 입안을 헹군다.
 <<wash_mouth>>
 <br><br>
 
-<<link [[Next|Men's Toilets]]>><</link>>
+<<link [[다음|Men's Toilets]]>><</link>>
 <br>
 
 :: Women's Toilets
 <<set $outside to 0>><<set $location to "park">><<effects>><<set $bus to "parkwomens">>
 
-You are in the women's toilets in the park.
+당신은 공원의 여자 화장실에 있다.
 
 <<storeon "parkwomens" "check">>
 <<if _store_check is 1>>
-	Your clothes are stored beneath the sinks.
+	당신의 옷은 세면대 아래에 보관되어 있다.
 <</if>>
 <br><br>
 
 <<if $stress gte $stressmax>>
 	<<passoutpark>>
 <<else>>
-	
-		<<if dangerEvent() and $player.gender_appearance is "m" and $eventskip isnot 1>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $player.gender_appearance is "m" and $eventskip isnot 1>>
 			<<eventstoilets>>
 		<<else>>
 			<<storeactions "parkwomens">>
 			<<if hasSexStat("exhibitionism", 5) and Time.dayState is "day" and $exposed gte 2 and !$daily.parkStreak>>
-				<span class="lewd">Standing naked in the bathroom, you have the lewd urge to go streaking through the park. So many people would see you.</span>
+				<span class="lewd">화장실에 벌거벗은 채로 서서, 당신은 공원을 가로질러 가고 싶다는 음란한 충동이 든다. 그렇게 한다면 수많은 사람들이 당신을 볼 것이다.</span>
 				<br><br>
-				<<link [[Go streaking|Park Streak]]>><<set $daily.parkStreak to true>><<pass 1>><<arousal 100>><</link>><<exhibitionist5>><<garousal>>
+				<<link [[벌거벗고 달려나간다|Park Streak]]>><<set $daily.parkStreak to true>><<pass 1>><<arousal 100>><</link>><<exhibitionist5>><<garousal>>
 				<br>
 			<<elseif hasSexStat("exhibitionism", 4)>>
-				<span class="lewd">A lewd idea strikes you.</span> You could strip and wait in one of the stalls for an unsuspecting passerby to see you.
+				<span class="lewd">음란한 생각이 떠오른다.</span> 당신은 화장실을 이용하려는 사람이 당신을 볼 수 있도록 화장실 한 켠에서 옷을 벗고 기다릴 수 있다.
 				<<if Time.dayState is "dusk" or Time.dayState is "night">>
 					<br><br>
-					<<skinicon "strip">><<link [[Strip and wait in a stall (0:20)|Toilets Stall]]>><<pass 20>><</link>><<exhibitionist4>>
+					<<link [[벌거벗고 화장실 칸에서 기다린다 (0:20)|Toilets Stall]]>><<pass 20>><</link>><<exhibitionist4>>
 					<br>
 				<<else>>
-					<span class="blue">However, it would be best to wait until night falls.</span>
+					<span class="blue">하지만, 밤이 될 때까지 기다리는 것이 가장 좋을 것 같다.</span>
 					<br><br>
 				<</if>>
 			<</if>>
 
-			<<mirroricon>><<link [[Look in the mirror (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+			<<mirroricon>><<link [[거울을 바라본다 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
 			<br>
 			<<if hasSexStat("exhibitionism", 3) or $arousal gte 9000>>
-				<<skinicon "masturbate">><<link [[Masturbate|Women's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
+				<<skinicon "masturbate">><<link [[자위한다|Women's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
 				<br>
 			<</if>>
 			<<if setup.bodyliquid.combined("face") gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-				<<bathroomicon "sink">><<link [[Wash face (0:05)|Women's Toilets Wash]]>><<pass 5>><</link>>
+				<<bathroomicon "sink">><<link [[얼굴을 씻는다 (0:05)|Women's Toilets Wash]]>><<pass 5>><</link>>
 				<br>
 			<</if>>
 			<<if setup.bodyliquid.combined("mouth") gte 1>>
-				<<bathroomicon "sink">><<link [[Rinse mouth (0:05)|Women's Toilets Rinse]]>><<pass 5>><</link>>
+				<<bathroomicon "sink">><<link [[입을 헹군다 (0:05)|Women's Toilets Rinse]]>><<pass 5>><</link>>
 				<br>
 			<</if>>
 			<<pregnancyTest "Women's Toilets">>
 			<<storeon "parkwomens" "check">>
 			<<if _store_check isnot 1>>
-				<<getouticon>><<link [[Leave|Park]]>><</link>>
+				<<getouticon>><<link [[떠난다|Park]]>><</link>>
 			<<elseif $exposed gte 2 and hasSexStat("exhibitionism", 3)>>
-				<<sneakicon>><<link [[Sneak out|Park Toilets Sneak]]>><<set $phase to 2>><</link>><<exhibitionist3>>
+				<<sneakicon>><<link [[몰래 나간다|Park Toilets Sneak]]>><<set $phase to 2>><</link>><<exhibitionist3>>
 			<<elseif $exposed is 1>>
-				<<sneakicon>><<link [[Sneak out|Park Toilets Sneak]]>><<set $phase to 1>><</link>><<exhibitionist1>>
+				<<sneakicon>><<link [[몰래 나간다|Park Toilets Sneak]]>><<set $phase to 1>><</link>><<exhibitionist1>>
 			<<elseif $exposed lte 0>>
-				<<getouticon>><<link [[Leave|Park]]>><</link>>
+				<<getouticon>><<link [[떠난다|Park]]>><</link>>
 			<</if>>
 		<</if>>
 <</if>>
@@ -366,117 +358,117 @@ You are in the women's toilets in the park.
 
 <<if setup.bodyliquid.combined("face") gte 1>>
 	<<if $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen">>
-		Bending over the sink, you wash the lewd fluid and ink from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 잉크와 음란한 액체들을 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-		Bending over the sink, you wash the lewd fluid and lipstick from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 립스틱과 음란한 액체들을 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-		Bending over the sink, you wash the lewd fluid and mud from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 진흙과 음란한 액체들을 씻어낸다.
 	<<else>>
-		Bending over the sink, you wash the lewd fluid from your face.
+		세면대에 몸을 숙여, 당신은 얼굴에 묻은 음란한 액체들을 씻어낸다.
 	<</if>>
 <<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-	Bending over the sink, you wash the lipstick from your face.
+	세면대에 몸을 숙여, 당신은 얼굴에 묻은 립스틱을 닦아낸다.
 <<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-	Bending over the sink, you wash the mud from your face.
+	세면대에 몸을 숙여, 당신은 얼굴에 묻은 진흙을 닦아낸다.
 <<else>>
-	Bending over the sink, you wash the ink from your face.
+	세면대에 몸을 숙여, 당신은 얼굴에 묻은 잉크를 닦아낸다.
 <</if>>
 <<wash_face>>
 <br><br>
 
-<<link [[Next|Women's Toilets]]>><</link>>
+<<link [[다음|Women's Toilets]]>><</link>>
 <br>
 
 :: Women's Toilets Rinse
 <<effects>>
 
-You bend over a sink and rinse out your mouth.
+세면대에 몸을 숙여 입안을 헹군다.
 <<wash_mouth>>
 <br><br>
 
-<<link [[Next|Women's Toilets]]>><</link>>
+<<link [[다음|Women's Toilets]]>><</link>>
 <br>
 
 :: Park Streak
 <<effects>>
-Hiding your nudity behind the toilet door, you take a peek into the park.
+화장실 문 뒤에서 벌거벗은 몸을 숨긴 채로, 당신은 공원을 살짝 둘러본다.
 <<switch Weather.name>>
 	<<case "clear" "lightClouds">>
-		The park is full of people, enjoying the good weather. There are people jogging, having picnics, walking their dogs, buying ice cream, and sitting on benches.
+		공원은 좋은 날씨를 즐기는 사람들로 가득하다. 사람들은 조깅하거나, 개와 산책하거나, 피크닉을 즐기거나, 아이스크림을 사거나, 벤치에 앉아 있다.
 		<br>
-		You would be seen by a lot of people.
+		당신은 아주 많은 사람들에게 보여질 것이다.
 		<<fameexhibitionism 15>>
 	<<case "heavyClouds">>
-		Despite the grey sky, the park is still crowded. Some people are jogging, some are reading on benches, and some are passing through.
+		흐린 날임에도 불구하고, 공원은 사람들로 붐빈다. 몇몇 사람들은 조깅하거나, 벤치에서 책을 읽거나, 그냥 지나가고 있다.
 		<br>
-		You would be seen by many people.
+		당신은 많은 사람들에게 보여질 것이다.
 		<<fameexhibitionism 10>>
 	<<case "lightPrecipitation" "heavyPrecipitation" "thunderStorm">>
 		<<if Weather.precipitation is "rain">>
-			Despite the downpour, the park isn't empty. There's a few people with umbrellas passing by, a few walking their dogs, and even one person having a smoke.
+			폭우에도 불구하고, 공원은 비어있지 않다. 적은 수의 사람들이 우산을 쓰고 공원을 지나가거나, 개와 산책 하거나, 어떤 한 사람은 담배를 피고 있기도 한다.
 		<<else>>
-			The park is full of people enjoying the snow. You see snowball fights, people building snowmen, dog-walkers, and even one <<person>> jogging.
+			공원은 눈을 즐기는 사람들로 가득하다. 당신은 눈싸움을 하거나, 눈사람을 만드는 사람들, 개를 산책시키는 사람들, 심지어 한 <<people_ un>> 조깅을 하고 있기도 한다.
 		<</if>>
 		<br>
-		You would be seen by a few people.
+		당신은 몇몇 사람들에게 보여질 것이다.
 		<<fameexhibitionism 5>>
 <</switch>>
 <<if isInPark("kylar")>>
 	<br>
-	You can see Kylar sitting beneath a tree, drawing in <<nnpc_his "Kylar">> sketchbook.
+	당신은 카일라가 나무 밑에 앉아, <<nnpc_his_ "Kylar" 의>> 스케치북에 그림을 그리고 있는 것을 발견한다.
 <</if>>
 <<if isInPark("whitney")>>
 	<br>
-	You can see Whitney, standing under an umbrella.
+	당신은 우산 아래 서 있는 휘트니를 발견한다.
 <</if>>
 <<if isInPark("robin")>>
 	<br>
-	You can see Robin's hot chocolate stand.
+	당신은 로빈의 핫초코 가판대를 발견한다.
 <</if>>
 <br><br>
-<<link [[Next|Park Streak 2]]>><</link>>
+<<link [[다음|Park Streak 2]]>><</link>>
 
 :: Park Streak 2
 <<effects>>
 <<generate1>><<generate2>>
-You take a deep breath. You burst out from the toilets and start running as fast as you can.
+당신은 심호흡을 한 후, 당신은 화장실에서 뛰어나와 가능한 빨리 달리기 시작한다.
 <br><br>
 <<switch Weather.precipitation>>
 	<<case "none">>
 		<<if Weather.isSnow>>
-			It's so cold you almost go numb. The snow crunches beneath your feet.
+			너무 추워서 거의 감각이 없다. 눈이 밟혀 뽀득뽀득 소리를 낸다.
 		<<elseif Weather.temperature >= 20>>
-			Despite the warm air, you feel a chill as the wind blows over your naked body. You get goosebumps from the feeling of exposure.
+			따뜻한 공기에도 불구하고, 벌거벗은 몸 위로 바람이 불며 한기를 느낀다. 당신은 노출되었다는 느낌에 소름이 돋는다.
 		<<else>>
-			The breeze doubles as you sprint, flowing over your most intimate areas. You feel the cool wind on every part of your skin.
+			달리다 보니 산들바람이 두 배로 세게 불어, 당신의 소중한 부분까지 바람이 들어온다. 당신은 온 몸 구석구석까지 시원한 바람을 느낀다.
 		<</if>>
 		<br><br>
-		The reactions start quickly. You hear screams, shouts, laughs, and cheers. You're doing nothing to hide your fully exposed body, so the crowds see everything.
+		반응이 빠르게 시작된다. 당신은 비명, 고함, 웃음, 환호를 듣는다. 당신은 벗은 몸을 가리기 위해 아무 것도 하지 않고 있기에, 군중들은 모든 것을 볼 수 있다.
 		<br><br>
-		You run by the ice cream stand first, giving everyone in line a good view. You stop to do a quick twirl, making sure they can see you from every angle. You hear cheers and shouts of disgust as you run off.
+		당신은 먼저 아이스크림 가판대를 지나치며, 줄을 선 모든 사람들에게 좋은 볼거리를 제공한다. 당신은 빠르게 돌기 위해 잠시 멈춰, 그들이 모든 각도에서 당신을 볼 수 있도록 한다. 당신이 달려갈 때 환호와 혐오의 함성을 듣는다.
 		<br><br>
-		You sprint by the toilets, giving a peace sign to a surprised <<person1>><<person>> walking out.
+		당신은 화장실 옆으로 전력질주하며, 걸어나오다 놀란 <<person1>><<personPost>>에게 피쓰 사인을 날린다.
 		<br><br>
-		Next you run through a field. Three people having a picnic gape at you. You run a quick circle around their blanket before running off.
+		다음으로 당신은 공터를 질러 뛰어간다. 세 명의 사람들이 피크닉을 즐기다 입을 쩍 벌리고 당신을 바라본다. 당신은 달려가기 전 그들의 돗자리 주위를 빙글 돈다.
 		<br><br>
-		Many of the park-goers are able to pull out their phones and grab videos of your streak. Your arousal builds the more you run around the park. You want to go as long as possible without returning to the toilets.
+		공원을 찾은 많은 사람들이 핸드폰을 꺼내 당신의 모습을 담은 사진과 비디오를 찍을 수 있다. 당신이 공원을 계속 달릴 수록 흥분감이 높아진다. 당신은 가능한 화장실로 가지 않고 오래 달리고 싶다.
 	<<case "rain">>
-		You get soaked as you run through the rain. You can feel the water run down your skin and flow over your fully exposed genitals. You shiver as you run.
+		당신은 비를 뚫고 달리며 흠뻑 젖는다. 당신의 몸을 타고 흘러내린 물이 완전히 노출된 성기 위로 흐르는 것을 느낄 수 있다. 당신은 달리면서 몸을 떤다.
 		<br><br>
-		The park is mostly empty, but there are a few people to show off for. You run by a <<person1>><<person>> walking under an umbrella. <<He>> takes a long look as you run by.
+		공원은 대부분 비어 있지만, 보여줄 사람들은 몇몇 보인다. 당신은 우산을 쓰고 걷는 한 <<person1>><<person_ ul>> 달려 지나친다. <<He_ nun>> 뛰어가는 당신을 한참을 바라본다.
 		<br><br>
-		You still sometimes run into startled people in the park. You make sure they get a good look and then run off again.
+		당신은 가끔 공원에서 놀란 사람들과 마주친다. 당신은 그들이 잘 보고있는지 확인하고선 다시 달려간다.
 		<br><br>
-		You stop in the middle of a field. You extend your arms out and let the rain wash over you. After a minute, you drop your arms and start running again. You see a <<person2>><<person>> under an umbrella with <<his>> phone pointed at you. You blush when you realise how much footage you've just given <<him>>.
+		당신은 공터 한 가운데 멈춰 섰다. 당신은 두 팔을 뻗어 비가 당신을 씻어내도록 한다. 몇 분 후, 당신은 두 팔을 내리곤 다시 뛰기 시작한다. 당신은 한 <<person2>><<person_ i>> 우산 아래에서 핸드폰을 당신 쪽으로 향하고 있는 것을 본다. 당신은 그 사람이 당신을 얼마나 많이 찍었을 지 깨닫고 얼굴이 붉어진다.
 	<<default>>
 		<<generate3>>
-		It's so cold you almost go numb. The snow crunches beneath your feet.
+		너무 추워서 거의 감각이 없다. 눈이 밟혀 뽀득뽀득 소리를 낸다.
 		<br><br>
-		You hear the shouts and cheers quickly. You veer as close to the large groups as you can. The snow makes it hard to run, so you move much slower. Everyone gets more time to take a look at you in your exposed state.
+		당신은 함성과 환호소리를 듣는다. 당신은 모여있는 사람들에게 가능한 가까이 다가간다. 눈 때문에 달리기 어렵기 때문에, 당신은 천천히 움직인다. 모든 사람들은 당신의 알몸을 더욱 오랫동안 볼 수 있을 것이다.
 		<br><br>
-		Several people are throwing snowballs at each other. You jog through, dodging snowballs. Several of them cheer and make you their next target. Most of their shots fly wide, but one lucky one gets a cold strike right on your naked butt. You yelp and jump, brushing the snow off your rear. The group laughs and cheers as you run off.
+		몇 명의 사람들이 눈싸움을 하고 있다. 당신은 눈덩이를 피하며 달린다. 눈덩이를 던지던 몇몇 사람들이 환호하며 당신을 다음 목표로 삼는다 . 눈덩이의 대부분은 멀리 날아가지만, 운이 좋은 한 덩이가 당신의 벗은 엉덩이에 명중한다. 당신은 비명을 지르며 펄쩍 뛰고는, 엉덩이에 묻은 눈을 털어낸다. 당신이 달려가는 모습을 보며 그들은 웃고 환호한다.
 		<br><br>
-		There's a <<person1>><<person>> and a <<person2>><<person>> building a snowman. You run around a circle around them. The <<person1>><<person>> knocks over the snowman's head in surprise. You stop and wiggle your cold, bare butt at them before running off again. A <<person3>><<person>> on a bench films your very cold run with <<his>> phone.
+		<<person1>><<person_ gwa>> <<person2>><<person_ i>> 눈사람을 만들고 있다. 당신은 그들 주위를 빙글빙글 돈다. <<person1>><<person_ i>> 놀라서 눈사람 머리를 넘어뜨린다. 당신은 멈춰서서 당신의 차가운, 벗은 엉덩이를 흔들고 나선 다시 달려간다. 한 <<person3>><<person_ nun>> 벤치에 앉아 추위속에 뛰는 당신을 핸드폰으로 찍는다.
 <</switch>>
 <<endevent>>
 <<athletics 1>><<tiredness 1>>
@@ -496,7 +488,7 @@ You take a deep breath. You burst out from the toilets and start running as fast
 	<<addevent "eventParkStreak5" 2>>
 <</if>>
 <<addinlineevent "eventParkStreak6" 4>>
-	You run back to the toilets without incident. You take deep breaths as you try to slow your pulse.<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+	당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다.<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
 	<br><br>
 	<<eventParkStreakEnd>>
 <</addinlineevent>>
@@ -505,57 +497,57 @@ You take a deep breath. You burst out from the toilets and start running as fast
 :: Park Streak Police Run
 <<effects>>
 <<if $athleticsSuccess>>
-	You pick up the pace, running as fast as you can. It's difficult to lose them, but you manage to dive behind some bushes. You stay hidden until they move on, keeping as quiet and still as possible.
+	당신은 속도를 높여, 최대한 빨리 달린다. 경찰을 따돌리기는 어렵지만, 어떻게든 덤불 뒤로 뛰어들 수 있었다. 당신은 경찰이 떠날 때까지 숨어서, 가능한 조용하게 가만히 있는다.
 	<br><br>
-	When the coast is clear, you step out of the bushes. You return to the bathroom.
+	방해자들이 없어지자, 당신은 덤불에서 나와 화장실로 달려간다.
 	<br><br>
 	<<eventParkStreakEnd>>
 <<else>>
-	You try to run faster, but the cops catch up to you. They grab you and handcuff your arms behind your back.
+	당신은 최대한 빨리 달리지만, 결국 경찰들이 따라잡는다. 경찰은 당신을 붙잡고 등 뒤로 팔을 돌려 수갑을 채운다.
 	<br><br>
-	<<link [[Next|Park Streak Police Catch]]>><<crimeUp 100 "resisting">><<pass 2>><<pain 1>><</link>>
+	<<link [[다음|Park Streak Police Catch]]>><<crimeUp 100 "resisting">><<pass 2>><<pain 1>><</link>>
 <</if>>
 
 :: Park Streak Police Catch
 <<effects>>
 <<if $phase is 1>>
 	<<set $phase to 0>>
-	You stop and wait for the two cops to catch up. Before you can say anything your <<if $worn.handheld.name isnot "naked">>$worn.handheld.name is confiscated and your <</if>>arms are bound behind your back with handcuffs.
+	당신은 멈춰 서서 두 경찰이 따라잡기를 기다린다. 당신이 어떤 말을 하기도 전에 당신의 <<if $worn.handheld.name isnot "naked">><<worn_handheld_name_ un>> 몰수당하고 당신의 <</if>>팔이 등 뒤로 돌려져 수갑이 채워진다.
 	<br><br>
 <</if>>
 <<bind>>
-"You're under arrest for public indecency," the cop leading you away says. They begin walking you towards their squad car.
+"당신을 공연음란죄로 체포합니다," 경찰이 당신을 끌고 가며 말한다. 그들은 당신을 데리고 경찰차로 향한다.
 <br><br>
-With your hands bound behind you, there's nothing you can do to cover your nudity. The cops seem to be walking deliberately slower than they need to be. Even though you were just running naked around the park, there's something different about being slowly paraded nude with your hands bound behind your back.
+두 손이 뒤로 묶여, 당신은 벌거벗은 몸을 감추기 위해 할 수 있는 일이 아무것도 없다. 경찰들은 필요 이상으로 일부러 천천히 걷고 있는 것 같다. 비록 당신이 벌거벗은 채로 공원을 뛰어다녔지만, 등 뒤에 수갑이 채워진 채 천천히 나체 퍼레이드를 하는 것은 뭔가 다르다.
 <br><br>
 <<switch Weather.precipitation>>
 	<<case "none">>
-		Many of the parkgoers saw your arrest and have come closer to watch. Many have their phones out, getting good shots of you completely naked. You blush.
+		공원을 찾은 많은 사람들이 당신이 체포된 것을 보고는 더 가까이 다가와 지켜본다. 많은 사람들이 당신의 나체를 핸드폰으로 찍는다. 당신의 얼굴이 붉어진다.
 	<<case "rain">>
-		Because of the weather, there's few people in the park to see your naked parade to the squad car.
+		날씨 때문에 공원에는 당신의 나체 퍼레이드를 볼 사람이 거의 없다.
 	<<default>>
-		The park is full of people enjoying the snow, all of them dressed more warmly than you. You shiver as the cops walk you through the park, letting everyone get a good look at your naked body. Many start filming your procession, getting footage of every side of you.
+		공원은 눈을 즐기는 사람들로 가득 차 있고, 그들 모두는 당신보다는 더 따뜻하게 옷을 입었다. 경찰들이 당신을 데리고 공원을 가로지르며, 모든 사람들이 당신의 벌거벗은 몸을 잘 볼 수 있도록 두자 당신은 몸을 부르르 떤다. 많은 사람들이 당신의 모습을 모든 각도로 촬영하기 시작한다.
 <</switch>>
 <br><br>
-<<link [[Bluff|Park Streak Police Bluff]]>><<pass 2>><</link>><<englishdifficulty 1 1000>>
+<<link [[발뺌한다|Park Streak Police Bluff]]>><<pass 2>><</link>><<englishdifficulty 1 1000>>
 <br>
-<<link [[Go along quietly|Park Streak Police Car]]>><<set $phase to 1>><<pass 10>><</link>>
+<<link [[조용히 따라간다|Park Streak Police Car]]>><<set $phase to 1>><<pass 10>><</link>>
 
 :: Park Streak Police Bluff
 <<effects>>
-"Wait!" you say. "My clothes were stolen. A group of thugs jumped me and stole my clothes! I was just trying to get home."
+"잠깐만요!" 당신이 말한다. "제 옷을 도둑 맞았어요. 깡패들이 습격해 제 옷을 훔쳐갔어요! 그래서 전 그냥 집으로 가던 길이었어요."
 <br><br>
-You put a quiver in your voice and try to make your most sympathetic face.
+당신은 목소리에 떨림을 넣고 가장 동정심을 얻을 수 있는 얼굴을 만들려고 노력한다.
 <<if $englishSuccess>>
-	The two officers look like they're buying it. When they get to the squad car they uncuff you and pull a towel out of the car.
+	두 경찰관은 당신의 말을 믿는 것처럼 보인다. 그들은 경찰차로 돌아가 당신의 수갑을 풀어주고 차에서 수건을 꺼낸다.
 	<br><br>
-	"Lucky we had this," one of them says. "We've had reports of these thugs jumping people before. Stay safe and try to get home quickly."
+	"우리가 이걸 갖고 있어 다행입니다," 그들 중 한명이 말한다. "전에 깡패들이 사람들을 습격한 기록이 있습니다. 안전한 길로 가능한 빨리 집에 가도록 하십시오."
 	<br><br>
-	"I will!" you say, putting on a face of pure gratitude. "Thank you! Thank you so much!"
+	"그럴게요!" 순수한 표정을 지으며 당신이 대답한다. "감사합니다! 정말 감사합니다!"
 	<br><br>
-	The two cops get in their car and drive away. You run off, happy to have gotten out of getting arrested.
+	경찰관들이 경찰차를 타고 떠난다. 당신은 체포되지 않았다는 사실에 기뻐하며 달려간다.
 	<br><br>
-	You run back to the toilets without incident. You take deep breaths as you try to slow your pulse.
+	당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다.
 	<<ltrauma>><<lstress>><<trauma -3>><<stress -3>>
 	<br><br>
 	<<unbind>>
@@ -567,37 +559,37 @@ You put a quiver in your voice and try to make your most sympathetic face.
 	<<eventParkStreakEnd>>
 <<else>>
 	<<crimeUp 100 "exposure">>
-	"Nice try," one of the cops says, "but we know a pervert like you when we see one."
+	"좋은 시도였어," 경찰관 중 한명이 말한다, "하지만 우리는 너같은 변태는 한눈에 알아본다고."
 	<br><br>
-	<<link [[Next|Park Streak Police Car]]>><<pass 10>><</link>>
+	<<link [[다음|Park Streak Police Car]]>><<pass 10>><</link>>
 <</if>>
 
 :: Park Streak Police Car
 <<effects>>
 <<if $phase is 1>>
-	You quietly follow the officers back to their car.
+	당신은 조용히 경찰차로 따라간다.
 <<else>>
-	They finally get you to their car.
+	그들은 마침내 경찰차에 당신을 데려간다.
 <</if>>
 <<fameexhibitionism 5>>
-Your heart drops as you see they're parked on High Street. Crowds of people walk the sidewalk, going on various errands. You hear shouts and whistles as the cops march you onto the sidewalk. One of the cops stands you on the sidewalk just outside the back door.
+당신은 하이 가에 주차된 차를 보고 심장이 내려앉는 것 같다. 다양한 일을 하러 보도를 걷는 수많은 사람들이 있다. 경찰관들이 당신을 데리고 보도로 행진하자 수많은 함성과 휘파람 소리가 들린다. 경찰관 중 한명이 당신을 뒷문 바로 바깥 보도에 세운다.
 <<gstress>><<stress 3>>
 <br><br>
-"Wait there," <<person1>><<he>> says, a wicked grin on <<his>> face.
+"여기서 기다려," <<person1>><<he_ ga>> 말하며, <<his_ yi>> 얼굴에 사악한 미소를 짓는다.
 <br><br>
-"You're not going to put me inside? Or give me anything to cover with?"
+"저를 경찰차에 태우지 않나요? 아니면 무언가 덮을 거라도 안 주나요?"
 <br><br>
-"What's the issue?" <<he>> says, "you didn't have a problem letting everyone see a few minutes ago."
+"뭐가 문젠데?" <<he_ ga>> 말한다, "몇 분 전까지만 해도 다른 사람들이 너를 봐도 아무 문제가 없었잖아."
 <br><br>
-<<He>> leans against the car and watches you while the other cop opens the driver's side door and pulls out <<his>> radio. The cops let you stand there completely naked on High Street with your arms bound behind your back. A crowd quickly forms, and many slow their walks or stay just long enough to get a full look at you. You can do nothing to hide your fully exposed <<breasts>>, your naked genitals, or even your completely bare ass. You also can't stop the crowd from taking as many pictures as they want. The officer on the radio takes <<his>> time finishing <<his>> call, and the other officer just watches.
+다른 한 명의 경찰이 운전석 문을 열고 무전기를 꺼내는 동안 <<He_ nun>> 차에 기대어 당신을 지켜본다. 경찰들은 당신이 팔을 등 뒤로 묶이고 벌거벗은 채로 하이 가에 서 있도록 둔다. 구경꾼들이 빠르게 모여들고, 많은 사람들이 단지 당신을 완전히 보기 위해 걸음을 늦추거나 멈춘다. 당신은 당신의 완전히 노출된 <<breasts_ na>>, 벌거벗은 성기, 심지어 당신의 맨 엉덩이를 숨기기 위해 아무것도 할 수 없다. 그리고 당신은 수많은 사람들이 당신을 찍는 것 또한 막을 수 없다. 무전기를 든 경찰관은 무전을 보내는 데 시간을 보내고, 다른 경찰관은 그저 보고만 있다.
 <br><br>
-Finally, the other officer ends <<his>> call and pushes you into the backseat of the squad car.
+마침내, 다른 경찰관이 무전을 끝내고 당신을 경찰차 뒷자리로 밀어넣는다.
 <br><br>
-<<link [[Next|Hospital Arrest Sit]]>><<pass 5>><</link>>
+<<link [[다음|Hospital Arrest Sit]]>><<pass 5>><</link>>
 
 :: Park Streak Police Fight
 <<if $fightstart is 1>>
-	You stop and brace yourself, ready to fight the cops off.
+	당신은 멈춰서서 긴장하며, 경찰과 싸울 준비를 한다.
 	<<set $fightstart to 0>>
 	<<neutral 1>>
 	<<maninit>>
@@ -609,23 +601,23 @@ Finally, the other officer ends <<his>> call and pushes you into the backseat of
 
 <<effects>>
 <<effectsman>>
-<<alarmstate "<span class='red'>You scream, but no one comes to your aid against the police.</span>">>
+<<alarmstate "<span class='red'>당신은 비명을 지르지만, 경찰을 상대로 도와줄 사람은 아무도 없다.</span>">>
 <<man>>
 <<stateman>>
 <<actionsman>>
 
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Park Streak Police Fight Finish]]>><</link>></span>
+	<span id="next"><<link [[다음|Park Streak Police Fight Finish]]>><</link>></span>
 <<else>>
-	<span id="next"><<link [[Next|Park Streak Police Fight]]>><</link>></span>
+	<span id="next"><<link [[다음|Park Streak Police Fight]]>><</link>></span>
 <</if>>
 
 :: Park Streak Police Fight Finish
 <<effects>>
 <<if $enemyhealth lte 0>>
-	You catch the officer off-guard. You shove <<him>> to the ground and take the opportunity to run away.
+	당신은 경찰관의 허를 찔렀다. 당신은 <<he_ rul>> 바닥에 밀쳐 버리고 도망칠 기회를 잡는다.
 	<br><br>
-	You run back to the toilets. You take deep breaths as you try to slow your pulse.
+	당신은 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다.
 	<br>
 	<<endcombat>>
 	<<eventParkStreakEnd>>
@@ -633,21 +625,20 @@ Finally, the other officer ends <<his>> call and pushes you into the backseat of
 	<<if $enemyarousal gte $enemyarousalmax>>
 		<<ejaculation>>
 	<</if>>
-	You are left helpless and writhing in pain. You can do nothing as the cops pick you up and handcuff your hands behind your back. <<if $worn.handheld.name isnot "naked">>Your $worn.handheld.name is confiscated.<</if>>
+	당신은 속수무책으로 당하고 고통에 몸부림친다. 경찰이 당신을 들어올려 등 뒤에서 수갑을 채우는 동안 당신은 아무것도 할 수 없다. <<if $worn.handheld.name isnot "naked">>당신의 <<worn_handheld_name>>도 압수당했다.<</if>>
 	<<bind>>
-	<<tearful>> you try to get your bearings. They carry you away.
+	<<tearful>> 당신은 정신을 차리려고 애쓴다. 그들은 당신을 데려간다.
 	<<saveNPC 0 "police_park_0">><<saveNPC 1 "police_park_1">>
 	<br>
 	<<endcombat>>
 	<<loadNPC 0 "police_park_0">><<loadNPC 1 "police_park_1">>
 	<<clearNPC "police_park_0">><<clearNPC "police_park_1">>
-	<<link [[Next|Park Streak Police Car]]>><<pass 5>><</link>>
+	<<link [[다음|Park Streak Police Car]]>><<pass 5>><</link>>
 <</if>>
 
 :: Park Streak Rape
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
-	<<controlloss>>
 	<<neutral 1>>
 	<<maninit>>
 	<<set $enemytrust -= 0>>
@@ -664,23 +655,22 @@ Finally, the other officer ends <<his>> call and pushes you into the backseat of
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Park Streak Rape Finish]]>><</link>></span>
+	<span id="next"><<link [[다음|Park Streak Rape Finish]]>><</link>></span>
 <<else>>
-	<span id="next"><<link [[Next|Park Streak Rape]]>><</link>></span>
+	<span id="next"><<link [[다음|Park Streak Rape]]>><</link>></span>
 <</if>>
 
 :: Park Streak Rape Finish
 <<effects>>
 <<if $enemyhealth lte 0>>
-	You leave the two lying on the ground and take your chance to escape. You rush back to the toilets, ending your streak.
+	당신은 두 사람을 바닥에 밀쳐 버리고 도망칠 기회를 잡는다. 당신은 벌거벗고 달리기를 끝내고 화장실로 급히 돌아온다.
 <<elseif $alarm is 1 and $rescue is 1>>
-	They lose their nerve after your screaming, and leave you on the ground, laughing as they walk off. You take a few minutes to pick yourself up and brush yourself off before rushing back to the bathroom, ending your streak.
+	그들은 당신의 비명 때문에 겁을 먹고, 당신을 땅에 버려둔 채 웃으면서 걸어간다. 당신은 몇 분 후 일어나 먼지를 털고는, 벌거벗고 달리기를 끝내고 화장실로 돌아온다.
 <<else>>
 	<<ejaculation>>
-	They leave you lying on the ground, laughing as they walk off. You take a few minutes to pick yourself up and brush yourself off before rushing back to the bathroom, ending your streak.
+	그들은 당신을 바닥에 둔 채로 웃으며 걸어간다. 당신은 몇 분 후 일어나 먼지를 털고는, 벌거벗고 달리기를 끝내고 화장실로 돌아온다.
 <</if>>
-<br><br>
-
+<br>
 <<endcombat>>
 <<eventParkStreakEnd>>
 
@@ -688,49 +678,50 @@ Finally, the other officer ends <<his>> call and pushes you into the backseat of
 <<effects>>
 <<person1>>
 <<if $phase is 1>>
-	You decide to streak by Whitney as well. You pick your pace back up and start running towards <<him>>. It's a few seconds before Whitney sees you. There's a look of confusion on <<his>> face before recognition sets in.
+	당신은 휘트니 앞에서도 벌거벗고 달리기로 결심한다. 당신은 다시 속도를 내서 <<he_ rul>> 향해 뛰기 시작한다. 휘트니가 당신을 보기 몇 초 전이다. 알아채기 전까지 <<his_ yi>> 얼굴에 혼란스러운 표정이 역력하다.
 	<br><br>
 	<<if $speech_attitude is "meek">>
-		"Hi Whitney," you say, trying to be coy.
+		"안녕 휘트니,"라고 당신은 새침한 척 말한다.
 	<<elseif $speech_attitude is "bratty">>
-		"Like what you see?" you say, trying to show off as much as you can.
+		"보기 좋아?"라고 최대한 뽐내며 당신은 말한다.
 	<<else>>
-		"What's up?" you say, trying to hide your embarrassment.
+		"무슨 일이야?" 당신은 당혹감을 감추며 말한다.
 	<</if>>
 	<br><br>
 	<<if $whitneyromance is 1>>
-		"Hey slut," <<he>> responds. "What's wrong with you this time?"<<npcincr Whitney lust 1>><<glust>>
+		"안녕 <<slut_ a>>," <<he_ nun>> 대답한다. "이번엔 또 뭔 일이야?"<<npcincr Whitney lust 1>><<glust>>
 		<br>
-		"Nothing, just... showing off what I've got."
+		"아무것도, 그냥... 내 모습을 보여주고 싶어서."
 		<br>
-		"Hmm." <<He>> places <<his>> hand on <<his>> chin, then slowly looks you over, more than once. "Hold still."
+		"흠." <<He_ nun>> 손을 턱에 얹고 천천히 여러번 당신을 훑어본다. "가만히 있어."
 		<br>
 		<<if $bodywritingLvl gte 1 and !$skin.breasts.writing>>
 			<<add_bodywriting "breasts" "property_of_whitney" "marker">>
-			<<npcincr Whitney dom 1>><<gdom>>
-			Reaching into <<his>> bag, <<he>> pulls out a marker and promptly writes <i><span class="sub">Property of Whitney</span></i> on your exposed chest.
+			<<npcincr Whitney dom 5>><<ggdom>>
+			<<his_ yi>> 가방 안에 손을 뻗어, <<he_ nun>> 마커를 꺼내 당신의 노출된 가슴에 <i><span class="sub">휘트니의 소유물</span></i>이라고 적는다.
 			<br>
-			"There. Much better. I don't want anyone getting any stupid ideas."
+			"됐다. 훨씬 좋아. 아무도 멍청한 생각 못하겠지."
 			<br>
 		<</if>>
 		<br>
-		<<He>> pulls you in for a quick kiss, then turns you around and gives your exposed ass a slap. "Now, get a move on. I'm not in the mood for a fuck."<<arousal 100>><<garousal>>
+		<<He_ nun>> 당신을 끌어당겨 키스를 한 다음, 당신을 놓고선 당신의 노출된 엉덩이를 한 대 때린다. "자, 이제 얼른 가. 난 오늘 너랑 섹스 할 기분이 아니야."<<arousal 100>><<garousal>>
 		<br><br>
-		You jump, and continue your run through the park.
+		당신은 펄쩍 뛰고, 공원을 가로질러 계속 달린다.
 	<<else>>
-		Whitney ignores you and looks away, uninterested in your display.
+		휘트니는 당신을 무시하고 다른 곳을 바라보며, 당신의 모습에 관심을 갖지 않는다.
 		<br><br>
-		You jog in place for a few moments, but you don't capture <<his>> interest.
+		당신은 잠시 제자리 달리기를 하지만, <<his_ yi>> 관심을 받지 못한다.
 		<br><br>
-		Then, still not looking at you, <<he>> exhales a cloud of smoke. "Go away, slut, you're annoying me."
+		그러고는, 여전히 당신을 보지 않으며 <<he_ nun>> 연기를 내뿜는다. "저리 꺼져, <<slut_ a>>, 날 짜증나게 만들고 있어."
+		<<npcincr Whitney dom 1>><<gdom>>
 		<br><br>
-		You continue your run through the park.
+		당신은 계속해서 공원을 달린다.
 	<</if>>
 <<else>>
-	You decide to avoid <<him>> and move off in the opposite direction.
+	당신은 <<he_ rul>> 피해 반대 방향으로 돌기로 결정한다.
 <</if>>
 <br><br>
-You run back to the toilets without incident. You take deep breaths as you try to slow your pulse.<<ltrauma>><<lstress>><<trauma -3>><<stress -3>>
+당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다.<<ltrauma>><<lstress>><<trauma -3>><<stress -3>>
 <br><br>
 <<eventParkStreakEnd>>
 
@@ -738,50 +729,49 @@ You run back to the toilets without incident. You take deep breaths as you try t
 <<effects>>
 <<if $phase is 1>>
 	<<generate2>>
-	You run up to the hot chocolate stand. Robin's customers notice you first. A <<person2>><<person>> drops <<his>> cup when they see your nudity. Robin notices you next, and <<person1>><<his>> face turns beet red.
+	당신은 핫초코 가판대로 달려간다. 로빈의 손님들이 먼저 당신을 알아본다. 한 <<person2>><<person_ un>> 당신의 나체를 보고는 <<his_ yi>> 컵을 떨어트린다. 로빈이 당신을 알아채고는 <<person1>><<his_ yi>> 얼굴이 벌겋게 달아오른다.
 	<br><br>
 	<<if $robinromance is 1>>
-		<<wearProp "hot drink" 0 "cocoa">>
-		Robin openly ogles your exposed body as you run up to their stand. You take a lap around the hot chocolate stand as Robin's customers stare and take footage of your naked run.
+		로빈은 당신이 가판대로 달려오는 동안 당신의 노출된 몸을 공공연하게 훔쳐본다. 로빈의 손님들이 나체로 달리는 당신을 찍는 동안 당신은 로빈의 핫초코 가판대를 빙글 돈다.
 		<br><br>
-		You stop in front of the stand.
+		당신은 가판대 앞에 멈춰선다.
 		<br><br>
-		"What're you doing?" Robin asks, concerned. "Why are you out here like that? Aren't you cold? Here, let me get you some hot chocolate." Robin hands you a cup.
-		<br>Taking a sip, you immediately feel a warmth spread through your body, chasing away the cold.
+		"뭐 하는 거야?" 로빈이 걱정스럽게 묻는다. "왜 그러고 나온거야? 안 추워? 여기, 내가 핫초코 줄게." 로빈이 컵을 건넨다.
+		<br>한 모금 마시는 순간, 당신의 온 몸에 온기가 퍼져 추위를 쫓아내는 기분을 느낀다.
 		<br><br>
 		<<if $fame.exhibitionism gte 600>>
-			"I've heard you like to run around naked, but I thought it was exaggerated."
+			"네가 벌거벗고 뛰어다니는 걸 좋아한다고 듣긴 했는데, 나는 그 소문이 과장되었다고 생각했었어."''''
 		<<else>>
-			"I had no idea this is the kind of stuff you like to do."
+			"네가 이런 걸 좋아하는 줄 몰랐어."
 		<</if>>
 		<br><br>
-		Robin doesn't sound like <<hes>> objecting. <<He>> is still eyeing up your naked body. You can see some lust in <<his>> face. You turn to see the customers still there. They've been watching you the whole time, and have seen everything. And there are more park-goers coming to get a better look at you. You hold the cup up.
+		로빈은 이걸 반대하는 것 같지는 않다. <<He_ nun>> 여전히 당신의 알몸을 쳐다보고 있다. <<his_ yi>> 얼굴에서 약간의 욕망이 보인다. 당신은 여전히 그곳에 있는 손님들을 보기 위해 고개를 돌린다. 그들은 당신을 계속 지켜보고 있었고, 모든 것을 다 봤다. 그리고 더 많은 공원 이용객들이 당신을 더 잘 보기 위해 오고 있다. 당신은 컵을 들어올린다.
 		<<npcincr Robin love 1>><<glove>>
 		<br><br>
-		"Come get some hot chocolate and you can look all you want!" you shout. "It's keeping me warm even without anything on!"
+		"핫초코를 먹으며 절 마음껏 구경하세요!!" 당신이 소리친다, "아무것도 안 입어도 따뜻한 기분이에요!"
 		<br><br>
-		The next few minutes are a rush as Robin gains a crowd of new customers. They all wait in line while you stand and pose for numerous pictures. You're freezing, but the hot chocolate helps. Your pulse quickens as you stand naked in front of a small crowd.
+		로빈의 가판대에 새로운 손님들이 많이 오며 몇 분 동안 정신없이 바쁘다. 포즈를 취하는 당신을 찍기 위해 모두들 줄을 서서 기다린다. 당신은 얼어붙을 것 같지만, 핫초코가 이를 도와준다. 적은 군중 앞에 알몸으로 서 있으니 맥박이 빨라진다.
 		<br><br>
-		Finally, after everyone has bought a cup, you knock back the last of your hot chocolate and run off.
+		마침내, 모든 손님들이 핫초코를 산 후, 당신은 마지막 남은 핫초코를 털어마시고 달려간다.
 		<<fameexhibitionism 5>>
 		<<set $robinmoney += 20>>
 	<<else>>
 		<<person1>>
-		You run a circle around the booth. Robin looks down, trying to avoid looking at your exposed nudity. <<His>> customers openly leer and use their phones to record your run. You stop right next to Robin and turn to <<his>> customers.
+		당신은 가판대 주위를 한바퀴 돈다. 로빈은 당신의 노출된 알몸을 보지 않으려고, 아래를 쳐다본다. <<His_ yi>> 고객들은 당신이 달리는 모습을 휴대폰으로 녹화한다. 당신은 로빈 바로 옆에서 멈춰 <<his_ yi>> 고객에게로 몸을 돌린다.
 		<br><br>
-		"Buy hot chocolate from Robin," you say, not hiding any part of your exposed nudity from the crowd. "Here in the park, every winter."
+		"로빈의 핫초콜릿을 구매해 주세요." 사람들에게 노출된 부위를 숨기지 않으며, 당신이 말한다. "여기 공원에서 겨울마다 팔아요."
 		<br><br>
-		You turn to see Robin. <<He>> looks mortified and still can't look directly at you. <<He>> doesn't seem to appreciate your naked endorsement.
+		당신은 몸을 돌려 로빈을 본다. <<He_ nun>> 부끄러운 표정을 지으며 여전히 당신을 똑바로 쳐다보지 못한다. <<He_ nun>> 당신의 벌거벗은 홍보를 달가워하지 않는 것 같다.
 		<br><br>
-		You run back off into the park.
+		당신은 다시 공원으로 뛰어간다.
 		<<set $robinmoney += 5>>
 	<</if>>
 	<<npcincr Robin dom 1>><<gdom>>
 <<else>>
-	You decide not to streak by them and run off in the opposite direction.
+	당신은 그들을 지나치지 않고 반대 방향으로 달리기로 결심한다.
 <</if>>
 <br><br>
-You run back to the toilets without incident. You take deep breaths as you try to slow your pulse. <<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다. <<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
 <br><br>
 <<eventParkStreakEnd>>
 
@@ -791,32 +781,32 @@ You run back to the toilets without incident. You take deep breaths as you try t
 <<if $phase is 1>>
 	<<if _kylar.love gte 50>>
 		<<npcincr Kylar lust 1>>
-		Kylar notices you as you run up. It takes a few seconds for <<him>> to recognise you and see what you're doing. A look of terrified concern crosses <<his>> face. <<He>> jumps up and sprints towards you.
+		카일라가 달려오는 당신을 알아챈다. <<He_ ga>> 당신을 알아보고 무엇을 하고 있는지 알아채는데 몇 초 정도 걸린다. 겁에 질린 듯한 표정이 <<He_ yi>> 얼굴에 스친다. <<He_ ga>> 벌떡 일어나 당신을 향해 달려온다.
 		<br><br>
-		"What happened? Who did this to you?" <<he>> screams. Before you can respond Kylar's grasped your arm and pulled you off the path. <<He>> brings you behind some trees and bushes, secluding you from sight.
+		"무슨 일 있어? 누가 너한테 이런 짓을 한거야?" <<he_ ga>> 소리지른다. 당신이 대답하기도 전에 카일라가 당신의 팔을 붙잡고 길에서 끌어당긴다. <<He_ nun>> 나무와 덤불 뒤에 숨어, 당신을 사람들의 시선에서 가린다.
 		<br><br>
-		"Why are you out here like that?" Kylar is blushing furiously. You try to explain as much as possible but <<he>> interrupts.
+		"왜 그런 모습으로 여기 나와있는 거야?" 카일라가 얼굴을 새빨갛게 붉히며 말한다. 당신은 설명하려 하지만 <<he_ ga>> 끼어든다.
 		<br>
-		"You can't do that! You can't just show everyone your body like that! It's only for me to see!"<<glust "Kylar">>
+		"이러면 안돼! 네 몸을 남한테 그렇게 보여주지마! 나만 볼 수 있는거야!"<<glust "Kylar">>
 		<br><br>
-		Before you can stop <<him>>, Kylar starts removing <<his>> own clothes. <<He>> takes off <<his>> shirt and pants, leaving <<him>> <<if $kylarSeen.includes("commando")>>completely naked<<else>>in only <<his>> underwear<</if>>, before shoving them into your arms. <<Hes>> on the verge of tears. "Put these on, you need to protect yourself!"
+		<<he_ rul>> 막기도 전에 카일라가 자신의 옷을 벗기 시작한다. <<He_ ga>> <<his_ yi>> 셔츠와 바지를 벗고, <<if $kylarSeen.includes("commando")>>완전히 벌거벗은 채로<<else>>속옷만 입은 채로<</if>>, 당신의 품에 그 옷들을 밀어 넣는다. <<He_ nun>> 눈물을 흘리기 직전이다. "이거 입어, 너 자신을 보호해야 한다고!"
 		<br><br>
-		<<link [[Take them|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 1>><</link>>
+		<<link [[가져간다|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 1>><</link>>
 		<br>
-		<<link [[Refuse them|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 2>><</link>>
+		<<link [[거부한다|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 2>><</link>>
 	<<else>>
-		Kylar turns <<his>> head and looks up at you. It's a few seconds before <<he>> recognises you and sees what you're doing. A look of panic crosses <<his>> face.
+		카일라가 고개를 돌려 당신을 바라본다. <<He_ ga>> 당신을 알아보고 무엇을 하고 있는지 알아채는데 몇 초 정도 걸린다. 당황한 표정이 <<He_ yi>> 얼굴에 스친다.
 		<br><br>
-		Before you can even reach <<him>>, <<he>> grabbed <<his>> sketchbook, jumped up, and runs away from you. You watch <<him>> run down the path towards the park's exit, out of sight.<<npcincr Kylar lust 5>><<gglust "Kylar">>
+		<<hePost "에게">> 다가가기도 전에, <<he_ ga>> <<he_ yi>> 스케치북을 움켜쥐곤, 당신에게서 도망친다. 당신은 <<he_ ga>> 공원 출구를 향해 달려가, 사라질 때까지 지켜본다.<<npcincr Kylar lust 5>><<gglust "Kylar">>
 		<br><br>
-		You run back to the toilets without incident. You take deep breaths as you try to slow your pulse. <<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+		당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다. <<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
 		<br><br>
 		<<eventParkStreakEnd>>
 	<</if>>
 <<else>>
-	You turn and run in the opposite direction, getting away before Kylar can see you.
+	카일라가 당신을 발견하기 전에, 당신은 몸을 돌려 반대 방향으로 달려간다.
 	<br><br>
-	You run back to the toilets without incident. You take deep breaths as you try to slow your pulse. <<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+	당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다. <<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
 	<br><br>
 	<<eventParkStreakEnd>>
 <</if>>
@@ -838,14 +828,14 @@ You run back to the toilets without incident. You take deep breaths as you try t
 		<<case "shorts">><<lowerwear 5>>
 		<<case "sweatpants">><<lowerwear 67>>
 	<</switch>>
-	You decide to do what <<he>> says. Slowly, without making any sudden moves, you put on the clothes Kylar has given you.
+	당신은 <<he_ ga>> 시키는 대로 하기로 결정한다. 천천히, 갑작스러운 움직임 없이, 당신은 카일라가 준 옷을 입는다.
 	<br><br>
-	As soon as you're covered Kylar's demeanour changes. <<He>> wipes a tear from <<his>> eye and lowers the knife, before pulling you into a hug.
+	당신이 옷을 다 입자마자 카일라의 태도가 바뀐다. <<He_ ga>> 눈에서 흐르는 눈물을 닦고 나이프를 내린 다음, 당신을 잡아당겨 끌어안는다.
 	<br><br>
-	"You're all mine, remember that," <<he>> says as <<he>> squeezes you tight. "You can't let anyone see you like that. You're all mine."
+	"넌 전부 내 거야, 그걸 기억해" <<he_ nun>> 당신을 꽉 쥐며 말한다. "누구에게도 그런 모습을 보여주면 안돼. 넌 전부 내 거야."
 	<<npcincr Kylar love 5>><<gglove>>
 	<br><br>
-	With a final squeeze <<he>> separates from you and runs off. You watch <<him>> exit the park <<if $kylarSeen.includes("commando")>>completely naked<<else>>wearing only <<his>> underwear<</if>>.
+	마지막으로 힘을 주며 <<he_ nun>> 당신에게서 멀어진다. 당신은 <<him_ i>> <<if $kylarSeen.includes("commando")>>완전히 벌거벗은 채로<<else>>오직 속옷만 입은 채로<</if>> 공원을 나가는 것을 본다.
 	<br><br>
 	<<eventParkStreakEnd>>
 <<elseif $phase is 1>>
@@ -861,34 +851,34 @@ You run back to the toilets without incident. You take deep breaths as you try t
 		<<case "shorts">><<lowerwear 5>>
 		<<case "sweatpants">><<lowerwear 67>>
 	<</switch>>
-	You acquiesce and put the clothes on, covering yourself. Kylar calms down and gives you an aggressive hug.
+	당신은 아무 말 없이 옷을 입어, 몸을 가린다. 카일라가 진정하고는 적극적으로 포옹한다.
 	<br>
-	"You need to protect yourself," <<he>> says. "You're all mine, no one else can see you the way I see you."
+	"넌 너 자신을 소중히 할 필요가 있어," <<he_ ga>> 말한다. "넌 전부 내 거야, 아무도 내가 널 보는 것처럼 보게 할 수 없어."
 	<br>
-	With that <<he>> turns and runs off. You watch <<him>> exit the park <<if $kylarSeen.includes("commando")>>completely naked<<else>>in only <<his>> underwear<</if>>.
+	그러고선 <<he_ nun>> 몸을 돌려 달려간다. 당신은 <<him_ i>> <<if $kylarSeen.includes("commando")>>완전히 벌거벗은 채로<<else>>오직 속옷만 입은 채로<</if>> 공원을 나가는 것을 본다.
 	<<npcincr Kylar love 5>><<gglove>>
 	<br><br>
 	<<eventParkStreakEnd>>
 <<elseif $phase is 2>>
-	You push the clothes back into Kylar's arms. "Thanks," you say, "but I'm not done yet."
+	당신은 옷을 카일라의 품에 다시 밀어 넣는다. "고마워," 당신이 말한다, "그런데 난 아직 안 끝났어"
 	<br><br>
 	<<if C.npc.Kylar.rage gte 60>>
-		Your words freeze Kylar in place. <<He>> takes a step back and stands motionless. In one sudden motion, <<he>> produces a knife and lunges at you, holding you down.
+		당신의 말에 카일라가 제자리에서 얼어 붙는다. <<He_ nun>> 한 발짝 물러나 움직임 없이 서 있는다. 갑작스러운 움직임으로, <<he_ ga>> 나이프를 꺼내 들고 돌진해, 당신을 제압한다.
 		<br><br>
-		"W-What did you say, my love?" <<he>> asks. <<His>> face shows no sign of emotion. "I only want what's best for you, you know this don't you? So I'll ask again. Put. Them. On."<<npcincr Kylar rage 3>><<gksuspicion>>
+		"뭐-뭐라고, 내 사랑?" <<he_ ga>> 묻는다. <<His_ yi>> 얼굴에는 감정의 기미가 없다. "난 네가 가장 좋은 상태이기를 바라, 너도 알잖아. 안 그래? 그러니 다시 부탁할게. 이거. 당장. 입어."<<npcincr Kylar rage 3>><<gksuspicion>>
 		<br><br>
-		<<link [[Take them|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 0>><<stress 3>><</link>><<gstress>>
+		<<link [[가져간다|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 0>><<stress 3>><</link>><<gstress>>
 		<br>
-		<<link [[Fight|Park Streak Kylar Fight]]>><<set $molestationstart to 1>><<stress 3>><</link>><<gstress>>
+		<<link [[싸운다|Park Streak Kylar Fight]]>><<set $molestationstart to 1>><<stress 3>><</link>><<gstress>>
 		<br>
 		<<if hasSexStat("promiscuity", 2)>>
-			<<link [[Seduce|Park Streak Kylar Seduce]]>><</link>><<promiscuous2>>
+			<<link [[유혹한다|Park Streak Kylar Seduce]]>><</link>><<promiscuous2>>
 		<</if>>
 	<<else>>
-		Kylar looks distraught. Before <<he>> can fight you you've run back out of the bushes into the park. You can hear Kylar screaming behind you but <<he>> doesn't chase after you.
+		카일라는 정신이 나간 듯 하다. <<he_ ga>> 당신과 싸우기도 전에 당신은 덤불을 빠져나와 공원으로 달려간다. 뒤에서 카일라의 비명 소리가 들리지만 <<he_ nun>> 쫓아오지는 않는다.
 		<<npcincr Kylar love -1>><<llove>><<npcincr Kylar rage 1>><<gksuspicion>>
 		<br><br>
-		You run back to the toilets without incident. You take deep breaths as you try to slow your pulse.<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+		당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다.<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
 		<br><br>
 		<<eventParkStreakEnd>>
 	<</if>>
@@ -904,7 +894,7 @@ You run back to the toilets without incident. You take deep breaths as you try t
 	<<molested>>
 	<<maninit>>
 	<<set $kylar.raped += 1>>
-	You swing your arm and knock the knife out of Kylar's hand. Before you can escape, <<person1>><<he>> lunges at you.
+	당신은 팔을 휘둘러 카일라의 손에서 나이프를 빼낸다. 도망치기도 전에, <<person1>><<he_ ga>> 당신에게 달려든다.
 	<<set $kylarClothes to $NPCList[0].clothes>>
 	<<npcstrip>>
 <</if>>
@@ -916,18 +906,18 @@ You run back to the toilets without incident. You take deep breaths as you try t
 <br><br>
 <<actionsman>>
 <<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
-	<span id="next"><<link [[Next|Park Streak Kylar Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Park Streak Kylar Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Park Streak Kylar Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Park Streak Kylar Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Park Streak Kylar Fight Finish
 <<effects>>
 <<person1>>
 <<if $enemyhealth lte 0>>
-	Kylar is lying on the ground, groaning in pain. You take the opportunity to run off before Kylar can recover.<<npcincr Kylar rage 1>><<gksuspicion>><<npcincr Kylar lust 1>><<npcincr Kylar love -1>><<llove>>
+	카일라가 바닥에 쓰러져, 고통에 신음하고 있다. 당신은 그 기회를 잡아 카일라가 다시 일어나기 전에 달려나간다.<<npcincr Kylar rage 1>><<gksuspicion>><<npcincr Kylar lust 1>><<npcincr Kylar love -1>><<llove>>
 	<br><br>
-	You run back to the toilets without incident. You take deep breaths as you try to slow your pulse.<<ltrauma>><<lstress>><<trauma -2>><<stress -2>>
+	당신은 아무 일 없이 화장실로 달려 돌아온다. 당신은 맥박을 안정시키려고 애쓰며 심호흡을 한다.<<ltrauma>><<lstress>><<trauma -2>><<stress -2>>
 <<else>>
 	<<if $enemyarousal gte $enemyarousalmax>>
 		<<ejaculation>>
@@ -944,19 +934,19 @@ You run back to the toilets without incident. You take deep breaths as you try t
 		<<case "shorts">><<lowerwear 5>>
 		<<case "sweatpants">><<lowerwear 67>>
 	<</switch>>
-	You are writhing on the ground in pain. You are helpless as Kylar retrieves <<his>> knife, grabs the clothes, and throws them on you. <<He>> stands over you threateningly, brandishing the knife.
+	당신은 고통스러워 바닥에서 몸부림친다. 카일라가 <<his_ yi>> 나이프를 가져와서, 옷을 집어, 당신에게 집어던져도 아무것도 할 수 없다. <<He_ ga>> 나이프를 휘두르며 위협적으로 당신 위에 서있다.
 	<br><br>
-	"Put them on, now!" <<he>> shouts.
+	"그거 입어, 당장!" <<he_ ga>> 소리친다.
 	<br><br>
-	Slowly, carefully, you get up and put on the clothes Kylar gave you. <<He>> watches you silently, holding the knife, until you're completely covered.
+	천천히, 당신은 카일라가 준 옷을 입는다. <<He_ nun>> 당신이 옷을 다 입을때까지, 나이프를 들고 조용히 지켜본다.
 	<br><br>
-	Once the clothes are on <<he>> calms down considerably. <<He>> lowers the knife and pulls you into a hug. You wince in pain as <<he>> squeezes you.
+	옷을 입고 나니 <<he_ nun>> 상당히 진정되어 보인다. 그는 나이프를 내리고 당신을 끌어안는다. 당신은 <<he_ ga>> 당신을 쥐어짜자 고통에 몸을 움찔한다.
 	<br><br>
-	"You're mine, only for me," <<he>> says. "Don't make me do things like this, you have to protect and save yourself for me."
+	"넌 내거야, 나만을 위한 거야." <<he_ ga>> 말한다, "나한테 이런 일 시키지 말고, 넌 너 스스로를 보호하고 소중히 해야 돼."
 	<br><br>
-	With a final squeeze <<he>> separates from you and runs off. You watch <<him>> exit the park wearing only <<his>> underwear.<<glust>><<glove>>
+	마지막으로 힘을 주며 <<he_ nun>> 당신에게서 멀어진다. 당신은 <<he_ ga>> 속옷만 입은 채 공원을 나가는 것을 바라본다.<<glust>><<glove>>
 	<br><br>
-	<<tearful>> you run back to the toilets.
+	<<tearful>> 당신은 화장실로 달려 돌아간다.
 	<<npcincr Kylar lust 1>>
 	<<npcincr Kylar love 1>>
 <</if>>
@@ -970,23 +960,26 @@ You run back to the toilets without incident. You take deep breaths as you try t
 
 <<set $seductiondifficulty to 6000>>
 <<seductioncheck>>
-<<seductionskilluptext>>
-<<seductionskilluse>>
-
-<<person1>>
-Kylar looks ready to use the knife. You present yourself in the most attractive way you can.
 <br><br>
-"Couldn't you tell?" you say, "I'm out here like this for you. I wanted to give you a gift."
+<<if $seductionskill lt 1000>>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+<<person1>>
+카일라는 나이프를 사용할 준비가 된 것 같다. 당신은 당신이 할 수 있는 가장 매력적인 방법을 시도한다.
+<br><br>
+"모르겠어?" 당신이 말한다, "널 위해 이렇게 나온거야. 너에게 선물을 주고 싶었어."
 <<promiscuity3>>
 
 <<if $seductionrating gte $seductionrequired>>
-	Kylar hesitates. While <<hes>> looking uncertain, you gently take the hand with the knife and push it away. You pull <<him>> to you.
+	카일라가 망설인다. <<he_ ga>> 불안한 표정을 짓는 동안, 당신은 나이프를 든 손을 부드럽게 잡고 밀쳐낸다. 당신은 <<he_ rul>> 당신에게로 끌어 당긴다.
 	<br><br>
-	<<link [[Next|Park Streak Kylar Seduce Sex]]>><<set $sexstart to 1>><</link>>
+	<<link [[다음|Park Streak Kylar Seduce Sex]]>><<set $sexstart to 1>><</link>>
 <<else>>
-	Kylar hesitates. You gently reach for the knife, but <span class="red"><<he>> flinches back</span>. "Put them on," <<he>> says. "Put them on!" <<He>> pushes you to the ground.
+	카일라가 망설인다. 당신은 나이프를 든 손을 향해 부드럽게 다가가지만, <span class="red"><<he_ ga>> 뒤로 움찔한다.</span>. "그거 입어," <<he_ ga>> 말한다. "입으라고!" <<He_ nun>> 당신을 바닥으로 밀친다.
 	<br><br>
-	<<link [[Next|Park Streak Kylar Seduce Sex]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Park Streak Kylar Seduce Sex]]>><<set $molestationstart to 1>><</link>>
 <</if>>
 
 
@@ -1026,9 +1019,9 @@ Kylar looks ready to use the knife. You present yourself in the most attractive 
 <</if>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Park Streak Kylar Seduce Sex Finish]]>><</link>></span>
+	<span id="next"><<link [[다음|Park Streak Kylar Seduce Sex Finish]]>><</link>></span>
 <<else>>
-	<span id="next"><<link [[Next|Park Streak Kylar Seduce Sex]]>><</link>></span>
+	<span id="next"><<link [[다음|Park Streak Kylar Seduce Sex]]>><</link>></span>
 <</if>>
 
 :: Park Streak Kylar Seduce Sex Finish
@@ -1036,7 +1029,7 @@ Kylar looks ready to use the knife. You present yourself in the most attractive 
 <<person1>>
 <<if ($enemyarousal gte $enemyarousalmax and $consensual is 1) or $enemyhealth lte 0>>
 	<<if $enemyarousal gte $enemyarousalmax>><<ejaculation>><</if>>
-	You leave Kylar in a daze on the ground. Before <<he>> can recover from <<his>> orgasm, you run off naked, leaving the clothes Kylar offered behind.
+	당신은 카일라를 바닥에 쓰러진 채로 놔둔다. <<he_ ga>> 절정에서 회복하기도 전에, 당신은 카일라가 건넨 옷을 그냥 두고, 알몸으로 달려간다.
 <<else>>
 	<<if $enemyarousal gte $enemyarousalmax>><<ejaculation>><</if>>
 	<<switch $kylarClothes.upper.name>>
@@ -1051,51 +1044,51 @@ Kylar looks ready to use the knife. You present yourself in the most attractive 
 		<<case "shorts">><<lowerwear 5>>
 		<<case "sweatpants">><<lowerwear 67>>
 	<</switch>>
-	Kylar pins you to the ground as <<he>> finishes. After a few seconds <<he>> grabs the clothes and throws them on you.
+	카일라가 당신을 바닥에 고정시킨다. 몇 초 후 <<he_ ga>> 옷을 집어 당신에게 던진다.
 	<br><br>
-	"Put them on, now!" <<he>> yells.
+	"그거 입어, 당장!" <<he_ ga>> 소리지른다.
 	<br><br>
-	You put the clothes Kylar has given you on. <<He>> looks relieved that you've finally covered up.
+	당신은 카일라가 준 옷을 입는다. <<He_ nun>> 당신이 옷을 입었다는 사실에 안도하는 표정이다.
 	<br><br>
-	"You have to be careful!" <<he>> says. "You can't let anyone see you like that, you only belong to me!"
+	"조심해야지!" <<he_ ga>> 말한다. "다른 사람에게 그런 모습 보여주면 안돼, 넌 내 거라고!"
 	<br><br>
-	With that Kylar turns and walks away. You watch <<him>> walk out of the park wearing only <<his>> underwear.
+	카일라는 그렇게 말하며 돌아서서 걸어간다. 당신은 <<he_ ga>> 속옷만 입은 채 공원을 나가는 것을 바라본다.
 <</if>>
 <br><br>
-You run back to the toilets. You take deep breaths as you try to slow your pulse.<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+당신은 화장실로 돌아간다. 당신은 맥박을 안정시키려고 애쓰며 깊게 심호흡을 한다.<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
 <br>
 <<endcombat>>
 <<unset $kylarClothes>>
 <<eventParkStreakEnd>>
 
 :: Toilets Stall
-<<effects>><<set $phase to 0>>
-<<if dangerEvent(1/3, 8900)>>
+<<effects>><<set $danger to random(1, 10000)>><<set $phase to 0>>
+<<if $danger gte (8900 - ($allure / 3))>>
 	<<set $toiletsrape to 1>>
 <</if>>
 <<if $exposed gte 2>>
-	Already exposed, you enter a stall and keep the door open.
+	이미 벌거벗고 있기에, 당신은 화장실 칸에 들어가 문을 열어둔 채 둔다.
 <<else>>
 	<<set _redress to 1>>
 	<<overlowerstrip>><<overupperstrip>><<lowerstrip>><<upperstrip>><<underlowerstrip>><<underupperstrip>><<legsstrip>><<feetstrip>>
 	<<exposure>>
-	You enter the stall, keeping the door open. You take off your clothes, making a bundle on the floor.
+	당신은 문을 열어둔 채, 화장실 칸에 들어간다. 당신은 옷을 벗어, 바닥에 옷다발을 만든다.
 <</if>>
-You sit on the toilet, and wait.
+당신은 화장실 변기에 앉아, 기다린다.
 <br><br>
 <<if ($bus is "parkmens" and maleChance() is 0) or ($bus is "parkwomens" and maleChance() gte 100)>>
-	Much time passes, and no one enters the restroom. You decide to get up.
+	많은 시간이 흘렀지만, 아무도 화장실에 오지 않는다. 당신은 일어나기로 결정한다.
 	<<if _redress is 1>><<clotheson>><</if>><<unset $toiletsrape>>
 	<br><br>
 	<<if $bus is "parkmens">>
-		<<link [[Next|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Men's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Women's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<else>>
-	<<if $rng gte 66>>
+	<<if $rng gte 65>>
 		<<set $phase2 to 1>>
 		<<fameexhibitionism 10>>
 		<<if $bus is "parkmens">>
@@ -1103,7 +1096,7 @@ You sit on the toilet, and wait.
 		<<else>>
 			<<generatef1>><<generatef2>>
 		<</if>>
-		You hear footsteps approaching, followed by laughter and some banter.
+		당신은 다가오는 발자국 소리와 함께, 웃음소리와 농담을 듣는다.
 	<<else>>
 		<<set $phase2 to 2>>
 		<<fameexhibitionism 5>>
@@ -1112,70 +1105,69 @@ You sit on the toilet, and wait.
 		<<else>>
 			<<generatef1>>
 		<</if>>
-		You hear footsteps approaching.
+		다가오는 발소리가 들린다.
 	<</if>>
-	A <<person1>><<person>> walks into view and starts to wash <<his>> hands, only stopping when <<he>> sees you in the mirror.
-	<<He>> pauses for a moment, clearly surprised to see an exposed <<girl>> already there.
+	한 <<person1>><<person_ yi>> 시야 내로 들어와 손을 씻기 시작하다가, 거울에 비친 당신을 보고는 멈춘다.
+	<<He_ ga>> 벌거벗은 <<girl_ i>> 이미 거기에 있는 것을 보고 명백히 놀라, 잠시 멈칫한다.
 	<<exhibitionism4>>
 
 	<<if ($bus is "parkmens" and $player.gender_appearance is "f") or ($bus is "parkwomens" and $player.gender_appearance is "m")>>
 		<<if $toiletsrape is 1>>
 			<<unset $toiletsrape>>
-			<<if isCrossdressing()>>
+			<<if $player.gender_appearance isnot $player.gender>>
 				<<set $toiletsmistake to 1>>
 			<</if>>
-			"Wrong bathroom, you fucking pervert." <<He>> marches up to you and grabs you!
+			"화장실을 잘못 찾았어, 이 변태야." <<He_ ga>> 당신에게 다가와 붙잡는다!
 			<<if $phase2 is 1>>
-				"Come help me punish this brat," <<he>> calls out to someone else. A <<person2>><<person>> quickly runs over, and <<his>> eyes turn wicked.
+				"이 자식 벌주는 것 좀 도와줘," <<he_ nun>> 다른 누군가를 부른다.<<person2>><<person_ i>> 재빨리 달려오더니, <<his_ yi>> 눈이 사악하게 변한다.
 			<<else>>
-				"I'll show you what happens to <<girls>> like you."
+				"너같은 <<girls_ i>> 어떻게 되는지 보여줄게."
 			<</if>>
 			<br><br>
-			<<link [[Next|Toilets Molestation]]>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Toilets Molestation]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<<else>>
 			<<set $toiletswrong to 1>>
-			"This is, uh... the wrong restroom." <<He>> tries to avert <<his>> gaze, but you can see <<his>> eyes sticking to your <<genitals>>.
+			"여긴, 어... 화장실을 잘못 찾았어요." <<He_ nun>> 시선을 피하려 하지만, 당신은 <<his_ yi>> 시선이 당신의 <<genitals_ rul>> 향하고 있다는 것을 알 수 있다.
 			<<if $phase2 is 1>>
-				"Hey, what's going on—" a <<person2>><<person>> steps in, and has a similar reaction.
+				"이봐, 무슨 일이-" <<person2>><<person_ i>> 들어오다, 비슷한 반응을 보인다.
 			<</if>>
 			<br><br>
-			<<link [[Tease|Toilets Stall 2]]>><<set $phase to 1>><</link>>
+			<<link [[희롱한다|Toilets Stall 2]]>><<set $phase to 1>><</link>>
 			<br>
-			<<link [[Masturbate|Toilets Stall 2]]>><<set $phase to 2>><</link>><<exhibitionist4>>
+			<<link [[자위한다|Toilets Stall 2]]>><<set $phase to 2>><</link>><<exhibitionist4>>
 			<br>
 			<<if hasSexStat("promiscuity", 3)>>
-				<<link [[Offer oral|Toilets Stall 2]]>><<set $phase to 3>><</link>><<promiscuous3>>
+				<<link [[입으로 해 준다고 한다|Toilets Stall 2]]>><<set $phase to 3>><</link>><<promiscuous3>>
 				<br>
 			<</if>>
-			<<if $phase2 is 1 and hasSexStat("promiscuity", 5) and ($NPCList[0].penis isnot "none" and $NPCList[1].penis isnot "none") and ($player.sex isnot "m" or $analdisable is "f")>>
-				<<link [[Offer spitroast|Toilets Stall 2]]>><<set $phase to 4>><</link>><<promiscuous5>>
+			<<if $phase2 is 1 and hasSexStat("promiscuity", 5) and ($NPCList[0].penis isnot "none" and $NPCList[1].penis isnot "none") and ($player.gender isnot "m" or $analdisable is "f")>>
+				<<link [[위아래로 해 준다고 한다|Toilets Stall 2]]>><<set $phase to 4>><</link>><<promiscuous5>>
 				<br>
 			<<elseif hasSexStat("promiscuity", 5)>>
-				<<link [[Offer yourself|Toilets Stall 2]]>><<set $phase to 5>><</link>><<promiscuous5>>
+				<<link [[범하게 해 준다고 한다|Toilets Stall 2]]>><<set $phase to 5>><</link>><<promiscuous5>>
 				<br>
 			<</if>>
 		<</if>>
 	<<else>>
-		"What are you doing?" <<he>> questions as <<he>> quickly comes back to <<his>> senses.
+		"여기서 뭐하는거지?" <<he_ nun>> 빠르게 정신을 차리며 물어본다.
 		<<if $phase2 is 1>>
-			<br><br>
-			"Who are you talking to?" a <<person2>><<person>> steps in, and quickly averts <<his>> eyes upon seeing you.
+			"누구한테 말하는거야?" <<person2>><<person_ ga>> 끼어들고, 당신을 보는 순간 <<he_ nun>> 눈을 피한다.
 		<</if>>
 		<br><br>
-		<<link [[Tease|Toilets Stall 2]]>><<set $phase to 1>><</link>>
+		<<link [[희롱한다|Toilets Stall 2]]>><<set $phase to 1>><</link>>
 		<br>
-		<<link [[Masturbate|Toilets Stall 2]]>><<set $phase to 2>><</link>><<exhibitionist4>>
+		<<link [[자위한다|Toilets Stall 2]]>><<set $phase to 2>><</link>><<exhibitionist4>>
 		<br>
 		<<if hasSexStat("promiscuity", 3)>>
-			<<link [[Offer oral|Toilets Stall 2]]>><<set $phase to 3>><</link>><<promiscuous3>>
+			<<link [[입으로 해 준다고 한다|Toilets Stall 2]]>><<set $phase to 3>><</link>><<promiscuous3>>
 			<br>
 		<</if>>
-		<<if $phase2 is 1 and hasSexStat("promiscuity", 5) and ($NPCList[0].penis isnot "none" and $NPCList[1].penis isnot "none") and ($player.sex isnot "m" or $analdisable is "f")>>
-			<<link [[Offer spitroast|Toilets Stall 2]]>><<set $phase to 4>><</link>><<promiscuous5>>
+		<<if $phase2 is 1 and hasSexStat("promiscuity", 5) and ($NPCList[0].penis isnot "none" and $NPCList[1].penis isnot "none") and ($player.gender isnot "m" or $analdisable is "f")>>
+			<<link [[위아래로 해 준다고 한다|Toilets Stall 2]]>><<set $phase to 4>><</link>><<promiscuous5>>
 			<br>
 		<<elseif hasSexStat("promiscuity", 5)>>
-			<<link [[Offer yourself|Toilets Stall 2]]>><<set $phase to 5>><</link>><<promiscuous5>>
+			<<link [[범하게 해 준다고 한다|Toilets Stall 2]]>><<set $phase to 5>><</link>><<promiscuous5>>
 			<br>
 		<</if>>
 	<</if>>
@@ -1187,65 +1179,65 @@ You sit on the toilet, and wait.
 	<<case 1>>
 		<<if $toiletswrong is 1>>
 			<<if $speech_attitude is "meek">>
-				"Oh, s...sorry! I must have been mistaken,"
+				"아, 죄...죄송해요! 제가 화장실을 착각했나봐요,"
 			<<elseif $speech_attitude is "bratty">>
-				"Whoops. Sorry<<if $phase2 is 1>> <<if $bus is "parkmens">>boys<<else>>girls<</if>><</if>>, guess I wandered into the wrong room,"
+				"이런. 미안해서 어쩌나<<if $phase2 is 1>> <<if $bus is "parkmens">>남자분들<<else>>여자분들<</if>><</if>>, 화장실을 헷갈렸나 봐,"
 			<<else>>
-				"Oh! I wandered into the wrong restroom, silly me,"
+				"아! 화장실을 잘못 들어왔네요, 바보같게도 말예요,"
 			<</if>>
 		<<else>>
 			<<if $speech_attitude is "meek">>
-				"Oh, s...sorry! I must have dozed off,"
+				"아, 죄...죄송해요! 졸았나봐요,"
 			<<elseif $speech_attitude is "bratty">>
-				"Whoops. Sorry<<if $phase2 is 1>> <<if $bus is "parkmens">>boys<<else>>girls<</if>><</if>>, just showing off a little,"
+				"이런. 미안해서 어쩌나<<if $phase2 is 1>> <<if $bus is "parkmens">>남자분들<<else>>여자분들<</if>><</if>>, 그냥 좀 과시하고 싶어서,"
 			<<else>>
-				"Don't mind me, just enjoying some alone time,"
+				"신경쓰지 마세요, 그냥 혼자만의 시간을 즐기세요,"
 			<</if>>
 		<</if>>
-		you say as you stand up. You make sure to rub right up against the <<person1>><<person>> as you exit the stall.
+		당신은 일어서서 말한다. 당신은 화장실을 나오며 <<person1>><<person_ gwa>> 몸을 스치며 지나간다.
 		<br><br>
 	<<case 2>>
 		<<if $speech_attitude is "meek">>
-			"P...please... I want you to watch me,"
+			"제...제발... 날 지켜봐 주기를 바래요,"
 		<<elseif $speech_attitude is "bratty">>
-			"Don't worry about it. Just enjoy the show,"
+			"걱정 마. 그냥 쇼를 즐겨,"
 		<<else>>
-			"I wanted an audience,"
+			"전 관객이 필요해서요,"
 		<</if>>
-		you say to <<if $phase2 is 1>><<him>><<else>>them<</if>> as you lower your hands to your <<genitals>>.
+		당신은 <<genitals_ ro>> 양손을 내리며 <<if $phase2 is 1>><<himPost>>에게<<else>>그들에게<</if>> 말한다.
 		<<exhibitionism4>>
 	<<case 3>>
-		You move your hand to your mouth, making a very suggestive gesture.
+		당신은 당신의 손을 입에 가져다 대며, 매우 암시적인 제스처를 취한다.
 		<<if $speech_attitude is "meek">>
-			"Please, I need someone to use my mouth,"
+			"제발, 난 누가 내 입을 사용해줬으면 좋겠어요,"
 		<<elseif $speech_attitude is "bratty">>
-			"Need someone to shut me up for a while,"
+			"잠시 입 다물게 만들어줄 사람이 필요해서 말야,"
 		<<else>>
-			"How about we have some fun?"
+			"재미 좀 보는거 어때요?"
 		<</if>>
-		you say.
+		당신이 말한다.
 		<<promiscuity3>>
 	<<case 4>>
-		You spread your legs, pointing at your <<if $player.sex is "m">><<bottom>><<else>><<genitals>><</if>> with one hand and mouth with the other.
+		당신은 다리를 벌리고, 한 손으로는 당신의 <<if $player.gender is "m">><<bottom_ rul>><<else>><<genitals_ rul>><</if>> 가리키고 다른 손으로 입을 가리킨다.
 		<<if $speech_attitude is "meek">>
-			"Please, I need you both to use me,"
+			"제발, 당신 둘 다 날 이용해줘요,"
 		<<elseif $speech_attitude is "bratty">>
-			"Need you two to shut me up for a while,"
+			"둘이서 잠시만 내 입 좀 다물게 해줘,"
 		<<else>>
-			"How about we all have some fun?"
+			"우리 같이 재미 좀 보는거 어때요?"
 		<</if>>
-		you say.
+		당신이 말한다.
 		<<promiscuity5>>
 	<<case 5>>
-		You spread your legs.
+		당신은 다리를 벌린다.
 		<<if $speech_attitude is "meek">>
-			"Please, do whatever you want with me,"
+			"제발, 저에게 원하는대로 하세요,"
 		<<elseif $speech_attitude is "bratty">>
-			"Need someone to make me scream,"
+			"날 비명지르게 해줄 사람이 필요한데,"
 		<<else>>
-			"How about we have some fun?"
+			"우리 같이 재미 좀 보는거 어때요?"
 		<</if>>
-		you say.
+		당신이 말한다.
 		<<promiscuity5>>
 	<<default>>
 <</switch>>
@@ -1256,35 +1248,35 @@ You sit on the toilet, and wait.
 <<if $toiletsrape is 1>>
 	<<unset $toiletsrape>>
 	<<if $phase is 2>>
-		<<person1>><<He>> smiles<<if $phase2 is 1>> and turns to the <<person2>><<person>><</if>>. "Right, as if <<if $phase2 is 1>>we<<else>>I<</if>> could just watch!" <<if $phase2 is 1>>They jump<<else>><<He>> jumps<</if>> at you.
+		<<person1>><<He_ ga>> 미소를 <<if $phase2 is 1>>지으며 <<person2>><<personPost>>에게 몸을 돌린다<<else>>짓는다<</if>>. "그래, <<if $phase2 is 1>>우리<<else>>내<</if>>가 지켜만 볼 것 같아!" <<if $phase2 is 1>>그들이<<else>><<He_ ga>><</if>> 당신한테 달려든다.
 	<<else>>
-		<<person1>><<He>> suddenly looks angry. "You slut, you think this is funny? I guess <<if $phase2 is 1>>we<<else>>I<</if>>'ll have to teach you a lesson in modesty." <<if $phase2 is 1>>They jump<<else>><<He>> jumps<</if>> at you.
+		<<person1>><<He_ nun>> 갑자기 화난 것처럼 보인다. "이 <<slut_ a>>, 넌 이게 재밌나보지? 아무래도 <<if $phase2 is 1>>우리<<else>>내<</if>>가 얌전함에 대해 가르쳐 줘야겠군" <<if $phase2 is 1>>그들이<<else>><<He_ ga>><</if>> 당신한테 달려든다.
 	<</if>>
 	<br><br>
-	<<link [[Next|Toilets Molestation]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Toilets Molestation]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	<<if $phase is 1>>
-		<<flaunting>> <<if $phase2 is 1>>they eye<<else>><<he>> eyes<</if>> you closely as you
+		<<flaunting>> <<if $phase2 is 1>>그들이<<else>><<he_ ga>><</if>> 당신을 가까이에서 쳐다보고 있는 가운데 당신은
 		<<storeon $bus "check">>
 		<<if _store_check is 1>>
 			<<storeon $bus>>
-			retrieve your clothes, and slowly dress in front of <<if $phase2 is 1>>them<<else>><<him>><</if>>,
+			옷을 꺼내,  <<if $phase2 is 1>>그들<<else>><<himPost>><</if>> 앞에서 천천히 옷을 입으며,
 		<<else>>
-			look at yourself in the mirror, giving <<if $phase2 is 1>>one of them<<else>><<him>><</if>> a wink and
-		<</if>>giving your <<bottom>> a wiggle as you do so. They make no other moves towards you.
+			거울에 비친 당신의 모습을 보며, <<if $phase2 is 1>>그들 중의 한사람<<else>><<himPost>><</if>>에게 윙크를 하고는
+		<</if>> <<bottom_ rul>> 흔든다. 그들은 당신을 향해 다른 행동을 하지 않는다.
 		<<clotheson>>
-		<<getouticon>><<link [[Leave|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<<getouticon>><<link [[떠난다|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
 		<br>
 	<<elseif $phase is 2>>
-		<<person1>><<He>> smiles<<if $phase2 is 1>> and turns to the <<person2>><<person>><</if>>. "Well... if you insist."
+		<<person1>><<He_ ga>> 미소를 <<if $phase2 is 1>>지으며 <<person2>><<personPost>>에게 몸을 돌린다<<else>>짓는다<</if>>. "글쎄... 네가 꼭 하자고 한다면."
 		<br><br>
-		<<link [[Next|Toilets Watched Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<<link [[다음|Toilets Watched Masturbation]]>><<set $masturbationstart to 1>><</link>>
 		<br>
 	<<else>>
-		<<person1>><<He>> smiles<<if $phase2 is 1>> and turns to the <<person2>><<person>><</if>>. "Hey, <<if $phase2 is 1>>we<<else>>I<</if>> won't say no to such an offer." <<if $phase2 is 1>>They approach<<else>><<He>> approaches<</if>> you.
+		<<person1>><<He_ ga>> 미소를 <<if $phase2 is 1>>지으며 <<person2>><<personPost>>에게 몸을 돌린다<<else>>짓는다<</if>>. "이봐, <<if $phase2 is 1>>우리<<else>>나<</if>>는 그런 제안 거절 안해." <<if $phase2 is 1>>그들이<<else>><<He_ ga>><</if>> 당신에게 다가온다.
 		<br><br>
-		<<link [[Next|Toilets Sex]]>><<set $sexstart to 1>><</link>>
+		<<link [[다음|Toilets Sex]]>><<set $sexstart to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -1305,7 +1297,7 @@ You sit on the toilet, and wait.
 		<<case 4>>
 			<<npc_attempt_sex>>
 			<<set $NPCList[1].penis to "mouthentrance">><<submission 5>><<set $mouthstate to "entrance">><<set $mouthuse to "penis">><<set $mouthtarget to 1>>
-			The <<person2>><<person>> presses <<his>> penis against your lips as the <<person1>><<person>> approaches your entrance.
+			<<person2>><<person_ i>> <<his_ yi>> 자지를 당신의 입술에 누르고 <<person1>><<person_ un>> 당신 보지 입구로 다가간다.
 		<<case 5>>
 			<<npc_attempt_sex>>
 		<<default>>
@@ -1320,9 +1312,9 @@ You sit on the toilet, and wait.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Toilets Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Toilets Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Toilets Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Toilets Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Toilets Sex Finish
@@ -1331,16 +1323,16 @@ You sit on the toilet, and wait.
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	<<if $enemyanger gte ($enemyangermax / 5) * 3>>
-		<<He>> gives you one last smack to the face, and <<if $phase2 is 1>>they leave<<else>><<he>> leaves<</if>> you lying on the cold tiles.
+		<<He_ ga>> 당신의 얼굴에 마지막 한대를 날리고선, 당신을 차가운 타일 위에 두고 <<if $phase2 is 1>>그들은<<else>><<he_ nun>><</if>> 떠난다.
 		<<violence 3>>
 		<br><br>
 	<<elseif $enemyanger gte 1>>
-		"Thanks, slut," <<he>> says. <<if $phase2 is 1>>They get up and leave<<else>><<He>> gets up and leaves<</if>> you lying on the cold tiles.
+		"고맙다 <<slut_ a>>," <<he_ ga>> 말한다. 당신을 차가운 타일 위에 두고 <<if $phase2 is 1>>그들은<<else>><<he_ nun>><</if>> 일어나서 떠난다.
 		<br><br>
 	<<else>>
-		Smiling, the <<person1>><<person>> kisses you on the cheek. "This is for you,"<<if $phase2 is 1>> the <<person2>><<person>> says<<else>> <<he>> says<</if>>, thumbing through <<his>> wallet. <<if $phase2 is 1>>They get up, and each extend <<else>><<He>> gets up, and extends <</if>>you a hand, helping you to your feet.
+		생긋 웃으며, <<person1>><<person_ nun>> 당신의 볼에 키스한다. "내 선물이야,"<<if $phase2 is 1>> <<person2>><<person_ ga>> 말하며<<else>> <<he_ ga>> 말하며<</if>>, <<his_ yi>> 지갑 속을 훑어본다. <<if $phase2 is 1>>그들은 일어나서, 각각 <<else>><<He_ ga>> 일어나서, <</if>>당신에게 손을 뻗어 일어나는 것을 돕는다.
 		<br>
-		You've gained <<printmoney 1000>><<money 1000 "prostitution">>.
+		당신은 <<moneyGain 10>>를 얻었다.
 		<br><br>
 	<</if>>
 	<<clearNPC toilets_1>>
@@ -1350,19 +1342,19 @@ You sit on the toilet, and wait.
 	<<clotheson>>
 	<<endcombat>>
 	<<if $bus is "parkmens">>
-		<<link [[Next|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Men's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Women's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
-	<<He>> falls back against the sinks, giving you the chance you need. <<tearful>> you flee the scene.
+	<<He_ ga>> 세면대로 넘어지고, 당신은 도망칠 수 있는 기회를 잡는다. <<tearful>> 당신은 도망친다.
 	<br><br>
 	<<storeon $bus "check">>
 	<<if _store_check is 1>>
 		<<storeon $bus>>
-		Your clothes are tossed out behind you.
+		당신의 옷이 당신 뒤로 던져진다.
 	<</if>>
 	<<clearNPC toilets_1>>
 	<<if $phase2 is 1>>
@@ -1370,12 +1362,12 @@ You sit on the toilet, and wait.
 	<</if>>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Park]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
 <<elseif $finish is 1>>
 	<<if $phase2 is 1>>
-		They stop touching you and let you leave the stall. They leave the restrooms shortly after, sharing awkward glances with each other.
+		그들은 당신을 만지는 것을 멈추고 당신이 화장실을 나가도록 내버려 둔다. 얼마 지나지 않아, 그들은 서로 어색한 눈빛을 주고 받으며 화장실을 나선다.
 	<<else>>
-		<<He>> stops touching you and lets you leave the stall. <<He>> leaves the restroom shortly after.
+		<<He_ nun>> 당신을 만지는 것을 멈추고 화장실을 나가도록 내버려 둔다. <<He_ ga>> 잠시 후 화장실을 나간다.
 	<</if>>
 	<br><br>
 	<<clearNPC toilets_1>>
@@ -1385,10 +1377,10 @@ You sit on the toilet, and wait.
 	<<clotheson>>
 	<<endcombat>>
 	<<if $bus is "parkmens">>
-		<<link [[Next|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Men's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|Women's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -1414,13 +1406,13 @@ You sit on the toilet, and wait.
 <<actionsman>>
 
 <<if $alarm is 1>>
-	Your cries echo against the tiles, but no one comes.
+	당신의 비명소리가 타일에 메아리치지만, 아무도 오지 않는다.
 	<br><br>
 <</if>>
 <<if _combatend>>
-	<span id="next"><<link [[Next|Toilets Molestation Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Toilets Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Toilets Molestation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Toilets Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Toilets Molestation Finish
@@ -1428,21 +1420,21 @@ You sit on the toilet, and wait.
 
 <<if $enemyhealth lte 0>>
 
-	<<He>> falls back against the sinks, giving you the chance you need. <<tearful>> you flee the scene.
+	<<He_ ga>> 세면대로 넘어지고, 당신은 도망칠 수 있는 기회를 잡는다. <<tearful>>현장을 빠져나간다.
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
 
 	<<ejaculation>>
 
-	<<if $player.sex is $player.gender_appearance and $toiletsmistake is 1>>
-		"This is your fault for looking like a <<if $player.gender_appearance is "f">>boy<<else>>girl<</if>>." <<He>> shoves you out the door.
+	<<if $player.gender is $player.gender_appearance and $toiletsmistake is 1>>
+		"네가 <<if $player.gender_appearance is "f">>남자<<else>>여자<</if>>처럼 보이는 것이 잘못이야." <<He_ ga>> 당신을 문 밖으로 밀쳐낸다.
 		<br><br>
 	<<else>>
-		"Let that be a lesson for you." <<He>> shoves you out the door.
+		"이걸 교훈으로 삼아라." <<He_ ga>> 당신을 문 밖으로 밀어낸다.
 		<br><br>
 	<</if>>
 
-	<<tearful>> you struggle to your feet.
+	<<tearful>> 당신은 발버둥쳐 일어난다.
 
 <</if>>
 
@@ -1451,7 +1443,7 @@ You sit on the toilet, and wait.
 	<<storeon $bus "check">>
 	<<if _store_check is 1>>
 		<<storeon $bus>>
-		Your clothes are tossed out behind you.
+		당신의 옷이 당신 뒤로 던져진다.
 	<</if>>
 	<<clearNPC toilets_1>>
 	<<if $phase2 is 1>>
@@ -1467,15 +1459,16 @@ You sit on the toilet, and wait.
 :: Park Toilets Sneak
 <<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "park">>
 
-You <<nervously>> poke your head outside. There's no one around. You leave the safety of the building, your <<lewdness>> on display.
+당신은 <<nervously>> 고개를 밖으로 내밀어 본다. 주변에 아무도 없다. 당신은 당신의 <<lewdness_ ul>> 드러낸 채, 안전한 건물을 떠난다.
 
 <<if $phase is 1>>
 	<<exhibitionism1>>
 <<elseif $phase is 2>>
 	<<exhibitionism3>>
 <</if>>
+<br><br>
 
-<<link [[Next|Park]]>><</link>>
+<<link [[다음|Park]]>><</link>>
 <br>
 
 <<set $eventskip to 1>>
@@ -1500,9 +1493,9 @@ You <<nervously>> poke your head outside. There's no one around. You leave the s
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Park Lizard Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Park Lizard Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Park Lizard Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Park Lizard Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Park Lizard Rape Finish
@@ -1512,21 +1505,21 @@ You <<nervously>> poke your head outside. There's no one around. You leave the s
 	<<set _itsgender to $NPCList[0].gender>>
 	<<beastejaculation>>
 
-	<<if _itsgender is "m">><<bHis>> seed deposited,<<else>><<bHis>> needs satisfied,<</if>> the <<beasttype>> loses interest in you and shuffles back toward the sewer.
+	<<if _itsgender is "m">><<bHis_ yi>> 정액이 배출되자,<<else>><<bHis_ yi>> 욕구가 충족되자,<</if>> <<beasttype_ un>> 당신에게 흥미를 잃고 하수구 쪽으로 돌아간다.
 	<br><br>
 
-	<<tearful>> you gather yourself.
+	<<tearful>> 당신은 마음을 가다듬는다.
 	<br><br>
 
 	<<endcombat>>
-	<<link [[Next|Park]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
 <<else>>
-	<<bHe>> hisses and flees toward the sewer.
+	<<bHe_ nun>> 쉿 소리를 내며 하수구를 향해 도망간다.
 	<br><br>
 
-	<<tearful>> you gather yourself.
+	<<tearful>> 당신은 마음을 가다듬는다.
 	<br><br>
 
 	<<endcombat>>
-	<<link [[Next|Park]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
 <</if>>

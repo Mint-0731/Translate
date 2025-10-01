@@ -1,4 +1,4 @@
-function effectsWater(waterType = "liquid") {
+function effectsWater() {
 	DOL.Perflog.logWidgetStart("effectsWaterJs");
 	const fragment = document.createDocumentFragment();
 
@@ -18,27 +18,27 @@ function effectsWater(waterType = "liquid") {
 
 	switch (V.squidcount) {
 		case 1:
-			sWikifier('<span class="purple">You feel the squid tease your <<genitals>>.</span> <<garousal>><<arousal 100 "genitals">>');
+			sWikifier('<span class="purple">당신은 오징어가 당신의 <<genitals_ rul>> 희롱하는 것을 느낀다.</span> <<garousal>><<arousal 100 "genitals">>');
 			break;
 		case 2:
 			sWikifier(
-				'<span class="purple">You feel the squids tease your <<genitals>> and chest.</span> <<garousal>><<arousal 100 "breasts">><<arousal 100 "genitals">>'
+				'<span class="purple">당신은 오징어들이 당신의 <<genitals_ wa>> 가슴을 희롱하는 것을 느낀다.</span> <<garousal>><<arousal 100 "breasts">><<arousal 100 "genitals">>'
 			);
 			break;
 		case 3:
 			sWikifier(
-				'<span class="purple">You feel the squids tease your <<genitals>> and <<breasts>>.</span> <<garousal>><<arousal 200 "breasts">><<arousal 100 "genitals">>'
+				'<span class="purple">당신은 오징어들이 당신의 <<genitals_ wa>> <<breasts_ rul>> 희롱하는 것을 느낀다.</span> <<garousal>><<arousal 200 "breasts">><<arousal 100 "genitals">>'
 			);
 			break;
 		case 4:
 			sWikifier(
-				'<span class="purple">You feel the squids tease your <<genitals>>, <<breasts>>, and <<bottom>>.</span> <<garousal>><<arousal 200 "breasts">><<arousal 100 "genitals">><<arousal 100 "bottom">>'
+				'<span class="purple">당신은 오징어들이 당신의 <<genitalsPost>>, <<breasts_ wa>>, <<bottom_ ul>> 희롱하는 것을 느낀다.</span> <<garousal>><<arousal 200 "breasts">><<arousal 100 "genitals">><<arousal 100 "bottom">>'
 			);
 			break;
 		default:
 			if (V.squidcount >= 5) {
 				squidArousal = V.squidcount * 30;
-				sWikifier(`<span class="purple">You feel ${V.squidcount} squids tease your <<genitals>>, <<breasts>>, <<bottom>>, and other parts of your body.</span>
+				sWikifier(`<span class="purple">당신은 ${V.squidcount}마리의 오징어들이 당신의 <<genitalsPost>>, <<breastsPost>>, <<bottom_ gwa>>, 당신 몸의 다른 부분들을 희롱하는 것을 느낀다.</span>
 				<<garousal>><<arousal ${squidArousal} "breasts">><<arousal ${squidArousal} "genitals">><<arousal ${squidArousal} "bottom">>`);
 			}
 			break;
@@ -47,23 +47,23 @@ function effectsWater(waterType = "liquid") {
 		if (V.upperwet >= 100 && V.upperwetstage < 3) {
 			V.upperwetstage = 3;
 			wetIntro = 2;
-			sWikifier(`<span class="lewd">${waterType.toUpperFirst()} soaks through your ${V.worn.upper.name}, exposing your <<undertop>>.</span>`);
+			sWikifier(`<span class="lewd">물이 당신의 <<worn_upper_name>>에 스며들어, 당신의 <<undertop_ ul>> 노출시킨다.</span>`);
 		} else if (V.upperwet < 90 && V.upperwetstage >= 3) {
 			V.upperwetstage = 2;
-			sWikifier(`<span class="green">Your ${V.worn.upper.name} <<upperhas>> dried, concealing your <<undertop>>.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_upper_name_ i>> 말라서, 당신의 <<undertop_ ul>> 감춘다.</span>`);
 		} else if (V.upperwet >= 80 && V.upperwetstage < 2) {
 			V.upperwetstage = 2;
 			wetIntro = 1;
-			sWikifier(`<span class="purple">Your ${V.worn.upper.name} <<upperplural>> wet.</span>`);
+			sWikifier(`<span class="purple">당신의 <<worn_upper_name_ i>> 젖었다.</span>`);
 		} else if (V.upperwet < 70 && V.upperwetstage >= 2) {
 			V.upperwetstage = 1;
-			sWikifier(`<span class="green">Your ${V.worn.upper.name} <<upperplural>> drying out.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_upper_name_ i>> 말라간다.</span>`);
 		} else if (V.upperwet >= 50 && V.upperwetstage < 1) {
 			V.upperwetstage = 1;
-			sWikifier(`<span class="blue">Your ${V.worn.upper.name} <<upperplural>> damp.</span>`);
+			sWikifier(`<span class="blue">당신의 <<worn_upper_name_ un>> 축축하다.</span>`);
 		} else if (V.upperwet < 40 && V.upperwetstage >= 1) {
 			V.upperwetstage = 0;
-			sWikifier(`<span class="green">Your ${V.worn.upper.name} <<upperplural>> dry.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_upper_name_ i>> 말랐다.</span>`);
 		}
 	}
 
@@ -71,23 +71,23 @@ function effectsWater(waterType = "liquid") {
 		if (V.lowerwet >= 100 && V.lowerwetstage < 3) {
 			V.lowerwetstage = 3;
 			wetIntro = 2;
-			sWikifier(`<span class="lewd">${waterType.toUpperFirst()} soaks through your ${V.worn.lower.name}, exposing your <<undies>>.</span>`);
+			sWikifier(`<span class="lewd">물이 당신의 <<worn_lower_name>>에 스며들어, 당신의 <<undies_ rul>> 노출시킨다.</span>`);
 		} else if (V.lowerwet < 90 && V.lowerwetstage >= 3) {
 			V.lowerwetstage = 2;
-			sWikifier(`<span class="green">Your ${V.worn.lower.name} <<lowerhas>> dried, concealing your <<undies>>.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_lower_name_ i>> 말라서, 당신의 <<undies_ rul>> 감춘다.</span>`);
 		} else if (V.lowerwet >= 80 && V.lowerwetstage < 2) {
 			V.lowerwetstage = 2;
 			wetIntro = 1;
-			sWikifier(`<span class="purple">Your ${V.worn.lower.name} <<lowerplural>> wet.</span>`);
+			sWikifier(`<span class="purple">당신의 <<worn_lower_name_ i>> 젖었다.</span>`);
 		} else if (V.lowerwet < 70 && V.lowerwetstage >= 2) {
 			V.lowerwetstage = 1;
-			sWikifier(`<span class="green">Your ${V.worn.lower.name} <<lowerplural>> drying out.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_lower_name_ i>> 말라간다.</span>`);
 		} else if (V.lowerwet >= 50 && V.lowerwetstage < 1) {
 			V.lowerwetstage = 1;
-			sWikifier(`<span class="blue">Your ${V.worn.lower.name} <<lowerplural>> damp.</span>`);
+			sWikifier(`<span class="blue">당신의 <<worn_lower_name_ un>> 축축하다.</span>`);
 		} else if (V.lowerwet < 40 && V.lowerwetstage >= 1) {
 			V.lowerwetstage = 0;
-			sWikifier(`<span class="green">Your ${V.worn.lower.name} <<lowerplural>> dry.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_lower_name_ i>> 말랐다.</span>`);
 		}
 	}
 
@@ -97,34 +97,34 @@ function effectsWater(waterType = "liquid") {
 			if (V.lowerwetstage === 3 || V.worn.lower.type.includes("naked")) {
 				// If clothing above underwear is also wet, or missing
 				wetIntro = 2;
-				sWikifier(`<span class="lewd">Your bodily fluids soak through your ${V.worn.under_lower.name}, exposing your <<genitals>>.</span>`);
+				sWikifier(`<span class="lewd">당신의 체액이 <<worn_under_lower_name>>에 스며들어, 당신의 <<genitals_ rul>> 노출시킨다.</span>`);
 			} else if (setup.clothes.lower[clothesIndex("lower", V.worn.lower)].skirt === 1) {
 				sWikifier(
-					`<span class="lewd">Your bodily fluids soak through your ${V.worn.under_lower.name}, exposing your <<genitals>> to the air under your $worn.lower.name.</span>`
+					`<span class="lewd">당신의 체액이 <<worn_under_lower_name>>에 스며들어, <<worn_lower_name>> 아래에서 당신의 <<genitals_ rul>> 공기 중에 노출시킨다.</span>`
 				);
 			} else {
-				span(`Your bodily fluids soak through your ${V.worn.under_lower.name}.`, "lewd");
+				sWikifier(`<span class="lewd">당신의 체액이 <<worn_under_lower_name>>에 스며든다.</span>`);
 			}
 		} else if (V.underlowerwet >= 100 && V.underlowerwetstage < 3) {
 			V.underlowerwetstage = 3;
 			wetIntro = 2;
-			sWikifier(`<span class="lewd">${waterType.toUpperFirst()} soaks through your ${V.worn.under_lower.name}, exposing your <<genitals>>.</span>`);
+			sWikifier(`<span class="lewd">물이 당신의 <<worn_under_lower_name>>에 스며들어, 당신의 <<genitals_ rul>> 노출시킨다.</span>`);
 		} else if (V.underlowerwet < 90 && V.underlowerwetstage >= 3) {
 			V.underlowerwetstage = 2;
-			sWikifier(`<span class="green">Your ${V.worn.under_lower.name} <<underlowerhas>> dried, concealing your <<genitals>>.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_under_lower_name_ i>> 말라서, 당신의 <<genitals_ rul>> 감춘다.</span>`);
 		} else if (V.underlowerwet >= 80 && V.underlowerwetstage < 2) {
 			V.underlowerwetstage = 2;
 			wetIntro = 1;
-			sWikifier(`<span class="purple">Your ${V.worn.under_lower.name} <<underlowerplural>> wet.</span>`);
+			sWikifier(`<span class="purple">당신의 <<worn_under_lower_name_ i>> 젖었다.</span>`);
 		} else if (V.underlowerwet < 70 && V.underlowerwetstage >= 2) {
 			V.underlowerwetstage = 1;
-			sWikifier(`<span class="green">Your ${V.worn.under_lower.name} <<underlowerplural>> drying out.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_under_lower_name_ i>> 말라간다.</span>`);
 		} else if (V.underlowerwet >= 50 && V.underlowerwetstage < 1) {
 			V.underlowerwetstage = 1;
-			sWikifier(`<span class="blue">Your ${V.worn.under_lower.name} <<underlowerplural>> damp.</span>`);
+			sWikifier(`<span class="blue">당신의 <<worn_under_lower_name_ un>> 축축하다.</span>`);
 		} else if (V.underlowerwet < 40 && V.underlowerwetstage >= 1) {
 			V.underlowerwetstage = 0;
-			sWikifier(`<span class="green">Your ${V.worn.under_lower.name} <<underlowerplural>> dry.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_under_lower_name_ i>> 말랐다.</span>`);
 		}
 	}
 
@@ -132,23 +132,23 @@ function effectsWater(waterType = "liquid") {
 		if (V.underupperwet >= 100 && V.underupperwetstage < 3) {
 			V.underupperwetstage = 3;
 			wetIntro = 2;
-			sWikifier(`<span class="lewd">${waterType.toUpperFirst()} soaks through your ${V.worn.under_upper.name}, exposing your <<breasts>>.</span>`);
+			sWikifier(`<span class="lewd">물이 당신의 <<worn_under_upper_name>>에 스며들어, 당신의 <<breasts_ rul>> 노출시킨다.</span>`);
 		} else if (V.underupperwet < 90 && V.underupperwetstage >= 3) {
 			V.underupperwetstage = 2;
-			sWikifier(`<span class="green">Your ${V.worn.under_upper.name} <<underupperhas>> dried, concealing your <<breasts>>.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_under_upper_name_ i>> 말라서, 당신의 <<breasts_ rul>> 감춘다.</span>`);
 		} else if (V.underupperwet >= 80 && V.underupperwetstage < 2) {
 			V.underupperwetstage = 2;
 			wetIntro = 1;
-			sWikifier(`<span class="purple">Your ${V.worn.under_upper.name} <<underupperplural>> wet.</span>`);
+			sWikifier(`<span class="purple">당신의 <<worn_under_upper_name_ i>> 젖었다.</span>`);
 		} else if (V.underupperwet < 70 && V.underupperwetstage >= 2) {
 			V.underupperwetstage = 1;
-			sWikifier(`<span class="green">Your ${V.worn.under_upper.name} <<underupperplural>> drying out.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_under_upper_name_ i>> 말라간다.</span>`);
 		} else if (V.underupperwet >= 50 && V.underupperwetstage < 1) {
 			V.underupperwetstage = 1;
-			sWikifier(`<span class="blue">Your ${V.worn.under_upper.name} <<underupperplural>> damp.</span>`);
+			sWikifier(`<span class="blue">당신의 <<worn_under_upper_name_ un>> 축축하다.</span>`);
 		} else if (V.underupperwet < 40 && V.underupperwetstage >= 1) {
 			V.underupperwetstage = 0;
-			sWikifier(`<span class="green">Your ${V.worn.under_upper.name} <<underupperplural>> dry.</span>`);
+			sWikifier(`<span class="green">당신의 <<worn_under_upper_name_ i>> 말랐다.</span>`);
 		}
 	}
 
@@ -158,14 +158,14 @@ function effectsWater(waterType = "liquid") {
 			if (V.exhibitionism >= 55) {
 				span(
 					!V.worn.face.type.includes("blindfold")
-						? "You feel a lewd thrill as you look down and see your clothes clinging tight to your body, completely transparent."
-						: "You feel a lewd thrill as your clothes cling tight to your body, completely transparent."
+						? "당신은 아래를 쳐다보고 당신의 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있어서 음란한 황홀감을 느낀다."
+						: "당신은 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있는 것을 느끼며 음란한 황홀감을 느낀다."
 				);
 			} else {
 				span(
 					!V.worn.face.type.includes("blindfold")
-						? "You look down in horror at your clothes, which cling tight to your body and are completely transparent."
-						: "Horror takes over you as you feel your clothes, which cling tight to your body and are completely transparent."
+						? "당신은 당신의 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있는 것을 경악에 차서 내려다본다."
+						: "당신은 당신의 옷이 완전히 투명해진 채로, 당신의 몸에 딱 달라붙어 있는 것을 느끼며 경악한다."
 				);
 			}
 			sWikifier("<<covered>>");
@@ -175,14 +175,14 @@ function effectsWater(waterType = "liquid") {
 			if (V.exhibitionism >= 35) {
 				span(
 					!V.worn.face.type.includes("blindfold")
-						? "You feel a lewd thrill as you look down and see your clothes clinging tight to your body, giving a hint of transparency."
-						: "You feel a lewd thrill as your clothes cling tight to your body, giving a hint of transparency."
+						? "당신은 아래를 쳐다보고 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것 같아서 음란한 황홀감을 느낀다."
+						: "당신은 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것을 느끼며 음란한 황홀감을 느낀다."
 				);
 			} else {
 				span(
 					!V.worn.face.type.includes("blindfold")
-						? "You look down anxiously at your clothes, now clinging tightly to your body and giving a hint of transparency."
-						: "You feel your clothes, now clinging tightly to your body and giving a hint of transparency."
+						? "당신은 당신의 옷이 당신의 몸에 딱 달라붙어, 투명해지려는 것을 불안해하며 내려다본다."
+						: "당신은 당신의 옷이 이제 당신의 몸에 딱 달라붙어, 투명해지려는 것을 느낀다."
 				);
 			}
 			br();
@@ -196,7 +196,7 @@ function effectsWater(waterType = "liquid") {
 
 Macro.add("effectswater", {
 	handler() {
-		const fragment = effectsWater(this.args[0]);
+		const fragment = effectsWater();
 		if (fragment) this.output.append(fragment);
 	},
 });
@@ -214,7 +214,7 @@ function effectsMakeup() {
 
 	if (V.makeupWashed) {
 		delete V.makeupWashed;
-		span(`Your makeup is washed away${V.beauty >= (V.beautymax / 7) * 4 ? " revealing your natural beauty" : ""}.`, "teal");
+		span(`당신의 화장이 씻겨져${V.beauty >= (V.beautymax / 7) * 4 ? " 내려가 당신의 본래 미모를 드러낸다" : " 내려갔다"}.`, "teal");
 		fragment.append(document.createElement("br"));
 	}
 
@@ -251,41 +251,41 @@ function effects() {
 	if (V.speechcycle >= 7) V.speechcycle = 0;
 
 	if (Weather.bodyTemperature < setup.WeatherTemperature.minTemperature + 1 && !Weather.BodyTemperature.isIncreasing()) {
-		element("span", `You're very cold, and about to get hypothermia!`, "red");
+		element("span", `당신은 매우 춥고, 저체온증에 걸리려 하고 있다!`, "red");
 		br();
 	} else if (Weather.bodyTemperature > setup.WeatherTemperature.maxTemperature - 1 && !Weather.BodyTemperature.isDecreasing()) {
-		element("span", `You're extremely hot, and about to get heatstroke!`, "red");
+		element("span", `당신은 극심하게 더우며, 열사병에 걸리려 하고 있다!`, "red");
 		br();
 	}
 
 	if (!T.inWater && V.squidcount) {
-		element("span", `The squid${V.squidcount > 1 ? "s" : ""} drop${V.squidcount > 1 ? "" : "s"} off you, seeking water.`, "blue");
+		element("span", `오징어${V.squidcount > 1 ? "들이" : "가"} 물을 찾아, 당신에게서 떨어진다.`, "blue");
 		V.squidcount = 0;
 	}
 
 	if (V.scienceproject === "ongoing" && V.scienceprojectdays === 0 && !V.scienceprojectwarning) {
 		V.scienceprojectwarning = 1;
-		element("span", `The science fair is being held in the town hall on Cliff Street today from ${ampm(9, 0)} until ${ampm(18, 0)}.`, "gold");
+		element("span", `과학 전람회가 클리프 가의 시청에서 오늘 ${ampm(9, 0)}부터 ${ampm(18, 0)}까지 열릴 예정이다.`, "gold");
 	}
 
 	if (V.mathsproject === "ongoing" && V.mathsprojectdays === 0 && !V.mathsprojectwarning) {
 		V.mathsprojectwarning = 1;
-		element("span", `The maths competition is being held in the town hall on Cliff Street today from ${ampm(9, 0)} until ${ampm(18, 0)}.`, "gold");
+		element("span", `수학 경시대회가 클리프 가의 시청에서 오늘 ${ampm(9, 0)}부터 ${ampm(18, 0)}까지 열릴 예정이다.`, "gold");
 	}
 
 	if (V.englishPlay === "ongoing" && V.englishPlayDays === 0 && !V.englishPlayWarning) {
 		V.englishPlayWarning = 1;
-		element("span", `The school plays are being held on Cliff Street tonight from ${ampm(17, 0)} until ${ampm(21, 0)}.`, "gold");
+		element("span", `학교 연극이 클리프 가에서 오늘 밤 ${ampm(17, 0)}부터 ${ampm(21, 0)}까지 열릴 예정이다.`, "gold");
 	}
 
 	if (V.innocencemessage === "start") {
 		delete V.innocencemessage;
-		element("span", "A profound sense of peace falls on your mind. You were upset a moment ago, but you can't remember why.", "red");
-		element("i", "Your trauma has been replaced with innocence. Trauma will continue to accumulate, and will return should you run out of innocence.");
+		element("span", "깊은 평화감이 머릿속에 솟아오른다. 좀 전까지만 해도 마음이 상해있었으나, 지금 와서는 그 이유가 기억나지 않는다.", "red");
+		element("i", "당신의 트라우마가 순수함으로 대체되었다. 트라우마는 계속해서 축적되고, 순수함이 바닥난다면 다시 돌아올 것이다.");
 	} else if (V.innocencemessage === "end") {
 		delete V.innocencemessage;
-		element("span", "You have a terrible epiphany. The abuse you've endured can be ignored no longer.", "red");
-		element("i", "Your innocence has been replaced by trauma.");
+		element("span", "당신은 끔찍한 사실을 자각하고 말았다. 여태까지 견뎌온 학대를 더는 무시할 수 없게 되었다.", "red");
+		element("i", "순수함이 트라우마로 대체되었다.");
 	}
 
 	if (V.eventskipoverrule) V.eventskipoverrule = 0;
@@ -298,65 +298,61 @@ function effects() {
 	}
 
 	sWikifier("<<updateHallucinations>>");
-
-	if (V.controlled === 0 && V.flashbacks >= 1) {
-		switch (V.location) {
-			case "town":
-				if (V.flashbacktownready === 1) {
-					delete V.flashbacktownready;
-					sWikifier("<<flashbacktown>>");
-				}
-				break;
-			case "home":
-				if (V.flashbackhomeready === 1) {
-					delete V.flashbackhomeready;
-					sWikifier("<<flashbackhome>>");
-				}
-				break;
-			case "beach":
-				if (V.flashbackbeachready === 1) {
-					delete V.flashbackbeachready;
-					sWikifier("<<flashbackbeach>>");
-				}
-				break;
-			case "underground":
-				if (V.flashbackundergroundready === 1) {
-					delete V.flashbackundergroundready;
-					sWikifier("<<flashbackunderground>>");
-				}
-				break;
-			case "school":
-				if (V.flashbackschoolready === 1) {
-					delete V.flashbackschoolready;
-					sWikifier("<<flashbackschool>>");
-				}
-				break;
-		}
+	switch (V.location) {
+		case "town":
+			if (V.flashbacktownready === 1 && V.controlled === 0) {
+				delete V.flashbacktownready;
+				sWikifier("<<flashbacktown>>");
+			}
+			break;
+		case "home":
+			if (V.flashbackhomeready === 1 && V.controlled === 0) {
+				delete V.flashbackhomeready;
+				sWikifier("<<flashbackhome>>");
+			}
+			break;
+		case "beach":
+			if (V.flashbackbeachready === 1 && V.controlled === 0) {
+				delete V.flashbackbeachready;
+				sWikifier("<<flashbackbeach>>");
+			}
+			break;
+		case "underground":
+			if (V.flashbackundergroundready === 1 && V.controlled === 0) {
+				delete V.flashbackundergroundready;
+				sWikifier("<<flashbackunderground>>");
+			}
+			break;
+		case "school":
+			if (V.flashbackschoolready === 1 && V.controlled === 0) {
+				delete V.flashbackschoolready;
+				sWikifier("<<flashbackschool>>");
+			}
+			break;
 	}
-
 	// eslint-disable-next-line no-undef
 	if (isPregnancyEnding()) {
 		sWikifier(
-			`<span class="red">Your waters have broken.</span> ${
-				["asylum", "prison", "hospital"].includes(V.location) ? "You need to find help, fast!" : "You need to head to the hospital, fast!"
+			`<span class="red">당신의 양수가 터졌다.</span> ${
+				["asylum", "prison", "hospital"].includes(V.location) ? "당신은 도와줄 사람을 찾아야 한다, 당장!" : "당신은 병원으로 가야만 한다, 당장!"
 			} <<ggstress>>`
 		);
 		br();
 	}
 
-	if (V.effectsmessage && !V.statFreeze && !V.silenceNotifications) {
+	if (V.effectsmessage && !V.statFreeze) {
 		delete V.effectsmessage;
 
 		if (V.recovered_from_pregnancy) {
 			delete V.recovered_from_pregnancy;
-			element("span", "You feel a familiar emptiness return in your womb.", "green");
+			element("span", "당신은 자궁에 익숙한 비어있는 느낌이 돌아온 것을 느낀다.", "green");
 		}
 
 		if (V.skulduggerymessage) {
 			const grade = ["S", "A+", "A", "B+", "B", "C+", "C", "D+", "D", "F+"];
 			const colour = ["green", "teal", "teal", "lblue", "lblue", "blue", "blue", "purple", "purple", "pink"];
-			element("span", "Your skulduggery has improved to", "gold");
-			element("span", `${grade[V.skulduggerymessage - 1]}.`, colour[V.skulduggerymessage - 1]);
+			element("span", "당신의 속임수 기술이", "gold");
+			element("span", `${grade[V.skulduggerymessage - 1]}로 발전하였다.`, colour[V.skulduggerymessage - 1]);
 			delete V.skulduggerymessage;
 			V.skulduggeryday = V.skulduggery;
 		}
@@ -364,25 +360,25 @@ function effects() {
 		if (V.hypnosis_deviancy_message) {
 			delete V.hypnosis_deviancy_message;
 			sWikifier(
-				`<<hypnosisicon>> You weren't very deviant yesterday. ${
-					V.hypnosis_traits.deviancy < 5 ? "The thought fills you with " : "The thought sends your mind "
+				`<<hypnosisicon>> 당신은 어제 별로 이상성욕적이지 않았다. ${
+					V.hypnosis_traits.deviancy < 5 ? "그 생각은 당신을 " : "그 생각은 당신의 마음에 "
 				}`
 			);
 			switch (V.hypnosis_traits.deviancy) {
 				case 1:
-					element("span", "shame.", "lblue");
+					element("span", "수치스러움으로 채운다.", "lblue");
 					break;
 				case 2:
-					element("span", "regret.", "blue");
+					element("span", "후회로 채운다.", "blue");
 					break;
 				case 3:
-					element("span", "guilt.", "purple");
+					element("span", "죄책감으로 채운다.", "purple");
 					break;
 				case 4:
-					element("span", "intense guilt.", "pink");
+					element("span", "극심한 죄책감으로 채운다.", "pink");
 					break;
 				case 5:
-					element("span", "whirring with guilt and anxiety.", "red");
+					element("span", "죄책감과 불안감으로 소용돌이친다.", "red");
 					break;
 			}
 			sWikifier("<<gggtrauma>><<hypnosisicon>>");
@@ -392,11 +388,11 @@ function effects() {
 		["science", "maths", "english", "history"].forEach(subject => {
 			if (V[`${subject}_up_message`]) {
 				delete V[`${subject}_up_message`];
-				sWikifier(`You feel more confident at ${subject}. <<${subject}_skill_up_text>>`);
+				sWikifier(`당신은 <<putpost '${subject}'>>에 더 자신감을 느낀다. <<${subject}_skill_up_text>>`);
 				br();
 			} else if (V[`${subject}_down_message`]) {
 				delete V[`${subject}_down_message`];
-				element("span", `The ${subject} curriculum has outpaced your understanding${V[`${subject}trait`] > 0 ? ", weakening your trait" : ""}.`, "red");
+				sWikifier(`<span class="red">당신은 <<putpost '${subject}'>> 교육과정을 따라잡기가 벅차${V[`${subject}trait`] > 0 ? "서, 성적이 떨어졌다" : "다"}.</span>`);
 				br();
 			}
 		});
@@ -404,31 +400,31 @@ function effects() {
 		if (V.lactationmessage) {
 			delete V.lactationmessage;
 			if (V.lactating) {
-				sWikifier('<span class="purple">Your <<breasts>> feel heavy and sensitive.</span>');
+				sWikifier('<span class="purple">당신의 <<breastsPost "이">> 무겁고 민감해진 것 같다.</span>');
 			} else {
-				sWikifier('<span class="lblue">Your <<breasts>> feel light. They are no longer so sensitive.</span>');
+				sWikifier('<span class="lblue">당신의 <<breastsPost "이">> 가볍다. 더는 전처럼 민감하지도 않다.</span>');
 			}
 		}
 
 		if (V.penisgrowthmessage !== undefined) {
 			switch (V.penisgrowthmessage) {
 				case 4:
-					element("span", "Your penis has grown to a prodigious size.", "purple");
+					element("span", "당신의 자지가 엄청난 크기로 자라났다.", "purple");
 					break;
 				case 3:
-					element("span", "Your penis has grown larger.", "purple");
+					element("span", "당신의 자지가 더 커졌다.", "purple");
 					break;
 				case 2:
-					element("span", "Your penis has grown to an unremarkable size.", "purple");
+					element("span", "당신의 자지가 평범한 크기로 자라났다.", "purple");
 					break;
 				case 1:
-					element("span", "Your penis has grown, though it's still small.", "purple");
+					element("span", "당신의 자지가 커지긴 했으나, 아직도 작은 상태다.", "purple");
 					break;
 				case 0:
-					element("span", "Your penis looks like it's recovering.", "purple");
+					element("span", "당신의 자지는 다시 자라나는 것처럼 보인다.", "purple");
 					break;
 				case -1:
-					element("span", "Your penis looks like it's been given another chance.", "purple");
+					element("span", "당신의 자지는 또다른 기회를 얻은 것처럼 보인다.", "purple");
 					break;
 			}
 			delete V.penisgrowthmessage;
@@ -438,24 +434,24 @@ function effects() {
 			if (V.worn.genitals.name === "chastity parasite") {
 				switch (V.penisshrinkmessage) {
 					case 3:
-						element("span", "Your chastity parasite has shrunk, though it still hints of an impressive penis size.", "purple");
+						element("span", "기생충 정조대의 크기가 줄어들었으나, 아직 놀랄만한 자지 크기일 것이라 짐작할 수 있다.", "purple");
 						break;
 					case 2:
-						element("span", "Your chastity parasite has shrunk, it hints of a much less unremarkable penis size.", "purple");
+						element("span", "기생충 정조대의 크기가 줄어들어, 훨씬 평범한 자지 크기일 것이라 짐작할 수 있다.", "purple");
 						break;
 					case 1:
-						element("span", "Your chastity parasite has become smaller.", "purple");
+						element("span", "기생충 정조대의 크기가 더 작아졌다.", "purple");
 						break;
 					case 0:
-						element("span", "Your chastity parasite has become tiny.", "purple");
+						element("span", "기생충 정조대의 크기가 조그마해졌다.", "purple");
 						break;
 					case -1:
-						element("span", "Your chastity parasite looks ridiculously tiny, you briefly wonder if your penis could still work.", "purple");
+						element("span", "기생충 정조대의 크기가 말도 안 되게 작아져, 당신은 자지가 아직 제 기능을 하는지 잠시 궁금해한다.", "purple");
 						break;
 					case -2:
 						element(
 							"span",
-							"Your chastity parasite looks like it could just have a clit inside, you briefly wonder if you still have a penis.",
+							"기생충 정조대는 그 안에 클리토리스 정도만이 들어있는 것 처럼 보여, 당신은 아직 자지가 있기는 한지 잠시 궁금해한다.",
 							"purple"
 						);
 						break;
@@ -463,22 +459,22 @@ function effects() {
 			} else {
 				switch (V.penisshrinkmessage) {
 					case 3:
-						element("span", "Your penis has shrunk, though it's still of an impressive size.", "purple");
+						element("span", "당신의 자지가 줄어들긴 했으나, 아직도 놀랄만한 크기다.", "purple");
 						break;
 					case 2:
-						element("span", "Your penis has shrunk to an unremarkable size.", "purple");
+						element("span", "당신의 자지가 평범한 크기로 줄어들었다.", "purple");
 						break;
 					case 1:
-						element("span", "Your penis has become smaller.", "purple");
+						element("span", "당신의 자지가 더 작아졌다.", "purple");
 						break;
 					case 0:
-						element("span", "Your penis has become tiny.", "purple");
+						element("span", "당신의 자지가 조그마해졌다.", "purple");
 						break;
 					case -1:
-						element("span", "Your penis looks like it may shrivel up.", "purple");
+						element("span", "당신의 자지가 쪼그라든 것처럼 보인다.", "purple");
 						break;
 					case -2:
-						element("span", "Your penis looks like it may never be used properly again.", "purple");
+						element("span", "당신의 자지는 더 이상 제대로 사용할 수 없을 것 같다.", "purple");
 						break;
 				}
 			}
@@ -488,30 +484,30 @@ function effects() {
 		if (V.breastgrowthmessage !== undefined) {
 			switch (V.breastgrowthmessage) {
 				case 12:
-					element("span", "Your large breasts feel heavy and might get in the way.", "purple");
+					element("span", "당신의 커다란 유방은 무거워 행동에 방해가 될 것 같다.", "purple");
 					break;
 				case 11:
-					element("span", "Your large breasts feel heavy and impressive.", "purple");
+					element("span", "당신의 커다란 유방은 무겁고 인상적이다.", "purple");
 					break;
 				case 10:
 				case 9:
-					element("span", "Your breasts feel heavy.", "purple");
+					element("span", "당신의 유방이 무겁게 느껴진다.", "purple");
 					break;
 				case 8:
 				case 7:
-					element("span", "Your breasts feel a little heavier.", "purple");
+					element("span", "당신의 유방이 조금 무거워진 것 같다.", "purple");
 					break;
 				case 6:
 				case 5:
-					element("span", "Your small breasts will be obvious to those around you.", "purple");
+					element("span", "당신 주변에 있는 사람들에게 당신의 작은 유방은 분명히 눈에 띌 것이다.", "purple");
 					break;
 				case 4:
 				case 3:
-					element("span", "Your small breasts might be obvious to others.", "purple");
+					element("span", "다른 사람들에게 당신의 작은 가슴은 분명히 는에 띌 것이다.", "purple");
 					break;
 				case 2:
 				case 1:
-					element("span", "Your chest feels odd; it might be growing.", "purple");
+					element("span", "당신의 가슴에 뭔가 이상한 느낌이 든다; 자라나고 있는 것일지도 모른다.", "purple");
 					break;
 			}
 			delete V.breastgrowthmessage;
@@ -519,11 +515,11 @@ function effects() {
 
 		if (V.milkFullPainMessage) {
 			if (V.milkFullPain >= 275) {
-				sWikifier(`<span class="red">You haven't been milked enough in some time. Your <<breasts>> throb painfully from being so full.</span>`);
+				sWikifier(`<span class="red">당신은 꽤 시간이 지나는 동안 모유를 충분히 짜 주지 못 했다. 당신의 <<breasts_ ga>> 너무나 꽉 차서 아프게 욱신거린다.</span>`);
 			} else if (V.milkFullPain >= 250) {
-				sWikifier(`<span class="red">You haven't been milked enough in a while. Your <<breasts>> are sore from being so full.</span>`);
+				sWikifier(`<span class="red">당신은 한동안 모유를 충분히 짜 주지 못 했다. 당신의 <<breasts_ ga>> 너무 꽉 차서 쓰리다.</span>`);
 			} else {
-				sWikifier(`<span class="red">You haven't been milked enough recently. Your <<breasts>> feel a little sore from being so full.</span>`);
+				sWikifier(`<span class="red">당신은 최근에 모유를 충분히 짜 주지 못 했다. 당신의 <<breasts_ ga>> 꽉 차서 조금 쓰리다.</span>`);
 			}
 			V.daily.milkFullPainMessage = true;
 			delete V.milkFullPainMessage;
@@ -532,30 +528,30 @@ function effects() {
 		if (V.breastshrinkmessage !== undefined) {
 			switch (V.breastshrinkmessage) {
 				case 11:
-					element("span", "Your large breasts feel lighter, but are still very large.", "purple");
+					element("span", "당신의 커다란 유방이 조금 가벼워진 느낌이지만, 아직도 커다랗다.", "purple");
 					break;
 				case 10:
 				case 9:
-					element("span", "Your breasts feel light, and are looking less impressive.", "purple");
+					element("span", "당신의 유방이 조금은 가벼워진 것 같고, 이전보다는 덜 인상적이게 되었다.", "purple");
 					break;
 				case 8:
 				case 7:
-					element("span", "Your breasts feel lighter.", "purple");
+					element("span", "당신의 유방이 가벼워진 느낌이다.", "purple");
 					break;
 				case 6:
 				case 5:
-					element("span", "Your small breasts feel a little lighter.", "purple");
+					element("span", "당신의 작은 유방이 더 가벼워졌다.", "purple");
 					break;
 				case 4:
 				case 3:
-					element("span", "Your small breasts look less obvious.", "purple");
+					element("span", "당신의 작은 유방이 전보다 분명히 인식하기 어려워졌다.", "purple");
 					break;
 				case 2:
 				case 1:
-					element("span", "Your chest looks flatter.", "purple");
+					element("span", "당신의 가슴이 전보다 평평해져 보인다.", "purple");
 					break;
 				case 0:
-					element("span", "Your chest looks flat.", "purple");
+					element("span", "당신의 가슴은 평평해 보인다.", "purple");
 					break;
 			}
 			delete V.breastshrinkmessage;
@@ -564,28 +560,28 @@ function effects() {
 		if (V.bottomgrowthmessage !== undefined) {
 			switch (V.bottomgrowthmessage) {
 				case 8:
-					element("span", "Your large butt has become even larger.", "purple");
+					element("span", "당신의 커다랗던 엉덩이가 전보다도 더 커졌다.", "purple");
 					break;
 				case 7:
-					element("span", "Your butt feels heavy.", "purple");
+					element("span", "당신의 엉덩이가 무거운 느낌이다.", "purple");
 					break;
 				case 6:
-					element("span", "Your butt feels plump.", "purple");
+					element("span", "당신의 엉덩이가 더 통통해진 것 같다.", "purple");
 					break;
 				case 5:
-					element("span", "Your butt feels round.", "purple");
+					element("span", "당신의 엉덩이가 둥그래진 것 같다.", "purple");
 					break;
 				case 4:
-					element("span", "Your butt feels plush.", "purple");
+					element("span", "당신의 엉덩이가 더 푹신해진 것 같다.", "purple");
 					break;
 				case 3:
-					element("span", "Your butt has gained a little weight.", "purple");
+					element("span", "당신의 엉덩이에 약간 살이 찐 것 같다.", "purple");
 					break;
 				case 2:
-					element("span", "Your small butt sticks out more than you remember.", "purple");
+					element("span", "당신의 작은 엉덩이가 당신 기억보다 더 튀어나온 것 같다.", "purple");
 					break;
 				case 1:
-					element("span", "Your butt doesn't feel so small any more.", "purple");
+					element("span", "당신의 엉덩이가 더는 전처럼 작은 것 같지 않다.", "purple");
 					break;
 			}
 			delete V.bottomgrowthmessage;
@@ -594,26 +590,26 @@ function effects() {
 		if (V.bottomshrinkmessage) {
 			switch (V.bottomshrinkmessage) {
 				case 7:
-					element("span", "Your large butt feels a bit lighter.", "purple");
+					element("span", "당신의 커다랗던 엉덩이가 조금 가벼워진 것 같다.", "purple");
 					break;
 				case 6:
-					element("span", "Your butt feels lighter.", "purple");
+					element("span", "당신의 엉덩이가 가벼워진 것 같다.", "purple");
 					break;
 				case 5:
-					element("span", "Your butt isn't quite as cushioned as before.", "purple");
+					element("span", "당신의 엉덩이가 전처럼 푹신하지 않다.", "purple");
 					break;
 				case 4:
-					element("span", "Your butt has lost weight.", "purple");
+					element("span", "당신의 엉덩이에 살이 많이 빠졌다.", "purple");
 					break;
 				case 3:
-					element("span", "Your butt feels a lot sleeker.", "purple");
+					element("span", "당신의 엉덩이가 꽤나 날렵해진 느낌이다.", "purple");
 					break;
 				case 2:
 				case 1:
-					element("span", "Your butt feels small.", "purple");
+					element("span", "당신의 엉덩이가 작아진 느낌이다.", "purple");
 					break;
 				case 0:
-					element("span", "Your butt feels tiny.", "purple");
+					element("span", "당신의 엉덩이가 조그마해진 느낌이다.", "purple");
 					break;
 			}
 			delete V.bottomshrinkmessage;
@@ -621,37 +617,31 @@ function effects() {
 
 		if (V.speech_attitude_bratty_message) {
 			delete V.speech_attitude_bratty_message;
-			element("span", "You've become too submissive to adopt a bratty demeanour in conversation.", "purple");
+			element("span", "당신은 대화중에 건방진 태도를 취하기에는 너무 순종적이 되었다.", "purple");
 		}
 
 		if (V.speech_attitude_meek_message) {
 			delete V.speech_attitude_meek_message;
-			element("span", "You've become too defiant to adopt a meek demeanour in conversation.", "purple");
-		}
-
-		if (V.sunscreenAutoApplied) {
-			element("span", `You apply sunscreen to your skin${Skin.Sunscreen.usesLeft <= 0 ? "," : "."}`, "purple");
-			if (Skin.Sunscreen.usesLeft <= 0) element("span", "using the last of it.", "red");
-			delete V.sunscreenAutoApplied;
+			element("span", "당신은 대화중에 온순한 태도를 취하기에는 너무 반항적이 되었다.", "purple");
 		}
 
 		if (V.pillsTaken) {
-			element("span", "You take your daily pills.", "purple");
-			if (V.pillsTakenLast) element("span", "You have run out of some of them.", "red");
+			element("span", "당신은 매일마다 먹는 약을 복용한다.", "purple");
+			if (V.pillsTakenLast) element("span", "몇몇 약은 방금 먹은 것으로 동이 났다.", "red");
 			delete V.pillsTaken;
 			delete V.pillsTakenLast;
 		}
 
 		if (V.hairGrowthApplied) {
-			element("span", `You apply growth formula to your hair${V.hairGrowthAppliedLast ? "," : "."}`, "purple");
-			if (V.hairGrowthAppliedLast) element("span", "but used the last of it.", "red");
+			element("span", `당신은 모발 성장약을 뿌${V.hairGrowthAppliedLast ? "리지만," : "린다."}`, "purple");
+			if (V.hairGrowthAppliedLast) element("span", "방금 마지막 약을 사용했다.", "red");
 			delete V.hairGrowthApplied;
 			delete V.hairGrowthAppliedLast;
 		}
 
 		if (V.exhibitionism_message) {
 			sWikifier(
-				`<span class="lblue">You've spent time in public with no underwear on. You wonder if people can tell, and shiver at the thought.</span> <<exhibitionism1>>`
+				`<span class="lblue">당신은 속옷을 입지 않은 상태로 사람들이 있는 곳에서 시간을 보냈다. 혹시 사람들이 눈치채진 않았을까 하는 생각을 하며, 당신은 전율한다.</span> <<exhibitionism1>>`
 			);
 			delete V.exhibitionism_message;
 		}
@@ -665,10 +655,10 @@ function effects() {
 			Object.entries(rebuyMessage).forEach(([location, items]) => {
 				element(
 					"span",
-					`Your ${formatList(items, "and", true)} signal${items.length > 1 ? "" : "s"} for a replacement${
+					`당신의 ${formatList(trList(items, "trSearchClothes", "'name'"), "그리고", true)}${trPost(T.postNum, "이")} 너무 해졌기 때문에${
 						V.wardrobes[location]
-							? ` to the ${V.wardrobes[location].name}`
-							: `. (Likely One-off update error, no need to report unless seen multiple times in the same save) ${
+							? ` 새로 사서 ${trWardrobeName(V.wardrobes[location].name)}에 넣었다.`
+							: ` 새로 샀다. (아마도 업데이트 후에 한 번 나는 에러이며, 같은 세이브에서 여러 번 보여지는 게 아니면 버그리포트할 필요 없습니다) ${
 									Array.isArray(V.rebuy_success) ? JSON.stringify(V.rebuy_success) : ""
 							  }`
 					}.
@@ -682,9 +672,9 @@ function effects() {
 		if (V.rebuy_failure.length) {
 			element(
 				"span",
-				`Your ${formatList(V.rebuy_failure, "and", true)} signal${
-					V.rebuy_failure.length > 1 ? "" : "s"
-				} for a replacement, but you don't have enough money.`,
+				`당신의 ${formatList(trList(V.rebuy_failure, "trSearchClothes", "'name'"), "그리고", true)}${trPost(T.postNum, "이")} 너무 해져서
+					
+				새로 사야 하지만, 당신은 충분한 돈이 없다.`,
 				"purple"
 			);
 			V.rebuy_failure = [];
@@ -693,35 +683,35 @@ function effects() {
 		if (V.masochism_message) {
 			switch (V.masochism_message) {
 				case "up 1":
-					element("span", "Your thoughts wander over the attacks you've suffered. You shiver.", "blue");
-					element("i", "You've become a guilty masochist.", "blue");
+					element("span", "여태껏 시달린 공격들이 머릿속을 떠돈다. 몸이 떨려온다.", "blue");
+					element("i", "당신은 죄책감있는 마조히스트가 되었다.", "blue");
 					break;
 				case "up 2":
-					element("span", "Your thoughts turn to the attacks you've suffered. A thrill follows, unbeckoned.", "purple");
-					element("i", "You've become a normal masochist.", "purple");
+					element("span", "여태껏 시달린 공격들이 떠오른다. 그러고는 느닷없이, 흥분이 뒤따라 온다.", "purple");
+					element("i", "당신은 평범한 마조히스트가 되었다.", "purple");
 					break;
 				case "up 3":
-					element("span", "Your body yearns for more abuse.", "pink");
-					element("i", "You've become a hardened masochist.", "pink");
+					element("span", "당신의 몸은 더 많은 학대를 원한다.", "pink");
+					element("i", "당신은 굳건한 마조히스트가 되었다.", "pink");
 					break;
 				case "up 4":
-					element("span", "Your body craves more abuse.", "red");
-					element("i", "You've become a drooling masochist.", "red");
+					element("span", "당신의 몸은 더 많은 학대를 갈망한다.", "red");
+					element("i", "당신은 엄청난 마조히스트가 되었다.", "red");
 					break;
 				case "down 0":
-					element("i", "You are no longer a masochist.", "lblue");
+					element("i", "당신은 더는 마조히스트가 아니다.", "lblue");
 					break;
 				case "down 1":
-					element("span", "You are no longer so masochistic, and can only be considered a", "blue");
-					element("i", "guilty masochist.", "blue");
+					element("span", "당신은 이전보다 피학 성애적인 면모가 줄어들어,", "blue");
+					element("i", "죄책감있는 마조히스트로 분류된다.", "blue");
 					break;
 				case "down 2":
-					element("span", "You are no longer so masochistic, and can only be considered a", "purple");
-					element("i", "normal masochist.", "purple");
+					element("span", "당신은 이전보다 피학 성애적인 면모가 줄어들어,", "purple");
+					element("i", "평범한 마조히스트로 분류된다.", "purple");
 					break;
 				case "down 3":
-					element("span", "You are no longer so masochistic, and can only be considered a", "pink");
-					element("i", "hardened masochist.", "pink");
+					element("span", "당신은 이전보다 피학 성애적인 면모가 줄어들어,", "pink");
+					element("i", "굳건한 마조히스트로 분류된다.", "pink");
 					break;
 			}
 			delete V.masochism_message;
@@ -730,58 +720,56 @@ function effects() {
 		if (V.sadism_message) {
 			switch (V.sadism_message) {
 				case "up 1":
-					element("span", "Your thoughts turn to the pain you've inflicted. You shiver.", "blue");
-					element("i", "You've become a guilty sadist.", "blue");
+					element("span", "당신이 사람들에게 입힌 고통이 머릿속을 떠돈다. 몸이 떨려온다.", "blue");
+					element("i", "당신은 죄책감있는 새디스트가 되었다.", "blue");
 					break;
 				case "up 2":
-					element("span", "Your thoughts turn to the pain you've inflicted. A thrill follows, unbeckoned.", "purple");
-					element("i", "You've become a normal sadist.", "purple");
+					element("span", "당신이 사람들에게 입힌 고통이 머릿속을 떠돈다. 그러고는 느닷없이, 흥분이 뒤따라 온다.", "purple");
+					element("i", "당신은 평범한 새디스트가 되었다.", "purple");
 					break;
 				case "up 3":
-					element("span", "You yearn to hurt others.", "pink");
-					element("i", "You've become a hardened sadist.", "pink");
+					element("span", "당신은 다른 사람들을 학대하는 것을 갈망한다.", "pink");
+					element("i", "당신은 굳건한 새디스트가 되었다.", "pink");
 					break;
 				case "up 4":
-					element("span", "If they want to play rough, so be it.", "red");
-					element("i", "You've become a vengeful sadist.", "red");
+					element("span", "그들이 험하게 하기를 원한다면, 그렇게 해주자.", "red");
+					element("i", "당신은 복수심에 불타는 새디스트가 되었다.", "red");
 					break;
 				case "down 0":
-					element("i", "You are no longer a sadist.", "lblue");
+					element("i", "당신은 더는 새디스트가 아니다.", "lblue");
 					break;
 				case "down 1":
-					element("span", "You are no longer so sadistic, and can only be considered a", "blue");
-					element("i", "guilty sadist.", "blue");
+					element("span", "당신은 이전보다 가학적인 면모가 줄어들어,", "blue");
+					element("i", "죄책감있는 새디스트로 분류된다.", "blue");
 					break;
 				case "down 2":
-					element("span", "You are no longer so sadistic, and can only be considered a", "purple");
-					element("i", "normal sadist.", "purple");
+					element("span", "당신은 이전보다 가학적인 면모가 줄어들어,", "purple");
+					element("i", "평범한 새디스트로 분류된다.", "purple");
 					break;
 				case "down 3":
-					element("span", "You are no longer so sadistic, and can only be considered a", "pink");
-					element("i", "hardened sadist.", "pink");
+					element("span", "당신은 이전보다 가학적인 면모가 줄어들어,", "pink");
+					element("i", "굳건한 새디스트로 분류된다.", "pink");
 					break;
 			}
 			delete V.sadism_message;
 		}
 
 		if (V.school_crossdress_message) {
-			const crossdressing = V.player.gender !== V.player.sex ? "presumed crossdressing" : "crossdressing";
-			const knows = V.player.gender !== V.player.sex ? "believes it to be true" : "knows";
 			switch (V.school_crossdress_message) {
 				case 5:
-					element("span", `Your ${crossdressing} has become common knowledge at school. Everyone ${knows}, including the teachers.`, "red");
+					element("span", "학교 내에서 당신이 크로스드레서라는 건 공공연한 사실이 되었다. 선생님들을 포함한 모두가 알고 있다.", "red");
 					break;
 				case 4:
-					element("span", `Rumours of your ${crossdressing} are spreading throughout the school.`, "pink");
+					element("span", "학교 전체에 당신이 크로스드레서라는 소문이 퍼지고 있다.", "pink");
 					break;
 				case 3:
-					element("span", `Rumours of your ${crossdressing} are spreading, and have become a popular topic of conversation at school.`, "purple");
+					element("span", "학교에 당신이 크로스드레서라는 소문이 퍼지고 있고, 흔한 대화 주제 중 하나가 되었다.", "purple");
 					break;
 				case 2:
-					element("span", `Whispers of your ${crossdressing} are spreading through the school.`, "blue");
+					element("span", "당신이 크로스드레서라는 내용의 귓속말이 학교에 퍼지고 있다.", "blue");
 					break;
 				case 1:
-					element("span", `A few cliques at school have begun whispering of your ${crossdressing}.`, "lblue");
+					element("span", "학교 내의 몇몇 학생들이 당신이 크로스드레서라며 귓속말을 하기 시작했다.", "lblue");
 					break;
 			}
 			delete V.school_crossdress_message;
@@ -790,23 +778,23 @@ function effects() {
 		if (V.school_herm_message) {
 			switch (V.school_herm_message) {
 				case 5:
-					element("span", "Everyone at school has heard of your unique genitalia, including the teachers.", "red");
+					element("span", "선생님들을 포함한 학교의 모두가 당신의 독특한 성기에 대해 들어보았다.", "red");
 					break;
 				case 4:
-					element("span", "Rumours of your unique genitalia have spread throughout the school.", "pink");
+					element("span", "학교 전체에 당신의 독특한 성기에 대한 소문이 퍼지고 있다.", "pink");
 					break;
 				case 3:
 					element(
 						"span",
-						"It sounds far-fetched to many, but the school is rife with gossip about a student with both boy and girl parts.",
+						"많은 학생들이 믿지는 않으나, 남성기와 여성기를 모두 가진 학생에 대한 소문이 학교에 만연하다.",
 						"purple"
 					);
 					break;
 				case 2:
-					element("span", "Rumours of a student with both boy and girl parts are spreading through the school.", "blue");
+					element("span", "남성기와 여성기를 모두 가진 학생에 대한 소문이 학교에 퍼지고 있다.", "blue");
 					break;
 				case 1:
-					element("span", "A few cliques at school have begun whispering about a student with both boy and girl parts.", "lblue");
+					element("span", "학교 내의 몇몇 학생들이 남성기와 여성기를 모두 가진 학생에 대해 귓속말을 하기 시작했다.", "lblue");
 					break;
 			}
 			delete V.school_herm_message;
@@ -814,17 +802,17 @@ function effects() {
 
 		// expects the use of $orgasm_trait_message, $molest_trait_message, $rape_trait_message, $bestiality_trait_message, $tentacle_trait_message, $vore_trait_message, $milk_trait_message and $cum_trait_message
 		[
-			["orgasm", "Hedonist", "Orgasm Addict"],
-			["molest", "Graceful", "Plaything"],
-			["rape", "Survivor", "Fucktoy"],
-			["bestiality", "Tamer", "Bitch"],
-			["tentacle", "Witch", "Prey"],
-			["vore", "Daredevil", "Tasty"],
-			["milk", "Milk Enthusiast", "Milk Addict"],
-			["cum", "Cumoisseur", "Cum Dump"],
+			["orgasm", "쾌락주의자", "절정 중독자"],
+			["molest", "품위있음", "노리개"],
+			["rape", "생존자", "육변기"],
+			["bestiality", "조련사", `${(V.player.gender_appearance == "m")?"수캐":"암캐"}`],
+			["tentacle", "마술사", "먹잇감"],
+			["vore", "무모함", "맛있음"],
+			["milk", "모유 성애자", "모유 중독자"],
+			["cum", "정액 성애자", "정액받이"],
 		].forEach(([variable, defiantName, submissiveName]) => {
 			if (V[`${variable}_trait_message`]) {
-				element("span", `You've gained the "${V.submissive <= 850 ? defiantName : submissiveName}" trait.`, "gold");
+				element("span", `당신은 "${V.submissive <= 850 ? defiantName : submissiveName}" 특성을 얻었다.`, "gold");
 				delete V[`${variable}_trait_message`];
 			}
 		});
@@ -834,24 +822,24 @@ function effects() {
 				case "traitGain":
 					element(
 						"span",
-						`You find yourself craving more sweet nectar. You've gained the "${V.submissive <= 850 ? "Dendrophile" : "Plant Lover"}" and`,
+						`당신은 당신이 달콤한 꿀을 더 갈망하는 것을 알게 되었다. 당신은 "${V.submissive <= 850 ? "식물 애호가" : "식물 성애자"}"와`,
 						"purple"
 					);
-					element("span", '"Nectar Addict"', "red");
-					element("span", "traits.", "purple");
+					element("span", '"꿀 중독"', "red");
+					element("span", "특성을 얻었다.", "purple");
 					break;
 				case "traitLost":
 					element(
 						"span",
-						`The cravings for nectar finally subside. You've lost the "${V.submissive <= 850 ? "Dendrophile" : "Plant Lover"}" and`,
+						`꿀에 대한 갈망이 드디어 가라앉았다. 당신은 "${V.submissive <= 850 ? "식물 애호가" : "식물 성애자"}"와`,
 						"lblue"
 					);
-					element("span", '"Nectar Addict"', "red");
-					element("span", "traits.", "lblue");
+					element("span", '"꿀 중독"', "red");
+					element("span", "특성을 잃었다.", "lblue");
 					break;
 				case "withdrawals":
 					sWikifier(
-						'<span class="red">Your body craves nectar, and has begun to suffer from withdrawals.</span> <<stress 12>><<ggstress>><<trauma 12>><<ggtrauma>><<physique_loss 4>><<lphysique>>'
+						'<span class="red">당신의 몸은 꿀을 갈망하고 있으며, 금단 증상으로 고통받기 시작했다.</span> <<stress 12>><<ggstress>><<trauma 12>><<ggtrauma>><<physique_loss 4>><<lphysique>>'
 					);
 					br();
 					break;
@@ -863,46 +851,46 @@ function effects() {
 			element(
 				"span",
 				V.hiddenTransformMessage === 1
-					? "Your mental state is too fragile to continue hiding your inner self."
-					: "Hiding your inner self takes a toll on your mental state.",
+					? "당신의 내적 자아를 계속 숨기기에는 당신의 정신상태가 너무 취약하다."
+					: "당신의 내적 자아를 숨기고 있기에 정신상태에 무리가 가고 있다.",
 				"red"
 			);
 			delete V.hiddenTransformMessage;
 		}
 
 		if (V.prof_spray_message) {
-			element("span", "Your spray was accurate. You didn't need to use a full cartridge, saving ammo.", "green");
+			element("span", "당신은 스프레이를 정밀하게 쏠 수 있게 되었다. 당신은 한 통을 전부 쓸 필요가 없기에, 탄약을 아낄 수 있다.", "green");
 			delete V.prof_spray_message;
 		}
 
 		if (V.community_message === "missed") {
-			sWikifier('<span class="red">You missed community service. The police have taken note.</span><<crime "obstruction">>');
+			sWikifier('<span class="red">당신은 사회봉사를 하지 않았다. 경찰은 그 사실을 알고 있다.</span><<crime "obstruction">>');
 			delete V.community_message;
 		}
 
 		if (V.toy_message) {
-			element("span", "Sex toys are becoming more popular throughout town.", "purple");
+			element("span", "섹스 장난감들이 도시 전체에서 점점 인기가 많아지고 있다.", "purple");
 			delete V.toy_message;
 		}
 
 		if (V.loveInterest_message === 1) {
-			element("i", "You feel that having multiple lovers is wrong. You can no longer choose more than one love interest.", "blue");
+			element("i", "당신은 여러 명의 연인을 갖는 것은 잘못됐다고 느낀다. 당신은 더 이상 연인 하나 이상을 선택할 수 없다.", "blue");
 			delete V.loveInterest_message;
 			delete V.loveInterestAwareMessage;
 		} else if (V.loveInterest_message === 2 && !V.loveInterestAwareMessage) {
-			element("i", "Your mind is open to the possibility of multiple lovers. You may now choose a second love interest.", "pink");
+			element("i", "당신의 마음은 여러 명의 연인에 대한 가능성에 열렸다. 당신은 이제 두번째 연인을 선택할 수 있다.", "pink");
 			delete V.loveInterest_message;
 			V.loveInterestAwareMessage = 1;
 		}
 
 		if (V.fallenangelmessage) {
-			sWikifier('<span class="red">You feel a dark presence clawing at your skin.</span> <<gstress>>');
+			sWikifier('<span class="red">당신은 어두운 존재가 당신의 피부를 할퀴는 느낌이 든다.</span> <<gstress>>');
 			V.stress += V.stressmax;
 			delete V.fallenangelmessage;
 		}
 
 		if (V.demonmessage) {
-			sWikifier('<span class="red">You feel a terrible light sear through you.</span> <<gstress>>');
+			sWikifier('<span class="red">당신은 끔찍한 빛이 당신을 관통하며 불태우는 느낌이 든다.</span> <<gstress>>');
 			V.stress += V.stressmax;
 			delete V.demonmessage;
 		}
@@ -911,8 +899,8 @@ function effects() {
 			element(
 				"span",
 				V.blackmoney >= 100
-					? "You feel an animalistic satisfaction towards your growing collection of stolen goods."
-					: "You feel an animalistic satisfaction as you commit such crimes.",
+					? "당신은 훔친 물건이 점점 늘어나는 것에서 동물적인 만족감을 느낀다."
+					: "당신은 그런 범죄를 저지르면서 동물적인 만족감을 느낀다.",
 				"gold"
 			);
 			delete V.foxCrimeMessage;
@@ -921,58 +909,56 @@ function effects() {
 		if (V.bookoverduemessage) {
 			if (V.bookoverduemessage === 1) {
 				sWikifier(`<<crimeUp 5 "thievery">><<delinquency ${5 / 4}>>`);
-				element("span", "You have a book severely overdue, and the police have been informed.", "red");
+				element("span", "당신은 반납기한이 심각하게 지난 책을 가지고 있고, 경찰은 그 사실을 알고 있다.", "red");
 			} else {
 				sWikifier(`<<delinquency ${3 / 4}>>`);
-				element("span", "You have a book overdue, and have incurred delinquency.", "red");
+				element("span", "당신은 반납기한이 지난 책을 가지고 있고, 그로 인해 불량하다고 여겨지고 있다.", "red");
 			}
 			delete V.bookoverduemessage;
 		}
 
 		if (V.wraithcompoundmessage) {
-			element("span", "A fell mist hangs over Elk Street.", "red");
+			element("span", "포악한 안개가 엘크 가에 드리워져 있다.", "red");
 			delete V.wraithcompoundmessage;
 		}
 
 		if (V.earSlimebreastsParasite || V.earSlimePenisParasite || V.earSlimeClitParasite) {
 			const parasiteCount = (V.earSlimebreastsParasite ? 1 : 0) + (V.earSlimePenisParasite ? 1 : 0) + (V.earSlimeClitParasite ? 1 : 0);
 			let parasiteMessage = "";
-			if (V.earSlimebreastsParasite) parasiteMessage += `A new parasite forms around your ${V.player.breastsize >= 1 ? "breasts" : "chest"}`;
+			if (V.earSlimebreastsParasite) parasiteMessage += `새 기생충이 당신 ${V.player.breastsize >= 1 ? "유방" : "가슴"}`;
 
 			if (V.earSlimePenisParasite) {
-				parasiteMessage += parasiteMessage ? " and the base of your penis" : "A new parasite forms around the base of your penis";
+				parasiteMessage += parasiteMessage ? "과 자지의 밑동" : "새 기생충이 당신 자지의 밑동";
 			}
 
-			if (V.earSlimeClitParasite && V.player.vaginaExist) {
+			if (V.earSlimeClitParasite) {
 				if (V.earSlime.focus === "pregnancy") {
-					parasiteMessage += parasiteMessage ? " and <<pussy>>" : "A new parasite forms around your <<pussy>>";
+					parasiteMessage += parasiteMessage ? "과 <<pussyPost>> 주위에 형성되었다" : "새 기생충이 당신의 <<pussyPost>> 주위에 형성되었다";
 				} else {
-					const looks = playerChastity("vagina") ? "feels" : "looks";
+					const looks = playerChastity("vagina") ? "느낌이다" : "모습이다";
 					parasiteMessage += parasiteMessage
-						? ` and clit. It ${looks} like you have your own penis now`
-						: `A new parasite forms around the base of your clit, it ${looks} similar to a penis`;
+						? `과 클리토리스 주위에 형성되었다. 그것은 이제 당신 자신의 자지가 된 것 같은 ${looks}`
+						: `새 기생충이 당신의 클리토리스 주위에 형성되었고, 자지와 비슷한 ${looks}`;
 				}
-			}
-			if (parasiteMessage) {
-				sWikifier(`<span class="blue">A satisfied warmth fills you. ${parasiteMessage}.</span>`);
-				element("span", `You can tell that ${parasiteCount > 1 ? "they are" : "it's"} from the slimes in your ears.`);
+				sWikifier(`<span class="blue">만족스러운 따뜻함이 당신을 채운다. ${parasiteMessage}.</span>`);
+				element("span", `당신은 ${parasiteCount > 1 ? "그것들이" : "그것이"} 당신 귓속의 슬라임에서 온 것이라는 것을 알고 있다.`);
 				if (V.earSlimePenisParasite && V.earSlimePenisParasite !== 1) {
-					element("span", `The previous ${V.earSlimePenisParasite} falls off shortly after it finishes growing.`, "red");
+					element("span", `이전 ${trParasite(V.earSlimePenisParasite, '은')} 그것이 다 자라자 곧 떨어져 버린다.`, "red");
 				}
 				if (V.earSlimeClitParasite && V.earSlimeClitParasite !== 1) {
-					element("span", `The previous ${V.earSlimeClitParasite} falls off shortly after it finishes growing.`, "red");
+					element("span", `클리토리스 위에 있었던 ${trParasite(V.earSlimeClitParasite, '은')} 그것이 다 자라자 곧 떨어져 버린다.`, "red");
 				}
+				delete V.earSlimebreastsParasite;
+				delete V.earSlimePenisParasite;
+				delete V.earSlimeClitParasite;
 			}
-			delete V.earSlimebreastsParasite;
-			delete V.earSlimePenisParasite;
-			delete V.earSlimeClitParasite;
 		}
 
 		if (V.penisslimebrokenchastitymessage) {
 			element(
 				"span",
-				`The parasite at the base of your genitals frees you from the ${V.penisslimebrokenchastitymessage}${
-					V.penisslimecagemessage === 1 ? ", and almost just as quickly, a new chastity parasite forms around your penis" : ""
+				`당신의 성기 밑동에 있던 기생충이 ${trClothes("genitals", V.penisslimebrokenchastitymessage)}에서 떨어${
+					V.penisslimecagemessage === 1 ? "지고, 그리고 곧바로, 새 기생충 정조대가 당신의 자지 주위에 형성된다" : "진다"
 				}.`,
 				"purple"
 			);
@@ -983,7 +969,7 @@ function effects() {
 		if (V.penisslimecagemessage) {
 			element(
 				"span",
-				V.penisslimecagemessage === 1 ? "A new chastity parasite forms around your penis." : "Your chastity parasite looks brand new again.",
+				V.penisslimecagemessage === 1 ? "새 기생충 정조대가 당신의 자지 주위에 형성된다." : "당신의 기생충 정조대가 다시 새 것처럼 깨끗해진다.",
 				"purple"
 			);
 			delete V.penisslimecagemessage;
@@ -1016,15 +1002,15 @@ function effects() {
 					case "vagina0":
 						if (V.pregnancyStats.parasiteDoctorEvents >= 4) {
 							sWikifier(
-								`You feel ${V.pregnancyStats.namesParasitesChild ? "your grown child" : "the grown parasite"} in your ${
-									event === "anus0" ? "stomach" : "uterus"
-								}. <<ggarousal>>`
+								`당신은 ${V.pregnancyStats.namesParasitesChild ? "커진 당신의 아기를" : "자란 기생충을"} 당신의 ${
+									event === "anus0" ? "배" : "자궁"
+								} 안에서 느낀다. <<ggarousal>>`
 							);
 						} else {
 							sWikifier(
-								`You feel something large move around in your ${
-									event === "anus0" ? "stomach" : "uterus"
-								}. Might be best to go to the hospital again. <<ggarousal>>`
+								`당신은 무언가 커다란 것이 당신의 ${
+									event === "anus0" ? "배" : "자궁"
+								} 안에서 움직이는 것을 느낀다. 다시 한번 병원에 가 보는 것이 최선일 듯 하다. <<ggarousal>>`
 							);
 						}
 						arousalGain += 2000;
@@ -1033,12 +1019,12 @@ function effects() {
 					case "vagina1":
 						if (V.pregnancyStats.parasiteDoctorEvents >= 2) {
 							sWikifier(
-								`You feel one of ${V.pregnancyStats.namesParasitesChild ? "your children" : "the parasites"} move around in your ${
-									event === "anus1" ? "stomach" : "uterus"
-								}. <<ggarousal>>${stressMulti ? "<<gstress>>" : ""}`
+								`당신은 ${V.pregnancyStats.namesParasitesChild ? "당신의 아기들" : "기생충들"} 중 하나가 ${
+									event === "anus1" ? "배" : "자궁"
+								} 안에서 움직이는 것을 느낀다. <<ggarousal>>${stressMulti ? "<<gstress>>" : ""}`
 							);
 						} else {
-							sWikifier(`You feel something move around in your ${event === "anus1" ? "stomach" : "uterus"}. Might be best to go to the hospital.
+							sWikifier(`당신은 무언가가 당신의 ${event === "anus1" ? "배" : "자궁"} 안에서 움직이는 것을 느낀다. 병원에 가 보는 것이 최선일 듯 하다.
 							<<ggarousal>>${stressMulti ? "<<gstress>>" : ""}`);
 						}
 						arousalGain += (arousalMulti * 500) / (minDaysLeft + 1);
@@ -1047,16 +1033,16 @@ function effects() {
 					case "anus2":
 					case "vagina2":
 						sWikifier(
-							`Your ${
-								event === "anus2" ? "stomach" : "uterus"
-							} rumbles a little. You hope the noise hasn't attracted any attention. <<garousal>>${stressMulti ? "<<gstress>>" : ""}`
+							`당신의 ${
+								event === "anus2" ? "배가" : "자궁이"
+							} 살짝 꾸르륵 거린다. 당신은 이 소리가 어떤 주의도 끌지 않기를 바란다. <<garousal>>${stressMulti ? "<<gstress>>" : ""}`
 						);
 						arousalGain += (arousalMulti * 250) / (minDaysLeft + 1);
 						V.stress += 200 * stressMulti;
 						break;
 					case "anus3":
 					case "vagina3":
-						sWikifier(`You feel a little lightheaded for a moment.${stressMulti ? "<<gstress>>" : ""}`);
+						sWikifier(`잠시동안 머리가 어지러운 것을 느꼈다.${stressMulti ? "<<gstress>>" : ""}`);
 						V.stress += 100 * stressMulti;
 						break;
 				}
@@ -1071,7 +1057,7 @@ function effects() {
 		if (V.earSlime.event.includes("get sperm into your") && V.earSlime.event.includes("completed") && V.earSlime.eventTimer <= 2) {
 			element(
 				"span",
-				`The slime in your ear is pleased that you completed its task of getting sperm into your ${V.player.vaginaExist ? "vagina" : "anus"}.`,
+				`귓속의 슬라임이 당신이 ${V.player.vaginaExist ? "질" : "항문"} 안에 정액을 넣으라는 명령을 이행한 것에 기뻐하고 있다.`,
 				"green"
 			);
 			sWikifier(`<<pain -4>><<stress -6>><<trauma -12>><<lpain>><<lltrauma>><<lstress>>`);
@@ -1080,471 +1066,28 @@ function effects() {
 		} else if (V.earSlime.event.includes("get your own sperm into your") && V.earSlime.event.includes("completed") && V.earSlime.eventTimer <= 2) {
 			element(
 				"span",
-				`The slime in your ear is pleased that you completed its task of getting your own sperm into your ${V.player.vaginaExist ? "vagina" : "anus"}.`,
+				`귓속의 슬라임이 당신이 ${V.player.vaginaExist ? "질" : "항문"} 안에 당신 자신의 정액을 넣으라는 명령을 이행한 것에 기뻐하고 있다.`,
 				"green"
 			);
 			sWikifier(`<<pain -4>><<stress -6>><<trauma -12>><<lpain>><<lltrauma>><<lstress>>`);
 			if (V.earSlime.growth >= 100 && V.earSlime.focus === "pregnancy" && V.worn.genitals.name === "naked") {
-				sWikifier(`<span class="purple">A new chastity parasite forms around your penis.</span> <<genitalswear 8>>`);
+				sWikifier(`<span class="purple">새 기생충 정조대가 당신의 자지 주위에 형성되었다.</span> <<genitalswear 8>>`);
 				V.worn.genitals.origin = "ear slime";
 			}
 			br();
 			V.earSlime.event = "";
 		} else if (V.earSlime.eventTimer <= 2 || (V.earSlime.noSleep && Time.dayState !== "night")) {
 			if (V.earSlime.startedThreats) {
-				element("span", "The slime in your ear punishes you for failing to complete your task.", "red");
+				element("span", "귓속의 슬라임이 임무를 완수하지 못한 것에 대한 처벌을 내린다.", "red");
 				sWikifier(`<<ggpain>><<ggtrauma>><<ggstress>><<pain 16>><<stress 12>><<trauma 12>>`);
 				V.earSlime.defyCooldown += 4;
 			} else {
-				element("span", "The slime in your ear is upset you were unable to complete what you said you would do.", "cyan");
+				element("span", "귓속의 슬라임은 당신이 하겠다고 말한 명령을 완수할 수 없게 되자 당황하고 있다.", "cyan");
 			}
 			br();
 			V.earSlime.event = "";
 			V.earSlime.noSleep = false;
 		}
-	}
-
-	if (Array.isArray(V.timeMessages) && V.timeMessages.length) {
-		/*
-			Calls to <<earnFeat "x">> here and within earnHourlyFeats are intended to show feats to the user.
-			Be aware that the earnFeat widget is also used in passages such as 'Forest Blood Lemon Pick' and feats earned this way should still be displayed on that very passage and not the next one.
-		*/
-		const errors = [];
-		V.timeMessages.forEach(messageKey => {
-			let display;
-			switch (messageKey) {
-				case "feats":
-					display = earnHourlyFeats();
-					if (display) fragment.append(display);
-					break;
-				// Transformations
-				case "fallenAngelFeathers":
-					element("span", "Your wings have grown some new feathers.", "gold");
-					break;
-				case "fallenAngelWings":
-					element("span", "The familiar feeling of soft feathers fills you with hope.", "gold");
-					break;
-				case "fallenAngelDescend":
-					element(
-						"span",
-						"Your blackened wings turn blacker still. Your shattered halo fades. Horns sprout from your scalp and a tail sprouts from your lower back. Your sense of loss is replaced with a desire for revenge.",
-						"gold"
-					);
-					fragment.append(wikifier("garousal"));
-					fragment.append(wikifier("earnFeat", "'Demon'"));
-					break;
-				case "angelUp1":
-					sWikifier('<span class="gold">Despite everything, you have managed to remain a pure <<pcGender>>. The thought makes you happy.</span>');
-					break;
-				case "angelUp2":
-					element("span", "You are pure and feel determined to keep it that way.", "gold");
-					break;
-				case "angelUp3":
-					element("span", "You feel a weight lift from your shoulders.", "gold");
-					break;
-				case "angelUp4":
-					element("span", "A golden light shines down on you.", "gold");
-					break;
-				case "angelUp5":
-					element("span", "You feel a soothing warmth in your back.", "gold");
-					break;
-				case "angelUp6":
-					element("span", "You feel lighter. Your new wings caress your face.", "gold");
-					fragment.append(wikifier("earnFeat", "'Angel'"));
-					break;
-				case "angelDown0":
-					element("span", "You feel soiled.", "gold");
-					break;
-				case "angelDown1":
-					element("span", "You feel dirty.", "gold");
-					break;
-				case "angelDown2":
-					element("span", "You feel a weight bear down on you.", "gold");
-					break;
-				case "angelDown3":
-					element("span", "The light above you fades.", "gold");
-					break;
-				case "angelDown4":
-					element("span", "The soothing warmth in your back fades.", "gold");
-					break;
-				case "angelDown5":
-					element("span", "Your wings fade away.", "gold");
-					break;
-				case "demonUp1":
-					sWikifier('<span class="gold">Your scalp itches.</span><<garousal>>');
-					break;
-				case "demonUp2":
-					sWikifier('<span class="gold">Horns sprout from your scalp.</span><<garousal>>');
-					break;
-				case "demonUp3":
-					sWikifier('<span class="gold">Your <<bottom>> itches.</span><<garousal>>');
-					break;
-				case "demonUp4":
-					sWikifier('<span class="gold">A tail sprouts from your lower back.</span><<garousal>>');
-					break;
-				case "demonUp5":
-					sWikifier('<span class="gold">You feel a burning sensation in your back.</span><<garousal>>');
-					break;
-				case "demonUp6":
-					sWikifier('<span class="gold">You feel lighter. Your new wings caress your face.</span><<garousal>><<earnFeat "Demon">>');
-					break;
-				case "demonDown0":
-					element("span", "You feel an invisible light burn away your impurity.", "gold");
-					if (V.demonFeat) {
-						fragment.append(wikifier("earnFeat", "'The Path to Redemption'"));
-						delete V.demonFeat;
-					}
-					break;
-				case "demonDown1":
-					element("span", "Your horns recede.", "gold");
-					break;
-				case "demonDown2":
-					sWikifier('<span class="gold">The itching in your <<bottom>> stops.</span>');
-					break;
-				case "demonDown3":
-					element("span", "Your tail recedes.", "gold");
-					break;
-				case "demonDown4":
-					element("span", "The burning in your back ceases.", "gold");
-					break;
-				case "demonDown5":
-					element("span", "Your wings recede.", "gold");
-					break;
-				case "wolfUp1":
-					element("span", "You have a strange toothache.", "gold");
-					break;
-				case "wolfUp2":
-					element("span", "Your mouth feels different. You explore your mouth and wince as your tongue presses against your new fangs.", "gold");
-					break;
-				case "wolfUp3":
-					element("span", `Your scalp ${V.pbdisable === "f" ? "and pubic area itch" : "itches"}.`, "gold");
-					break;
-				case "wolfUp4":
-					element("span", "You feel something on your head. You reach up and tug, but it hurts. You have a new pair of wolf ears.", "gold");
-					if (V.pbdisable === "f") element("span", "You also notice long and fluffy hair has grown in your pubic area.");
-					break;
-				case "wolfUp5":
-					element("span", "Your lower back itches.", "gold");
-					break;
-				case "wolfUp6":
-					element("span", "Your bottom feels heavier than usual. You reach behind you and feel your new wolf tail.", "gold");
-					fragment.append(wikifier("earnFeat", "'Wolf'"));
-					break;
-				case "wolfDown0":
-					element("span", "Your toothache has stopped.", "gold");
-					break;
-				case "wolfDown1":
-					element("span", "Your fangs have turned into regular teeth.", "gold");
-					break;
-				case "wolfDown2":
-					element("span", `Your scalp ${V.pbdisable === "f" ? "and pubic area no longer itch" : "no longer itches"}.`, "gold");
-					break;
-				case "wolfDown3":
-					element("span", `Your wolf ears ${V.pbdisable === "f" ? "and extra body hair " : ""}have disappeared.`, "gold");
-					break;
-				case "wolfDown4":
-					element("span", "Your lower back has stopped itching.", "gold");
-					break;
-				case "wolfDown5":
-					element("span", "Your balance feels different. Your wolf tail has disappeared.", "gold");
-					break;
-				case "catUp1":
-					element("span", "You have a strange toothache. A beetle crawls by. You resist the urge to pounce.", "gold");
-					break;
-				case "catUp2":
-					element("span", "Your mouth feels different. You explore your mouth and wince as your tongue presses against your new fangs.", "gold");
-					break;
-				case "catUp3":
-					element("span", "Your scalp itches.", "gold");
-					break;
-				case "catUp4":
-					element("span", "Your scalp twitches. You reach up and feel your new pair of cat ears.", "gold");
-					break;
-				case "catUp5":
-					element("span", "Your lower back itches.", "gold");
-					break;
-				case "catUp6":
-					element("span", "Your bottom feels weighty, yet perfectly balanced. You reach behind and feel your new cat tail.", "gold");
-					fragment.append(wikifier("earnFeat", "'Neko'"));
-					break;
-				case "catUp7":
-					element("span", "Your eyes itch.", "gold");
-					break;
-				case "catUp8":
-					element("span", "Your eyes water from a burning sensation around the pupil.", "gold");
-					break;
-				case "catUp9":
-					element("span", "Your eyes burn, likely due to some sort of allergy, you can barely keep them open.", "gold");
-					break;
-				case "catUp10":
-					element(
-						"span",
-						"Your eyes no longer burn, and despite the darkness of the early morning, you are able to pick up every detail of the scenery around you.",
-						"gold"
-					);
-					break;
-				case "catDown0":
-					element("span", "Your toothache has stopped.", "gold");
-					break;
-				case "catDown1":
-					element("span", "Your fangs have turned into regular teeth.", "gold");
-					break;
-				case "catDown2":
-					element("span", "Your scalp no longer itches.", "gold");
-					break;
-				case "catDown3":
-					element("span", "Your cat ears have disappeared.", "gold");
-					break;
-				case "catDown4":
-					element("span", "The itching in your lower back stops.", "gold");
-					break;
-				case "catDown5":
-					element("span", "Your cat tail disappears.", "gold");
-					break;
-				case "catDown6":
-					element("span", "Your eyes no longer itch; it must have been an allergy.", "gold");
-					break;
-				case "catDown7":
-					element("span", "Your eyes sense less detail of your surroundings.", "gold");
-					break;
-				case "catDown9":
-					element("span", "Your surroundings appear darker than before.", "gold");
-					break;
-				case "cowUp1":
-					element("span", "You have a strange urge to munch grass.", "gold");
-					break;
-				case "cowUp2":
-					element("span", "Your scalp itches. You reach up, and find that a pair of small horns have sprouted.", "gold");
-					break;
-				case "cowUp3":
-					element("span", "Your ears tingle.", "gold");
-					break;
-				case "cowUp4":
-					element(
-						"span",
-						"Your ears itch. You reach up to scratch them, and find them much bigger than you expected. You've grown a pair of cow ears.",
-						"gold"
-					);
-					break;
-				case "cowUp5":
-					element("span", "Your lower back tingles.", "gold");
-					break;
-				case "cowUp6":
-					element(
-						"span",
-						"Your bottom feels heavier than usual. You reach behind you and feel your new cow tail. You suppress the urge to moo.",
-						"gold"
-					);
-					fragment.append(wikifier("earnFeat", "'Cattle'"));
-					break;
-				case "cowDown0":
-					element("span", "Grass no longer looks so tasty.", "gold");
-					break;
-				case "cowDown1":
-					element("span", "Your small horns have disappeared.", "gold");
-					break;
-				case "cowDown2":
-					element("span", "Your ears no longer tingle.", "gold");
-					break;
-				case "cowDown3":
-					element("span", "Your cow ears have disappeared.", "gold");
-					break;
-				case "cowDown4":
-					element("span", "Your lower back has stopped tingling.", "gold");
-					break;
-				case "cowDown5":
-					element("span", "Your balance feels different. Your cow tail has disappeared.", "gold");
-					break;
-				case "harpyUp1":
-					element("span", "Your vision feels sharper.", "gold");
-					break;
-				case "harpyUp2":
-					element("span", "Your eyes feel strange. Your vision has improved.", "gold");
-					break;
-				case "harpyUp3":
-					element(
-						"span",
-						`Your lower back and neck itch. ${
-							V.loveInterest.primary !== "None"
-								? `Your thoughts turn to ${
-										["Black Wolf", "Great Hawk"].includes(V.loveInterest.primary)
-											? `the ${V.loveInterest.primary},`
-											: `${V.loveInterest.primary},`
-								  } and you have a primal, almost animalistic, urge to be with ${C.npc[V.loveInterest.primary].pronouns.him}.`
-								: "You suddenly crave a true partner to be with."
-						}`,
-						"gold"
-					);
-					break;
-				case "harpyUp4":
-					element("span", "Your bottom feels lighter. You reach behind you, and grasp a feathered tail. Small feathers cover your neck.", "gold");
-					break;
-				case "harpyUp5":
-					element("span", `Your back ${V.pbdisable === "f" ? "and pubic area itch" : "itches"}.`, "gold");
-					break;
-				case "harpyUp6":
-					element(
-						"span",
-						`You feel light as a feather. Wings caress your face.${
-							V.pbdisable === "f" ? " You also notice that short, feathery hair has grown in your pubic area." : ""
-						}`,
-						"gold"
-					);
-					fragment.append(wikifier("earnFeat", "'Harpy'"));
-					break;
-				case "harpyDown0":
-					element("span", "Your vision has returned to normal.", "gold");
-					break;
-				case "harpyDown1":
-					element("span", "Your vision is no longer so sharp.", "gold");
-					break;
-				case "harpyDown2":
-					element("span", "The itching in your lower back and neck both stop, and you no longer crave a partner so feverishly.", "gold");
-					break;
-				case "harpyDown3":
-					element("span", "Your feathered tail has disappeared, along with the feathers on your neck.", "gold");
-					break;
-				case "harpyDown4":
-					element("span", `You feel heavier${V.pbdisable === "f" ? ", and your pubic area no longer itches" : ""}.`, "gold");
-					break;
-				case "harpyDown5":
-					element("span", `You feel heavier. Your feathered wings${V.pbdisable === "f" ? " and feathery pubes" : ""} have disappeared.`, "gold");
-					break;
-				case "foxUp1":
-					element("span", "You have a strange toothache, and your eyes feel a little sharper. You have the urge to steal something.", "gold");
-					break;
-				case "foxUp2":
-					element(
-						"span",
-						"Your mouth and eyes feel different. You explore your mouth and yip as your tongue presses against your new fangs.",
-						"gold"
-					);
-					break;
-				case "foxUp3":
-					element(
-						"span",
-						`Your scalp itches. ${
-							V.loveInterest.primary !== "None"
-								? `Your thoughts turn to ${
-										["Black Wolf", "Great Hawk"].includes(V.loveInterest.primary)
-											? `the ${V.loveInterest.primary},`
-											: `${V.loveInterest.primary},`
-								  } and you have a primal, almost animalistic, urge to be with ${C.npc[V.loveInterest.primary].pronouns.him}.`
-								: "You suddenly crave a true partner to be with."
-						}`,
-						"gold"
-					);
-					break;
-				case "foxUp4":
-					element("span", "You feel something on your head. You reach up and touch your new pair of fox ears, and they wiggle in response.", "gold");
-					break;
-				case "foxUp5":
-					element(
-						"span",
-						"Your lower back itches. You have the urge to let someone scratch it. You also notice strange discolouration around your eyes.",
-						"gold"
-					);
-					break;
-				case "foxUp6":
-					element(
-						"span",
-						"Your bottom feels heavier than usual. You give it a wiggle and feel your new fox tail. It's extremely comforting to touch.",
-						"gold"
-					);
-					fragment.append(wikifier("earnFeat", "'Fox'"));
-					break;
-				case "foxDown0":
-					element("span", "Your toothache has stopped.", "gold");
-					break;
-				case "foxDown1":
-					element("span", "Your fangs have turned into regular teeth, and your eyesight feels dull.", "gold");
-					break;
-				case "foxDown2":
-					element("span", "Your scalp no longer itches, and you no longer crave a partner so feverishly.", "gold");
-					break;
-				case "foxDown3":
-					element("span", "Your fox ears have disappeared.", "gold");
-					break;
-				case "foxDown4":
-					element("span", "Your lower back has stopped itching, and the discolouration around your eyes has vanished.", "gold");
-					break;
-				case "foxDown5":
-					element("span", "Your balance feels different. Your fox tail has disappeared.", "gold");
-					break;
-				// Clothes
-				case "bimboMessage1":
-					element(
-						"span",
-						`You feel different, but you're not sure how or why.${
-							V.worn.upper.type.includesAny("bimbo", "pimp") ||
-							V.worn.lower.type.includesAny("bimbo", "pimp") ||
-							V.worn.feet.type.includes("bimbo") ||
-							V.worn.head.type.includes("pimp")
-								? " Your clothing seems to cling to you."
-								: ""
-						}`,
-						"lewd"
-					);
-					break;
-				case "pimpMessage1":
-					element(
-						"span",
-						`You feel different, but you're not sure how or why.${
-							V.worn.upper.type.includes("pimp") || V.worn.lower.type.includes("pimp") || V.worn.head.type.includes("pimp")
-								? " Your clothing feels warm to the touch."
-								: ""
-						}`,
-						"lewd"
-					);
-					break;
-				case "bimboMessage2":
-					element(
-						"span",
-						`You feel different yet again. This time you're more sure about it: something is making you look more feminine. Your thoughts turn to the outfit you${
-							V.worn.upper.type.includes("bimbo") || V.worn.lower.type.includes("bimbo") || V.worn.feet.type.includes("bimbo")
-								? "'re wearing."
-								: " had on earlier."
-						}`,
-						"lewd"
-					);
-					break;
-				case "pimpMessage2":
-					element(
-						"span",
-						`You feel different yet again. This time you're more sure about it: something is making you look more masculine. Your thoughts turn to the outfit you${
-							V.worn.upper.type.includes("pimp") || V.worn.lower.type.includes("pimp") || V.worn.head.type.includes("pimp")
-								? "'re wearing."
-								: " had on earlier."
-						}`,
-						"lewd"
-					);
-					break;
-				case "bimboMessage3":
-					element(
-						"span",
-						"You feel an odd sense of yearning grow within you, and you are filled with a deep desire. An unbearable lust soon takes hold.",
-						"lewd"
-					);
-					break;
-				// Feats
-				case "heroicVictory":
-					fragment.append(wikifier("earnFeat", "'Heroic Victory'"));
-					break;
-				case "dawnToDusk":
-					fragment.append(wikifier("earnFeat", "'Dawn to Dusk'"));
-					break;
-				case "adultShopContribution":
-					if (V.adultshopcontribution) fragment.append(wikifier("earnFeat", "'Opened Pandoras Box'"));
-					if (V.adultshopcontribution >= 12) fragment.append(wikifier("earnFeat", "'Opened Pandoras Cocks'"));
-					break;
-				default:
-					// Report error
-					errors.pushUnique(messageKey);
-					break;
-			}
-		});
-		if (errors.length) Errors.report("Not fully implemented or incorrect time message keys found", errors);
-		V.timeMessages = [];
 	}
 
 	sWikifier("<<integritycheck>><<exposure>>");
@@ -1553,7 +1096,7 @@ function effects() {
 
 	if (V.exposed >= 1 && V.exposedcheck === 1) {
 		V.exposedcheck = 0;
-		sWikifier("You feel self-conscious about your <<nudity>>.");
+		sWikifier("당신은 당신의 <<nudityPost '을'>> 의식한다.<<nudityPostend>>");
 		br();
 	}
 
@@ -1564,9 +1107,7 @@ function effects() {
 
 	if (V.worn.genitals.cursed === 1 && V.worn.genitals.integrity <= 0) V.worn.genitals.type.push("broken");
 
-	if (V.worn.feet.type.includes("heels") && currentSkillValue("feetskill") < V.worn.feet.reveal) {
-		V.tiredness += (V.worn.feet.reveal - currentSkillValue("feetskill")) / 150;
-	}
+	sWikifier("<<heelsUpdate>>");
 
 	if (V.combat) sWikifier("<<pass 10 seconds>>");
 

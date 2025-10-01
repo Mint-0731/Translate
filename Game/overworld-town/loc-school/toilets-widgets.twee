@@ -7,7 +7,7 @@
 	A <<person>> grabs the pack of condoms from behind.
 	<br><br>
 
-	"What are you going to use these for?" <<he>> asks. "I'll make it easy on ya. You can have these back if you come to the stall with me."
+	"What are you going to use these for?" <<He>> asks. "I'll make it easy on ya. You can have these back if you come to the stall with me."
 	<br><br>
 
 	<<if hasSexStat("promiscuity", 4)>>
@@ -19,8 +19,8 @@
 		<</if>>
 	<</if>>
 	<<if hasSexStat("promiscuity", 2)>>
-		<<link [[Seduce|Vending Machine Proposal Seduce]]>><</link>><<promiscuous1>>
+		<<link [[유혹한다|Vending Machine Proposal Seduce]]>><</link>><<promiscuous1>>
 		<br>
 	<</if>>
-	<<link [[Refuse|Vending Machine Proposal Reject]]>><</link>>
+	<<link [[거절한다|Vending Machine Proposal Reject]]>><</link>>
 <</widget>>

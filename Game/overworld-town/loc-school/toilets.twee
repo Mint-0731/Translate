@@ -4,28 +4,28 @@
 
 <<unset $changingRoomGender>>
 
-You are in the antechamber outside the school toilets.
+당신은 학교 화장실 밖의 곁방에 있다.
 <br><br>
 <<if $stress gte $stressmax>>
 	<<if isPregnancyEnding()>>
 		<<pregnancyPassout "schoolToilets">>
 	<<else>>
-		<<link [[Everything fades to black...|School Passout]]>><</link>>
+		<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 	<</if>>
 <<else>>
-	<<icon "mentoilet.png">><<link [[Boys' toilets|School Boy's Toilets]]>><</link>>
+	<<maleicon>><<link [[남학생 화장실|School Boy's Toilets]]>><</link>>
 	<br>
-	<<icon "womentoilet.png">><<link [[Girls' toilets|School Girl's Toilets]]>><</link>>
+	<<femaleicon>><<link [[여학생 화장실|School Girl's Toilets]]>><</link>>
 	<br><br>
 	<<if $historytrait gte 2 and $schooldrainintro isnot 1>>
-		<<sewericon>><<link [[Secret tunnel to drain system (0:02)|School Drain]]>><<pass 2>><</link>>
+		<<sewericon>><<link [[빗물 배수 시스템으로 향하는 비밀 통로 (0:02)|School Drain]]>><<pass 2>><</link>>
 		<br>
 	<<elseif $historytrait gte 2>>
-		<<sewericon>><<link [[Secret tunnel to drain system (0:02)|Commercial Drain]]>><<pass 2>><</link>>
+		<<sewericon>><<link [[빗물 배수 시스템으로 향하는 비밀 통로 (0:02)|Commercial Drain]]>><<pass 2>><</link>>
 		<br>
 	<</if>>
 	<<if $brothel_basement_intro is 1 and hasSexStat("promiscuity", 4)>>
-		<<brothelicon "gloryhole">><<link [[Set up gloryhole in antechamber|School Gloryhole Start]]>><</link>><<promiscuous4>>
+		<<brothelicon "gloryhole">><<link [[곁방에 글로리홀을 차린다|School Gloryhole Start]]>><</link>><<promiscuous4>>
 		<br>
 	<</if>>
 	<<if $condomLvl gte 1>>
@@ -33,20 +33,20 @@ You are in the antechamber outside the school toilets.
 		<br>
 	<</if>>
 	<br>
-	<<getouticon>><<link [[Leave the toilets (0:01)|Hallways]]>><<pass 1>><</link>>
+	<<getouticon>><<link [[화장실에서 나온다 (0:01)|Hallways]]>><<pass 1>><</link>>
 	<br>
 <</if>>
 
 :: School Toilets Hiss
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
-You hiss at the <<beasttype>>. <<bHe>> backs away from you, <<bhis>> ears turned back. You stare at <<bhim>> and unleash your deepest meow. <<bHe>> growls back, but <<bhis>> face relaxes. <<bHe>> leaps onto the windowsill and disappears behind it.
+당신은 <<beasttypePost "에게">> 쉭쉭거린다. <<bHePost "은">> 귀를 뒤로 눕히고는 뒷걸음질 친다. 당신은 녀석을 응시하며 최대한 낮은 목소리로 야옹거린다. <<bHePost "도">> 답하듯 그르렁거리나, 이전보다 긴장이 풀린 모습이다. <<bHePost "은">> 창틀 위로 뛰어올라가서는 그 뒤로 사라진다.
 <br><br>
 <<if $changingRoomGender is "boys">>
-	<<link [[Next|School Boy's Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Boy's Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
-	<<link [[Next|School Girl's Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Girl's Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
@@ -73,9 +73,9 @@ You hiss at the <<beasttype>>. <<bHe>> backs away from you, <<bhis>> ears turned
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|School Toilets Cat Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|School Toilets Cat Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|School Toilets Cat]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|School Toilets Cat]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: School Toilets Cat Finish
@@ -83,31 +83,31 @@ You hiss at the <<beasttype>>. <<bHe>> backs away from you, <<bhis>> ears turned
 <<set $outside to 0>><<set $location to "school">><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
-	The <<beasttype>> grunts in satisfaction, and leaps out the window, leaving you lying on the floor.
+	<<beasttypePost "은">> 만족스러운 골골거리는 소리를 내더니, 바닥에 당신을 내버려두고는 창문 밖으로 홀연히 사라진다.
 	<br><br>
-	<<tearful>> you rise to your feet.
+	<<tearful>> 당신은 자리에서 일어난다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
-	The <<beasttype>> yelps and flees through the window.
+	<<beasttypePost "은">> 비명을 내지르고는 창문을 통해 달아난다.
 	<br><br>
-	<<tearful>> you rise to your feet.
+	<<tearful>> 당신은 자리에서 일어난다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -116,32 +116,33 @@ You hiss at the <<beasttype>>. <<bHe>> backs away from you, <<bhis>> ears turned
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<if $phase is 1>>
-	You tell them you went into the wrong room by mistake, and apologise. You leave the room before you get in trouble.
+	당신은 그들에게 실수로 잘못 들어왔다 말하며 사과한다. 그러고는 뭔가 문제가 일어나기 전에 화장실에서 나온다.
 	<br><br>
 	<<endevent>>
-	<<link [[Next|School Toilets]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Toilets]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<elseif $phase is 2>>
-	"Oh, I'm in the wrong room?" You walk up to the <<person1>><<person>>, as close as you can without touching <<him>>. "It's a good thing you're here. I should leave before someone takes advantage of my silliness."
+	"아, 잘못 들어왔나보네?" 당신은 <<person1>><<personPost "을">> 건드리지 않으며 최대한 <<hePost "에게">> 가까이 다가간다. "네가 여기 있어서 다행이야. 내 실수를 누가 이용해먹으려 들기 전에 나가야겠는걸."
 	<br><br>
-	"N-no, it's fine," the <<person>> says, averting <<his>> eyes and blushing. "We'll get out of your way." They leave the room, though the <<person3>><<person>> has to be pulled along by <<his>> wrist.
+	"아-아냐. 괜찮아." <<personPost "이">> 시선을 돌리며, 얼굴을 붉힌 채로 말한다. "비켜줄게." 그들은 화장실에서 나가지만, 그 중에서 <<person3>><<personPost "은">> 손목을 잡힌 채로 끌려 나간다.
 	<<promiscuity1>>
 
 	<<endevent>>
-	<<link [[Next|School Toilets]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Toilets]]>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
 :: School Toilets Seduce
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
-You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly me. I think I need to be punished, don't you?"
+당신은 <<personPost "에게로">> 다가가 <<hisPost "의">> 가랑이에 손을 얹는다. "나도 참 바보같지. 이런 아이는 벌을 받아야 한다고 생각하지 않아?"
 <<promiscuity2>>
 
 <<set $seductiondifficulty to 4000>>
 <<seductioncheck>>
-<<seductionskilluptext>>
-<<seductionskilluse>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">You feel more confident in your powers of seduction.</span><</if>><<seductionskilluse>>
+<br>
 
 <<if $seductionrating gte $seductionrequired>>
 	The <<person1>><<person>> looks <<= either("startled", "shocked", "surprised")>>, then smiles. "Well, maybe you're right. What do you say, <<= $NPCList[0].pronoun is "m" ? "boys" : "girls">>?" <<His>> face is bright red as <<he>> glances at <<his>> friends.
@@ -150,7 +151,7 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<br><br>
 	"Definitely," the <<person3>><<person>> says, a <<= either("hungry", "lustful", "eager")>> look in <<his>> eyes. "Pervy <<girls>> like <<phim>> need to be taught a lesson."
 	<br><br>
-	<<link [[Seduce|School Toilets Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+	<<link [[유혹한다|School Toilets Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
 <<else>>
 	"Ew, no!" The <<person1>><<person>> pushes your hand away, looking mortified.
 	<br><br>
@@ -164,7 +165,7 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<br><br>
 	You leave the room before you get in trouble.
 	<br><br>
-	<<link [[Next|School Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Toilets]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 
@@ -187,7 +188,7 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<<neutral 1>>
 	<<maninit>>
 	<<molested>>
-	The stall door swings open, and the <<person1>><<person>> drags you out to where <<his>> friends await.
+	변기 칸의 문이 열리더니, <<person1>><<personPost "이">> 당신을 끌고 나와 기다리고 있던 <<hisPost "의">> 친구들에게로 데려간다.
 	<br><br>
 	<<enableSchoolRescue "Whitney">>
 <</if>>
@@ -201,57 +202,57 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|School Toilets Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|School Toilets Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|School Toilets Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|School Toilets Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: School Toilets Sex Finish
 
 <<effects>>
 <<if $finish is 1>>
-	The <<person3>><<person>> doesn't look happy as the other two pull <<him>> away from you. <<tearful>> you wave them goodbye.
+	다른 두 명이 <<person3>><<personPost "을">> 당신에게서 떼어내자 <<hePost "은">> 썩 기분이 좋아보이진 않는다. <<tearful>> 당신은 작별의 의미에서 손을 흔든다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	<<if $consensual is 1>>
-		The three avoid eye contact with each other as they fix their clothing. <<tearful>> you wave them goodbye.
+		세 명은 서로 눈을 마주치지 않으며 옷을 매만진다. <<tearful>> 당신은 작별의 의미에서 손을 흔든다.
 		<br><br>
 	<<else>>
-		The <<person1>><<person>> shoves you against the ground, and the three of them leave you lying there. The sound of their laughter soon disappears. <<tearful>> you struggle to your feet.
+		<<person1>><<personPost "은">> 당신을 바닥으로 밀치고, 세 명은 바닥에 나동그라진 당신을 내버려둔 채로 떠난다. 곧 그들의 웃음소리도 들려오지 않는다. <<tearful>> 당신은 어떻게든 자리에서 일어난다.
 		<br><br>
 	<</if>>
 	<<clotheson>>
 	<<endcombat>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $enemyhealth lte 0>>
-	The three recoil in pain, giving you a chance to escape. <<tearful>> you flee from the room.
+	세 명이 고통에 몸을 움찔거리고, 당신은 그 기회를 틈타 도망친다. <<tearful>> 당신은 화장실에서 도망친다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|School Toilets]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|School Toilets]]>><<set $eventskip to 1>><</link>>
 <<else>>
 	<<set $rescued += 1>>
-	The <<group>> look up as someone bursts into the room. It's Whitney.
+	그 <<group_ un>> 누군가 칸 안으로 난입한 것을 보고 올려다 본다. 휘트니다.
 	<<if ($changingRoomGender is "boys" and C.npc.Whitney.pronoun isnot "m") or ($changingRoomGender is "girls" and C.npc.Whitney.pronoun isnot "f")>>
-		They startle at the sight of a <<nnpc_gendery "Whitney">> in the $changingRoomGender' toilets, but <<nnpc_he "Whitney">> ignores them. <<nnpc_He "Whitney">> grabs you and drags you outside.
+		그들은 어떤 <<nnpc_gendery_ ga "Whitney">> <<print ($changingRoomGender is "boys" ? "남자":"여자")>> 화장실에 들어온 것을 보고 깜짝 놀랐지만, <<nnpc_he_ nun "Whitney">> 그들을 무시한다. <<nnpc_He_ nun "Whitney">> 당신을 잡고 밖으로 끌어낸다.
 	<<else>>
-		<<nnpc_He "Whitney">> grabs you and drags you outside before they can react.
+		<<nnpc_He_ nun "Whitney">> 그들이 반응하기 전에 당신을 잡고 밖으로 끌어낸다.
 	<</if>>
 	<br><br>
 
@@ -269,7 +270,7 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<</if>>
 	<</silently>>
 	<<if _temp_clothes_present is 1>>
-		You were unable to recover your clothes on the way out.
+		당신은 나올 때 당신의 옷을 되찾지 못한다.
 		<br><br>
 	<</if>>
 
@@ -277,7 +278,7 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<<endcombat>>
 	<<npc Whitney>><<person1>>
 
-	<<link [[Next|Whitney Rescue 2]]>><<set $whitneyRescueExit to "hallways">><</link>>
+	<<link [[다음|Whitney Rescue 2]]>><<set $whitneyRescueExit to "hallways">><</link>>
 	<br>
 <</if>>
 
@@ -290,90 +291,90 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<<else>>
 		<<storeon "schoolgirls" "delete">>
 	<</if>>
-	You hear them leave the room, taking your clothes with them.
+	그들이 화장실에서 나가는 소리가 들려온다. 나가면서 당신의 옷을 가져갔다.
 	<br><br>
 	<<endevent>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 2>>
-	You call out. "Wait! Those are mine." The footsteps cease.
+	당신은 외친다. "기다려! 그거 내 옷이야." 발걸음이 멈춘다.
 	<br><br>
 	<<if $player.gender_appearance is "f" and $changingRoomGender is "boys">>
-		The <<person1>><<person>> speaks. "Girls aren't allowed in here. Open the door."
+		<<person1>><<personPost "이">> 말한다. "여자애들은 여길 들어오면 안돼. 문 열어."
 		<br><br>
-		<<link [[Open it|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
+		<<link [[연다|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
 		<br>
 		<<if $speech_attitude is "bratty">>
-			<<link [[Demand|School Toilets Clothes]]>><<set $phase to 4>><</link>>
+			<<link [[따진다|School Toilets Clothes]]>><<set $phase to 4>><</link>>
 			<br>
 		<<else>>
-			<<link [[Plead|School Toilets Clothes]]>><<set $phase to 5>><</link>>
+			<<link [[애원한다|School Toilets Clothes]]>><<set $phase to 5>><</link>>
 			<br>
 		<</if>>
 	<<elseif $player.gender_appearance is "m" and $changingRoomGender is "girls">>
-		The <<person1>><<person>> speaks. "Boys aren't allowed in here. Open the door."
+		<<person1>><<personPost "이">> 말한다. "남자애들은 여길 들어오면 안돼. 문 열어."
 		<br><br>
-		<<link [[Open it|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
+		<<link [[연다|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
 		<br>
 		<<if $speech_attitude is "bratty">>
-			<<link [[Demand|School Toilets Clothes]]>><<set $phase to 4>><</link>>
+			<<link [[따진다|School Toilets Clothes]]>><<set $phase to 4>><</link>>
 			<br>
 		<<else>>
-			<<link [[Plead|School Toilets Clothes]]>><<set $phase to 5>><</link>>
+			<<link [[애원한다|School Toilets Clothes]]>><<set $phase to 5>><</link>>
 			<br>
 		<</if>>
 	<<else>>
-		The <<person1>><<person>> speaks. "Oh? What will you do for us if we give them back?"
+		<<person1>><<personPost "이">> 말한다. "그래? 돌려주면 뭘 해줄 거야?"
 		<br><br>
 		<<if hasSexStat("promiscuity", 2)>>
-			<<link [[Offer your body|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
+			<<link [[몸을 내준다고 한다|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
 			<br>
 		<</if>>
 		<<if $money gte 1500>>
-			<<link [[Offer money (£15)|School Toilets Clothes]]>><<money -1500>><<set $phase to 3>><</link>>
+			<<link [[돈을 준다고 한다 (£15)|School Toilets Clothes]]>><<set $money -= 1500>><<set $phase to 3>><</link>>
 			<br>
 		<</if>>
 		<<if $speech_attitude is "bratty">>
-			<<link [[Demand|School Toilets Clothes]]>><<set $phase to 4>><</link>>
+			<<link [[따진다|School Toilets Clothes]]>><<set $phase to 4>><</link>>
 			<br>
 		<<else>>
-			<<link [[Plead|School Toilets Clothes]]>><<set $phase to 5>><</link>>
+			<<link [[애원한다|School Toilets Clothes]]>><<set $phase to 5>><</link>>
 			<br>
 		<</if>>
 	<</if>>
 <<elseif $phase is 3>>
-	You slip some money under the door, and after a brief pause the <<person>> speaks again. "Nice. Okay, we'll leave them where we found them. Come on." You hear them leave the room.
+	당신은 문 밑으로 돈을 밀어넣고, 잠시 뒤 <<personPost "이">> 말한다. "멋져. 좋아, 찾았던 곳에 다시 둘게. 가자." 그들의 화장실을 나가는 소리가 들려온다.
 	<br><br>
-	Once they're gone, you open the stall and peek out. Sure enough, your clothes are where you left them.
+	일단 그들이 나가자, 당신은 문을 열고는 밖을 내다본다. 아니나 다를까, 당신의 옷은 뒀던 곳에 그대로 있다.
 	<br><br>
 	<<endevent>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 4>>
-	"Listen," you say. "Take my things and I'll find you and shove a rail spike up your worthless arseholes."
+	"잘 들어." 당신이 말한다. "내 물건을 가져가면 어떻게든 찾아내서 너네 그 쓸모없는 똥꾸멍에다가 꼬챙이를 쑤셔박아주마."
 	<br><br>
-	Something in your tone affects them. "Calm down, you fucking psycho. We're just messing with you." Once they're gone you peek out the stall, and see your clothes safely where you left them.
+	당신의 분위기에 뭔가를 감지한 모양이다. "진정해, 이 미친<<if $player.gender_appearance is "f">>년<<elseif $player.gender_appearance is "m">>놈<</if>>아. 그냥 장난친 것 뿐이야." 그들이 나가자, 당신은 문을 열고는 밖을 내다보고, 당신의 옷이 뒀던 곳에 그대로 있는 걸 본다.
 	<br><br>
 	<<endevent>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <<elseif $phase is 5>>
-	You try to plead with them, but it's no use. "If you won't play ball," the <<person1>><<person>> says, "why should we?" They laugh as they leave the room. You peek out the stall, and see an empty space where your clothes once were.
+	당신은 어떻게든 애원해보려 하나, 아무런 소용이 없다. "네가 협조하려 하지 않는데." <<person1>><<personPost "이">> 말한다. "우리라고 그래야 할까?" 그들은 웃음을 터트리며 화장실에서 나간다. 변기 칸 밖을 내다보자, 옷을 뒀던 곳에 아무 것도 없다.
 	<<if $changingRoomGender is "boys">>
 		<<storeon "schoolboys" "delete">>
 	<<else>>
@@ -382,10 +383,10 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 	<br><br>
 	<<endevent>>
 	<<if $changingRoomGender is "boys">>
-		<<link [[Next|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<else>>
-		<<link [[Next|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<<link [[다음|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -394,38 +395,38 @@ You walk right up to the <<person>> and place your hand on <<his>> groin. "Silly
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<set $changingRoomGender to "boys">>
-You are in the boys' toilets.
+당신은 남학생 화장실에 있다.
 <br><br>
 <<if $stress gte $stressmax>>
-	<<link [[Everything fades to black...|School Passout]]>><</link>>
+	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
-
-	<<if dangerEvent() and $eventskip isnot 1>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1>>
 		<<eventsschooltoilets>>
 	<<else>>
 		<<storeactions "schoolboys">>
-		<<mirroricon "school">><<link [[Look in the mirror (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+		<<mirroricon>><<link [[거울을 본다 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+		<br>
+		<<skinicon "masturbate">><<link [[자위한다|School Boy's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
 		<br>
 		<<if setup.bodyliquid.combined("face") gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-			<<bathroomicon "sink">><<link [[Wash face (0:05)|School Boy's Wash]]>><<pass 5>><</link>>
+			<<bathroomicon "sink">><<link [[얼굴을 씻는다 (0:05)|School Boy's Wash]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
 		<<if setup.bodyliquid.combined("mouth") gte 1>>
-			<<bathroomicon "sink">><<link [[Rinse mouth (0:05)|School Boy's Rinse]]>><<pass 5>><</link>>
+			<<bathroomicon "sink">><<link [[입을 헹군다 (0:05)|School Boy's Rinse]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
-		<<skinicon "masturbate">><<link [[Masturbate|School Boy's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
-		<br>
 		<<pregnancyTest "School Boy's Toilets">>
 		<<storeon "schoolboys" "check">>
 		<<if _store_check isnot 1>>
-			<<getouticon>><<link [[Leave|Hallways]]>><</link>>
+			<<getouticon>><<link [[나간다|Hallways]]>><</link>>
 		<<elseif $exposed gte 2 and hasSexStat("exhibitionism", 4)>>
-			<<getouticon>><<link [[Sneak out|Hallways Sneak]]>><<set $phase to 2>><</link>><<exhibitionist4>>
+			<<getouticon>><<link [[몰래 나간다|Hallways Sneak]]>><<set $phase to 2>><</link>><<exhibitionist4>>
 		<<elseif $exposed is 1 and hasSexStat("exhibitionism", 3)>>
-			<<getouticon>><<link [[Sneak out|Hallways Sneak]]>><<set $phase to 1>><</link>><<exhibitionist3>>
+			<<getouticon>><<link [[몰래 나간다|Hallways Sneak]]>><<set $phase to 1>><</link>><<exhibitionist3>>
 		<<elseif $exposed lte 0>>
-			<<getouticon>><<link [[Leave|Hallways]]>><</link>>
+			<<getouticon>><<link [[나간다|Hallways]]>><</link>>
 		<</if>>
 	<</if>>
 <</if>>
@@ -436,38 +437,38 @@ You are in the boys' toilets.
 
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 <<set $changingRoomGender to "girls">>
-You are in the girls' toilets.
+당신은 여학생 화장실에 있다.
 <br><br>
 <<if $stress gte $stressmax>>
-	<<link [[Everything fades to black...|School Passout]]>><</link>>
+	<<link [[모든 것이 암흑 속으로 사라져간다...|School Passout]]>><</link>>
 <<else>>
-
-	<<if dangerEvent() and $eventskip isnot 1>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1>>
 		<<eventsschooltoilets>>
 	<<else>>
 		<<storeactions "schoolgirls">>
-		<<mirroricon "school">><<link [[Look in the mirror (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+		<<mirroricon>><<link [[거울을 본다 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+		<br>
+		<<skinicon "masturbate">><<link [[자위한다|School Girl's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
 		<br>
 		<<if setup.bodyliquid.combined("face") gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-			<<bathroomicon "sink">><<link [[Wash face (0:05)|School Girl's Wash]]>><<pass 5>><</link>>
+			<<bathroomicon "sink">><<link [[얼굴을 씻는다 (0:05)|School Girl's Wash]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
 		<<if setup.bodyliquid.combined("mouth") gte 1>>
-			<<bathroomicon "sink">><<link [[Rinse mouth (0:05)|School Girl's Rinse]]>><<pass 5>><</link>>
+			<<bathroomicon "sink">><<link [[입을 헹군다 (0:05)|School Girl's Rinse]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
-		<<skinicon "masturbate">><<link [[Masturbate|School Girl's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
-		<br>
 		<<pregnancyTest "School Girl's Toilets">>
 		<<storeon "schoolgirls" "check">>
 		<<if _store_check isnot 1>>
-			<<getouticon>><<link [[Leave|Hallways]]>><</link>>
+			<<getouticon>><<link [[나간다|Hallways]]>><</link>>
 		<<elseif $exposed gte 2 and hasSexStat("exhibitionism", 4)>>
-			<<getouticon>><<link [[Sneak out|Hallways Sneak]]>><<set $phase to 2>><</link>><<exhibitionist4>>
+			<<getouticon>><<link [[몰래 나간다|Hallways Sneak]]>><<set $phase to 2>><</link>><<exhibitionist4>>
 		<<elseif $exposed is 1 and hasSexStat("exhibitionism", 3)>>
-			<<getouticon>><<link [[Sneak out|Hallways Sneak]]>><<set $phase to 1>><</link>><<exhibitionist3>>
+			<<getouticon>><<link [[몰래 나간다|Hallways Sneak]]>><<set $phase to 1>><</link>><<exhibitionist3>>
 		<<elseif $exposed lte 0>>
-			<<getouticon>><<link [[Leave|Hallways]]>><</link>>
+			<<getouticon>><<link [[나간다|Hallways]]>><</link>>
 		<</if>>
 	<</if>>
 <</if>>
@@ -479,24 +480,24 @@ You are in the girls' toilets.
 <<effects>>
 <<if setup.bodyliquid.combined("face") gte 1>>
 	<<if $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen">>
-		Bending over the sink, you wash the lewd fluid and ink from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체와 잉크를 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-		Bending over the sink, you wash the lewd fluid and lipstick from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체와 립스틱을 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-		Bending over the sink, you wash the lewd fluid and mud from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체와 진흙을 씻어낸다.
 	<<else>>
-		Bending over the sink, you wash the lewd fluid from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체를 씻어낸다.
 	<</if>>
 <<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-	Bending over the sink, you wash the lipstick from your face.
+	당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 립스틱을 씻어낸다.
 <<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-	Bending over the sink, you wash the mud from your face.
+	당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 진흙을 씻어낸다.
 <<else>>
-	Bending over the sink, you wash the ink from your face.
+	당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 잉크를 씻어낸다.
 <</if>>
 <<wash_face>>
 <br><br>
-<<link [[Next|School Boy's Toilets]]>><</link>>
+<<link [[다음|School Boy's Toilets]]>><</link>>
 <br>
 
 :: School Girl's Wash
@@ -504,53 +505,53 @@ You are in the girls' toilets.
 <<effects>>
 <<if setup.bodyliquid.combined("face") gte 1>>
 	<<if $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen">>
-		Bending over the sink, you wash the lewd fluid and ink from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체와 잉크를 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-		Bending over the sink, you wash the lewd fluid and lipstick from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체와 립스틱을 씻어낸다.
 	<<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-		Bending over the sink, you wash the lewd fluid and mud from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체와 진흙을 씻어낸다.
 	<<else>>
-		Bending over the sink, you wash the lewd fluid from your face.
+		당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 음란한 액체를 씻어낸다.
 	<</if>>
 <<elseif $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
-	Bending over the sink, you wash the lipstick from your face.
+	당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 립스틱을 씻어낸다.
 <<elseif $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud">>
-	Bending over the sink, you wash the mud from your face.
+	당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 진흙을 씻어낸다.
 <<else>>
-	Bending over the sink, you wash the ink from your face.
+	당신은 세면대 위로 몸을 구부리고, 얼굴에 묻은 잉크를 씻어낸다.
 <</if>>
 <<wash_face>>
 <br><br>
-<<link [[Next|School Girl's Toilets]]>><</link>>
+<<link [[다음|School Girl's Toilets]]>><</link>>
 <br>
 
 :: School Boy's Rinse
 <<effects>>
 
-You bend over the sink and rinse out your mouth.
+당신은 세면대 위로 몸을 굽히고는 입을 헹군다.
 
 <<wash_mouth>>
 <br><br>
 
-<<link [[Next|School Boy's Toilets]]>><</link>>
+<<link [[다음|School Boy's Toilets]]>><</link>>
 <br>
 
 :: School Girl's Rinse
 <<effects>>
 
-You bend over the sink and rinse out your mouth.
+당신은 세면대 위로 몸을 굽히고는 입을 헹군다.
 
 <<wash_mouth>>
 <br><br>
 
-<<link [[Next|School Girl's Toilets]]>><</link>>
+<<link [[다음|School Girl's Toilets]]>><</link>>
 <br>
 
 :: Vending Machine Buy
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
 <<set $daily.vendingMachine.used to true>>
-<<money -2000 "schoolCondoms">><<wearProp "condom">>
+<<set $money -= 2000>>
 You insert the money into the machine and a 2-pack of condoms slides into a drawer.
 <br><br>
 
@@ -564,7 +565,7 @@ You insert the money into the machine and a 2-pack of condoms slides into a draw
 			A <<person>> enters the antechamber. <<He>> stares at you. You take the condoms and put them in your pocket while smiling at <<him>>.
 			<<gcondoms 2>>
 			<br><br>
-			<<link [[Back|School Toilets]]>><<endevent>><</link>>
+			<<link [[뒤로|School Toilets]]>><<endevent>><</link>>
 		<</addinlineevent>>
 	<<else>>
 		<<addinlineevent "antechamber_vending_1" 3>>
@@ -573,16 +574,16 @@ You insert the money into the machine and a 2-pack of condoms slides into a draw
 			You quickly take the package and put it in your pocket on the sly. <<gstress>><<stress 1>>
 			<<gcondoms 2>>
 			<br><br>
-			<<link [[Back|School Toilets]]>><<endevent>><</link>>
+			<<link [[뒤로|School Toilets]]>><<endevent>><</link>>
 		<</addinlineevent>>
 	<</if>>
 <<else>>
-	<<addinlineevent "antechamber_vending_0">>
-		You take them.
+    <<addinlineevent "antechamber_vending_0">>
+        You take them.
 		<<gcondoms 2>>
-		<br><br>
-		<<link [[Back|School Toilets]]>><<endevent>><</link>>
-	<</addinlineevent>>
+        <br><br>
+        <<link [[뒤로|School Toilets]]>><<endevent>><</link>>
+    <</addinlineevent>>
 <</if>>
 
 <<runeventpool>>
@@ -595,23 +596,17 @@ You insert the money into the machine and a 2-pack of condoms slides into a draw
 You examine the vending machine.
 <br><br>
 <<if currentSkillValue('skulduggery') gte $lock>>
-	<<if pcAreArmsBound("both")>>
-		You think you'd be able to pick the lock, <span class="blue">if your arms weren't bound.</span>
-		<br><br>
-	<<else>>
-		<<wearProp "lockpick">>
-		<span class="green">The lock looks easy to pick.</span>
-		<br><br>
-		<<lockicon "pick">><<link [[Pick it (0:10)|Vending Machine Sneak]]>><<handheldon>><<pass 10>><<crimeUp 1 "petty">><</link>><<crime "petty">>
-		<br>
-	<</if>>
+	<span class="green">The lock looks easy to pick.</span>
+	<br><br>
+	<<lockpickicon>><<link [[자물쇠를 딴다 (0:10)|Vending Machine Sneak]]>><<pass 10>><<crimeUp 1 "petty">><</link>><<crime "petty">>
+	<br>
 <<else>>
-	<span class="red">The lock looks beyond your ability to pick.</span><<skulduggeryrequired>>
+	<span class="red">The lock looks beyond your ability to pick, it's delinquent-proof.</span><<skulduggeryrequired>>
 	<br>
 <</if>>
-<<condomicon "machine">><<link [[Smash it (0:10)|Vending Machine Smash]]>><<handheldon>><<pass 10>><<crimeUp 5 "destruction">><<crimeUp 5 "petty">><</link>><<physiquedifficulty>> <<crimes "destruction" "petty">>
+<<condomicon "machine">><<link [[Smash it (0:10)|Vending Machine Smash]]>><<pass 10>><<crimeUp 5 "destruction">><<crimeUp 5 "petty">><</link>><<physiquedifficulty>> <<crimes "destruction" "petty">>
 <br>
-<<getouticon>><<link [[Back|School Toilets]]>><<handheldon>><</link>>
+<<getouticon>><<link [[뒤로|School Toilets]]>><</link>>
 
 :: Vending Machine Sneak
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
@@ -621,12 +616,15 @@ You examine the vending machine.
 You deftly open the vending machine and count out the money inside. There's <<printmoney $tip>>.
 <<if _condomsStolen>>There are also _condomsStolen condoms.<</if>>
 <br><br>
-
-<<skulduggeryuse 500 "locks">>
-
-<<link [[Take them|School Toilets]]>><<money $tip>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
+<<if $skulduggery lt 500>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">There's nothing more you can learn from locks this simple.</span>
+<</if>>
+<br><br>
+<<link [[가져간다|School Toilets]]>><<set $money += $tip>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
 <br>
-<<link [[Leave them|School Toilets]]>><</link>>
+<<link [[그냥 둔다|School Toilets]]>><</link>>
 
 :: Vending Machine Smash
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
@@ -645,13 +643,13 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 	<<else>>
 		You kick the machine until you hear a crack. The lock breaks and the door opens. You look inside and find <<printmoney $tip>><<if _condomsStolen>>, plus _condomsStolen condoms<</if>>.
 		<br><br>
-		<<link [[Take them and leave|School Toilets]]>><<money $tip>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
+		<<link [[Take them and leave|School Toilets]]>><<set $money += $tip>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
 	<</if>>
 <<else>>
 	You kick the machine until you hear a crack. You try to open the door, but the lock is stuck. You give up and decide to try another day.
 <</if>>
 <br>
-<<link [[Leave|School Toilets]]>><</link>>
+<<link [[떠난다|School Toilets]]>><</link>>
 
 
 
@@ -690,9 +688,9 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Vending Machine Proposal Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Vending Machine Proposal Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Vending Machine Proposal Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Vending Machine Proposal Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 
@@ -712,7 +710,7 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 	<<tearful>> you follow suit.
 	<br><br>
 
-	<<link [[Next|School Toilets]]>><</link>>
+	<<link [[다음|School Toilets]]>><</link>>
 <<elseif $enemyhealth lte 0>>
 	You shove <<him>> back against the toilet, giving you the chance to escape.
 	<br><br>
@@ -728,7 +726,7 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 	<<clotheson>>
 	<<endcombat>>
 
-	<<link [[Next|School Toilets]]>><</link>>
+	<<link [[다음|School Toilets]]>><</link>>
 <<elseif $finish is 1>>
 	"Fucking tease," <<he>> says as <<he>> adjusts <<his>> uniform. "I'll be keeping the condoms, <<bitch>>."
 	<br><br>
@@ -739,7 +737,7 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 	<<tearful>> you both leave the bathroom.
 	<br><br>
 
-	<<link [[Next|School Toilets]]>><</link>>
+	<<link [[다음|School Toilets]]>><</link>>
 <<else>>
 	<<clotheson>>
 	<<endcombat>>
@@ -747,7 +745,7 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 	<<tearful>> you leave the stall.
 	<br><br>
 
-	<<link [[Next|School Toilets]]>><</link>>
+	<<link [[다음|School Toilets]]>><</link>>
 <</if>>
 <<set $phase to 0>>
 
@@ -784,9 +782,9 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Vending Machine Gloryhole Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Vending Machine Gloryhole Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Vending Machine Gloryhole Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Vending Machine Gloryhole Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 
@@ -797,7 +795,6 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<set $gloryholestat += 1>>
 	<<ejaculation>>
-	<<set _prop to "condom">>
 	<<tearful>> you take the condom <<he>> pushes through the hole.
 	"You'll probably need this more than me, you slut," <<he>> chirps as <<he>> walks away. <<gcondoms 1>>
 <<elseif $enemyhealth lte 0>>
@@ -813,7 +810,6 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 
 <<clotheson>>
 <<endcombat>>
-<<if _prop>><<wearProp _prop>><</if>>
 
 <<set $phase to 0>>
 <<link [[Climb out (0:01)|School Toilets]]>><<pass 1>><<unset $desperateaction>><</link>>
@@ -835,16 +831,16 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 
 <<set $seductiondifficulty to 2000>>
 <<seductioncheck>>
+<br><br>
 
 <<if $seductionrating gte $seductionrequired>>
 	<!-- Passed check -->
-	<<wearProp "condom">>
 	<<He>> pauses, unable to respond. The silence is eventually broken. "E-errm, yeah, here you go." <<He>> hands you back the condoms.
 	<<gcondoms 2>>
 	<br>
 	<<if hasSexStat("promiscuity", 4)>>
 		<br>
-		<<link [[Still accept their offer|Vending Machine Proposal Sex]]>><</link>><<handheldon>><<set $sexstart to 1>><<promiscuous3>>
+		<<link [[Still accept their offer|Vending Machine Proposal Sex]]>><</link>><<set $sexstart to 1>><<promiscuous3>>
 	<</if>>
 <<else>>
 	<!-- Failed check -->
@@ -854,7 +850,7 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 
 <br>
 <<set $phase to 0>>
-<<link [[Back|School Toilets]]>><</link>>
+<<link [[뒤로|School Toilets]]>><</link>>
 
 
 
@@ -880,4 +876,4 @@ You deftly open the vending machine and count out the money inside. There's <<pr
 <br><br>
 
 <<set $phase to 0>>
-<<link [[Back|School Toilets]]>><</link>>
+<<link [[뒤로|School Toilets]]>><</link>>

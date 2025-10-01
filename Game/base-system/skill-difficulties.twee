@@ -2,19 +2,19 @@
 <<widget "chestdifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("chestskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("chestskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("chestskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("chestskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("chestskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("chestskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
@@ -26,56 +26,56 @@
 			<<set _text_output to "">>
 		<<elseif _args[0] is true>>
 			<<if (990 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '(Very Easy)'>>
+				<<set _text_output to '(매우 쉬움)'>>
 			<<elseif (800 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '(Easy)'>>
+				<<set _text_output to '(쉬움)'>>
 			<<elseif (600 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '(Medium)'>>
+				<<set _text_output to '(보통)'>>
 			<<elseif (400 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '(Challenging)'>>
+				<<set _text_output to '(까다로움)'>>
 			<<elseif (200 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '(Hard)'>>
+				<<set _text_output to '(어려움)'>>
 			<<elseif (1 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '(Very Hard)'>>
+				<<set _text_output to '(매우 어려움)'>>
 			<<else>>
-				<<set _text_output to '(Impossible)'>>
+				<<set _text_output to '(불가능함)'>>
 			<</if>>
 		<<else>>
 			<<if (990 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '<span class="green">(Very Easy)</span>'>>
+				<<set _text_output to '<span class="green">(매우 쉬움)</span>'>>
 			<<elseif (800 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '<span class="teal">(Easy)</span>'>>
+				<<set _text_output to '<span class="teal">(쉬움)</span>'>>
 			<<elseif (600 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '<span class="lblue">(Medium)</span>'>>
+				<<set _text_output to '<span class="lblue">(보통)</span>'>>
 			<<elseif (400 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '<span class="blue">(Challenging)</span>'>>
+				<<set _text_output to '<span class="blue">(까다로움)</span>'>>
 			<<elseif (200 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '<span class="purple">(Hard)</span>'>>
+				<<set _text_output to '<span class="purple">(어려움)</span>'>>
 			<<elseif (1 - ($enemytrust * 10) - currentSkillValue("seductionskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-				<<set _text_output to '<span class="pink">(Very Hard)</span>'>>
+				<<set _text_output to '<span class="pink">(매우 어려움)</span>'>>
 			<<else>>
-				<<set _text_output to '<span class="red">(Impossible)</span>'>>
+				<<set _text_output to '<span class="red">(불가능함)</span>'>>
 			<</if>>
 		<</if>>
 	<<else>>
 		<<if $checkstyle is "skillname">>
-			<<set _text_output to ` | <span class="lewd">Seduction</span>`>>
+			<<set _text_output to ` | <span class="lewd">유혹</span>`>>
 		<<else>>
-			<<set _text_output to ` | <span class="lewd">Seduction</span>: `>>
+			<<set _text_output to ` | <span class="lewd">유혹</span>: `>>
 			<<if 990 - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
-				<<set _text_output += '<span class="green">(Very Easy)</span>'>>
+				<<set _text_output += '<span class="green">(매우 쉬움)</span>'>>
 			<<elseif 800 - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
-				<<set _text_output += '<span class="teal">(Easy)</span>'>>
+				<<set _text_output += '<span class="teal">(쉬움)</span>'>>
 			<<elseif 600 - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
-				<<set _text_output += '<span class="lblue">(Medium)</span>'>>
+				<<set _text_output += '<span class="lblue">(보통)</span>'>>
 			<<elseif 400 - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
-				<<set _text_output += '<span class="blue">(Challenging)</span>'>>
+				<<set _text_output += '<span class="blue">(까다로움)</span>'>>
 			<<elseif 200 - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
-				<<set _text_output += '<span class="purple">(Hard)</span>'>>
+				<<set _text_output += '<span class="purple">(어려움)</span>'>>
 			<<elseif 1 - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
-				<<set _text_output += '<span class="pink">(Very Hard)</span>'>>
+				<<set _text_output += '<span class="pink">(매우 어려움)</span>'>>
 			<<else>>
-				<<set _text_output += '<span class="red">(Impossible)</span>'>>
+				<<set _text_output += '<span class="red">(불가능함)</span>'>>
 			<</if>>
 		<</if>>
 	<</if>>
@@ -85,152 +85,152 @@
 <<widget "oraldifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("oralskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("oralskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("oralskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("oralskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("oralskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("oralskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "vaginaldifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("vaginalskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("vaginalskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("vaginalskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("vaginalskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("vaginalskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("vaginalskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "analdifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("analskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("analskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("analskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("analskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("analskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("analskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "handdifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("handskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("handskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("handskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("handskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("handskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("handskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "feetdifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("feetskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("feetskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("feetskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("feetskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("feetskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("feetskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "bottomdifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("bottomskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("bottomskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("bottomskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("bottomskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("bottomskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("bottomskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "thighdifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("thighskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("thighskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("thighskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("thighskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("thighskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("thighskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
 <<widget "peniledifficulty">>
 	<<if $checkstyle is "skillname" or $statdisable is "t">>
 	<<elseif (990 - ($enemytrust * 10) - currentSkillValue("penileskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="green">(Very Easy)</span>
+		<span class="green">(매우 쉬움)</span>
 	<<elseif (800 - ($enemytrust * 10) - currentSkillValue("penileskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="teal">(Easy)</span>
+		<span class="teal">(쉬움)</span>
 	<<elseif (600 - ($enemytrust * 10) - currentSkillValue("penileskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="lblue">(Medium)</span>
+		<span class="lblue">(보통)</span>
 	<<elseif (400 - ($enemytrust * 10) - currentSkillValue("penileskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="blue">(Challenging)</span>
+		<span class="blue">(까다로움)</span>
 	<<elseif (200 - ($enemytrust * 10) - currentSkillValue("penileskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="purple">(Hard)</span>
+		<span class="purple">(어려움)</span>
 	<<elseif (1 - ($enemytrust * 10) - currentSkillValue("penileskill") + $enemyanger) lte (($enemyarousalmax / ($enemyarousal + 1)) * 100)>>
-		<span class="pink">(Very Hard)</span>
+		<span class="pink">(매우 어려움)</span>
 	<<else>>
-		<span class="red">(Impossible)</span>
+		<span class="red">(불가능함)</span>
 	<</if>>
 <</widget>>
 
@@ -258,9 +258,9 @@
 	<</if>>
 	<<if _args[0] isnot "silent">>
 		<<if $skulduggerysuccess is 1>>
-			<span class="green">You succeed in your skulduggery.</span>
+			<span class="green">속임수를 쓰는데에 성공했다.</span>
 		<<else>>
-			<span class="red">You fail in your skulduggery.</span>
+			<span class="red">속임수를 쓰는데에 실패했다.</span>
 		<</if>>
 	<</if>>
 <</widget>>
@@ -268,24 +268,24 @@
 <<widget "skulduggerydifficulty">>
 	<<if $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">Skulduggery</span>
+			| <span class="orange">속임수</span>
 		<<else>>
 			<<set _skulduggery to currentSkillValue('skulduggery')>>
-			| <span class="orange">Skulduggery</span>:
+			| <span class="orange">속임수</span>:
 			<<if _skulduggery gte $skulduggerydifficulty>>
-				<span class="green">Very Easy</span>
+				<span class="green">매우 쉬움</span>
 			<<elseif (_skulduggery + 100) gte $skulduggerydifficulty>>
-				<span class="teal">Easy</span>
+				<span class="teal">쉬움</span>
 			<<elseif (_skulduggery + 200) gte $skulduggerydifficulty>>
-				<span class="lblue">Medium</span>
+				<span class="lblue">보통</span>
 			<<elseif (_skulduggery + 300) gte $skulduggerydifficulty>>
-				<span class="blue">Challenging</span>
+				<span class="blue">까다로움</span>
 			<<elseif (_skulduggery + 400) gte $skulduggerydifficulty>>
-				<span class="purple">Hard</span>
+				<span class="purple">어려움</span>
 			<<elseif (_skulduggery + 500) gte $skulduggerydifficulty>>
-				<span class="pink">Very Hard</span>
+				<span class="pink">매우 어려움</span>
 			<<else>>
-				<span class="red">Impossible</span>
+				<span class="red">불가능함</span>
 			<</if>>
 		<</if>>
 	<</if>>
@@ -294,28 +294,28 @@
 <<widget "skulduggeryrequired">>
 	/* this widget is only called after a failed attempt at picking a lock. if a player has their skulduggery at 198 (F+) and the lock level is 199 (also F+), it would be weird to show a requirement of skulduggery level that pc clearly already achieved according to stats. to combat that, the levels here are purposefully shown higher than they actually are */
 	<<if $statdisable is "f">>
-		Skulduggery required:
+		필요 속임수 기술:
 		<<if $lock lt 0>>
-			<span class="red">None</span>
+			<span class="red">못함</span>
 		<<elseif $lock is 0>>
 			<span class="pink">F</span>
-		<<elseif $lock lte 100>>
+		<<elseif $lock lt 100>>
 			<span class="pink">F+</span>
-		<<elseif $lock lte 200>>
+		<<elseif $lock lt 200>>
 			<span class="purple">D</span>
-		<<elseif $lock lte 300>>
+		<<elseif $lock lt 300>>
 			<span class="purple">D+</span>
-		<<elseif $lock lte 400>>
+		<<elseif $lock lt 400>>
 			<span class="blue">C</span>
-		<<elseif $lock lte 500>>
+		<<elseif $lock lt 500>>
 			<span class="blue">C+</span>
-		<<elseif $lock lte 600>>
+		<<elseif $lock lt 600>>
 			<span class="lblue">B</span>
-		<<elseif $lock lte 700>>
+		<<elseif $lock lt 700>>
 			<span class="lblue">B+</span>
-		<<elseif $lock lte 800>>
+		<<elseif $lock lt 800>>
 			<span class="teal">A</span>
-		<<elseif $lock lte 900>>
+		<<elseif $lock lt 900>>
 			<span class="teal">A+</span>
 		<<else>>
 			<span class="green">S</span>
@@ -325,7 +325,7 @@
 
 <<widget "seductioncheck">>
 	<<if $statdisable is "f">>
-		Attractiveness rating:
+		매력 점수:
 		<<if $attractiveness gte 5000>>
 			<span class="green">S</span>
 		<<elseif $attractiveness gte 4000>>
@@ -340,9 +340,9 @@
 			<span class="pink">F</span>
 		<</if>>
 		<br>
-		Seduction Skill:
+		유혹 기술:
 		<<if currentSkillValue("seductionskill") lte 0>>
-			<span class="red">None</span>
+			<span class="red">못함</span>
 		<<elseif currentSkillValue("seductionskill") gte 1 and currentSkillValue("seductionskill") lt 200>>
 			<span class="pink">F</span>
 		<<elseif currentSkillValue("seductionskill") gte 200 and currentSkillValue("seductionskill") lt 400>>
@@ -357,7 +357,7 @@
 			<span class="green">S</span>
 		<</if>>
 		<br>
-		Overall rating:
+		전체 점수:
 		<<if $attractiveness + (currentSkillValue("seductionskill") * 5) gte 10000>>
 			<span class="green">S</span>
 			<<set $seductionrating to 6>>
@@ -378,7 +378,7 @@
 			<<set $seductionrating to 1>>
 		<</if>>
 		<br>
-		Required rating:
+		필요 점수:
 		<<if $seductiondifficulty gte 10000>>
 			<span class="green">S</span>
 			<<set $seductionrequired to 6>>
@@ -398,7 +398,6 @@
 			<span class="pink">F</span>
 			<<set $seductionrequired to 1>>
 		<</if>>
-		<br><br>
 	<<else>> <!-- Hidden stat checks -->
 		<<if $attractiveness + (currentSkillValue("seductionskill") * 5) gte 10000>>
 			<<set $seductionrating to 6>>
@@ -413,6 +412,7 @@
 		<<else>>
 			<<set $seductionrating to 1>>
 		<</if>>
+		<br>
 		<<if $seductiondifficulty gte 10000>>
 			<<set $seductionrequired to 6>>
 		<<elseif $seductiondifficulty gte 8000>>
@@ -438,9 +438,9 @@
 	<<set _physique to currentSkillValue('physique')>>
 	<<if _args[2] is undefined and $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">Physique</span>
+			| <span class="orange">체격</span>
 		<<else>>
-			| <span class="orange">Physique</span>:
+			| <span class="orange">체격</span>:
 			<<set _difficulty to Math.round(Math.clamp(_physique - _physiquedifficultymin, 0, _physiquedifficultymax) / (_physiquedifficultymax - _physiquedifficultymin) * 100)>>
 			<<if _difficulty gt 100>>
 				<<set _difficulty to 100>>
@@ -467,9 +467,9 @@
 	<<set _danceskill to currentSkillValue('danceskill')>>
 	<<if _args[2] is undefined and $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">Dance</span>
+			| <span class="orange">춤</span>
 		<<else>>
-			| <span class="orange">Dance</span>:
+			| <span class="orange">춤</span>:
 			<<set _difficulty to Math.round(Math.clamp(_danceskill - _dancedifficultymin, 0, _dancedifficultymax) / (_dancedifficultymax - _dancedifficultymin) * 100)>>
 			<<if _difficulty gt 100>>
 				<<set _difficulty to 100>>
@@ -496,9 +496,9 @@
 	<<set _swimmingskill to currentSkillValue('swimmingskill')>>
 	<<if _args[2] is undefined and $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">Swimming</span>
+			| <span class="orange">수영</span>
 		<<else>>
-			| <span class="orange">Swimming</span>:
+			| <span class="orange">수영</span>:
 			<<set _difficulty to Math.round(Math.clamp(_swimmingskill - _swimmingdifficultymin, 0, _swimmingdifficultymax) / (_swimmingdifficultymax - _swimmingdifficultymin) * 100)>>
 			<<if _difficulty gt 100>>
 				<<set _difficulty to 100>>
@@ -525,9 +525,9 @@
 	<<set _athletics to currentSkillValue('athletics')>>
 	<<if _args[2] is undefined and $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">Athletics</span>
+			| <span class="orange">운동</span>
 		<<else>>
-			| <span class="orange">Athletics</span>:
+			| <span class="orange">운동</span>:
 			<<set _difficulty to Math.round(Math.clamp(_athletics - _athleticsdifficultymin, 0, _athleticsdifficultymax) / (_athleticsdifficultymax - _athleticsdifficultymin) * 100)>>
 			<<if _difficulty gt 100>>
 				<<set _difficulty to 100>>
@@ -555,9 +555,9 @@
 	<<if $statdisable is "f">>
 		<<if _args[2] is undefined>>
 			<<if $checkstyle is "skillname">>
-				| <span class="orange">Willpower</span>
+				| <span class="orange">의지력</span>
 			<<else>>
-				| <span class="orange">Willpower</span>:
+				| <span class="orange">의지력</span>:
 				<<set _difficulty to Math.round(Math.clamp(_willpower - _willpowerdifficultymin, 0, _willpowerdifficultymax) / (_willpowerdifficultymax - _willpowerdifficultymin) * 100)>>
 				<<if _difficulty gt 100>>
 					<<set _difficulty to 100>>
@@ -567,19 +567,19 @@
 		<<elseif _args[2] is "combat">>
 			<<if $checkstyle is "skillname">>
 			<<elseif _difficulty gte 100>>
-				<span class="green">(Very Easy)</span>
+				<span class="green">(매우 쉬움)</span>
 			<<elseif _difficulty gte 80>>
-				<span class="teal">(Easy)</span>
+				<span class="teal">(쉬움)</span>
 			<<elseif _difficulty gte 60>>
-				<span class="lblue">(Medium)</span>
+				<span class="lblue">(보통)</span>
 			<<elseif _difficulty gte 40>>
-				<span class="blue">(Challenging)</span>
+				<span class="blue">(까다로움)</span>
 			<<elseif _difficulty gte 20>>
-				<span class="purple">(Hard)</span>
+				<span class="purple">(어려움)</span>
 			<<elseif _difficulty gte 1>>
-				<span class="pink">(Very Hard)</span>
+				<span class="pink">(매우 어려움)</span>
 			<<else>>
-				<span class="red">(Impossible)</span>
+				<span class="red">(불가능함)</span>
 			<</if>>
 		<</if>>
 	<</if>>
@@ -602,9 +602,9 @@
 	<<set _tending to currentSkillValue('tending')>>
 	<<if _args[2] is undefined and $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">Tending</span>
+			| <span class="orange">관리</span>
 		<<else>>
-			| <span class="orange">Tending</span>:
+			| <span class="orange">관리</span>:
 			<<set _difficulty to Math.round(Math.clamp(_tending - _tendingdifficultymin, 0, _tendingdifficultymax) / (_tendingdifficultymax - _tendingdifficultymin) * 100)>>
 			<<if _difficulty gt 100>>
 				<<set _difficulty to 100>>
@@ -623,37 +623,37 @@
 <</widget>>
 
 <<widget "housekeepingdifficulty">>
-	<<set _housekeepingdifficultymin to (_args[0] ? _args[0] : 1)>>
-	<<set _housekeepingdifficultymax to (_args[1] ? _args[1] : 1000)>>
-	<<if _housekeepingdifficultymin gte _housekeepingdifficultymax>>
-		<<set _housekeepingdifficultymax to _housekeepingdifficultymin + 1>>
-	<</if>>
-	<<set _housekeeping to currentSkillValue('housekeeping')>>
-	<<if _args[2] is undefined and $statdisable is "f">>
-		<<if $checkstyle is "skillname">>
-			| <span class="orange">Housekeeping</span>
-		<<else>>
-			| <span class="orange">Housekeeping</span>:
-			<<set _difficulty to Math.round(Math.clamp(_housekeeping - _housekeepingdifficultymin, 0, _housekeepingdifficultymax) / (_housekeepingdifficultymax - _housekeepingdifficultymin) * 100)>>
-			<<if _difficulty gt 100>>
-				<<set _difficulty to 100>>
-			<</if>>
-			<<skillDifficultyText _difficulty>>
-		<</if>>
-	<</if>>
-	<<if $temple_burden gte random(1, 100)>>
-		<<set _housekeeping to 0>>
-	<</if>>
-	<<if _housekeeping gte random(_housekeepingdifficultymin, _housekeepingdifficultymax)>>
-		<<set $housekeepingSuccess to 1>>
+<<set _housekeepingdifficultymin to (_args[0] ? _args[0] : 1)>>
+<<set _housekeepingdifficultymax to (_args[1] ? _args[1] : 1000)>>
+<<if _housekeepingdifficultymin gte _housekeepingdifficultymax>>
+	<<set _housekeepingdifficultymax to _housekeepingdifficultymin + 1>>
+<</if>>
+<<set _housekeeping to currentSkillValue('housekeeping')>>
+<<if _args[2] is undefined and $statdisable is "f">>
+	<<if $checkstyle is "skillname">>
+		| <span class="orange">정리정돈</span>
 	<<else>>
-		<<set $housekeepingSuccess to 0>>
+		| <span class="orange">정리정돈</span>:
+		<<set _difficulty to Math.round(Math.clamp(_housekeeping - _housekeepingdifficultymin, 0, _housekeepingdifficultymax) / (_housekeepingdifficultymax - _housekeepingdifficultymin) * 100)>>
+		<<if _difficulty gt 100>>
+			<<set _difficulty to 100>>
+		<</if>>
+		<<skillDifficultyText _difficulty>>
 	<</if>>
+<</if>>
+<<if $temple_burden gte random(1, 100)>>
+	<<set _housekeeping to 0>>
+<</if>>
+<<if _housekeeping gte random(_housekeepingdifficultymin, _housekeepingdifficultymax)>>
+	<<set $housekeepingSuccess to 1>>
+<<else>>
+	<<set $housekeepingSuccess to 0>>
+<</if>>
 <</widget>>
 
 <<widget "difficulty">>
 	<<if _args[0] and $statdisable is "f">>
-	| Success Chance:
+	| 성공 확률: 
 		<<if _args[0] gte 100>>
 			<span class="green"><<print _args[0]>>%</span>
 		<<elseif _args[0] gte 80>>
@@ -681,9 +681,9 @@
 	<<set _english to currentSkillValue('english')>>
 	<<if _args[2] is undefined and $statdisable is "f">>
 		<<if $checkstyle is "skillname">>
-			| <span class="orange">English</span>
+			| <span class="orange">영어</span>
 		<<else>>
-			| <span class="orange">English</span>:
+			| <span class="orange">영어</span>:
 			<<set _difficulty to Math.round(Math.clamp(_english - _englishdifficultymin, 0, _englishdifficultymax) / (_englishdifficultymax - _englishdifficultymin) * 100)>>
 			<<if _difficulty gt 100>>
 				<<set _difficulty to 100>>
@@ -743,7 +743,7 @@
 	/* args[0] = historyTrait required
 	*/
 	<<if $statdisable is "f">>
-		History Grade required:
+		필요 역사 점수:
 		<<if _args[0] gte 1 and _args[0] lt 2>>
 			<span class="blue">C</span>
 		<<elseif _args[0] gte 2 and _args[0] lt 3>>
@@ -760,19 +760,19 @@
 	<<set $_difficulty to _args[0]>>
 	<<if $statdisable is "f">>
 		<<if $_difficulty gte 100>>
-			<span class="green">Simple <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="green">간단함 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<<elseif $_difficulty gte 80>>
-			<span class="teal">Easy <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="teal">쉬움 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<<elseif $_difficulty gte 60>>
-			<span class="lblue">Reasonable <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="lblue">적절함 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<<elseif $_difficulty gte 40>>
-			<span class="blue">Challenging <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="blue">까다로움 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<<elseif $_difficulty gte 20>>
-			<span class="purple">Hard <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="purple">어려움 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<<elseif $_difficulty gte 1>>
-			<span class="pink">Very Hard <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="pink">매우 어려움 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<<else>>
-			<span class="red">Impossible <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
+			<span class="red">불가능함 <<if $checkstyle is "percentage">>$_difficulty%<</if>></span>
 		<</if>>
 	<</if>>
 <</widget>>

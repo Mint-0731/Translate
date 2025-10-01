@@ -1,63 +1,63 @@
 :: Widgets Actions Pain [widget]
 <<widget "actionspain">>
 	<<if $leftarm is 0>>
-		Your left arm is free, but hurts to move.
+ 	당신의 왼팔은 자유롭지만, 너무 아파 움직일 수가 없다.
 		<br>
 		<<if $leftactiondefault is "leftstruggleweak">>
-			| <label><span class="brat">Struggle</span> <<radiobutton "$leftaction" "leftstruggleweak" checked>></label>
+			| <label><span class="brat">저항한다</span> <<radiobutton "$leftaction" "leftstruggleweak" checked>></label>
 		<<else>>
-			| <label><span class="brat">Struggle</span> <<radiobutton "$leftaction" "leftstruggleweak">></label>
+			| <label><span class="brat">저항한다</span> <<radiobutton "$leftaction" "leftstruggleweak">></label>
 		<</if>>
 		<<if $leftactiondefault is "leftprotect">>
-			| <label><span class="meek">Protect</span> <<radiobutton "$leftaction" "leftprotect" checked>></label>
+			| <label><span class="meek">몸을 지킨다</span> <<radiobutton "$leftaction" "leftprotect" checked>></label>
 		<<else>>
-			| <label><span class="meek">Protect</span> <<radiobutton "$leftaction" "leftprotect">></label>
+			| <label><span class="meek">몸을 지킨다</span> <<radiobutton "$leftaction" "leftprotect">></label>
 		<</if>>
 		<br>
 	<<elseif $leftarm is "grappled">>
-		Your left arm is held in a painful grip.
+ 	당신의 왼쪽 팔은 고통스럽게 잡혀있다.
 		<br>
 	<<elseif $leftarm is "bound">>
-		Your left arm is held in a painful bind.
+		당신의 왼쪽 팔은 고통스럽게 묶여있다.
 		<br>
 	<</if>>
 
 	<<if $rightarm is 0>>
 		<br>
-		Your right arm is free, but hurts to move.
+		당신의 오른팔은 자유롭지만, 너무 아파 움직일 수가 없다.
 		<br>
 		<<if $rightactiondefault is "rightstruggleweak">>
-			| <label><span class="brat">Struggle</span> <<radiobutton "$rightaction" "rightstruggleweak" checked>></label>
+			| <label><span class="brat">저항한다</span> <<radiobutton "$rightaction" "rightstruggleweak" checked>></label>
 		<<else>>
-			| <label><span class="brat">Struggle</span> <<radiobutton "$rightaction" "rightstruggleweak">></label>
+			| <label><span class="brat">저항한다</span> <<radiobutton "$rightaction" "rightstruggleweak">></label>
 		<</if>>
 		<<if $rightactiondefault is "rightprotect">>
-			| <label><span class="meek">Protect</span> <<radiobutton "$rightaction" "rightprotect" checked>></label>
+			| <label><span class="meek">몸을 지킨다</span> <<radiobutton "$rightaction" "rightprotect" checked>></label>
 		<<else>>
-			| <label><span class="meek">Protect</span> <<radiobutton "$rightaction" "rightprotect">></label>
+			| <label><span class="meek">몸을 지킨다</span> <<radiobutton "$rightaction" "rightprotect">></label>
 		<</if>>
 		<br>
 	<<elseif $rightarm is "grappled">>
-		Your right arm is held in a painful grip.
+		당신의 오른쪽 팔은 고통스럽게 잡혀있다.
 		<br>
 	<<elseif $rightarm is "bound">>
-		Your right arm is held in a painful bind.
+		당신의 오른쪽 팔은 고통스럽게 묶여있다.
 		<br>
 	<</if>>
 
 	<<if $mouthuse is 0>>
 		<br>
-		Your mouth is free, but involuntary sobs and cries prevent speaking.
+		당신의 입은 자유롭지만, 무의식적으로 내뱉는 흐느낌과 울음이 섞여 말이 나오지 않는다.
 		<br>
 		<<if $mouthactiondefault is "stifle">>
-			| <label><span class="brat">Stifle</span> <<radiobutton "$mouthaction" "stifle" checked>></label>
+			| <label><span class="brat">억누른다</span> <<radiobutton "$mouthaction" "stifle" checked>></label>
 		<<else>>
-			| <label><span class="brat">Stifle</span> <<radiobutton "$mouthaction" "stifle">></label>
+			| <label><span class="brat">억누른다</span> <<radiobutton "$mouthaction" "stifle">></label>
 		<</if>>
 		<<if $mouthactiondefault is "letout">>
-			| <label><span class="meek">Let it out</span> <<radiobutton "$mouthaction" "letout" checked>></label>
+			| <label><span class="meek">참지 않는다</span> <<radiobutton "$mouthaction" "letout" checked>></label>
 		<<else>>
-			| <label><span class="meek">Let it out</span> <<radiobutton "$mouthaction" "letout">></label>
+			| <label><span class="meek">참지 않는다</span> <<radiobutton "$mouthaction" "letout">></label>
 		<</if>>
 		<br>
 	<</if>>
@@ -69,9 +69,9 @@
 	<<if $leftaction is "leftstruggleweak" and $rightaction is "rightstruggleweak">>
 		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftstruggleweak">><<set $rightactiondefault to "rightstruggleweak">>
 		<<if $position is "stalk">>
-			You fight through the pain and try to push yourself to your feet, but have too little strength.
+			당신은 고통을 이겨내며 당신의 발로 일어나려 하지만, 그러기엔 힘이 너무 약하다.
 		<<else>>
-			You fight through the pain and try to push them away, but have too little strength.
+			당신은 고통을 이겨내며 저들을 밀어내려 하지만 그러기엔 힘이 너무 약하다.
 		<</if>>
 		<<brat 2>><<set _br to true>>
 	<</if>>
@@ -79,9 +79,9 @@
 	<<if $leftaction is "leftstruggleweak">>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftstruggleweak">>
 		<<if $position is "stalk">>
-			You fight through the pain and try to push yourself to your feet with your left arm, but have too little strength.
+			당신은 고통을 이겨내며 왼팔을 사용해 당신의 발로 일어나려 하지만, 그러기엔 힘이 너무 약하다.
 		<<else>>
-			You fight through the pain and push them with your left arm, but have too little strength.
+			당신은 고통을 이겨내며 왼팔로 저들을 밀어내려 하지만 그러기엔 힘이 너무 약하다.
 		<</if>>
 		<<brat 1>><<set _br to true>>
 	<</if>>
@@ -89,29 +89,29 @@
 	<<if $rightaction is "rightstruggleweak">>
 		<<set $rightaction to 0>><<set $rightactiondefault to "rightstruggleweak">>
 		<<if $position is "stalk">>
-			You fight through the pain and try to push yourself to your feet with your right arm, but have too little strength.
+			당신은 고통을 이겨내며 오른팔을 사용해 당신의 발로 일어나려 하지만, 그러기엔 힘이 너무 약하다.
 		<<else>>
-			You fight through the pain and push them with your right arm, but have too little strength.
+			당신은 고통을 이겨내며 오른팔로 저들을 밀어내려 하지만 그러기엔 힘이 너무 약하다.
 		<</if>>
 		<<brat 1>><<set _br to true>>
 	<</if>>
 
 	<<if $leftaction is "leftprotect" and $rightaction is "rightprotect">>
 		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftprotect">><<set $rightactiondefault to "rightprotect">>
-		You shield the tender parts of your body, protecting them from further harm.
-		<<lpain>><<meek 2>><<pain -2>><<set _br to true>>
+		당신은 몸의 급소를 보호하며 더 심한 부상을 막는다. <span class="green"> - 고통</span>
+		<<meek 2>><<pain -2>><<set _br to true>>
 	<</if>>
 
 	<<if $leftaction is "leftprotect">>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftprotect">>
-		You clutch a tender spot on your body with your left hand, protecting it from harm.
-		<<lpain>><<meek 1>><<pain -1>><<set _br to true>>
+		당신은 왼손으로 몸의 급소를 보호하며 더 심한 부상을 막는다. <span class="green"> - 고통</span>
+		<<meek 1>><<pain -1>><<set _br to true>>
 	<</if>>
 
 	<<if $rightaction is "rightprotect">>
 		<<set $rightaction to 0>><<set $rightactiondefault to "rightprotect">>
-		You clutch a tender spot on your body with your right hand, protecting it from harm.
-		<<lpain>><<meek 1>><<pain -1>><<set _br to true>>
+		당신은 오른손으로 몸의 급소를 보호하며 더 심한 부상을 막는다. <span class="green"> - 고통</span>
+		<<meek 1>><<pain -1>><<set _br to true>>
 	<</if>>
 
 	<<if _br is true>>
@@ -120,14 +120,14 @@
 
 	<<if $mouthaction is "stifle">>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "stifle">>
-		You try to control your breath and stifle your sobs. You're mostly successful.
-		<<lpain>><<pain -1>>
+		당신은 호흡을 가다듬고 흐느낌을 억누르려 노력한다. 효과가 있는듯하다. <span class="green"> - 고통</span>
+		<<pain -1>>
 	<</if>>
 
 	<<if $mouthaction is "letout">>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "letout">><<set _sound to 1>>
-		You don't hold back your tears. Your sobs are punctuated by cries and whimpers.
-		<<lstress>><<meek 1>><<stress -2>>
+		당신은 눈물을 참지 않는다. 당신의 흐느끼며 간간이 터져 나오는 울음소리를 훌쩍인다. <span class="green"> - 스트레스</span>
+		<<meek 1>><<stress -2>>
 	<</if>>
 
 	<<painclamp>>
@@ -136,63 +136,63 @@
 :: Widgets Actions Orgasm [widget]
 <<widget "actionsorgasm">>
 	<<if $leftarm is 0>>
-		Your left arm is free, but you can't stop the spasms.
+		당신의 왼팔은 자유롭지만 경련을 멈출 수 없다.
 		<br>
 		<<if $leftactiondefault is "leftfold">>
-			| <label><span class="brat">Fold</span> <<radiobutton "$leftaction" "leftfold" checked>></label>
+			| <label><span class="brat">팔을 붙잡는다</span> <<radiobutton "$leftaction" "leftfold" checked>></label>
 		<<else>>
-			| <label><span class="brat">Fold</span> <<radiobutton "$leftaction" "leftfold">></label>
+			| <label><span class="brat">팔을 붙잡는다</span> <<radiobutton "$leftaction" "leftfold">></label>
 		<</if>>
 		<<if $leftactiondefault is "leftgrip">>
-			| <label><span class="meek">Grip</span> <<radiobutton "$leftaction" "leftgrip" checked>></label>
+			| <label><span class="meek">움켜쥔다</span> <<radiobutton "$leftaction" "leftgrip" checked>></label>
 		<<else>>
-			| <label><span class="meek">Grip</span> <<radiobutton "$leftaction" "leftgrip">></label>
+			| <label><span class="meek">움켜쥔다</span> <<radiobutton "$leftaction" "leftgrip">></label>
 		<</if>>
 		<br>
 	<<elseif $leftarm is "grappled">>
-		Your left arm jerks against their grip.
+		당신의 왼쪽 팔이 저들의 손아귀에 세게 잡혀 당겨진다.
 		<br>
 	<<elseif $leftarm is "bound">>
-		Your left arm jerks against its bonds.
+		당신의 왼쪽 팔이 저들의 밧줄에 세게 잡혀 당겨진다.
 		<br>
 	<</if>>
 
 	<<if $rightarm is 0>>
 		<br>
-		Your right arm is free, but you can't stop the spasms.
+		당신의 오른팔은 자유롭지만 경련을 멈출 수 없다.
 		<br>
 		<<if $rightactiondefault is "rightfold">>
-			| <label><span class="brat">Fold</span> <<radiobutton "$rightaction" "rightfold" checked>></label>
+			| <label><span class="brat">팔을 붙잡는다</span> <<radiobutton "$rightaction" "rightfold" checked>></label>
 		<<else>>
-			| <label><span class="brat">Fold</span> <<radiobutton "$rightaction" "rightfold">></label>
+			| <label><span class="brat">팔을 붙잡는다</span> <<radiobutton "$rightaction" "rightfold">></label>
 		<</if>>
 		<<if $rightactiondefault is "rightgrip">>
-			| <label><span class="meek">Grip</span> <<radiobutton "$rightaction" "rightgrip" checked>></label>
+			| <label><span class="meek">움켜쥔다</span> <<radiobutton "$rightaction" "rightgrip" checked>></label>
 		<<else>>
-			| <label><span class="meek">Grip</span> <<radiobutton "$rightaction" "rightgrip">></label>
+			| <label><span class="meek">움켜쥔다</span> <<radiobutton "$rightaction" "rightgrip">></label>
 		<</if>>
 		<br>
 	<<elseif $rightarm is "grappled">>
-		Your right arm jerks against their grip.
+		당신의 오른쪽 팔이 저들의 손아귀에 세게 잡혀 당겨진다.
 		<br>
 	<<elseif $rightarm is "bound">>
-		Your right arm jerks against its bonds.
+		당신의 오른쪽 팔이 저들의 밧줄에 세게 잡혀 당겨진다.
 		<br>
 	<</if>>
 
 	<<if $mouthuse is 0>>
 		<br>
-		Your mouth is free, but involuntary moans and cries prevent speaking.
+		당신의 입은 자유롭지만, 무의식적으로 내뱉는 흐느낌과 울음이 섞여 말이 나오지 않는다.
 		<br>
 		<<if $mouthactiondefault is "stifleorgasm">>
-			| <label><span class="brat">Stifle</span> <<radiobutton "$mouthaction" "stifleorgasm" checked>></label>
+			| <label><span class="brat">억누른다</span> <<radiobutton "$mouthaction" "stifleorgasm" checked>></label>
 		<<else>>
-			| <label><span class="brat">Stifle</span> <<radiobutton "$mouthaction" "stifleorgasm">></label>
+			| <label><span class="brat">억누른다</span> <<radiobutton "$mouthaction" "stifleorgasm">></label>
 		<</if>>
 		<<if $mouthactiondefault is "letoutorgasm">>
-			| <label><span class="meek">Let it out</span> <<radiobutton "$mouthaction" "letoutorgasm" checked>></label>
+			| <label><span class="meek">참지 않는다</span> <<radiobutton "$mouthaction" "letoutorgasm" checked>></label>
 		<<else>>
-			| <label><span class="meek">Let it out</span> <<radiobutton "$mouthaction" "letoutorgasm">></label>
+			| <label><span class="meek">참지 않는다</span> <<radiobutton "$mouthaction" "letoutorgasm">></label>
 		<</if>>
 		<br>
 	<</if>>
@@ -202,21 +202,21 @@
 <<widget "effectsorgasm">>
 	<<if $leftaction is "leftfold" and $rightaction is "rightfold">>
 		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftfold">><<set $rightactiondefault to "rightfold">>
-		You try to conceal your orgasm by folding your arms in front of you, keeping them as still as possible.
+		당신은 팔짱을 끼고 최대한 움직이지 않으며 오르가즘을 느끼고 있다는걸 숨기려 노력한다.
 		<<brat 2>>
 		<<set _br to true>>
 	<</if>>
 
 	<<if $leftaction is "leftfold">>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftfold">>
-		You fold your left arm in front of you to keep it as still as possible.
+		당신은 왼쪽 팔로 팔짱을 끼고 최대한 움직이지 않는다.
 		<<brat 1>>
 		<<set _br to true>>
 	<</if>>
 
 	<<if $rightaction is "rightfold">>
 		<<set $rightaction to 0>><<set $rightactiondefault to "rightfold">>
-		You fold your right arm in front of you to keep it as still as possible.
+		당신은 오른쪽 팔로 팔짱을 끼고 최대한 움직이지 않는다.
 		<<brat 1>>
 		<<set _br to true>>
 	<</if>>
@@ -224,33 +224,33 @@
 	<<if $leftaction is "leftgrip" and $rightaction is "rightgrip">>
 		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftgrip">><<set $rightactiondefault to "rightgrip">>
 		<<if $position is "stalk">>
-			You steady yourself against a brick wall as your body trembles.
+			당신은 몸을 떨며 벽돌 벽에 기대어 스스로를 진정시킨다.
 		<<else>>
-			You grip whatever you can for purchase as your body trembles.
+			당신은 몸을 떨며 당신이 잡을 수 있는 건 무엇이든 꽉 붙잡는다.
 		<</if>>
-		<<larousal>><<meek 2>><<arousal -300>>
+		<span class="green"> - 흥분</span><<meek 2>><<arousal -300>>
 		<<set _br to true>>
 	<</if>>
 
 	<<if $leftaction is "leftgrip">>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftgrip">>
 		<<if $position is "stalk">>
-			You steady yourself against a brick wall with your left hand as your body trembles.
+			당신은 몸을 떨며 왼손으로 벽돌 벽에 기대어 스스로를 진정시킨다.
 		<<else>>
-			You grip whatever you can with your left hand as your body trembles.
+			당신은 몸을 떨며 당신이 왼손으로 잡을 수 있는 건 무엇이든 꽉 붙잡는다.
 		<</if>>
-		<<larousal>><<meek 1>><<arousal -300>>
+		<span class="green"> - 흥분</span><<meek 1>><<arousal -300>>
 		<<set _br to true>>
 	<</if>>
 
 	<<if $rightaction is "rightgrip">>
 		<<set $rightaction to 0>><<set $rightactiondefault to "rightgrip">>
 		<<if $position is "stalk">>
-			You steady yourself against a brick wall with your right hand as your body trembles.
+			당신은 몸을 떨며 오른손으로 벽돌 벽에 기대어 스스로를 진정시킨다.
 		<<else>>
-			You grip whatever you can with your right hand as your body trembles.
+			당신은 몸을 떨며 당신이 오른손으로 잡을 수 있는 건 무엇이든 꽉 붙잡는다.
 		<</if>>
-		<<larousal>><<meek 1>><<arousal -300>>
+		<span class="green"> - 흥분</span><<meek 1>><<arousal -300>>
 		<<set _br to true>>
 	<</if>>
 
@@ -260,23 +260,23 @@
 
 	<<if $mouthaction is "stifleorgasm">>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "stifleorgasm">>
-		You scowl, hoping your gasps are taken as exasperation.
+		당신은 당신의 거친 숨소리가 분노했다는 걸로 받아들여지도록 째려본다.
 		<<brat 1>>
 	<</if>>
 
 	<<if $mouthaction is "letoutorgasm">>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "letoutorgasm">><<set _sound to 1>>
-		You don't hold back, letting gasps and moans escape as they will.
-		<<larousal>><<meek 1>><<arousal -300>>
+		당신은 거친 숨소리와 신음소리를 참지 않고 내보낸다.
+		<<meek 1>><span class="green"> - 흥분</span><<arousal -300>>
 	<</if>>
 
 	<<if $feetaction is "feetHold">>
 		<br>
 		<<set $feetaction to 0>><<set $feetactiondefault to "feetHold">>
 		<<if _leg_position is "up" or _feet_pos isnot "">>
-			You try to keep your legs still.
+			당신은 다리를 가능한 움직이지 않도록 한다.
 		<<else>>
-			You weakly try to shut your legs.
+			당신은 약하게 당신의 다리를 닫으려고 한다.
 		<</if>>
 		<<brat 1>>
 	<</if>>
@@ -285,122 +285,120 @@
 		<br>
 		<<set $feetaction to 0>><<set $feetactiondefault to "feetCurl">>
 		<<if $consensual is 1>>
-			You curl your toes, relishing in the orgasm.
+			당신은 발가락을 감아쥐며, 절정을 즐긴다.
 		<<else>>
-			You curl your toes, letting the orgasm take you.
+			당신은 발가락을 감아쥐며, 절정이 당신을 장악하게 둔다.
 		<</if>>
-		<<larousal>><<meek 1>><<arousal -100>>
+		<<meek 1>><span class="green"> - 흥분</span><<arousal -100>>
 	<</if>>
 <</widget>>
 
 :: Widgets Actions Dissociation [widget]
 <<widget "actionsdissociation">>
 	<<if $leftarm is 0>>
-		Your left arm is free, but doesn't feel real.
+		당신의 왼팔은 자유롭지만 실감이 나지 않는다.
 		<br>
 		<<if $leftactiondefault is "leftpoke">>
-			| <label>Poke yourself <<radiobutton "$leftaction" "leftpoke" checked>></label>
+			| <label>자신을 찌른다 <<radiobutton "$leftaction" "leftpoke" checked>></label>
 		<<else>>
-			| <label>Poke yourself <<radiobutton "$leftaction" "leftpoke">></label>
+			| <label>자신을 찌른다 <<radiobutton "$leftaction" "leftpoke">></label>
 		<</if>>
 		<<if $leftactiondefault is "leftcurl">>
-			| <label><span class="meek">Keep your arms out of the way</span> <<radiobutton "$leftaction" "leftcurl" checked>></label>
+			| <label><span class="meek">당신의 팔을 그대로 놔둔다</span> <<radiobutton "$leftaction" "leftcurl" checked>></label>
 		<<else>>
-			| <label><span class="meek">Keep your arms out of the way</span> <<radiobutton "$leftaction" "leftcurl">></label>
+			| <label><span class="meek">당신의 팔을 그대로 놔둔다</span> <<radiobutton "$leftaction" "leftcurl">></label>
 		<</if>>
 		<br>
 	<<elseif $leftarm is "grappled">>
-		Your left arm lies limp in their grip.
+		당신의 왼팔은 저들에게 잡힌 채로 축 늘어져 있다.
 		<br>
 	<<elseif $leftarm is "bound">>
-		Your left arm lies limp in its bonds.
+		당신의 왼팔은 묶인 채로 축 늘어져 있다.
 		<br>
 	<</if>>
 
 	<<if $rightarm is 0>>
 		<br>
-		Your right arm is free, but doesn't feel real.
+		당신의 오른팔은 자유롭지만 실감이 나지 않는다.
 		<br>
 		<<if $rightactiondefault is "rightpoke">>
-			| <label>Poke yourself <<radiobutton "$rightaction" "rightpoke" checked>></label>
+			| <label>자신을 찌른다 <<radiobutton "$rightaction" "rightpoke" checked>></label>
 		<<else>>
-			| <label>Poke yourself <<radiobutton "$rightaction" "rightpoke">></label>
+			| <label>자신을 찌른다 <<radiobutton "$rightaction" "rightpoke">></label>
 		<</if>>
 		<<if $rightactiondefault is "rightcurl">>
-			| <label><span class="meek">Keep your arms out of the way</span> <<radiobutton "$rightaction" "rightcurl" checked>></label>
+			| <label><span class="meek">당신의 팔을 그대로 놔둔다</span> <<radiobutton "$rightaction" "rightcurl" checked>></label>
 		<<else>>
-			| <label><span class="meek">Keep your arms out of the way</span> <<radiobutton "$rightaction" "rightcurl">></label>
+			| <label><span class="meek">당신의 팔을 그대로 놔둔다</span> <<radiobutton "$rightaction" "rightcurl">></label>
 		<</if>>
 		<br>
 	<<elseif $rightarm is "grappled">>
-		Your right arm lies limp in their grip.
+		당신의 오른팔은 저들에게 잡힌 채로 축 늘어져 있다.
 		<br>
 	<<elseif $rightarm is "bound">>
-		Your right arm lies limp in its bonds.
+		당신의 오른팔은 묶인 채로 축 늘어져 있다.
 		<br>
 	<</if>>
 
 	<<if $mouthuse is 0>>
 		<br>
-		Your mouth is free, but you don't know why.
+		당신의 입은 자유롭지만, 당신은 왜인지 이해할 수 없다.
 		<br>
 		<<if $mouthactiondefault is "speak">>
-			| <label>Try to speak <<radiobutton "$mouthaction" "speak" checked>></label>
+			| <label>무언가 말하려 시도한다 <<radiobutton "$mouthaction" "말한다" checked>></label>
 		<<else>>
-			| <label>Try to speak <<radiobutton "$mouthaction" "speak">></label>
+			| <label>무언가 말하려 시도한다 <<radiobutton "$mouthaction" "말한다">></label>
 		<</if>>
 		<<if $mouthactiondefault is "noises">>
-			| <label><span class="meek">Make soft noises</span> <<radiobutton "$mouthaction" "noises" checked>></label>
+			| <label><span class="meek">부드러운 소리를 낸다</span> <<radiobutton "$mouthaction" "noises" checked>></label>
 		<<else>>
-			| <label><span class="meek">Make soft noises</span> <<radiobutton "$mouthaction" "noises">></label>
+			| <label><span class="meek">부드러운 소리를 낸다</span> <<radiobutton "$mouthaction" "noises">></label>
 		<</if>>
 	<</if>>
 <</widget>>
 
 :: Widgets Effects Dissociation [widget]
 <<widget "effectsdissociation">>
-	<<if $leftaction == "leftcurl" && $rightaction == "rightcurl">>
-		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftcurl">><<set $rightactiondefault to "rightcurl">>
-		You hold your arms to the side and curl your fingers.
-		<<meek 2>>
-		<<set _br to true>>
-	<</if>>
-
-	<<if $leftaction == "leftcurl">>
-		<<set $leftaction to 0>><<set $leftactiondefault to "leftcurl">>
-		You hold your left arm to the side and curl your fingers.
-		<<meek 1>>
-		<<set _br to true>>
-	<</if>>
-
-	<<if $rightaction == "rightcurl">>
-		<<set $rightaction to 0>><<set $rightactiondefault to "rightcurl">>
-		You hold your right arm to the side and curl your fingers.
-		<<meek 1>>
-		<<set _br to true>>
-	<</if>>
-
 	<<if $leftaction == "leftpoke" && $rightaction == "rightpoke">>
 		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftpoke">><<set $rightactiondefault to "rightpoke">>
-		You poke yourself. Is this real?
-		<<note "+ Focus" "green">>
+		당신은 스스로를 찔러본다.
+		이거 진짜야? <span class="green"> + 집중</span>
 		<<set $traumafocus += 2>>
 		<<set _br to true>>
 	<</if>>
 
 	<<if $leftaction == "leftpoke">>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftpoke">>
-		You poke yourself with your left hand.
-		<<note "+ Focus" "green">>
+		당센은 왼손으로 스스로를 찔러본다. <span class="green"> + 집중</span>
 		<<set $traumafocus += 1>>
 		<<set _br to true>>
 	<</if>>
 
 	<<if $rightaction == "rightpoke">>
 		<<set $rightaction to 0>><<set $rightactiondefault to "rightpoke">>
-		You poke yourself with your right hand.
-		<<note "+ Focus" "green">>
+		당신은 오른손으로 스스로를 찔러본다. <span class="green"> + 집중</span>
 		<<set $traumafocus += 1>>
+		<<set _br to true>>
+	<</if>>
+
+	<<if $leftaction == "leftcurl" && $rightaction == "rightcurl">>
+		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftcurl">><<set $rightactiondefault to "rightcurl">>
+		당신은 팔을 옆으로 치워 손가락을 만지작거린다.
+		<<meek 2>>
+		<<set _br to true>>
+	<</if>>
+
+	<<if $leftaction == "leftcurl">>
+		<<set $leftaction to 0>><<set $leftactiondefault to "leftcurl">>
+		당신은 왼팔을 옆으로 치워 손가락을 만지작거린다.
+		<<meek 1>>
+		<<set _br to true>>
+	<</if>>
+
+	<<if $rightaction == "rightcurl">>
+		<<set $rightaction to 0>><<set $rightactiondefault to "rightcurl">>
+		당신은 오른팔을 옆으로 치워 손가락을 만지작거린다
+		<<meek 1>>
 		<<set _br to true>>
 	<</if>>
 
@@ -408,17 +406,16 @@
 		<br>
 	<</if>>
 
-	<<if $mouthaction == "noises">>
-		<<set $mouthaction to 0>><<set $mouthactiondefault to "noises">>
-		You make some soft noises. They sound nice.
-		<<meek 1>>
-	<</if>>
-
 	<<if $mouthaction == "speak">>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "speak">>
-		You make some noises that resemble words.
-		<<note "+ Focus" "green">>
+		당신은 단어를 조합해보며 작은 소리를 낸다. <span class="green"> + 집중</span>
 		<<set $traumafocus += 1>>
+	<</if>>
+
+	<<if $mouthaction == "noises">>
+		<<set $mouthaction to 0>><<set $mouthactiondefault to "noises">>
+		당신은 부드러운 소리를 낸다. 좋은 소리가 난다.
+		<<meek 1>>
 	<</if>>
 <</widget>>
 
@@ -437,125 +434,125 @@
 		<<set $mouthactiondefault to "mouthacceptW">>
 	<</if>>
 	<<if $leftarm is 0>>
-		Your left arm is free, <span class="pink">but not under your control</span>.
+		당신의 왼팔은 자유롭지만, <span class="pink">당신이 통제할 수가 없다</span>.
 		<br>
 		<<if $leftactiondefault is "leftacceptW">>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$leftaction" "leftacceptW" checked>></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$leftaction" "leftacceptW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$leftaction" "leftacceptW">></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$leftaction" "leftacceptW">></label>
 		<</if>>
 		<<if $leftactiondefault is "leftresistW">>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$leftaction" "leftresistW" checked>></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$leftaction" "leftresistW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$leftaction" "leftresistW">></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$leftaction" "leftresistW">></label>
 		<</if>>
 		<br>
 	<<elseif $leftarm is "grappled">>
-		Your left arm writhes in their grip, unbidden.
+		당신의 왼팔은 당신의 의사와는 무관하게 녀석의 손아귀에서 몸부림치고 있다.
 		<br>
 		<<set $leftactiondefault to ["leftacceptW","leftstruggleW"].includes($leftactiondefault) ? "leftstruggleW" : "leftstillW">>
 		<<if $leftactiondefault is "leftstruggleW">>
-			| <label><span class="wraith">Struggle</span> <<radiobutton "$leftaction" "leftstruggleW" checked>></label>
+			| <label><span class="wraith">몸부림친다</span> <<radiobutton "$leftaction" "leftstruggleW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Struggle</span> <<radiobutton "$leftaction" "leftstruggleW">></label>
+			| <label><span class="wraith">몸부림친다</span> <<radiobutton "$leftaction" "leftstruggleW">></label>
 		<</if>>
 		<<if $leftactiondefault is "leftstillW">>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$leftaction" "leftstillW" checked>></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$leftaction" "leftstillW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$leftaction" "leftstillW">></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$leftaction" "leftstillW">></label>
 		<</if>>
 		<br>
 	<<elseif $leftarm is "bound">>
-		Your left arm writhes in its bounds, unbidden.
+		당신의 왼팔은 당신의 의사와는 무관하게 묶인 상태에서 몸부림치고 있다.
 		<br>
 	<</if>>
 
 	<<if $rightarm is 0>>
 		<br>
-		Your right arm is free, <span class="pink">but not under your control</span>.
+		당신의 오른팔은 자유롭지만, <span class="pink">당신이 통제할 수가 없다</span>.
 		<br>
 		<<if $rightactiondefault is "rightacceptW">>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$rightaction" "rightacceptW" checked>></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$rightaction" "rightacceptW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$rightaction" "rightacceptW">></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$rightaction" "rightacceptW">></label>
 		<</if>>
 		<<if $rightactiondefault is "rightresistW">>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$rightaction" "rightresistW" checked>></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$rightaction" "rightresistW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$rightaction" "rightresistW">></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$rightaction" "rightresistW">></label>
 		<</if>>
 		<br>
 	<<elseif $rightarm is "grappled">>
 		<br>
-		Your right arm writhes in their grip, unbidden.
+		당신의 왼팔은 당신의 의사와는 무관하게 녀석의 손아귀에서 몸부림치고 있다.
 		<br>
 		<<set $rightactiondefault to ["rightacceptW","rightstruggleW"].includes($rightactiondefault) ? "rightstruggleW" : "rightstillW">>
 		<<if $rightactiondefault is "rightstruggleW">>
-			| <label><span class="wraith">Struggle</span> <<radiobutton "$rightaction" "rightstruggleW" checked>></label>
+			| <label><span class="wraith">몸부림친다</span> <<radiobutton "$rightaction" "rightstruggleW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Struggle</span> <<radiobutton "$rightaction" "rightstruggleW">></label>
+			| <label><span class="wraith">몸부림친다</span> <<radiobutton "$rightaction" "rightstruggleW">></label>
 		<</if>>
 		<<if $rightactiondefault is "rightstillW">>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$rightaction" "rightstillW" checked>></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$rightaction" "rightstillW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Hold it still</span> <<radiobutton "$rightaction" "rightstillW">></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$rightaction" "rightstillW">></label>
 		<</if>>
 		<br>
 	<<elseif $rightarm is "bound">>
 		<br>
-		Your right arm writhes in its bounds, unbidden.
+		당신의 왼팔은 당신의 의사와는 무관하게 묶인 상태에서 몸부림치고 있다.
 		<br>
 	<</if>>
 
 	<<if $feetuse is 0>>
 		<br>
-		Your legs are free, <span class="pink">but you can't feel them beneath you</span>.
+		당신의 다리는 자유롭지만, <span class="pink">당신은 그걸 느낄 수가 없다</span>.
 		<br>
 		<<if $feetactiondefault is "feetacceptW">>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$feetaction" "feetacceptW" checked>></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$feetaction" "feetacceptW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$feetaction" "feetacceptW">></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$feetaction" "feetacceptW">></label>
 		<</if>>
 		<<if $feetactiondefault is "feetresistW">>
-			| <label><span class="brat">Hold them still</span> <<radiobutton "$feetaction" "feetresistW" checked>></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$feetaction" "feetresistW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Hold them still</span> <<radiobutton "$feetaction" "feetresistW">></label>
+			| <label><span class="brat">움직이지 않게 힘을 준다</span> <<radiobutton "$feetaction" "feetresistW">></label>
 		<</if>>
 		<br>
 	<<elseif $feetuse is "bound">>
 		<br>
-		Your legs thrash in their shackles, unbidden.
+		당신의 다리는 당신의 의사와는 무관하게 족쇄 안에서 몸부림치고 있다.
 		<br>
 	<</if>>
 
 	<<if $mouthuse is 0>>
 		<br>
-		Your mouth is free, <span class="pink">but unfamiliar words spill from your tongue</span>.
+		당신의 입은 자유롭지만, <span class="pink">낯선 단어들이 당신의 혀에서 흘러나온다</span>.
 		<br>
 		<<if $mouthactiondefault is "mouthacceptW">>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$mouthaction" "mouthacceptW" checked>></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$mouthaction" "mouthacceptW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Accept it</span> <<radiobutton "$mouthaction" "mouthacceptW">></label>
+			| <label><span class="wraith">받아들인다</span> <<radiobutton "$mouthaction" "mouthacceptW">></label>
 		<</if>>
 		<<if $mouthactiondefault is "mouthresistW">>
-			| <label><span class="brat">Clamp your mouth shut</span> <<radiobutton "$mouthaction" "mouthresistW" checked>></label>
+			| <label><span class="brat">입을 꽉 다문다</span> <<radiobutton "$mouthaction" "mouthresistW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Clamp your mouth shut</span> <<radiobutton "$mouthaction" "mouthresistW">></label>
+			| <label><span class="brat">입을 꽉 다문다</span> <<radiobutton "$mouthaction" "mouthresistW">></label>
 		<</if>>
 	<<elseif $mouthuse is "lefthand" or $mouthuse is "righthand">>
 		<br>
-		Your mouth is blocked, muffling the foreign words that well up within you.
+		당신의 입은 막힌 상태로, 당신 안의 존재에게 익숙한 외국어를 중얼거리고 있다.
 		<br>
 		<<set $mouthactiondefault to ["mouthacceptW","handbiteW"].includes($mouthactiondefault) ? "handbiteW" : "handcloseW">>
 		<<if $mouthactiondefault is "handbiteW">>
-			| <label><span class="wraith">Bite</span> <<radiobutton "$mouthaction" "handbiteW" checked>></label>
+			| <label><span class="wraith">문다</span> <<radiobutton "$mouthaction" "handbiteW" checked>></label>
 		<<else>>
-			| <label><span class="wraith">Bite</span> <<radiobutton "$mouthaction" "handbiteW">></label>
+			| <label><span class="wraith">문다</span> <<radiobutton "$mouthaction" "handbiteW">></label>
 		<</if>>
 		<<if $mouthactiondefault is "handcloseW">>
-			| <label><span class="brat">Clamp your mouth shut</span> <<radiobutton "$mouthaction" "handcloseW" checked>></label>
+			| <label><span class="brat">입을 꽉 다문다</span> <<radiobutton "$mouthaction" "handcloseW" checked>></label>
 		<<else>>
-			| <label><span class="brat">Clamp your mouth shut</span> <<radiobutton "$mouthaction" "handcloseW">></label>
+			| <label><span class="brat">입을 꽉 다문다</span> <<radiobutton "$mouthaction" "handcloseW">></label>
 		<</if>>
 	<</if>>
 <</widget>>
@@ -570,7 +567,7 @@
 	<<if $combatBegun is 1>>
 		<<set _resist to 0>>
 		<<if $leftaction isnot "leftresistW" and $rightaction isnot "rightresistW" and $feetaction isnot "feetresistW" and $mouthaction isnot "mouthresistW">>
-			<span class="pink">You let it take you.</span>
+			<span class="pink">당신은 그것이 당신을 움직이도록 둔다.</span>
 			<<pain -2>><<stress -12>><<sub 2>><<lpain>><<llstress>><<set $wraith.will += 30>>
 		<<else>>
 			<<if $leftaction is "leftresistW" and $rightaction is "rightresistW" and $feetaction is "feetresistW">>
@@ -587,20 +584,20 @@
 			<<if $willpowerSuccess>>
 				<<set _resistSuccess to 1>>
 				<span class="green">
-					You fight for control.
+					당신은 통제권을 되찾기 위해 싸운다.
 					<<if ($leftaction is "leftresistW" or $leftaction is "leftstillW") and ($rightaction is "rightresistW" or $rightaction is "rightstillW") and $feetaction is "feetresistW">>
-						Your body locks up.
+						당신은 몸을 움직이지 않게 한다.
 					<<elseif $feetaction is "feetresistW" and ($leftaction is "leftresistW" or $leftaction is "leftstillW" or $rightaction is "rightresistW" or $rightaction is "rightstillW")>>
-						Your arm and legs lock up.
+						당신은 팔과 다리를 움직이지 않게 한다.
 					<<elseif ($leftaction is "leftresistW" or $leftaction is "leftstillW") and ($rightaction is "rightresistW" or $rightaction is "rightstillW")>>
-						Your arms lock up.
+						당신은 양팔을 움직이지 않게 한다.
 					<<elseif $feetaction is "feetresistW">>
-						Your legs lock up.
+						당신은 다리를 움직이지 않게 한다.
 					<<elseif $leftaction is "leftresistW" or $leftaction is "leftstillW" or $rightaction is "rightresistW" or $rightaction is "rightstillW">>
-						Your arm locks up.
+						당신은 팔을 움직이지 않게 한다.
 					<</if>>
 					<<if $mouthaction is "handcloseW">>
-						You clamp your mouth shut.
+						당신은 입을 꽉 닫는다.
 					<</if>>
 				</span>
 				<<if $mouthaction is "mouthresistW">>
@@ -608,15 +605,15 @@
 					<<silently>><<willpowerdifficulty _wraithWill/3 _wraithWill*1.2>><</silently>>
 					<<if $willpowerSuccess>>
 						<<set _mouthSuccess to 1>><<set _resist++>>
-						<span class="green">You clamp your mouth shut.</span>
+						<span class="green">당신은 입을 꽉 닫는다.</span>
 					<<else>>
-						<span class="purple">You can't stop the stream of words coming from your mouth, though.</span>
+						<span class="purple">그럼에도 불구하고, 당신은 입에서 줄줄 나오는 말을 멈출 수가 없다.</span>
 					<</if>>
 				<</if>>
 				<<pain _resist>><<stress _resist>><<trauma _resist>><<def 2>><<gpain>><<gtrauma>><<gstress>><<if _resist is 4>><<ggcontrol>><<else>><<gcontrol>><</if>><<set $wraith.will -= Math.floor(currentSkillValue('willpower') / 24)*_resist>>
 				<<set $control += Math.floor(currentSkillValue('willpower') / 24)*_resist>>
 			<<else>>
-				<span class="red">Your body does not obey.</span>
+				<span class="red">당신의 몸이 말을 듣지 않는다.</span>
 				<<stress 6>><<trauma 6>><<willpower 1>><<def 1>><<gtrauma>><<gstress>><<gwillpower>><<set $wraith.will -= Math.floor(currentSkillValue('willpower') / 40)*_resist>>
 			<</if>>
 		<</if>>
@@ -627,7 +624,7 @@
 
 	<<if $leftaction is "leftresistW" and $rightaction is "rightresistW" and _resistSuccess>>
 		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftresistW">><<set $rightactiondefault to "rightresistW">>
-		You hold your arms firm to your side.
+		당신은 양팔을 당신의 옆구리에 단단하게 붙인다.
 	<</if>>
 
 	<<if $leftaction is "leftacceptW" or $leftaction is "leftresistW" and !_resistSuccess>>
@@ -635,21 +632,21 @@
 		<<if $leftaction is "leftacceptW">><<set $_wraithDamage ++>><</if>>
 		<<set $_wraithDamage += Math.floor(C.npc["Ivory Wraith"].lust / 10)>>
 		<<set $leftactiondefault to $leftaction>><<set $leftaction to 0>><<set _target to random(1,$enemyno)-1>>
-		You <<print either("punch","slap","scratch","claw","chop","strike")>> with your left hand.
+		당신은 왼손으로 <<print either("주먹을 쥐고 때린다","뺨을 때린다","긁는다","할퀸다","내려친다","때린다")>>.
 		<<defiance $_wraithDamage _target>>
 	<</if>>
 
 	<<if $leftaction is "leftresistW" and _resistSuccess>>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftresistW">>
-		You hold your left arm firm to your side.
+		당신은 왼팔을 당신의 옆구리에 단단하게 붙인다.
 	<</if>>
 
 	<<if $leftaction is "leftstruggleW" or $rightaction is "rightstruggleW" or (($leftaction is "leftresistW" or $rightaction is "rightresistW") and !_resistSuccess)>>
 		<<set $leftaction to 0>><<set $leftactiondefault to "leftstruggleW">><<set $rightaction to 0>><<set $leftactiondefault to "leftstruggleW">>
-		You struggle to free your arms.
+		당신은 양팔을 풀어내려 몸부림친다.
 		<<set $speechstruggle to 1>>
 		<<if currentSkillValue('physique') gte random(1, 48000)>>
-			<span class="pink">You manage to wrench your arms free.</span>
+			<span class="pink">당신은 어떻게든 양팔을 풀어낸다.</span>
 			<<set $leftarm to 0>><<set $rightarm to 0>>
 			<<for _s = 0; _s lt $NPCList.length; _s++>>
 				<<if $NPCList[_s].lefthand is "arms">>
@@ -662,12 +659,12 @@
 				<</if>>
 			<</for>>
 		<<else>>
-			<span class="lblue">Your arms remain grasped.</span>
+			<span class="lblue">당신의 양팔은 여전히 잡혀있다.</span>
 		<</if>>
 	<</if>>
 
 	<<if $leftaction is "leftstillW" and $rightaction is "rightstillW" and _resistSuccess>>
-		You hold your arms as still as you can in their grasp.
+		당신은 당신의 양팔을 녀석의 손아귀에서 가능한 움직이지 않게 한다.
 	<</if>>
 
 	<<if $rightaction is "rightacceptW" or $rightaction is "rightresistW" and !_resistSuccess>>
@@ -675,13 +672,13 @@
 		<<if $rightaction is "rightacceptW">><<set $_wraithDamage ++>><</if>>
 		<<set $_wraithDamage += Math.floor(C.npc["Ivory Wraith"].lust / 10)>>
 		<<set $rightactiondefault to $rightaction>><<set $rightaction to 0>><<set _target to random(1,$enemyno)-1>>
-		You <<print either("punch","slap","scratch","claw","chop","strike")>> with your right hand.
+		당신은 오른손으로 <<print either("주먹을 쥐고 때린다","뺨을 때린다","긁는다","할퀸다","내려친다","때린다")>>.
 		<<defiance $_wraithDamage _target>>
 	<</if>>
 
 	<<if $rightaction is "rightresistW" and _resistSuccess>>
 		<<set $rightaction to 0>><<set $rightactiondefault to "rightresistW">>
-		You hold your right arm firm to your side.
+		당신은 오른팔을 당신의 옆구리에 단단하게 붙인다.
 	<</if>>
 
 	<<if $feetaction is "feetacceptW" or $feetaction is "feetresistW" and !_resistSuccess>>
@@ -689,13 +686,13 @@
 		<<if $feetaction is "feetacceptW">><<set $_wraithDamage ++>><</if>>
 		<<set $_wraithDamage += Math.floor(C.npc["Ivory Wraith"].lust / 10)>>
 		<<set $feetactiondefault to $feetaction>><<set $feetaction to 0>><<set _target to random(1,$enemyno)-1>>
-		You <<print either("awkwardly","viciously","rapidly","jerkily","cruelly","<<feettext>>")>> lash out with your feet.
+		당신은 <<print either("어설프게","사납게","빠르게","홱 움직이며","잔혹하게","<<feettext>>")>> 발로 후려갈긴다.
 		<<defiance $_wraithDamage _target>>
 	<</if>>
 
 	<<if $feetaction is "feetresistW" and _resistSuccess>>
 		<<set $feetaction to 0>><<set $feetactiondefault to "feetresistW">>
-		You plant your legs into the ground.
+		당신은 다리를 바닥에 움직이지 않도록 힘을 준다.
 	<</if>>
 
 	<<if $mouthaction is "mouthacceptW" or $mouthaction is "mouthresistW" and !_mouthSuccess>>
@@ -708,7 +705,7 @@
 
 	<<if $mouthaction is "mouthresistW" and _mouthSuccess>>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "mouthresistW">>
-		Words well up in your mouth, but you swallow them down.
+		말이 당신의 입에서 흘러나오지만, 당신은 그것을 다시 삼킨다.
 	<</if>>
 
 	<<if $mouthaction is "handbiteW" or $mouthaction is "handcloseW" and !_resistSuccess>>
@@ -721,7 +718,7 @@
 			<<if $NPCList[_s].righthand is "mouth">>
 				<<set $NPCList[_s].righthand to 0>>
 			<</if>>
-			<span class="teal"><<He _s>> flinches away in pain, freeing your mouth.</span>
+			<span class="teal"><<He_ nun _s>> 아픔에 움찔하면서, 당신의 입을 놓아준다.</span>
 			<<defiance 1 _s>>
 			<<break>>
 		<</for>>
@@ -730,6 +727,6 @@
 
 	<<if $mouthaction is "handcloseW" and _resistSuccess>>
 		<<set $mouthaction to 0>><<set $mouthactiondefault to "handcloseW">>
-		You keep your mouth closed against the hand pressing against it.
+		당신은 입을 막고 있는 손 안에서 입을 다물고 있다.
 	<</if>>
 <</widget>>

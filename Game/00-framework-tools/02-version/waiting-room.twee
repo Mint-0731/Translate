@@ -1,8 +1,8 @@
 :: Upgrade Waiting Room
 
-Welcome to Degrees of Lewdity <<print StartConfig.version>><<if StartConfig.versionName>> <<print StartConfig.versionName>><</if>>. We're making a few changes to your game so it supports this latest version.
+Degrees of Lewdity <<print StartConfig.version>><<if StartConfig.versionName>> <<print StartConfig.versionName>><</if>>에 오신 것을 환영합니다. 최신버전을 지원하기 위한 몇 가지 변경점을 처리합니다.
 
-Remember to update your save if things appear to be working.
+작업이 처리 된 후 세이브를 하는 것을 잊지 마십시오.
 
 <<silently>>
 <<variablesVersionUpdate>>
@@ -12,16 +12,16 @@ Remember to update your save if things appear to be working.
 <<set $runWardrobeSanityChecker to true>>
 <</silently>>
 
-Looks like we're done already.
+완료된 것 같습니다.
 
-<<link [[Resume|$navigation.stack.last()]]>><<run $navigation.stack.pop()>><</link>>
+<<link [[시작|$navigation.stack.last()]]>><<run $navigation.stack.pop()>><</link>>
 
 :: Downgrade Waiting Room
 
-Welcome back to Degrees of Lewdity <<- StartConfig.version>><<if StartConfig.versionName>> <<print StartConfig.versionName>><</if>>.
+Degrees of Lewdity <<- StartConfig.version>><<if StartConfig.versionName>> <<print StartConfig.versionName>><</if>>에 다시 오신 것을 환영합니다.
 <br><br>
-You have switched to an older version of the game, from <<- $saveVersions.last()>>, so we just want to confirm you know what you're doing.
+당신은 게임을 <<- $saveVersions.last()>>에서, 구버전으로 다시 변경하였기에, 당신이 무엇을 하려고 하는지 제대로 알고 있는지 확인하려고 합니다.
 <br><br>
-<<link [[Confirm|$passagePrev]]>><</link>>
+<<link [[확인|$passagePrev]]>><</link>>
 <br>
-<span class="red">If you want to avoid potential issues, go back to the latest version.</span>
+<span class="red">생길 수 있는 문제를 피하고 싶다면, 최신 버전으로 돌아가세요.</span>

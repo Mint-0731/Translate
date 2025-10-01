@@ -1,5 +1,4 @@
 :: Clothing Shop [exitCheckBypass]
-<<set $bus to "clothingshop">>
 <div id="clothingShop-div" class="main-shop-div">
 	<<clothingShop-main>>
 </div>
@@ -11,21 +10,21 @@
 	<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
 	<<set $shopName = "clothing">>
 
-	You are in the clothing shop. It has a large selection of ordinary clothes, but you'll need to go elsewhere if you're looking for something exotic.
+	당신은 옷 가게에 있다. 다양한 종류의 평범한 옷들이 있지만, 이국적인 것을 찾는다면 다른 곳으로 가야 한다.
 	<br><br>
 
 	<<if $stress gte $stressmax>>
 	<<passoutshop>>
 	<<else>>
 		<<if Time.hour is 21>>
-			It's closing time. Security is herding everyone outside. <<if $exposed gte 1>>Panic swells within you as you realise how exposed you'll be should security find you in this state of dress.<</if>>
+			폐점 시간이다. 보안요원이 모두를 밖으로 이동시킨다.<<if $exposed gte 1>>당신은 이렇게 노출된 차림으로 보안요원에게 발각된다면 당신이 얼마나 부끄러울지를 깨닫자 공포가 일어난다..<</if>>
 			<br><br>
 
 			<<if $exposed lte 0>>
-				<<highicon>><<link [[Go outside|High Street]]>><</link>>
+				<<highicon>><<link [[밖으로 나간다|High Street]]>><</link>>
 				<br>
 			<<else>>
-				<<ind>><<link [["Hide until it's over (1:00)"|Clothing Shop]]>><<pass 1 hour>><</link>>
+				<<ind>><<link [["끝날때까지 숨어 있는다 (1:00)"|Clothing Shop]]>><<pass 1 hour>><</link>>
 			<</if>>
 		<<else>>
 			<div id="tryonstats-div"><<tryOnStats>></div>
@@ -34,84 +33,81 @@
 			<<set $shopPage = 0>>
 
 			<<if Time.dayState is "night">>
-				You are alone in the darkness.
+				당신은 어둠 속에서 혼자 있다.
 				<br><br>
 			<<elseif $exposed gte 1>>
-				You are hiding within a clothing stand to protect your dignity.
+				당신은 자신의 존엄을 지키기 위해 옷 가게 안에 숨어있다.
 				<br><br>
 			<</if>>
 
-			<span>Warmth:</span>
+			<span>따뜻함:</span>
 			<<warmthscale>>
 			<div id="warmth-description">
 				<<warmth_description>>
 			</div>
 			<br><br>
 			<<clothingcategoryicon "all">>
-			<<link "View All">><<replace "#clothingShop-div">><<AllShop>><</replace>><</link>>
+			<<link "전부 보기">><<replace "#clothingShop-div">><<AllShop>><</replace>><</link>>
 			<br><br>
 			<<if $debug is 1>>
 				<<clothingcategoryicon "overoutfit">>
-				<<link "View Over Outfits">><<replace "#clothingShop-div">><<OverOutfitShop>><</replace>><</link>>
+				<<link "원피스 외투 보기">><<replace "#clothingShop-div">><<OverOutfitShop>><</replace>><</link>>
 				<br><br>
 			<</if>>
 			<<clothingcategoryicon "outfit">>
-			<<link "View Outfits">><<replace "#clothingShop-div">><<OutfitShop>><</replace>><</link>>
+			<<link "원피스 겉옷 보기">><<replace "#clothingShop-div">><<OutfitShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "upper">>
-			<<link "View Tops">><<replace "#clothingShop-div">><<TopShop>><</replace>><</link>>
+			<<link "상의 보기">><<replace "#clothingShop-div">><<TopShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "lower">>
-			<<link "View Bottoms">><<replace "#clothingShop-div">><<BottomShop>><</replace>><</link>>
+			<<link "하의 보기">><<replace "#clothingShop-div">><<BottomShop>><</replace>><</link>>
 			<br><br>
 			<<clothingcategoryicon "underoutfit">>
-			<<link "View Under Outfits">><<replace "#clothingShop-div">><<UnderOutfitShop>><</replace>><</link>>
+			<<link "원피스 속옷 보기">><<replace "#clothingShop-div">><<UnderOutfitShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "underupper">>
-			<<link "View Under Tops">><<replace "#clothingShop-div">><<UnderTopShop>><</replace>><</link>>
+			<<link "속옷 상의 보기">><<replace "#clothingShop-div">><<UnderTopShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "underlower">>
-			<<link "View Under Bottoms">><<replace "#clothingShop-div">><<UnderBottomShop>><</replace>><</link>>
+			<<link "속옷 하의 보기">><<replace "#clothingShop-div">><<UnderBottomShop>><</replace>><</link>>
 			<br><br>
 			<<clothingcategoryicon "head">>
-			<<link "View Head Accessories">><<replace "#clothingShop-div">><<HeadShop>><</replace>><</link>>
+			<<link "머리 악세서리 보기">><<replace "#clothingShop-div">><<HeadShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "face">>
-			<<link "View Face Accessories">><<replace "#clothingShop-div">><<FaceShop>><</replace>><</link>>
+			<<link "얼굴 악세서리 보기">><<replace "#clothingShop-div">><<FaceShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "neck">>
-			<<link "View Neck Accessories">><<replace "#clothingShop-div">><<NeckShop>><</replace>><</link>>
+			<<link "목 악세서리 보기">><<replace "#clothingShop-div">><<NeckShop>><</replace>><</link>>
 			<br><br>
 			<<clothingcategoryicon "handheld">>
-			<<link "View Handheld Items">><<replace "#clothingShop-div">><<HandheldShop>><</replace>><</link>>
+			<<link "들고다니는 악세서리 보기">><<replace "#clothingShop-div">><<HandheldShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "hand">>
-			<<link "View Hand Accessories">><<replace "#clothingShop-div">><<HandsShop>><</replace>><</link>>
+			<<link "손 악세서리 보기">><<replace "#clothingShop-div">><<HandsShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "legs">>
-			<<link "View Legwear">><<replace "#clothingShop-div">><<LegsShop>><</replace>><</link>>
+			<<link "레그웨어 보기">><<replace "#clothingShop-div">><<LegsShop>><</replace>><</link>>
 			<br>
 			<<clothingcategoryicon "feet">>
-			<<link "View Shoes">><<replace "#clothingShop-div">><<FeetShop>><</replace>><</link>>
+			<<link "신발 보기">><<replace "#clothingShop-div">><<FeetShop>><</replace>><</link>>
 			/*<br>
 			*<<clothingcategoryicon "strapon">> <!-- disable for now-->
-			*<<link "View Genital Wear">><<replace "#clothingShop-div">><<GenitalShop>><</replace>><</link>>*/
+			*<<link "음부 덮개 보기">><<replace "#clothingShop-div">><<GenitalShop>><</replace>><</link>>*/
 			<br><br>
 			<<run linkifyDivs('.button-back-to-shop')>>
 
-			<<if (Time.dayState isnot "night" or Time.hour isnot $closinghour) and $tryOn.value is 0>>
-				<<icon "hanger.png">><<link [[Changing room|Changing Room]]>><<ShowUnderEquip "normal">><<set $wardrobeExit to "Clothing Shop">><</link>>
-				<br>
-			<</if>>
 			<<if $clothingrebuy is 1>>
-				<<rebuyicon "disable">><<link [[Disable automatic clothing rebuy|Rebuy Shop]]>><</link>>
+				<<rebuyicon "disable">><<link [[의류 자동구입 비활성화|Rebuy Shop]]>><</link>>
 				<br>
 			<<else>>
-				<<rebuyicon "enable">><<link [[Enable automatic clothing rebuy|Rebuy Shop]]>><</link>>
+				<<rebuyicon "enable">><<link [[의류 자동구입 활성화|Rebuy Shop]]>><</link>>
 				<br>
 			<</if>>
+
 			<<if Time.dayState is "night" and Time.hour isnot $closinghour and !$weekly.theft.clothingShop>>
-				<<shopicon "register">><<link [[Examine the cash register|Clothing Shop Register]]>><</link>>
+				<<shopicon "register">><<link [[금전등록기를 살펴본다|Clothing Shop Register]]>><</link>>
 				<br>
 			<</if>>
 
@@ -120,11 +116,10 @@
 			<<if Time.dayState is "night" or $tryOn.value is 0>>
 				<<if Time.dayState is "night" and $clothingShop.spotted is true and $clothingShop.stolenClothes gt 0>>
 					<<getouticon>>
-					<<link [[Leave|Clothing Shop Night Guard Found]]>>
+					<<link [[나간다|Clothing Shop Night Guard Found]]>>
 						<<shopClothingFilterReset>>
 						<<ShowUnderEquip "normal">>
 						<<ShowUnderEquip "over">>
-						<<buyTryOnClothes "wear" "steal">>
 						<<set $tryOn.autoReset to true>>
 						<<crimeUp `$tryOn.value / 100` "thievery">>
 						<<shopHoodCheck>>
@@ -132,11 +127,10 @@
 					<</link>>
 				<<else>>
 					<<getouticon>>
-					<<link [[Leave|Shopping Centre Top]]>>
+					<<link [[나간다|Shopping Centre Top]]>>
 						<<shopClothingFilterReset>>
 						<<ShowUnderEquip "normal">>
 						<<ShowUnderEquip "over">>
-						<<buyTryOnClothes "wear" "steal">>
 						<<set $tryOn.autoReset to true>>
 						<<crimeUp `$tryOn.value / 100` "thievery">>
 						<<shopHoodCheck>>
@@ -147,8 +141,8 @@
 					<<crime "thievery">>
 				<</if>>
 				<br><br>
-			<<elseif $tryOn.value isnot 0>>
-				<<icon "hanger.png">><<link "Return clothes">><<clothingReset>>
+			<<elseif $tryOn.value gt 0>>
+				<<ind>><<link "옷을 반납한다">><<clothingReset>>
 					<<updatesidebarimg>>
 					<<updatesidebardescription>>
 					<<updateallure>>
@@ -158,11 +152,11 @@
 					<<run updateMoment()>>
 				<</link>>
 				<br>
-				<<if $tryOn.value gt 0 and $tryOn.value lte $money>>
+				<<if $tryOn.value lte $money>>
 					<<sendItemsToDropdown>>
-					<<highicon>><<link "Buy clothes">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
+					<<ind>><<link "옷을 산다">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
 					<br>
-					<<wardrobeicon>><<link "Buy clothes and send to wardrobe">>
+					<<ind>><<link "옷을 사서 옷장에 보낸다">>
 						<<buyTryOnClothes "wardrobe">>
 						<<updatesidebarmoney>>
 						<<updatesidebarimg>>
@@ -175,47 +169,39 @@
 					<</link>>
 					<br>
 				<</if>>
-				<<if $tryOn.value gt 0>>
-					<<getouticon>><<link [[Leave with stolen clothes|Stolen Clothing Shop Result]]>><<shopClothingFilterReset>><<shopHoodCheck>><<shopCommandoCheck>><</link>><<crime "thievery">>
-					<br>
-				<</if>>
+				<<getouticon>><<link [[훔친 옷을 입고 떠난다|Stolen Clothing Shop Result]]>><<shopClothingFilterReset>><<shopHoodCheck>><<shopCommandoCheck>><</link>><<crime "thievery">>
+				<br>
 			<</if>>
 		<</if>>
 	<</if>>
 <</widget>>
 
 <<widget "clothingcategoryicon">>
-	<img class="icon" @src="`img/ui/clothes/categories/` + _args[0] + `.png`">
+	<<icon `"clothes/categories/" + _args[0] + ".png"`>>
 <</widget>>
 
 :: Clothing Shop Sneak
 <<set $outside to 0>><<effects>><<set $lock to 0>>
 
-<<if currentSkillValue('skulduggery') gte $lock>>
-	<<if pcAreArmsBound("both")>>
-		You think you'd be able to pick the lock, <span class="blue">if your arms weren't bound.</span>
-		<br><br>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">문을 따기 쉬워 보인다.</span>
+	<br><br>
+	<<lockpickicon>>
+	<<link [[잠금을 해제한다 (0:10)|Clothing Shop]]>>
+		<<pass 10>><<crimeUp 5 "trespassing">>
+		<<if $clothingShop.ban gt 0 or crimeSumCurrent() gte 50000 or $clothingShop.rng gte $skulduggery>>
+			<<set $clothingShop.spotted to true>>
+		<</if>>
+		<<set $clothingShop.rng to random(0,1000)>>
+	<</link>><<crime "trespassing">>
+	<br>
 	<<else>>
-		<<wearProp "lockpick">>
-		<span class="green">The lock looks easy to pick.</span>
-		<br><br>
-		<<lockicon "pick">>
-		<<link [[Pick it (0:10)|Clothing Shop]]>>
-			<<handheldon>><<pass 10>><<crimeUp 5 "trespassing">>
-			<<if $clothingShop.ban gt 0 or crimeSumCurrent() gte 50000 or $clothingShop.rng gte $skulduggery>>
-				<<set $clothingShop.spotted to true>>
-			<</if>>
-			<<set $clothingShop.rng to random(0,1000)>>
-		<</link>><<crime "trespassing">>
-		<br>
-	<</if>>
-<<else>>
-	<span class="red">The lock looks beyond your ability to pick.</span>
+	<span class="red">잠금장치는 당신이 해제할 수 있는 능력 이상인 것 같다.</span>
 	<<skulduggeryrequired>>
 	<br><br>
-<</if>>
+	<</if>>
 
-<<getouticon>><<link [[Leave|Shopping Centre Top]]>><<handheldon>><</link>>
+<<getouticon>><<link [[떠난다|Shopping Centre Top]]>><</link>>
 <br>
 
 :: Rebuy Shop
@@ -223,26 +209,26 @@
 
 <<if $clothingrebuy is 1>>
 
-Disabling clothing rebuy will deactivate the chips in all your clothing. They will no longer attempt to buy replacements when destroyed, and will not charge you anything.
+자동구입을 비활성화하면, 모든 의류 칩이 비활성화 됩니다. 옷이 파괴되었을 때 더 이상 대체품을 구매하지 않으며, 당신에게 어떤 비용도 청구되지 않습니다.
 <br><br>
 
-Would you like to disable automatic clothing rebuy?
+정말로 의류 자동구입을 비활성화 합니까?
 <br><br>
 
-<<link [[Yes|Clothing Shop]]>><<set $clothingrebuy to 0>><</link>>
+<<link [[네|Clothing Shop]]>><<set $clothingrebuy to 0>><</link>>
 <br>
 
 <<else>>
 
-Enabling clothing rebuy will activate chips in all your clothing. When damaged beyond repair, the clothes automatically order a replacement. The cost is the price of the garment, plus an additional 50% service fee. This will not work if you don't have enough money, which will be deducted immediately.
+자동구입을 활성화하면, 모든 의류 칩이 활성화 됩니다. 옷이 수선할 수 없을 정도로 손상되면, 그 옷은 자동으로 대체품을 주문합니다. 비용은 옷의 원래 가격과 그의 50%인 추가요금이 듭니다. 이는 즉시 공제되며, 돈이 충분하지 않을 시 효과가 없을 것 입니다.
 <br><br>
 
-Would you like to enable this?
+정말로 활성화 합니까?
 <br><br>
 
-<<link [[Yes|Clothing Shop]]>><<set $clothingrebuy to 1>><</link>>
+<<link [[네|Clothing Shop]]>><<set $clothingrebuy to 1>><</link>>
 <br>
 
 <</if>>
-<<link [[No|Clothing Shop]]>><</link>>
+<<link [[아니오|Clothing Shop]]>><</link>>
 <br>

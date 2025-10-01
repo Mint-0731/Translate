@@ -1,5 +1,6 @@
 /* eslint-disable no-new */
 /* eslint-disable jsdoc/require-description-complete-sentence */
+/* global exportable */ // Not really: just a bug in unused code
 function setfemininitymultiplierfromgender(gender) {
 	if (gender === "f") {
 		T.femininity_multiplier = 1;
@@ -29,10 +30,10 @@ function addfemininityfromfactor(femininityBoost, factorDescription, noOverwearC
 DefineMacro("addfemininityfromfactor", addfemininityfromfactor);
 
 function addfemininityofclothingarticle(slot, clothingArticle, noOverwearCheck) {
-	if (setup.clothes[slot][clothesIndex(slot, clothingArticle)].femininity) {
+	if (setup.clothes[slot][clothesIndex(slot, clothingArticle)].femininity) {	Wikifier.wikifyEval("<<trClothes \""+slot+"\" \""+setup.clothes[slot][clothesIndex(slot, clothingArticle)].name+"\" 'name'>>");
 		addfemininityfromfactor(
 			setup.clothes[slot][clothesIndex(slot, clothingArticle)].femininity,
-			setup.clothes[slot][clothesIndex(slot, clothingArticle)].name_cap,
+			T.trResult,
 			noOverwearCheck
 		);
 	}
@@ -94,34 +95,6 @@ function calculatePenisBulge() {
 }
 window.calculatePenisBulge = calculatePenisBulge;
 
-/* Calculate the player's gender appearance if their genitals and chest are exposed  */
-function nudeGenderAppearance() {
-	if (V.NudeGenderDC === 2 && !playerChastity("hidden")) return V.player.sex;
-
-	genderappearancecheck();
-	T.apparent_femininity_nude += (V.player.breastsize - 0.5) * 100;
-	T.apparent_femininity_nude += Math.trunc(V.player.bottomsize * 50);
-	if (playerChastity("hidden")) {
-		T.apparent_femininity_nude += setup.clothes.genitals[clothesIndex("genitals", V.worn.genitals)].femininity;
-	} else if (V.NudeGenderDC === 1) {
-		if (V.player.penisExist) T.apparent_femininity_nude += (-V.player.penissize - 2.5) * 150;
-		if (V.player.vaginaExist) T.apparent_femininity_nude += 450;
-	}
-	if (!(V.sexStats === undefined || !playerBellyVisible() || V.NudeGenderDC === 0)) {
-		if (V.NudeGenderDC === 1) T.apparent_femininity_nude += Math.clamp((playerBellySize() - 7) * (V.NudeGenderDC === 1 ? 90 : 70), 0, Infinity);
-		else if (playerBellySize() >= 18) T.apparent_femininity_nude += Math.clamp(10000, 0, Infinity);
-		else if (playerBellySize() >= 8) T.apparent_femininity_nude += Math.clamp((playerBellySize() - 7) * 250, 0, Infinity);
-	}
-	Object.keys(V.skin).forEach(label => {
-		if (["m", "f"].includes(V.skin[label].gender)) {
-			const multiplier = V.skin[label].gender === "m" ? -1 : 1;
-			T.apparent_femininity_nude += 50 * (V.skin[label].pen !== "pen" ? 2 : 1) * multiplier;
-		}
-	});
-	return T.apparent_femininity_nude > 0 ? "f" : "m";
-}
-window.nudeGenderAppearance = nudeGenderAppearance;
-
 /** Calculate the player's gender appearance */
 function genderappearancecheck() {
 	/* Calculate bulge size */
@@ -176,33 +149,29 @@ function genderappearancecheck() {
 		}
 		const femininityfactor = Math.trunc((V.hairlength - 200) / 2);
 		if (lengthCap && femininityfactor >= lengthCap) {
-			addfemininityfromfactor(lengthCap, "Hair length (capped due to hair style)");
+			addfemininityfromfactor(lengthCap, "머리카락 길이 (머리 스타일 때문에 더 자라지 않음)");
 		} else {
-			addfemininityfromfactor(femininityfactor, "Hair length");
+			addfemininityfromfactor(femininityfactor, "머리카락 길이");
 		}
 	}
 	/* Makeup */
-	addfemininityfromfactor(V.makeup.lipstick ? 50 : 0, "Lipstick");
-	addfemininityfromfactor(V.makeup.eyeshadow ? 50 : 0, "Eyeshadow");
-	addfemininityfromfactor(V.makeup.mascara ? 50 : 0, "Mascara");
-	addfemininityfromfactor(V.makeup.blusher ? 50 : 0, "Blusher");
+	addfemininityfromfactor(V.makeup.lipstick ? 50 : 0, "립스틱");
+	addfemininityfromfactor(V.makeup.eyeshadow ? 50 : 0, "아이섀도우");
+	addfemininityfromfactor(V.makeup.mascara ? 50 : 0, "마스카라");
 	/* Body structure */
 	setfemininitymultiplierfromgender(V.player.gender_body);
-	addfemininityfromfactor(T.femininity_multiplier * 200, "Body appearance");
-	addfemininityfromfactor(Math.trunc(((V.physique + V.physiquesize / 2) / V.physiquesize) * -100), "Toned muscles");
+	addfemininityfromfactor(T.femininity_multiplier * 200, "체형");
+	addfemininityfromfactor(Math.trunc(((V.physique + V.physiquesize / 2) / V.physiquesize) * -100), "탄탄한 근육");
 	/* Behaviour */
 	setfemininitymultiplierfromgender(V.player.gender_posture);
 	const actingMultiplier = V.englishtrait + 1;
-	addfemininityfromfactor(T.femininity_multiplier * 100 * actingMultiplier, "Posture (x" + actingMultiplier + " effectiveness due to English skill)");
+	addfemininityfromfactor(T.femininity_multiplier * 100 * actingMultiplier, "태도 (영어 기술로 인해 효과 x" + actingMultiplier + ")");
 	/* Special handling for calculating topless gender */
 	T.over_lower_protected = V.worn.over_lower.exposed < 2;
 	T.lower_protected = V.worn.lower.exposed < 2;
 	T.under_lower_protected = !V.worn.under_lower.exposed;
 	T.apparent_femininity_noow = T.apparent_femininity;
 	T.gender_appearance_factors_noow = clone(T.gender_appearance_factors);
-	/* Calculate gender appearance with no clothes on */
-	T.apparent_femininity_nude = T.apparent_femininity;
-
 	T.over_lower_femininity = setup.clothes.over_lower[clothesIndex("over_lower", V.worn.over_lower)].femininity
 		? setup.clothes.over_lower[clothesIndex("over_lower", V.worn.over_lower)].femininity
 		: 0;
@@ -213,24 +182,24 @@ function genderappearancecheck() {
 		? setup.clothes.under_lower[clothesIndex("under_lower", V.worn.under_lower)].femininity
 		: 0;
 	/* find maximum possible femininity of the last lower piece you can strip down to, and add it to the counter */
-	addfemininityfromfactor(Math.max(T.over_lower_femininity, T.lower_femininity, T.under_lower_femininity), "Lower clothes", "noow");
+	addfemininityfromfactor(Math.max(T.over_lower_femininity, T.lower_femininity, T.under_lower_femininity), "아래옷", "noow");
 	/* bulge and genitals checks for topless gender */
 	if (T.under_lower_protected && V.NudeGenderDC > 0) {
-		addfemininityfromfactor(T.bulge_size * -60, "Bulge visible through underwear", "noow");
+		addfemininityfromfactor(T.bulge_size * -60, "속옷 너머로 발기한 것이 보임", "noow");
 	} else if ((T.over_lower_protected || T.lower_protected) && V.NudeGenderDC > 0) {
-		addfemininityfromfactor(Math.clamp((T.bulge_size - 6) * -60, 0, Infinity), "Bulge visible through clothing", "noow");
+		addfemininityfromfactor(Math.clamp((T.bulge_size - 6) * -60, 0, Infinity), "옷 너머로 발기한 것이 보임", "noow");
 	} else if (V.worn.genitals.exposed && V.NudeGenderDC === 1) {
 		if (V.player.penisExist) {
-			addfemininityfromfactor((V.player.penissize + 2.5) * -150, "Penis exposed", "noow");
+			addfemininityfromfactor((V.player.penissize + 2.5) * -150, "노출된 자지", "noow");
 		}
 		if (V.player.vaginaExist) {
-			addfemininityfromfactor(450, "Vagina exposed", "noow");
+			addfemininityfromfactor(450, "노출된 보지", "noow");
 		}
 	} else if (V.worn.genitals.exposed && V.NudeGenderDC === 2) {
-		addfemininityfromfactor(V.player.vaginaExist * 100000 - V.player.penisExist * 100000, "Genitals exposed", "noow");
+		addfemininityfromfactor(V.player.vaginaExist * 100000 - V.player.penisExist * 100000, "노출된 성기", "noow");
 	}
 	/* plain breasts factor */
-	addfemininityfromfactor((V.player.perceived_breastsize - 0.5) * 100, "Exposed breasts", "noow");
+	addfemininityfromfactor((V.player.perceived_breastsize - 0.5) * 100, "노출된 가슴", "noow");
 	/* Lower clothing, bulge, and genitals */
 	addfemininityofclothingarticle("over_lower", V.worn.over_lower);
 	if (!T.over_lower_protected) {
@@ -246,17 +215,17 @@ function genderappearancecheck() {
 				/* Bare genitals are visible */
 				if (V.NudeGenderDC === 1) {
 					if (V.player.penisExist) {
-						addfemininityfromfactor((-V.player.penissize - 2.5) * 150, "Penis visible");
+						addfemininityfromfactor((-V.player.penissize - 2.5) * 150, "자지가 보임");
 					}
 					if (V.player.vaginaExist) {
-						addfemininityfromfactor(450, "Vagina visible");
+						addfemininityfromfactor(450, "보지가 보임");
 					}
 				} else if (V.NudeGenderDC === 2) {
 					if (V.player.penisExist) {
-						addfemininityfromfactor(-100000, "Penis visible");
+						addfemininityfromfactor(-100000, "자지가 보임");
 					}
 					if (V.player.vaginaExist) {
-						addfemininityfromfactor(100000, "Vagina visible");
+						addfemininityfromfactor(100000, "보지가 보임");
 					}
 				}
 			}
@@ -265,7 +234,7 @@ function genderappearancecheck() {
 			T.bottom_visibility *= 0.75;
 			/* Bulge visible through underwear */
 			if (V.NudeGenderDC > 0) {
-				addfemininityfromfactor(T.bulge_size * -60, "Bulge visible through underwear");
+				addfemininityfromfactor(T.bulge_size * -60, "속옷 너머로 발기한 것이 보임");
 			}
 		}
 	} else {
@@ -273,7 +242,7 @@ function genderappearancecheck() {
 		T.bottom_visibility *= 0.75;
 		/* Bulge covered by lower clothes */
 		if (V.NudeGenderDC > 0) {
-			addfemininityfromfactor(-Math.clamp((T.bulge_size - 6) * 60, 0, Infinity), "Bulge visible through clothing");
+			addfemininityfromfactor(-Math.clamp((T.bulge_size - 6) * 60, 0, Infinity), "옷 너머로 발기한 것이 보임");
 		}
 	}
 	/* Upper clothing and breasts */
@@ -287,31 +256,31 @@ function genderappearancecheck() {
 		if (V.worn.under_upper.exposed >= 1) {
 			/* Exposed breasts */
 			T.breast_indicator = 1;
-			addfemininityfromfactor((V.player.perceived_breastsize - 0.5) * 100, V.player.perceived_breastsize > 0 ? "Exposed breasts" : "Exposed flat chest");
+			addfemininityfromfactor((V.player.perceived_breastsize - 0.5) * 100, V.player.perceived_breastsize > 0 ? "노출된 유방" : "노출된 평평한 가슴");
 		} else {
 			/* Breasts covered by only underwear */
-			addfemininityfromfactor(Math.clamp((V.player.perceived_breastsize - 2) * 100, 0, Infinity), "Breast size visible through underwear");
+			addfemininityfromfactor(Math.clamp((V.player.perceived_breastsize - 2) * 100, 0, Infinity), "속옷 너머로 가슴 크기 확인 가능");
 		}
 	} else {
 		/* Breast fully covered */
-		addfemininityfromfactor(Math.clamp((V.player.perceived_breastsize - 4) * 100, 0, Infinity), "Breast size visible through clothing");
+		addfemininityfromfactor(Math.clamp((V.player.perceived_breastsize - 4) * 100, 0, Infinity), "옷 너머로 가슴 크기 확인 가능");
 	}
 	/* Bottom */
-	addfemininityfromfactor(Math.trunc(V.player.bottomsize * T.bottom_visibility * 50), "Bottom size (" + Math.trunc(T.bottom_visibility * 100) + "% visible)");
+	addfemininityfromfactor(Math.trunc(V.player.bottomsize * T.bottom_visibility * 50), "엉덩이 크기 (" + Math.trunc(T.bottom_visibility * 100) + "% 확인 가능)");
 	/* Pregnant Belly */
-	if (V.sexStats === undefined || !playerBellyVisible() || V.NudeGenderDC === 0) {
+	if (V.sexStats === undefined || !playerBellyVisible()) {
 		// do glorious nothing
-	} else if (V.NudeGenderDC === 1) {
+	} else if (V.NudeGenderDC <= 1) {
 		addfemininityfromfactor(
 			Math.clamp((playerBellySize() - 7) * (V.NudeGenderDC === 1 ? 90 : 70), 0, Infinity),
-			playerAwareTheyArePregnant() ? "Pregnant Belly" : "Pregnant Looking Belly"
+			playerAwareTheyArePregnant() ? "임신한 배" : "임신한 것처럼 보이는 배"
 		);
 	} else if (playerBellySize() >= 18) {
-		addfemininityfromfactor(Math.clamp(10000, 0, Infinity), playerAwareTheyArePregnant() ? "Pregnant Belly" : "Pregnant Looking Belly");
+		addfemininityfromfactor(Math.clamp(10000, 0, Infinity), playerAwareTheyArePregnant() ? "임신한 배" : "임신한 것처럼 보이는 배");
 	} else if (playerBellySize() >= 8) {
 		addfemininityfromfactor(
 			Math.clamp((playerBellySize() - 7) * 250, 0, Infinity),
-			playerAwareTheyArePregnant() ? "Pregnant Belly" : "Pregnant Looking Belly"
+			playerAwareTheyArePregnant() ? "임신한 배" : "임신한 것처럼 보이는 배"
 		);
 	}
 	/* Body writing */
@@ -334,26 +303,26 @@ function genderappearancecheck() {
 			}
 		}
 	});
-	addfemininityfromfactor(T.skinValue, "Visible skin markings");
-	addfemininityfromfactor(T.skinValue + T.skinValue_noow, "Visible skin markings", "noow");
+	addfemininityfromfactor(T.skinValue, "피부에 글자/그림 보임");
+	addfemininityfromfactor(T.skinValue + T.skinValue_noow, "피부에 글자/그림 보임", "noow");
 	if (T.apparent_femininity > 0) {
 		T.gender_appearance = "f";
 	} else if (T.apparent_femininity < 0) {
 		T.gender_appearance = "m";
-	} else if (V.player.sex === "h") {
+	} else if (V.player.gender === "h") {
 		// if herm pc and perfect 0 apparent_femininity
 		T.gender_appearance = genderAppearanceHermTiebreak();
 	} else {
-		T.gender_appearance = V.player.sex;
+		T.gender_appearance = V.player.gender;
 	}
 	if (T.apparent_femininity_noow > 0) {
 		T.gender_appearance_noow = "f";
 	} else if (T.apparent_femininity_noow < 0) {
 		T.gender_appearance_noow = "m";
-	} else if (V.player.sex === "h") {
+	} else if (V.player.gender === "h") {
 		T.gender_appearance_noow = genderAppearanceHermTiebreak();
 	} else {
-		T.gender_appearance_noow = V.player.sex;
+		T.gender_appearance_noow = V.player.gender;
 	}
 }
 
@@ -426,7 +395,6 @@ DefineMacro("exposedcheck", exposedcheck);
 
 /* Checks if bodywriting or tattoos are visible to NPCs. */
 function bodywritingExposureCheck(overwrite, skipRng) {
-	window.outfitChecks();
 	if (!T.skin_array || overwrite) {
 		T.visible_areas = ["forehead"];
 		T.bodywriting_exposed = 0;
@@ -456,12 +424,7 @@ function bodywritingExposureCheck(overwrite, skipRng) {
 		) {
 			T.visible_areas.push("left_bottom", "right_bottom");
 		}
-		if (
-			V.worn.over_lower.exposed >= 1 &&
-			V.worn.lower.exposed >= 1 &&
-			!T.underOutfit &&
-			(V.worn.under_lower.exposed >= 1 || !V.worn.under_lower.type.includes("covered"))
-		) {
+		if (V.worn.over_lower.exposed >= 1 && V.worn.lower.exposed >= 1 && (V.worn.under_lower.exposed >= 1 || !V.worn.under_lower.type.includes("covered"))) {
 			T.visible_areas.push("pubic");
 		}
 		if (V.worn.over_lower.vagina_exposed >= 1 && V.worn.lower.vagina_exposed >= 1 && !V.worn.under_lower.type.includes("covered")) {
@@ -480,19 +443,74 @@ function bodywritingExposureCheck(overwrite, skipRng) {
 }
 DefineMacro("bodywritingExposureCheck", bodywritingExposureCheck);
 
-/* Checks if PC has bodywriting or tattoos that are not visible to NPCs. */
-function bodywritingHiddenCheck(overwrite, skipRng) {
-	if (!T.hidden || overwrite) {
-		bodywritingExposureCheck(true);
-		T.bodywriting_hidden = 0;
-
-		T.hidden_writing = Object.keys(V.skin).filter(loc => V.skin[loc].writing && !T.skin_array.includes(loc));
-
-		if (T.hidden_writing.length >= 1) T.bodywriting_hidden = 1;
-	}
-	if (!skipRng) T.bodypart = T.hidden_writing.random();
-}
-DefineMacro("bodywritingHiddenCheck", bodywritingHiddenCheck);
+/**
+ * Jimmy: A potential improvement is to not wikify the hints that are appended to the ends of the links,
+ *         I chose to keep this format for now to keep <<promiscuous>>, <<exhibitionist>> and <<deviant>> centralised.
+ * 		   If someone wants to change those widgets, this won't need updating.
+ */
+Macro.add("reqSkill", {
+	tags: ["reqE", "reqElse"],
+	reqs: [0, 1, 15, 35, 55, 75, 95],
+	handler() {
+		/* The function below (some) will immediately end and not iterate further if TRUE is returned, it will continue to iterate if FALSE is returned. */
+		this.payload.some(section => {
+			if (section.args.length === 0) {
+				/* If <<reqSkill>> has no arguments, report an error.
+				   However, if <<reqElse>> had none, print out the section as normal, no need to add skill hints to the links. */
+				if (section.name === "reqSkill") {
+					throwError(this.output, `Missing arguments for <<${section.name}>>`, `${this.source}`, exportable);
+				} else {
+					new Wikifier(this.output, section.contents);
+				}
+				return true;
+			}
+			/* Output variable to store what will be appended to EVERY link in the section. */
+			let output = "";
+			const cancel = section.args.some(arg => {
+				/* Splits up the arguments so that everything but the last character goes into type, and the last character goes into tier.
+				   If arg is "deviancy5", type would be "deviancy" and tier would be 5. */
+				const type = arg.slice(0, -1);
+				const tier = Number.parseInt(arg.slice(-1));
+				/* Check if parseInt returned an actual number, and not NaN. */
+				if (!Number.isInteger(tier)) {
+					throwError(this.output, `Invalid argument (${arg}) for <<${section.name}>> | Tier`, `${this.source}`, exportable);
+					return true;
+				}
+				switch (type) {
+					case "promiscuity":
+					case "p":
+						if (V.promiscuity < this.self.reqs[tier]) return true;
+						output += `<<promiscuous${tier}>>`;
+						return false;
+					case "exhibitionism":
+					case "e":
+						if (V.exhibitionism < this.self.reqs[tier]) return true;
+						output += `<<exhibitionist${tier}>>`;
+						return false;
+					case "deviancy":
+					case "d":
+						if (V.deviancy < this.self.reqs[tier]) return true;
+						output += `<<deviant${tier}>>`;
+						return false;
+					default:
+						throwError(this.output, `Invalid argument (${arg}) for <<${section.name}>> | Type`, `${this.source}`, exportable);
+						return true;
+				}
+			});
+			/* If cancel signals true, exit but continue next payloads. */
+			if (cancel) return false;
+			/* Final render, and insertion of elements.
+			   Renders the section defined within the block that was successful. */
+			new Wikifier(this.output, section.contents);
+			/* Renders the HTML elements that are inserted after every link. */
+			const wikiOutput = new Wikifier(null, output);
+			/* Scan through macro outfit for valid links to append hints to. */
+			jQuery(this.output).children().filter("a.link-internal, a.link-external").after(wikiOutput.output);
+			/* Successful render, no need to process anymore segments. */
+			return true;
+		});
+	},
+});
 
 /**
  * Turns an array into a formatted list for printing.
@@ -503,7 +521,7 @@ DefineMacro("bodywritingHiddenCheck", bodywritingHiddenCheck);
  * @param {string} separator (", ") - A separator between elements of the formatted list
  * @returns {string} A formatted list, ie "a, b, c and d"
  */
-function formatList(arr, conjunction = "and", useOxfordComma = false, separator = ", ") {
+function formatList(arr, conjunction = "그리고", useOxfordComma = false, separator = ", ") {
 	if (!(Array.isArray(arr) && arr.length > 0)) {
 		Errors.report("Error in formatList: Missing or invalid array argument", { Stacktrace: Utils.GetStack(), arguments });
 		return "";
@@ -518,187 +536,3 @@ function formatList(arr, conjunction = "and", useOxfordComma = false, separator 
 }
 window.formatList = formatList;
 DefineMacroS("formatList", formatList);
-
-function liquidcount(liquid, parts) {
-	if (!setup.bodyliquid.liquidtype.includes(liquid)) return Errors.report("liquidcount error: wrong type", liquid);
-	let count = 0;
-	for (const part of parts) {
-		count += V.player.bodyliquid[part][liquid];
-	}
-	return count;
-}
-
-function liquidclamp() {
-	for (const bodypart of setup.bodyliquid.bodyparts) {
-		for (const liquid of ["goo", "semen", "nectar"]) {
-			V.player.bodyliquid[bodypart][liquid] = Math.clamp(V.player.bodyliquid[bodypart][liquid], 0, 5);
-		}
-	}
-}
-
-function goocount() {
-	liquidclamp();
-	const outer = setup.bodyliquid.outerbodyparts;
-	const goooutsidecount = liquidcount("goo", outer);
-	const semenoutsidecount = liquidcount("semen", outer);
-	const nectaroutsidecount = liquidcount("nectar", outer);
-	const liquidoutsidecount = goooutsidecount + semenoutsidecount + nectaroutsidecount;
-
-	const inner = setup.bodyliquid.innerbodyparts;
-	const gooinsidecount = liquidcount("goo", inner) * 3;
-	const semeninsidecount = liquidcount("semen", inner) * 3;
-	const nectarinsidecount = liquidcount("nectar", inner) * 3;
-	const liquidinsidecount = gooinsidecount + semeninsidecount + nectarinsidecount;
-
-	V.goooutsidecount = goooutsidecount;
-	V.semenoutsidecount = semenoutsidecount;
-	V.nectaroutsidecount = nectaroutsidecount;
-	V.liquidoutsidecount = liquidoutsidecount;
-	V.goocount = gooinsidecount + goooutsidecount;
-	V.semencount = semeninsidecount + semenoutsidecount;
-	V.nectarcount = nectarinsidecount + nectaroutsidecount;
-	V.liquidcount = liquidinsidecount + liquidoutsidecount;
-}
-DefineMacro("goocount", goocount);
-
-/* set $allure to allure, set $attractiveness to attractiveness */
-function calculateallure() {
-	/* attractiveness calcs */
-	let attractiveness;
-	/* baseline, reused later for allure danger mods */
-	let baseattractiveness = V.beauty / 3 + V.hairlength / 4;
-	if (!V.worn.over_upper.type.includes("naked")) {
-		baseattractiveness += V.worn.over_upper.reveal;
-	} else {
-		baseattractiveness += V.worn.upper.reveal;
-		if (V.worn.upper.type.includes("naked")) baseattractiveness += V.worn.under_upper.reveal;
-	}
-	if (!V.worn.over_lower.type.includes("naked")) {
-		baseattractiveness += V.worn.over_lower.reveal;
-	} else {
-		baseattractiveness += V.worn.lower.reveal;
-		if (V.worn.lower.type.includes("naked")) baseattractiveness += V.worn.under_lower.reveal;
-	}
-	attractiveness = baseattractiveness;
-	/* extra attractiveness from accessories */
-	for (const slot of ["head", "face", "neck", "legs", "feet", "handheld", "hands"]) attractiveness += V.worn[slot].reveal || 0;
-	/* tf bonuses */
-	const partsHidden = (tf, parts) => parts.filter(part => V.transformationParts[tf][part] === "hidden").length;
-	if (V.demon >= 6) attractiveness += 500 - 100 * partsHidden("demon", ["horns", "tail", "wings"]);
-	if (V.angel >= 6) attractiveness += 500 - 150 * partsHidden("angel", ["halo", "wings"]);
-	if (V.fallenangel >= 2) attractiveness += 500 - 150 * partsHidden("fallenAngel", ["halo", "wings"]);
-	if (V.wolfgirl >= 6) attractiveness += 500 - 150 * partsHidden("wolf", ["tail", "ears"]);
-	if (V.cat >= 6) attractiveness += 500 - 150 * partsHidden("cat", ["tail", "ears"]);
-	if (V.cow >= 6) attractiveness += 500 - 100 * partsHidden("cow", ["ears", "horns", "tail"]);
-	if (V.harpy >= 6) attractiveness += 500 - 60 * partsHidden("bird", ["tail", "eyes", "wings", "malar", "plumage"]);
-	if (V.fox >= 6) attractiveness += 750 - 225 * partsHidden("fox", ["ears", "tail"]);
-	/* makeup */
-	for (const makeup of ["lipstick", "mascara", "eyeshadow", "blusher"]) {
-		if (V.makeup[makeup]) attractiveness += 100;
-	}
-	V.attractiveness = Math.floor(attractiveness);
-
-	/* allure calcs */
-	let allure = attractiveness;
-	/* night and exposed mods to base attractiveness. minus one, because it's already included into attractiveness above */
-	const nightMod = Weather.dayState === "night" ? 1.5 : 1;
-	const exposedMod = 1 + V.exposed / 5;
-	allure += baseattractiveness * (nightMod * exposedMod - 1);
-	/* bodyliquid danger */
-	goocount();
-	allure += V.liquidcount * 50;
-	/* ear slime */
-	if (V.earSlime.growth > 50) allure += (V.earSlime.growth - 50) * 10;
-	/* fame mods */
-	if (!["island"].includes(V.location)) {
-		for (const badfame of ["sex", "prostitution", "rape", "bestiality", "exhibitionism", "pregnancy", "impreg"]) allure += V.fame[badfame] / 10;
-		for (const goodfame of ["good", "scrap", "business", "social", "model", "pimp"]) allure -= V.fame[goodfame] / 2;
-	}
-	/* bloodmoon */
-	if (Time.isBloodMoon()) allure += 2000;
-	allure = Math.clamp(allure, 0, 8000);
-	V.baseAllure = allure;
-	/* extra modifiers */
-	allure *= V.alluremod;
-	if (V.moorLuck > 0) allure *= 1 - V.moorLuck / 100;
-
-	V.allure = Math.floor(allure);
-}
-DefineMacro("calculateallure", calculateallure);
-
-// check exposure, tags, and wetness
-function itemExposure(slot) {
-	const item = V.worn[slot];
-	// if you're looking to delete $overupperwetstage, $upperwetstage, $underupperwetstage, $overlowerwetstage, $lowerwetstage, or $underlowerwetstage - look here, too
-	if (item.type.includes("naked") || V[slot.replace("_", "") + "wetstage"] >= 3) return 2;
-	return item.exposed;
-}
-
-function exposure() {
-	exposedcheck();
-
-	V.exposed = 0;
-	V.exposedRaw = 0;
-
-	// wraith cares not of your exposure
-	if (V.possessed) {
-		return;
-	}
-
-	// calculate libertine factors.
-	const safeLocations = ["Bedroom", "Sleep", "Bird Tower", "Bird Hunt", "Spa Tan Underwear", "Spa Tan Curtains", "Spa Tan Naked", "Mirror"];
-	if (
-		// the check for safe locations might be too generous with included passage names, but seems to be working as of 0.5.4.9
-		// wardrobes should not be safe locations though, as they must show what clothes are appropriate outside. if you wanna stop pc from covering themselves - use "don't cover yourself" link in the wardrobes instead of altering the libertine score.
-		safeLocations.some(location => V.passage.includes(location)) &&
-		V.NPCList.every(npc => !npc.fullDescription || Object.values(V.loveInterest).includes(npc.fullDescription)) &&
-		V.audiencepresent === 0
-	) {
-		// alone (or with a li) in safe locations - anything goes
-		V.libertine = 2;
-	} else if (
-		["beach", "pool", "sea", "lake", "lake_ruin"].includes(V.location) ||
-		(V.location === "dance_studio" && V.worn.under_lower.type.includes("dance") && V.worn.under_upper.type.includes("dance"))
-	) {
-		// some places don't care about pc sporting underwear
-		V.libertine = 1;
-	} else {
-		V.libertine = 0;
-	}
-
-	/*
-		is bra or breasts visible?
-	*/
-	// "covered" is a strange beast and might need splitting into separate tags
-	// when applied to lower - it covers under_upper. when applied to under_upper - it makes it okay to be seen. when applied to face - it doesn't cover under_upper and doesn't make face okay to be seen...
-	// If under_upper is not covering or exposing/displaced exposed should be 1 because either it's underwear or PCs breasts are visible
-	if (
-		["over_upper", "upper"].every(slot => itemExposure(slot) >= 1) &&
-		(!V.worn.lower.type.includes("covered") || itemExposure("lower") >= 2) &&
-		(!V.worn.under_upper.type.includes("covered") || itemExposure("lower") >= 1)
-	) {
-		// the answer is yes
-		// Only non-male appearing PCs should be exposed from underwear/breasts
-		if (V.player.gender_appearance !== "m") {
-			V.exposed = 1;
-		}
-	}
-
-	/*
-		panties
-	*/
-	if (["over_lower", "lower"].every(slot => itemExposure(slot) >= 1) && (!V.worn.under_lower.type.includes("covered") || itemExposure("under_lower") >= 1)) {
-		V.exposed = 1;
-	}
-
-	/*
-		genitals
-	*/
-	if (["over_lower", "lower"].every(slot => itemExposure(slot) >= 2) && itemExposure("under_lower") >= 1) {
-		V.exposed = 2;
-	}
-
-	V.exposedRaw = V.exposed;
-	if (V.libertine >= V.exposed) V.exposed = 0;
-}
-DefineMacro("exposure", exposure);

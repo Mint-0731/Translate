@@ -1,6 +1,6 @@
 :: Portal Panties [widget]
 
-/* Written for a bit of fun over a couple of hours, feel free to mod it in or re-work it. Follow the comments to run in the game. Lollipop Scythe */
+/* Witten for a bit of fun over a couple of hours, feel free to mod it in or re-work it. Follow the comments to run in the game. Lollipop Scythe */
 
 /*Run at the start of the game and in version update*/
 <<widget "portalPantiesSetup">>
@@ -96,7 +96,7 @@
 			owner: _args[1] ? "pc" : "portal",
 			size: _args[1] ? $player.penissize : random(1,4),
 			timer: _args[1] ? null : random(5,15),
-			type: _args[1] ? "human" : "human",
+			type:  _args[1] ? "human" : "human",
 			new: true,
 			tempRemoval: false,
 		}>>
@@ -136,20 +136,20 @@
 	<<if $portalPanties.state[_args[0]]>>
 		<<set $_disabled to !!$event or !!$NPCList.name>>
 		<<if $_disabled and !$portalPanties.state[_args[0]].tempRemoval and !$portalPanties.state[_args[0]].new>>
-			<<set $portalPanties.message.disappeared.push(_args[0])>>
+			<<trBodypart _args[0]>><<set $portalPanties.message.disappeared.push(_trResult)>>
 			<<set $portalPanties.state[_args[0]].tempRemoval to true>>
 		<<elseif $_disabled>>
 		<<elseif !$_disabled and $portalPanties.state[_args[0]].tempRemoval and !$portalPanties.state[_args[0]].new>>
 			<<set $portalPanties.state[_args[0]].tempRemoval to false>>
 		<<elseif $portalPanties.state[_args[0]].new>>
-			<<set $portalPanties.message.started.push(_args[0])>>
+			<<trBodypart _args[0]>><<set $portalPanties.message.started.push(_trResult)>>
 			<<set $portalPanties.state[_args[0]].new to false>>
 		<<else>>
-			<<set $portalPanties.message.continued.push(_args[0])>>
+			<<trBodypart _args[0]>><<set $portalPanties.message.continued.push(_trResult)>>
 			<<if $portalPanties.state[_args[0]].owner is "pc">>
 			<<else>>
 				<<if $portalPanties.state[_args[0]].timer lte 0>>
-					<<set $portalPanties.message.finished.push(_args[0])>>
+					<<trBodypart _args[0]>><<set $portalPanties.message.finished.push(_trResult)>>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -167,42 +167,42 @@
 	<<set $_continuedPlayerPenis to $_continued.find((location) => $portalPanties.state[location] and $portalPanties.state[location].owner is "pc")>>
 	<<set $_penisLocation to ["mouth","anus","vagina"].find((location) => $portalPanties.state[location] and $portalPanties.state[location].owner is "pc")>>
 	<<if $_started.length>>
-		You feel
+		당신은
 		<<if _awareOfPenis>>
-			<<pluralise $_started.length "a foreign penis" "foreign penises">>
+			<<print ($_started.length gt 1) ? "이질적인 자지들이" : "이질적인 자지가">>
 		<<else>>
-			<<pluralise $_started.length "a foreign object" "foreign objects">>
+			<<print ($_started.length gt 1) ? "이질적인 물체들이" : "이질적인 물체가">>
 		<</if>>
-		penetrate your <<print formatList($_started)>><<if $_startedPlayerPenis>>, while your penis is enveloped by <<if _awareOfPenis>>a <<print $_penisLocation>><<else>>something<</if>><</if>>.
+		당신의 <<print formatList($_started)>>에 삽입되<<if $_startedPlayerPenis>>면서, 당신의 자지가 <<if _awareOfPenis>><<trBodypart $_penisLocation>><<print _trResult>>에 감싸이<<else>>무언가에 감싸이<</if>><</if>>는 것을 느낀다.
 	<</if>>
 	<<if $_continued.length>>
 		<<if !$_started.length>>
 			<<if _awareOfPenis>>
-				The foreign <<pluralise $_continued.length "penis" "penises">>
+				<<set $_foreanObject to ($_continued.length gt 1) ? "그 이질적인 자지들이" : "그 이질적인 자지가">>
 			<<else>>
-				The foreign <<pluralise $_continued.length "object">>
+				<<set $_foreanObject to ($_continued.length gt 1) ? "그 이질적인 물체들이" : "그 이질적인 물체가">>
 			<</if>>
 		<<else>>
-			<<pluralise $_continued.length "The one" "Those">>
+			<<set $_foreanObject to ($_continued.length gt 1) ? "그것들이" : "그것이">>
 		<</if>>
-		in your <<print formatList($_continued)>> <<pluralise $_continued.length "is" "are">> constantly thrusting into you<<if $_continuedPlayerPenis>>, while your penis is forced <<if _awareOfPenis>>to thrust into a <<print $_penisLocation>><<else>>in and out of something<</if>><</if>>.<<garousal>>
+		당신의 <<print formatList($_continued)>> 안에 있는 $_foreanObject 계속 당신 안으로 찔러대<<if $_continuedPlayerPenis>>면서, 당신의 자지는 강제적으로 <<if _awareOfPenis>><<trBodypart $_penisLocation>><<print _trResult>> 안에 찔러지<<else>>무언가의 안에 들어갔다 나왔다 하<</if>><</if>>고 있다.<<garousal>>
 		<br>
 	<</if>>
 	<<if $_finished.length>>
-		The one in your <<print formatList($_finished)>> releases something then disappears.
+		당신의 <<print formatList($_finished)>> 안에 있는 것이 무언가를 쏟아내고는 사라진다.
 		<<for $_item range $_finished>>
 			<<portalPantiesPortalCum $_item>>
 		<</for>>
 		<br>
 	<</if>>
 	<<if $_disappeared.length>>
-		You feel the foreign
+		당신은
 		<<if _awareOfPenis>>
-			<<pluralise $_disappeared.length "penis" "penises">>
+			<<set $_foreanObject to ($_disappeared.length gt 1) ? "그 이질적인 자지들이" : "그 이질적인 자지가">>
 		<<else>>
-			<<pluralise $_disappeared.length "object">>
+			<<set $_foreanObject to ($_disappeared.length gt 1) ? "그 이질적인 물체들이" : "그 이질적인 물체가">>
 		<</if>>
-		in your <<print formatList($_disappeared)>> disappear suddenly, leaving you feeling empty.
+		당신의 <<print formatList($_disappeared)>> 안에 있는 $_foreanObject 갑자기 사라지는 것을 느끼며, 당신에게 공허한 기분을 남긴다.
 		<br>
 	<</if>>
 	<<set _firstItem to true>>
@@ -227,12 +227,12 @@
 			<<run console.log($vaginalPain, $portalPanties.state[_args[0]].size, $vaginalPain * (1.5 / (5 - ($portalPanties.state[_args[0]].size))))>>
 			<<pain `$vaginalPain * $portalPanties.state[_args[0]].size`>>
 			<<if $sexStats.vagina.pregnancy.totalBirthEvents gt 0>>
-				<<set $_text_output to "<span class='red'>Despite your lack of a hymen, you feel <<if _awareOfPenis>>a penis<<else>>something<</if>> inside you change as your virginity and purity are taken.</span><<fallenTransform>><<ggpain>>">>
+				<<set $_text_output to "<span class='red'>당신은 처녀막이 없음에도 불구하고, 당신 안의 <<if _awareOfPenis>>자지<<else>>물체<</if>>가 당신의 처녀와 순결을 뺏은 것 같은 기분이 든다.</span><<fallenTransform>><<ggpain>>">>
 			<<else>>
 				<<if $portalPanties.state[_args[0]].size is 4>>
-					<<set $_text_output to "<span class='red'>Your hymen obliterated, you whimper as your <<pussy>> struggles to accommodate the <<if _awareOfPenis>>penis<<else>>object<</if>>.</span><<fallenTransform>><<ggpain>>">>
+					<<set $_text_output to "<span class='red'>당신의 처녀막이 흔적도 없이 날아가며, 당신은 당신의 <<pussy_ ga>> 그 <<if _awareOfPenis>>자지<<else>>물체<</if>>를 받아들이려 고군분투하며 훌쩍인다.</span><<fallenTransform>><<ggpain>>">>
 				<<else>>
-					<<set $_text_output to "<span class='red'>Your hymen is torn as your vaginal virginity is taken by the <<if _awareOfPenis>>penis<<else>>object<</if>>.</span><<fallenTransform>><<ggpain>>">>
+					<<set $_text_output to "<span class='red'>당신의 처녀막이 찢어지며 당신의 보지 처녀를 그 <<if _awareOfPenis>>자지<<else>>물체<</if>>에게 빼앗겨 버린다.</span><<fallenTransform>><<ggpain>>">>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -241,19 +241,19 @@
 			<<takeVirginity "Portal Panties" "anal">>
 			<<pain `$analPain * (1.5 / (5 - ($portalPanties.state[_args[0]].size)))`>>
 			<<if $portalPanties.state[_args[0]].size is 4>>
-				<<set $_text_output to "<span class='red'>You whimper as your virgin anus struggles to accommodate the <<if _awareOfPenis>>penis<<else>>object<</if>>, violating you in a way you hadn't conceived of.</span><<ggpain>>">>
+				<<set $_text_output to "<span class='red'>당신이 지금까지 상상하지 못했던 방법으로 범해지면서, 당신은 당신의 처녀 항문이 그 <<if _awareOfPenis>>자지<<else>>물체<</if>>를 받아들이려 고군분투하며 훌쩍인다.</span><<ggpain>>">>
 			<<else>>
-				<<set $_text_output to "<span class='red'>Your anus virginity is taken, the <<if _awareOfPenis>>penis<<else>>object<</if>> violating you in a way you hadn't conceived of.</span><<ggpain>>">>
+				<<set $_text_output to "<span class='red'>그 <<if _awareOfPenis>>자지<<else>>물체<</if>>가 당신을 지금까지 상상하지 못했던 방법으로 범하면서, 당신은 항문 처녀를 빼앗긴다.</span><<ggpain>>">>
 			<</if>>
 		<</if>>
 	<<case "mouth">>
 		<<if $player.virginity.oral is true>>
 			<<takeVirginity "Portal Panties" "oral">>
-			<<set $_text_output to "<span class='red'>The <<if _awareOfPenis>>penis<<else>>object<</if>> in your mouth tastes strange.</span><<ggpain>>">>
+			<<set $_text_output to "<span class='red'>당신 입 안의 그 <<if _awareOfPenis>>자지<<else>>물체<</if>>는 이상한 맛이 난다.</span><<ggpain>>">>
 		<</if>>
 	<<case "penis">>
 		<<if $player.virginity.penile is true>>
-			<<set $_text_output to "<span class='red'>Your penis virginity is taken.</span><<fallenTransform>>">>
+			<<set $_text_output to "<span class='red'>당신은 자지 동정을 빼앗긴다.</span><<fallenTransform>>">>
 		<</if>>
 <</switch>>
 <</silently>><<if _firstItem>><br><<set _firstItem to false>><</if>><<print $_text_output>>
@@ -264,7 +264,7 @@
 		<<case "mouth">>
 			<<oralejacstat>><<ejacstat>><<cumswallow $portalPanties.state[_args[0]].type undefined "forced">>
 			<<set $portalPanties.portalPenisOrgasms.mouth++>>
-			<<portalPantiesClear _args[0]>>
+			<<portalPantiesClear _args[0]>>		
 		<<case "anus">>
 			<<recordSperm `{target: "pc", spermOwner: $portalPanties.state[_args[0]].owner, spermType: $portalPanties.state[_args[0]].type, genital: "anus"}`>>
 			<<portalPantiesClear "anus">>
@@ -286,18 +286,18 @@
 */
 <<widget "portalPantiesPlayerCum">>
 	<<if $portalPanties.state.mouth and $portalPanties.state.mouth.owner is "pc">>
-		<span class="pink">You are overcome by sensation. A surge of cum erupts from your penis and goes straight into your mouth.</span>
+		<span class="pink">당신은 흥분감에 압도당한다. 정액의 파도가 당신의 자지에서 뿜어져 나와 곧바로 당신의 입 안으로 쏟아져 내린다.</span>
 		<<oralejacstat>><<ejacstat>><<cumswallow "human" undefined "selfForced">>
 		<<portalPantiesClear "mouth">>
 		<<set $portalPanties.ownPenisOrgasms.mouth++>>
 	<<elseif $portalPanties.state.anus and $portalPanties.state.anus.owner is "pc">>
-		<span class="pink">You are overcome by sensation. A surge of cum erupts from your penis and goes straight into your anus.</span>
+		<span class="pink">당신은 흥분감에 압도당한다. 정액의 파도가 당신의 자지에서 뿜어져 나와 곧바로 당신의 항문 안으로 쏟아져 내린다.</span>
 		<<recordSperm `{target: "pc", spermOwner: "pc", spermType: "human", genital: "anus"}`>>
 		<<portalPantiesClear "anus">>
 		<<analejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $hygiene += 500>><<bodyliquid "anus" "semen">>
 		<<set $portalPanties.ownPenisOrgasms.anus++>>
 	<<elseif $portalPanties.state.vagina and $portalPanties.state.vagina.owner is "pc">>
-		<span class="pink">You are overcome by sensation. A surge of cum erupts from your penis and goes straight into your <<pussy>>.</span>
+		<span class="pink">당신은 흥분감에 압도당한다. 정액의 파도가 당신의 자지에서 뿜어져 나와 곧바로 당신의 <<pussyPost>> 안으로 쏟아져 내린다.</span>
 		<<recordSperm `{target: "pc", spermOwner: "pc", spermType: "human"}`>>
 		<<portalPantiesClear "vagina">>
 		<<vaginalejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "vagina" "semen">>
@@ -325,3 +325,4 @@
 		<<set $thirst -= 200>>
 		<<bodyliquid "mouth" "semen" 1>>'
  */
+ 

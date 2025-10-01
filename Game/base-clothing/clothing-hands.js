@@ -1,4 +1,3 @@
-// @ts-check
 /* For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites.
 
 Warmth checklist:
@@ -14,17 +13,12 @@ Warmth checklist:
 	Max warmth: 3
 */
 function initHands() {
-	/** @type {ClothesItem[]} */
-	const clothing = [
+	setup.clothes.hands = [
 		{
 			index: 0,
-			slot: "hands",
 			name: "naked",
 			name_cap: "Naked",
 			variable: "naked",
-			state: 0,
-			state_base: 0,
-			warmth: 0,
 			integrity: 0,
 			integrity_max: 0,
 			fabric_strength: 0,
@@ -35,6 +29,7 @@ function initHands() {
 			colour_options: [],
 			type: ["naked"],
 			gender: "n",
+			warmth: 0,
 			cost: 0,
 			description: "naked",
 			shop: [],
@@ -51,12 +46,9 @@ function initHands() {
 
 		{
 			index: 1,
-			slot: "hands",
 			name: "fingerless gloves",
 			name_cap: "Fingerless gloves",
 			variable: "fingerlessgloves",
-			state: 0,
-			state_base: 0,
 			integrity: 50,
 			integrity_max: 50,
 			fabric_strength: 20,
@@ -87,12 +79,9 @@ function initHands() {
 
 		{
 			index: 2,
-			slot: "hands",
 			name: "mittens",
 			name_cap: "Mittens",
 			variable: "mittens",
-			state: 0,
-			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -123,12 +112,9 @@ function initHands() {
 
 		{
 			index: 3,
-			slot: "hands",
 			name: "arm warmers",
 			name_cap: "Arm warmers",
 			variable: "armwarmers",
-			state: 0,
-			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -160,15 +146,9 @@ function initHands() {
 
 		{
 			index: 4,
-			slot: "hands",
 			name: "lace arm warmers",
 			name_cap: "Lace arm warmers",
 			variable: "lacewarmers",
-			combat: {
-				boundable: true,
-			},
-			state: 0,
-			state_base: 0,
 			integrity: 30,
 			integrity_max: 30,
 			fabric_strength: 15,
@@ -197,14 +177,12 @@ function initHands() {
 			leftImage: 1,
 			rightImage: 1,
 		},
+
 		{
 			index: 5,
-			slot: "hands",
 			name: "long leather gloves",
 			name_cap: "Long leather gloves",
 			variable: "longleathergloves",
-			state: 0,
-			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -234,7 +212,7 @@ function initHands() {
 			colour_combat: 0,
 			type: ["normal", "sticky_fingers", "stealthy"],
 			gender: "n",
-			warmth: 3,
+			warmth: 2,
 			cost: 8000,
 			description: "Fashionable and ready to slip into pockets.",
 			shop: ["clothing", "adult"],
@@ -253,15 +231,9 @@ function initHands() {
 
 		{
 			index: 6,
-			slot: "hands",
 			name: "cheerleader gloves",
 			name_cap: "Cheerleader gloves",
 			variable: "pompoms",
-			combat: {
-				reference: "fingerlessgloves",
-			},
-			state: 0,
-			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -293,12 +265,9 @@ function initHands() {
 
 		{
 			index: 7,
-			slot: "hands",
 			name: "gold bracelets",
 			name_cap: "Gold bracelets",
 			variable: "gold",
-			state: 0,
-			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -329,12 +298,9 @@ function initHands() {
 
 		{
 			index: 8,
-			slot: "hands",
 			name: "cow sleeves",
 			name_cap: "Cow sleeves",
 			variable: "cow",
-			state: 0,
-			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -349,15 +315,14 @@ function initHands() {
 			cost: 1000,
 			description: "Cute cow print.",
 			shop: ["forest"],
-			accessory: 1,
+			accessory: 0,
 			accessory_colour: 0,
-			accessory_colour_options: ["black", "brown", "light pink", "light blue", "light green", "custom"],
-			accessory_colour_sidebar: "secondary",
+			accessory_colour_options: [],
 			back_img: 0,
 			cursed: 0,
 			location: 0,
 			iconFile: "cow_sleeves.png",
-			accIcon: "cow_sleeves_acc.png",
+			accIcon: "",
 			mainImage: 0,
 			leftImage: 1,
 			rightImage: 1,
@@ -365,16 +330,9 @@ function initHands() {
 
 		{
 			index: 9,
-			slot: "hands",
 			name: "work gloves",
 			name_cap: "Work gloves",
 			variable: "workgloves",
-			combat: {
-				reference: "longleathergloves",
-				mainColour: "#8c4c00",
-			},
-			state: 0,
-			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -404,17 +362,9 @@ function initHands() {
 		},
 		{
 			index: 10,
-			slot: "hands",
 			name: "sexy nun's gloves",
 			name_cap: "Sexy nun's gloves",
 			variable: "nunlewd",
-			combat: {
-				reference: "armwarmers",
-				mainColour: "#2f2534",
-				accColour: "#2f2534",
-			},
-			state: 0,
-			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -444,15 +394,9 @@ function initHands() {
 		},
 		{
 			index: 11,
-			slot: "hands",
 			name: "wrist cuffs",
 			name_cap: "Wrist cuffs",
 			variable: "wristcuffs",
-			combat: {
-				reference: "gold",
-			},
-			state: 0,
-			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -482,15 +426,9 @@ function initHands() {
 		},
 		{
 			index: 12,
-			slot: "hands",
 			name: "gold shackles",
 			name_cap: "Gold shackles",
 			variable: "goldshackles",
-			combat: {
-				reference: "gold",
-			},
-			state: 0,
-			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -518,69 +456,7 @@ function initHands() {
 			leftImage: 1,
 			rightImage: 1,
 		},
-
-		{
-			index: 13,
-			slot: "hands",
-			name: "belted gloves",
-			name_cap: "Belted gloves",
-			variable: "belted",
-			combat: {
-				reference: "longleathergloves",
-			},
-			state: 0,
-			state_base: 0,
-			integrity: 200,
-			integrity_max: 200,
-			fabric_strength: 20,
-			reveal: 500,
-			word: "n",
-			plural: 1,
-			colour: 0,
-			colour_options: [
-				"black",
-				"brown",
-				"silver",
-				"gold",
-				"rose gold",
-				"blue",
-				"green",
-				"pink",
-				"purple",
-				"red",
-				"tangerine",
-				"teal",
-				"white",
-				"yellow",
-				"neon blue",
-				"custom",
-			],
-			colour_sidebar: 1,
-			colour_combat: 0,
-			pattern: 0,
-			pattern_options: ["gloves", "belts"],
-			pattern_layer: "primary",
-			type: ["normal"],
-			gender: "m",
-			femininity: -100,
-			warmth: 2,
-			cost: 8000,
-			description: "Buckles for days.",
-			shop: ["clothing", "adult"],
-			accessory: 1,
-			accessory_colour: 0,
-			accessory_colour_options: [],
-			back_img: 0,
-			cursed: 0,
-			location: 0,
-			iconFile: "pattern",
-			accIcon: "belted_gloves_acc.png",
-			mainImage: 0,
-			leftImage: 1,
-			rightImage: 1,
-		},
 	];
-	setup.clothes.hands = clothing;
 
 	/*
 		Clothes that modders add go into this array, this should be empty in the base game at all times.

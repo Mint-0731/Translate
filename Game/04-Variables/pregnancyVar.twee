@@ -79,7 +79,7 @@
 					"foodStorage":0,
 					"luxury":0
 				},
-				"name": "Tiny Fish Tank",
+				"name": "조그마한 수조",
 				"count": 0,
 				"maxCount": 1,
 				"daysSinceFed": 0,
@@ -127,7 +127,7 @@
 				"foodStorage":0,
 				"luxury":0
 			},
-			"name": "Parasite Barn",
+			"name": "기생충 우리",
 			"count": 0,
 			"maxCount": 5,
 			"daysSinceFed": 0,

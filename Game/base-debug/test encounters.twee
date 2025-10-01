@@ -40,15 +40,15 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 	<<if $rescue is 0>>
 		<<set $alarm to 0>>
 		<<if ($enemyarousal gte $enemyarousalmax) or ($enemyhealth lte 0)>>
-			<span id="next"><<link [[Next|The Pod Finish]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->The Pod Finish]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|The Pod]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->The Pod]]>><</link>></span><<nexttext>>
 		<</if>>
 	<</if>>
 <<elseif ($enemyarousal gte $enemyarousalmax) or ($enemyhealth lte 0)>>
-	<span id="next"><<link [[Next|The Pod Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->The Pod Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|The Pod]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->The Pod]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: The Pod Finish
@@ -61,7 +61,7 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Bedroom]]>><</link>>
+	<<link [[다음|Bedroom]]>><</link>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	<<if $audience is 1>>
@@ -77,7 +77,7 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 	<<endcombat>>
 	You feel the room shift again, and find yourself in your bedroom.
 	<br><br>
-	<<link [[Next|Bedroom]]>><</link>>
+	<<link [[다음|Bedroom]]>><</link>>
 <</if>>
 
 :: The Farm
@@ -94,7 +94,7 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 		<br><br>
 		When you recover, you find yourself in the main yard of a small farm. You are stunned to see several animals dancing around you... singing...
 		<br><br>
-		<span class="green">Old McDonald's rape-y farm
+		<span class="green">Old McDonalds rape-y farm
 		<br>
 		E-I-E-I-O
 		<br>
@@ -131,9 +131,9 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|The Farm Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|The Farm Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|The Farm]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|The Farm]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: The Farm Finish
@@ -145,11 +145,11 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 		The $NPCList[0].type recoils in pain and fear, but another beast is eager for a go.
 		<<combatTrainAdvance>>
 		<br><br>
-		<<link [[Next|The Farm]]>><</link>>
+		<<link [[다음|The Farm]]>><</link>>
 	<<else>>
 		The $NPCList[_na].type recoils in pain and fear.
 		<br><br>
-		<<link [[Next|The Farm Finish]]>><<set $finish to 1>><</link>>
+		<<link [[다음|The Farm Finish]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
@@ -157,11 +157,11 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 		Satisfied, the $NPCList[0].type moves and another beast takes its turn.
 		<<combatTrainAdvance>>
 		<br><br>
-		<<link [[Next|The Farm]]>><</link>>
+		<<link [[다음|The Farm]]>><</link>>
 	<<else>>
 		Satisfied, the $NPCList[0].type moves away from you.
 		<br><br>
-		<<link [[Next|The Farm Finish]]>><<set $finish to 1>><</link>>
+		<<link [[다음|The Farm Finish]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $finish is 1>>
 	<<if $enemywounded is 1 and $enemyejaculated is 0>>
@@ -176,13 +176,13 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 		The animals leave you spent and shivering on the grass.
 	<</if>>
 	<br><br>
-	<<tearful>> you gather yourself.
+	<<tearful>> 당신은 마음을 가다듬는다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 	Out of nowhere a goat runs from the shed. Rearing back, <span class="green">it kicks you all the way to Domus Street and through your bedroom window.</span>
 	<br>
-	<<link [[Next|Bedroom]]>><</link>>
+	<<link [[다음|Bedroom]]>><</link>>
 <</if>>
 
 :: Beast Parade
@@ -206,7 +206,7 @@ DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftar
 	/% STATE: $NPCList[0].state<br> %/
 <</for>>
 
-<<link [[Next|Bedroom]]>><</link>>
+<<link [[다음|Bedroom]]>><</link>>
 
 :: Beast Train
 <!-- Used to debug Beast Train -->
@@ -224,7 +224,7 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 <br><br>
 <</for>>
 
-<<link [[Next|Bedroom]]>><</link>>
+<<link [[다음|Bedroom]]>><</link>>
 
 :: NNPC Parade
 <!-- Used to debug Named NPCs by displaying all attributes. -->
@@ -261,7 +261,7 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 	| INSECURITY: <span class="red">_nnpc.insecurity</span>
 	<br>
 	TRUST:	<span class="gold">_nnpc.trust</span>
-	| LOVE (<span class="pink"><<print setup.loveAlias[_nnpc.nam]()>></span>):	<span class="gold">_nnpc.love</span>
+	| LOVE:		<span class="gold">_nnpc.love</span>
 	| DOM:		<span class="gold">_nnpc.dom</span>
 	| LUST:		<span class="gold">_nnpc.lust</span>
 	| RAGE:		<span class="gold">_nnpc.rage</span>
@@ -284,13 +284,13 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 	<hr>
 <</for>>
 
-<<link [[Next|Bedroom]]>><</link>>
+<<link [[다음|Bedroom]]>><</link>>
 
 :: Alley Dog
 
 <!-- Keeping this only as an example on how to use Widget as Event for debug -->
 <<residentialex2>>
-<<link [[Next|Domus Street]]>><</link>>
+<<link [[다음|Domus Street]]>><</link>>
 
 :: Abomination Old
 
@@ -312,21 +312,21 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 <<actionsman>>
 <<if $alarm is 1>>
 	<<if $rescue is 1>>
-		<span id="next"><<link [[Next|Abomination Old]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Abomination Old]]>><</link>></span><<nexttext>>
 	<<else>>
 		<<set $alarm to 0>>
 		<<if $enemyarousal gte $enemyarousalmax>>
-			<span id="next"><<link [[Next|Abomination Old]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Abomination Old]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|Abomination Old]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Abomination Old]]>><</link>></span><<nexttext>>
 		<</if>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Abomination Old]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Abomination Old]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Abomination Old]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Abomination Old]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Abomination Old]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Abomination Old]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Swarm Test
@@ -342,11 +342,11 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 <<swarmactions>>
 
 <<if $stress gte $stressmax>>
-	<span id="next"><<link [[Next|Swarm Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Swarm Test]]>><</link>></span><<nexttext>>
 <<elseif $swimdistance lte 0>>
-	<span id="next"><<link [[Next|Swarm Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Swarm Test]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Swarm Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Swarm Test]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Monster Test
@@ -384,11 +384,11 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 <<actionsOmni>>
 
 <<if $stress gte $stressmax>>
-	<span id="next"><<link [[Next|Monster Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Monster Test]]>><</link>></span><<nexttext>>
 <<elseif $vorestage lte 0>>
-	<span id="next"><<link [[Next|Monster Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Monster Test]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Monster Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Monster Test]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: DP Test
@@ -414,23 +414,23 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 
 <<if $alarm is 1>>
 	<<if $rescue is 1>>
-		<span id="next"><<link [[Next|DP Test]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->DP Test]]>><</link>></span><<nexttext>>
 	<<else>>
 		<<set $alarm to 0>>
 		<<if $enemyarousal gte $enemyarousalmax>>
-			<span id="next"><<link [[Next|Molestation Ejaculation]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Molestation Ejaculation]]>><</link>></span><<nexttext>>
 		<<elseif $enemyhealth lte 0>>
-			<span id="next"><<link [[Next|Molestation Escape]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Molestation Escape]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|DP Test]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->DP Test]]>><</link>></span><<nexttext>>
 		<</if>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Molestation Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Molestation Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|DP Test]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->DP Test]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Wolf Pack
@@ -461,19 +461,19 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 <<if $alarm is 1>>
 	<<set $alarm to 0>>
 	<<if $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[Next|Wolf Pack Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음|Wolf Pack Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[Next|Wolf Pack Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Wolf Pack Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[Next|Wolf Pack]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음|Wolf Pack]]>><</link>></span><<nexttext>>
 	<</if>>
 
 	<<elseif $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[Next|Wolf Pack Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Wolf Pack Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[Next|Wolf Pack Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Wolf Pack Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[Next|Wolf Pack]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Wolf Pack]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Wolf Pack Escape
@@ -484,11 +484,11 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 	<<beastNEWinit $combatTrain.numberPerTrain[0] $combatTrain.beastTypes[0]>>
 	<<combatTrainAdvance>>
 	<br><br>
-	<<link [[Next|Wolf Pack]]>><</link>>
+	<<link [[다음|Wolf Pack]]>><</link>>
 <<else>>
 	The beast recoils in pain and fear.
 	<br><br>
-	<<link [[Next|Wolf Pack End]]>><</link>>
+	<<link [[다음|Wolf Pack End]]>><</link>>
 <</if>>
 
 :: Wolf Pack Ejaculation
@@ -499,11 +499,11 @@ PenActiv: <span class="gold">$NPCList[_x].penis</span> VagActiv: <span class="go
 	<<beastNEWinit $combatTrain.numberPerTrain[0] $combatTrain.beastTypes[0]>>
 	<<combatTrainAdvance>>
 	<br><br>
-	<<link [[Next|Wolf Pack]]>><</link>>
+	<<link [[다음|Wolf Pack]]>><</link>>
 <<else>>
 	Satisfied, the beast leaves you be.
 	<br><br>
-	<<link [[Next|Wolf Pack End]]>><</link>>
+	<<link [[다음|Wolf Pack End]]>><</link>>
 <</if>>
 
 :: Wolf Pack End
@@ -664,9 +664,9 @@ Add the NPCs you want.<br>
 <<actionsman>>
 
 <<if _combatend or _controlRegain is 1>>
-	<span id="next"><<link [[Next|Named NPC Gangbang Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Named NPC Gangbang Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Named NPC Gangbang]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Named NPC Gangbang]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Named NPC Gangbang Finish
@@ -741,7 +741,7 @@ How do you respond?
 	<br><br>
 	The figure unfreezes, and shakes its head. It then looks at you. "<span class="wraith">Get fucked.</span>" Your mirror shatters, and signals for replacement. When you blink, it's been fixed.
 	<br><br>
-	<<link [[Next...?|Bedroom]]>><<endWraith>><</link>>
+	<<link [[다음...?|Bedroom]]>><<endWraith>><</link>>
 	<br>
 <<else>>
 	<<initWraith $wraith.select>>
@@ -768,7 +768,7 @@ How do you respond?
 			The space behind the figure begins to distort. A mass of pale tentacles shoot out from the mirror as it steps out. "<span class="wraith">Embrace the power of lust.</span>"
 	<</switch>>
 	<br><br>
-	<<link [[Next|Wraith Test Sex]]>><</link>>
+	<<link [[다음|Wraith Test Sex]]>><</link>>
 <</if>>
 
 :: Wraith Test Sex
@@ -799,23 +799,23 @@ How do you respond?
 <<switch $wraith.type>>
 	<<case "man">>
 		<<if $enemyarousal gte $enemyarousalmax>>
-			<span id="next"><<link [[Next|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
 		<<elseif $enemyhealth lte 0>>
-			<span id="next"><<link [[Next|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|Wraith Test Sex]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex]]>><</link>></span><<nexttext>>
 		<</if>>
 	<<case "tentacles">>
 		<<if $tentacles.active lte ($tentacles.max / 2)>>
-			<span id="next"><<link [[Next|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|Wraith Test Sex]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex]]>><</link>></span><<nexttext>>
 		<</if>>
 	<<case "slime">>
 		<<if $struggle.done gte $struggle.number>>
-			<span id="next"><<link [[Next|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex Finish]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[Next|Wraith Test Sex]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음|Wraith Test Sex]]>><</link>></span><<nexttext>>
 		<</if>>
 <</switch>>
 <br>
@@ -858,7 +858,7 @@ How do you respond?
 <<endcombat>>
 <<endWraith>>
 
-<<link [[Next|Bedroom]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Bedroom]]>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Plantperson Test
@@ -916,7 +916,7 @@ How do you respond?
 <<elseif $alarm is 1 and $rescue is 1>>
 	<span id="next"><<link [[RESCUE|Plantperson Test Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Plantperson Test Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Plantperson Test Sex]]>><</link>></span><<nexttext>>
 <</if>>
 <br>
 <<link [[Emergency exit|Plantperson Test Sex Finish]]>><<set $finish to 1>><</link>>
@@ -1003,7 +1003,7 @@ You open your mouth to scream, but it is already inside you.
 <<elseif _controlRegain is 1>>
 	<span id="next" class="nextWraith"><<link [[CONTROL|Possessed Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next" class="nextWraith"><<link [[Next|Possessed Fight]]>><</link>></span><<nexttext>>
+	<span id="next" class="nextWraith"><<link [[다음|Possessed Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Possessed Fight Finish
@@ -1011,7 +1011,7 @@ You open your mouth to scream, but it is already inside you.
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	<br><br>
-	<<tearful>> you recover. "<span class="wraith">Shall we dance again?</span>" your mouth is forced to ask.
+	<<tearful>> 당신은 몸을 추스른다. "<span class="wraith">Shall we dance again?</span>" your mouth is forced to ask.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -1026,7 +1026,7 @@ You open your mouth to scream, but it is already inside you.
 		Sydney moans, slaps a hand over <<his>> mouth, and runs away.
 	<</if>>
 	<br><br>
-	<<tearful>> you recover. "<span class="wraith">Shall we dance again?</span>" your mouth is forced to ask.
+	<<tearful>> 당신은 몸을 추스른다. "<span class="wraith">Shall we dance again?</span>" your mouth is forced to ask.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -1057,7 +1057,7 @@ You open your mouth to scream, but it is already inside you.
 
 :: NPC Role Select
 <br>
-The lights flash on. You find yourself in a strange chamber, completely smooth and featureless. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters. A large, opaque tube reaches to the ceiling. The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
+The lights flash on. You find yourself in a strange chamber, completely smooth and featureless. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters. A large, opaque tube reaches to the ceiling, The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
 <br>
 A terminal is attached to the tube. You look at the prompts.
 <br><br>
@@ -1084,7 +1084,7 @@ A terminal is attached to the tube. You look at the prompts.
 	<<unset $npcselectdesc>><<unset $npcselectrole>>
 <</link>>
 <br>
-<<link [[Fight|NPC Role Fight]]>><<set $fightstart to 1>>
+<<link [[싸운다|NPC Role Fight]]>><<set $fightstart to 1>>
 	<<if $npcselectdesc is undefined>><<set $npcselectdesc to "custom">><</if>>
 	<<if $npcselectrole is undefined>><<set $npcselectrole to "construct">><</if>>
 	<<set $npcselectdesc to Util.escape($npcselectdesc)>>
@@ -1137,7 +1137,7 @@ A terminal is attached to the tube. You look at the prompts.
 <<elseif $pain gte 100 and $willpowerpain is 0>>
 	<span id="next"><<link [[PAIN|NPC Role Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|NPC Role Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|NPC Role Fight]]>><</link>></span><<nexttext>>
 <</if>>
 <br>
 <<link [[Emergency exit|NPC Role Fight Finish]]>><<set $finish to 1>><</link>>
@@ -1170,7 +1170,7 @@ A terminal is attached to the tube. You look at the prompts.
 
 :: NPC Clothing Select
 <br>
-The lights flash on. You find yourself in a strange chamber, completely smooth and featureless. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters. A large, opaque tube reaches to the ceiling. The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
+The lights flash on. You find yourself in a strange chamber, completely smooth and featureless. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters. A large, opaque tube reaches to the ceiling, The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
 <br>
 A terminal is attached to the tube. You look at the prompts.
 <br><br>
@@ -1263,7 +1263,7 @@ A terminal is attached to the tube. You look at the prompts.
 <<elseif $pain gte 100 and $willpowerpain is 0>>
 	<span id="next"><<link [[PAIN|NPC Clothing Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|NPC Clothing Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|NPC Clothing Fight]]>><</link>></span><<nexttext>>
 <</if>>
 <br>
 <<link [[Emergency exit|NPC Clothing Fight Finish]]>><<set $finish to 1>><</link>>
@@ -1353,7 +1353,7 @@ minute = <<print Time.minute>>
 :: NNPC Strapon Generator
 The lights flash on. You find yourself in a strange chamber, completely smooth and featureless.
 There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters.
-A large, opaque tube reaches to the ceiling. The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
+A large, opaque tube reaches to the ceiling, The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
 <br>
 
 <<set _nnpcOptions to $NPCName.filter(npc => npc.penis === "none")>>
@@ -1454,7 +1454,7 @@ A terminal is attached to the tube.
 <<elseif $pain gte 100 and $willpowerpain is 0>>
 	<span id="next"><<link [[PAIN|NNPC Strapon Generator Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|NNPC Strapon Generator Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|NNPC Strapon Generator Sex]]>><</link>></span><<nexttext>>
 <</if>>
 <br>
 <<link [[Emergency exit|NNPC Strapon Generator Sex Finish]]>><<set $finish to 1>><</link>>
@@ -1507,9 +1507,9 @@ Once the tube touches the floor, the lights switch off.
 <<actionsman>>
 
 <<if _combatend>>
-	<span id="next"><<link [[Next|Cow Test Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Cow Test Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Cow Test Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Cow Test Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Cow Test Sex Finish
@@ -1529,7 +1529,7 @@ Once the tube touches the floor, the lights switch off.
 <<endcombat>>
 <<link [[Find another cow|Cow Test Sex]]>><<set $sexstart to 1>><</link>>
 <br>
-<<link [[Go home|Bedroom]]>><</link>>
+<<link [[집에 간다|Bedroom]]>><</link>>
 <br>
 
 :: Named NPC Stalk Select
@@ -1540,13 +1540,13 @@ Once the tube touches the floor, the lights switch off.
 		<<person1>>You hear footsteps behind you, from more than one person. <span class="blue">You feel followed.</span>
 		<br><br>
 
-		<<link [[Next|Street Stalk Group]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Street Stalk Group]]>><<set $molestationstart to 1>><</link>>
 		<br>
 	<<else>>
 		<<person1>>You hear footsteps behind you. <span class="blue">You feel followed.</span>
 		<br><br>
 
-		<<link [[Next|Street Stalk]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Street Stalk]]>><<set $molestationstart to 1>><</link>>
 		<br>
 	<</if>>
 <<else>>
@@ -1717,7 +1717,7 @@ Once the tube touches the floor, the lights switch off.
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[ORGASM|Hypnotist Test Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Hypnotist Test Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Hypnotist Test Sex]]>><</link>></span><<nexttext>>
 <</if>>
 <br>
 <<link [[Emergency exit|Hypnotist Test Sex Finish]]>><<set $finish to 1>><</link>>
@@ -1762,9 +1762,9 @@ Once the tube touches the floor, the lights switch off.
 <<actionstentacles>>
 
 <<if $tentacles.active lte ($tentacles.max / 2)>>
-	<span id="next"><<link [[Next|Hypnotist Test Tentacles Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Hypnotist Test Tentacles Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Hypnotist Test Tentacles]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Hypnotist Test Tentacles]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Hypnotist Test Tentacles Finish
@@ -1794,7 +1794,14 @@ Unset V.bellySizeDebug to fix.
 <</if>>
 <<effects>>
 <<effectsman>>
-<<animateCombat>>
+<<if $options.images is 1 and $options.combatImages is 1>>
+	<<if $position isnot "stalk">>
+		<<timed 100ms>>
+			<<combatimg>>
+			<br>
+		<</timed>>
+	<</if>>
+<</if>>
 <hr>
 <label class="no-numberify">
 	<span class="lewd">Body:</span><br>
@@ -2193,7 +2200,7 @@ WOLF TRUST:<br>
 <<wolfpacktrust>><<wolfpackfear>><br><br>
 
 OTHER:<br>
-<<incgpenisinsecurity>><<incggpenisinsecurity>><<incgbreastinsecurity>><<gpenisacceptance 10>><br><br>
+<<incgpenisinsecurity>><<incggpenisinsecurity>><<gpenisacceptance 10>><br><br>
 
 
 </span>
@@ -2209,71 +2216,4 @@ OTHER:<br>
 <br><br><br>
 
 <<link [[Back Home|Bedroom]]>><<endcombat>><</link>>
-<br>
-
-:: Virginity Show Test
-<<effects>>
-
-Take penile virginity: <span class="gold"><<= !unableTakeVirginity("penile") ? "Yes":"No">>.</span><br>
-
-male vaginas 0% + female penises 100% + disable anal:
-<span class="gold"><<= ($cbchance is 0 and $dgchance is 100 and $analdisable isnot "f") ? "true":"false">></span><br>
-
-All NPCs are male + male vaginas 0% + disable anal:
-<span class="gold"><<= (maleChance() is 100 and $cbchance is 0 and $analdisable isnot "f") ? "true":"false">></span><br>
-
-All NPCs are female + female penises 100% + disable anal:
-<span class="gold"><<= (maleChance() is 0 and $dgchance is 100 and $analdisable isnot "f") ? "true":"false">></span><br>
-
-All NPCs are male + male vaginas 100% + strap-on penises 100% + disable anal:
-<span class="gold"><<= (maleChance() is 100 and $cbchance is 100 and $straponchance is 100 and $analdisable isnot "f") ? "true":"false">></span><br>
-
-All NPCs are female + female penises 0% + strap-on penises 100% + disable anal:
-<span class="gold"><<= (maleChance() is 0 and $dgchance is 0 and $straponchance is 100 and $analdisable isnot "f") ? "true":"false">></span>
-<br><br>
-
-Take vaginal virginity: <span class="gold"><<= !unableTakeVirginity("vaginal") ? "Yes":"No">>.</span><br>
-
-male vaginas 100% + female penises 0% + strap-on penises 0%:
-<span class="gold"><<= ($cbchance is 100 and $dgchance is 0 and $straponchance is 0) ? "true":"false">></span><br>
-
-All NPCs are male + male vaginas 100% + strap-on penises 0%:
-<span class="gold"><<= (maleChance() is 100 and $cbchance is 100 and $straponchance is 0) ? "true":"false">></span><br>
-
-All NPCs are female + female penises 0% + strap-on penises 0%:
-<span class="gold"><<= (maleChance() is 0 and $dgchance is 0 and $straponchance is 0) ? "true":"false">></span>
-<br><br>
-
-<<set _test to "Virginity Show Test">>
-Virginity: <span class="gold"><<= !unableTakeVirginity() and $player.virginity.penile is true and $player.virginity.vaginal is true ? "true" : "false">></span>
-<br>
-<<link [[Generate Take Virginity NPCs|_test]]>><<endevent>><<generatetakevirginity 1>><<generatetakevirginity 2>><<generatetakevirginity 3>><<generatetakevirginity 4>><<generatetakevirginity 5>><<generatetakevirginity 6>><</link>>
-<br>
-<<if EventSystem.any() and $debug is 1>>
-	<<script>>
-		V.NPCList.forEach((element, index) => {
-			console.log(`NPC_${index}; penis: ${element.penis}; vagina: ${element.vagina}.`);
-		});
-	<</script>>
-<</if>>
-
-<<link [[Take Virginity Combat|Underground Virgin Rape]]>><<endevent>><<generatetakevirginity 1>><<set $molestationstart to 1>><</link>>
-<br><br>
-
-Brothel Virginity Show:
-<br>
-<<link [[Briar's Office Show|Briar's Office Show]]>><<endevent>><<npc Briar>><<person1>><<set Time.setDate(Time.getNextWeekdayDate(5))>><</link>>
-<br>
-<<link [[Brothel Virginity Show|Brothel Stage]]>><<endevent>><<$brothelVirginityIntro to true>><<set Time.setDate(Time.getNextWeekdayDate(5))>><<acceptbrothelshow "virginity">><<set Time.setDate(Time.getNextWeekdayDate(6))>><</link>>
-<br>
-<<link [[Show Virginity Auction|Brothel Show Virginity Auction]]>><<endevent>><<set $virginitytip to 0>><<set $weekly.brothelVirginityShow to 0>><</link>>
-<br>
-Underground Brothel Virginity Show:
-<br>
-<<link [[Underground Brothel Virginity Show|Underground Intro]]>><<endevent>><<generate1>><<generate2>><</link>>
-<br><br>
-
-<<link [[Gameplay Settings|Settings]]>><<set $settingsExitPassage to "Virginity Show Test">><</link>>
-<br>
-<<link [[Back Home|Bedroom]]>><<endevent>><</link>>
 <br>

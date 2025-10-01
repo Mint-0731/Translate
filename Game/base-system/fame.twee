@@ -150,17 +150,17 @@
 <<widget "fameProse">>
 	<<switch _args[0]>>
 		<<case "scrap">>
-			<<set $_output to "combat">>
+			<<set $_output to "전투">>
 		<<case "good">>
-			<<set $_output to "kindness">>
+			<<set $_output to "친절">>
 		<<case "social">>
-			<<set $_output to "socialite">>
+			<<set $_output to "사교">>
 		<<case "model">>
-			<<set $_output to "modelling">>
+			<<set $_output to "모델">>
 		<<case "impreg">>
-			<<set $_output to "impregnation">>
+			<<set $_output to "수태">>
 		<<default>>
-			<<set $_output to _args[0]>>
+			<<silently>><<putpost _args[0]>><<set $_output to _trResult>><</silently>>
 	<</switch>>
 	<<print $_output>>
 <</widget>>

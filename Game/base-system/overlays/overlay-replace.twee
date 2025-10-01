@@ -13,12 +13,10 @@
 		<<run closeOverlay()>>
 		<<exit>>
 	<</if>>
-
+	
 	<<script>>
-		if (T.buttons.activeTab != -1) {
-			T.buttons.toggle();
-			updateOptions();
-		}
+		T.buttons.toggle();
+		updateOptions();
 		T.currentOverlay = T.key;
 		$("#customOverlay").removeClass("hidden").parent().removeClass("hidden");
 		$("#customOverlay").attr("data-overlay", T.currentOverlay);
@@ -80,7 +78,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Characteristics">>
+		<<button "정보">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<characteristics>><</replace>>
 		<</button>>
@@ -93,7 +91,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Social">>
+		<<button "관계">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<social>><</replace>>
 		<</button>>
@@ -106,7 +104,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Traits">>
+		<<button "특성">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<traits>><</replace>>
 		<</button>>
@@ -118,12 +116,12 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Journal">>
+		<<button "일지">>
 			<<journalNotesTextareaSave>>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<journal>><</replace>>
 		<</button>>
-		<<button "Notes">>
+		<<button "노트">>
 			<<toggleTab>>
 			<<set $tempDisable to true>>
 			<<replace #customOverlayContent>><<journalNotes>><</replace>>
@@ -136,12 +134,12 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Journal">>
+		<<button "일지">>
 			<<journalNotesTextareaSave>>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<journal>><</replace>>
 		<</button>>
-		<<button "Notes">>
+		<<button "노트">>
 			<<toggleTab>>
 			<<set $tempDisable to true>>
 			<<replace #customOverlayContent>><<journalNotes>><</replace>>
@@ -154,11 +152,11 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Statistics">>
+		<<button "통계">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<statistics>><</replace>>
 		<</button>>
-		<<button "Extra stats (spoilers)">>
+		<<button "추가 통계 (스포일러)">>
 			<<toggleTab>>
 			<<if $options.skipStatisticsConfirmation>>
 				<<replace #customOverlayContent>><<extraStatistics>><</replace>>
@@ -174,7 +172,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Feats">>
+		<<button "도전과제">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<feats>><</replace>>
 		<</button>>
@@ -186,29 +184,29 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Stats">>
+		<<button "스탯">>
 			<<toggleTab>>
 			<<replace #cheatsShown>><<cheats-characterStats>><</replace>>
 			<<run $("#customOverlayContent").scrollTop(0);>>
 		<</button>>
-		<<button "Visual">>
+		<<button "모습">>
 			<<toggleTab>>
 			<<replace #cheatsShown>><<cheats-characterVisual>><</replace>>
 			<<run $("#customOverlayContent").scrollTop(0);>>
 		<</button>>
-		<<button "NPCs">>
+		<<button "NPC들">>
 			<<toggleTab>>
 			<<replace #cheatsShown>><<cheats-npcs>><</replace>>
 			<<run $("#customOverlayContent").scrollTop(0);>>
 		<</button>>
 		<<if !$statFreeze>>
-			<<button "Teleport">>
+			<<button "순간이동">>
 				<<toggleTab>>
 				<<replace #cheatsShown>><<cheats-teleport>><</replace>>
 				<<run $("#customOverlayContent").scrollTop(0);>>
 			<</button>>
 		<</if>>
-		<<button "Other">>
+		<<button "기타">>
 			<<toggleTab>>
 			<<replace #cheatsShown>><<cheats-other>><</replace>>
 			<<run $("#customOverlayContent").scrollTop(0);>>
@@ -221,23 +219,23 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "General">>
+		<<button "일반">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<optionsgeneral>><</replace>>
 		<</button>>
-		<<button "Theme">>
+		<<button "테마">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<optionstheme>><</replace>>
 		<</button>>
-		<<button "Performance">>
+		<<button "성능">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<optionsperformance>><</replace>>
 		<</button>>
-		<<button "Advanced">>
+		<<button "고급">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<optionsadvanced>><</replace>>
 		<</button>>
-		<<button "Information">>
+		<<button "정보">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<optionsinformation>><</replace>>
 		<</button>>
@@ -249,11 +247,11 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Saves">>
+		<<button "세이브">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<saves>><</replace>>
 		<</button>>
-		<<button "Export/Import">>
+		<<button "내보내기/불러오기">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<optionsExportImport>><</replace>>
 		<</button>>
@@ -265,7 +263,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Blackjack Guide">>
+		<<button "블랙잭 도움말">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<blackjackHelp>><</replace>>
 		<</button>>
@@ -277,7 +275,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Event Info">>
+		<<button "이벤트 정보">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<eventExtraInfo>><</replace>>
 		<</button>>
@@ -289,27 +287,27 @@
 	<<setupTabs 2>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Layers">>
+		<<button "레이어">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<canvasLayersEditor>><</replace>>
 		<</button>>
-		<<button "Colours">>
+		<<button "색상">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<canvasColoursEditor `$cheatdisable is "f"`>><</replace>>
 		<</button>>
-		<<button "Model">>
+		<<button "모델">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<canvasModelEditor>><</replace>>
 		<</button>>
 		<<if Renderer.lastAnimation>>
-			<<button "Start/Stop Animation">>
+			<<button "애니메이션 시작/정지">>
 				<<script>>
 					if (Renderer.lastAnimation.playing) { Renderer.lastAnimation.stop(); }
 					else { Renderer.lastAnimation.start(); }
 				<</script>>
 			<</button>>
 		<</if>>
-		<<button "Refresh Caches">>
+		<<button "캐시 리셋">>
 			<<script>>
 				Renderer.Stats.logmsgLoad.value = "";
 				Renderer.Stats.logmsgRender.value = "";
@@ -334,7 +332,7 @@
 	<<setupTabs>>
 	<div id="overlayTabs" class="tab">
 		<<closeButtonMobile>>
-		<<button "Outfit Editor">>
+		<<button "복장 편집기">>
 			<<toggleTab>>
 			<<replace #customOverlayContent>><<outfitEditor>><</replace>>
 		<</button>>
@@ -343,22 +341,11 @@
 <</widget>>
 
 <<widget "colourCodes">>
-	<mouse class="tooltip-small colourCodes"><span>Colour Codes</span>
-		<span>
-		<i class="red">Terrible</i>
-		|
-		<i class="pink">Bad</i>
-		|
-		<i class="purple">Poor</i>
-		|
-		<i class="blue">Okay</i>
-		|
-		<i class="lblue">Decent</i>
-		|
-		<i class="teal">Good</i>
-		|
-		<i class="green">Excellent</i>
-		</span>
+	<mouse class="tooltip-small colourCodes"><span>색상 코드</span>
+		<span><i class="green">훌륭함</i> | <i class="teal">좋음</i> |
+		<i class="lblue">괜찮음</i> | <i class="blue">나쁘지 않음</i> |
+		<i class="purple">부족함</i> | <i class="pink">나쁨</i> |
+		<i class="red">끔찍함</i></span>
 	</mouse>
 <</widget>>
 
@@ -382,7 +369,7 @@
 
 <<widget "closeButtonMobile">>
 	<<if $options.closeButtonMobile>>
-		<<button "Close">>
+		<<button "닫기">>
 			<<run closeOverlay()>>
 		<</button>>
 	<</if>>
