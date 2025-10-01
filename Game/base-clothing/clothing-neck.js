@@ -1,20 +1,25 @@
+// @ts-check
 /* For any item that has a colour_combat tag, set it to 0 if that item ever gets its own combat sprites.
 
 Warmth checklist:
 	Base: 0
 	Normal: 0
-	Thick: +1
-	Very thick: +2
+	Thick: +2
+	Very thick: +4
 
-	Max warmth: 2
+	Max warmth: 4
 */
 function initNeck() {
-	setup.clothes.neck = [
+	/** @type {ClothesItem[]} */
+	const clothing = [
 		{
 			index: 0,
+			slot: "neck",
 			name: "naked",
 			name_cap: "Naked",
 			variable: "naked",
+			state: 0,
+			state_base: 0,
 			integrity: 10,
 			integrity_max: 10,
 			fabric_strength: 20,
@@ -42,9 +47,15 @@ function initNeck() {
 
 		{
 			index: 1,
+			slot: "neck",
 			name: "collar",
 			name_cap: "Collar",
 			variable: "collar",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 400,
 			integrity_max: 400,
 			fabric_strength: 20,
@@ -72,9 +83,16 @@ function initNeck() {
 
 		{
 			index: 2,
+			slot: "neck",
 			name: "bunny collar",
 			name_cap: "Bunny collar",
 			variable: "bunnycollar",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#000000",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -82,7 +100,8 @@ function initNeck() {
 			word: "n",
 			plural: 1,
 			colour: 0,
-			colour_options: [],
+			colour_options: ["white", "custom"],
+			colour_sidebar: 1,
 			colour_combat: "white",
 			type: ["costume", "serving"],
 			gender: "n",
@@ -91,20 +110,27 @@ function initNeck() {
 			description: "A collar and tie. Part of the bunny outfit.",
 			shop: ["adult"],
 			collared: 0,
-			accessory: 0,
+			accessory: 1,
 			accessory_colour: 0,
-			accessory_colour_options: [],
+			accessory_colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+			accessory_colour_sidebar: 1,
 			cursed: 0,
 			location: 0,
 			iconFile: "bunny_collar.png",
-			accIcon: 0,
+			accIcon: "bunny_collar_acc.png",
 		},
 
 		{
 			index: 3,
+			slot: "neck",
 			name: "holy pendant",
 			name_cap: "Holy pendant",
 			variable: "holypendant",
+			combat: {
+				reference: "naked",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -132,9 +158,15 @@ function initNeck() {
 
 		{
 			index: 4,
+			slot: "neck",
 			name: "dark pendant",
 			name_cap: "Dark pendant",
 			variable: "darkpendant",
+			combat: {
+				reference: "naked",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -162,9 +194,15 @@ function initNeck() {
 
 		{
 			index: 5,
+			slot: "neck",
 			name: "stone pendant",
 			name_cap: "Stone pendant",
 			variable: "stonependant",
+			combat: {
+				reference: "naked",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -192,9 +230,16 @@ function initNeck() {
 
 		{
 			index: 6,
+			slot: "neck",
 			name: "gold choker",
 			name_cap: "Gold choker",
 			variable: "goldchoker",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#d8b608",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -222,9 +267,15 @@ function initNeck() {
 
 		{
 			index: 7,
+			slot: "neck",
 			name: "cat bell collar",
 			name_cap: "Cat bell collar",
 			variable: "cat",
+			combat: {
+				reference: "cow",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -232,7 +283,8 @@ function initNeck() {
 			word: "a",
 			plural: 0,
 			colour: 0,
-			colour_options: [],
+			colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+			colour_sidebar: 1,
 			colour_combat: "red",
 			type: ["costume", "serving", "unstealthy", "eerie"],
 			gender: "n",
@@ -241,20 +293,24 @@ function initNeck() {
 			description: "Jingles.",
 			shop: ["clothing", "adult"],
 			collared: 0,
-			accessory: 0,
+			accessory: 1,
 			accessory_colour: 0,
-			accessory_colour_options: [],
+			accessory_colour_options: ["gold", "silver", "rose gold", "bronze"],
+			accessory_colour_sidebar: 1,
 			cursed: 0,
 			location: 0,
 			iconFile: "cat_bell_collar.png",
-			accIcon: 0,
+			accIcon: "cat_bell_collar_acc.png",
 		},
 
 		{
 			index: 8,
+			slot: "neck",
 			name: "cow bell",
 			name_cap: "Cow bell",
 			variable: "cow",
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -262,7 +318,8 @@ function initNeck() {
 			word: "a",
 			plural: 0,
 			colour: 0,
-			colour_options: [],
+			colour_options: ["black", "brown", "light pink", "light blue", "light green", "custom"],
+			colour_sidebar: 1,
 			colour_combat: 0,
 			type: ["costume", "eerie", "unstealthy"],
 			gender: "n",
@@ -271,20 +328,27 @@ function initNeck() {
 			description: "Jangles.",
 			shop: ["forest"],
 			collared: 0,
-			accessory: 0,
+			accessory: 1,
 			accessory_colour: 0,
-			accessory_colour_options: [],
+			accessory_colour_options: ["gold", "silver", "rose gold", "bronze", "steel", "blue steel"],
+			accessory_colour_sidebar: 1,
 			cursed: 0,
 			location: 0,
 			iconFile: "cow_bell.png",
-			accIcon: 0,
+			accIcon: "cow_bell_acc.png",
 		},
 
 		{
 			index: 9,
+			slot: "neck",
 			name: "lace choker",
 			name_cap: "Lace choker",
 			variable: "lacechoker",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 40,
 			integrity_max: 40,
 			fabric_strength: 20,
@@ -315,9 +379,16 @@ function initNeck() {
 
 		{
 			index: 10,
+			slot: "neck",
 			name: "spiked collar",
 			name_cap: "Spiked collar",
 			variable: "spiked",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#000000",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 40,
 			integrity_max: 40,
 			fabric_strength: 20,
@@ -346,9 +417,16 @@ function initNeck() {
 
 		{
 			index: 11,
+			slot: "neck",
 			name: "heart choker",
 			name_cap: "Heart choker",
 			variable: "heartchoker",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#000000",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -356,7 +434,8 @@ function initNeck() {
 			word: "a",
 			plural: 0,
 			colour: 0,
-			colour_options: [],
+			colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+			colour_sidebar: 1,
 			colour_combat: "black",
 			type: ["normal"],
 			gender: "f",
@@ -366,20 +445,28 @@ function initNeck() {
 			description: "Cute.",
 			shop: ["clothing", "adult"],
 			collared: 0,
-			accessory: 0,
+			accessory: 1,
 			accessory_colour: 0,
-			accessory_colour_options: [],
+			accessory_colour_options: ["red", "pink", "lilac", "purple", "light pink", "custom"],
+			accessory_colour_sidebar: 1,
 			cursed: 0,
 			location: 0,
 			iconFile: "heart_choker.png",
-			accIcon: 0,
+			accIcon: "heart_choker_acc.png",
 		},
 
 		{
 			index: 12,
+			slot: "neck",
 			name: "ringed collar",
 			name_cap: "Ringed collar",
 			variable: "ringedcollar",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#000000",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -408,9 +495,15 @@ function initNeck() {
 
 		{
 			index: 13,
+			slot: "neck",
 			name: "necktie",
 			name_cap: "Necktie",
 			variable: "tie",
+			combat: {
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -435,15 +528,24 @@ function initNeck() {
 			accessory_colour_sidebar: 1,
 			cursed: 0,
 			location: 0,
+			altposition: "none",
+			altdisabled: [],
 			iconFile: "necktie.png",
 			accIcon: "necktie_acc.png",
 		},
 
 		{
 			index: 14,
+			slot: "neck",
 			name: "suspenders",
 			name_cap: "Suspenders",
 			variable: "suspenders",
+			combat: {
+				reference: "naked",
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -463,7 +565,7 @@ function initNeck() {
 			collared: 0,
 			accessory: 1,
 			accessory_colour: 0,
-			accessory_colour_options: ["steel", "blue steel", "bronze", "gold", "silver"],
+			accessory_colour_options: ["steel", "blue steel", "bronze", "gold", "rose gold", "silver"],
 			accessory_colour_sidebar: 1,
 			mask_img: 1,
 			cursed: 0,
@@ -476,9 +578,12 @@ function initNeck() {
 
 		{
 			index: 15,
+			slot: "neck",
 			name: "cloth choker",
 			name_cap: "Cloth choker",
 			variable: "clothchoker",
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -507,9 +612,12 @@ function initNeck() {
 
 		{
 			index: 16,
+			slot: "neck",
 			name: "scarf",
 			name_cap: "Scarf",
 			variable: "scarf",
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -540,7 +648,7 @@ function initNeck() {
 			type: ["normal"],
 			gender: "n",
 			femininity: 0,
-			warmth: 2,
+			warmth: 4,
 			cost: 1200,
 			description: "Snug.",
 			shop: ["clothing"],
@@ -556,9 +664,16 @@ function initNeck() {
 
 		{
 			index: 17,
+			slot: "neck",
 			name: "gold chain",
 			name_cap: "Gold chain",
 			variable: "chaingold",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#d8b608",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 500,
@@ -587,9 +702,15 @@ function initNeck() {
 
 		{
 			index: 18,
+			slot: "neck",
 			name: "iron chain",
 			name_cap: "Iron chain",
 			variable: "chainiron",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 1000,
@@ -618,9 +739,15 @@ function initNeck() {
 
 		{
 			index: 19,
+			slot: "neck",
 			name: "holy stole",
 			name_cap: "Holy stole",
 			variable: "holystole",
+			combat: {
+				reference: "naked",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 100,
@@ -632,7 +759,7 @@ function initNeck() {
 			type: ["holy"],
 			gender: "n",
 			femininity: 0,
-			warmth: 1,
+			warmth: 2,
 			cost: 10000,
 			description: "Ecclesiastical attire.",
 			shop: ["forest"],
@@ -648,9 +775,16 @@ function initNeck() {
 
 		{
 			index: 20,
+			slot: "neck",
 			name: "free use collar",
 			name_cap: "Free use collar",
 			variable: "freeuse",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#b59a51",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 400,
 			integrity_max: 400,
 			fabric_strength: 20,
@@ -678,9 +812,17 @@ function initNeck() {
 
 		{
 			index: 21,
+			slot: "neck",
 			name: "collar with leash",
 			name_cap: "Collar with leash",
 			variable: "collarleash",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#000000",
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 400,
 			integrity_max: 400,
 			fabric_strength: 20,
@@ -708,9 +850,17 @@ function initNeck() {
 
 		{
 			index: 22,
+			slot: "neck",
 			name: "free use collar with leash",
 			name_cap: "Free use collar with leash",
 			variable: "freeuseleash",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#b59a51",
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 400,
 			integrity_max: 400,
 			fabric_strength: 20,
@@ -738,9 +888,15 @@ function initNeck() {
 
 		{
 			index: 23,
+			slot: "neck",
 			name: "ivory necklace",
 			name_cap: "Ivory necklace",
 			variable: "ivorynecklace",
+			combat: {
+				reference: "naked",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 100,
@@ -768,9 +924,16 @@ function initNeck() {
 
 		{
 			index: 24,
+			slot: "neck",
 			name: "leather collar with leash",
 			name_cap: "Leather collar with leash",
 			variable: "collarleashfetish",
+			combat: {
+				reference: "clothchoker",
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 400,
 			integrity_max: 400,
 			fabric_strength: 20,
@@ -799,9 +962,15 @@ function initNeck() {
 
 		{
 			index: 25,
+			slot: "neck",
 			name: "leather collar",
-			name_cap: "Leather Collar",
+			name_cap: "Leather collar",
 			variable: "collarfetish",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 400,
 			integrity_max: 400,
 			fabric_strength: 20,
@@ -830,9 +999,17 @@ function initNeck() {
 
 		{
 			index: 26,
+			slot: "neck",
 			name: "spiked collar with leash",
 			name_cap: "Spiked collar with leash",
 			variable: "spikedleash",
+			combat: {
+				reference: "clothchoker",
+				mainColour: "#000000",
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 40,
 			integrity_max: 40,
 			fabric_strength: 20,
@@ -861,9 +1038,16 @@ function initNeck() {
 
 		{
 			index: 27,
+			slot: "neck",
 			name: "short tie",
 			name_cap: "Short tie",
 			variable: "shorttie",
+			combat: {
+				reference: "tie",
+				accessory: false,
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -893,9 +1077,15 @@ function initNeck() {
 
 		{
 			index: 28,
+			slot: "neck",
 			name: "fur boa",
 			name_cap: "Fur boa",
 			variable: "boa",
+			combat: {
+				reference: "scarf",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -924,7 +1114,7 @@ function initNeck() {
 			colour_sidebar: 1,
 			type: ["normal"],
 			gender: "n",
-			warmth: 2,
+			warmth: 4,
 			cost: 3000,
 			description: "Soft and stylish.",
 			shop: ["clothing"],
@@ -940,9 +1130,15 @@ function initNeck() {
 
 		{
 			index: 29,
+			slot: "neck",
 			name: "sailor ribbon",
 			name_cap: "Sailor ribbon",
 			variable: "serafuku ribbon",
+			combat: {
+				reference: "tie",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -971,9 +1167,15 @@ function initNeck() {
 
 		{
 			index: 30,
+			slot: "neck",
 			name: "love locket",
 			name_cap: "Love locket",
 			variable: "lovelocket",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 40,
 			integrity_max: 40,
 			fabric_strength: 20,
@@ -981,7 +1183,7 @@ function initNeck() {
 			word: "a",
 			plural: 0,
 			colour: 0,
-			colour_options: ["bronze", "gold", "silver"],
+			colour_options: ["bronze", "gold", "rose gold", "silver"],
 			colour_sidebar: 1,
 			colour_combat: "gold",
 			type: ["normal"],
@@ -1002,9 +1204,15 @@ function initNeck() {
 		},
 		{
 			index: 31,
+			slot: "neck",
 			name: "classic lace choker",
 			name_cap: "Classic lace choker",
 			variable: "lacechokerold",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 40,
 			integrity_max: 40,
 			fabric_strength: 20,
@@ -1034,9 +1242,15 @@ function initNeck() {
 		},
 		{
 			index: 32,
+			slot: "neck",
 			name: "bowtie",
 			name_cap: "Bowtie",
 			variable: "bowtie",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -1066,9 +1280,15 @@ function initNeck() {
 		},
 		{
 			index: 33,
+			slot: "neck",
 			name: "ribbon tie",
 			name_cap: "Ribbon tie",
 			variable: "ribbontie",
+			combat: {
+				reference: "tie",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 100,
 			integrity_max: 100,
 			fabric_strength: 20,
@@ -1113,9 +1333,15 @@ function initNeck() {
 		},
 		{
 			index: 34,
+			slot: "neck",
 			name: "whistle",
 			name_cap: "Whistle",
 			variable: "whistle",
+			combat: {
+				reference: "naked",
+			},
+			state: 0,
+			state_base: 0,
 			integrity: 200,
 			integrity_max: 200,
 			fabric_strength: 20,
@@ -1123,7 +1349,8 @@ function initNeck() {
 			word: "a",
 			plural: 0,
 			colour: 0,
-			colour_options: [],
+			colour_options: ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow", "custom"],
+			colour_sidebar: 1,
 			type: ["normal"],
 			gender: "n",
 			femininity: 0,
@@ -1140,7 +1367,99 @@ function initNeck() {
 			iconFile: "whistle.png",
 			accIcon: 0,
 		},
+		{
+			index: 35,
+			slot: "neck",
+			name: "large ribbon tie",
+			name_cap: "Large ribbon tie",
+			variable: "ribbontielarge",
+			combat: {
+				reference: "tie",
+			},
+			state: 0,
+			state_base: 0,
+			integrity: 100,
+			integrity_max: 100,
+			fabric_strength: 20,
+			reveal: 100,
+			word: "a",
+			plural: 0,
+			colour: 0,
+			colour_options: [
+				"black",
+				"blue",
+				"brown",
+				"green",
+				"pink",
+				"light pink",
+				"purple",
+				"lilac",
+				"red",
+				"tangerine",
+				"teal",
+				"white",
+				"yellow",
+				"custom",
+			],
+			colour_sidebar: 1,
+			type: ["formal"],
+			gender: "f",
+			femininity: 100,
+			warmth: 0,
+			cost: 3500,
+			description: "Comes pre-tied.",
+			shop: ["clothing"],
+			collared: 0,
+			has_collar: 1,
+			accessory: 0,
+			accessory_colour: 0,
+			accessory_colour_options: [],
+			accessory_colour_sidebar: 0,
+			cursed: 0,
+			location: 0,
+			iconFile: "large_ribbon_tie.png",
+			accIcon: 0,
+		},
+		{
+			index: 36,
+			slot: "neck",
+			name: "bolo tie",
+			name_cap: "Bolo tie",
+			variable: "bolotie",
+			combat: {
+				reference: "clothchoker",
+			},
+			state: 0,
+			state_base: 0,
+			integrity: 100,
+			integrity_max: 100,
+			fabric_strength: 20,
+			reveal: 100,
+			word: "a",
+			plural: 0,
+			colour: 0,
+			colour_options: ["black", "white", "brown", "sand", "tan", "olive", "russet", "custom"],
+			colour_sidebar: 1,
+			type: ["formal"],
+			gender: "m",
+			femininity: -100,
+			warmth: 0,
+			cost: 1500,
+			description: "Eccentric.",
+			shop: ["clothing"],
+			collared: 0,
+			has_collar: 1,
+			accessory: 1,
+			accessory_colour: 0,
+			accessory_colour_options: ["steel", "blue steel", "bronze", "gold", "rose gold", "silver"],
+			accessory_colour_sidebar: 1,
+			cursed: 0,
+			location: 0,
+			iconFile: "bolo_tie.png",
+			accIcon: "bolo_tie_acc.png",
+		},
 	];
+	setup.clothes.neck = clothing;
 
 	/*
 		Clothes that modders add go into this array, this should be empty in the base game at all times.
